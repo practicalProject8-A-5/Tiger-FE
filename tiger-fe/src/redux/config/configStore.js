@@ -2,8 +2,11 @@
 
 import logger from "redux-logger";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import MapSlice from "../modules/MapSlice";
 
-const reducer = combineReducers({});
+const reducer = combineReducers({
+  MapSlice,
+});
 
 const store = configureStore({
   reducer,
