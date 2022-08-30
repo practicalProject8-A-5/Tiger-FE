@@ -8,9 +8,16 @@ import { ko } from "date-fns/esm/locale";
 
 import styled from "styled-components";
 
+import Modal from "../../global_elements/Modal";
+
 const Reservation = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+
+  const [IsModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(!IsModalOpen);
+  };
 
   console.log("start-date", startDate);
   console.log("end-date", endDate);
@@ -19,7 +26,7 @@ const Reservation = () => {
       <CalendarWrapper>
         <NewDatePicker
           selected={startDate}
-          onChange={(date: Date) => setStartDate(date)}
+          onChange={(date) => setStartDate(date)}
           selectsStart
           startDate={startDate}
           endDate={endDate}
@@ -31,7 +38,7 @@ const Reservation = () => {
       <CalendarWrapper>
         <NewDatePicker
           selected={endDate}
-          onChange={(date: Date) => setEndDate(date)}
+          onChange={(date) => setEndDate(date)}
           selectsEnd
           startDate={startDate}
           endDate={endDate}
@@ -39,7 +46,13 @@ const Reservation = () => {
           locale={ko}
           dateFormat="yyyy-MM-dd"
         />
-        <button>결제하기</button>
+        <button onClick={showModal}>결제하기</button>
+        {IsModalOpen ? (
+          <Modal showModal={showModal}>
+            <p>{String(startDate.toISOString().slice(0, 10))}</p>
+            <p>{String(endDate.toISOString().slice(0, 10))}</p>
+          </Modal>
+        ) : null}
       </CalendarWrapper>
     </CalendarContainer>
   );
