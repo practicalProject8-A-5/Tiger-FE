@@ -1,6 +1,9 @@
 // eslint-disable-next-line
 
 import React, { useState } from "react";
+
+import styled from "styled-components";
+
 import DaumPostcode from "react-daum-postcode";
 
 const SearchLocation = () => {
@@ -39,7 +42,7 @@ const SearchLocation = () => {
     height: "400px",
   };
   return (
-    <div>
+    <SearchLocationContainer>
       <input
         value={address}
         onClick={() => {
@@ -51,8 +54,12 @@ const SearchLocation = () => {
       {isPopupOpen ? (
         <DaumPostcode style={postCodeStyle} onComplete={handlePostCode} />
       ) : null}
-    </div>
+    </SearchLocationContainer>
   );
 };
+
+const SearchLocationContainer = styled.div`
+  margin: 36px;
+`;
 
 export default SearchLocation;

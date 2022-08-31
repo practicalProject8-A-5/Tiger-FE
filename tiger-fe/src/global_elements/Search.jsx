@@ -26,5 +26,7 @@ const StSearch = styled.div`
     0px 12.5216px 10px rgba(0, 0, 0, 0.02);
   /* background-color: skyblue; */
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
+  padding: 0 246px;
+  box-sizing: border-box;
 `;

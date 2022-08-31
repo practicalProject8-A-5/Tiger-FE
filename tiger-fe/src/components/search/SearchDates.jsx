@@ -18,11 +18,11 @@ const SearchDates = () => {
   const [endDate, setEndDate] = useState(new Date());
 
   // date picker button custom
-  const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
-    <button className="example-custom-input" onClick={onClick} ref={ref}>
-      {value}
-    </button>
-  ));
+  // const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
+  //   <button className="example-custom-input" onClick={onClick} ref={ref}>
+  //     {value}
+  //   </button>
+  // ));
 
   const newStartDate = String(startDate.toISOString().slice(0, 10));
   const newEndDate = String(endDate.toISOString().slice(0, 10));
@@ -47,7 +47,7 @@ const SearchDates = () => {
           locale={ko}
           dateFormat="yyyy-MM-dd"
           minDate={new Date()}
-          customInput={<ExampleCustomInput />}
+          // customInput={<ExampleCustomInput />}
           shouldCloseOnSelect={false}
         />
       </CalendarWrapper>
@@ -61,7 +61,7 @@ const SearchDates = () => {
           minDate={startDate}
           locale={ko}
           dateFormat="yyyy-MM-dd"
-          customInput={<ExampleCustomInput />}
+          // customInput={<ExampleCustomInput />}
           shouldCloseOnSelect={false}
         />
         {/* <button onClick={showModal}>찾기</button> */}
@@ -94,6 +94,7 @@ const NewDatePicker = styled(DatePicker)`
   border-radius: 4px;
   border: 1px solid orange;
   font-size: 12px;
+  margin: 31px 0 31px 0;
 `;
 
 export default SearchDates;
