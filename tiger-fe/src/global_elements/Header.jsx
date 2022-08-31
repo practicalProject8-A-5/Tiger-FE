@@ -3,12 +3,16 @@
 import React from "react";
 import styled from "styled-components";
 
+import SearchVehicle from "../components/search/SearchVehicle";
+
 const Header = () => {
   return (
     <StHeader>
       <div className="wrap">
         <div className="logo">logo</div>
-        <div className="search">search</div>
+        <div className="search">
+          <SearchVehicle />
+        </div>
         <div className="menu">
           <p className="reservation_list">예약내역</p>
           <p className="host_mode">차주 등록하기</p>
