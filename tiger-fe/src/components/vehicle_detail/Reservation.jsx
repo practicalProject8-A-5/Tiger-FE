@@ -1,10 +1,11 @@
 // eslint-disable-next-line
 
-import React, { useState } from "react";
+import React, { useState, forwardRef } from "react";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
+import moment from "moment";
 
 import styled from "styled-components";
 
@@ -13,6 +14,22 @@ import Modal from "../../global_elements/Modal";
 const Reservation = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
+    <button className="example-custom-input" onClick={onClick} ref={ref}>
+      {value}
+    </button>
+  ));
+
+  const disabledDates = ["2022-09-15", "2022-09-20"];
+
+  const disabledDate = (current) => {
+    return (
+      moment(current).day() === 0 ||
+      disabledDates.find(
+        (date) => date === moment(current).format("YYYY-MM-DD")
+      )
+    );
+  };
 
   const [IsModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
@@ -33,6 +50,9 @@ const Reservation = () => {
           locale={ko}
           dateFormat="yyyy-MM-dd"
           minDate={new Date()}
+          // isClearable
+          customInput={<ExampleCustomInput />}
+          disabledDate={disabledDate}
         />
       </CalendarWrapper>
       <CalendarWrapper>
@@ -45,6 +65,9 @@ const Reservation = () => {
           minDate={startDate}
           locale={ko}
           dateFormat="yyyy-MM-dd"
+          // isClearable
+          customInput={<ExampleCustomInput />}
+          disabledDate={disabledDate}
         />
         <button onClick={showModal}>결제하기</button>
         {IsModalOpen ? (
