@@ -1,12 +1,16 @@
+// eslint-disable-next-line
+
 import React from "react";
 import styled from "styled-components";
 
-import SearchVehicle from "../components/search/SearchVehicle";
+import SearchDates from "../components/search/SearchDates";
+import SearchLocation from "../components/search/SearchLocation";
 
 const Search = () => {
   return (
     <StSearch>
-      <SearchVehicle />
+      <SearchLocation />
+      <SearchDates />
     </StSearch>
   );
 };
@@ -21,4 +25,6 @@ const StSearch = styled.div`
     0px 10px 12px rgba(0, 0, 0, 0.0456112),
     0px 12.5216px 10px rgba(0, 0, 0, 0.02);
   /* background-color: skyblue; */
+  display: flex;
+  justify-content: center;
 `;

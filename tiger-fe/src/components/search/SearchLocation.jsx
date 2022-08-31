@@ -2,8 +2,8 @@
 
 import React from "react";
 
-const VehicleDetailPage = () => {
+const SearchLocation = () => {
   return <div></div>;
 };
 
-export default VehicleDetailPage;
+export default SearchLocation;

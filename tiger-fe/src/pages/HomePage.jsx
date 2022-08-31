@@ -3,14 +3,14 @@
 import React from "react";
 import styled from "styled-components";
 
-import Header from "../global_elements/Header";
-import Search from "../global_elements/Search";
+// import Header from "../global_elements/Header";
+// import Search from "../global_elements/Search";
 
 const HomePage = () => {
   return (
     <StHomePage>
-      <Header />
-      <Search />
+      {/* <Header />
+      <Search /> */}
     </StHomePage>
   );
 };

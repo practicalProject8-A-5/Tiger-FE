@@ -5,11 +5,15 @@ import React, { useState, forwardRef } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
-import moment from "moment";
-import styled from "styled-components";
-import Modal from "../../global_elements/Modal";
 
-const SearchVehicle = () => {
+import styled from "styled-components";
+// import Button from "../../global_elements/Button";
+import "./SearchDates.scss";
+import VehicleDetailPage from "../../pages/VehicleDetailPage";
+
+// import Modal from "../../global_elements/Modal";
+
+const SearchDates = () => {
   // let user to pick startDate and endDate
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
@@ -21,11 +25,17 @@ const SearchVehicle = () => {
     </button>
   ));
 
+  const newStartDate = String(startDate.toISOString().slice(0, 10));
+  const newEndDate = String(endDate.toISOString().slice(0, 10));
+
+  console.log(newStartDate);
+  console.log(newEndDate);
+
   // modal open or close
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const showModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
+  // const [isModalOpen, setIsModalOpen] = useState(false);
+  // const showModal = () => {
+  //   setIsModalOpen(!isModalOpen);
+  // };
   return (
     <CalendarContainer>
       <CalendarWrapper>
@@ -55,26 +65,27 @@ const SearchVehicle = () => {
           customInput={<ExampleCustomInput />}
           shouldCloseOnSelect={false}
         />
-        <button onClick={showModal}>찾기</button>
+        {/* <button onClick={showModal}>찾기</button> */}
 
         {/* modal open to payment modal */}
-        {isModalOpen ? (
+        {/* {isModalOpen ? (
           <Modal showModal={showModal}>
             <p>{String(startDate.toISOString().slice(0, 10))}</p>
             <p>{String(endDate.toISOString().slice(0, 10))}</p>
           </Modal>
-        ) : null}
+        ) : null} */}
       </CalendarWrapper>
+      {/* <Button size="medium">찾기</Button> */}
     </CalendarContainer>
   );
 };
 
-const CalendarContainer = styled.div``;
-
-const CalendarWrapper = styled.div`
-  width: 50%;
-  margin: 0 auto;
+const CalendarContainer = styled.div`
+  display: flex;
+  justify-content: center;
 `;
+
+const CalendarWrapper = styled.div``;
 
 const NewDatePicker = styled(DatePicker)`
   width: 130px;
@@ -86,4 +97,4 @@ const NewDatePicker = styled(DatePicker)`
   font-size: 12px;
 `;
 
-export default SearchVehicle;
+export default SearchDates;
