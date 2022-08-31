@@ -3,8 +3,6 @@
 import React from "react";
 import styled from "styled-components";
 
-import SearchVehicle from "../components/search/SearchVehicle";
-
 const Header = () => {
   return (
     <StHeader>
@@ -19,9 +17,9 @@ const Header = () => {
           <div className="header__menu__R">
             <div className="header__switch">
               <span className="text">오너모드로 전환</span>
-              <label class="switch">
+              <label className="switch">
                 <input id="switch" type="checkbox" />
-                <span class="slider"></span>
+                <span className="slider"></span>
               </label>
             </div>
             <div className="header__login">로그인</div>

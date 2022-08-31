@@ -1,8 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
+import SearchVehicle from "../components/search/SearchVehicle";
+
 const Search = () => {
-  return <StSearch></StSearch>;
+  return (
+    <StSearch>
+      <SearchVehicle />
+    </StSearch>
+  );
 };
 
 export default Search;
