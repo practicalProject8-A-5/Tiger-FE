@@ -8,7 +8,6 @@ import { ko } from "date-fns/esm/locale";
 
 import styled from "styled-components";
 // import Button from "../../global_elements/Button";
-import "./SearchDates.scss";
 
 // import Modal from "../../global_elements/Modal";
 
@@ -87,14 +86,14 @@ const CalendarContainer = styled.div`
 const CalendarWrapper = styled.div``;
 
 const NewDatePicker = styled(DatePicker)`
-  width: 130px;
-  height: 30px;
+  width: 270px;
+  height: 42px;
   box-sizing: border-box;
-  padding: 8px 20px;
+  padding: 8px;
   border-radius: 4px;
   border: 1px solid orange;
   font-size: 12px;
-  margin: 31px 0 31px 0;
+  margin: 25px 0 25px 0;
 `;
 
 export default SearchDates;

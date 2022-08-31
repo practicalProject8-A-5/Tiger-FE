@@ -37,13 +37,15 @@ const SearchLocation = () => {
   const postCodeStyle = {
     display: "block",
     position: "absolute",
-    top: "50%",
+    top: "21.8%",
     width: "400px",
     height: "400px",
+    border: "1px solid black",
   };
   return (
     <SearchLocationContainer>
       <input
+        className="location_input"
         value={address}
         onClick={() => {
           setIsPopupOpen(!isPopupOpen);
@@ -59,7 +61,11 @@ const SearchLocation = () => {
 };
 
 const SearchLocationContainer = styled.div`
-  margin: 36px;
+  margin: 26px;
+  .location_input {
+    width: 400px;
+    height: 35px;
+  }
 `;
 
 export default SearchLocation;
