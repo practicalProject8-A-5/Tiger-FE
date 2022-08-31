@@ -3,6 +3,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import SearchVehicle from "../components/search/SearchVehicle";
+
 const Header = () => {
   return (
     <StHeader>
