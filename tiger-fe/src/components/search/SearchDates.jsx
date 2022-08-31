@@ -9,7 +9,6 @@ import { ko } from "date-fns/esm/locale";
 import styled from "styled-components";
 // import Button from "../../global_elements/Button";
 import "./SearchDates.scss";
-import VehicleDetailPage from "../../pages/VehicleDetailPage";
 
 // import Modal from "../../global_elements/Modal";
 
