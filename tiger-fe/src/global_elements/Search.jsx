@@ -1,25 +1,171 @@
 // eslint-disable-next-line
 
-import React from "react";
+import React, { useState, forwardRef } from "react";
 import styled from "styled-components";
 
-import SearchDates from "../components/search/SearchDates";
-import SearchLocation from "../components/search/SearchLocation";
-import SearchType from "../components/search/SearchType";
+import DaumPostcode from "react-daum-postcode";
+
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { ko } from "date-fns/esm/locale";
+
+// import SearchDates from "../components/search/SearchDates";
+// import SearchLocation from "../components/search/SearchLocation";
+// import SearchType from "../components/search/SearchType";
 
 const Search = () => {
+  // search full address
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [address, setAddress] = useState("");
+
+  const onChangeHandler = (e) => {
+    setAddress(e.target.value);
+  };
+
+  const handlePostCode = (data) => {
+    let fullAddress = data.address;
+    let extraAddress = "";
+
+    if (data.addressType === "R") {
+      if (data.bname !== "") {
+        extraAddress += data.bname;
+      }
+      if (data.buildingName !== "") {
+        extraAddress +=
+          extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
+      }
+      fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
+    }
+    // console.log(data);
+    console.log(fullAddress);
+    setAddress(fullAddress);
+    // console.log(data.zonecode);
+  };
+
+  const postCodeStyle = {
+    display: "block",
+    position: "absolute",
+    top: "21.8%",
+    width: "400px",
+    height: "400px",
+    border: "1px solid black",
+    zIndex: "1",
+  };
+
+  // searchDate
+
+  // let user to pick startDate and endDate
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+
+  // date picker button custom
+  // const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
+  //   <button className="example-custom-input" onClick={onClick} ref={ref}>
+  //     {value}
+  //   </button>
+  // ));
+
+  const newStartDate = String(startDate.toISOString().slice(0, 10));
+  const newEndDate = String(endDate.toISOString().slice(0, 10));
+
+  console.log(newStartDate);
+  console.log(newEndDate);
+
+  // modal open or close
+  // const [isModalOpen, setIsModalOpen] = useState(false);
+  // const showModal = () => {
+  //   setIsModalOpen(!isModalOpen);
+  // };
+
+  // search vehicle type
+  const getInitialState = () => {
+    const value = "자동차 종류";
+    return value;
+  };
+
+  const [value, setValue] = useState(getInitialState);
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
+
+  console.log(value);
+
   return (
     <StSearch>
       <div className="wrap">
-        <SearchLocation />
-        <SearchDates />
-        <SearchType />
+        <SearchLocationContainer>
+          <input
+            className="location_input"
+            value={address}
+            onClick={() => {
+              setIsPopupOpen(!isPopupOpen);
+            }}
+            onChange={onChangeHandler}
+            placeholder="어디서?"></input>
+
+          {isPopupOpen ? (
+            <DaumPostcode style={postCodeStyle} onComplete={handlePostCode} />
+          ) : null}
+        </SearchLocationContainer>
+        <CalendarContainer>
+          <CalendarWrapper>
+            <NewDatePicker
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              selectsStart
+              startDate={startDate}
+              endDate={endDate}
+              locale={ko}
+              dateFormat="yyyy-MM-dd"
+              minDate={new Date()}
+              // customInput={<ExampleCustomInput />}
+              shouldCloseOnSelect={false}
+            />
+          </CalendarWrapper>
+          <CalendarWrapper>
+            <NewDatePicker
+              selected={endDate}
+              onChange={(date) => setEndDate(date)}
+              selectsEnd
+              startDate={startDate}
+              endDate={endDate}
+              minDate={startDate}
+              locale={ko}
+              dateFormat="yyyy-MM-dd"
+              // customInput={<ExampleCustomInput />}
+              shouldCloseOnSelect={false}
+            />
+            {/* <button onClick={showModal}>찾기</button> */}
+
+            {/* modal open to payment modal */}
+            {/* {isModalOpen ? (
+          <Modal showModal={showModal}>
+            <p>{String(startDate.toISOString().slice(0, 10))}</p>
+            <p>{String(endDate.toISOString().slice(0, 10))}</p>
+          </Modal>
+        ) : null} */}
+          </CalendarWrapper>
+          {/* <Button size="medium">찾기</Button> */}
+        </CalendarContainer>
+        <VehicleTypeContainer>
+          <select value={value} onChange={handleChange}>
+            <option value="자동차 종류" disabled>
+              자동차 종류
+            </option>
+            <option value="경형">경형</option>
+            <option value="중형">증형</option>
+            <option value="대형">대형</option>
+            <option value="승합RV">승합RV</option>
+            <option value="수입">수입</option>
+          </select>
+
+          {/* {value} */}
+        </VehicleTypeContainer>
       </div>
     </StSearch>
   );
 };
-
-export default Search;
 
 const StSearch = styled.div`
   width: 100%;
@@ -41,3 +187,43 @@ const StSearch = styled.div`
     justify-content: space-between;
   }
 `;
+
+const SearchLocationContainer = styled.div`
+  /* margin: 26px; */
+  .location_input {
+    width: 400px;
+    height: 35px;
+    cursor: pointer;
+  }
+`;
+
+const CalendarContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const CalendarWrapper = styled.div``;
+
+const NewDatePicker = styled(DatePicker)`
+  width: 270px;
+  height: 42px;
+  box-sizing: border-box;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid orange;
+  font-size: 12px;
+  margin: 25px 0 25px 0;
+  cursor: pointer;
+`;
+
+const VehicleTypeContainer = styled.div`
+  /* margin: 25px; */
+  select {
+    width: 300px;
+    height: 42px;
+    padding: 8px;
+    cursor: pointer;
+  }
+`;
+
+export default Search;
