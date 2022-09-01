@@ -41,6 +41,7 @@ const SearchLocation = () => {
     width: "400px",
     height: "400px",
     border: "1px solid black",
+    zIndex: "1",
   };
   return (
     <SearchLocationContainer>
@@ -65,6 +66,7 @@ const SearchLocationContainer = styled.div`
   .location_input {
     width: 400px;
     height: 35px;
+    cursor: pointer;
   }
 `;
 

@@ -40,6 +40,7 @@ const VehicleTypeContainer = styled.div`
     width: 300px;
     height: 42px;
     padding: 8px;
+    cursor: pointer;
   }
 `;
 

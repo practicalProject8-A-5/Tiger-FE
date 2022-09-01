@@ -4,7 +4,7 @@ import React from "react";
 import styled from "styled-components";
 import ItemList from "../components/main/ItemList";
 
-const HomePage = () => {
+const RentMainPage = () => {
   return (
     <StHomePage>
       <ItemList />
@@ -12,4 +12,8 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default RentMainPage;
+
+const StHomePage = styled.div`
+  height: 300vh;
+`;
