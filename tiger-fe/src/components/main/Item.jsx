@@ -29,14 +29,10 @@ const StItem = styled.div`
   height: 421px;
   position: relative;
   cursor: pointer;
-  /* & + & {
-    margin-left: 36px;
-  } */
   img {
     width: 318px;
     height: 300px;
     object-fit: cover;
-    /* border: 1px solid; */
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
   }
@@ -52,8 +48,6 @@ const StItem = styled.div`
     margin-top: 19px;
     width: 315px;
     height: 102px;
-    /* border: 1px solid; */
-    /* box-sizing: border-box; */
     .desc__top {
       display: flex;
       align-items: center;
