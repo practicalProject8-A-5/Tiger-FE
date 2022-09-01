@@ -3,7 +3,7 @@
 import React from "react";
 
 const VehicleDetailPage = () => {
-  return <div>v detail</div>;
+  return <div></div>;
 };
 
 export default VehicleDetailPage;
