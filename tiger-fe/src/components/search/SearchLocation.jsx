@@ -52,7 +52,8 @@ const SearchLocation = () => {
           setIsPopupOpen(!isPopupOpen);
         }}
         onChange={onChangeHandler}
-        placeholder="어디서?"></input>
+        placeholder="어디서?"
+      ></input>
 
       {isPopupOpen ? (
         <DaumPostcode style={postCodeStyle} onComplete={handlePostCode} />
@@ -62,7 +63,7 @@ const SearchLocation = () => {
 };
 
 const SearchLocationContainer = styled.div`
-  margin: 26px;
+  /* margin: 26px; */
   .location_input {
     width: 400px;
     height: 35px;

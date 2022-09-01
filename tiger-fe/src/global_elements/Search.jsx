@@ -10,9 +10,11 @@ import SearchType from "../components/search/SearchType";
 const Search = () => {
   return (
     <StSearch>
-      <SearchLocation />
-      <SearchDates />
-      <SearchType />
+      <div className="wrap">
+        <SearchLocation />
+        <SearchDates />
+        <SearchType />
+      </div>
     </StSearch>
   );
 };
@@ -27,7 +29,15 @@ const StSearch = styled.div`
     0px 10px 12px rgba(0, 0, 0, 0.0456112),
     0px 12.5216px 10px rgba(0, 0, 0, 0.02);
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   padding: 0 246px;
   box-sizing: border-box;
+  /* background-color: skyblue; */
+  .wrap {
+    width: 1411px;
+    /* background-color: pink; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 `;
