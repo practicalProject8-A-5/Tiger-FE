@@ -6,6 +6,7 @@ const Item = () => {
   return (
     <StItem>
       <img src={img} alt="car" />
+      <span className="heart"></span>
       <div className="desc__box">
         <div className="desc__top">
           <div className="desc__title">서울특별시,korea</div>
@@ -26,19 +27,26 @@ export default Item;
 const StItem = styled.div`
   width: 318px;
   height: 421px;
-
-  & + & {
+  position: relative;
+  cursor: pointer;
+  /* & + & {
     margin-left: 36px;
-    /* background-color: yellow; */
-  }
+  } */
   img {
     width: 318px;
     height: 300px;
     object-fit: cover;
-    /* background-color: pink; */
-    border: 1px solid;
+    /* border: 1px solid; */
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
+  }
+  .heart {
+    width: 28px;
+    height: 28px;
+    background-color: pink;
+    position: absolute;
+    top: 18px;
+    right: 18px;
   }
   .desc__box {
     margin-top: 19px;
@@ -53,10 +61,10 @@ const StItem = styled.div`
       font-weight: 600;
       font-size: 18px;
       margin-bottom: 6px;
-      .desc__title {
+      /* .desc__title {
       }
       .desc__star {
-      }
+      } */
     }
     p {
       font-weight: 500;
