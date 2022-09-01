@@ -1,7 +1,80 @@
 import React from "react";
+import styled from "styled-components";
+import img from "../../assets/img_1.jpg";
 
 const Item = () => {
-  return <div></div>;
+  return (
+    <StItem>
+      <img src={img} alt="car" />
+      <div className="desc__box">
+        <div className="desc__top">
+          <div className="desc__title">서울특별시,korea</div>
+          <div className="desc__star">4.12</div>
+        </div>
+        <p>벤츠, c-클래스 / 가솔린</p>
+        <p className="km">11581km</p>
+        <div className="desc__bottom">
+          ₩2,1581 <span>/시간</span>
+        </div>
+      </div>
+    </StItem>
+  );
 };
 
 export default Item;
+
+const StItem = styled.div`
+  width: 318px;
+  height: 421px;
+
+  & + & {
+    margin-left: 36px;
+    /* background-color: yellow; */
+  }
+  img {
+    width: 318px;
+    height: 300px;
+    object-fit: cover;
+    /* background-color: pink; */
+    border: 1px solid;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+  }
+  .desc__box {
+    margin-top: 19px;
+    width: 315px;
+    height: 102px;
+    /* border: 1px solid; */
+    /* box-sizing: border-box; */
+    .desc__top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 600;
+      font-size: 18px;
+      margin-bottom: 6px;
+      .desc__title {
+      }
+      .desc__star {
+      }
+    }
+    p {
+      font-weight: 500;
+      font-size: 18px;
+      color: #777777;
+    }
+    .km {
+      margin: 5px 0 7px 0;
+    }
+    .desc__bottom {
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 21px;
+      span {
+        color: #777777;
+        font-weight: 500;
+        font-size: 18px;
+      }
+    }
+  }
+`;
