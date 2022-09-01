@@ -54,7 +54,7 @@ const Search = () => {
   const postCodeStyle = {
     display: "block",
     position: "absolute",
-    top: "21.8%",
+    top: "18.8%",
     width: "400px",
     height: "400px",
     border: "1px solid black",
@@ -73,8 +73,8 @@ const Search = () => {
   const newStartDate = String(startDate.toISOString().slice(0, 10));
   const newEndDate = String(endDate.toISOString().slice(0, 10));
 
-  console.log(newStartDate);
-  console.log(newEndDate);
+  // console.log(newStartDate);
+  // console.log(newEndDate);
 
   // modal open or close
   // const [isModalOpen, setIsModalOpen] = useState(false);
@@ -92,7 +92,7 @@ const Search = () => {
     setValue(e.target.value);
   };
 
-  console.log(value);
+  // console.log(value); ------------------------
 
   // submit handler
   const onSubmitHandler = (e) => {
@@ -115,7 +115,8 @@ const Search = () => {
               setIsPopupOpen(!isPopupOpen);
             }}
             onChange={onChangeHandler}
-            placeholder="어디서?"></input>
+            placeholder="어디서?"
+          ></input>
 
           {isPopupOpen ? (
             <div>
@@ -169,7 +170,7 @@ const Search = () => {
 
         <VehicleTypeContainer>
           <select value={value} onChange={handleChange}>
-            <option value="자동차 종류" disabled selected>
+            <option defaultValue="" hidden>
               자동차 종류
             </option>
             <option value="경형">경형</option>

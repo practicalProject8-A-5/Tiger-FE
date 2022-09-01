@@ -164,3 +164,5 @@ const RESP = {
     },
   },
 };
+
+export default RESP;
