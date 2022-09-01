@@ -94,6 +94,7 @@ const NewDatePicker = styled(DatePicker)`
   border: 1px solid orange;
   font-size: 12px;
   margin: 25px 0 25px 0;
+  cursor: pointer;
 `;
 
 export default SearchDates;
