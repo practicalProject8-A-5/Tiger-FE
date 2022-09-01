@@ -9,10 +9,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
 
-// import SearchDates from "../components/search/SearchDates";
-// import SearchLocation from "../components/search/SearchLocation";
-// import SearchType from "../components/search/SearchType";
-
 const Search = () => {
   // search full address
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -105,9 +101,14 @@ const Search = () => {
             placeholder="어디서?"></input>
 
           {isPopupOpen ? (
-            <DaumPostcode style={postCodeStyle} onComplete={handlePostCode} />
-          ) : null}
+            <div>
+              <DaumPostcode style={postCodeStyle} onComplete={handlePostCode} />
+            </div>
+          ) : (
+            !isPopupOpen
+          )}
         </SearchLocationContainer>
+
         <CalendarContainer>
           <CalendarWrapper>
             <NewDatePicker
@@ -148,6 +149,7 @@ const Search = () => {
           </CalendarWrapper>
           {/* <Button size="medium">찾기</Button> */}
         </CalendarContainer>
+
         <VehicleTypeContainer>
           <select value={value} onChange={handleChange}>
             <option value="자동차 종류" disabled>
