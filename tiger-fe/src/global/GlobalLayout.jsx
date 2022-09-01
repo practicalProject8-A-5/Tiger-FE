@@ -3,14 +3,14 @@
 import React from "react";
 import styled from "styled-components";
 
-const GlobalLayout = () => {
-  return <GlobalLayoutContainer />;
+const GlobalLayout = ({ children }) => {
+  return <GlobalLayoutContainer>{children}</GlobalLayoutContainer>;
 };
 
 const GlobalLayoutContainer = styled.div`
-  width: 100%;
-  min-height: 100vh;
-  padding: 24px;
+  /* background-color: yellowgreen; */
+  padding: 0 93px 0 93px;
+  box-sizing: border-box;
 `;
 
 export default GlobalLayout;

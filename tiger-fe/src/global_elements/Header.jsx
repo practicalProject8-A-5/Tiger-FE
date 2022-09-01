@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 
 import React from "react";
-// import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Header = () => {
@@ -10,12 +10,20 @@ const Header = () => {
   return (
     <StHeader>
       <div className="wrap">
-        <div className="header__logo">ta,iger</div>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <div className="header__logo">ta,iger</div>
+        </Link>
         <div className="header__menu">
           <div className="header__menu__L">
-            <div className="header__home">홈</div>
-            <div className="header__main">24렌트</div>
-            <div className="header__mypage">마이페이지</div>
+            <Link to="/intro" style={{ textDecoration: "none" }}>
+              <div className="header__home">홈</div>
+            </Link>
+            <Link to="/" style={{ textDecoration: "none" }}>
+              <div className="header__main">24렌트</div>
+            </Link>
+            <Link to="/renter" style={{ textDecoration: "none" }}>
+              <div className="header__mypage">마이페이지</div>
+            </Link>
           </div>
           <div className="header__menu__R">
             <div className="header__switch">
@@ -44,11 +52,12 @@ const StHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  /* font-family: "Noto Sans KR", sans-serif; */
+  /* background-color: pink; */
   .wrap {
     width: 100%;
     height: 40px;
     display: flex;
+    /* background-color: pink; */
     .header__logo {
       width: 121px;
       height: 40px;

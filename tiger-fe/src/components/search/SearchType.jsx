@@ -35,7 +35,7 @@ const SearchType = () => {
 };
 
 const VehicleTypeContainer = styled.div`
-  margin: 25px;
+  /* margin: 25px; */
   select {
     width: 300px;
     height: 42px;
