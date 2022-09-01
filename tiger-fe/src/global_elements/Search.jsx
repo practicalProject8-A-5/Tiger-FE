@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 
 import React, { useState, useEffect, forwardRef } from "react";
-import { useDispatch } from "react-redux/es/exports";
+import { useDispatch, useSelector } from "react-redux";
 
 import styled from "styled-components";
 
@@ -18,6 +18,9 @@ import { __vehicleSearchList } from "../redux/modules/searchSlice";
 const Search = () => {
   const dispatch = useDispatch();
 
+  // 추후 서버 열리면 밑에 div 에 정보들을 뿌릴 예정
+  // const getVehicleList = useSelector((state) => state.searchSlice.filteredVehicleList);
+
   // search full address
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [address, setAddress] = useState("");
@@ -27,6 +30,7 @@ const Search = () => {
   //search vehicle type
   const [value, setValue] = useState();
 
+  // search address
   const onChangeHandler = (e) => {
     setAddress(e.target.value);
   };
@@ -61,8 +65,6 @@ const Search = () => {
     zIndex: "1",
   };
 
-  // searchDate
-
   // date picker button custom
   // const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
   //   <button className="example-custom-input" onClick={onClick} ref={ref}>
@@ -70,8 +72,8 @@ const Search = () => {
   //   </button>
   // ));
 
-  const newStartDate = String(startDate.toISOString().slice(0, 10));
-  const newEndDate = String(endDate.toISOString().slice(0, 10));
+  const newStartDate = new Date(startDate).toISOString().slice(0, 10);
+  const newEndDate = new Date(endDate).toISOString().slice(0, 10);
 
   console.log(newStartDate);
   console.log(newEndDate);
@@ -83,24 +85,16 @@ const Search = () => {
   // };
 
   // search vehicle type
-  // const getInitialState = () => {
-  //   const value = "자동차 종류";
-  //   return value;
-  // };
-
   const handleChange = (e) => {
     setValue(e.target.value);
   };
-
   console.log(value);
 
   // submit handler
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    dispatch(__vehicleSearchList(address, startDate, endDate, value));
+    dispatch(__vehicleSearchList({ address, newStartDate, newEndDate, value }));
     setAddress("");
-    setStartDate("");
-    setEndDate("");
     setValue("");
   };
 
@@ -138,7 +132,7 @@ const Search = () => {
               dateFormat="yyyy-MM-dd"
               minDate={new Date()}
               // customInput={<ExampleCustomInput />}
-              shouldCloseOnSelect={false}
+              shouldCloseOnSelect={true}
             />
           </CalendarWrapper>
           <CalendarWrapper>
@@ -152,7 +146,7 @@ const Search = () => {
               locale={ko}
               dateFormat="yyyy-MM-dd"
               // customInput={<ExampleCustomInput />}
-              shouldCloseOnSelect={false}
+              shouldCloseOnSelect={true}
             />
             {/* <button onClick={showModal}>찾기</button> */}
 
@@ -164,7 +158,6 @@ const Search = () => {
           </Modal>
         ) : null} */}
           </CalendarWrapper>
-          {/* <Button size="medium">찾기</Button> */}
         </CalendarContainer>
 
         <VehicleTypeContainer>
@@ -173,13 +166,11 @@ const Search = () => {
               자동차 종류
             </option>
             <option value="경형">경형</option>
-            <option value="중형">증형</option>
+            <option value="중형">중형</option>
             <option value="대형">대형</option>
             <option value="승합RV">승합RV</option>
             <option value="수입">수입</option>
           </select>
-
-          {/* {value} */}
         </VehicleTypeContainer>
         <Button onClick={onSubmitHandler}>찾기</Button>
       </div>
