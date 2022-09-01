@@ -169,7 +169,7 @@ const Search = () => {
 
         <VehicleTypeContainer>
           <select value={value} onChange={handleChange}>
-            <option value="자동차 종류" disabled selected>
+            <option defaultValue="" hidden>
               자동차 종류
             </option>
             <option value="경형">경형</option>
