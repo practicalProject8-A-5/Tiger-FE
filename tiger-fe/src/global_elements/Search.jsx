@@ -1,6 +1,8 @@
 // eslint-disable-next-line
 
-import React, { useState, forwardRef } from "react";
+import React, { useState, useEffect, forwardRef } from "react";
+import { useDispatch } from "react-redux/es/exports";
+
 import styled from "styled-components";
 
 import DaumPostcode from "react-daum-postcode";
@@ -9,10 +11,21 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
 
+import Button from "./Button";
+
+import { __vehicleSearchList } from "../redux/modules/searchSlice";
+
 const Search = () => {
+  const dispatch = useDispatch();
+
   // search full address
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [address, setAddress] = useState("");
+  // search reservation dates
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  //search vehicle type
+  const [value, setValue] = useState();
 
   const onChangeHandler = (e) => {
     setAddress(e.target.value);
@@ -33,8 +46,8 @@ const Search = () => {
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
     // console.log(data);
-    console.log(fullAddress);
     setAddress(fullAddress);
+    console.log(address);
     // console.log(data.zonecode);
   };
 
@@ -49,10 +62,6 @@ const Search = () => {
   };
 
   // searchDate
-
-  // let user to pick startDate and endDate
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
 
   // date picker button custom
   // const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
@@ -74,18 +83,26 @@ const Search = () => {
   // };
 
   // search vehicle type
-  const getInitialState = () => {
-    const value = "자동차 종류";
-    return value;
-  };
-
-  const [value, setValue] = useState(getInitialState);
+  // const getInitialState = () => {
+  //   const value = "자동차 종류";
+  //   return value;
+  // };
 
   const handleChange = (e) => {
     setValue(e.target.value);
   };
 
   console.log(value);
+
+  // submit handler
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    dispatch(__vehicleSearchList(address, startDate, endDate, value));
+    setAddress("");
+    setStartDate("");
+    setEndDate("");
+    setValue("");
+  };
 
   return (
     <StSearch>
@@ -152,7 +169,7 @@ const Search = () => {
 
         <VehicleTypeContainer>
           <select value={value} onChange={handleChange}>
-            <option value="자동차 종류" disabled>
+            <option value="자동차 종류" disabled selected>
               자동차 종류
             </option>
             <option value="경형">경형</option>
@@ -164,6 +181,7 @@ const Search = () => {
 
           {/* {value} */}
         </VehicleTypeContainer>
+        <Button onClick={onSubmitHandler}>찾기</Button>
       </div>
     </StSearch>
   );

@@ -2,10 +2,10 @@
 
 import logger from "redux-logger";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import MapSlice from "../modules/MapSlice";
+import searchSlice from "../modules/searchSlice";
 
 const reducer = combineReducers({
-  MapSlice,
+  searchSlice,
 });
 
 const store = configureStore({
