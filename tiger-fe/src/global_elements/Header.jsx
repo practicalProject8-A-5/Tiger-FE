@@ -1,9 +1,12 @@
 // eslint-disable-next-line
 
 import React from "react";
+// import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Header = () => {
+  // const navigate = useNavigate();
+
   return (
     <StHeader>
       <div className="wrap">
@@ -51,6 +54,7 @@ const StHeader = styled.div`
       height: 40px;
       margin-right: 126px;
       background-color: skyblue;
+      cursor: pointer;
     }
     .header__menu {
       width: calc(1411px - 247px);
@@ -67,6 +71,7 @@ const StHeader = styled.div`
           font-weight: 500;
           line-height: 23px;
           margin-right: 44px;
+          cursor: pointer;
         }
         .header__main {
           width: 65px;
@@ -76,6 +81,7 @@ const StHeader = styled.div`
           font-size: 20px;
           line-height: 23px;
           margin-right: 44px;
+          cursor: pointer;
         }
         .header__mypage {
           width: 92px;
@@ -83,6 +89,7 @@ const StHeader = styled.div`
           font-weight: 500;
           font-size: 20px;
           line-height: 23px;
+          cursor: pointer;
         }
       }
       .header__menu__R {
@@ -107,6 +114,8 @@ const StHeader = styled.div`
             background: rgba(33, 33, 33, 0.08);
             border-radius: 7px;
             transition: all 0.5s;
+            /* background-color: pink; */
+            cursor: pointer;
             input {
               display: none;
               :checked + .slider {
@@ -135,6 +144,7 @@ const StHeader = styled.div`
           line-height: 23px;
           color: #ff881b;
           margin-left: 50px;
+          cursor: pointer;
         }
       }
     }

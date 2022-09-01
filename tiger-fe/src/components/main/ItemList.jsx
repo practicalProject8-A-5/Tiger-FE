@@ -10,6 +10,12 @@ const ItemList = () => {
       <Item />
       <Item />
       <Item />
+      <Item />
+      <Item />
+      <Item />
+      <Item />
+      <Item />
+      <Item />
     </StItemList>
   );
 };
@@ -18,10 +24,11 @@ export default ItemList;
 
 const StItemList = styled.div`
   width: 100%;
-  height: 600px;
   margin-top: 108px;
   padding: 0 84px;
   box-sizing: border-box;
-  background-color: pink;
+  /* background-color: pink; */
   display: flex;
+  flex-wrap: wrap;
+  gap: 36px;
 `;
