@@ -25,12 +25,8 @@ export default ItemList;
 const StItemList = styled.div`
   width: 100%;
   margin-top: 108px;
-  /* padding: 0 84px; */
-  /* box-sizing: border-box; */
-  /* background-color: pink; */
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: 59px 36px;
 `;
