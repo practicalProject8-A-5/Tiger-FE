@@ -7,8 +7,15 @@ import styled from "styled-components";
 import logo from "../assets/ta,iger_logo.png";
 
 import { useState } from "react";
+import LoginModal from "./LoginModal";
 
 const Header = ({ ownerMode }) => {
+  const [IsModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(!IsModalOpen);
+  };
+  console.log("현재 :", IsModalOpen);
+
   const [inOwner, setInOwner] = useState(false);
   const navigate = useNavigate();
   const onClick = () => {
@@ -37,6 +44,7 @@ const Header = ({ ownerMode }) => {
             <img src={logo} alt="로고" />
           </Link>
         </div>
+
         <div className="header__menu">
           <div className="header__menu__L">
             <Link to="/intro" style={{ textDecoration: "none" }}>
@@ -67,7 +75,10 @@ const Header = ({ ownerMode }) => {
                 </label>
               )}
             </div>
-            <div className="header__login">로그인</div>
+            <div className="header__login" onClick={showModal}>
+              로그인
+            </div>
+            {IsModalOpen && <LoginModal showModal={showModal} />}
           </div>
         </div>
       </div>

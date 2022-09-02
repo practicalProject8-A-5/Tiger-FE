@@ -39,7 +39,7 @@ export default OwnerInfo;
 
 const StOwnerInfo = styled.div`
   position: fixed;
-  z-index: 9;
+  /* z-index: 9; */
   top: 261px;
   right: 259px;
   width: 520px;
