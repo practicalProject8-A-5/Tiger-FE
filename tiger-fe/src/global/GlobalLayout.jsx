@@ -9,7 +9,7 @@ const GlobalLayout = ({ children }) => {
 
 const GlobalLayoutContainer = styled.div`
   /* background-color: skyblue; */
-  padding: 0 84px 0 84px;
+  padding: 0 246px;
   box-sizing: border-box;
 `;
 

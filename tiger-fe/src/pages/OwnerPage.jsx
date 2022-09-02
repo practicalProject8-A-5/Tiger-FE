@@ -2,13 +2,16 @@
 
 import React from "react";
 import GlobalLayout from "../global/GlobalLayout";
-import VehicleRegister from "../components/owner/VehicleRegister";
+import Header from "../global_elements/Header";
 
 const OwnerPage = () => {
   return (
-    <GlobalLayout>
-      <VehicleRegister />
-    </GlobalLayout>
+    <>
+      <Header />
+      <GlobalLayout>
+        <h1>owner</h1>
+      </GlobalLayout>
+    </>
   );
 };
 

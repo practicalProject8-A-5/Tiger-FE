@@ -106,7 +106,9 @@ const VehicleRegister = () => {
     <StVehicleRegister>
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* location */}
+        <label htmlFor="location">location</label>
         <input
+          id="location"
           className="location_input"
           value={address}
           onClick={() => {
@@ -114,7 +116,13 @@ const VehicleRegister = () => {
           }}
           onChange={onChangeHandler}
           placeholder="위치 or 주소"
-        ></input>
+          {...register("location", {
+            required: "주소를 입력해주세요",
+          })}
+        />
+        {errors.location ? (
+          <div className="error">{errors.location.message}</div>
+        ) : null}
 
         {isPopupOpen ? (
           <div>
@@ -176,9 +184,6 @@ const VehicleRegister = () => {
             placeholder="연식"
             {...register("years", {
               required: "연식을 입력해주세요",
-              validate: {
-                pattern: /^[A-Za-z]+$/i,
-              },
             })}
           />
           {errors.years ? (
@@ -250,43 +255,66 @@ const VehicleRegister = () => {
           ) : null}
         </div>
 
-        <Controller
-          name="cartype"
-          className="select"
-          render={({ field }) => (
-            <Select {...field} placeholder="차 타입" options={cartypeOption} />
-          )}
-          control={control}
-          defaultValue=""
-        />
+        <div>
+          <Controller
+            name="cartype"
+            className="select"
+            rules={{ required: "필수로 선택하셔야합니다." }}
+            render={({ field }) => (
+              <Select
+                {...field}
+                placeholder="차 타입"
+                options={cartypeOption}
+              />
+            )}
+            control={control}
+            defaultValue=""
+          />
+          {errors.cartype ? (
+            <div className="error">{errors.cartype.message}</div>
+          ) : null}
+        </div>
 
-        <Controller
-          name="transmission"
-          className="select"
-          render={({ field }) => (
-            <Select
-              {...field}
-              placeholder="변속기 종류"
-              options={transmissionOption}
-            />
-          )}
-          control={control}
-          defaultValue=""
-        />
+        <div>
+          <Controller
+            name="transmission"
+            className="select"
+            rules={{ required: "필수로 선택하셔야합니다." }}
+            render={({ field }) => (
+              <Select
+                {...field}
+                placeholder="변속기 종류"
+                options={transmissionOption}
+              />
+            )}
+            control={control}
+            defaultValue=""
+          />
+          {errors.transmission ? (
+            <div className="error">{errors.transmission.message}</div>
+          ) : null}
+        </div>
 
-        <Controller
-          name="fueltype"
-          className="select"
-          render={({ field }) => (
-            <Select
-              {...field}
-              placeholder="연료 종류"
-              options={fueltypeOption}
-            />
-          )}
-          control={control}
-          defaultValue=""
-        />
+        <div>
+          <Controller
+            name="fueltype"
+            className="select"
+            rules={{ required: "필수로 선택하셔야합니다." }}
+            render={({ field }) => (
+              <Select
+                {...field}
+                placeholder="연료 종류"
+                options={fueltypeOption}
+              />
+            )}
+            control={control}
+            defaultValue=""
+          />
+          {errors.fueltype ? (
+            <div className="error">{errors.fueltype.message}</div>
+          ) : null}
+        </div>
+
         <div>
           <input
             type="file"
@@ -308,27 +336,31 @@ export default VehicleRegister;
 
 const StVehicleRegister = styled.div`
   /* background-color: pink; */
+  div {
+    margin-bottom: 10px;
+  }
   .location_input {
     width: 300px;
     height: 50px;
   }
-  div {
-    margin: 10px 0;
-    input {
-      width: 300px;
-      height: 50px;
-    }
-    label {
-      margin-bottom: 5px;
-      display: block;
-    }
-    .error {
-      color: red;
-      font-size: 13px;
-    }
-    .img {
-      border: none;
-      padding: 0;
-    }
+  label {
+    margin-bottom: 10px;
+    display: block;
+  }
+  input {
+    width: 300px;
+    height: 50px;
+  }
+  label {
+    margin-bottom: 5px;
+    display: block;
+  }
+  .error {
+    color: red;
+    font-size: 13px;
+  }
+  .img {
+    border: none;
+    padding: 0;
   }
 `;

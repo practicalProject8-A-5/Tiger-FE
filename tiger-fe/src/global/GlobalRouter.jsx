@@ -13,8 +13,8 @@ const GlobalRouter = () => {
   return (
     <Routes>
       <Route path="/" element={<RentMainPage />} />
-      <Route path="/intro" element={<HomePage />} />
       <Route path="/owner" element={<OwnerPage />} />
+      <Route path="/intro" element={<HomePage />} />
       <Route path="/renter" element={<RenterPage />} />
       <Route path="/vdetail/:id" element={<VehicleDetailPage />} />
       <Route path="/vlist" element={<VehicleListPage />} />

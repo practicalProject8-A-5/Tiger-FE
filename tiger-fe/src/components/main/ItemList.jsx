@@ -28,5 +28,5 @@ const StItemList = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 59px 36px;
+  gap: 59px 46px;
 `;

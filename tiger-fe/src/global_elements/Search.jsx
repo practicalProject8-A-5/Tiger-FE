@@ -191,17 +191,17 @@ const Search = () => {
 const StSearch = styled.div`
   width: 100%;
   height: 93px;
+  padding: 0 246px;
+  box-sizing: border-box;
   border-top: 1px solid rgba(0, 0, 0, 0.06);
   box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.06),
     0px 10px 12px rgba(0, 0, 0, 0.0456112),
     0px 12.5216px 10px rgba(0, 0, 0, 0.02);
   display: flex;
   justify-content: space-between;
-  padding: 0 246px;
-  box-sizing: border-box;
   /* background-color: skyblue; */
   .wrap {
-    width: 1411px;
+    width: 100%;
     /* background-color: pink; */
     display: flex;
     align-items: center;
