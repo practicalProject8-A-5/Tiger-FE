@@ -3,7 +3,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Payment = () => {
+const VehicleDetailRight = () => {
   return <StPaymentBox></StPaymentBox>;
 };
 
@@ -17,4 +17,4 @@ const StPaymentBox = styled.div`
   box-sizing: border-box;
 `;
 
-export default Payment;
+export default VehicleDetailRight;

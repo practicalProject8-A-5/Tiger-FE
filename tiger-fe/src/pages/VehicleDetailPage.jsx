@@ -3,8 +3,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import VehicleImgSwiper from "../components/vehicle_detail/VehicleImgSwiper";
-import Payment from "../components/payment/Payment";
+import VehicleDetailLeft from "../components/vehicle_detail/VehicleDetailLeft";
+import VehicleDetailRight from "../components/vehicle_detail/VehicleDetailRight";
 import GlobalLayout from "../global/GlobalLayout";
 import Header from "../global_elements/Header";
 import Search from "../global_elements/Search";
@@ -17,10 +17,10 @@ const VehicleDetailPage = () => {
       <GlobalLayout>
         <StDetailContainer>
           <StDetailLeftSection>
-            <VehicleImgSwiper />
+            <VehicleDetailLeft />
           </StDetailLeftSection>
           <StDetailRightSection>
-            <Payment />
+            <VehicleDetailRight />
           </StDetailRightSection>
         </StDetailContainer>
       </GlobalLayout>
@@ -65,9 +65,9 @@ const StDetailLeftSection = styled.div`
 
 const StDetailRightSection = styled.div`
   @media (min-width: 1200px) {
-    top: 70px;
+    top: 27%;
     position: fixed;
-    right: calc((100% - 1060px) / 2);
+    right: calc((100% - 1396px) / 2);
   }
   @media (min-width: 768px) and (max-width: 991px) {
     bottom: 0;

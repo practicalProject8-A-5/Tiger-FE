@@ -4,7 +4,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  filteredVehicleList: {},
+  filteredVehicleList: [],
   isLoading: false,
   success: null,
   error: null,
@@ -60,5 +60,5 @@ export const searchSlice = createSlice({
   },
 });
 
-// export const {} = jobDetailSlice.actions;
+// export const {} = searchSlice.actions;
 export default searchSlice.reducer;
