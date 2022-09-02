@@ -24,10 +24,10 @@ const Header = ({ ownerMode }) => {
       }, 1000);
     }
   };
-  console.log(inOwner);
+  // console.log(inOwner);
 
   const ownerToggle = useMatch(`/`);
-  console.log(ownerToggle);
+  // console.log(ownerToggle);
 
   return (
     <StHeader>
@@ -86,6 +86,7 @@ const StHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   /* background-color: pink; */
   .wrap {
     width: 100%;

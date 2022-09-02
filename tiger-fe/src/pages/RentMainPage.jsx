@@ -2,7 +2,7 @@
 
 import React from "react";
 import styled from "styled-components";
-import ItemList from "../components/main/ItemList";
+import MainItemList from "../components/main/MainItemList";
 import Header from "../global_elements/Header";
 import Search from "../global_elements/Search";
 import GlobalLayout from "../global/GlobalLayout";
@@ -13,7 +13,7 @@ const RentMainPage = () => {
       <Header />
       <Search />
       <GlobalLayout>
-        <ItemList />
+        <MainItemList />
       </GlobalLayout>
     </StHomePage>
   );
