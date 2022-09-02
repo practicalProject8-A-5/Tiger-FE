@@ -5,17 +5,26 @@ import styled from "styled-components";
 
 import VehicleImgSwiper from "../components/vehicle_detail/VehicleImgSwiper";
 import Payment from "../components/payment/Payment";
+import GlobalLayout from "../global/GlobalLayout";
+import Header from "../global_elements/Header";
+import Search from "../global_elements/Search";
 
 const VehicleDetailPage = () => {
   return (
-    <StDetailContainer>
-      <StDetailLeftSection>
-        <VehicleImgSwiper />
-      </StDetailLeftSection>
-      <StDetailRightSection>
-        <Payment />
-      </StDetailRightSection>
-    </StDetailContainer>
+    <>
+      <Header />
+      <Search />
+      <GlobalLayout>
+        <StDetailContainer>
+          <StDetailLeftSection>
+            <VehicleImgSwiper />
+          </StDetailLeftSection>
+          <StDetailRightSection>
+            <Payment />
+          </StDetailRightSection>
+        </StDetailContainer>
+      </GlobalLayout>
+    </>
   );
 };
 
