@@ -101,7 +101,7 @@ const Search = () => {
   return (
     <StSearch>
       <div className="wrap">
-        <SearchLocationContainer>
+        <StSearchLocationContainer>
           <input
             className="location_input"
             value={address}
@@ -118,11 +118,11 @@ const Search = () => {
           ) : (
             !isPopupOpen
           )}
-        </SearchLocationContainer>
+        </StSearchLocationContainer>
 
-        <CalendarContainer>
-          <CalendarWrapper>
-            <NewDatePicker
+        <StCalendarContainer>
+          <StCalendarWrapper>
+            <StNewDatePicker
               selected={startDate}
               onChange={(date) => setStartDate(date)}
               selectsStart
@@ -134,9 +134,9 @@ const Search = () => {
               // customInput={<ExampleCustomInput />}
               shouldCloseOnSelect={true}
             />
-          </CalendarWrapper>
-          <CalendarWrapper>
-            <NewDatePicker
+          </StCalendarWrapper>
+          <StCalendarWrapper>
+            <StNewDatePicker
               selected={endDate}
               onChange={(date) => setEndDate(date)}
               selectsEnd
@@ -157,10 +157,10 @@ const Search = () => {
             <p>{String(endDate.toISOString().slice(0, 10))}</p>
           </Modal>
         ) : null} */}
-          </CalendarWrapper>
-        </CalendarContainer>
+          </StCalendarWrapper>
+        </StCalendarContainer>
 
-        <VehicleTypeContainer>
+        <StVehicleTypeContainer>
           <select value={value} onChange={handleChange}>
             <option defaultValue="" hidden>
               자동차 종류
@@ -171,7 +171,7 @@ const Search = () => {
             <option value="승합RV">승합RV</option>
             <option value="수입">수입</option>
           </select>
-        </VehicleTypeContainer>
+        </StVehicleTypeContainer>
         <Button onClick={onSubmitHandler}>찾기</Button>
       </div>
     </StSearch>
@@ -199,7 +199,7 @@ const StSearch = styled.div`
   }
 `;
 
-const SearchLocationContainer = styled.div`
+const StSearchLocationContainer = styled.div`
   /* margin: 26px; */
   .location_input {
     width: 400px;
@@ -208,14 +208,14 @@ const SearchLocationContainer = styled.div`
   }
 `;
 
-const CalendarContainer = styled.div`
+const StCalendarContainer = styled.div`
   display: flex;
   justify-content: center;
 `;
 
-const CalendarWrapper = styled.div``;
+const StCalendarWrapper = styled.div``;
 
-const NewDatePicker = styled(DatePicker)`
+const StNewDatePicker = styled(DatePicker)`
   width: 270px;
   height: 42px;
   box-sizing: border-box;
@@ -227,7 +227,7 @@ const NewDatePicker = styled(DatePicker)`
   cursor: pointer;
 `;
 
-const VehicleTypeContainer = styled.div`
+const StVehicleTypeContainer = styled.div`
   /* margin: 25px; */
   select {
     width: 300px;
