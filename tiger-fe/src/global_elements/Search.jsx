@@ -58,7 +58,7 @@ const Search = () => {
   const postCodeStyle = {
     display: "block",
     position: "absolute",
-    top: "21.8%",
+    top: "18.8%",
     width: "400px",
     height: "400px",
     border: "1px solid black",
@@ -75,8 +75,8 @@ const Search = () => {
   const newStartDate = new Date(startDate).toISOString().slice(0, 10);
   const newEndDate = new Date(endDate).toISOString().slice(0, 10);
 
-  console.log(newStartDate);
-  console.log(newEndDate);
+  // console.log(newStartDate);
+  // console.log(newEndDate);
 
   // modal open or close
   // const [isModalOpen, setIsModalOpen] = useState(false);
@@ -89,6 +89,7 @@ const Search = () => {
     setValue(e.target.value);
   };
   console.log(value);
+
 
   // submit handler
   const onSubmitHandler = (e) => {
@@ -109,7 +110,8 @@ const Search = () => {
               setIsPopupOpen(!isPopupOpen);
             }}
             onChange={onChangeHandler}
-            placeholder="어디서?"></input>
+            placeholder="어디서?"
+          ></input>
 
           {isPopupOpen ? (
             <div>
@@ -181,17 +183,17 @@ const Search = () => {
 const StSearch = styled.div`
   width: 100%;
   height: 93px;
+  padding: 0 246px;
+  box-sizing: border-box;
   border-top: 1px solid rgba(0, 0, 0, 0.06);
   box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.06),
     0px 10px 12px rgba(0, 0, 0, 0.0456112),
     0px 12.5216px 10px rgba(0, 0, 0, 0.02);
   display: flex;
   justify-content: space-between;
-  padding: 0 246px;
-  box-sizing: border-box;
   /* background-color: skyblue; */
   .wrap {
-    width: 1411px;
+    width: 100%;
     /* background-color: pink; */
     display: flex;
     align-items: center;

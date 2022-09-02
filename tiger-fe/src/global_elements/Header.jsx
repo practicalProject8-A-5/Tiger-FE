@@ -1,18 +1,42 @@
 // eslint-disable-next-line
 
 import React from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
 
-const Header = () => {
-  // const navigate = useNavigate();
+import { Link, useMatch, useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import logo from "../assets/ta,iger_logo.png";
+
+import { useState } from "react";
+
+const Header = ({ ownerMode }) => {
+  const [inOwner, setInOwner] = useState(false);
+  const navigate = useNavigate();
+  const onClick = () => {
+    if (ownerToggle !== null) {
+      setInOwner((prev) => !prev);
+      setTimeout(() => {
+        navigate("/owner");
+      }, 1000);
+    } else {
+      setInOwner((prev) => !prev);
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
+    }
+  };
+  console.log(inOwner);
+
+  const ownerToggle = useMatch(`/`);
+  console.log(ownerToggle);
 
   return (
     <StHeader>
       <div className="wrap">
-        <Link to="/" style={{ textDecoration: "none" }}>
-          <div className="header__logo">ta,iger</div>
-        </Link>
+        <div className="header__logo">
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <img src={logo} alt="로고" />
+          </Link>
+        </div>
         <div className="header__menu">
           <div className="header__menu__L">
             <Link to="/intro" style={{ textDecoration: "none" }}>
@@ -28,10 +52,20 @@ const Header = () => {
           <div className="header__menu__R">
             <div className="header__switch">
               <span className="text">오너모드로 전환</span>
-              <label className="switch">
-                <input id="switch" type="checkbox" />
-                <span className="slider"></span>
-              </label>
+              {!inOwner ? (
+                <label className="switch">
+                  <input id="switch" type="checkbox" onClick={onClick} />
+                  <span className="slider"></span>
+                </label>
+              ) : (
+                <label
+                  className="switch"
+                  style={{ backgroundColor: "#ff881b" }}
+                >
+                  <input id="switch" type="checkbox" onClick={onClick} />
+                  <span className="slider"></span>
+                </label>
+              )}
             </div>
             <div className="header__login">로그인</div>
           </div>
@@ -62,8 +96,11 @@ const StHeader = styled.div`
       width: 121px;
       height: 40px;
       margin-right: 126px;
-      background-color: skyblue;
-      cursor: pointer;
+      /* background-color: skyblue; */
+      /* cursor: pointer; */
+      img {
+        cursor: pointer;
+      }
     }
     .header__menu {
       width: calc(1411px - 247px);
@@ -123,7 +160,7 @@ const StHeader = styled.div`
             background: rgba(33, 33, 33, 0.08);
             border-radius: 7px;
             transition: all 0.5s;
-            /* background-color: pink; */
+            /* background-color: pink;/ */
             cursor: pointer;
             input {
               display: none;
