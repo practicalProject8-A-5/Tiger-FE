@@ -4,7 +4,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  filteredVehicleList: [],
+  filteredVehicleList: {},
   isLoading: false,
   success: null,
   error: null,
@@ -22,14 +22,9 @@ export const __vehicleSearchList = createAsyncThunk(
       const headers = {
         "Content-Type": "application/json",
       };
-      const response = await axios.post(
-        "/api/vehicle/search",
-        {
-          address: address,
-          startDate: newStartDate,
-          endDate: newEndDate,
-          type: value,
-        },
+      const response = await axios.get(
+        `/api/vehicle/search?startDate={newStartDate}?endDate={newEndDate}?type={value}?location={address}`,
+        {},
         { headers: headers }
       );
       console.log(response.data);
