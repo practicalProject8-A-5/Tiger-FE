@@ -23,7 +23,7 @@ export const __vehicleSearchList = createAsyncThunk(
         "Content-Type": "application/json",
       };
       const response = await axios.get(
-        `/api/vehicle/search?startDate={newStartDate}?endDate={newEndDate}?type={value}?location={address}`,
+        `/api/vehicle/search?startDate=${newStartDate}?endDate=${newEndDate}?type=${value}?location=${address}`,
         {},
         { headers: headers }
       );
