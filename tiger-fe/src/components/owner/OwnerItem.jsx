@@ -2,17 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import img from "../../assets/img_1.jpg";
 
-const OwnerItem = () => {
+const OwnerItem = ({ list }) => {
   return (
     <StOwnerItem>
-      <img src={img} alt="차량" />
+      <img src={list.thumbnail} alt="차량" />
       <div className="carInfo">
-        <p>차 이름</p>
+        <p>{list.vname}</p>
         <span>2022-09-03 ~ 2022-09-05</span>
-        <p>차 상세정보 상세정보 상세정보 상세정보</p>
-        <p>상세정보상세정보상세정보상세정보상세정보</p>
+        <p>{list.price}/1일</p>
+        <p>{list.location}</p>
       </div>
-      <div className="dateBtn">등록 날짜 표시</div>
+      <div className="dateBtn">{list.createdAt}</div>
     </StOwnerItem>
   );
 };

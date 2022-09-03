@@ -1,0 +1,25 @@
+{
+  "result": "true",
+  "status ": {
+    "code": "200",
+    "msg": "상품이 성공적으로 조회되었습니다."
+  },
+  "output": [
+    {
+      "vId": 1,
+      "thumbnail": "https://mygitpher.s3…cd38c87a.jpg",
+      "vname": "람보르기니 우루스",
+      "price": 30000,
+      "location": "경기도 성남시 분당구 판교로 421",
+      "createdAt": "2022-08-01"
+    },
+    {
+      "vId": 2,
+      "thumbnail": "https://mygitpher.aw…6751c38c2e0.jpg",
+      "vname": "포르쉐 카이얀",
+      "price": 20000,
+      "location": "경기도 성남시 분당구 판교로 421",
+      "createdAt": "2022-08-03"
+    }
+  ]
+}
