@@ -5,7 +5,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import styled from "styled-components";
 import logo from "../../assets/ta,iger_logo.png";
 
-const Login = ({ showModal }) => {
+const Login = ({ showModal, goRegister, loginToggle }) => {
   console.log(showModal);
   return (
     <StLoginForm>
@@ -25,7 +25,9 @@ const Login = ({ showModal }) => {
 
         <div className="kakao">카카오로 간편 로그인</div>
         <div className="google">구글로 간편 로그인</div>
-        <div className="email">이메일로 회원가입</div>
+        <div className="email" onClick={loginToggle}>
+          이메일로 회원가입
+        </div>
 
         <div className="login__descbox">
           <div className="lineL"></div>

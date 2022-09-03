@@ -1,12 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import LoginForm from "../components/member/LoginForm";
+import RegisterForm from "../components/member/RegisterForm";
 
 const LoginModal = ({ showModal }) => {
-  console.log(showModal);
+  const [goRegister, setGoRegister] = useState(false);
+  // console.log(showModal);
+
+  const loginToggle = () => {
+    setGoRegister(!goRegister);
+  };
+
   return (
     <StLoginModal>
-      <LoginForm showModal={showModal} />
+      {goRegister === false ? (
+        <LoginForm
+          showModal={showModal}
+          goRegister={goRegister}
+          loginToggle={loginToggle}
+        />
+      ) : (
+        <RegisterForm
+          showModal={showModal}
+          goRegister={goRegister}
+          loginToggle={loginToggle}
+        />
+      )}
     </StLoginModal>
   );
 };

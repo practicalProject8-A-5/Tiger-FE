@@ -4,7 +4,7 @@ import React from "react";
 import { useCallback } from "react";
 import { useState } from "react";
 import NavBar from "../components/owner/NavBar";
-// import VehicleRegister from "../components/owner/VehicleRegister";
+import VehicleRegister from "../components/owner/VehicleRegister";
 import GlobalLayout from "../global/GlobalLayout";
 import Header from "../global_elements/Header";
 import OwnerItemList from "../components/owner/OwnerItemList";
