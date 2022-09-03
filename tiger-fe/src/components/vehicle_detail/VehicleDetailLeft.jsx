@@ -23,13 +23,12 @@ const VehicleDetailLeft = () => {
     dispatch(__vehicleDetail());
   }, [dispatch]);
 
-  const styles = { height: "auto" };
-
-  // get request for vehicle info
+  // get response for vehicle info
   const vehicleDetails = useSelector(
     (state) => state.vehicleDetailSlice.vehicleDetailList
   );
   console.log(vehicleDetails);
+  console.log(vehicleDetails.imageList);
 
   return (
     <>
@@ -40,29 +39,35 @@ const VehicleDetailLeft = () => {
         slidesPerView={1}
         scrollbar={{ draggable: true, dragSize: 24 }}
         navigation={true}>
-        {vehicleDetails.imagesList &&
-          vehicleDetails.imagesList.map((image, i) => {
+        {vehicleDetails.imageList &&
+          vehicleDetails.imageList.map((image, i) => {
             return (
-              <SwiperSlide className="image" key={i} style={styles}>
-                <img src={image[i]} alt="imageSlide" />
+              <SwiperSlide className="image" key={i}>
+                <img src={image} alt="imageSlide" />
               </SwiperSlide>
             );
           })}
       </StNewSwiper>
-      <StVehicleInfoWrap>
+      <StVehicleInfoContainer>
+        <StVehicleInfoTitleWrapper>
+          <h1>
+            {vehicleDetails.years} <span>{vehicleDetails.vname}</span>
+          </h1>
+        </StVehicleInfoTitleWrapper>
+        <StVehicleInfoLocationWrapper>
+          <p>{vehicleDetails.location}</p>
+        </StVehicleInfoLocationWrapper>
         <div>
-          <h1>이름: {vehicleDetails.vname}</h1>
-          <h1>연식: {vehicleDetails.years}</h1>
           <h1>종류: {vehicleDetails.type}</h1>
           <h1>자동: {vehicleDetails.transmission}</h1>
           <h1>인승: {vehicleDetails.passengers}</h1>
-          <h1>주소: {vehicleDetails.location}</h1>
-          <h1>가격: {vehicleDetails.price}</h1>
           <h1>연비: {vehicleDetails.fuelEfficiency}</h1>
           <h1>설명: {vehicleDetails.description}</h1>
           <h1>휘발유: {vehicleDetails.fuelType}</h1>
         </div>
-      </StVehicleInfoWrap>
+
+        <h1>대여요금 {vehicleDetails.price}</h1>
+      </StVehicleInfoContainer>
     </>
   );
 };
@@ -71,6 +76,15 @@ const StNewSwiper = styled(Swiper)`
   position: relative;
   overflow: hidden;
   margin-bottom: 0;
+  width: 79%;
+  float: left;
+  border-radius: 12px;
+  .swiper-slide-active {
+    /* width: auto !important; */
+  }
+  .swiper-button-next {
+    right: 15px !important;
+  }
   img {
     width: 844px;
     height: 429px;
@@ -82,8 +96,30 @@ const StNewSwiper = styled(Swiper)`
   }
 `;
 
-const StVehicleInfoWrap = styled.div`
+const StVehicleInfoContainer = styled.div`
   display: block;
+  float: left;
+  width: 79%;
+`;
+
+const StVehicleInfoTitleWrapper = styled.div`
+  h1,
+  span {
+    margin-top: 29px;
+    font-weight: 500;
+    font-size: 38px;
+    line-height: 52px;
+  }
+`;
+
+const StVehicleInfoLocationWrapper = styled.div`
+  p {
+    font-family: 700;
+    font-size: 18px;
+    line-height: 25px;
+    border-bottom: 1px solid #cccccc;
+    padding-bottom: 64px;
+  }
 `;
 
 export default VehicleDetailLeft;

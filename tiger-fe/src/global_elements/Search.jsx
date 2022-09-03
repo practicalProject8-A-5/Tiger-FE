@@ -24,11 +24,6 @@ const Search = () => {
   // search full address
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [address, setAddress] = useState("");
-  // search reservation dates
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
-  //search vehicle type
-  const [value, setValue] = useState();
 
   // search address
   const onChangeHandler = (e) => {
@@ -72,24 +67,22 @@ const Search = () => {
   //   </button>
   // ));
 
+  // search reservation dates
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+
   const newStartDate = new Date(startDate).toISOString().slice(0, 10);
   const newEndDate = new Date(endDate).toISOString().slice(0, 10);
 
-  // console.log(newStartDate);
-  // console.log(newEndDate);
+  console.log(newStartDate);
+  console.log(newEndDate);
 
-  // modal open or close
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-  // const showModal = () => {
-  //   setIsModalOpen(!isModalOpen);
-  // };
-
-  // search vehicle type
+  //search vehicle type
+  const [value, setValue] = useState();
   const handleChange = (e) => {
     setValue(e.target.value);
   };
   console.log(value);
-
 
   // submit handler
   const onSubmitHandler = (e) => {
@@ -110,8 +103,7 @@ const Search = () => {
               setIsPopupOpen(!isPopupOpen);
             }}
             onChange={onChangeHandler}
-            placeholder="어디서?"
-          ></input>
+            placeholder="어디서?"></input>
 
           {isPopupOpen ? (
             <div>
@@ -150,15 +142,6 @@ const Search = () => {
               // customInput={<ExampleCustomInput />}
               shouldCloseOnSelect={true}
             />
-            {/* <button onClick={showModal}>찾기</button> */}
-
-            {/* modal open to payment modal */}
-            {/* {isModalOpen ? (
-          <Modal showModal={showModal}>
-            <p>{String(startDate.toISOString().slice(0, 10))}</p>
-            <p>{String(endDate.toISOString().slice(0, 10))}</p>
-          </Modal>
-        ) : null} */}
           </StCalendarWrapper>
         </StCalendarContainer>
 
