@@ -8,6 +8,8 @@ import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Scrollbar } from "swiper";
 
+import KakaoMapDetail from "./KakaoMapDetail";
+
 import { __vehicleDetail } from "../../redux/modules/vehicleDetail";
 
 import "swiper/scss";
@@ -57,16 +59,27 @@ const VehicleDetailLeft = () => {
         <StVehicleInfoLocationWrapper>
           <p>{vehicleDetails.location}</p>
         </StVehicleInfoLocationWrapper>
-        <div>
-          <h1>종류: {vehicleDetails.type}</h1>
-          <h1>자동: {vehicleDetails.transmission}</h1>
-          <h1>인승: {vehicleDetails.passengers}</h1>
-          <h1>연비: {vehicleDetails.fuelEfficiency}</h1>
-          <h1>설명: {vehicleDetails.description}</h1>
-          <h1>휘발유: {vehicleDetails.fuelType}</h1>
-        </div>
-
-        <h1>대여요금 {vehicleDetails.price}</h1>
+        <StVehicleInfoContentsWrapper>
+          <p>종류: {vehicleDetails.type}</p>
+          <p>자동: {vehicleDetails.transmission}</p>
+          <p>인승: {vehicleDetails.passengers}</p>
+          <p>연비: {vehicleDetails.fuelEfficiency}</p>
+          <p>설명: {vehicleDetails.description}</p>
+          <p>휘발유: {vehicleDetails.fuelType}</p>
+        </StVehicleInfoContentsWrapper>
+        <StRenterInfoWrapper>
+          <div className="infoWrapper_nickname">
+            <h1>렌터 닉네임</h1>
+          </div>
+          <div className="infoWrapper_personal">
+            <p>렌터 전화번호</p>
+            <p>렌터 이메일 주소</p>
+          </div>
+          <div className="infoWrapper_desc">
+            <p>렌터 설명란</p>
+          </div>
+        </StRenterInfoWrapper>
+        <KakaoMapDetail />
       </StVehicleInfoContainer>
     </>
   );
@@ -119,6 +132,38 @@ const StVehicleInfoLocationWrapper = styled.div`
     line-height: 25px;
     border-bottom: 1px solid #cccccc;
     padding-bottom: 64px;
+  }
+`;
+
+const StVehicleInfoContentsWrapper = styled.div`
+  border-bottom: 1px solid #cccccc;
+  padding-bottom: 82px;
+  p {
+  }
+`;
+
+const StRenterInfoWrapper = styled.div`
+  margin-top: 48px;
+  .infoWrapper_nickname {
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 41px;
+  }
+  .infoWrapper_personal {
+    margin-top: 90px;
+    p {
+      font-weight: 400;
+      font-size: 30px;
+      line-height: 41px;
+    }
+  }
+  .infoWrapper_desc {
+    margin-top: 145px;
+    p {
+      font-weight: 400;
+      font-size: 30px;
+      line-height: 41px;
+    }
   }
 `;
 

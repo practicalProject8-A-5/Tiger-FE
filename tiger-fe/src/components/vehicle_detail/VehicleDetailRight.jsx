@@ -13,10 +13,10 @@ const VehicleDetailRight = () => {
     (state) => state.vehicleDetailSlice.vehicleDetailList
   );
   console.log(vehicleDetails);
-  console.log(vehicleDetails.imageList);
   return (
     <StPaymentBox>
       <h1>결제 정보</h1>
+      <p>대여요금 {vehicleDetails.price}</p>
       <h2>대여시간</h2>
     </StPaymentBox>
   );
