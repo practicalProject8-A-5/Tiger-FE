@@ -1,21 +1,21 @@
 import React from "react";
 import styled from "styled-components";
-import Item from "./Item";
+import MainItem from "./MainItem";
 
 const ItemList = () => {
   return (
     <StItemList>
-      <Item />
-      <Item />
-      <Item />
-      <Item />
-      <Item />
-      <Item />
-      <Item />
-      <Item />
-      <Item />
-      <Item />
-      <Item />
+      <MainItem />
+      <MainItem />
+      <MainItem />
+      <MainItem />
+      <MainItem />
+      <MainItem />
+      <MainItem />
+      <MainItem />
+      <MainItem />
+      <MainItem />
+      <MainItem />
     </StItemList>
   );
 };
