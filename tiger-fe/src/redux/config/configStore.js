@@ -9,16 +9,16 @@ import ownerItemListSlice from "../modules/ownerItemListSlice";
 const reducer = combineReducers({
   searchSlice,
   ownerItemListSlice,
-  vehicleDetailSlice,  
+  vehicleDetailSlice,
 });
 
 const store = configureStore({
   reducer,
-  // middleware: (getDefaultMiddleware) =>
-  //   getDefaultMiddleware({
-  //     serializableCheck: false,
-  //   }).concat(logger),
-  // devTools: true,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }).concat(logger),
+  devTools: true,
 });
 
 export default store;
