@@ -14,7 +14,7 @@ const Header = ({ ownerMode }) => {
   const showModal = () => {
     setIsModalOpen(!IsModalOpen);
   };
-  console.log("현재 :", IsModalOpen);
+  // console.log("현재 :", IsModalOpen);
 
   const [inOwner, setInOwner] = useState(false);
   const navigate = useNavigate();
