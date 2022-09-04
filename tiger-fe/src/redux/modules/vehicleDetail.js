@@ -13,7 +13,8 @@ const initialState = {
 export const __vehicleDetail = createAsyncThunk(
   "detail/__vehicleDetail",
   async (payload, thunkAPI) => {
-    // const { address, newStartDate, newEndDate, value } = payload;
+    const vid = payload;
+    console.log(vid);
     try {
       const headers = {
         "Content-Type": "application/json",

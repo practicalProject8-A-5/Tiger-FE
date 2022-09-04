@@ -2,6 +2,7 @@
 
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 import styled from "styled-components";
 
@@ -21,9 +22,11 @@ const VehicleDetailLeft = () => {
 
   const dispatch = useDispatch();
 
+  const id = useParams();
+
   useEffect(() => {
-    dispatch(__vehicleDetail());
-  }, [dispatch]);
+    dispatch(__vehicleDetail(parseInt(id.id)));
+  }, [dispatch, id]);
 
   // get response for vehicle info
   const vehicleDetails = useSelector(
