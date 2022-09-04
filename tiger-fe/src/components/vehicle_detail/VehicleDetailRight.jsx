@@ -3,6 +3,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import Button from "../../global_elements/Button";
+
 import styled from "styled-components";
 
 // import { __vehicleDetail } from "../../redux/modules/vehicleDetail";
@@ -16,8 +18,15 @@ const VehicleDetailRight = () => {
   return (
     <StPaymentBox>
       <h1>결제 정보</h1>
-      <p>대여요금 {vehicleDetails.price}</p>
-      <h2>대여시간</h2>
+      <StPaymentPeriod>
+        <h2>대여시간</h2>
+      </StPaymentPeriod>
+      <StPaymentPriceInfo>
+        <p>대여요금 ₩{vehicleDetails.price}</p>
+        <p>기타 수수료, 보험료</p>
+        <p>총 예약 금액</p>
+      </StPaymentPriceInfo>
+      <StPaymentButton>예약하기</StPaymentButton>
     </StPaymentBox>
   );
 };
@@ -41,6 +50,9 @@ const StPaymentBox = styled.div`
     padding-bottom: 32px;
     border-bottom: 1px solid #cccccc;
   }
+`;
+
+const StPaymentPeriod = styled.div`
   h2 {
     font-weight: 500;
     font-size: 20px;
@@ -49,6 +61,27 @@ const StPaymentBox = styled.div`
     padding-top: 25px;
     padding-bottom: 16px;
   }
+`;
+
+const StPaymentPriceInfo = styled.div`
+  p {
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 26px;
+    padding-top: 50px;
+  }
+`;
+
+const StPaymentButton = styled(Button)`
+  width: 380px;
+  height: 60px;
+  background: #ff881b;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 30px;
+  color: #ffffff;
+  margin: 40px auto;
 `;
 
 export default VehicleDetailRight;
