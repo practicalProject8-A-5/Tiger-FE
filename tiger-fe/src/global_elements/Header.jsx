@@ -112,15 +112,14 @@ const Header = ({ ownerMode }) => {
                 </label>
               )}
             </div>
-            <div className="header__login">
-              {userInfo ? (
-                `${name}님께서 로그인중`
-              ) : (
-                <div className="header__login" onClick={showModal}>
-                  로그인
-                </div>
-              )}
-            </div>
+
+            {userInfo ? (
+              <div className="header__login">{name}님께서 로그인중</div>
+            ) : (
+              <div className="header__login" onClick={showModal}>
+                로그인
+              </div>
+            )}
             {userInfo ? (
               <div className="header__login" onClick={__userLogout}>
                 로그아웃
