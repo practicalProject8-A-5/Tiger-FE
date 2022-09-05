@@ -5,11 +5,13 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import searchSlice from "../modules/searchSlice";
 import vehicleDetailSlice from "../modules/vehicleDetail";
 import ownerItemListSlice from "../modules/ownerItemListSlice";
+import memberSlice from "../modules/memberSlice";
 
 const reducer = combineReducers({
   searchSlice,
   ownerItemListSlice,
   vehicleDetailSlice,
+  memberSlice,
 });
 
 const store = configureStore({
