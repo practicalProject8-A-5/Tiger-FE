@@ -4,21 +4,21 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // initialize userToken from local storage
-// const userToken = localStorage.getItem("userToken")
-//   ? localStorage.getItem("userToken")
-//   : null;
+const userToken = localStorage.getItem("userToken")
+  ? localStorage.getItem("userToken")
+  : null;
 
-// const refreshToken = localStorage.getItem("refreshToken")
-//   ? localStorage.getItem("refreshToken")
-//   : null;
+const refreshToken = localStorage.getItem("refreshToken")
+  ? localStorage.getItem("refreshToken")
+  : null;
 
 const initialState = {
   isLoading: false,
   result: false, // for monitoring the registration process.
   error: null,
   userInfo: null, // for user object
-  // userToken, // for storing the JWT
-  // refreshToken,
+  userToken, // for storing the JWT
+  refreshToken,
   // success: false, // for monitoring the registration process.
 };
 
@@ -67,6 +67,7 @@ export const __userLogin = createAsyncThunk(
         // store user's token in local storage
         localStorage.getItem("userToken", response.headers.authorization);
         localStorage.setItem("email", response.data.data.email);
+        localStorage.setItem("name", response.data.data.name);
         localStorage.setItem("refreshToken", response.headers.refreshtoken);
         // console.log(response);
         window.alert("로그인 성공");

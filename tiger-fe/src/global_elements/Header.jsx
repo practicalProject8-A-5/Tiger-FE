@@ -2,9 +2,13 @@
 
 import React from "react";
 
+import { useSelector } from "react-redux";
+
 import { Link, useMatch, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../assets/ta,iger_logo.png";
+
+import axios from "axios";
 
 import { useState } from "react";
 import LoginModal from "./LoginModal";
@@ -35,6 +39,37 @@ const Header = ({ ownerMode }) => {
 
   const ownerToggle = useMatch(`/`);
   // console.log(ownerToggle);
+
+  const { userInfo } = useSelector((state) => state.memberSlice);
+  // console.log(userInfo);
+
+  const name = localStorage.getItem("name");
+  // nickname or name 추후 확정 예정
+
+  // logout
+  const __userLogout = async () => {
+    const confirm = window.confirm("Are you Sure?");
+    if (confirm === true) {
+      const userToken = localStorage.getItem("userToken");
+      const refreshToken = localStorage.getItem("refreshToken");
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `${userToken}`,
+        refreshToken: `${refreshToken}`,
+      };
+      axios.post(
+        "추후 추가",
+        {},
+        {
+          headers: headers,
+        }
+      );
+      window.localStorage.clear();
+      window.location.replace("/");
+    } else if (confirm === false) {
+      return;
+    }
+  };
 
   return (
     <StHeader>
@@ -68,16 +103,26 @@ const Header = ({ ownerMode }) => {
               ) : (
                 <label
                   className="switch"
-                  style={{ backgroundColor: "#ff881b" }}
-                >
+                  style={{ backgroundColor: "#ff881b" }}>
                   <input id="switch" type="checkbox" onClick={onClick} />
                   <span className="slider"></span>
                 </label>
               )}
             </div>
-            <div className="header__login" onClick={showModal}>
-              로그인
+            <div className="header__login">
+              {userInfo ? (
+                `${name}님께서 로그인중`
+              ) : (
+                <div className="header__login" onClick={showModal}>
+                  로그인
+                </div>
+              )}
             </div>
+            {userInfo ? (
+              <div className="header__login" onClick={__userLogout}>
+                로그아웃
+              </div>
+            ) : null}
             {IsModalOpen && <LoginModal showModal={showModal} />}
           </div>
         </div>
