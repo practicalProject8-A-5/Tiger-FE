@@ -8,6 +8,7 @@ import RenterPage from "../pages/RenterPage";
 import VehicleDetailPage from "../pages/VehicleDetailPage";
 import VehicleListPage from "../pages/VehicleListPage";
 import HomePage from "../pages/HomePage";
+import OwnerFormPage from "../pages/OwnerFormPage";
 
 const GlobalRouter = () => {
   return (
@@ -17,6 +18,7 @@ const GlobalRouter = () => {
       <Route path="/intro" element={<HomePage />} />
       <Route path="/renter" element={<RenterPage />} />
       <Route path="/vdetail/:id" element={<VehicleDetailPage />} />
+      <Route path="/ownerregisterform" element={<OwnerFormPage />} />
       <Route path="/vlist" element={<VehicleListPage />} />
     </Routes>
   );

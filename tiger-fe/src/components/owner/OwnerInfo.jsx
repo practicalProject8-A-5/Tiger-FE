@@ -1,7 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const OwnerInfo = () => {
+  const navigate = useNavigate("");
+  const toForm = () => {
+    navigate("/ownerregisterform");
+  };
+
   return (
     <StOwnerInfo>
       <div className="userProfile">
@@ -14,7 +20,7 @@ const OwnerInfo = () => {
             </div>
             <div className="userEmail">12346789@gmail.com</div>
           </div>
-          <div className="createBtn">
+          <div className="createBtn" onClick={toForm}>
             <div className="createBtn__text">
               <span>차 량</span>
               <span>등 록</span>
