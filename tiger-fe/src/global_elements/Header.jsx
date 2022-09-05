@@ -57,7 +57,7 @@ const Header = ({ ownerMode }) => {
         Authorization: `${userToken}`,
         refreshToken: `${refreshToken}`,
       };
-      axios.post(
+      await axios.post(
         "추후 추가",
         {},
         {
