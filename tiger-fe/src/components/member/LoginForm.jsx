@@ -1,12 +1,48 @@
 // eslint-disable-next-line
 
-import React from "react";
+import React, { useEffect } from "react";
+
+import { useNavigate } from "react-router-dom";
+
+import { useForm } from "react-hook-form";
+
+import { useDispatch, useSelector } from "react-redux";
+
+import { __userLogin } from "../../redux/modules/memberSlice";
+
 import { AiOutlineClose } from "react-icons/ai";
+
 import styled from "styled-components";
+
 import logo from "../../assets/ta,iger_logo.png";
 
 const LoginForm = ({ showModal, goRegister, loginToggle }) => {
+  const { isLoading, userInfo, success, result } = useSelector(
+    (state) => state.memberSlice
+  );
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { register, handleSubmit } = useForm();
+
+  // redirect authenticated user to home screen
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/");
+    }
+  }, [navigate, userInfo]);
+
+  const onSubmit = (data) => {
+    console.log(data);
+    dispatch(__userLogin(data));
+    // setTimeout(() => {
+    //   window.location.replace("/");
+    // }, 300);
+  };
+
   // console.log(showModal);
+
   return (
     <StLoginForm>
       <div className="login__header">
@@ -35,11 +71,25 @@ const LoginForm = ({ showModal, goRegister, loginToggle }) => {
           <div className="lineR"></div>
         </div>
 
-        <form>
-          <input type="text" placeholder="이메일" className="loginForEmail" />
-          <input type="password" placeholder="비밀번호" />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <input
+            type="text"
+            className="loginForEmail"
+            required={true}
+            minLength={3}
+            {...register("email")}
+            placeholder="아이디를 입력하세요"
+          />
+          <input
+            type="password"
+            placeholder="비밀번호"
+            required={true}
+            minLength={3}
+            className="form-input"
+            {...register("password")}
+          />
           <div className="find">아이디/비밀번호 찾기</div>
-          <button>로그인</button>
+          <button type="submit">로그인</button>
         </form>
       </div>
     </StLoginForm>

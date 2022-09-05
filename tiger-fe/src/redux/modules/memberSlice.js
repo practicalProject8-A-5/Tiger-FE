@@ -52,11 +52,11 @@ export const __registerUser = createAsyncThunk(
 //예약 주문
 export const __userLogin = createAsyncThunk(
   "member/__userLogin",
-  async ({ loginId, password }, thunkAPI) => {
+  async ({ email, password }, thunkAPI) => {
     try {
       const response = await axios.post(
         "추후 추가 예정",
-        { loginId, password },
+        { email, password },
         config
       );
       // console.log(response);
@@ -66,7 +66,7 @@ export const __userLogin = createAsyncThunk(
       } else {
         // store user's token in local storage
         localStorage.getItem("userToken", response.headers.authorization);
-        localStorage.setItem("loginId", response.data.data.loginId);
+        localStorage.setItem("email", response.data.data.email);
         localStorage.setItem("refreshToken", response.headers.refreshtoken);
         // console.log(response);
         window.alert("로그인 성공");
@@ -110,7 +110,7 @@ const memberSlice = createSlice({
     },
     [__registerUser.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      state.success = true; // registration successful
+      state.result = true; // registration successful
     },
     [__registerUser.rejected]: (state, { payload }) => {
       state.isLoading = false;
