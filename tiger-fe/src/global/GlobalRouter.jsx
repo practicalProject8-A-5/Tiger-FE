@@ -9,12 +9,15 @@ import VehicleDetailPage from "../pages/VehicleDetailPage";
 import VehicleListPage from "../pages/VehicleListPage";
 import HomePage from "../pages/HomePage";
 import OwnerFormPage from "../pages/OwnerFormPage";
+import OwnerItemList from "../components/owner/OwnerItemList";
 
 const GlobalRouter = () => {
   return (
     <Routes>
       <Route path="/" element={<RentMainPage />} />
       <Route path="/owner" element={<OwnerPage />} />
+      {/* //test */}
+      <Route path="/owner/:category" element={<OwnerItemList />} />
       <Route path="/intro" element={<HomePage />} />
       <Route path="/renter" element={<RenterPage />} />
       <Route path="/vdetail/:id" element={<VehicleDetailPage />} />

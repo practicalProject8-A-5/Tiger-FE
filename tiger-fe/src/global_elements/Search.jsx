@@ -74,15 +74,15 @@ const Search = () => {
   const newStartDate = new Date(startDate).toISOString().slice(0, 10);
   const newEndDate = new Date(endDate).toISOString().slice(0, 10);
 
-  console.log(newStartDate);
-  console.log(newEndDate);
+  // console.log(newStartDate);
+  // console.log(newEndDate);
 
   //search vehicle type
   const [value, setValue] = useState();
   const handleChange = (e) => {
     setValue(e.target.value);
   };
-  console.log(value);
+  // console.log(value);
 
   // submit handler
   const onSubmitHandler = (e) => {
@@ -103,7 +103,8 @@ const Search = () => {
               setIsPopupOpen(!isPopupOpen);
             }}
             onChange={onChangeHandler}
-            placeholder="어디서?"></input>
+            placeholder="어디서?"
+          ></input>
 
           {isPopupOpen ? (
             <div>

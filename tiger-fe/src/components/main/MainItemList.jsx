@@ -1,26 +1,33 @@
 import React from "react";
 import styled from "styled-components";
 import MainItem from "./MainItem";
+// import { __incomeItemList } from "../../redux/modules/incomeItemListSlice";
+import { __incomeItemList } from "../../redux/modules/incomeItemListSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
-const ItemList = () => {
+const MainItemList = () => {
+  const MainItemLists = useSelector(
+    (state) => state.incomeItemListSlice.incomeItemList
+  );
+
+  // console.log(MainItemLists);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(__incomeItemList());
+    // console.log("11");
+  }, [dispatch]);
   return (
     <StItemList>
-      <MainItem />
-      <MainItem />
-      <MainItem />
-      <MainItem />
-      <MainItem />
-      <MainItem />
-      <MainItem />
-      <MainItem />
-      <MainItem />
-      <MainItem />
-      <MainItem />
+      {MainItemLists.output &&
+        MainItemLists.output.map((list, i) => <MainItem key={i} list={list} />)}
     </StItemList>
+    // <h1>차량</h1>
   );
 };
 
-export default ItemList;
+export default MainItemList;
 
 const StItemList = styled.div`
   width: 100%;

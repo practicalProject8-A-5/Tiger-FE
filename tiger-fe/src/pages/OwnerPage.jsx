@@ -10,20 +10,8 @@ import Header from "../global_elements/Header";
 import OwnerItemList from "../components/owner/OwnerItemList";
 import OwnerInfo from "../components/owner/OwnerInfo";
 
-// import { __registeredItemList } from "../../redux/modules/ownerItemListSlice";
-// import { __reservedItemList } from "../../redux/modules/ownerItemListSlice";
-// import { __useItemList } from "../../redux/modules/ownerItemListSlice";
-// import { __returnItemList } from "../../redux/modules/ownerItemListSlice";
-// import { __cancleItemList } from "../../redux/modules/ownerItemListSlice";
-
 const OwnerPage = () => {
-  // const [category, setCategory] = useState([
-  //   "차량등록",
-  //   "예약등록",
-  //   "진행등록",
-  //   "지난등록",
-  // ]);
-  const [category, setCategory] = useState("등록차량");
+  const [category, setCategory] = useState("Registration");
   const onSelect = useCallback((category) => setCategory(category), []);
 
   return (
