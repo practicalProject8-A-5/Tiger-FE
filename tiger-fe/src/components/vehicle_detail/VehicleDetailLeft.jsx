@@ -35,6 +35,29 @@ const VehicleDetailLeft = () => {
   console.log(vehicleDetails);
   console.log(vehicleDetails.imageList);
 
+  const styleTh = {
+    width: "180px",
+    height: "41px",
+    borderTop: "2px solid #CCCCCC",
+    borderBottom: "2px solid #CCCCCC",
+    lineHeight: "41px",
+    backgroundColor: "#F2F2F2",
+  };
+  const styleCol = {
+    borderTop: "2px solid #CCCCCC",
+    borderBottom: "2px solid #CCCCCC",
+    height: "41px",
+    lineHeight: "41px",
+  };
+  const styleTd = {
+    width: "249px",
+    height: "41px",
+    borderTop: "2px solid #CCCCCC",
+    borderBottom: "2px solid #CCCCCC",
+    textAlign: "center",
+    lineHeight: "41px",
+  };
+
   return (
     <>
       <StNewSwiper
@@ -64,13 +87,34 @@ const VehicleDetailLeft = () => {
         </StVehicleInfoLocationWrapper>
         <StVehicleInfoContentsWrapper>
           <h1>차량정보</h1>
-          <p>연식: {vehicleDetails.years} </p>
-          <p>종류: {vehicleDetails.type}</p>
-          <p>자동: {vehicleDetails.transmission}</p>
-          <p>인승: {vehicleDetails.passengers}</p>
-          <p>연비: {vehicleDetails.fuelEfficiency}</p>
-          <p>설명: {vehicleDetails.description}</p>
-          <p>휘발유: {vehicleDetails.fuelType}</p>
+          <table border="1" cellspacing="5" cellpadding="10">
+            <col style={styleCol} />
+            <col style={styleCol} />
+            <col style={styleCol} />
+            <col style={styleCol} />
+            <tbody>
+              <tr>
+                <th style={styleTh}>연식</th>
+                <td style={styleTd}>{vehicleDetails.years}</td>
+                <th style={styleTh}>연료</th>
+                <td style={styleTd}>{vehicleDetails.fuelType}</td>
+              </tr>
+              <tr>
+                <th style={styleTh}>연비</th>
+                <td style={styleTd}>{vehicleDetails.fuelEfficiency}</td>
+                <th style={styleTh}>탑승 가능 인원</th>
+                <td style={styleTd}>{vehicleDetails.passengers}</td>
+              </tr>
+              <tr>
+                <th style={styleTh}>기어 변속</th>
+                <td style={styleTd} rowSpan={2}>
+                  {vehicleDetails.transmission}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <h1>설명</h1>
+          <p>{vehicleDetails.description}</p>
         </StVehicleInfoContentsWrapper>
         <StRenterInfoWrapper>
           <div className="infoWrapper_nickname">
@@ -141,15 +185,15 @@ const StVehicleInfoLocationWrapper = styled.div`
 `;
 
 const StVehicleInfoContentsWrapper = styled.div`
+  border-bottom: 1px solid #cccccc;
+  padding-bottom: 82px;
   h1 {
     font-weight: 600;
     font-size: 20px;
     line-height: 27px;
     margin-top: 62px;
-    margin-bottom: 54px;
+    margin-bottom: 34px;
   }
-  border-bottom: 1px solid #cccccc;
-  padding-bottom: 82px;
   p {
   }
 `;
