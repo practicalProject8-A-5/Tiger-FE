@@ -60,20 +60,22 @@ export const __userLogin = createAsyncThunk(
         config
       );
       // console.log(response);
-      if (response.data.success === false) {
-        window.alert(response.data.error.message);
-        return thunkAPI.rejectWithValue();
-      } else {
-        // store user's token in local storage
-        localStorage.getItem("userToken", response.headers.authorization);
-        localStorage.setItem("email", response.data.data.email);
-        localStorage.setItem("name", response.data.data.name);
-        localStorage.setItem("refreshToken", response.headers.refreshtoken);
-        // console.log(response);
-        window.alert("로그인 성공");
-        return thunkAPI.fulfillWithValue(response);
-      }
+      // if (response.data.success === false) {
+      //   window.alert(response.data.error.message);
+      //   return thunkAPI.rejectWithValue();
+      // } else {
+      // store user's token in local storage
+      // localStorage.getItem("userToken", response.headers.authorization);
+      // localStorage.setItem("email", response.data.data.email);
+      // localStorage.setItem("phone", response.data.data.tel);
+      // localStorage.setItem("name", response.data.data.name);
+      // localStorage.setItem("refreshToken", response.headers.refreshtoken);
+      console.log(response);
+      window.alert("로그인 성공");
+      return thunkAPI.fulfillWithValue(response);
+      // }
     } catch (error) {
+      window.alert(error.message);
       return thunkAPI.rejectWithValue(error);
     }
   }
