@@ -5,20 +5,22 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import searchSlice from "../modules/searchSlice";
 import vehicleDetailSlice from "../modules/vehicleDetail";
 import ownerItemListSlice from "../modules/ownerItemListSlice";
+import incomeItemListSlice from "../modules/incomeItemListSlice";
 
 const reducer = combineReducers({
   searchSlice,
   ownerItemListSlice,
   vehicleDetailSlice,
+  incomeItemListSlice,
 });
 
 const store = configureStore({
   reducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }).concat(logger),
-  devTools: true,
+  // middleware: (getDefaultMiddleware) =>
+  //   getDefaultMiddleware({
+  //     serializableCheck: false,
+  //   }).concat(logger),
+  // devTools: true,
 });
 
 export default store;

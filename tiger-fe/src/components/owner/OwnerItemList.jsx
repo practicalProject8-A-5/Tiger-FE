@@ -22,36 +22,20 @@ const OwnerItemList = ({ category }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // dispatch(__registeredItemList());
     if (category === "Registration") {
-      // setLoading(true);
       dispatch(__registeredItemList());
-      // setLoading(false);
     } else if (category === "Reservation") {
-      // setLoading(true);
       dispatch(__reservedItemList());
-      // setLoading(false);
     } else if (category === "progress") {
-      // setLoading(true);
       dispatch(__useItemList());
-      // setLoading(false);
     } else if (category === "return") {
-      // setLoading(true);
       dispatch(__returnItemList());
-      // setLoading(false);
     } else if (category === "Refund") {
-      // setLoading(true);
       dispatch(__cancleItemList());
-      // setLoading(false);
     }
   }, [dispatch, category]);
 
   console.log(OwnerItemLists);
-  // console.log(OwnerItemLists.output);
-  // if (loading) {
-  //   // console.log(loading);
-  //   return <StOwnerItemList>대기중...</StOwnerItemList>;
-  // }
   return (
     <StOwnerItemList>
       {OwnerItemLists.output && OwnerItemLists.output.length === 0 ? (

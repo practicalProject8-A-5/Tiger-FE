@@ -1,10 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import img from "../../assets/img_1.jpg";
 
 const OwnerItem = ({ list }) => {
+  const onClick = () => {
+    console.log("눌림");
+  };
+
   return (
-    <StOwnerItem>
+    <StOwnerItem onClick={onClick}>
       <img src={list.thumbnail} alt="차량" />
       <div className="carInfo">
         <p>{list.vname}</p>
@@ -28,6 +31,7 @@ const StOwnerItem = styled.div`
   display: flex;
   position: relative;
   margin-bottom: 40px;
+  cursor: pointer;
   img {
     width: 250px;
     height: 134px;

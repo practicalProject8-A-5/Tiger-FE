@@ -2,40 +2,66 @@ import React from "react";
 import styled from "styled-components";
 import img from "../../assets/img_1.jpg";
 
-const Item = () => {
+import "swiper/scss";
+import "swiper/scss/navigation";
+import "swiper/scss/pagination";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation } from "swiper";
+
+const MainItem = ({ list }) => {
+  console.log(list.imageList);
+
+  const MainItemListImage = list.imageList;
+
   return (
     <StItem>
-      <img src={img} alt="car" />
+      {/* <img src={list.imageList[0]} alt="car" /> */}
+      <StSwiper
+        pagination={{
+          type: "fraction",
+          clickable: true,
+        }}
+        navigation={true}
+        loop={true}
+        modules={[Pagination, Navigation]}
+        className="mySwiper"
+      >
+        {MainItemListImage.map((image, i) => {
+          return (
+            <SwiperSlide className="img" key={i}>
+              <img src={image} alt="imageSlide" />
+            </SwiperSlide>
+          );
+        })}
+      </StSwiper>
       <span className="heart"></span>
       <div className="desc__box">
         <div className="desc__top">
-          <div className="desc__title">서울특별시,korea</div>
+          <div className="desc__title">{list.location}</div>
           <div className="desc__star">4.12</div>
         </div>
-        <p>벤츠, c-클래스 / 가솔린</p>
+        <p>
+          {list.vname} / {list.fuelType}
+        </p>
         <p className="km">11581km</p>
         <div className="desc__bottom">
-          ₩2,1581 <span>/시간</span>
+          ₩{list.price} <span>/24시간</span>
         </div>
       </div>
     </StItem>
   );
 };
 
-export default Item;
+export default MainItem;
 
 const StItem = styled.div`
   width: 318px;
   height: 421px;
   position: relative;
   cursor: pointer;
-  img {
-    width: 318px;
-    height: 300px;
-    object-fit: cover;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 20px;
-  }
+
+  /* background-color: pink; */
+
   .heart {
     width: 28px;
     height: 28px;
@@ -78,5 +104,89 @@ const StItem = styled.div`
         font-size: 18px;
       }
     }
+  }
+  &:hover .swiper-button-next {
+    opacity: 1;
+  }
+  &:hover .swiper-button-prev {
+    opacity: 1;
+  }
+`;
+
+const StSwiper = styled(Swiper)`
+  width: 318px;
+  height: 300px;
+  position: relative;
+  border-radius: 20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  .swiper-button-next {
+    opacity: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: block;
+    text-align: center;
+    transform: scale(1);
+    transition: all 0.4s;
+    :hover {
+      transform: scale(1.25);
+    }
+
+    :after {
+      line-height: 32px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #777777;
+      left: 2px;
+      position: relative;
+    }
+  }
+
+  .swiper-button-prev {
+    opacity: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: block;
+    text-align: center;
+    transform: scale(1);
+    transition: all 0.4s;
+    :hover {
+      transform: scale(1.25);
+    }
+
+    :after {
+      line-height: 32px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #777777;
+      right: 2px;
+      position: relative;
+    }
+  }
+  .swiper-pagination {
+    width: 100%;
+    height: 20px;
+    /* opacity: 0.4; */
+    span {
+      opacity: 1;
+      color: #000;
+    }
+  }
+  .swiper-pagination {
+    background-color: rgba(255, 255, 255, 0.4);
+    /* background-color: pink; */
+    position: absolute;
+    bottom: 0;
+    border-radius: 0 0 20px 20px;
+  }
+  img {
+    width: 318px;
+    height: 300px;
+    object-fit: cover;
+    /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
+    border-radius: 20px;
   }
 `;
