@@ -1,36 +1,44 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-const NavBar = ({ onSelect, category }) => {
-  const navis = [
+const NavBar = ({ category, onSelect }) => {
+  // console.log("category:", category);
+  // console.log("onSelect:", onSelect);
+
+  const categories = [
     {
-      name: "RegisteredVehicle",
+      name: "Registration",
       text: "등록 차량",
     },
     {
-      name: "ReservationOrder",
+      name: "Reservation",
       text: "예약 주문",
     },
     {
-      name: "ProgressOrder",
+      name: "progress",
       text: "진행 주문",
     },
     {
-      name: "LastOrder",
+      name: "return",
       text: "지난 주문",
+    },
+    {
+      name: "Refund",
+      text: "환불",
     },
   ];
   return (
     <StNavBar>
       <div className="wrap">
-        {navis.map((cate) => (
+        {categories.map((c) => (
           <Category
-            className="categories"
-            key={cate.name}
-            active={category === cate.name}
-            onClick={() => onSelect(cate.name)}
+            key={c.name}
+            active={category === c.name}
+            onClick={() => {
+              onSelect(c.name);
+            }}
           >
-            {cate.text}
+            {c.text}
           </Category>
         ))}
       </div>
@@ -55,6 +63,23 @@ const StNavBar = styled.div`
     align-items: center;
     height: 100%;
     /* background-color: pink; */
+    /* .category {
+      font-weight: 600;
+      font-size: 20px;
+      color: #8b8b8b;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      cursor: pointer;
+      margin-left: 70px;
+      :nth-child(1) {
+        margin: 0;
+      }
+      :hover {
+        color: #585656;
+      }
+    } */
   }
 `;
 
@@ -79,9 +104,7 @@ const Category = styled.div`
       &:hover {
         color: #000;
       }
-    `}
-
-  /* ${(props) =>
+    `} /* ${(props) =>
     props.active &&
     css`
       font-weight: 600;
@@ -91,7 +114,7 @@ const Category = styled.div`
         color: #3bc9db;
       }
     `} */
-  & + & {
+    & + & {
     margin-left: 70px;
   }
 `;

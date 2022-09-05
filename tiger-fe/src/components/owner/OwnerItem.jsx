@@ -8,7 +8,9 @@ const OwnerItem = ({ list }) => {
       <img src={list.thumbnail} alt="차량" />
       <div className="carInfo">
         <p>{list.vname}</p>
-        <span>2022-09-03 ~ 2022-09-05</span>
+        <span>
+          {list.startDate} ~ {list.endDate}
+        </span>
         <p>{list.price}/1일</p>
         <p>{list.location}</p>
       </div>
