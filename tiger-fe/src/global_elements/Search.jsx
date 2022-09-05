@@ -57,7 +57,7 @@ const Search = () => {
     width: "400px",
     height: "400px",
     border: "1px solid black",
-    zIndex: "1",
+    zIndex: "99",
   };
 
   // date picker button custom
@@ -103,8 +103,7 @@ const Search = () => {
               setIsPopupOpen(!isPopupOpen);
             }}
             onChange={onChangeHandler}
-            placeholder="어디서?"
-          ></input>
+            placeholder="어디서?"></input>
 
           {isPopupOpen ? (
             <div>
@@ -198,7 +197,9 @@ const StCalendarContainer = styled.div`
   justify-content: center;
 `;
 
-const StCalendarWrapper = styled.div``;
+const StCalendarWrapper = styled.div`
+  z-index: 99;
+`;
 
 const StNewDatePicker = styled(DatePicker)`
   width: 270px;

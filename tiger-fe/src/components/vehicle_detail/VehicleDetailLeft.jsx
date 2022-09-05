@@ -13,6 +13,9 @@ import KakaoMapDetail from "./KakaoMapDetail";
 
 import { __vehicleDetail } from "../../redux/modules/vehicleDetail";
 
+import email from "../../assets/email.jpg";
+import phone from "../../assets/phone.jpg";
+
 import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
@@ -118,14 +121,28 @@ const VehicleDetailLeft = () => {
         </StVehicleInfoContentsWrapper>
         <StRenterInfoWrapper>
           <div className="infoWrapper_nickname">
-            <h1>렌터 닉네임</h1>
+            <h1>Owner 정보</h1>
           </div>
           <div className="infoWrapper_personal">
-            <p>렌터 전화번호</p>
-            <p>렌터 이메일 주소</p>
+            <div className="infoWrapper_personal__picture"></div>
+            <div className="infoWrapper_personal__info">
+              <p>권익현</p>
+              <div className="infoWrapper_personal__info__wrapper">
+                <div className="infoWrapper_personal__info__wrapper__email"></div>
+                <a href="mailto:kwonih1020@gmail.com">
+                  <p>kwonih1020@gmail.com</p>
+                </a>
+                <div className="infoWrapper_personal__info__wrapper__phone"></div>
+                <a href="010-1234-1234">
+                  <p>010-1234-1234</p>
+                </a>
+              </div>
+            </div>
           </div>
           <div className="infoWrapper_desc">
-            <p>렌터 설명란</p>
+            <div>
+              <p>렌터 설명란</p>
+            </div>
           </div>
         </StRenterInfoWrapper>
         <KakaoMapDetail />
@@ -148,13 +165,14 @@ const StNewSwiper = styled(Swiper)`
     right: 15px !important;
   }
   img {
-    width: 844px;
+    width: 100%;
     height: 429px;
     -o-object-fit: cover;
     object-fit: cover;
     outline: 1px solid rgba(0, 0, 0, 0.05);
     outline-offset: -1px;
     border-radius: 12px;
+    object-position: center;
   }
 `;
 
@@ -201,24 +219,75 @@ const StVehicleInfoContentsWrapper = styled.div`
 const StRenterInfoWrapper = styled.div`
   margin-top: 48px;
   .infoWrapper_nickname {
-    font-weight: 400;
-    font-size: 30px;
-    line-height: 41px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 27px;
   }
   .infoWrapper_personal {
-    margin-top: 90px;
+    margin-top: 64px;
+    display: flex;
+    &__picture {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 1px solid black;
+      margin-right: 31px;
+    }
+    &__info {
+      display: flex;
+      flex-direction: column;
+      p {
+        margin-bottom: 10px;
+      }
+      &__wrapper {
+        display: flex;
+        a {
+          text-decoration: underline;
+          color: black;
+        }
+        &__email {
+          background-image: url(${email});
+          background-size: contain;
+          background-repeat: no-repeat;
+          width: 20px;
+          height: 20px;
+          margin-right: 10px;
+          background-position: bottom;
+        }
+        &__phone {
+          background-image: url(${phone});
+          background-size: contain;
+          background-repeat: no-repeat;
+          width: 20px;
+          height: 20px;
+          margin-right: 10px;
+          margin-left: 10px;
+          background-position: bottom;
+        }
+      }
+    }
+
     p {
-      font-weight: 400;
-      font-size: 30px;
-      line-height: 41px;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 25px;
     }
   }
   .infoWrapper_desc {
-    margin-top: 145px;
-    p {
-      font-weight: 400;
-      font-size: 30px;
-      line-height: 41px;
+    margin-top: 48px;
+    margin-bottom: 80px;
+    div {
+      border: 1px solid #8b8b8b;
+      border-radius: 20px;
+      width: 840px;
+      height: 320px;
+      box-sizing: border-box;
+      padding: 28px;
+      p {
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 25px;
+      }
     }
   }
 `;

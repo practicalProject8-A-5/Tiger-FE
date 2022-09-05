@@ -62,7 +62,7 @@ const KakaoMapDetail = () => {
     <StVehicleMapContainer>
       <h1>렌터지역</h1>
       <StVehicleMapBox id="map"></StVehicleMapBox>
-      <h2>렌트 장소 : {vehicleDetailsLocation}</h2>
+      <h2>{vehicleDetailsLocation}</h2>
     </StVehicleMapContainer>
   );
 };
@@ -70,23 +70,23 @@ const KakaoMapDetail = () => {
 const StVehicleMapContainer = styled.div`
   border-top: 1px solid #cccccc;
   h1 {
-    font-weight: 400;
-    font-size: 30px;
-    line-height: 41px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 27px;
     margin-top: 62px;
     margin-bottom: 31px;
   }
   h2 {
-    font-weight: 400;
-    font-size: 30px;
-    line-height: 41px;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 25px;
   }
 `;
 
 const StVehicleMapBox = styled.div`
-  width: 799px;
-  height: 212px;
-  margin-bottom: 41px;
+  width: 840px;
+  height: 286px;
+  margin-bottom: 15px;
 `;
 
 export default KakaoMapDetail;
