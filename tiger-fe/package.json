@@ -35,7 +35,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "aws s3 sync ./build s3://taiger --profile=ick"
+    "deploy": "aws s3 sync ./build s3://taiger --profile=ick",
+    "invalidate": "aws cloudfront create-invalidation --profile=ick --distribution-id E3Q1YNSRRKSOR7 --paths /*"
   },
   "eslintConfig": {
     "extends": [

@@ -23,6 +23,7 @@ const LoginModal = ({ showModal }) => {
         <RegisterForm
           showModal={showModal}
           goRegister={goRegister}
+          setGoRegister={setGoRegister}
           loginToggle={loginToggle}
         />
       )}
