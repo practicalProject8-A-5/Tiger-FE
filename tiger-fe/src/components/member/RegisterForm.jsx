@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 import { __registerUser } from "../../redux/modules/memberSlice";
 
@@ -18,6 +18,7 @@ const RegisterForm = ({ showModal, loginToggle, setGoRegister }) => {
   );
 
   console.log(userInfo);
+  console.log(result);
 
   const dispatch = useDispatch();
   // const navigate = useNavigate();
@@ -25,10 +26,10 @@ const RegisterForm = ({ showModal, loginToggle, setGoRegister }) => {
   // useEffect(() => {
   //   // redirect authenticated user to home
   //   if (userInfo) navigate("/");
-  //   console.log(userInfo);
-  //   // redirect user to login page if registration was successful
-  //   if (success) navigate("/login");
-  //   console.log(success);
+  //   // redirect user to login modal if registration was successful
+  //   if (result) {
+  //     setGoRegister(!loginToggle);
+  //   }
   // }, [navigate, userInfo, success, result]);
 
   const {
@@ -49,7 +50,6 @@ const RegisterForm = ({ showModal, loginToggle, setGoRegister }) => {
     dispatch(__registerUser(data));
     console.log(data);
     console.log("눌림");
-    // setGoRegister(!loginToggle);
   };
 
   return (

@@ -19,7 +19,7 @@ const initialState = {
   userInfo: null, // for user object
   userToken, // for storing the JWT
   refreshToken,
-  // success: false, // for monitoring the registration process.
+  success: false, // for monitoring the registration process.
 };
 
 // configure header's Content-Type as JSON
@@ -32,15 +32,16 @@ const config = {
 //등록 차량
 export const __registerUser = createAsyncThunk(
   "member/__registerUser",
-  async ({ email, password, passwordConfirm, name, phone }, thunkAPI) => {
+  async ({ email, password, passwordConfirm, name }, thunkAPI) => {
     try {
       // make request to backend
       const response = await axios.post(
         "api 추후 추가 예정",
-        { email, password, passwordConfirm, name, phone },
+        { email, password, passwordConfirm, name },
         config
       );
       window.alert("회원가입 성공");
+      console.log(response);
       return thunkAPI.fulfillWithValue(response);
     } catch (error) {
       window.alert("회원가입 실패!");
@@ -65,11 +66,11 @@ export const __userLogin = createAsyncThunk(
       //   return thunkAPI.rejectWithValue();
       // } else {
       // store user's token in local storage
-      // localStorage.getItem("userToken", response.headers.authorization);
-      // localStorage.setItem("email", response.data.data.email);
-      // localStorage.setItem("phone", response.data.data.tel);
-      // localStorage.setItem("name", response.data.data.name);
-      // localStorage.setItem("refreshToken", response.headers.refreshtoken);
+      localStorage.getItem("userToken", response.headers.authorization);
+      localStorage.setItem("email", response.data.data.email);
+      localStorage.setItem("phone", response.data.data.tel);
+      localStorage.setItem("name", response.data.data.name);
+      localStorage.setItem("refreshToken", response.headers.refreshtoken);
       console.log(response);
       window.alert("로그인 성공");
       return thunkAPI.fulfillWithValue(response);
@@ -90,7 +91,7 @@ const memberSlice = createSlice({
     },
   },
   extraReducers: {
-    //등록
+    //로그인
     [__userLogin.pending]: (state) => {
       state.isLoading = true;
       state.error = null;
@@ -113,7 +114,8 @@ const memberSlice = createSlice({
     },
     [__registerUser.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      state.result = true; // registration successful
+      state.result = true;
+      state.succes = true; // registration successful
     },
     [__registerUser.rejected]: (state, { payload }) => {
       state.isLoading = false;
