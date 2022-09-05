@@ -56,13 +56,15 @@ const VehicleDetailLeft = () => {
       <StVehicleInfoContainer>
         <StVehicleInfoTitleWrapper>
           <h1>
-            {vehicleDetails.years} <span>{vehicleDetails.vname}</span>
+            <span>{vehicleDetails.vname}</span>
           </h1>
         </StVehicleInfoTitleWrapper>
         <StVehicleInfoLocationWrapper>
           <p>{vehicleDetails.location}</p>
         </StVehicleInfoLocationWrapper>
         <StVehicleInfoContentsWrapper>
+          <h1>차량정보</h1>
+          <p>연식: {vehicleDetails.years} </p>
           <p>종류: {vehicleDetails.type}</p>
           <p>자동: {vehicleDetails.transmission}</p>
           <p>인승: {vehicleDetails.passengers}</p>
@@ -139,6 +141,13 @@ const StVehicleInfoLocationWrapper = styled.div`
 `;
 
 const StVehicleInfoContentsWrapper = styled.div`
+  h1 {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 27px;
+    margin-top: 62px;
+    margin-bottom: 54px;
+  }
   border-bottom: 1px solid #cccccc;
   padding-bottom: 82px;
   p {
