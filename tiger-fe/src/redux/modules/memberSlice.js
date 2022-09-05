@@ -32,19 +32,19 @@ const config = {
 //등록 차량
 export const __registerUser = createAsyncThunk(
   "member/__registerUser",
-  async ({ loginId, password, passwordConfirm }, thunkAPI) => {
+  async ({ email, password, passwordConfirm, name, phone }, thunkAPI) => {
     try {
       // make request to backend
       const response = await axios.post(
         "api 추후 추가 예정",
-        { loginId, password, passwordConfirm },
+        { email, password, passwordConfirm, name, phone },
         config
       );
       window.alert("회원가입 성공");
       return thunkAPI.fulfillWithValue(response);
     } catch (error) {
       window.alert("회원가입 실패!");
-      return thunkAPI.rejectWithValue();
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
@@ -65,7 +65,7 @@ export const __userLogin = createAsyncThunk(
         return thunkAPI.rejectWithValue();
       } else {
         // store user's token in local storage
-        localStorage.setItem("userToken", response.headers.authorization);
+        localStorage.getItem("userToken", response.headers.authorization);
         localStorage.setItem("loginId", response.data.data.loginId);
         localStorage.setItem("refreshToken", response.headers.refreshtoken);
         // console.log(response);
@@ -78,7 +78,6 @@ export const __userLogin = createAsyncThunk(
   }
 );
 
-//등록 차량
 const memberSlice = createSlice({
   name: "memberSlice",
   initialState: initialState,

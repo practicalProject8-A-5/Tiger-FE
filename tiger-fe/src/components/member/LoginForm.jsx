@@ -5,8 +5,8 @@ import { AiOutlineClose } from "react-icons/ai";
 import styled from "styled-components";
 import logo from "../../assets/ta,iger_logo.png";
 
-const Login = ({ showModal, goRegister, loginToggle }) => {
-  console.log(showModal);
+const LoginForm = ({ showModal, goRegister, loginToggle }) => {
+  // console.log(showModal);
   return (
     <StLoginForm>
       <div className="login__header">
@@ -45,8 +45,6 @@ const Login = ({ showModal, goRegister, loginToggle }) => {
     </StLoginForm>
   );
 };
-
-export default Login;
 
 const StLoginForm = styled.div`
   /* background-color: skyblue; */
@@ -202,3 +200,5 @@ const StLoginForm = styled.div`
     }
   }
 `;
+
+export default LoginForm;
