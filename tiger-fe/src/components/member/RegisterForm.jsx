@@ -12,7 +12,12 @@ import { BiChevronLeft } from "react-icons/bi";
 
 import { useForm } from "react-hook-form";
 
-const RegisterForm = ({ showModal, loginToggle, setGoRegister }) => {
+const RegisterForm = ({
+  showModal,
+  loginToggle,
+  setGoRegister,
+  goRegister,
+}) => {
   const { isLoading, userInfo, success, result } = useSelector(
     (state) => state.memberSlice
   );
@@ -28,7 +33,7 @@ const RegisterForm = ({ showModal, loginToggle, setGoRegister }) => {
   //   if (userInfo) navigate("/");
   //   // redirect user to login modal if registration was successful
   //   if (result) {
-  //     setGoRegister(!loginToggle);
+  //     setGoRegister(!goRegister);
   //   }
   // }, [navigate, userInfo, success, result]);
 
