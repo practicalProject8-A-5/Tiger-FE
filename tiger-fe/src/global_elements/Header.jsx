@@ -12,6 +12,7 @@ import axios from "axios";
 
 import { useState } from "react";
 import LoginModal from "./LoginModal";
+import { useEffect } from "react";
 
 const Header = ({ ownerMode }) => {
   const [IsModalOpen, setIsModalOpen] = useState(false);
@@ -48,27 +49,29 @@ const Header = ({ ownerMode }) => {
 
   // logout
   const __userLogout = async () => {
-    const confirm = window.confirm("Are you Sure?");
-    if (confirm === true) {
-      const userToken = localStorage.getItem("userToken");
-      const refreshToken = localStorage.getItem("refreshToken");
-      const headers = {
-        "Content-Type": "application/json",
-        Authorization: `${userToken}`,
-        refreshToken: `${refreshToken}`,
-      };
-      await axios.post(
-        "추후 추가",
-        {},
-        {
-          headers: headers,
-        }
-      );
-      window.localStorage.clear();
-      window.location.replace("/");
-    } else if (confirm === false) {
-      return;
-    }
+    useEffect(() => {
+      const confirm = window.confirm("Are you Sure?");
+      if (confirm === true) {
+        const userToken = localStorage.getItem("userToken");
+        const refreshToken = localStorage.getItem("refreshToken");
+        const headers = {
+          "Content-Type": "application/json",
+          Authorization: `${userToken}`,
+          refreshToken: `${refreshToken}`,
+        };
+        axios.post(
+          "추후 추가",
+          {},
+          {
+            headers: headers,
+          }
+        );
+        window.localStorage.clear();
+        navigate("/");
+      } else if (confirm === false) {
+        return;
+      }
+    }, []);
   };
 
   return (
