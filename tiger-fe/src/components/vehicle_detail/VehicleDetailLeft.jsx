@@ -69,8 +69,7 @@ const VehicleDetailLeft = () => {
         spaceBetween={8}
         slidesPerView={1}
         scrollbar={{ draggable: true, dragSize: 24 }}
-        navigation={true}
-      >
+        navigation={true}>
         {vehicleDetails.imageList &&
           vehicleDetails.imageList.map((image, i) => {
             return (
@@ -83,6 +82,7 @@ const VehicleDetailLeft = () => {
       <StVehicleInfoContainer>
         <StVehicleInfoTitleWrapper>
           <h1>
+            {/* <span>{vehicleDetails.vbrand}</span> */}
             <span>{vehicleDetails.vname}</span>
           </h1>
         </StVehicleInfoTitleWrapper>
@@ -111,9 +111,9 @@ const VehicleDetailLeft = () => {
               </tr>
               <tr>
                 <th style={styleTh}>기어 변속</th>
-                <td style={styleTd} rowSpan={2}>
-                  {vehicleDetails.transmission}
-                </td>
+                <td style={styleTd}>{vehicleDetails.transmission}</td>
+                <th style={styleTh}>차 종류</th>
+                <td style={styleTd}>{vehicleDetails.type}</td>
               </tr>
             </tbody>
           </table>
@@ -140,11 +140,11 @@ const VehicleDetailLeft = () => {
               </div>
             </div>
           </div>
-          <div className="infoWrapper_desc">
+          {/* <div className="infoWrapper_desc">
             <div>
               <p>렌터 설명란</p>
             </div>
-          </div>
+          </div> */}
         </StRenterInfoWrapper>
         <KakaoMapDetail />
       </StVehicleInfoContainer>
@@ -219,6 +219,7 @@ const StVehicleInfoContentsWrapper = styled.div`
 
 const StRenterInfoWrapper = styled.div`
   margin-top: 48px;
+  margin-bottom: 80px;
   .infoWrapper_nickname {
     font-weight: 600;
     font-size: 20px;
