@@ -2,35 +2,56 @@ import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
 
+import "swiper/scss";
+import "swiper/scss/navigation";
+import "swiper/scss/pagination";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation } from "swiper";
+
 const ImgViewBox = ({ files }) => {
   //트러블 슈팅 하나짜리 이후에 여러개 다시 수정하면 버튼이 안눌림
-  const [currImg, setCurrImg] = useState(0);
-  const [lastImg, setLastImg] = useState(files.length - 1);
 
-  // const [isOne, setIsOne] = useState(false);
-  // if (isOne === false) {
-  //   setIsOne();
-  // }
-
-  const clickPrev = () => {
-    setCurrImg((prevCount) => (prevCount - 1 < 0 ? lastImg : prevCount - 1));
-  };
-
-  const clickNext = () => {
-    setCurrImg((prevCount) => (prevCount + 1 > lastImg ? 0 : prevCount + 1));
-  };
-
-  const imgLength = files.length;
+  console.log(files.length);
   return (
     <StImgViewBox>
-      {imgLength === 1 ? (
-        <img src={files[0]} alt="img" />
+      {files.length === 1 ? (
+        <StRegisterSwiper
+        // pagination={{
+        //   type: "fraction",
+        //   clickable: true,
+        // }}
+        // navigation={true}
+        // loop={true}
+        // modules={[Pagination, Navigation]}
+        // className="mySwiper"
+        >
+          {files.map((image, i) => {
+            return (
+              <SwiperSlide className="img" key={i}>
+                <img src={image} alt="imageSlide" />
+              </SwiperSlide>
+            );
+          })}
+        </StRegisterSwiper>
       ) : (
-        <div>
-          <button onClick={clickPrev}>이전</button>
-          <img src={files[currImg]} alt="img" />
-          <button onClick={clickNext}>다음</button>
-        </div>
+        <StRegisterSwiper
+          pagination={{
+            type: "fraction",
+            clickable: true,
+          }}
+          navigation={true}
+          // loop={true}
+          modules={[Pagination, Navigation]}
+          className="mySwiper"
+        >
+          {files.map((image, i) => {
+            return (
+              <SwiperSlide className="img" key={i}>
+                <img src={image} alt="imageSlide" />
+              </SwiperSlide>
+            );
+          })}
+        </StRegisterSwiper>
       )}
     </StImgViewBox>
   );
@@ -38,9 +59,93 @@ const ImgViewBox = ({ files }) => {
 
 export default ImgViewBox;
 const StImgViewBox = styled.div`
+  margin-top: 56px;
   img {
-    width: 300px;
-    height: 300px;
+    width: 844px;
+    height: 429px;
     object-fit: cover;
+    /* background-color: pink; */
+    border-radius: 12px;
+  }
+  &:hover .swiper-button-next {
+    opacity: 1;
+  }
+  &:hover .swiper-button-prev {
+    opacity: 1;
   }
 `;
+
+const StRegisterSwiper = styled(Swiper)`
+  .swiper-button-next {
+    opacity: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: block;
+    text-align: center;
+    transform: scale(1);
+    transition: all 0.4s;
+    :hover {
+      transform: scale(1.25);
+    }
+
+    :after {
+      line-height: 32px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #777777;
+      left: 2px;
+      position: relative;
+    }
+  }
+
+  .swiper-button-prev {
+    opacity: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: block;
+    text-align: center;
+    transform: scale(1);
+    transition: all 0.4s;
+    :hover {
+      transform: scale(1.25);
+    }
+
+    :after {
+      line-height: 32px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #777777;
+      right: 2px;
+      position: relative;
+    }
+  }
+  .swiper-pagination {
+    width: 100%;
+    height: 20px;
+    /* opacity: 0.4; */
+    span {
+      opacity: 1;
+      color: #000;
+    }
+  }
+  .swiper-pagination {
+    background-color: rgba(255, 255, 255, 0.4);
+    /* background-color: pink; */
+    position: absolute;
+    bottom: 0;
+    border-radius: 0 0 20px 20px;
+  }
+`;
+
+// const StRegisterSwiperOne = styled(Swiper)`
+//   .swiper-button-prev {
+//     display: none;
+//   }
+//   .swiper-button-next {
+//     display: none;
+//   }
+// `;
