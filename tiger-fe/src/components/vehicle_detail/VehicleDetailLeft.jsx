@@ -69,7 +69,8 @@ const VehicleDetailLeft = () => {
         spaceBetween={8}
         slidesPerView={1}
         scrollbar={{ draggable: true, dragSize: 24 }}
-        navigation={true}>
+        navigation={true}
+      >
         {vehicleDetails.imageList &&
           vehicleDetails.imageList.map((image, i) => {
             return (

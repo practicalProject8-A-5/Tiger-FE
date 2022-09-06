@@ -11,6 +11,7 @@ const KakaoMapDetail = () => {
   );
 
   console.log(vehicleDetailsLocation);
+  // (9~13) 리팩토링
 
   useEffect(() => {
     const mapContainer = document.getElementById("map");
@@ -25,6 +26,7 @@ const KakaoMapDetail = () => {
     var geocoder = new kakao.maps.services.Geocoder();
 
     // 주소로 좌표를 검색합니다
+    // 이거 채운이가 필요
     geocoder.addressSearch(vehicleDetailsLocation, function (result, status) {
       // 정상적으로 검색이 완료됐으면
       if (status === kakao.maps.services.Status.OK) {
@@ -73,8 +75,7 @@ const StVehicleMapContainer = styled.div`
     font-weight: 600;
     font-size: 20px;
     line-height: 27px;
-    margin-top: 62px;
-    margin-bottom: 31px;
+    margin-bottom: 24px;
   }
   h2 {
     font-weight: 700;
