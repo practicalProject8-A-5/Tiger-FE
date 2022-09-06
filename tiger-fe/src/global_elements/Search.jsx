@@ -16,7 +16,7 @@ import Button from "./Button";
 import { __vehicleSearchList } from "../redux/modules/searchSlice";
 
 import pin from "../assets/pin_trans.png";
-import clock from "../assets/Clock.png";
+import clock from "../assets/clock.png";
 import vehicle from "../assets/vehicle.png";
 
 const Search = () => {
@@ -106,8 +106,7 @@ const Search = () => {
               setIsPopupOpen(!isPopupOpen);
             }}
             onChange={onChangeHandler}
-            placeholder="어디서?"
-          ></input>
+            placeholder="어디서?"></input>
 
           {isPopupOpen ? (
             <div>
