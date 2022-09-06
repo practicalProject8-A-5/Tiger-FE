@@ -1,8 +1,8 @@
 // eslint-disable-next-line
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import { Link, useMatch, useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -10,9 +10,9 @@ import logo from "../assets/ta,iger_logo.png";
 
 import axios from "axios";
 
-import { useState } from "react";
 import LoginModal from "./LoginModal";
-import { useEffect } from "react";
+
+import { loader } from "../redux/modules/memberSlice";
 
 const Header = ({ ownerMode }) => {
   const [IsModalOpen, setIsModalOpen] = useState(false);
@@ -41,37 +41,36 @@ const Header = ({ ownerMode }) => {
   const ownerToggle = useMatch(`/`);
   // console.log(ownerToggle);
 
-  const { userInfo } = useSelector((state) => state.memberSlice);
-  // console.log(userInfo);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(loader());
+  }, [dispatch]);
 
-  const name = localStorage.getItem("name");
-  // nickname or name 추후 확정 예정
+  const userInfo = useSelector((state) => state.memberSlice.userInfo);
+  console.log(userInfo);
 
   // logout
   const __userLogout = async () => {
-    useEffect(() => {
-      const confirm = window.confirm("Are you Sure?");
-      if (confirm === true) {
-        const userToken = localStorage.getItem("userToken");
-        const refreshToken = localStorage.getItem("refreshToken");
-        const headers = {
-          "Content-Type": "application/json",
-          Authorization: `${userToken}`,
-          refreshToken: `${refreshToken}`,
-        };
-        axios.post(
-          "추후 추가",
-          {},
-          {
-            headers: headers,
-          }
-        );
-        window.localStorage.clear();
-        navigate("/");
-      } else if (confirm === false) {
-        return;
-      }
-    }, []);
+    // useEffect(() => {
+    const confirm = window.confirm("Are you Sure?");
+    if (confirm === true) {
+      const userToken = localStorage.getItem("userToken");
+      const refreshToken = localStorage.getItem("refreshToken");
+      console.log(refreshToken);
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: userToken,
+        RefreshToken: refreshToken,
+      };
+      axios.delete("http://43.200.177.2/api/member/logout", {
+        headers: headers,
+      });
+      window.localStorage.clear();
+      dispatch(loader());
+    } else if (confirm === false) {
+      return;
+    }
+    // }, []);
   };
 
   return (
@@ -113,18 +112,20 @@ const Header = ({ ownerMode }) => {
               )}
             </div>
 
-            {userInfo ? (
-              <div className="header__login">{name}님께서 로그인중</div>
+            {userInfo.name ? (
+              <>
+                <div className="header__login">
+                  {userInfo.name}님께서 로그인중
+                </div>
+                <div className="header__login" onClick={__userLogout}>
+                  로그아웃
+                </div>
+              </>
             ) : (
               <div className="header__login" onClick={showModal}>
                 로그인
               </div>
             )}
-            {userInfo ? (
-              <div className="header__login" onClick={__userLogout}>
-                로그아웃
-              </div>
-            ) : null}
             {IsModalOpen && <LoginModal showModal={showModal} />}
           </div>
         </div>

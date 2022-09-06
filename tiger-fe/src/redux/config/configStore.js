@@ -8,23 +8,21 @@ import ownerItemListSlice from "../modules/ownerItemListSlice";
 import incomeItemListSlice from "../modules/incomeItemListSlice";
 import memberSlice from "../modules/memberSlice";
 
-
 const reducer = combineReducers({
   searchSlice,
   ownerItemListSlice,
   vehicleDetailSlice,
   incomeItemListSlice,
   memberSlice,
-
 });
 
 const store = configureStore({
   reducer,
-  // middleware: (getDefaultMiddleware) =>
-  //   getDefaultMiddleware({
-  //     serializableCheck: false,
-  //   }).concat(logger),
-  // devTools: true,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }).concat(logger),
+  devTools: true,
 });
 
 export default store;

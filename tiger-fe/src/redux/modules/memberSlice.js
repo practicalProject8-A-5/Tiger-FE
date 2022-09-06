@@ -16,10 +16,9 @@ const initialState = {
   isLoading: false,
   result: false, // for monitoring the registration process.
   error: null,
-  userInfo: null, // for user object
-  userToken, // for storing the JWT
+  userInfo: {},
   refreshToken,
-  success: false, // for monitoring the registration process.
+  userToken,
 };
 
 // configure header's Content-Type as JSON
@@ -36,13 +35,13 @@ export const __registerUser = createAsyncThunk(
     try {
       // make request to backend
       const response = await axios.post(
-        "api 추후 추가 예정",
+        "http://43.200.177.2/api/member/register",
         { email, password, passwordConfirm, name },
         config
       );
       window.alert("회원가입 성공");
-      console.log(response);
-      return thunkAPI.fulfillWithValue(response);
+      console.log(response.data);
+      return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       window.alert("회원가입 실패!");
       return thunkAPI.rejectWithValue(error);
@@ -56,28 +55,21 @@ export const __userLogin = createAsyncThunk(
   async ({ email, password }, thunkAPI) => {
     try {
       const response = await axios.post(
-        "추후 추가 예정",
+        "http://43.200.177.2/api/member/login",
         { email, password },
         config
       );
-      // console.log(response);
-      // if (response.data.success === false) {
-      //   window.alert(response.data.error.message);
-      //   return thunkAPI.rejectWithValue();
-      // } else {
-      // store user's token in local storage
-      localStorage.getItem("userToken", response.headers.authorization);
-      localStorage.setItem("email", response.data.data.email);
-      localStorage.setItem("phone", response.data.data.tel);
-      localStorage.setItem("name", response.data.data.name);
+      localStorage.setItem("userToken", response.headers.authorization);
+      localStorage.setItem("email", response.data.output.email);
+      localStorage.setItem("phone", response.data.output.tel);
+      localStorage.setItem("name", response.data.output.name);
       localStorage.setItem("refreshToken", response.headers.refreshtoken);
-      console.log(response);
+      console.log(response.data);
       window.alert("로그인 성공");
-      return thunkAPI.fulfillWithValue(response);
-      // }
+      loader();
+      return thunkAPI.fulfillWithValue(response.data.output);
     } catch (error) {
-      window.alert(error.message);
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );
@@ -87,7 +79,15 @@ const memberSlice = createSlice({
   initialState: initialState,
   reducers: {
     loader: (state, action) => {
-      state.userInfo = action.payload;
+      const email = localStorage.getItem("email");
+      const phone = localStorage.getItem("phone");
+      const name = localStorage.getItem("name");
+      // console.log(payload);
+      if (userToken !== null) {
+        state.userInfo = { email, phone, name };
+      } else {
+        state.userInfo = {};
+      }
     },
   },
   extraReducers: {
@@ -98,14 +98,13 @@ const memberSlice = createSlice({
     },
     [__userLogin.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
+      console.log(payload);
       state.userInfo = payload;
-      state.userToken = payload.userToken;
-      // console.log(payload);
     },
     [__userLogin.rejected]: (state, { payload }) => {
       state.isLoading = false;
-      state.error = payload;
-      // console.log(payload);
+      console.log(payload);
+      state.error = payload.message;
     },
     // register user
     [__registerUser.pending]: (state) => {
@@ -114,8 +113,7 @@ const memberSlice = createSlice({
     },
     [__registerUser.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      state.result = true;
-      state.succes = true; // registration successful
+      state.result = payload.result;
     },
     [__registerUser.rejected]: (state, { payload }) => {
       state.isLoading = false;
@@ -124,5 +122,5 @@ const memberSlice = createSlice({
   },
 });
 
-// export const {} = memberSlice.actions;
+export const { loader } = memberSlice.actions;
 export default memberSlice.reducer;

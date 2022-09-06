@@ -14,9 +14,8 @@ import OwnerItemList from "../components/owner/OwnerItemList";
 const GlobalRouter = () => {
   return (
     <Routes>
-      <Route path="/" element={<RentMainPage />} />
+      <Route exact path="/" element={<RentMainPage />} />
       <Route path="/owner" element={<OwnerPage />} />
-      {/* //test */}
       <Route path="/owner/:category" element={<OwnerItemList />} />
       <Route path="/intro" element={<HomePage />} />
       <Route path="/renter" element={<RenterPage />} />

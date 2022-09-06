@@ -1,7 +1,5 @@
 // import axios from "axios";
-import React, { useState } from "react";
-// import { useState } from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import OwnerItem from "./OwnerItem";
 import { useDispatch, useSelector } from "react-redux";

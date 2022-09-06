@@ -3,15 +3,15 @@
 import React from "react";
 
 import Header from "../global_elements/Header";
+import RenterNavbar from "../components/renter/RenterNavbar";
 import GlobalLayout from "../global/GlobalLayout";
-import Search from "../global_elements/Search";
 
 const RenterPage = () => {
   return (
     <div>
       <Header />
-      <Search />
-      <GlobalLayout>renter</GlobalLayout>
+      <RenterNavbar />
+      <GlobalLayout></GlobalLayout>
     </div>
   );
 };

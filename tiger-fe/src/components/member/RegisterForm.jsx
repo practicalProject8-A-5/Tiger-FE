@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { __registerUser } from "../../redux/modules/memberSlice";
 
@@ -18,24 +18,19 @@ const RegisterForm = ({
   setGoRegister,
   goRegister,
 }) => {
-  const { isLoading, userInfo, success, result } = useSelector(
-    (state) => state.memberSlice
-  );
+  const { isLoading, result } = useSelector((state) => state.memberSlice);
 
-  console.log(userInfo);
   console.log(result);
+  // true
 
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   // redirect authenticated user to home
-  //   if (userInfo) navigate("/");
-  //   // redirect user to login modal if registration was successful
-  //   if (result) {
-  //     setGoRegister(!goRegister);
-  //   }
-  // }, [navigate, userInfo, success, result]);
+  useEffect(() => {
+    // redirect authenticated user to home
+    if (result === true) {
+      loginToggle();
+    }
+  }, [result]);
 
   const {
     register,
@@ -328,9 +323,7 @@ const RegisterForm = ({
             <div className="error">{errors.phone.message}</div>
           ) : null}
         </div> */}
-        <button type="submit" disabled={isLoading}>
-          회원가입
-        </button>
+        <button type="submit">회원가입</button>
       </form>
     </StRegisterForm>
   );

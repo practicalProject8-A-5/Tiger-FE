@@ -22,7 +22,7 @@ export const __incomeItemList = createAsyncThunk(
         {},
         { headers: headers }
       );
-      console.log(resp.data);
+      // console.log(resp.data);
       return thunkAPI.fulfillWithValue(resp.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

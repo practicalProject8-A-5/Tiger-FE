@@ -9,7 +9,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
 
 const MainItem = ({ list }) => {
-  console.log(list.imageList);
+  // console.log(list.imageList);
 
   const MainItemListImage = list.imageList;
 
@@ -24,8 +24,7 @@ const MainItem = ({ list }) => {
         navigation={true}
         loop={true}
         modules={[Pagination, Navigation]}
-        className="mySwiper"
-      >
+        className="mySwiper">
         {MainItemListImage.map((image, i) => {
           return (
             <SwiperSlide className="img" key={i}>

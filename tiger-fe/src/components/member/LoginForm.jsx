@@ -1,47 +1,34 @@
 // eslint-disable-next-line
 
-import React, { useEffect } from "react";
-
-import { useNavigate } from "react-router-dom";
-
+import React from "react";
 import { useForm } from "react-hook-form";
-
 import { useDispatch, useSelector } from "react-redux";
-
 import { __userLogin } from "../../redux/modules/memberSlice";
-
 import { AiOutlineClose } from "react-icons/ai";
-
 import styled from "styled-components";
-
 import logo from "../../assets/ta,iger_logo.png";
 
 const LoginForm = ({ showModal, goRegister, loginToggle }) => {
-  const { isLoading, userInfo, success, result } = useSelector(
-    (state) => state.memberSlice
-  );
+  const userInfo = useSelector((state) => state.memberSlice.userInfo);
+  console.log(userInfo);
+
+  const error = useSelector((state) => state.memberSlice.error);
+  // console.log(error);
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const { register, handleSubmit } = useForm();
 
-  // redirect authenticated user to home screen
-  useEffect(() => {
-    if (userInfo) {
-      navigate("/");
-    }
-  }, [navigate, userInfo]);
-
   const onSubmit = (data) => {
     console.log(data);
+    if (error) {
+      return alert(error);
+    } else {
+      // console.log("loggedin");
+      showModal();
+    }
     dispatch(__userLogin(data));
-    // setTimeout(() => {
-    //   window.location.replace("/");
-    // }, 300);
   };
-
-  // console.log(showModal);
 
   return (
     <StLoginForm>
