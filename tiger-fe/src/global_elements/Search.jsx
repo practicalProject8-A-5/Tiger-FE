@@ -15,6 +15,10 @@ import Button from "./Button";
 
 import { __vehicleSearchList } from "../redux/modules/searchSlice";
 
+import pin from "../assets/pin_trans.png";
+import clock from "../assets/clock.png";
+import vehicle from "../assets/vehicle.png";
+
 const Search = () => {
   const dispatch = useDispatch();
 
@@ -29,7 +33,6 @@ const Search = () => {
   const onChangeHandler = (e) => {
     setAddress(e.target.value);
   };
-
   const handlePostCode = (data) => {
     let fullAddress = data.address;
     let extraAddress = "";
@@ -186,9 +189,18 @@ const StSearch = styled.div`
 const StSearchLocationContainer = styled.div`
   /* margin: 26px; */
   .location_input {
-    width: 400px;
-    height: 35px;
+    width: 350px;
+    height: 28px;
     cursor: pointer;
+    background: #f2f2f2;
+    border-radius: 12px;
+    padding: 5px;
+    background-image: url(${pin});
+    background-repeat: no-repeat;
+    background-size: 16px;
+    background-position: 9px 7px;
+    text-indent: 30px;
+    border: 1px solid;
   }
 `;
 
@@ -202,15 +214,21 @@ const StCalendarWrapper = styled.div`
 `;
 
 const StNewDatePicker = styled(DatePicker)`
-  width: 270px;
+  width: 250px;
   height: 42px;
   box-sizing: border-box;
-  padding: 8px;
-  border-radius: 4px;
-  border: 1px solid orange;
   font-size: 12px;
   margin: 25px 0 25px 0;
   cursor: pointer;
+  background: #f2f2f2;
+  border-radius: 12px;
+  padding: 5px;
+  background-image: url(${clock});
+  background-repeat: no-repeat;
+  background-size: 23px;
+  background-position: 9px 8px;
+  text-indent: 34px;
+  border: 1px solid;
 `;
 
 const StVehicleTypeContainer = styled.div`
@@ -220,6 +238,14 @@ const StVehicleTypeContainer = styled.div`
     height: 42px;
     padding: 8px;
     cursor: pointer;
+    background: #f2f2f2;
+    border-radius: 12px;
+    padding: 5px;
+    background-image: url(${vehicle});
+    background-repeat: no-repeat;
+    background-size: 23px;
+    background-position: 9px 7px;
+    text-indent: 34px;
   }
 `;
 
