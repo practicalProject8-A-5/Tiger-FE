@@ -15,6 +15,8 @@ import LoginModal from "./LoginModal";
 import { loader } from "../redux/modules/memberSlice";
 
 const Header = ({ ownerMode }) => {
+  const memberApi = process.env.REACT_APP_MEMBER;
+
   const [IsModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
     setIsModalOpen(!IsModalOpen);
@@ -47,7 +49,7 @@ const Header = ({ ownerMode }) => {
   }, [dispatch]);
 
   const userInfo = useSelector((state) => state.memberSlice.userInfo);
-  console.log(userInfo);
+  // console.log(userInfo);
 
   // logout
   const __userLogout = async () => {
@@ -62,7 +64,7 @@ const Header = ({ ownerMode }) => {
         Authorization: userToken,
         RefreshToken: refreshToken,
       };
-      axios.delete("http://43.200.177.2/api/member/logout", {
+      axios.delete(`${memberApi}/member/logout`, {
         headers: headers,
       });
       window.localStorage.clear();
@@ -114,10 +116,10 @@ const Header = ({ ownerMode }) => {
 
             {userInfo.name ? (
               <>
-                <div className="header__login">
-                  {userInfo.name}님께서 로그인중
+                <div className="header__loggedin">
+                  <span>반갑습니다!</span> <span>{userInfo.name}님</span>
                 </div>
-                <div className="header__login" onClick={__userLogout}>
+                <div className="header__logout" onClick={__userLogout}>
                   로그아웃
                 </div>
               </>
@@ -251,6 +253,26 @@ const StHeader = styled.div`
           color: #ff881b;
           margin-left: 50px;
           cursor: pointer;
+        }
+        .header__loggedin {
+          font-weight: 500;
+          font-size: 20px;
+          line-height: 23px;
+          color: #ff881b;
+          margin-left: 50px;
+          display: flex;
+          justify-content: space-between;
+          flex-direction: column;
+          text-align: center;
+          gap: 5px;
+        }
+        .header__logout {
+          font-weight: 500;
+          font-size: 20px;
+          line-height: 23px;
+          color: #ff881b;
+          margin-left: 50px;
+          text-align: center;
         }
       }
     }

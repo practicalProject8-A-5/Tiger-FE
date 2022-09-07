@@ -3,6 +3,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const memberApi = process.env.REACT_APP_MEMBER;
+
 // initialize userToken from local storage
 const userToken = localStorage.getItem("userToken")
   ? localStorage.getItem("userToken")
@@ -35,7 +37,7 @@ export const __registerUser = createAsyncThunk(
     try {
       // make request to backend
       const response = await axios.post(
-        "http://43.200.177.2/api/member/register",
+        `${memberApi}/member/register`,
         { email, password, passwordConfirm, name },
         config
       );
@@ -55,7 +57,7 @@ export const __userLogin = createAsyncThunk(
   async ({ email, password }, thunkAPI) => {
     try {
       const response = await axios.post(
-        "http://43.200.177.2/api/member/login",
+        `${memberApi}/member/login`,
         { email, password },
         config
       );

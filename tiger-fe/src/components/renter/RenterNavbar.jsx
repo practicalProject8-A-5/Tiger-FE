@@ -1,21 +1,52 @@
 // eslint-disable-next-line
 
 import React from "react";
+import { useDispatch } from "react-redux";
 
 import styled, { css } from "styled-components";
 
-const RenterNavbar = () => {
+import { __getRenterItemList } from "../../redux/modules/renterItemListSlice";
+
+const RenterNavbar = ({ category, onSelect }) => {
+  const dispatch = useDispatch();
+
+  const categories = [
+    {
+      name: "RESERVED",
+      text: "예약차량",
+    },
+    {
+      name: "USE",
+      text: "사용중",
+    },
+    {
+      name: "RETURN",
+      text: "렌트내역",
+    },
+    {
+      name: "CANCLE",
+      text: "환불",
+    },
+  ];
+
   return (
-    <StNavBar>
-      <div className="wrap">
-        <Category>
-          <div>예약차량</div>
-          <div>사용중 차량</div>
-          <div>렌트내역</div>
-          <div>환불</div>
-        </Category>
-      </div>
-    </StNavBar>
+    <>
+      <StNavBar>
+        <div className="wrap">
+          {categories.map((c) => (
+            <Category
+              key={c.name}
+              active={category === c.name}
+              onClick={() => {
+                dispatch(__getRenterItemList(c.name));
+                onSelect(c.name);
+              }}>
+              {c.text}
+            </Category>
+          ))}
+        </div>
+      </StNavBar>
+    </>
   );
 };
 

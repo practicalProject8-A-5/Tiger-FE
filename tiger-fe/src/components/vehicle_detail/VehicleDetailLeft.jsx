@@ -91,12 +91,12 @@ const VehicleDetailLeft = () => {
         </StVehicleInfoLocationWrapper>
         <StVehicleInfoContentsWrapper>
           <h1>차량정보</h1>
-          <table border="1" cellspacing="5" cellpadding="10">
-            <col style={styleCol} />
-            <col style={styleCol} />
-            <col style={styleCol} />
-            <col style={styleCol} />
+          <table border="1" cellSpacing="5" cellPadding="10">
             <tbody>
+              <col style={styleCol} />
+              <col style={styleCol} />
+              <col style={styleCol} />
+              <col style={styleCol} />
               <tr>
                 <th style={styleTh}>연식</th>
                 <td style={styleTd}>{vehicleDetails.years}</td>

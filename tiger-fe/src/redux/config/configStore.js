@@ -7,6 +7,7 @@ import vehicleDetailSlice from "../modules/vehicleDetail";
 import ownerItemListSlice from "../modules/ownerItemListSlice";
 import incomeItemListSlice from "../modules/incomeItemListSlice";
 import memberSlice from "../modules/memberSlice";
+import renterItemListSlice from "../modules/renterItemListSlice";
 
 const reducer = combineReducers({
   searchSlice,
@@ -14,6 +15,7 @@ const reducer = combineReducers({
   vehicleDetailSlice,
   incomeItemListSlice,
   memberSlice,
+  renterItemListSlice,
 });
 
 const store = configureStore({
