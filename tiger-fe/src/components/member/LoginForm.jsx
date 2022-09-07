@@ -9,25 +9,29 @@ import styled from "styled-components";
 import logo from "../../assets/ta,iger_logo.png";
 
 const LoginForm = ({ showModal, goRegister, loginToggle }) => {
-  const userInfo = useSelector((state) => state.memberSlice.userInfo);
-  console.log(userInfo);
+  const { register, handleSubmit } = useForm();
 
   const error = useSelector((state) => state.memberSlice.error);
-  // console.log(error);
+  console.log(error);
 
   const dispatch = useDispatch();
 
-  const { register, handleSubmit } = useForm();
-
   const onSubmit = (data) => {
     console.log(data);
-    if (error) {
-      return alert(error);
-    } else {
-      // console.log("loggedin");
-      showModal();
-    }
-    dispatch(__userLogin(data));
+    dispatch(__userLogin(data)).then(
+      (result) => {
+        // console.log(result);
+        if (result.error?.message === "Rejected") {
+          return alert(result.payload.message);
+        } else {
+          console.log("loggedin");
+          showModal();
+        }
+      }
+      // (error) => {
+      //   console.log(error);
+      // }
+    );
   };
 
   return (
