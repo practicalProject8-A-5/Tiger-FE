@@ -15,7 +15,7 @@ const OwnerItemList = ({ category }) => {
   );
 
   // const [loading, setLoading] = useState(false);
-  console.log("List category:", category);
+  // console.log("List category:", category);
 
   const dispatch = useDispatch();
 
@@ -33,7 +33,7 @@ const OwnerItemList = ({ category }) => {
     }
   }, [dispatch, category]);
 
-  console.log(OwnerItemLists);
+  // console.log(OwnerItemLists);
   return (
     <StOwnerItemList>
       {OwnerItemLists.output && OwnerItemLists.output.length === 0 ? (

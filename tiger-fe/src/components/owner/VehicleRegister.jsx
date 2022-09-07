@@ -10,10 +10,11 @@ import userImg from "../../assets/dan-gold-N7RiDzfF2iw-unsplash.jpg";
 import email from "../../assets/registermail.png";
 import phone from "../../assets/registerphone.png";
 import OwnerKakaoMap from "./OwnerKakaoMap";
+import { useDispatch } from "react-redux";
+import { __ownerRegisterInfo } from "../../redux/modules/ownerRegister";
 
 const VehicleRegister = () => {
-  //지도
-  console.log();
+  const dispatch = useDispatch();
 
   //유효성 검사 및 select 최적화
   const {
@@ -71,7 +72,7 @@ const VehicleRegister = () => {
     setAddress(e.target.value);
   };
 
-  console.log(address);
+  // console.log(address);
 
   const RegisterPostCodeStyle = {
     display: "block",
@@ -101,19 +102,11 @@ const VehicleRegister = () => {
     console.log(address);
   };
 
-  //임시
-  const onSubmit = async () => {
-    const resp = await axios.post("http://localhost:3001/vehicle/management");
-
-    const {
-      result,
-      status: { message },
-    } = resp.data;
-
-    if (!result) {
-      alert(message);
-      return;
-    }
+  //임시 submit handler
+  const onSubmit = (data) => {
+    dispatch(__ownerRegisterInfo(data));
+    setAddress("");
+    // setValue("");
   };
 
   return (
@@ -143,12 +136,12 @@ const VehicleRegister = () => {
         {/* 브랜드명, 차종 */}
         <div className="input__top">
           <div className="input__box">
-            <label htmlFor="model">브랜드명</label>
+            <label htmlFor="brand">브랜드명</label>
             <input
               type="text"
-              id="model"
+              id="brand"
               placeholder="ex. 테슬라"
-              {...register("model", {
+              {...register("brand", {
                 required: "브랜드명을 입력해주세요",
                 mimLength: {
                   value: 2,
@@ -161,7 +154,7 @@ const VehicleRegister = () => {
               })}
             />
             {errors.model ? (
-              <div className="error">{errors.model.message}</div>
+              <div className="error">{errors.brand.message}</div>
             ) : null}
           </div>
 
@@ -270,16 +263,16 @@ const VehicleRegister = () => {
                 </td>
               )}
               <th>연료</th>
-              {errors.fueltype ? (
+              {errors.fuelType ? (
                 <td style={{ border: " 2px solid #EB3434" }}>
                   <Controller
-                    name="fueltype"
+                    name="fuelType"
                     className="select"
                     rules={{ required: "필수로 선택하셔야합니다." }}
                     render={({ field }) => (
                       <Select
                         {...field}
-                        placeholder={errors.fueltype.message}
+                        placeholder={errors.fuelType.message}
                         options={fueltypeOption}
                       />
                     )}
@@ -290,7 +283,7 @@ const VehicleRegister = () => {
               ) : (
                 <td>
                   <Controller
-                    name="fueltype"
+                    name="fuelType"
                     className="select"
                     rules={{ required: "필수로 선택하셔야합니다." }}
                     render={({ field }) => (
