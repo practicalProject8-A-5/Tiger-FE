@@ -1,20 +1,20 @@
+/*global kakao*/
 import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
 import styled, { css } from "styled-components";
 import ImgViewBox from "./ImgViewBox";
-// import RESP from "../../server/response";
 import axios from "axios";
 import DaumPostcode from "react-daum-postcode";
-import { useRef } from "react";
 import userImg from "../../assets/dan-gold-N7RiDzfF2iw-unsplash.jpg";
 import email from "../../assets/registermail.png";
 import phone from "../../assets/registerphone.png";
-import KakaoMapDetail from "../vehicle_detail/KakaoMapDetail";
 import OwnerKakaoMap from "./OwnerKakaoMap";
-import { useEffect } from "react";
 
 const VehicleRegister = () => {
+  //지도
+  console.log();
+
   //유효성 검사 및 select 최적화
   const {
     register,

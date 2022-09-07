@@ -47,7 +47,7 @@ const Header = ({ ownerMode }) => {
   }, [dispatch]);
 
   const userInfo = useSelector((state) => state.memberSlice.userInfo);
-  console.log(userInfo);
+  // console.log(userInfo);
 
   // logout
   const __userLogout = async () => {
@@ -105,7 +105,8 @@ const Header = ({ ownerMode }) => {
               ) : (
                 <label
                   className="switch"
-                  style={{ backgroundColor: "#ff881b" }}>
+                  style={{ backgroundColor: "#ff881b" }}
+                >
                   <input id="switch" type="checkbox" onClick={onClick} />
                   <span className="slider"></span>
                 </label>
