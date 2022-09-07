@@ -3,48 +3,23 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 
 const RenterItem = ({ list }) => {
-  // const renterItemLists = useSelector(
-  //   (state) => state.renterItemListSlice.renterItemLists
-  // );
-  // console.log(renterItemLists);
+  const renterItemLists = useSelector(
+    (state) => state.renterItemListSlice.renterItemLists
+  );
+  console.log(renterItemLists);
 
   const onClick = () => {
     console.log("눌림");
   };
 
-  const OwnerItemLists = useSelector(
-    (state) => state.ownerItemListSlice.OwnerItemList
-  );
-
   return (
     <div>
       <StRenterItemList>
-        {/* {renterItemLists.output && renterItemLists.output.length === 0 ? (
+        {renterItemLists.output && renterItemLists.output.length === 0 ? (
           <p>등록된 차량이 없습니다.</p>
         ) : (
           renterItemLists.output &&
           renterItemLists.output.map((list, i) => {
-            return (
-              <StRenterItem onClick={onClick} key={i}>
-                <img src={list.thumbnail} alt="차량" />
-                <div className="carInfo">
-                  <p>{list.vname}</p>
-                  <span>
-                    {list.startDate} ~ {list.endDate}
-                  </span>
-                  <p>{list.price}/1일</p>
-                  <p>{list.location}</p>
-                </div>
-                <div className="dateBtn">{list.createdAt}</div>
-              </StRenterItem>
-            );
-          })
-        )} */}
-        {OwnerItemLists.output && OwnerItemLists.output.length === 0 ? (
-          <p>등록된 차량이 없습니다.</p>
-        ) : (
-          OwnerItemLists.output &&
-          OwnerItemLists.output.map((list, i) => {
             return (
               <StRenterItem onClick={onClick} key={i}>
                 <img src={list.thumbnail} alt="차량" />

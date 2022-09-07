@@ -61,6 +61,9 @@ const VehicleDetailLeft = () => {
     lineHeight: "41px",
   };
 
+  const memberInfo = useSelector((state) => state.memberSlice.userInfo);
+  console.log(memberInfo);
+
   return (
     <>
       <StNewSwiper
@@ -82,8 +85,9 @@ const VehicleDetailLeft = () => {
       <StVehicleInfoContainer>
         <StVehicleInfoTitleWrapper>
           <h1>
-            {/* <span>{vehicleDetails.vbrand}</span> */}
-            <span>{vehicleDetails.vname}</span>
+            <span>
+              {vehicleDetails.vbrand} <span>{vehicleDetails.vname}</span>
+            </span>
           </h1>
         </StVehicleInfoTitleWrapper>
         <StVehicleInfoLocationWrapper>
@@ -127,15 +131,15 @@ const VehicleDetailLeft = () => {
           <div className="infoWrapper_personal">
             <div className="infoWrapper_personal__picture"></div>
             <div className="infoWrapper_personal__info">
-              <p>권익현</p>
+              <p>{memberInfo.name}</p>
               <div className="infoWrapper_personal__info__wrapper">
                 <div className="infoWrapper_personal__info__wrapper__email"></div>
                 <a href="mailto:kwonih1020@gmail.com">
-                  <p>kwonih1020@gmail.com</p>
+                  <p>{memberInfo.email}</p>
                 </a>
                 <div className="infoWrapper_personal__info__wrapper__phone"></div>
                 <a href="010-1234-1234">
-                  <p>010-1234-1234</p>
+                  <p>{memberInfo.phone}</p>
                 </a>
               </div>
             </div>
