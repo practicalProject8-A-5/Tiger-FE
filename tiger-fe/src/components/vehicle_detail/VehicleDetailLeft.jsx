@@ -6,16 +6,14 @@ import { useParams } from "react-router-dom";
 
 import styled from "styled-components";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Navigation, Scrollbar } from "swiper";
-
 import KakaoMapDetail from "./KakaoMapDetail";
-
 import { __vehicleDetail } from "../../redux/modules/vehicleDetail";
 
 import email from "../../assets/email.jpg";
 import phone from "../../assets/phone.jpg";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { Navigation, Scrollbar } from "swiper";
 import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
@@ -61,8 +59,8 @@ const VehicleDetailLeft = () => {
     lineHeight: "41px",
   };
 
-  const memberInfo = useSelector((state) => state.memberSlice.userInfo);
-  console.log(memberInfo);
+  // const memberInfo = useSelector((state) => state.memberSlice.userInfo);
+  // console.log(memberInfo);
 
   return (
     <>
@@ -131,15 +129,15 @@ const VehicleDetailLeft = () => {
           <div className="infoWrapper_personal">
             <div className="infoWrapper_personal__picture"></div>
             <div className="infoWrapper_personal__info">
-              <p>{memberInfo.name}</p>
+              <p>Owner 이름</p>
               <div className="infoWrapper_personal__info__wrapper">
                 <div className="infoWrapper_personal__info__wrapper__email"></div>
                 <a href="mailto:kwonih1020@gmail.com">
-                  <p>{memberInfo.email}</p>
+                  <p>Owner 이메일</p>
                 </a>
                 <div className="infoWrapper_personal__info__wrapper__phone"></div>
                 <a href="010-1234-1234">
-                  <p>{memberInfo.phone}</p>
+                  <p>Owner 전화번호</p>
                 </a>
               </div>
             </div>

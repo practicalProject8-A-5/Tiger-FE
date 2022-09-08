@@ -273,6 +273,7 @@ const StHeader = styled.div`
           color: #ff881b;
           margin-left: 50px;
           text-align: center;
+          cursor: pointer;
         }
       }
     }
