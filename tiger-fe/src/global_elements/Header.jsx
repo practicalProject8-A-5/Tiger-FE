@@ -8,14 +8,12 @@ import { Link, useMatch, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../assets/ta,iger_logo.png";
 
-import axios from "axios";
-
 import LoginModal from "./LoginModal";
 
 import { loader } from "../redux/modules/memberSlice";
 
 const Header = ({ ownerMode }) => {
-  const memberApi = process.env.REACT_APP_MEMBER;
+  // const memberApi = process.env.REACT_APP_MEMBER;
 
   const [IsModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
@@ -55,17 +53,17 @@ const Header = ({ ownerMode }) => {
   const __userLogout = async () => {
     const confirm = window.confirm("Are you Sure?");
     if (confirm === true) {
-      const userToken = localStorage.getItem("userToken");
-      const refreshToken = localStorage.getItem("refreshToken");
+      // const userToken = localStorage.getItem("userToken");
+      // const refreshToken = localStorage.getItem("refreshToken");
       // console.log(refreshToken);
-      const headers = {
-        "Content-Type": "application/json",
-        Authorization: userToken,
-        RefreshToken: refreshToken,
-      };
-      axios.delete(`${memberApi}/member/logout`, {
-        headers: headers,
-      });
+      // const headers = {
+      //   "Content-Type": "application/json",
+      //   Authorization: userToken,
+      //   RefreshToken: refreshToken,
+      // };
+      // axios.delete(`${memberApi}/member/logout`, {
+      //   headers: headers,
+      // });
       window.localStorage.clear();
       dispatch(loader());
     } else if (confirm === false) {
