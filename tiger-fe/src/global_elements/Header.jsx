@@ -53,12 +53,11 @@ const Header = ({ ownerMode }) => {
 
   // logout
   const __userLogout = async () => {
-    // useEffect(() => {
     const confirm = window.confirm("Are you Sure?");
     if (confirm === true) {
       const userToken = localStorage.getItem("userToken");
       const refreshToken = localStorage.getItem("refreshToken");
-      console.log(refreshToken);
+      // console.log(refreshToken);
       const headers = {
         "Content-Type": "application/json",
         Authorization: userToken,
@@ -72,7 +71,6 @@ const Header = ({ ownerMode }) => {
     } else if (confirm === false) {
       return;
     }
-    // }, []);
   };
 
   return (

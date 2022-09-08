@@ -58,7 +58,11 @@ const LoginForm = ({ showModal, goRegister, loginToggle }) => {
           <div className="lineR"></div>
         </div>
 
-        <div className="kakao" onClick={kakaoLogin}></div>
+        <img
+          src={`${kakaoButton}`}
+          alt="kakaoButton"
+          className="kakao"
+          onClick={kakaoLogin}></img>
         <div className="google">구글로 간편 로그인</div>
         <div className="email" onClick={loginToggle}>
           이메일로 회원가입
@@ -166,14 +170,8 @@ const StLoginForm = styled.div`
       }
     }
     .kakao {
-      width: 100%;
-      height: 56px;
       margin-bottom: 18px;
       cursor: pointer;
-      background-image: url(${kakaoButton});
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-position: 50%;
       box-sizing: border-box;
     }
     .google {

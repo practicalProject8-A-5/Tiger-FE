@@ -10,9 +10,10 @@ import VehicleListPage from "../pages/VehicleListPage";
 import HomePage from "../pages/HomePage";
 import OwnerFormPage from "../pages/OwnerFormPage";
 import OwnerItemList from "../components/owner/OwnerItemList";
-import KakaoLogin from "react-kakao-login";
+import KakaoLogin from "../components/member/KakaoLogin";
 
 const GlobalRouter = () => {
+  console.log("5");
   return (
     <Routes>
       <Route exact path="/" element={<RentMainPage />} />
@@ -23,7 +24,7 @@ const GlobalRouter = () => {
       <Route path="/vdetail/:id" element={<VehicleDetailPage />} />
       <Route path="/ownerregisterform" element={<OwnerFormPage />} />
       <Route path="/vlist" element={<VehicleListPage />} />
-      <Route path={"/oauth"} element={<KakaoLogin />} />
+      <Route path="/user/kakao/callback" element={<KakaoLogin />} />
     </Routes>
   );
 };

@@ -4,6 +4,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const memberApi = process.env.REACT_APP_MEMBER;
+const kakaoApi = process.env.REACT_APP_KAKAO_LOGIN_API;
 
 // initialize userToken from local storage
 const userToken = localStorage.getItem("userToken")
@@ -30,7 +31,6 @@ const config = {
   },
 };
 
-//등록 차량
 export const __registerUser = createAsyncThunk(
   "member/__registerUser",
   async ({ email, password, passwordConfirm, name }, thunkAPI) => {
@@ -51,7 +51,6 @@ export const __registerUser = createAsyncThunk(
   }
 );
 
-//예약 주문
 export const __userLogin = createAsyncThunk(
   "member/__userLogin",
   async ({ email, password }, thunkAPI) => {
@@ -71,6 +70,31 @@ export const __userLogin = createAsyncThunk(
       loader();
       return thunkAPI.fulfillWithValue(response.data.output);
     } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const __kakaoLogin = createAsyncThunk(
+  "member/__kakaoLogin",
+  async (payload, thunkAPI) => {
+    const code = payload;
+    try {
+      const response = await axios.get(
+        kakaoApi + `/user/kakao/callback?code=${code}`,
+        {}
+      );
+      console.log(response);
+      localStorage.setItem("userToken", response.headers.authorization);
+      localStorage.setItem("email", response.data.output.email);
+      localStorage.setItem("phone", response.data.output.tel);
+      localStorage.setItem("name", response.data.output.name);
+      localStorage.setItem("refreshToken", response.headers.refreshtoken);
+      window.alert("카카오 성공");
+      loader();
+      return thunkAPI.fulfillWithValue(response.data.output);
+    } catch (error) {
+      console.log(error);
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
@@ -104,6 +128,21 @@ const memberSlice = createSlice({
       state.userInfo = payload;
     },
     [__userLogin.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      console.log(payload);
+      state.error = payload.message;
+    },
+    // 카카오 로그인
+    [__kakaoLogin.pending]: (state) => {
+      state.isLoading = true;
+      state.error = null;
+    },
+    [__kakaoLogin.fulfilled]: (state, { payload }) => {
+      state.isLoading = false;
+      console.log(payload);
+      state.userInfo = payload;
+    },
+    [__kakaoLogin.rejected]: (state, { payload }) => {
       state.isLoading = false;
       console.log(payload);
       state.error = payload.message;
