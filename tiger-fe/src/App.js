@@ -10,6 +10,7 @@ import { loader } from "./redux/modules/memberSlice";
 import "./App.css";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import Header from "./global_elements/Header";
 
 function App() {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ function App() {
   }, [dispatch]);
   return (
     <BrowserRouter>
+      {/* <Header /> */}
       <GlobalRouter />
     </BrowserRouter>
   );
