@@ -13,17 +13,17 @@ const initialState = {
 export const __vehicleSearchList = createAsyncThunk(
   "search/__vehicleSearchList",
   async (payload, thunkAPI) => {
-    const { address, newStartDate, newEndDate, value } = payload;
+    const { address, newStartDate, newEndDate, typeValue } = payload;
     try {
       console.log(address);
       console.log(newStartDate);
       console.log(newEndDate);
-      console.log(value);
+      console.log(typeValue);
       const headers = {
         "Content-Type": "application/json",
       };
       const response = await axios.get(
-        `/api/vehicle/search?startDate=${newStartDate}?endDate=${newEndDate}?type=${value}?location=${address}`,
+        `/api/vehicle/search?startDate=${newStartDate}?endDate=${newEndDate}?type=${typeValue}?location=${address}`,
         {},
         { headers: headers }
       );

@@ -1,23 +1,24 @@
 // eslint-disable-next-line
 
-import React, { useState, useEffect, forwardRef } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import styled from "styled-components";
-
 import DaumPostcode from "react-daum-postcode";
-
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
-
 import Button from "./Button";
-
 import { __vehicleSearchList } from "../redux/modules/searchSlice";
 
 import pin from "../assets/pin_trans.png";
 import clock from "../assets/clock.png";
 import vehicle from "../assets/vehicle.png";
+
+// import DatePicker, {
+//   DateObject,
+//   getAllDatesInRange,
+// } from "react-multi-date-picker";
+// import DatePanel from "react-multi-date-picker/plugins/date_panel";
 
 const Search = () => {
   const dispatch = useDispatch();
@@ -63,13 +64,6 @@ const Search = () => {
     zIndex: "99",
   };
 
-  // date picker button custom
-  // const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
-  //   <button className="example-custom-input" onClick={onClick} ref={ref}>
-  //     {value}
-  //   </button>
-  // ));
-
   // search reservation dates
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
@@ -77,23 +71,46 @@ const Search = () => {
   const newStartDate = new Date(startDate).toISOString().slice(0, 10);
   const newEndDate = new Date(endDate).toISOString().slice(0, 10);
 
-  // console.log(newStartDate);
-  // console.log(newEndDate);
+  console.log(newStartDate);
+  console.log(newEndDate);
 
   //search vehicle type
-  const [value, setValue] = useState();
+  const [typeValue, setTypeValue] = useState();
   const handleChange = (e) => {
-    setValue(e.target.value);
+    setTypeValue(e.target.value);
   };
   // console.log(value);
 
   // submit handler
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    dispatch(__vehicleSearchList({ address, newStartDate, newEndDate, value }));
+    dispatch(
+      __vehicleSearchList({ address, newStartDate, newEndDate, typeValue })
+    );
     setAddress("");
-    setValue("");
+    setTypeValue("");
   };
+
+  // ----------------------------------------------------------------
+
+  // const today = new Date();
+  // const tomorrow = new Date();
+  // tomorrow.setDate(tomorrow.getDate() + 1);
+
+  // const [dates, setDates] = useState([]);
+  // const [allDates, setAllDates] = useState([]);
+
+  // const dateLists = allDates.map((date, index) => {
+  //   return date.format();
+  // });
+  // console.log(dateLists);
+
+  // const onSubmitHandler = (e) => {
+  //   e.preventDefault();
+  //   dispatch(__vehicleSearchList({ address, typeValue, dateLists }));
+  //   setAddress("");
+  //   setTypeValue("");
+  // };
 
   return (
     <StSearch>
@@ -117,6 +134,22 @@ const Search = () => {
           )}
         </StSearchLocationContainer>
 
+        {/* <StCalendarContainer>
+          <StCalendarWrapper>
+            <StNewDatePicker
+              range
+              value={dates}
+              onChange={(dateObjects) => {
+                setDates(dateObjects);
+                setAllDates(getAllDatesInRange(dateObjects));
+              }}
+              plugins={[<DatePanel eachDaysInRange />]}
+              format="YYYY-MM-DD"
+              minDate={new Date()}
+            />
+          </StCalendarWrapper>
+        </StCalendarContainer> */}
+
         <StCalendarContainer>
           <StCalendarWrapper>
             <StNewDatePicker
@@ -128,8 +161,8 @@ const Search = () => {
               locale={ko}
               dateFormat="yyyy-MM-dd"
               minDate={new Date()}
-              // customInput={<ExampleCustomInput />}
               shouldCloseOnSelect={true}
+              placeholder="언제부터"
             />
           </StCalendarWrapper>
           <StCalendarWrapper>
@@ -142,14 +175,14 @@ const Search = () => {
               minDate={startDate}
               locale={ko}
               dateFormat="yyyy-MM-dd"
-              // customInput={<ExampleCustomInput />}
               shouldCloseOnSelect={true}
+              placeholder="언제까지"
             />
           </StCalendarWrapper>
         </StCalendarContainer>
 
         <StVehicleTypeContainer>
-          <select value={value} onChange={handleChange}>
+          <select value={typeValue} onChange={handleChange}>
             <option defaultValue="" hidden>
               자동차 종류
             </option>
@@ -217,7 +250,7 @@ const StNewDatePicker = styled(DatePicker)`
   width: 250px;
   height: 42px;
   box-sizing: border-box;
-  font-size: 12px;
+  font-size: 14px;
   margin: 25px 0 25px 0;
   cursor: pointer;
   background: #f2f2f2;
