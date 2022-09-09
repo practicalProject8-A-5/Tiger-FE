@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useMatch, useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -8,7 +8,6 @@ import logo from "../assets/ta,iger_logo.png";
 import axios from "axios";
 import LoginModal from "./LoginModal";
 import { loader } from "../redux/modules/memberSlice";
-import isLoggedin from "../components/member/isLoggedin";
 
 const Header = ({ ownerMode }) => {
   const memberApi = process.env.REACT_APP_MEMBER;

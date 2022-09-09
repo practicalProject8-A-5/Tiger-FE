@@ -1,8 +1,7 @@
 // eslint-disable-next-line
 
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { loader } from "../../redux/modules/memberSlice";
+import React from "react";
+import { useDispatch } from "react-redux";
 
 import styled, { css } from "styled-components";
 
@@ -29,13 +28,6 @@ const RenterNavbar = ({ category, onSelect }) => {
       text: "환불",
     },
   ];
-
-  // useEffect(() => {
-  //   dispatch(loader());
-  // }, [dispatch]);
-
-  // const userInfo = useSelector((state) => state.memberSlice.userInfo);
-  // console.log(userInfo);
 
   return (
     <>
