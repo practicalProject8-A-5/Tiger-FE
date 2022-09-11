@@ -13,12 +13,21 @@ const initialState = {
 export const __vehicleSearchList = createAsyncThunk(
   "search/__vehicleSearchList",
   async (payload, thunkAPI) => {
-    const { address, newStartDate, newEndDate, typeValue } = payload;
+    const {
+      address,
+      newStartDate,
+      newEndDate,
+      typeValue,
+      latitude,
+      longitude,
+    } = payload;
     try {
       console.log(address);
       console.log(newStartDate);
       console.log(newEndDate);
       console.log(typeValue);
+      console.log(latitude);
+      console.log(longitude);
       const headers = {
         "Content-Type": "application/json",
       };

@@ -1,7 +1,10 @@
+/*global kakao*/
+
 // eslint-disable-next-line
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 import styled from "styled-components";
 import DaumPostcode from "react-daum-postcode";
 import DatePicker from "react-datepicker";
@@ -48,11 +51,21 @@ const Search = () => {
       }
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
-    // console.log(data);
     setAddress(fullAddress);
     console.log(address);
-    // console.log(data.zonecode);
   };
+
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
+  const geocoder = new kakao.maps.services.Geocoder();
+  geocoder.addressSearch(address, function (result, status) {
+    if (status === kakao.maps.services.Status.OK) {
+      const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+      console.log(coords);
+      setLatitude(coords.Ma);
+      setLongitude(coords.La);
+    }
+  });
 
   const postCodeStyle = {
     display: "block",
@@ -79,13 +92,20 @@ const Search = () => {
   const handleChange = (e) => {
     setTypeValue(e.target.value);
   };
-  // console.log(value);
+  console.log(typeValue);
 
   // submit handler
   const onSubmitHandler = (e) => {
     e.preventDefault();
     dispatch(
-      __vehicleSearchList({ address, newStartDate, newEndDate, typeValue })
+      __vehicleSearchList({
+        address,
+        newStartDate,
+        newEndDate,
+        typeValue,
+        latitude,
+        longitude,
+      })
     );
     setAddress("");
     setTypeValue("");
