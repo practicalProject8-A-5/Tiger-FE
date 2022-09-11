@@ -41,7 +41,7 @@ const OwnerItemList = ({ category }) => {
       ) : (
         OwnerItemLists.output &&
         OwnerItemLists.output.map((list, i) => {
-          return <OwnerItem key={i} list={list} />;
+          return <OwnerItem key={i} list={list} category={category} />;
         })
       )}
     </StOwnerItemList>

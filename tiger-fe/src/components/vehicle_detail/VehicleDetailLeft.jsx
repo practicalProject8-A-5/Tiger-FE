@@ -6,16 +6,14 @@ import { useParams } from "react-router-dom";
 
 import styled from "styled-components";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Navigation, Scrollbar } from "swiper";
-
 import KakaoMapDetail from "./KakaoMapDetail";
-
 import { __vehicleDetail } from "../../redux/modules/vehicleDetail";
 
 import email from "../../assets/email.jpg";
 import phone from "../../assets/phone.jpg";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { Navigation, Scrollbar } from "swiper";
 import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
@@ -61,6 +59,9 @@ const VehicleDetailLeft = () => {
     lineHeight: "41px",
   };
 
+  // const memberInfo = useSelector((state) => state.memberSlice.userInfo);
+  // console.log(memberInfo);
+
   return (
     <>
       <StNewSwiper
@@ -69,8 +70,7 @@ const VehicleDetailLeft = () => {
         spaceBetween={8}
         slidesPerView={1}
         scrollbar={{ draggable: true, dragSize: 24 }}
-        navigation={true}
-      >
+        navigation={true}>
         {vehicleDetails.imageList &&
           vehicleDetails.imageList.map((image, i) => {
             return (
@@ -83,7 +83,9 @@ const VehicleDetailLeft = () => {
       <StVehicleInfoContainer>
         <StVehicleInfoTitleWrapper>
           <h1>
-            <span>{vehicleDetails.vname}</span>
+            <span>
+              {vehicleDetails.vbrand} <span>{vehicleDetails.vname}</span>
+            </span>
           </h1>
         </StVehicleInfoTitleWrapper>
         <StVehicleInfoLocationWrapper>
@@ -91,12 +93,12 @@ const VehicleDetailLeft = () => {
         </StVehicleInfoLocationWrapper>
         <StVehicleInfoContentsWrapper>
           <h1>차량정보</h1>
-          <table border="1" cellspacing="5" cellpadding="10">
-            <col style={styleCol} />
-            <col style={styleCol} />
-            <col style={styleCol} />
-            <col style={styleCol} />
+          <table border="1" cellSpacing="5" cellPadding="10">
             <tbody>
+              <col style={styleCol} />
+              <col style={styleCol} />
+              <col style={styleCol} />
+              <col style={styleCol} />
               <tr>
                 <th style={styleTh}>연식</th>
                 <td style={styleTd}>{vehicleDetails.years}</td>
@@ -111,9 +113,9 @@ const VehicleDetailLeft = () => {
               </tr>
               <tr>
                 <th style={styleTh}>기어 변속</th>
-                <td style={styleTd} rowSpan={2}>
-                  {vehicleDetails.transmission}
-                </td>
+                <td style={styleTd}>{vehicleDetails.transmission}</td>
+                <th style={styleTh}>차 종류</th>
+                <td style={styleTd}>{vehicleDetails.type}</td>
               </tr>
             </tbody>
           </table>
@@ -127,24 +129,24 @@ const VehicleDetailLeft = () => {
           <div className="infoWrapper_personal">
             <div className="infoWrapper_personal__picture"></div>
             <div className="infoWrapper_personal__info">
-              <p>권익현</p>
+              <p>Owner 이름</p>
               <div className="infoWrapper_personal__info__wrapper">
                 <div className="infoWrapper_personal__info__wrapper__email"></div>
                 <a href="mailto:kwonih1020@gmail.com">
-                  <p>kwonih1020@gmail.com</p>
+                  <p>Owner 이메일</p>
                 </a>
                 <div className="infoWrapper_personal__info__wrapper__phone"></div>
                 <a href="010-1234-1234">
-                  <p>010-1234-1234</p>
+                  <p>Owner 전화번호</p>
                 </a>
               </div>
             </div>
           </div>
-          <div className="infoWrapper_desc">
+          {/* <div className="infoWrapper_desc">
             <div>
               <p>렌터 설명란</p>
             </div>
-          </div>
+          </div> */}
         </StRenterInfoWrapper>
         <KakaoMapDetail />
       </StVehicleInfoContainer>
@@ -219,6 +221,7 @@ const StVehicleInfoContentsWrapper = styled.div`
 
 const StRenterInfoWrapper = styled.div`
   margin-top: 48px;
+  margin-bottom: 80px;
   .infoWrapper_nickname {
     font-weight: 600;
     font-size: 20px;

@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
+import TestCalender from "./TestCalender";
+import { useEffect } from "react";
 
 const PaymentInfo = () => {
   const {
@@ -10,83 +13,106 @@ const PaymentInfo = () => {
     formState: { errors },
   } = useForm();
 
+  const [isOpenPayInfo, setIsOpenPayInfo] = useState(true);
+  const [isShow, setIsShow] = useState(false);
+
+  const openHandler = () => {
+    // console.log("눌림");
+    setIsShow(!isShow);
+    // setIsOpenPayInfo(!isOpenPayInfo);
+  };
+  // console.log("IsShow :", isShow);
+  // console.log(isOpenPayInfo);
+
+  // useEffect(setIsOpenPayInfo(), [isOpenPayInfo]);
   return (
     <>
-      <StPaymentInfo>
-        <h1>결제 정보</h1>
-        <div className="pay__month">2021년 9월</div>
-        <div className="pay__calenderBox">
-          <p>렌트 가능 날짜를 선택해주세요.</p>
-          <div className="calender"></div>
-        </div>
+      {!isOpenPayInfo ? (
+        <StPaymentInfo>
+          <h1>결제 정보</h1>
+          <div className="pay__month">2021년 9월</div>
+          <div className="pay__calenderBox">
+            <p>렌트 가능 날짜가 선택되었습니다.</p>
+            <div className="calender" onClick={openHandler}></div>
+          </div>
 
-        <div className="price_box">
-          <div className="renter_price">
-            <label htmlFor="price">렌트 요금</label>
-            <div className="flex_wrap">
-              <input
-                type="text"
-                id="price"
-                placeholder="가격을 입력해주세요."
-                // placeholder={errors.price.message}
-                className="error_input"
-                {...register("price", {
-                  required: "가격 입력은 필수 입니다.",
-                })}
-              />
-              {errors.price ? (
-                <div className="error">{errors.price.message}</div>
-              ) : null}
-              <span>₩/24시간</span>
+          <div className="price_box">
+            <div className="renter_price">
+              <label htmlFor="price">렌트 요금</label>
+              <div className="flex_wrap">
+                <input
+                  type="text"
+                  id="price"
+                  placeholder="가격을 입력해주세요."
+                  // placeholder={errors.price.message}
+                  className="error_input"
+                  {...register("price", {
+                    required: "가격 입력은 필수 입니다.",
+                  })}
+                />
+                {errors.price ? (
+                  <div className="error">{errors.price.message}</div>
+                ) : null}
+                <span>₩/24시간</span>
+              </div>
+            </div>
+
+            <div className="total_price">
+              <p>총 렌트 금액</p>
+              <span>12345₩</span>
             </div>
           </div>
 
-          <div className="total_price">
-            <p>총 렌트 금액</p>
-            <span>12345₩</span>
+          <button>등록하기</button>
+        </StPaymentInfo>
+      ) : (
+        <StPaymentInfo>
+          <h1>결제 정보</h1>
+          <div className="pay__month">2021년 9월</div>
+          <div className="pay__calenderBox">
+            <p>렌트 가능 날짜를 선택해주세요.</p>
+            <div className="calender" onClick={openHandler}></div>
           </div>
-        </div>
+          <div className="price_box">
+            <div className="renter_price">
+              <label htmlFor="price">렌트 요금</label>
+              <div className="flex_wrap">
+                <input
+                  type="text"
+                  id="price"
+                  placeholder="가격을 입력해주세요."
+                  // placeholder={errors.price.message}
+                  className="error_input"
+                  {...register("price", {
+                    required: "가격 입력은 필수 입니다.",
+                  })}
+                />
+                {errors.price ? (
+                  <div className="error">{errors.price.message}</div>
+                ) : null}
+                <span>₩/24시간</span>
+              </div>
+            </div>
 
-        <button>등록하기</button>
-      </StPaymentInfo>
+            <div className="total_price">
+              <p>총 렌트 금액</p>
+              <span>12345₩</span>
+            </div>
+          </div>
+          <button>등록하기</button>
+          {/* isOpenPayInfo, setIsOpenPayInfo */}
+          {isShow ? (
+            <TestCalender
+              isOpenPayInfo={isOpenPayInfo}
+              setIsOpenPayInfo={setIsOpenPayInfo}
+              isShow={isShow}
+              setIsShow={setIsShow}
+            />
+          ) : null}
+        </StPaymentInfo>
+      )}
+
       {/* after */}
-      <StPaymentInfo>
-        <h1>결제 정보</h1>
-        <div className="pay__month">2021년 9월</div>
-        <div className="pay__calenderBox">
-          <p>렌트 가능 날짜가 선택되었습니다.</p>
-          <div className="calender"></div>
-        </div>
-
-        <div className="price_box">
-          <div className="renter_price">
-            <label htmlFor="price">렌트 요금</label>
-            <div className="flex_wrap">
-              <input
-                type="text"
-                id="price"
-                placeholder="가격을 입력해주세요."
-                // placeholder={errors.price.message}
-                className="error_input"
-                {...register("price", {
-                  required: "가격 입력은 필수 입니다.",
-                })}
-              />
-              {errors.price ? (
-                <div className="error">{errors.price.message}</div>
-              ) : null}
-              <span>₩/24시간</span>
-            </div>
-          </div>
-
-          <div className="total_price">
-            <p>총 렌트 금액</p>
-            <span>12345₩</span>
-          </div>
-        </div>
-
-        <button>등록하기</button>
-      </StPaymentInfo>
     </>
   );
 };

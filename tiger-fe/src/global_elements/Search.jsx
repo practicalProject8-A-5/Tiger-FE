@@ -106,8 +106,7 @@ const Search = () => {
               setIsPopupOpen(!isPopupOpen);
             }}
             onChange={onChangeHandler}
-            placeholder="어디서?"
-          ></input>
+            placeholder="어디서?"></input>
 
           {isPopupOpen ? (
             <div>

@@ -8,12 +8,12 @@ import "swiper/scss/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
 
-const ImgViewBox = ({ files }) => {
+const ModifyImgViewBox = ({ files }) => {
   //트러블 슈팅 하나짜리 이후에 여러개 다시 수정하면 버튼이 안눌림
 
-  // console.log(files.length);
+  console.log(files.length);
   return (
-    <StImgViewBox>
+    <StModifyImgViewBox>
       {files.length === 1 ? (
         <StRegisterSwiper
         // pagination={{
@@ -53,12 +53,12 @@ const ImgViewBox = ({ files }) => {
           })}
         </StRegisterSwiper>
       )}
-    </StImgViewBox>
+    </StModifyImgViewBox>
   );
 };
 
-export default ImgViewBox;
-const StImgViewBox = styled.div`
+export default ModifyImgViewBox;
+const StModifyImgViewBox = styled.div`
   margin-top: 56px;
   img {
     width: 844px;

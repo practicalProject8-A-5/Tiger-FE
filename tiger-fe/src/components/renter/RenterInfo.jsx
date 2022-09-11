@@ -1,52 +1,50 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+// import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const OwnerInfo = () => {
-  const navigate = useNavigate("");
-  const toForm = () => {
-    navigate("/ownerregisterform");
-  };
+const RenterInfo = () => {
+  // const navigate = useNavigate("");
+  // const toForm = () => {
+  //   navigate("/ownerregisterform");
+  // };
 
+  const memberInfo = useSelector((state) => state.memberSlice.userInfo);
+
+  console.log(memberInfo);
   return (
-    <StOwnerInfo>
+    <StRenterInfo>
       <div className="userProfile">
         <div className="profile__top">
           <div className="userimg"></div>
           <div className="userMiniProfile">
             <div className="userMiniProfile__top">
-              <h3>o o o님</h3>
-              <div className="bash">오너</div>
+              <h3>{memberInfo.name}님</h3>
+              <div className="bash">렌터</div>
             </div>
-            <div className="userEmail">12346789@gmail.com</div>
+            <div className="userEmail">{memberInfo.email}</div>
           </div>
         </div>
 
-        <div className="profileTitle">오너 네임</div>
-        <div className="profileValue">심채운</div>
+        <div className="profileTitle">렌터 네임</div>
+        <div className="profileValue">{memberInfo.name}</div>
 
-        <div className="profileTitle">오너 전화번호</div>
-        <div className="profileValue">010-0000-0000</div>
+        <div className="profileTitle">렌터 전화번호</div>
+        <div className="profileValue">{memberInfo.phone}</div>
 
-        <div className="profileTitle">오너 연락 메일 주소</div>
-        <div className="profileValue">123456789@gmail.com</div>
-        <div className="createBtn" onClick={toForm}>
-          차량 등록
-        </div>
+        <div className="profileTitle">렌터 연락 메일 주소</div>
+        <div className="profileValue">{memberInfo.email}</div>
       </div>
-    </StOwnerInfo>
+    </StRenterInfo>
   );
 };
 
-export default OwnerInfo;
-
-const StOwnerInfo = styled.div`
+const StRenterInfo = styled.div`
   position: fixed;
   /* z-index: 9; */
-  top: 130px;
+  top: 261px;
   right: 259px;
   width: 520px;
-  /* overflow: hidden; */
   height: 550px;
   display: flex;
   justify-content: center;
@@ -118,26 +116,12 @@ const StOwnerInfo = styled.div`
       width: 100%;
       height: 34px;
       /* background-color: royalblue; */
-      margin-bottom: 33px;
+      margin-bottom: 51px;
       border-bottom: 1px solid #000;
       line-height: 36px;
       font-weight: 600;
     }
-    .createBtn {
-      width: 380px;
-      height: 60px;
-      border: 2px solid #ff881b;
-      border-radius: 12px;
-      text-align: center;
-      line-height: 60px;
-      color: #ff881b;
-      /* padding: 10px 22px; */
-      box-sizing: border-box;
-      /* background: #d9d9d9; */
-      border-radius: 16px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 20px;
-    }
   }
 `;
+
+export default RenterInfo;

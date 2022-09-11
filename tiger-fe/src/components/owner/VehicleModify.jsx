@@ -12,24 +12,9 @@ import phone from "../../assets/registerphone.png";
 import OwnerKakaoMap from "./OwnerKakaoMap";
 import { useDispatch } from "react-redux";
 import { __ownerRegisterInfo } from "../../redux/modules/ownerRegister";
+import ModifyImgViewBox from "./ModifyImgViewBox";
 
-const VehicleRegister = () => {
-  const dispatch = useDispatch();
-
-  // const ParseTextarea = ({ value = [], onChange }) => {
-  //   const [text, setText] = React.useState(value.join)("\n");
-
-  //   const handleChange = (e) => {
-  //     const value = e.target.value;
-
-  //     setText(value);
-  //     onChange(value.split("\n"));
-  //   };
-
-  //   return <textarea onChange={handleChange} value={text} />;
-  // };
-
-  //유효성 검사 및 select 최적화
+const VehicleModify = () => {
   const {
     register,
     handleSubmit,
@@ -38,24 +23,16 @@ const VehicleRegister = () => {
     formState: { errors },
   } = useForm();
 
-  //value가 서버에 보내는 값, label view에 보여주는 값
   const cartypeOption = [
     { value: "경형", label: "경형" },
     { value: "중형", label: "중형" },
     { value: "대형", label: "대형" },
     { value: "승합RV", label: "승합RV" },
     { value: "수입", label: "수입" },
-    // { value: "경형" },
-    // { value: "중형" },
-    // { value: "대형" },
-    // { value: "승합RV" },
-    // { value: "수입" },
   ];
   const transmissionOption = [
     { value: "자동", label: "자동" },
     { value: "수동", label: "수동" },
-    // { value: "자동" },
-    // { value: "수동" },
   ];
   const fueltypeOption = [
     { value: "휘발유", label: "휘발유" },
@@ -63,11 +40,6 @@ const VehicleRegister = () => {
     { value: "LPG", label: "LPG" },
     { value: "전기", label: "전기" },
     { value: "수소", label: "수소" },
-    // { value: "휘발유" },
-    // { value: "경유" },
-    // { value: "LPG" },
-    // { value: "전기" },
-    // { value: "수소" },
   ];
 
   //파일 상태관리 및 Array로 만들기 위해
@@ -86,8 +58,6 @@ const VehicleRegister = () => {
       setIsShowImg(false);
     }
   };
-
-  // useEffect(() => {}, [files]);
 
   //location
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -129,52 +99,19 @@ const VehicleRegister = () => {
 
   //임시 submit handler
   const onSubmit = (data) => {
-    const formData = new FormData();
-    for (let i = 0; i < files.length; i++) {
-      formData.append("imageList", files[{ i }]);
-    }
-    // formData.append("vbrand", data.vbrand);
-    // formData.append("price", data.price);
-    // formData.append("description", data.description);
-    // formData.append("location", data.location);
-    // formData.append("vname", data.vname);
-    // formData.append("type", data.cartype.value);
-    // formData.append("years", data.years);
-    // formData.append("fuelType", data.fuelType.value);
-    // formData.append("passengers", data.passengers);
-    // formData.append("transmission", data.transmission.value);
-    // formData.append("fuelEfficiency", data.fuelEfficiency);
-    for (let value of formData.values()) {
-      console.log(value);
-    }
-
-    dispatch(__ownerRegisterInfo(formData));
-
-    setAddress("");
+    // dispatch(__ownerRegisterInfo(data));
+    // setAddress("");
     // setValue("");
-    // console.log(files);
-    // console.log(formData);
-    // console.log(data);
-    // console.log(data.cartype.value);
-    // console.log(data.vname);
-    // console.log(data.vbrand);
-    // console.log(data.years);
-    // console.log(data.fuelType.value);
-    // console.log(data.location);
-    // console.log(data.passengers);
-    // console.log(data.transmission.value);
-    console.log(data.description);
-    // console.log(data.)
+    console.log("onSubmit");
   };
-  console.log(files);
 
   return (
-    <StVehicleRegister>
+    <StVehicleModify>
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* //이미지 */}
         <div className="onchange__imgbox">
           {!isShowImg ? (
-            <ImgViewBox files={files} />
+            <ModifyImgViewBox files={files} />
           ) : (
             <p className="imgbox_text">
               등록하실 차량의 이미지를 아래 버튼을 통해 업로드 해주세요:)
@@ -195,12 +132,12 @@ const VehicleRegister = () => {
         {/* 브랜드명, 차종 */}
         <div className="input__top">
           <div className="input__box">
-            <label htmlFor="vbrand">브랜드명</label>
+            <label htmlFor="brand">브랜드명</label>
             <input
               type="text"
-              id="vbrand"
+              id="brand"
               placeholder="ex. 테슬라"
-              {...register("vbrand", {
+              {...register("brand", {
                 required: "브랜드명을 입력해주세요",
                 mimLength: {
                   value: 2,
@@ -213,7 +150,7 @@ const VehicleRegister = () => {
               })}
             />
             {errors.model ? (
-              <div className="error">{errors.vbrand.message}</div>
+              <div className="error">{errors.brand.message}</div>
             ) : null}
           </div>
 
@@ -441,15 +378,6 @@ const VehicleRegister = () => {
           </tbody>
         </table>
 
-        <div className="desc">
-          {/* <Controller name="desc" as={ParseTextarea} control={control} /> */}
-          <textarea
-            name="description"
-            id="description"
-            placeholder="차량에 대한 추가적인 설명을 입력해주세요."
-          />
-        </div>
-
         {/* 렌터정보 */}
         <StRenterInfoWrapper>
           <div className="infoWrapper_nickname">
@@ -501,29 +429,17 @@ const VehicleRegister = () => {
           )}
         </div>
 
-        <OwnerKakaoMap address={address} />
+        {/* <OwnerKakaoMap address={address} /> */}
         <button>제출</button>
       </form>
-    </StVehicleRegister>
+    </StVehicleModify>
   );
 };
 
-export default VehicleRegister;
+export default VehicleModify;
 
-const StVehicleRegister = styled.div`
-  /* ${() => css`
-    {error.years ? (
-      input::placeholder {
-      color: #eb3434;
-      font-style: italic;
-    }
-    ) : (
-      color: #CCCCCC;
-    )}
-  `} */
-
-  /* height: 250vh; */
-  margin-bottom: 80px;
+const StVehicleModify = styled.div`
+  height: 250vh;
   form {
     /* background-color: yellowgreen; */
     width: 845px;
@@ -588,7 +504,7 @@ const StVehicleRegister = styled.div`
     table {
       width: 100%;
       height: 150px;
-      margin-bottom: 50px;
+      margin-bottom: 80px;
       caption {
         text-align: left;
         font-weight: 600;
@@ -643,23 +559,6 @@ const StVehicleRegister = styled.div`
         }
       }
     }
-
-    .desc {
-      width: 100%;
-      /* height: 320px; */
-      /* background-color: pink; */
-      textarea {
-        width: 100%;
-        height: 320px;
-        border: 1px solid #8b8b8b;
-        border-radius: 20px;
-        padding: 28px 26px;
-        box-sizing: border-box;
-        outline: none;
-        resize: none;
-      }
-    }
-
     .location {
       position: relative;
       h2 {
@@ -691,9 +590,6 @@ const StVehicleRegister = styled.div`
         font-style: italic;
       }
     }
-  }
-  button {
-    margin-top: 30px;
   }
 `;
 const StRenterInfoWrapper = styled.div`

@@ -3,6 +3,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const memberApi = process.env.REACT_APP_MEMBER;
+
 const initialState = {
   vehicleDetailList: {},
   isLoading: false,
@@ -13,15 +15,14 @@ const initialState = {
 export const __vehicleDetail = createAsyncThunk(
   "detail/__vehicleDetail",
   async (payload, thunkAPI) => {
-    const vid = payload;
-    console.log(vid);
+    const vId = payload;
+    console.log(vId);
     try {
       const headers = {
         "Content-Type": "application/json",
       };
       const response = await axios.get(
-        "https://run.mocky.io/v3/16ad3382-8e32-4a7e-9063-de4b50f9e0b2",
-        // `/api/vehicle/${vId}`,
+        `${memberApi}/vehicle/${vId}`,
         {},
         { headers: headers }
       );

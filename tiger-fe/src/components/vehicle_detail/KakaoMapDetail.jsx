@@ -76,6 +76,7 @@ const StVehicleMapContainer = styled.div`
     font-size: 20px;
     line-height: 27px;
     margin-bottom: 24px;
+    margin-top: 48px;
   }
   h2 {
     font-weight: 700;

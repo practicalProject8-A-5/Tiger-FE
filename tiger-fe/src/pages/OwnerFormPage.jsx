@@ -11,12 +11,12 @@ const OwnerFormPage = () => {
   return (
     <>
       <Header />
-      <NavBar />
+      {/* <NavBar /> */}
       <GlobalLayout>
-        {/* <VehicleRegister /> */}
-        {/* <PaymentInfo /> */}
+        <VehicleRegister />
+        <PaymentInfo />
         {/* <Calender /> */}
-        <TestCalender />
+        {/* <TestCalender /> */}
       </GlobalLayout>
     </>
   );

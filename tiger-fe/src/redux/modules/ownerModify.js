@@ -1,8 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const memberApi = process.env.REACT_APP_MEMBER;
-
 const initialState = {
   ownerRegisterInfo: {},
   isLoading: false,
@@ -15,40 +13,43 @@ export const __ownerRegisterInfo = createAsyncThunk(
   "ownerRegister/__ownerRegisterInfo",
   async (payload, thunkAPI) => {
     const {
-      // vbrand,
-      // price,
-      // description,
-      // location,
-      // formData,
-      // vname,
-      // type,
-      // years,
-      // fuelType,
-      // passengers,
-      // transmission,
-      // fuelEfficiency,
-      formData,
+      brand,
+      price,
+      description,
+      location,
+      files,
+      vname,
+      type,
+      years,
+      fuelType,
+      passengers,
+      transmission,
+      fuelEfficiency,
     } = payload;
-    console.log(payload.formData);
-    const userToken = localStorage.getItem("userToken");
-    const refreshToken = localStorage.getItem("refreshToken");
     try {
+      // console.log(brand);
+      // console.log(price);
+      // console.log(description);
+      // console.log(location);
+      // console.log(files);
+      // console.log(vname);
+      // console.log(type);
+      // console.log(years);
+      // console.log(fuelType);
+      // console.log(passengers);
+      // console.log(transmission);
+      // console.log(fuelEfficiency);
+
       const headers = {
-        Authorization: userToken,
-        RefreshToken: refreshToken,
-        // "Content-Type": "application/json",
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "application/json",
       };
-      const resp = await axios.post(
-        `${memberApi}/vehicle/management`,
-        // `/api/vehicle/management`,
+      const resp = await axios.put(
+        `/api/vehicle/management/{vId}`,
         // `/api/vehicle`
-
-        formData,
-
+        {},
         { headers: headers }
       );
-      console.log(resp.data);
+      // console.log(resp.data);
       return thunkAPI.fulfillWithValue(resp.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

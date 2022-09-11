@@ -1,8 +1,6 @@
 // eslint-disable-next-line
 
-import React from "react";
-import { useCallback } from "react";
-import { useState } from "react";
+import React, { useCallback, useState } from "react";
 import NavBar from "../components/owner/NavBar";
 
 import GlobalLayout from "../global/GlobalLayout";
