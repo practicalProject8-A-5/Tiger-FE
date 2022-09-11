@@ -3,11 +3,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+// const mapKey = process.env.REACT_APP_KAKAO_MAP_RESTAPI;
+
 const initialState = {
   filteredVehicleList: {},
   isLoading: false,
   success: null,
   error: null,
+  // kakaoCoords: [],
 };
 
 export const __vehicleSearchList = createAsyncThunk(
@@ -20,6 +23,7 @@ export const __vehicleSearchList = createAsyncThunk(
       typeValue,
       latitude,
       longitude,
+      locationObj,
     } = payload;
     try {
       console.log(address);
@@ -28,6 +32,7 @@ export const __vehicleSearchList = createAsyncThunk(
       console.log(typeValue);
       console.log(latitude);
       console.log(longitude);
+      console.log(locationObj);
       const headers = {
         "Content-Type": "application/json",
       };
@@ -43,6 +48,26 @@ export const __vehicleSearchList = createAsyncThunk(
     }
   }
 );
+
+// export const __kakaoCoords = createAsyncThunk(
+//   "search/__kakaoCoords",
+//   async (payload, thunkAPI) => {
+//     const vehicleDetailsLocation = payload;
+//     try {
+//       const headers = {
+//         Authorization: `KakaoAK ${mapKey}`,
+//       };
+//       const response = await axios.get(
+//         `https://dapi.kakao.com/v2/local/search/address.json?query=${vehicleDetailsLocation}`,
+//         { headers: headers }
+//       );
+//       console.log(response.data);
+//       return thunkAPI.fulfillWithValue(response.data.documents);
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error);
+//     }
+//   }
+// );
 
 export const searchSlice = createSlice({
   name: "searchSlice",
@@ -61,6 +86,18 @@ export const searchSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    // [__kakaoCoords.pending]: (state, action) => {
+    //   state.isLoading = true;
+    // },
+    // [__kakaoCoords.fulfilled]: (state, action) => {
+    //   state.isLoading = false;
+    //   state.kakaoCoords = action.payload;
+    //   // console.log(action.payload);
+    // },
+    // [__kakaoCoords.rejected]: (state, action) => {
+    //   state.isLoading = false;
+    //   state.error = action.payload;
+    // },
   },
 });
 

@@ -1,5 +1,3 @@
-/*global kakao*/
-
 // eslint-disable-next-line
 
 import React, { useState, useEffect } from "react";
@@ -24,6 +22,8 @@ import vehicle from "../assets/vehicle.png";
 // import DatePanel from "react-multi-date-picker/plugins/date_panel";
 
 const Search = () => {
+  const mapKey = process.env.REACT_APP_KAKAO_MAP_RESTAPI;
+
   const dispatch = useDispatch();
 
   // 추후 서버 열리면 밑에 div 에 정보들을 뿌릴 예정
@@ -52,20 +52,48 @@ const Search = () => {
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
     setAddress(fullAddress);
+    getCoords(fullAddress);
     console.log(address);
   };
 
-  const [latitude, setLatitude] = useState("");
-  const [longitude, setLongitude] = useState("");
-  const geocoder = new kakao.maps.services.Geocoder();
-  geocoder.addressSearch(address, function (result, status) {
-    if (status === kakao.maps.services.Status.OK) {
-      const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-      console.log(coords);
-      setLatitude(coords.Ma);
-      setLongitude(coords.La);
-    }
-  });
+  // const [latitude, setLatitude] = useState("");
+  // const [longitude, setLongitude] = useState("");
+
+  const [locationObj, setLocationObj] = useState({});
+
+  const getCoords = (address) => {
+    const headers = {
+      Authorization: `KakaoAK ${mapKey}`,
+    };
+    axios
+      .get(
+        `https://dapi.kakao.com/v2/local/search/address.json?query=${address}`,
+        {
+          headers: headers,
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        const location = res.data.documents[0];
+        setLocationObj({
+          locationX: location.address.x,
+          locationY: location.address.y,
+        });
+      });
+  };
+
+  console.log(locationObj);
+
+  // 검색한 주소로 위도경도 구하기
+  // const geocoder = new kakao.maps.services.Geocoder();
+  // geocoder.addressSearch(address, function (result, status) {
+  //   if (status === kakao.maps.services.Status.OK) {
+  //     const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+  //     console.log(coords);
+  //     setLatitude(coords.Ma);
+  //     setLongitude(coords.La);
+  //   }
+  // });
 
   const postCodeStyle = {
     display: "block",
@@ -103,12 +131,16 @@ const Search = () => {
         newStartDate,
         newEndDate,
         typeValue,
-        latitude,
-        longitude,
+        locationObj,
+        // 위도경도
+        // latitude,
+        // longitude,
       })
     );
     setAddress("");
     setTypeValue("");
+    // setLatitude("");
+    // setLongitude("");
   };
 
   // ----------------------------------------------------------------
