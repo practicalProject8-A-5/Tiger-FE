@@ -84,7 +84,10 @@ const Search = () => {
       });
   };
 
-  console.log(locationObj);
+  const locationX = locationObj.locationX;
+  const locationY = locationObj.locationY;
+
+  console.log(locationX, locationY);
 
   // 검색한 주소로 위도경도 구하기
   // const geocoder = new kakao.maps.services.Geocoder();
@@ -142,10 +145,8 @@ const Search = () => {
           newStartDate,
           newEndDate,
           typeValue,
-          locationObj,
-          // 위도경도
-          // latitude,
-          // longitude,
+          locationX,
+          locationY,
         })
       );
       navigate("/vlist");

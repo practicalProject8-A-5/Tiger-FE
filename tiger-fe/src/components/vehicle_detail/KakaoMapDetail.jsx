@@ -14,8 +14,8 @@ const KakaoMapDetail = () => {
   console.log(vehicleDetailsLocation);
 
   const [locationObj, setLocationObj] = useState({
-    locationX: 100,
-    locationY: 100,
+    locationX: 0,
+    locationY: 0,
   });
 
   const getCoords = async (vehicleDetailsLocation) => {

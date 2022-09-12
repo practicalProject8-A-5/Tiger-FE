@@ -21,18 +21,16 @@ export const __vehicleSearchList = createAsyncThunk(
       newStartDate,
       newEndDate,
       typeValue,
-      latitude,
-      longitude,
-      locationObj,
+      locationX,
+      locationY,
     } = payload;
     try {
       console.log(address);
       console.log(newStartDate);
       console.log(newEndDate);
       console.log(typeValue);
-      console.log(latitude);
-      console.log(longitude);
-      console.log(locationObj);
+      console.log(locationX);
+      console.log(locationY);
       const headers = {
         "Content-Type": "application/json",
       };
