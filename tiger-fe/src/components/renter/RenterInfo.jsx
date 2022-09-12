@@ -34,7 +34,7 @@ const RenterInfo = () => {
         <div className="profileValue">{memberInfo.name}</div>
 
         <div className="profileTitle">렌터 전화번호</div>
-        <div className="profileValue">{memberInfo.phone}</div>
+        <div className="profileValue">{memberInfo.phone || memberInfo.tel}</div>
 
         <div className="profileTitle">렌터 연락 메일 주소</div>
         <div className="profileValue">{memberInfo.email}</div>

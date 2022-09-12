@@ -3,7 +3,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const memberApi = process.env.REACT_APP_MEMBER;
+const serverApi = process.env.REACT_APP_SERVER;
 const kakaoApi = process.env.REACT_APP_KAKAO_LOGIN_API;
 
 // initialize userToken from local storage
@@ -37,7 +37,7 @@ export const __registerUser = createAsyncThunk(
     try {
       // make request to backend
       const response = await axios.post(
-        `${memberApi}/member/register`,
+        `${serverApi}/member/register`,
         { email, password, passwordConfirm, name },
         config
       );
@@ -56,7 +56,7 @@ export const __userLogin = createAsyncThunk(
   async ({ email, password }, thunkAPI) => {
     try {
       const response = await axios.post(
-        `${memberApi}/member/login`,
+        `${serverApi}/member/login`,
         { email, password },
         config
       );
