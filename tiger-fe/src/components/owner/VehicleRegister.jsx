@@ -83,6 +83,8 @@ const VehicleRegister = () => {
   //location
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [address, setAddress] = useState("");
+  const [locationObj, setLocationObj] = useState({});
+  console.log(locationObj);
 
   const onChangeHandler = (e) => {
     setAddress(e.target.value);
@@ -128,6 +130,7 @@ const VehicleRegister = () => {
     fuelEfficiency,
     description,
     location,
+    // locationObj,
   }) => {
     //이미지 업로드
     // const imgFormData = new FormData();
@@ -142,8 +145,12 @@ const VehicleRegister = () => {
     formData.append("type", watch("cartype").value);
     formData.append("description", description);
     formData.append("location", location);
+    formData.append("locationX", locationObj.locationX);
+    formData.append("locationY", locationObj.locationY);
     // formData.append("imageList", fileList[0]);
-    // console.log(files);
+    // console.log(locationObj.locationX);
+    // console.log(locationObj.locationY);
+    // console.log(locationObj);
     for (let i = 0; i < fileList.length; i++) {
       // formData.append("imageList", imgfile[i]);
       // let fileUrl = new File(blob[i], "image.jpg");
@@ -528,7 +535,11 @@ const VehicleRegister = () => {
           )}
         </div>
 
-        <OwnerKakaoMap address={address} />
+        <OwnerKakaoMap
+          address={address}
+          locationObj={locationObj}
+          setLocationObj={setLocationObj}
+        />
         <button>제출</button>
       </form>
     </StVehicleRegister>

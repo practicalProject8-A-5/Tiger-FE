@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-const OwnerKakaoMap = ({ address }) => {
+const OwnerKakaoMap = ({ address, locationObj, setLocationObj }) => {
   const mapKey = process.env.REACT_APP_REST_API_KEY;
 
   // console.log(isEditLocation);
@@ -53,7 +53,7 @@ const OwnerKakaoMap = ({ address }) => {
 
   // 익현 --------------------------------------------------
 
-  const [locationObj, setLocationObj] = useState({});
+  // const [locationObj, setLocationObj] = useState({});
 
   const getCoords = (locationOnMap) => {
     const headers = {
@@ -123,7 +123,7 @@ const OwnerKakaoMap = ({ address }) => {
   const locationX = locationObj.locationX;
   const locationY = locationObj.locationY;
   // 위도경도 값
-  console.log(locationX, locationY);
+  // console.log(locationX, locationY);
 
   // --------------익현 끝 --------------------------------------
 
