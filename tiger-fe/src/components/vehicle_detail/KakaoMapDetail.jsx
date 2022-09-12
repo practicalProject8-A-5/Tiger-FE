@@ -14,8 +14,8 @@ const KakaoMapDetail = () => {
   console.log(vehicleDetailsLocation);
 
   const [locationObj, setLocationObj] = useState({
-    locationX: 0,
-    locationY: 0,
+    locationX: 100,
+    locationY: 100,
   });
 
   const getCoords = async (vehicleDetailsLocation) => {
@@ -60,10 +60,13 @@ const KakaoMapDetail = () => {
     // 지도를 생성합니다
     var map = new kakao.maps.Map(mapContainer, mapOption);
 
-    const resultX = locationObj.locationX;
-    const resultY = locationObj.locationY;
+    // const resultX = locationObj.locationX;
+    // const resultY = locationObj.locationY;
 
-    var coords = new kakao.maps.LatLng(resultY, resultX);
+    var coords = new kakao.maps.LatLng(
+      locationObj.locationY,
+      locationObj.locationX
+    );
 
     var marker = new kakao.maps.Marker({
       map: map,

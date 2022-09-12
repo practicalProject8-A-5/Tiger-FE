@@ -24,7 +24,7 @@ const RenterNavbar = ({ category, onSelect }) => {
       text: "렌트내역",
     },
     {
-      name: "CANCLE",
+      name: "CANCEL",
       text: "환불",
     },
   ];

@@ -1,16 +1,20 @@
 import React from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const RenterItem = ({ list }) => {
+  const navigate = useNavigate();
+
   const renterItemLists = useSelector(
     (state) => state.renterItemListSlice.renterItemLists
   );
   console.log(renterItemLists);
 
-  const onClick = () => {
-    console.log("눌림");
-  };
+  // const onClick = () => {
+  //   console.log("눌림");
+  //   navigate(`/owner/${vId}/modi`);
+  // };
 
   return (
     <div>
@@ -21,7 +25,11 @@ const RenterItem = ({ list }) => {
           renterItemLists.output &&
           renterItemLists.output.map((list, i) => {
             return (
-              <StRenterItem onClick={onClick} key={i}>
+              <StRenterItem
+                onClick={() => {
+                  navigate(`/vdetail/${list.vid}`);
+                }}
+                key={i}>
                 <img src={list.thumbnail} alt="차량" />
                 <div className="carInfo">
                   <p>{list.vname}</p>
