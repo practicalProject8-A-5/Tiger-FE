@@ -30,11 +30,11 @@ const RenterNavbar = ({ category, onSelect }) => {
     },
   ];
 
-  useEffect(() => {
-    if (category === "RESERVED") {
-      dispatch(__getRenterItemList("RESERVED"));
-    }
-  }, [dispatch]);
+  // useEffect(() => {
+  //   if (category === "RESERVED") {
+  //     dispatch(__getRenterItemList("RESERVED"));
+  //   }
+  // }, [dispatch]);
 
   return (
     <>
