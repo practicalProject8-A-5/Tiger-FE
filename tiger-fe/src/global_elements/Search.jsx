@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, forwardRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -120,11 +120,15 @@ const Search = () => {
   console.log(newStartDate);
   console.log(newEndDate);
 
-  const ExampleCustomInput = ({ value, onClick }) => (
-    <button className="example-custom-input" onClick={onClick}>
+  const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
+    <button
+      className="example-custom-input"
+      // value={value}
+      onClick={onClick}
+      ref={ref}>
       {value}
     </button>
-  );
+  ));
 
   //search vehicle type
   const [typeValue, setTypeValue] = useState();
