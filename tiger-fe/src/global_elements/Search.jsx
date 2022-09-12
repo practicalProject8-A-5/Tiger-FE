@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import DaumPostcode from "react-daum-postcode";
@@ -25,6 +26,7 @@ const Search = () => {
   const mapKey = process.env.REACT_APP_KAKAO_MAP_RESTAPI;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // 추후 서버 열리면 밑에 div 에 정보들을 뿌릴 예정
   // const getVehicleList = useSelector((state) => state.searchSlice.filteredVehicleList);
@@ -137,6 +139,7 @@ const Search = () => {
         // longitude,
       })
     );
+    navigate("/vlist");
     setAddress("");
     setTypeValue("");
     // setLatitude("");

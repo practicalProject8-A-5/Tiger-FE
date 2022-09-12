@@ -13,14 +13,14 @@ const RenterPage = () => {
   const onSelect = useCallback((category) => setCategory(category), []);
 
   return (
-    <div>
+    <>
       <Header />
       <RenterNavbar category={category} onSelect={onSelect} />
       <GlobalLayout>
         <RenterInfo />
         <RenterItem category={category} onSelect={onSelect} />
       </GlobalLayout>
-    </div>
+    </>
   );
 };
 

@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import MainItem from "./MainItem";
-// import { __incomeItemList } from "../../redux/modules/incomeItemListSlice";
 import { __incomeItemList } from "../../redux/modules/incomeItemListSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";

@@ -1,8 +1,8 @@
 // eslint-disable-next-line
 
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
-import img from "../../assets/img_1.jpg";
 
 import "swiper/scss";
 import "swiper/scss/navigation";
@@ -10,50 +10,58 @@ import "swiper/scss/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
 
-const MainItem = ({ list }) => {
-  // console.log(list.imageList);
-
-  const MainItemListImage = list.imageList;
+const FilteredVehicleList = () => {
+  const filteredVehicle = useSelector(
+    (state) => state.searchSlice.filteredVehicleList.ouput
+  );
+  console.log(filteredVehicle);
 
   return (
     <StItem>
-      {/* <img src={list.imageList[0]} alt="car" /> */}
-      <StSwiper
-        pagination={{
-          type: "fraction",
-          clickable: true,
-        }}
-        navigation={true}
-        loop={true}
-        modules={[Pagination, Navigation]}
-        className="mySwiper">
-        {MainItemListImage.map((image, i) => {
+      {filteredVehicle &&
+        filteredVehicle.map((list, index) => {
           return (
-            <SwiperSlide className="img" key={i}>
-              <img src={image} alt="imageSlide" />
-            </SwiperSlide>
+            <div key={index}>
+              <StSwiper
+                pagination={{
+                  type: "fraction",
+                  clickable: true,
+                }}
+                navigation={true}
+                loop={true}
+                modules={[Pagination, Navigation]}
+                className="mySwiper">
+                {list.imageList.map((image, i) => {
+                  return (
+                    <SwiperSlide className="img" key={i}>
+                      <img src={image} alt="imageSlide" />
+                    </SwiperSlide>
+                  );
+                })}
+              </StSwiper>
+              <span className="heart"></span>
+              <div className="desc__box">
+                <div className="desc__top">
+                  <div className="desc__title">{list.location}</div>
+                  <div className="desc__star">4.12</div>
+                </div>
+                <p>
+                  {list.vname} / {list.fuelType}
+                </p>
+                <p className="dates">
+                  {list.startDate} ~ {list.endDate}
+                </p>
+                <p className="km">11581km</p>
+                <div className="desc__bottom">
+                  ₩{list.price} <span>/24시간</span>
+                </div>
+              </div>
+            </div>
           );
         })}
-      </StSwiper>
-      <span className="heart"></span>
-      <div className="desc__box">
-        <div className="desc__top">
-          <div className="desc__title">{list.location}</div>
-          <div className="desc__star">4.12</div>
-        </div>
-        <p>
-          {list.vname} / {list.fuelType}
-        </p>
-        <p className="km">11581km</p>
-        <div className="desc__bottom">
-          ₩{list.price} <span>/24시간</span>
-        </div>
-      </div>
     </StItem>
   );
 };
-
-export default MainItem;
 
 const StItem = styled.div`
   width: 318px;
@@ -93,6 +101,9 @@ const StItem = styled.div`
       color: #777777;
     }
     .km {
+      margin: 5px 0 7px 0;
+    }
+    .dates {
       margin: 5px 0 7px 0;
     }
     .desc__bottom {
@@ -191,3 +202,5 @@ const StSwiper = styled(Swiper)`
     border-radius: 20px;
   }
 `;
+
+export default FilteredVehicleList;
