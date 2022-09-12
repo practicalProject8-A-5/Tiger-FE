@@ -2,22 +2,20 @@
 
 import React from "react";
 import styled from "styled-components";
-import img from "../../assets/img_1.jpg";
 
 import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
+import { useNavigate } from "react-router-dom";
 
 const MainItem = ({ list }) => {
-  // console.log(list.imageList);
-
   const MainItemListImage = list.imageList;
+  const navigate = useNavigate();
 
   return (
     <StItem>
-      {/* <img src={list.imageList[0]} alt="car" /> */}
       <StSwiper
         pagination={{
           type: "fraction",
@@ -36,17 +34,23 @@ const MainItem = ({ list }) => {
         })}
       </StSwiper>
       <span className="heart"></span>
-      <div className="desc__box">
+      <div
+        className="desc__box"
+        onClick={() => {
+          navigate(`/vdetail/${list.vid}`);
+        }}>
         <div className="desc__top">
           <div className="desc__title">{list.location}</div>
           <div className="desc__star">4.12</div>
         </div>
         <p>
-          {list.vname} / {list.fuelType}
+          {list.years} {list.vbrand} {list.vname}
         </p>
-        <p className="km">11581km</p>
+        <p className="km">
+          {list.fuelType} / {list.transmission}
+        </p>
         <div className="desc__bottom">
-          ₩{list.price} <span>/24시간</span>
+          ₩{list.price} <span>/1일</span>
         </div>
       </div>
     </StItem>

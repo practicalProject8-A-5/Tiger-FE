@@ -1,5 +1,9 @@
+// eslint-disable-next-line
+
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+
+const memberApi = process.env.REACT_APP_SERVER;
 
 const initialState = {
   incomeItemList: {},
@@ -17,9 +21,8 @@ export const __incomeItemList = createAsyncThunk(
         "Content-Type": "application/json",
       };
       const resp = await axios.get(
-        "https://run.mocky.io/v3/8b32e969-572a-4c46-a8c7-1086fde28c89",
-        // `/api/vehicle`
-        {},
+        `${memberApi}/vehicle`,
+        // {},
         { headers: headers }
       );
       // console.log(resp.data);
