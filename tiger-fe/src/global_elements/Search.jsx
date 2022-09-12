@@ -126,22 +126,35 @@ const Search = () => {
 
   // submit handler
   const onSubmitHandler = (e) => {
-    e.preventDefault();
-    dispatch(
-      __vehicleSearchList({
-        address,
-        newStartDate,
-        newEndDate,
-        typeValue,
-        locationObj,
-        // 위도경도
-        // latitude,
-        // longitude,
-      })
-    );
-    navigate("/vlist");
-    setAddress("");
-    setTypeValue("");
+    if (
+      startDate === "" ||
+      endDate === "" ||
+      address === "" ||
+      typeValue === ""
+    ) {
+      alert("검색을 완료 해주세요");
+    } else {
+      e.preventDefault();
+
+      dispatch(
+        __vehicleSearchList({
+          address,
+          newStartDate,
+          newEndDate,
+          typeValue,
+          locationObj,
+          // 위도경도
+          // latitude,
+          // longitude,
+        })
+      );
+      navigate("/vlist");
+      setAddress("");
+      setTypeValue("");
+    }
+
+    // setAddress("");
+    // setTypeValue("");
     // setLatitude("");
     // setLongitude("");
   };
