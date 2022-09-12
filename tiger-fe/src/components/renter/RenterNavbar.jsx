@@ -1,7 +1,6 @@
 // eslint-disable-next-line
 
 import React from "react";
-import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import styled, { css } from "styled-components";
@@ -29,12 +28,6 @@ const RenterNavbar = ({ category, onSelect }) => {
       text: "환불",
     },
   ];
-
-  // useEffect(() => {
-  //   if (category === "RESERVED") {
-  //     dispatch(__getRenterItemList("RESERVED"));
-  //   }
-  // }, [dispatch]);
 
   return (
     <>
