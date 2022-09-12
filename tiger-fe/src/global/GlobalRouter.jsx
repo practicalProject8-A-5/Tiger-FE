@@ -11,12 +11,13 @@ import HomePage from "../pages/HomePage";
 import OwnerFormPage from "../pages/OwnerFormPage";
 import OwnerItemList from "../components/owner/OwnerItemList";
 import KakaoLogin from "../components/member/KakaoLogin";
+import OwnerModifyPage from "../pages/OwnerModifyPage";
 // import isLoggedin from "../components/member/isLoggedin";
 import { useSelector } from "react-redux";
 
 const GlobalRouter = () => {
   const userInfo = useSelector((state) => state.memberSlice.userInfo);
-  console.log(userInfo);
+  // console.log(userInfo);
   return (
     <Routes>
       <Route exact path="/" element={<RentMainPage />} />
@@ -26,6 +27,9 @@ const GlobalRouter = () => {
         <Route path="/owner" element={<OwnerPage />} />
       )}
       <Route path="/owner/:category" element={<OwnerItemList />} />
+      <Route path="/ownerregisterform" element={<OwnerFormPage />} />
+      <Route path="/owner/:id/modi" element={<OwnerModifyPage />} />
+
       <Route path="/intro" element={<HomePage />} />
       {!userInfo.name ? (
         <Route path="/renter" element={<Navigate to="/" />} />
@@ -34,7 +38,6 @@ const GlobalRouter = () => {
       )}
       <Route path="/renter" element={<RenterPage />} />
       <Route path="/vdetail/:id" element={<VehicleDetailPage />} />
-      <Route path="/ownerregisterform" element={<OwnerFormPage />} />
       <Route path="/vlist" element={<VehicleListPage />} />
       <Route path="/user/kakao/callback" element={<KakaoLogin />} />
     </Routes>

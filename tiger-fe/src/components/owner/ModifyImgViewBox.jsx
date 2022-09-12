@@ -8,15 +8,26 @@ import "swiper/scss/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
 
-const ImgViewBox = ({ files }) => {
+const ModifyImgViewBox = ({ files, imageList }) => {
   //트러블 슈팅 하나짜리 이후에 여러개 다시 수정하면 버튼이 안눌림
+  // console.log(imageList);
+  // console.log(files.length);
+  // console.log(files);
 
-  console.log("files :", files);
   return (
-    <StImgViewBox>
+    <StModifyImgViewBox>
       {files.length === 1 ? (
-        <StRegisterSwiper>
-          {files.map((image, i) => {
+        <StRegisterSwiper
+        // pagination={{
+        //   type: "fraction",
+        //   clickable: true,
+        // }}
+        // navigation={true}
+        // loop={true}
+        // modules={[Pagination, Navigation]}
+        // className="mySwiper"
+        >
+          {imageList.map((image, i) => {
             return (
               <SwiperSlide className="img" key={i}>
                 <img src={image} alt="imageSlide" />
@@ -35,7 +46,7 @@ const ImgViewBox = ({ files }) => {
           modules={[Pagination, Navigation]}
           className="mySwiper"
         >
-          {files.map((image, i) => {
+          {imageList.map((image, i) => {
             return (
               <SwiperSlide className="img" key={i}>
                 <img src={image} alt="imageSlide" />
@@ -44,12 +55,12 @@ const ImgViewBox = ({ files }) => {
           })}
         </StRegisterSwiper>
       )}
-    </StImgViewBox>
+    </StModifyImgViewBox>
   );
 };
 
-export default ImgViewBox;
-const StImgViewBox = styled.div`
+export default ModifyImgViewBox;
+const StModifyImgViewBox = styled.div`
   margin-top: 56px;
   img {
     width: 844px;

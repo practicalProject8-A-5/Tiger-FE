@@ -43,7 +43,7 @@ const Header = ({ ownerMode }) => {
   // 로그인 여부
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.memberSlice.userInfo);
-  console.log(userInfo);
+  // console.log(userInfo);
 
   // 로그아웃 delete 호출
   const __userLogout = async () => {
@@ -91,12 +91,14 @@ const Header = ({ ownerMode }) => {
             ) : (
               <Link
                 to="/renter"
-                style={{ textDecoration: "none", display: "none" }}>
+                style={{ textDecoration: "none", display: "none" }}
+              >
                 <div className="header__mypage">마이페이지</div>
               </Link>
             )}
           </div>
           <div className="header__menu__R">
+
             {userInfo.name ? (
               <div className="header__switch">
                 <span className="text">오너모드로 전환</span>

@@ -20,12 +20,6 @@ const OwnerInfo = () => {
             </div>
             <div className="userEmail">12346789@gmail.com</div>
           </div>
-          <div className="createBtn" onClick={toForm}>
-            <div className="createBtn__text">
-              <span>차 량</span>
-              <span>등 록</span>
-            </div>
-          </div>
         </div>
 
         <div className="profileTitle">오너 네임</div>
@@ -36,6 +30,9 @@ const OwnerInfo = () => {
 
         <div className="profileTitle">오너 연락 메일 주소</div>
         <div className="profileValue">123456789@gmail.com</div>
+        <div className="createBtn" onClick={toForm}>
+          차량 등록
+        </div>
       </div>
     </StOwnerInfo>
   );
@@ -46,9 +43,10 @@ export default OwnerInfo;
 const StOwnerInfo = styled.div`
   position: fixed;
   /* z-index: 9; */
-  top: 261px;
+  top: 130px;
   right: 259px;
   width: 520px;
+  /* overflow: hidden; */
   height: 550px;
   display: flex;
   justify-content: center;
@@ -107,27 +105,6 @@ const StOwnerInfo = styled.div`
           color: #8b8b8b;
         }
       }
-      .createBtn {
-        width: 80px;
-        height: 60px;
-        position: absolute;
-        top: 0;
-        right: 0;
-        font-weight: 600;
-        font-size: 16px;
-        padding: 10px 22px;
-        box-sizing: border-box;
-        background: #d9d9d9;
-        border-radius: 16px;
-        cursor: pointer;
-        .createBtn__text {
-          top: 50%;
-          bottom: 50%;
-          left: 50%;
-          right: 50%;
-          line-height: 20px;
-        }
-      }
     }
     .profileTitle {
       width: 100%;
@@ -141,10 +118,26 @@ const StOwnerInfo = styled.div`
       width: 100%;
       height: 34px;
       /* background-color: royalblue; */
-      margin-bottom: 51px;
+      margin-bottom: 33px;
       border-bottom: 1px solid #000;
       line-height: 36px;
       font-weight: 600;
+    }
+    .createBtn {
+      width: 380px;
+      height: 60px;
+      border: 2px solid #ff881b;
+      border-radius: 12px;
+      text-align: center;
+      line-height: 60px;
+      color: #ff881b;
+      /* padding: 10px 22px; */
+      box-sizing: border-box;
+      /* background: #d9d9d9; */
+      border-radius: 16px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 20px;
     }
   }
 `;
