@@ -120,6 +120,12 @@ const Search = () => {
   console.log(newStartDate);
   console.log(newEndDate);
 
+  const ExampleCustomInput = ({ value, onClick }) => (
+    <button className="example-custom-input" onClick={onClick}>
+      {value}
+    </button>
+  );
+
   //search vehicle type
   const [typeValue, setTypeValue] = useState();
   const handleChange = (e) => {
@@ -152,6 +158,7 @@ const Search = () => {
       navigate("/vlist");
       setAddress("");
       setTypeValue("");
+      setLocationObj({});
     }
 
     // setAddress("");
@@ -232,8 +239,10 @@ const Search = () => {
               minDate={new Date()}
               shouldCloseOnSelect={true}
               placeholder="언제부터"
+              customInput={<ExampleCustomInput />}
             />
           </StCalendarWrapper>
+          <div className="dateConnection">~</div>
           <StCalendarWrapper>
             <StNewDatePicker
               selected={endDate}
@@ -246,6 +255,7 @@ const Search = () => {
               dateFormat="yyyy-MM-dd"
               shouldCloseOnSelect={true}
               placeholder="언제까지"
+              customInput={<ExampleCustomInput />}
             />
           </StCalendarWrapper>
         </StCalendarContainer>
@@ -277,7 +287,7 @@ const StSearch = styled.div`
     0px 10px 12px rgba(0, 0, 0, 0.0456112),
     0px 12.5216px 10px rgba(0, 0, 0, 0.02);
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   /* background-color: skyblue; */
   .wrap {
     width: 100%;
@@ -309,14 +319,7 @@ const StSearchLocationContainer = styled.div`
 const StCalendarContainer = styled.div`
   display: flex;
   justify-content: center;
-`;
-
-const StCalendarWrapper = styled.div`
-  z-index: 99;
-`;
-
-const StNewDatePicker = styled(DatePicker)`
-  width: 250px;
+  width: 374px;
   height: 42px;
   box-sizing: border-box;
   font-size: 14px;
@@ -325,13 +328,39 @@ const StNewDatePicker = styled(DatePicker)`
   background: #f2f2f2;
   border-radius: 12px;
   padding: 5px;
-  background-image: url(${clock});
-  background-repeat: no-repeat;
-  background-size: 23px;
-  background-position: 9px 8px;
-  text-indent: 34px;
   border: 1px solid;
+  .dateConnection {
+    height: 42px;
+    box-sizing: border-box;
+    font-size: 18px;
+    line-height: 42px;
+    top: -7px;
+    position: relative;
+    z-index: 100;
+    margin-right: 16px;
+    margin-left: 16px;
+  }
 `;
+
+const StCalendarWrapper = styled.div`
+  z-index: 99;
+  position: relative;
+  .example-custom-input {
+    box-sizing: border-box;
+    font-size: 14px;
+    cursor: pointer;
+    background: #f2f2f2;
+    padding: 7px;
+    background-image: url(${clock});
+    background-repeat: no-repeat;
+    background-size: 22px;
+    background-position: 1px 4px;
+    text-indent: 34px;
+    border: 0px;
+  }
+`;
+
+const StNewDatePicker = styled(DatePicker)``;
 
 const StVehicleTypeContainer = styled.div`
   /* margin: 25px; */
