@@ -23,7 +23,7 @@ const Header = ({ ownerMode }) => {
 
   const ownerToggle = useMatch("/*");
   // const ownerToggle = useMatch("/");
-  console.log(ownerToggle);
+  // console.log(ownerToggle);
 
   const onClick = () => {
     if (ownerToggle !== null) {
@@ -98,7 +98,6 @@ const Header = ({ ownerMode }) => {
             )}
           </div>
           <div className="header__menu__R">
-
             {userInfo.name ? (
               <div className="header__switch">
                 <span className="text">오너모드로 전환</span>
@@ -110,7 +109,8 @@ const Header = ({ ownerMode }) => {
                 ) : (
                   <label
                     className="switch"
-                    style={{ backgroundColor: "#ff881b" }}>
+                    style={{ backgroundColor: "#ff881b" }}
+                  >
                     <input id="switch" type="checkbox" onClick={onClick} />
                     <span className="slider"></span>
                   </label>
@@ -127,7 +127,8 @@ const Header = ({ ownerMode }) => {
                 ) : (
                   <label
                     className="switch"
-                    style={{ backgroundColor: "#ff881b" }}>
+                    style={{ backgroundColor: "#ff881b" }}
+                  >
                     <input id="switch" type="checkbox" onClick={onClick} />
                     <span className="slider"></span>
                   </label>
