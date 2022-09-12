@@ -1,19 +1,57 @@
 /*global kakao*/
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-
 import styled from "styled-components";
+import axios from "axios";
 
 const KakaoMapDetail = () => {
+  const mapKey = process.env.REACT_APP_KAKAO_MAP_RESTAPI;
+
   const vehicleDetailsLocation = useSelector(
     (state) => state.vehicleDetailSlice.vehicleDetailList.location
   );
-
   console.log(vehicleDetailsLocation);
-  // (9~13) 리팩토링
 
-  useEffect(() => {
+  const [locationObj, setLocationObj] = useState({
+    locationX: 0,
+    locationY: 0,
+  });
+
+  const getCoords = async (vehicleDetailsLocation) => {
+    const headers = {
+      Authorization: `KakaoAK ${mapKey}`,
+    };
+    const response = await axios.get(
+      `https://dapi.kakao.com/v2/local/search/address.json?query=${vehicleDetailsLocation}`,
+      {
+        headers: headers,
+      }
+    );
+    console.log(response);
+    setLocationObj({
+      ...locationObj,
+      locationX: response.data.documents[0].x,
+      locationY: response.data.documents[0].y,
+    });
+    // return response.data.documents[0];
+
+    // .then((res) => {
+    //   console.log(res);
+    //   const location = res.data.documents[0];
+    //   console.log(location);
+    //   // setLocationObj({
+    //   //   ...locationObj,
+    //   //   locationX: res.data.documents[0].x,
+    //   //   locationY: res.data.documents[0].y,
+    //   // });
+    // });
+  };
+  // (function () {
+  //   getCoords(vehicleDetailsLocation);
+  // })();
+
+  const createMap = () => {
     const mapContainer = document.getElementById("map");
     const mapOption = {
       center: new kakao.maps.LatLng(37.365264512305174, 127.10676860117488),
@@ -22,34 +60,39 @@ const KakaoMapDetail = () => {
     // 지도를 생성합니다
     var map = new kakao.maps.Map(mapContainer, mapOption);
 
-    // 주소-좌표 변환 객체를 생성합니다
-    var geocoder = new kakao.maps.services.Geocoder();
+    const resultX = locationObj.locationX;
+    const resultY = locationObj.locationY;
 
-    // 주소로 좌표를 검색합니다
-    // 이거 채운이가 필요
-    geocoder.addressSearch(vehicleDetailsLocation, function (result, status) {
-      // 정상적으로 검색이 완료됐으면
-      if (status === kakao.maps.services.Status.OK) {
-        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-        console.log(coords);
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new kakao.maps.Marker({
-          map: map,
-          position: coords,
-        });
+    var coords = new kakao.maps.LatLng(resultY, resultX);
 
-        // 인포윈도우로 장소에 대한 설명을 표시합니다
-        var infowindow = new kakao.maps.InfoWindow({
-          content:
-            '<div style="width:150px;text-align:center;padding:6px 0;">차량 위치</div>',
-        });
-        infowindow.open(map, marker);
-
-        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-        map.setCenter(coords);
-      }
+    var marker = new kakao.maps.Marker({
+      map: map,
+      position: coords,
     });
+
+    // 인포윈도우로 장소에 대한 설명을 표시합니다
+    var infowindow = new kakao.maps.InfoWindow({
+      content:
+        '<div style="width:150px;text-align:center;padding:6px 0;">차량 위치</div>',
+    });
+    infowindow.open(map, marker);
+
+    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+    map.setCenter(coords);
+
+    console.log(coords);
+  };
+
+  // getCoords함수는 처음 랜더링때와 주소가 호출 됐을때 렌더링
+  // getCoords & createMap이 연결 되어 있기 때문에 서로 무한루프 발생
+  useEffect(() => {
+    if (vehicleDetailsLocation !== undefined) getCoords(vehicleDetailsLocation);
   }, [vehicleDetailsLocation]);
+
+  // 맵을 생성하는 함수를 처음 렌더링 그리고 locationObj가 변경될 때만 랜더링 하고
+  useEffect(() => {
+    createMap();
+  }, [locationObj]);
 
   return (
     <StVehicleMapContainer>
@@ -82,4 +125,4 @@ const StVehicleMapBox = styled.div`
   margin-bottom: 15px;
 `;
 
-export default KakaoMapDetail;
+export default React.memo(KakaoMapDetail);

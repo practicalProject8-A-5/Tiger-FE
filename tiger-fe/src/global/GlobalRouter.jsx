@@ -21,7 +21,11 @@ const GlobalRouter = () => {
   return (
     <Routes>
       <Route exact path="/" element={<RentMainPage />} />
-      <Route path="/owner" element={<OwnerPage />} />
+      {!userInfo.name ? (
+        <Route path="/owner" element={<Navigate to="/" />} />
+      ) : (
+        <Route path="/owner" element={<OwnerPage />} />
+      )}
       <Route path="/owner/:category" element={<OwnerItemList />} />
       <Route path="/ownerregisterform" element={<OwnerFormPage />} />
       <Route path="/owner/:id/modi" element={<OwnerModifyPage />} />

@@ -8,7 +8,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import styled from "styled-components";
 import logo from "../../assets/ta,iger_logo.png";
 
-import kakaoButton from "../../assets/kakao_login_medium_narrow.png";
+import kakaoButton from "../../assets/kakao_login_large_wide.png";
 
 const LoginForm = ({ showModal, goRegister, loginToggle }) => {
   // 카카오로그인 redirect url
@@ -44,11 +44,12 @@ const LoginForm = ({ showModal, goRegister, loginToggle }) => {
 
   return (
     <StLoginForm>
-      <div className="login__header">
+      {/* <div className="login__header">
         <AiOutlineClose className="icon" onClick={showModal} />
         <p className="login__text">로그인 또는 회원가입</p>
-      </div>
+      </div> */}
       <div className="wrap">
+        <AiOutlineClose className="icon" onClick={showModal} />
         <div className="login__logo">
           <img src={logo} alt="logo" />
         </div>
@@ -108,13 +109,13 @@ const StLoginForm = styled.div`
     position: relative;
     color: #000;
     border-bottom: 1px solid #f2f2f2;
-    .icon {
+    /* .icon {
       font-size: 22px;
       position: absolute;
       top: 28px;
       left: 30px;
       cursor: pointer;
-    }
+    } */
     .login__text {
       font-weight: 600;
       font-size: 18px;
@@ -132,6 +133,13 @@ const StLoginForm = styled.div`
     align-items: center;
     /* background-color: skyblue; */
     /* justify-content: center; */
+    .icon {
+      font-size: 22px;
+      position: absolute;
+      top: 28px;
+      left: 30px;
+      cursor: pointer;
+    }
     .login__logo {
       width: 100%;
       height: 40px;
@@ -173,6 +181,7 @@ const StLoginForm = styled.div`
       margin-bottom: 18px;
       cursor: pointer;
       box-sizing: border-box;
+      width: 100%;
     }
     .google {
       width: 100%;
@@ -196,7 +205,7 @@ const StLoginForm = styled.div`
       font-size: 18px;
       border: 2px solid #cccccc;
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 25px;
       line-height: 56px;
       color: #000;
       box-sizing: border-box;
@@ -229,7 +238,7 @@ const StLoginForm = styled.div`
         line-height: 22px;
         color: #8b8b8b;
         text-align: right;
-        margin-bottom: 52px;
+        margin-bottom: 15px;
       }
       button {
         width: 100%;
@@ -240,7 +249,7 @@ const StLoginForm = styled.div`
         font-size: 18px;
         border: none;
         cursor: pointer;
-        margin-bottom: 48px;
+        margin-bottom: 20px;
         padding: 0;
       }
     }

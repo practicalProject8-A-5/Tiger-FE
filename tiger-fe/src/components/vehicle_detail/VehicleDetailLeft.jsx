@@ -46,12 +46,12 @@ const VehicleDetailLeft = () => {
     lineHeight: "41px",
     backgroundColor: "#F2F2F2",
   };
-  const styleCol = {
-    borderTop: "2px solid #CCCCCC",
-    borderBottom: "2px solid #CCCCCC",
-    height: "41px",
-    lineHeight: "41px",
-  };
+  // const styleCol = {
+  //   borderTop: "2px solid #CCCCCC",
+  //   borderBottom: "2px solid #CCCCCC",
+  //   height: "41px",
+  //   lineHeight: "41px",
+  // };
   const styleTd = {
     width: "249px",
     height: "41px",
@@ -97,11 +97,11 @@ const VehicleDetailLeft = () => {
         <StVehicleInfoContentsWrapper>
           <h1>차량정보</h1>
           <table border="1" cellSpacing="5" cellPadding="10">
+            {/* <col style={styleCol} />
+            <col style={styleCol} />
+            <col style={styleCol} />
+            <col style={styleCol} /> */}
             <tbody>
-              <col style={styleCol} />
-              <col style={styleCol} />
-              <col style={styleCol} />
-              <col style={styleCol} />
               <tr>
                 <th style={styleTh}>연식</th>
                 <td style={styleTd}>{vehicleDetails.years}</td>

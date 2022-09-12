@@ -37,10 +37,10 @@ const StLoginModal = styled.div`
   position: absolute;
   top: 57%;
   right: 0;
-  transform: translate(-90%, -50%);
+  transform: translate(-90%, -59%);
   z-index: 100;
   width: 688px;
-  height: 840px;
+  height: 722px;
   background-color: #fff;
   border-radius: 16px;
   border: 1px solid #eee;

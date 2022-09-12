@@ -1,9 +1,8 @@
-/*global kakao*/
-
 // eslint-disable-next-line
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, forwardRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import DaumPostcode from "react-daum-postcode";
@@ -24,7 +23,10 @@ import vehicle from "../assets/vehicle.png";
 // import DatePanel from "react-multi-date-picker/plugins/date_panel";
 
 const Search = () => {
+  const mapKey = process.env.REACT_APP_KAKAO_MAP_RESTAPI;
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // 추후 서버 열리면 밑에 div 에 정보들을 뿌릴 예정
   // const getVehicleList = useSelector((state) => state.searchSlice.filteredVehicleList);
@@ -52,20 +54,51 @@ const Search = () => {
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
     setAddress(fullAddress);
+    getCoords(fullAddress);
     console.log(address);
   };
 
-  const [latitude, setLatitude] = useState("");
-  const [longitude, setLongitude] = useState("");
-  const geocoder = new kakao.maps.services.Geocoder();
-  geocoder.addressSearch(address, function (result, status) {
-    if (status === kakao.maps.services.Status.OK) {
-      const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-      console.log(coords);
-      setLatitude(coords.Ma);
-      setLongitude(coords.La);
-    }
-  });
+  // const [latitude, setLatitude] = useState("");
+  // const [longitude, setLongitude] = useState("");
+
+  const [locationObj, setLocationObj] = useState({});
+
+  const getCoords = (address) => {
+    const headers = {
+      Authorization: `KakaoAK ${mapKey}`,
+    };
+    axios
+      .get(
+        `https://dapi.kakao.com/v2/local/search/address.json?query=${address}`,
+        {
+          headers: headers,
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        const location = res.data.documents[0];
+        setLocationObj({
+          locationX: location.address.x,
+          locationY: location.address.y,
+        });
+      });
+  };
+
+  const locationX = locationObj.locationX;
+  const locationY = locationObj.locationY;
+
+  console.log(locationX, locationY);
+
+  // 검색한 주소로 위도경도 구하기
+  // const geocoder = new kakao.maps.services.Geocoder();
+  // geocoder.addressSearch(address, function (result, status) {
+  //   if (status === kakao.maps.services.Status.OK) {
+  //     const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+  //     console.log(coords);
+  //     setLatitude(coords.Ma);
+  //     setLongitude(coords.La);
+  //   }
+  // });
 
   const postCodeStyle = {
     display: "block",
@@ -87,6 +120,16 @@ const Search = () => {
   console.log(newStartDate);
   console.log(newEndDate);
 
+  const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
+    <button
+      className="example-custom-input"
+      // value={value}
+      onClick={onClick}
+      ref={ref}>
+      {value}
+    </button>
+  ));
+
   //search vehicle type
   const [typeValue, setTypeValue] = useState();
   const handleChange = (e) => {
@@ -96,19 +139,36 @@ const Search = () => {
 
   // submit handler
   const onSubmitHandler = (e) => {
-    e.preventDefault();
-    dispatch(
-      __vehicleSearchList({
-        address,
-        newStartDate,
-        newEndDate,
-        typeValue,
-        latitude,
-        longitude,
-      })
-    );
-    setAddress("");
-    setTypeValue("");
+    if (
+      startDate === "" ||
+      endDate === "" ||
+      address === "" ||
+      typeValue === ""
+    ) {
+      alert("검색을 완료 해주세요");
+    } else {
+      e.preventDefault();
+
+      dispatch(
+        __vehicleSearchList({
+          address,
+          newStartDate,
+          newEndDate,
+          typeValue,
+          locationX,
+          locationY,
+        })
+      );
+      navigate("/vlist");
+      setAddress("");
+      setTypeValue("");
+      setLocationObj({});
+    }
+
+    // setAddress("");
+    // setTypeValue("");
+    // setLatitude("");
+    // setLongitude("");
   };
 
   // ----------------------------------------------------------------
@@ -183,8 +243,10 @@ const Search = () => {
               minDate={new Date()}
               shouldCloseOnSelect={true}
               placeholder="언제부터"
+              customInput={<ExampleCustomInput />}
             />
           </StCalendarWrapper>
+          <div className="dateConnection">></div>
           <StCalendarWrapper>
             <StNewDatePicker
               selected={endDate}
@@ -197,6 +259,7 @@ const Search = () => {
               dateFormat="yyyy-MM-dd"
               shouldCloseOnSelect={true}
               placeholder="언제까지"
+              customInput={<ExampleCustomInput />}
             />
           </StCalendarWrapper>
         </StCalendarContainer>
@@ -228,7 +291,7 @@ const StSearch = styled.div`
     0px 10px 12px rgba(0, 0, 0, 0.0456112),
     0px 12.5216px 10px rgba(0, 0, 0, 0.02);
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   /* background-color: skyblue; */
   .wrap {
     width: 100%;
@@ -260,14 +323,7 @@ const StSearchLocationContainer = styled.div`
 const StCalendarContainer = styled.div`
   display: flex;
   justify-content: center;
-`;
-
-const StCalendarWrapper = styled.div`
-  z-index: 99;
-`;
-
-const StNewDatePicker = styled(DatePicker)`
-  width: 250px;
+  width: 374px;
   height: 42px;
   box-sizing: border-box;
   font-size: 14px;
@@ -276,13 +332,39 @@ const StNewDatePicker = styled(DatePicker)`
   background: #f2f2f2;
   border-radius: 12px;
   padding: 5px;
-  background-image: url(${clock});
-  background-repeat: no-repeat;
-  background-size: 23px;
-  background-position: 9px 8px;
-  text-indent: 34px;
   border: 1px solid;
+  .dateConnection {
+    height: 42px;
+    box-sizing: border-box;
+    font-size: 18px;
+    line-height: 42px;
+    top: -7px;
+    position: relative;
+    z-index: 99;
+    margin-right: 16px;
+    margin-left: 16px;
+  }
 `;
+
+const StCalendarWrapper = styled.div`
+  z-index: 99;
+  position: relative;
+  .example-custom-input {
+    box-sizing: border-box;
+    font-size: 14px;
+    cursor: pointer;
+    background: #f2f2f2;
+    padding: 7px;
+    background-image: url(${clock});
+    background-repeat: no-repeat;
+    background-size: 22px;
+    background-position: 1px 4px;
+    text-indent: 34px;
+    border: 0px;
+  }
+`;
+
+const StNewDatePicker = styled(DatePicker)``;
 
 const StVehicleTypeContainer = styled.div`
   /* margin: 25px; */
