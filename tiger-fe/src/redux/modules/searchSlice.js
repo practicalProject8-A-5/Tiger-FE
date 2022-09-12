@@ -3,7 +3,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// const mapKey = process.env.REACT_APP_KAKAO_MAP_RESTAPI;
+const serverApi = process.env.REACT_APP_SERVER;
 
 const initialState = {
   filteredVehicleList: {},
@@ -35,7 +35,7 @@ export const __vehicleSearchList = createAsyncThunk(
         "Content-Type": "application/json",
       };
       const response = await axios.get(
-        `/api/vehicle/search?startDate=${newStartDate}?endDate=${newEndDate}?type=${typeValue}?location=${address}`,
+        `${serverApi}/vehicle/search?startDate=${newStartDate}?endDate=${newEndDate}?type=${typeValue}?location=${address}`,
         {},
         { headers: headers }
       );

@@ -18,7 +18,9 @@ const RenterInfo = () => {
     <StRenterInfo>
       <div className="userProfile">
         <div className="profile__top">
-          <div className="userimg"></div>
+          <div className="userimg">
+            <img src={memberInfo.profileImage} alt="profileImage" />
+          </div>
           <div className="userMiniProfile">
             <div className="userMiniProfile__top">
               <h3>{memberInfo.name}님</h3>
@@ -32,7 +34,7 @@ const RenterInfo = () => {
         <div className="profileValue">{memberInfo.name}</div>
 
         <div className="profileTitle">렌터 전화번호</div>
-        <div className="profileValue">{memberInfo.tel}</div>
+        <div className="profileValue">{memberInfo.phone || memberInfo.tel}</div>
 
         <div className="profileTitle">렌터 연락 메일 주소</div>
         <div className="profileValue">{memberInfo.email}</div>
@@ -70,7 +72,7 @@ const StRenterInfo = styled.div`
       height: 100%;
       display: flex;
       margin-bottom: 60px;
-      .userimg {
+      .userimg img {
         width: 56px;
         height: 56px;
         border-radius: 50%;
@@ -89,7 +91,7 @@ const StRenterInfo = styled.div`
           }
           .bash {
             border-radius: 20px;
-            background: #d9d9d9;
+            background: #ffb979;
             width: 34px;
             height: 20px;
             font-weight: 600;

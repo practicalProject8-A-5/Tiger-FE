@@ -24,7 +24,7 @@ const RenterNavbar = ({ category, onSelect }) => {
       text: "렌트내역",
     },
     {
-      name: "CANCLE",
+      name: "CANCEL",
       text: "환불",
     },
   ];
@@ -33,7 +33,30 @@ const RenterNavbar = ({ category, onSelect }) => {
     <>
       <StNavBar>
         <div className="wrap">
-          {categories.map((c) => (
+          {category === "RESERVED"
+            ? categories.map((c) => (
+                <Category
+                  key={c.name}
+                  active={category === c.name}
+                  onClick={() => {
+                    dispatch(__getRenterItemList(c.name));
+                    onSelect(c.name);
+                  }}>
+                  {c.text}
+                </Category>
+              ))
+            : categories.map((c) => (
+                <Category
+                  key={c.name}
+                  active={category === c.name}
+                  onClick={() => {
+                    dispatch(__getRenterItemList(c.name));
+                    onSelect(c.name);
+                  }}>
+                  {c.text}
+                </Category>
+              ))}
+          {/* {categories.map((c) => (
             <Category
               key={c.name}
               active={category === c.name}
@@ -43,7 +66,7 @@ const RenterNavbar = ({ category, onSelect }) => {
               }}>
               {c.text}
             </Category>
-          ))}
+          ))} */}
         </div>
       </StNavBar>
     </>

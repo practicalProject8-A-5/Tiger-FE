@@ -3,7 +3,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const memberApi = process.env.REACT_APP_MEMBER;
+const serverApi = process.env.REACT_APP_SERVER;
 const kakaoApi = process.env.REACT_APP_KAKAO_LOGIN_API;
 
 // initialize userToken from local storage
@@ -37,7 +37,7 @@ export const __registerUser = createAsyncThunk(
     try {
       // make request to backend
       const response = await axios.post(
-        `${memberApi}/member/register`,
+        `${serverApi}/member/register`,
         { email, password, passwordConfirm, name },
         config
       );
@@ -56,7 +56,7 @@ export const __userLogin = createAsyncThunk(
   async ({ email, password }, thunkAPI) => {
     try {
       const response = await axios.post(
-        `${memberApi}/member/login`,
+        `${serverApi}/member/login`,
         { email, password },
         config
       );
@@ -88,6 +88,7 @@ export const __kakaoLogin = createAsyncThunk(
       localStorage.setItem("userToken", response.headers.authorization);
       localStorage.setItem("email", response.data.output.email);
       localStorage.setItem("phone", response.data.output.tel);
+      localStorage.setItem("profileImage", response.data.output.profileImage);
       localStorage.setItem("name", response.data.output.name);
       localStorage.setItem("refreshToken", response.headers.refreshtoken);
       window.alert("카카오 성공");
@@ -108,9 +109,10 @@ const memberSlice = createSlice({
       const email = localStorage.getItem("email");
       const phone = localStorage.getItem("phone");
       const name = localStorage.getItem("name");
+      const profileImage = localStorage.getItem("profileImage");
       // console.log(payload);
       if (userToken !== null) {
-        state.userInfo = { email, phone, name };
+        state.userInfo = { email, phone, name, profileImage };
       } else {
         state.userInfo = {};
       }

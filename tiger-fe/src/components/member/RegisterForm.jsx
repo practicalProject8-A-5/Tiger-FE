@@ -21,7 +21,7 @@ const RegisterForm = ({
   goRegister,
 }) => {
   const dispatch = useDispatch();
-  const memberApi = process.env.REACT_APP_MEMBER;
+  const memberApi = process.env.REACT_APP_SERVER;
 
   // use Form Hook
   const {

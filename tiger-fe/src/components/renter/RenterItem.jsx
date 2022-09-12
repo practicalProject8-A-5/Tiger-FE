@@ -1,15 +1,45 @@
-import React from "react";
-import styled from "styled-components";
-import { useSelector } from "react-redux";
+// eslint-disable-next-line
 
-const RenterItem = ({ list }) => {
+import React, { useEffect } from "react";
+import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {
+  // __deleteRenterItem,
+  __getRenterItemList,
+} from "../../redux/modules/renterItemListSlice";
+import axios from "axios";
+
+const RenterItem = ({ category, list, onSelect }) => {
+  const serverApi = process.env.REACT_APP_SERVER;
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const renterItemLists = useSelector(
     (state) => state.renterItemListSlice.renterItemLists
   );
   console.log(renterItemLists);
 
-  const onClick = () => {
-    console.log("눌림");
+  useEffect(() => {
+    if (category) {
+      dispatch(__getRenterItemList("RESERVED"));
+    }
+  }, [dispatch]);
+
+  const deleteHandler = async (oid) => {
+    const userToken = localStorage.getItem("userToken");
+    const refreshToken = localStorage.getItem("refreshToken");
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: userToken,
+      RefreshToken: refreshToken,
+    };
+    const response = await axios.delete(serverApi + `/order/${oid}`, {
+      headers: headers,
+    });
+    console.log(response);
+    dispatch(__getRenterItemList("RESERVED"));
   };
 
   return (
@@ -17,21 +47,71 @@ const RenterItem = ({ list }) => {
       <StRenterItemList>
         {renterItemLists.output && renterItemLists.output.length === 0 ? (
           <p>등록된 차량이 없습니다.</p>
+        ) : category === "RESERVED" ? (
+          renterItemLists.output &&
+          renterItemLists.output.map((list, i) => {
+            return (
+              <StRenterItem key={i}>
+                <img
+                  src={list.thumbnail}
+                  alt="차량"
+                  onClick={() => {
+                    navigate(`/vdetail/${list.vid}`);
+                  }}
+                />
+                <div
+                  className="carInfo"
+                  onClick={() => {
+                    navigate(`/vdetail/${list.vid}`);
+                  }}>
+                  <p>{list.vname}</p>
+                  <span>{/* {list.oname} */}</span>
+                  <p>₩{list.price}/1일</p>
+                  <p>{list.location}</p>
+                </div>
+                {/* <div className="dateBtn">{list.createdAt}</div> */}
+                <div className="flex_wrap">
+                  <span className="item_date">
+                    {list.startDate} ~ {list.endDate}
+                  </span>
+                  <div className="btn_box">
+                    <span
+                      className="refund"
+                      onClick={() => {
+                        deleteHandler(list.oid);
+                      }}>
+                      환불
+                    </span>
+                  </div>
+                </div>
+              </StRenterItem>
+            );
+          })
         ) : (
           renterItemLists.output &&
           renterItemLists.output.map((list, i) => {
             return (
-              <StRenterItem onClick={onClick} key={i}>
+              <StRenterItem
+                onClick={() => {
+                  navigate(`/vdetail/${list.vid}`);
+                }}
+                key={i}>
                 <img src={list.thumbnail} alt="차량" />
                 <div className="carInfo">
                   <p>{list.vname}</p>
-                  <span>
-                    {list.startDate} ~ {list.endDate}
-                  </span>
-                  <p>{list.price}/1일</p>
+                  <span>{/* {list.oname} */}</span>
+                  <p>₩{list.price}/1일</p>
                   <p>{list.location}</p>
                 </div>
-                <div className="dateBtn">{list.createdAt}</div>
+                {/* <div className="dateBtn">{list.createdAt}</div> */}
+                <div className="flex_wrap">
+                  <span className="item_date">
+                    {list.startDate} ~ {list.endDate}
+                  </span>
+                  <div className="btn_box">
+                    <span className="refunded">환불 완료</span>
+                  </div>
+                </div>
               </StRenterItem>
             );
           })
@@ -88,6 +168,42 @@ const StRenterItem = styled.div`
     position: absolute;
     top: 0;
     right: 0;
+  }
+  .flex_wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .item_date {
+      font-weight: 500;
+      font-size: 16px;
+      color: #8b8b8b;
+    }
+    .btn_box {
+      margin-bottom: 11px;
+      display: flex;
+      justify-content: end;
+      /* background-color: pink; */
+      .modify {
+        font-weight: 500;
+        font-size: 14px;
+        color: #000;
+        text-decoration: underline;
+        margin-right: 12px;
+      }
+      .refund {
+        font-weight: 500;
+        font-size: 14px;
+        color: #eb3434;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+      .refunded {
+        font-weight: 500;
+        font-size: 14px;
+        color: #8b8b8b;
+        text-decoration: underline;
+      }
+    }
   }
 `;
 

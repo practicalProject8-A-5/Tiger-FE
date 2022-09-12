@@ -10,7 +10,7 @@ import LoginModal from "./LoginModal";
 import { loader } from "../redux/modules/memberSlice";
 
 const Header = ({ ownerMode }) => {
-  const memberApi = process.env.REACT_APP_MEMBER;
+  const memberApi = process.env.REACT_APP_SERVER;
   const navigate = useNavigate();
 
   const [IsModalOpen, setIsModalOpen] = useState(false);
@@ -91,8 +91,7 @@ const Header = ({ ownerMode }) => {
             ) : (
               <Link
                 to="/renter"
-                style={{ textDecoration: "none", display: "none" }}
-              >
+                style={{ textDecoration: "none", display: "none" }}>
                 <div className="header__mypage">마이페이지</div>
               </Link>
             )}

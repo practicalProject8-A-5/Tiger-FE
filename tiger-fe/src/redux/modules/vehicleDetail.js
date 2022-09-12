@@ -3,7 +3,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const memberApi = process.env.REACT_APP_MEMBER;
+const memberApi = process.env.REACT_APP_SERVER;
 
 const initialState = {
   vehicleDetailList: {},
