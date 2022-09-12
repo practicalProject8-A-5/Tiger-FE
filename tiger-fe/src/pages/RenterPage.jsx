@@ -9,8 +9,7 @@ import RenterInfo from "../components/renter/RenterInfo";
 import RenterItem from "../components/renter/RenterItem";
 
 const RenterPage = () => {
-  // const [category, setCategory] = useState("Reserved");
-  const [category, setCategory] = useState("Registration");
+  const [category, setCategory] = useState("RESERVED");
   const onSelect = useCallback((category) => setCategory(category), []);
 
   return (

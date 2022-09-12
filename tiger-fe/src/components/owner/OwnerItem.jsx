@@ -1,16 +1,17 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import VehicleModify from "./VehicleModify";
 
-const OwnerItem = ({ list, category }) => {
-  console.log(category);
+const OwnerItem = ({ list, category, vId }) => {
+  // console.log(vId);
   const onClick = () => {
     console.log("눌림");
   };
 
   const navigate = useNavigate();
-  const goUpdate = () => {
-    navigate("/owner/:id/modi");
+  const goUpdate = (list) => {
+    navigate(`/owner/${vId}/modi`);
   };
 
   return (
@@ -61,6 +62,7 @@ const OwnerItem = ({ list, category }) => {
 export default OwnerItem;
 
 const StOwnerItem = styled.div`
+  border: 1px solid;
   width: 100%;
   height: 134px;
   /* background-color: skyblue; */

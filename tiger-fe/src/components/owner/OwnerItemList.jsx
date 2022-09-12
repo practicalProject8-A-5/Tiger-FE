@@ -8,17 +8,27 @@ import { __reservedItemList } from "../../redux/modules/ownerItemListSlice";
 import { __useItemList } from "../../redux/modules/ownerItemListSlice";
 import { __returnItemList } from "../../redux/modules/ownerItemListSlice";
 import { __cancleItemList } from "../../redux/modules/ownerItemListSlice";
+import { useParams } from "react-router-dom";
 
 const OwnerItemList = ({ category }) => {
   const OwnerItemLists = useSelector(
     (state) => state.ownerItemListSlice.OwnerItemList
   );
 
+  // const id = useSelector(
+  //   (state) => state.ownerItemListSlice.OwnerItemList.output
+  // );
+  // const id = useParams();
+  // console.log(id);
+
+  // console.log(OwnerItemLists.output.vId);
   // const [loading, setLoading] = useState(false);
   // console.log("List category:", category);
-
+  // const id = useParams(OwnerItemLists.output.vId);
+  // console.log(id);
   const dispatch = useDispatch();
 
+  // console.log();
   useEffect(() => {
     if (category === "Registration") {
       dispatch(__registeredItemList());
@@ -33,6 +43,7 @@ const OwnerItemList = ({ category }) => {
     }
   }, [dispatch, category]);
 
+  // console.log(id);
   // console.log(OwnerItemLists);
   return (
     <StOwnerItemList>
@@ -41,7 +52,9 @@ const OwnerItemList = ({ category }) => {
       ) : (
         OwnerItemLists.output &&
         OwnerItemLists.output.map((list, i) => {
-          return <OwnerItem key={i} list={list} category={category} />;
+          return (
+            <OwnerItem key={i} list={list} category={category} vId={list.vId} />
+          );
         })
       )}
     </StOwnerItemList>
@@ -53,6 +66,7 @@ const StOwnerItemList = styled.div`
   width: 790px;
   height: 890px;
   margin-top: 65px;
+  /* border: 1px solid; */
 `;
 
 // const Loading = styled.div``;

@@ -10,45 +10,60 @@ const initialState = {
   error: null,
 };
 
-//등록 차량
+//차량 등록
 export const __ownerRegisterInfo = createAsyncThunk(
   "ownerRegister/__ownerRegisterInfo",
   async (payload, thunkAPI) => {
     const {
-      // vbrand,
-      // price,
-      // description,
-      // location,
-      // formData,
-      // vname,
-      // type,
-      // years,
-      // fuelType,
-      // passengers,
-      // transmission,
-      // fuelEfficiency,
+      vbrand,
+      price,
+      description,
+      location,
       formData,
+      vname,
+      type,
+      years,
+      fuelType,
+      passengers,
+      transmission,
+      fuelEfficiency,
+      // formData,
     } = payload;
-    console.log(payload.formData);
+    console.log(payload);
     const userToken = localStorage.getItem("userToken");
     const refreshToken = localStorage.getItem("refreshToken");
     try {
       const headers = {
         Authorization: userToken,
         RefreshToken: refreshToken,
-        // "Content-Type": "application/json",
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "application/json",
+        // "Content-Type": "multipart/form-data",
       };
       const resp = await axios.post(
         `${memberApi}/vehicle/management`,
         // `/api/vehicle/management`,
         // `/api/vehicle`
 
-        formData,
+        // formData,
+        {
+          vbrand,
+          price,
+          description,
+          location,
+          formData,
+          vname,
+          type,
+          years,
+          fuelType,
+          passengers,
+          transmission,
+          fuelEfficiency,
+        },
 
         { headers: headers }
       );
-      console.log(resp.data);
+      // console.log(resp.data);
+      console.log(vbrand);
       return thunkAPI.fulfillWithValue(resp.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

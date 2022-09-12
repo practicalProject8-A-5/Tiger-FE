@@ -2,76 +2,67 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  ownerRegisterInfo: {},
+  ownerModiRegisterInfo: {
+    vbrand: "",
+    vId: "",
+    description: "",
+    email: "",
+    fuelEfficiency: "",
+    fuelType: "",
+    location: "",
+    oname: "",
+    passengers: "",
+    price: "",
+    profileImage: "",
+    tel: "",
+    transmission: "",
+    type: "",
+    vname: "",
+    years: "",
+    imageList: [],
+  },
   isLoading: false,
   success: null,
   error: null,
 };
 
-//등록 차량
-export const __ownerRegisterInfo = createAsyncThunk(
-  "ownerRegister/__ownerRegisterInfo",
+//등록 차량정보
+export const __ownerModiRegisterInfo = createAsyncThunk(
+  "ownerRegister/__ownerModiRegisterInfo",
   async (payload, thunkAPI) => {
-    const {
-      brand,
-      price,
-      description,
-      location,
-      files,
-      vname,
-      type,
-      years,
-      fuelType,
-      passengers,
-      transmission,
-      fuelEfficiency,
-    } = payload;
     try {
-      // console.log(brand);
-      // console.log(price);
-      // console.log(description);
-      // console.log(location);
-      // console.log(files);
-      // console.log(vname);
-      // console.log(type);
-      // console.log(years);
-      // console.log(fuelType);
-      // console.log(passengers);
-      // console.log(transmission);
-      // console.log(fuelEfficiency);
-
       const headers = {
         "Content-Type": "application/json",
       };
-      const resp = await axios.put(
-        `/api/vehicle/management/{vId}`,
-        // `/api/vehicle`
+      const resp = await axios.get(
+        "https://run.mocky.io/v3/a007a5cd-6e49-4807-9586-6b4100ae5e86",
+        // `/api/vehicle/management/{ownerId}`
         {},
         { headers: headers }
       );
       // console.log(resp.data);
-      return thunkAPI.fulfillWithValue(resp.data);
+      return thunkAPI.fulfillWithValue(resp.data.output);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
-const ownerRegisterInfoSlice = createSlice({
-  name: "ownerRegisterInfoSlice",
+const ownerModiRegisterInfoSlice = createSlice({
+  name: "ownerModiRegisterInfoSlice",
   initialState: initialState,
   reducers: {},
   extraReducers: {
-    [__ownerRegisterInfo.pending]: (state, action) => {
+    [__ownerModiRegisterInfo.pending]: (state, action) => {
       state.isLoading = true;
       // console.log("pending");
     },
-    [__ownerRegisterInfo.fulfilled]: (state, action) => {
+    [__ownerModiRegisterInfo.fulfilled]: (state, action) => {
       state.isLoading = false;
       // console.log(action.payload);
-      state.ownerRegisterInfo = action.payload;
+      state.ownerModiRegisterInfo = action.payload;
     },
-    [__ownerRegisterInfo.rejected]: (state, action) => {
+    [__ownerModiRegisterInfo.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
@@ -79,4 +70,4 @@ const ownerRegisterInfoSlice = createSlice({
 });
 
 // export const {} = incomeItemListSlice.actions;
-export default ownerRegisterInfoSlice.reducer;
+export default ownerModiRegisterInfoSlice.reducer;

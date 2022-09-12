@@ -1,4 +1,4 @@
-/*global kakao*/
+// /*global kakao*/
 import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
@@ -10,17 +10,75 @@ import userImg from "../../assets/dan-gold-N7RiDzfF2iw-unsplash.jpg";
 import email from "../../assets/registermail.png";
 import phone from "../../assets/registerphone.png";
 import OwnerKakaoMap from "./OwnerKakaoMap";
-import { useDispatch } from "react-redux";
-import { __ownerRegisterInfo } from "../../redux/modules/ownerRegister";
 import ModifyImgViewBox from "./ModifyImgViewBox";
 
+import { __ownerModiRegisterInfo } from "../../redux/modules/ownerModify";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+
 const VehicleModify = () => {
+  const VehicleInfo = useSelector(
+    (state) => state.ownerModiRegisterInfoSlice.ownerModiRegisterInfo
+  );
+  // console.log(VehicleInfo);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(__ownerModiRegisterInfo());
+  }, []);
+
+  useEffect(() => {
+    setInputs({
+      ...inputs,
+      vbrand: VehicleInfo.vbrand,
+      vId: VehicleInfo.vId,
+      description: VehicleInfo.description,
+      email: VehicleInfo.email,
+      fuelEfficiency: VehicleInfo.fuelEfficiency,
+      fuelType: VehicleInfo.fuelType,
+      location: VehicleInfo.location,
+      oname: VehicleInfo.oname,
+      passengers: VehicleInfo.passengers,
+      price: VehicleInfo.price,
+      profileImage: VehicleInfo.profileImage,
+      tel: VehicleInfo.tel,
+      transmission: VehicleInfo.transmission,
+      type: VehicleInfo.type,
+      vname: VehicleInfo.vname,
+      years: VehicleInfo.years,
+      imageList: VehicleInfo.imageList,
+    });
+  }, [VehicleInfo]);
+  // console.log(VehicleInfo.location);
+
+  const [inputs, setInputs] = useState(VehicleInfo);
+  // console.log(inputs.imageList);
+
+  const imageList = VehicleInfo.imageList;
+  const locationInfo = VehicleInfo.location;
+  // console.log(locationInfo);
+  // console.log(inputs.fuelType);
+  // console.log(inputs);
+  // console.log(imageList);
+
+  const onChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
+    console.log(value);
+    console.log(name);
+  };
+
   const {
     register,
     handleSubmit,
     control,
     // watch,
     formState: { errors },
+    // defaultValues: {},
   } = useForm();
 
   const cartypeOption = [
@@ -42,6 +100,8 @@ const VehicleModify = () => {
     { value: "수소", label: "수소" },
   ];
 
+  // const default_value_fuelType = inputs.fuelType;
+  // console.log(default_value_fuelType);
   //파일 상태관리 및 Array로 만들기 위해
   const [files, setFiles] = useState([]);
   const [isShowImg, setIsShowImg] = useState(true);
@@ -61,10 +121,13 @@ const VehicleModify = () => {
 
   //location
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useState(inputs.location);
+  // console.log(inputs.location);
+  console.log(address);
 
   const onChangeHandler = (e) => {
-    setAddress(e.target.value);
+    console.log(e.target.defaultValue);
+    setAddress(e.target.defaultValue);
   };
 
   // console.log(address);
@@ -93,29 +156,47 @@ const VehicleModify = () => {
       }
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
+    console.log("fullAddress:", fullAddress);
     setAddress(fullAddress);
-    console.log(address);
   };
+  // console.log(address);
 
   //임시 submit handler
-  const onSubmit = (data) => {
-    // dispatch(__ownerRegisterInfo(data));
-    // setAddress("");
-    // setValue("");
-    console.log("onSubmit");
-  };
+  // const onSubmit = (data) => {
+  //   // dispatch(__ownerRegisterInfo(data));
+  //   // setAddress("");
+  //   // setValue("");
+  //   console.log("onSubmit");
+  // };
 
+  // console.log(inputs.vbrand);
+  // console.log(info);
+  const [isEdit, setIsEdit] = useState(false);
+  const [isEditLocation, setIsEditLocation] = useState(false);
+  const [showMap, setShowMap] = useState(false);
+  const onClickEdit = () => {
+    setIsEdit(!isEdit);
+  };
+  const onClickEditLocation = () => {
+    // setAddress();
+    setIsPopupOpen(!isPopupOpen);
+    // setIsEditLocation(!isEditLocation);
+  };
+  // const showMapHandler = () => {
+  //   setShowMap(!showMap);
+  // };
+  // console.log("isEditLocation:", isEditLocation);
+  // console.log("isEdit:", isEdit);
+  // console.log("address:", address);
   return (
     <StVehicleModify>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form>
         {/* //이미지 */}
         <div className="onchange__imgbox">
-          {!isShowImg ? (
-            <ModifyImgViewBox files={files} />
+          {!isEdit ? (
+            <ModifyImgViewBox files={files} imageList={imageList} />
           ) : (
-            <p className="imgbox_text">
-              등록하실 차량의 이미지를 아래 버튼을 통해 업로드 해주세요:)
-            </p>
+            <ImgViewBox files={files} imageList={imageList} />
           )}
         </div>
 
@@ -124,6 +205,7 @@ const VehicleModify = () => {
             type="file"
             className="img"
             onChange={changeImg}
+            onClick={onClickEdit}
             multiple="multiple"
             accept="image/jpg, image/png, image/jpeg"
           />
@@ -137,6 +219,10 @@ const VehicleModify = () => {
               type="text"
               id="brand"
               placeholder="ex. 테슬라"
+              defaultValue={inputs.vbrand || ""}
+              // value={inputs.vbrand || ""}
+              name="vbrand"
+              onChange={onchange}
               {...register("brand", {
                 required: "브랜드명을 입력해주세요",
                 mimLength: {
@@ -160,6 +246,9 @@ const VehicleModify = () => {
               type="text"
               id="vname"
               placeholder="ex. 모델 3 롱레인지"
+              onChange={onChange}
+              defaultValue={inputs.vname || ""}
+              // value={inputs.vname || ""}
               {...register("vname", {
                 required: "차종을 입력해주세요",
               })}
@@ -178,202 +267,108 @@ const VehicleModify = () => {
               <th>
                 <label htmlFor="years">연식</label>
               </th>
-              {errors.years ? (
-                <td style={{ border: " 2px solid #EB3434" }}>
-                  <input
-                    type="text"
-                    id="years"
-                    placeholder={errors.years.message}
-                    className="error_input"
-                    {...register("years", {
-                      required: "연식을 입력해주세요",
-                    })}
-                  />
-                </td>
-              ) : (
-                <td>
-                  <input
-                    type="text"
-                    id="years"
-                    placeholder="연식"
-                    {...register("years", {
-                      required: "연식을 입력해주세요",
-                    })}
-                  />
-                </td>
-              )}
+              <td>
+                <input
+                  type="text"
+                  id="years"
+                  placeholder="연식"
+                  // onChange={onChange}
+                  defaultValue={inputs.years || ""}
+                  // value={info.years || ""}
+                  {...register("years", {
+                    required: "연식을 입력해주세요",
+                  })}
+                />
+              </td>
               <th>
                 <label htmlFor="passengers">탑승 가능 인원</label>
               </th>
-              {errors.passengers ? (
-                <td style={{ border: " 2px solid #EB3434" }}>
-                  <input
-                    type="text"
-                    id="passengers"
-                    placeholder={errors.passengers.message}
-                    className="error_input"
-                    {...register("passengers", {
-                      required: "탑승자 수를 입력해주세요.",
-                    })}
-                  />
-                </td>
-              ) : (
-                <td>
-                  <input
-                    type="text"
-                    id="passengers"
-                    placeholder="탑승자 수"
-                    {...register("passengers", {
-                      required: "탑승자 수를 입력해주세요.",
-                    })}
-                  />
-                </td>
-              )}
+              <td>
+                <input
+                  type="text"
+                  id="passengers"
+                  placeholder="탑승자 수"
+                  defaultValue={inputs.passengers || ""}
+                  // value={info.passengers || ""}
+                  {...register("passengers", {
+                    required: "탑승자 수를 입력해주세요.",
+                  })}
+                />
+              </td>
             </tr>
             <tr>
               <th>
                 <label htmlFor="fuelEfficiency">연비</label>
               </th>
-              {errors.fuelEfficiency ? (
-                <td style={{ border: " 2px solid #EB3434" }}>
-                  <input
-                    type="text"
-                    id="fuelEfficiency"
-                    placeholder={errors.fuelEfficiency.message}
-                    className="error_input"
-                    {...register("fuelEfficiency", {
-                      required: "연비를 입력해주세요.",
-                    })}
-                  />
-                </td>
-              ) : (
-                <td>
-                  <input
-                    type="text"
-                    id="fuelEfficiency"
-                    placeholder="연비"
-                    {...register("fuelEfficiency", {
-                      required: "연비를 입력해주세요.",
-                    })}
-                  />
-                </td>
-              )}
+              <td>
+                <input
+                  type="text"
+                  id="fuelEfficiency"
+                  placeholder="연비"
+                  defaultValue={inputs.fuelEfficiency || ""}
+                  // value={info.fuelEfficiency || ""}
+                  {...register("fuelEfficiency", {
+                    required: "연비를 입력해주세요.",
+                  })}
+                />
+              </td>
+
               <th>연료</th>
-              {errors.fuelType ? (
-                <td style={{ border: " 2px solid #EB3434" }}>
-                  <Controller
-                    name="fuelType"
-                    className="select"
-                    rules={{ required: "필수로 선택하셔야합니다." }}
-                    render={({ field }) => (
-                      <Select
-                        {...field}
-                        placeholder={errors.fuelType.message}
-                        options={fueltypeOption}
-                      />
-                    )}
-                    control={control}
-                    defaultValue=""
-                  />
-                </td>
-              ) : (
-                <td>
-                  <Controller
-                    name="fuelType"
-                    className="select"
-                    rules={{ required: "필수로 선택하셔야합니다." }}
-                    render={({ field }) => (
-                      <Select
-                        {...field}
-                        placeholder="연료 종류"
-                        options={fueltypeOption}
-                      />
-                    )}
-                    control={control}
-                    defaultValue=""
-                  />
-                </td>
-              )}
+              <td>
+                <Controller
+                  name="fuelType"
+                  className="select"
+                  rules={{ required: "필수로 선택하셔야합니다." }}
+                  render={({ field, onChange, value }) => (
+                    <Select
+                      {...field}
+                      placeholder="연료 종류"
+                      options={fueltypeOption}
+                      // value={fueltypeOption.find((c) => c.value === value)}
+                      // onChange={(val) => onChange(val.value)}
+                      // value={fueltypeOption.value || ""}
+                    />
+                  )}
+                  control={control}
+                  defaultValue={inputs.fuelType || ""}
+                />
+              </td>
             </tr>
             <tr>
               <th>기어 변속</th>
-              {errors.transmission ? (
-                <td
-                  style={{
-                    // backgroundColor: "rgba(235,52,52,0.8) ",
-                    border: "2px solid #EB3434",
-                  }}
-                >
-                  <Controller
-                    name="transmission"
-                    className="select"
-                    rules={{ required: "필수로 선택하셔야합니다." }}
-                    render={({ field }) => (
-                      <Select
-                        {...field}
-                        placeholder={errors.transmission.message}
-                        options={transmissionOption}
-                      />
-                    )}
-                    control={control}
-                    defaultValue=""
-                  />
-                </td>
-              ) : (
-                <td>
-                  <Controller
-                    name="transmission"
-                    className="select"
-                    rules={{ required: "필수로 선택하셔야합니다." }}
-                    render={({ field }) => (
-                      <Select
-                        {...field}
-                        placeholder="변속기 종류"
-                        options={transmissionOption}
-                      />
-                    )}
-                    control={control}
-                    defaultValue=""
-                  />
-                </td>
-              )}
+              <td>
+                <Controller
+                  name="transmission"
+                  className="select"
+                  rules={{ required: "필수로 선택하셔야합니다." }}
+                  render={({ field }) => (
+                    <Select
+                      {...field}
+                      placeholder="변속기 종류"
+                      options={transmissionOption}
+                    />
+                  )}
+                  control={control}
+                  defaultValue={inputs.transmission || ""}
+                />
+              </td>
               <th>차 종류</th>
-              {errors.cartype ? (
-                <td>
-                  <Controller
-                    name="cartype"
-                    // className="select"
-                    className="select"
-                    rules={{ required: "필수로 선택하셔야합니다." }}
-                    render={({ field }) => (
-                      <Select
-                        {...field}
-                        placeholder={errors.cartype.message}
-                        options={cartypeOption}
-                      />
-                    )}
-                    control={control}
-                    defaultValue=""
-                  />
-                </td>
-              ) : (
-                <td>
-                  <Controller
-                    name="cartype"
-                    className="select"
-                    rules={{ required: "필수로 선택하셔야합니다." }}
-                    render={({ field }) => (
-                      <Select
-                        {...field}
-                        placeholder="차 종류"
-                        options={cartypeOption}
-                      />
-                    )}
-                    control={control}
-                    defaultValue=""
-                  />
-                </td>
-              )}
+              <td>
+                <Controller
+                  name="cartype"
+                  className="select"
+                  rules={{ required: "필수로 선택하셔야합니다." }}
+                  render={({ field }) => (
+                    <Select
+                      {...field}
+                      placeholder="차 종류"
+                      options={cartypeOption}
+                    />
+                  )}
+                  control={control}
+                  defaultValue={inputs.type || ""}
+                />
+              </td>
             </tr>
           </tbody>
         </table>
@@ -386,15 +381,15 @@ const VehicleModify = () => {
           <div className="infoWrapper_personal">
             <img src={userImg} alt="userimg" />
             <div className="infoWrapper_personal__info">
-              <p className="name">권익현</p>
+              <p className="name">{inputs.oname}</p>
               <div className="infoWrapper_personal__info__wrapper">
                 <div className="infoWrapper_personal__info__wrapper__email"></div>
                 <a href="mailto:kwonih1020@gmail.com">
-                  <p>1234590@gmail.com</p>
+                  <p>{inputs.email}</p>
                 </a>
                 <div className="infoWrapper_personal__info__wrapper__phone"></div>
-                <a href="010-1234-1234">
-                  <p>010-1234-1234</p>
+                <a href={inputs.tel}>
+                  <p>{inputs.tel}</p>
                 </a>
               </div>
             </div>
@@ -407,11 +402,12 @@ const VehicleModify = () => {
           <input
             id="location"
             className="location_input"
-            value={address}
-            onClick={() => {
-              setIsPopupOpen(!isPopupOpen);
-            }}
-            onChange={onChangeHandler}
+            // value={}
+            // defaultValue={inputs.location || ""}
+            defaultValue={address}
+            onClick={onClickEditLocation}
+            // onClickEditLocation={onClickEditLocation}
+            // onChange={onChangeHandler}
             placeholder="상세 주소를 입력해주세요."
             {...register("location", {
               required: "주소를 입력해주세요",
@@ -429,7 +425,12 @@ const VehicleModify = () => {
           )}
         </div>
 
-        {/* <OwnerKakaoMap address={address} /> */}
+        <OwnerKakaoMap
+          address={address}
+          locationInfo={locationInfo}
+          // isEditLocation={isEditLocation}
+        />
+
         <button>제출</button>
       </form>
     </StVehicleModify>
@@ -498,7 +499,7 @@ const StVehicleModify = styled.div`
         border: 1px solid #8b8b8b;
         border-radius: 12px;
         font-family: "Noto Sans KR", sans-serif;
-        color: #cccccc;
+        color: #000;
       }
     }
     table {
@@ -553,7 +554,7 @@ const StVehicleModify = styled.div`
               padding: 0 16px;
               box-sizing: border-box;
               font-family: "Noto Sans KR", sans-serif;
-              color: #cccccc;
+              color: #000;
             }
           }
         }
@@ -576,7 +577,7 @@ const StVehicleModify = styled.div`
         margin-bottom: 18px;
         box-sizing: border-box;
         padding: 15px 14px;
-        color: #cccccc;
+        color: #000;
         font-family: "Noto Sans KR", sans-serif;
       }
     }

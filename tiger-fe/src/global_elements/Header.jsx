@@ -1,17 +1,12 @@
 // eslint-disable-next-line
 
-import React, { useEffect, useState } from "react";
-
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
 import { Link, useMatch, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../assets/ta,iger_logo.png";
-
 import axios from "axios";
-
 import LoginModal from "./LoginModal";
-
 import { loader } from "../redux/modules/memberSlice";
 
 const Header = ({ ownerMode }) => {
@@ -44,9 +39,6 @@ const Header = ({ ownerMode }) => {
   // console.log(ownerToggle);
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(loader());
-  }, [dispatch]);
 
   const userInfo = useSelector((state) => state.memberSlice.userInfo);
   // console.log(userInfo);
@@ -90,9 +82,18 @@ const Header = ({ ownerMode }) => {
             <Link to="/" style={{ textDecoration: "none" }}>
               <div className="header__main">24렌트</div>
             </Link>
-            <Link to="/renter" style={{ textDecoration: "none" }}>
-              <div className="header__mypage">마이페이지</div>
-            </Link>
+            {userInfo.name ? (
+              <Link to="/renter" style={{ textDecoration: "none" }}>
+                <div className="header__mypage">마이페이지</div>
+              </Link>
+            ) : (
+              <Link
+                to="/renter"
+                style={{ textDecoration: "none", display: "none" }}
+              >
+                <div className="header__mypage">마이페이지</div>
+              </Link>
+            )}
           </div>
           <div className="header__menu__R">
             <div className="header__switch">

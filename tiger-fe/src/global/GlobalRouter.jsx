@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import RentMainPage from "../pages/RentMainPage";
 import OwnerPage from "../pages/OwnerPage";
 import RenterPage from "../pages/RenterPage";
@@ -12,9 +12,12 @@ import OwnerFormPage from "../pages/OwnerFormPage";
 import OwnerItemList from "../components/owner/OwnerItemList";
 import KakaoLogin from "../components/member/KakaoLogin";
 import OwnerModifyPage from "../pages/OwnerModifyPage";
+// import isLoggedin from "../components/member/isLoggedin";
+import { useSelector } from "react-redux";
 
 const GlobalRouter = () => {
-  // console.log("5");
+  const userInfo = useSelector((state) => state.memberSlice.userInfo);
+  // console.log(userInfo);
   return (
     <Routes>
       <Route exact path="/" element={<RentMainPage />} />
@@ -24,6 +27,11 @@ const GlobalRouter = () => {
       <Route path="/owner/:id/modi" element={<OwnerModifyPage />} />
 
       <Route path="/intro" element={<HomePage />} />
+      {!userInfo.name ? (
+        <Route path="/renter" element={<Navigate to="/" />} />
+      ) : (
+        <Route path="/renter" element={<RenterPage />} />
+      )}
       <Route path="/renter" element={<RenterPage />} />
       <Route path="/vdetail/:id" element={<VehicleDetailPage />} />
       <Route path="/vlist" element={<VehicleListPage />} />

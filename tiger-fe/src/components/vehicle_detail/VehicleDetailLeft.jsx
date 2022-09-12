@@ -29,6 +29,8 @@ const VehicleDetailLeft = () => {
     dispatch(__vehicleDetail(parseInt(id.id)));
   }, [dispatch, id]);
 
+  console.log(id);
+
   // get response for vehicle info
   const vehicleDetails = useSelector(
     (state) => state.vehicleDetailSlice.vehicleDetailList
@@ -70,7 +72,8 @@ const VehicleDetailLeft = () => {
         spaceBetween={8}
         slidesPerView={1}
         scrollbar={{ draggable: true, dragSize: 24 }}
-        navigation={true}>
+        navigation={true}
+      >
         {vehicleDetails.imageList &&
           vehicleDetails.imageList.map((image, i) => {
             return (

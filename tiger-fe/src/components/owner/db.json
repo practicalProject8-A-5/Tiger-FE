@@ -4,120 +4,27 @@
     "code": "200",
     "msg": "상품이 성공적으로 조회되었습니다."
   },
-  "output": [
-    {
-      "vId": 2,
-      "ownerId": 2,
-      "price": 20000,
-      "description": "포르쉐의 최신 SUV",
-      "location": "경기도 성남시 분당구 판교로 421",
-      "imageList": [
-        "https:images.unsplash.com/photo-1580274455191-1c62238fa333?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80",
-        "https://images.unsplash.com/photo-1611651338412-8403fa6e3599?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80",
-        "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-      ],
-      "vname": "포르쉐 카이얀",
-      "type": "수입",
-      "years": "2020",
-      "fuelType": "휘발유",
-      "passengers": "5",
-      "transmission": "자동",
-      "fuelEfficiency": "6"
-    },
-    {
-      "vId": 1,
-      "ownerId": 1,
-      "price": 30000,
-      "description": "람보르기니 최신 SUV",
-      "location": "경기도 성남시 분당구 판교로 421",
-      "imageList": [
-        "https:images.unsplash.com/photo-1580274455191-1c62238fa333?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80",
-        "https://images.unsplash.com/photo-1611651338412-8403fa6e3599?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80",
-        "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-      ],
-      "vname": "람보르기니 우루스",
-      "type": "수입",
-      "years": "2020",
-      "fuelType": "휘발유",
-      "passengers": "5",
-      "transmission": "자동",
-      "fuelEfficiency": "6"
-    },
-    {
-      "vId": 3,
-      "ownerId": 3,
-      "price": 30000,
-      "description": "람보르기니 최신 SUV",
-      "location": "경기도 성남시 분당구 판교로 421",
-      "imageList": [
-        "https:images.unsplash.com/photo-1580274455191-1c62238fa333?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80",
-        "https://images.unsplash.com/photo-1611651338412-8403fa6e3599?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80",
-        "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-      ],
-      "vname": "람보르기니 우루스",
-      "type": "수입",
-      "years": "2020",
-      "fuelType": "휘발유",
-      "passengers": "5",
-      "transmission": "자동",
-      "fuelEfficiency": "6"
-    },
-    {
-      "vId": 4,
-      "ownerId": 4,
-      "price": 30000,
-      "description": "람보르기니 최신 SUV",
-      "location": "경기도 성남시 분당구 판교로 421",
-      "imageList": [
-        "https:images.unsplash.com/photo-1580274455191-1c62238fa333?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80",
-        "https://images.unsplash.com/photo-1611651338412-8403fa6e3599?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80",
-        "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-      ],
-      "vname": "람보르기니 우루스",
-      "type": "수입",
-      "years": "2020",
-      "fuelType": "휘발유",
-      "passengers": "5",
-      "transmission": "자동",
-      "fuelEfficiency": "6"
-    },
-    {
-      "vId": 5,
-      "ownerId": 5,
-      "price": 30000,
-      "description": "람보르기니 최신 SUV",
-      "location": "경기도 성남시 분당구 판교로 421",
-      "imageList": [
-        "https:images.unsplash.com/photo-1580274455191-1c62238fa333?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80",
-        "https://images.unsplash.com/photo-1611651338412-8403fa6e3599?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80",
-        "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-      ],
-      "vname": "람보르기니 우루스",
-      "type": "수입",
-      "years": "2020",
-      "fuelType": "휘발유",
-      "passengers": "5",
-      "transmission": "자동",
-      "fuelEfficiency": "6"
-    },
-    {
-      "vId": 6,
-      "ownerId": 6,
-      "price": 30000,
-      "description": "람보르기니 최신 SUV",
-      "location": "경기도 성남시 분당구 판교로 421",
-      "imageList": [
-        "https:images.unsplash.com/photo-1580274455191-1c62238fa333?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80",
-        "https://images.unsplash.com/photo-1611651338412-8403fa6e3599?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80",
-        "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-      ],
-      "vname": "람보르기니 우루스",
-      "type": "수입",
-      "years": "2020",
-      "fuelType": "휘발유",
-      "passengers": "5",
-      "transmission": "자동",
-      "fuelEfficiency": "6"
-    }
-  ]
+  "output": {
+    "vId": 1,
+    "price": 30000,
+    "description": "람보르기니 최신 SUV",
+    "location": "경기도 성남시 분당구 판교로 421",
+    "imageList": [
+      "https:i.pinimg.com/originals/ac/42/db/ac42db304b9ad02f5024a22a89c65914.jpg",
+      "https:blog.kakaocdn.net/dn/mSTN8/btqOtfCzxis/AvYW2xo58bxNQid0mmvkLk/img.jpg",
+      "https:encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL7xW4ku7cZasqw93svYsjzReCkt98YSzg6A&usqp=CAU"
+    ],
+    "vbrand": "람보르기니",
+    "vname": "우루스",
+    "type": "수입",
+    "years": "2020",
+    "fuelType": "휘발유",
+    "passengers": "5",
+    "transmission": "자동",
+    "fuelEfficiency": "6",
+    "oname": "최준우",
+    "email": "jun_chois@naver.com",
+    "tel": "050-9897-2356",
+    "profileImage": "https://downloadwap.com/thumbs2/wallpapers/p2ls/new/37/YpINegBlPp.jpg"
+  }
 }

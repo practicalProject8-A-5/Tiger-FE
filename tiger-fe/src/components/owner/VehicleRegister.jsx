@@ -14,27 +14,15 @@ import { useDispatch } from "react-redux";
 import { __ownerRegisterInfo } from "../../redux/modules/ownerRegister";
 
 const VehicleRegister = () => {
-  const dispatch = useDispatch();
-
-  // const ParseTextarea = ({ value = [], onChange }) => {
-  //   const [text, setText] = React.useState(value.join)("\n");
-
-  //   const handleChange = (e) => {
-  //     const value = e.target.value;
-
-  //     setText(value);
-  //     onChange(value.split("\n"));
-  //   };
-
-  //   return <textarea onChange={handleChange} value={text} />;
-  // };
+  const memberApi = process.env.REACT_APP_MEMBER;
+  // const dispatch = useDispatch();
 
   //유효성 검사 및 select 최적화
   const {
     register,
     handleSubmit,
     control,
-    // watch,
+    watch,
     formState: { errors },
   } = useForm();
 
@@ -45,17 +33,10 @@ const VehicleRegister = () => {
     { value: "대형", label: "대형" },
     { value: "승합RV", label: "승합RV" },
     { value: "수입", label: "수입" },
-    // { value: "경형" },
-    // { value: "중형" },
-    // { value: "대형" },
-    // { value: "승합RV" },
-    // { value: "수입" },
   ];
   const transmissionOption = [
     { value: "자동", label: "자동" },
     { value: "수동", label: "수동" },
-    // { value: "자동" },
-    // { value: "수동" },
   ];
   const fueltypeOption = [
     { value: "휘발유", label: "휘발유" },
@@ -63,11 +44,6 @@ const VehicleRegister = () => {
     { value: "LPG", label: "LPG" },
     { value: "전기", label: "전기" },
     { value: "수소", label: "수소" },
-    // { value: "휘발유" },
-    // { value: "경유" },
-    // { value: "LPG" },
-    // { value: "전기" },
-    // { value: "수소" },
   ];
 
   //파일 상태관리 및 Array로 만들기 위해
@@ -78,6 +54,9 @@ const VehicleRegister = () => {
     const files = e.target.files;
     const fileList = Array.from(files);
     const urlList = fileList.map((file) => URL.createObjectURL(file));
+
+    console.log(fileList);
+    console.log(urlList);
 
     setFiles([...urlList]);
     // setFiles([]);
@@ -127,50 +106,53 @@ const VehicleRegister = () => {
     console.log(address);
   };
 
-  //임시 submit handler
-  const onSubmit = (data) => {
-    const formData = new FormData();
+  // redux 없이
+  // const imgfiles = [];
+  const onSubmit = async () => {
+    //이미지 업로드
+    const imgFormData = new FormData();
+
     for (let i = 0; i < files.length; i++) {
-      formData.append("imageList", files[{ i }]);
+      imgFormData.append("imageList", files[i]);
     }
-    // formData.append("vbrand", data.vbrand);
-    // formData.append("price", data.price);
-    // formData.append("description", data.description);
-    // formData.append("location", data.location);
-    // formData.append("vname", data.vname);
-    // formData.append("type", data.cartype.value);
-    // formData.append("years", data.years);
-    // formData.append("fuelType", data.fuelType.value);
-    // formData.append("passengers", data.passengers);
-    // formData.append("transmission", data.transmission.value);
-    // formData.append("fuelEfficiency", data.fuelEfficiency);
-    for (let value of formData.values()) {
+
+    const myform = document.getElementById("form");
+    const formdata = new FormData(myform);
+
+    // for (let value of formdata.values()) {
+    //   console.log(value);
+    // }
+    // string
+    for (let value of formdata.values()) {
       console.log(value);
     }
 
-    dispatch(__ownerRegisterInfo(formData));
+    for (let value of imgFormData.values()) {
+      console.log(value);
+    }
 
-    setAddress("");
-    // setValue("");
-    // console.log(files);
-    // console.log(formData);
-    // console.log(data);
-    // console.log(data.cartype.value);
-    // console.log(data.vname);
-    // console.log(data.vbrand);
-    // console.log(data.years);
-    // console.log(data.fuelType.value);
-    // console.log(data.location);
-    // console.log(data.passengers);
-    // console.log(data.transmission.value);
-    console.log(data.description);
-    // console.log(data.)
+    const userToken = localStorage.getItem("userToken");
+    const refreshToken = localStorage.getItem("refreshToken");
+    try {
+      const jsonType = { "Content-Type": "application/json" };
+      const multipartType = { "Content-Type": "multipart/form-data" };
+      const resp = await axios.post(
+        `${memberApi}/vehicle/management`,
+        imgFormData,
+        {
+          headers: multipartType,
+          Authorization: userToken,
+          RefreshToken: refreshToken,
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
   };
-  console.log(files);
 
   return (
     <StVehicleRegister>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form id="form" onSubmit={handleSubmit(onSubmit, watch)}>
         {/* //이미지 */}
         <div className="onchange__imgbox">
           {!isShowImg ? (
@@ -446,8 +428,10 @@ const VehicleRegister = () => {
           <textarea
             name="description"
             id="description"
-            placeholder="차량에 대한 추가적인 설명을 입력해주세요."
-          />
+            placeholder="차량에 대한 설명을 입력해주세요."
+            cols="50"
+            rows="10"
+          ></textarea>
         </div>
 
         {/* 렌터정보 */}
@@ -648,7 +632,7 @@ const StVehicleRegister = styled.div`
       width: 100%;
       /* height: 320px; */
       /* background-color: pink; */
-      textarea {
+      /* textarea {
         width: 100%;
         height: 320px;
         border: 1px solid #8b8b8b;
@@ -657,7 +641,7 @@ const StVehicleRegister = styled.div`
         box-sizing: border-box;
         outline: none;
         resize: none;
-      }
+      } */
     }
 
     .location {

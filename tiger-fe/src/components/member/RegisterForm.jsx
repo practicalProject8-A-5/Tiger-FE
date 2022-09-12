@@ -39,12 +39,10 @@ const RegisterForm = ({
 
   // 이메일 중복확인
   const [checkEmail, setCheckEmail] = useState("");
-
   const handleChange = (e) => {
     const checkEmail = e.target.value;
     setCheckEmail(checkEmail);
   };
-
   const [clickCheckEmail, setClickCheckEmail] = useState(false);
   const emailCheck = async (e) => {
     e.preventDefault();
@@ -62,7 +60,7 @@ const RegisterForm = ({
           headers: headers,
         }
       );
-      if (response.data.result === true) {
+      if (response.data.result === true && checkEmail !== "") {
         alert("사용 가능한 아이디 입니다."); // 백엔드로 보낸 데이터 결과 200 일 경우
         setCheckEmail(!checkEmail); //사용 가능한 아이디 일 경우 state상태에 true값으로 변경, 나중에 회원가입 버튼 클릭 이벤트핸들러에 필요!
       } else if (response.data.result === false) {
