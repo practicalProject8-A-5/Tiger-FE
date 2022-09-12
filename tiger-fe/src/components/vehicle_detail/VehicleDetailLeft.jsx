@@ -29,14 +29,14 @@ const VehicleDetailLeft = () => {
     dispatch(__vehicleDetail(parseInt(id.id)));
   }, [dispatch, id]);
 
-  console.log(id);
+  // console.log(id);
 
   // get response for vehicle info
   const vehicleDetails = useSelector(
     (state) => state.vehicleDetailSlice.vehicleDetailList
   );
-  console.log(vehicleDetails);
-  console.log(vehicleDetails.imageList);
+  // console.log(vehicleDetails);
+  // console.log(vehicleDetails.imageList);
 
   const styleTh = {
     width: "180px",
@@ -72,8 +72,7 @@ const VehicleDetailLeft = () => {
         spaceBetween={8}
         slidesPerView={1}
         scrollbar={{ draggable: true, dragSize: 24 }}
-        navigation={true}
-      >
+        navigation={true}>
         {vehicleDetails.imageList &&
           vehicleDetails.imageList.map((image, i) => {
             return (
@@ -130,18 +129,16 @@ const VehicleDetailLeft = () => {
             <h1>Owner 정보</h1>
           </div>
           <div className="infoWrapper_personal">
-            <div className="infoWrapper_personal__picture"></div>
+            <div className="infoWrapper_personal__picture">
+              <img src={vehicleDetails.profileImage} alt="" />
+            </div>
             <div className="infoWrapper_personal__info">
-              <p>Owner 이름</p>
+              <p>{vehicleDetails.oname}</p>
               <div className="infoWrapper_personal__info__wrapper">
                 <div className="infoWrapper_personal__info__wrapper__email"></div>
-                <a href="mailto:kwonih1020@gmail.com">
-                  <p>Owner 이메일</p>
-                </a>
+                <p>{vehicleDetails.email}</p>
                 <div className="infoWrapper_personal__info__wrapper__phone"></div>
-                <a href="010-1234-1234">
-                  <p>Owner 전화번호</p>
-                </a>
+                <p>{vehicleDetails.tel}</p>
               </div>
             </div>
           </div>

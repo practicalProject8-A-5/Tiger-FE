@@ -14,7 +14,7 @@ const VehicleDetailRight = () => {
   const vehicleDetails = useSelector(
     (state) => state.vehicleDetailSlice.vehicleDetailList
   );
-  console.log(vehicleDetails);
+  // console.log(vehicleDetails);
   return (
     <StPaymentBox>
       <h1>결제 정보</h1>

@@ -23,7 +23,7 @@ import vehicle from "../assets/vehicle.png";
 // import DatePanel from "react-multi-date-picker/plugins/date_panel";
 
 const Search = () => {
-  const mapKey = process.env.REACT_APP_KAKAO_MAP_RESTAPI;
+  const mapKey = process.env.REACT_APP_REST_API_KEY;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const renterMyPage = process.env.REACT_APP_RENTER;
+const serverApi = process.env.REACT_APP_SERVER;
 
 const initialState = {
   renterItemLists: {},
@@ -24,7 +24,7 @@ export const __getRenterItemList = createAsyncThunk(
         RefreshToken: refreshToken,
       };
       const response = await axios.get(
-        renterMyPage + `/renter?status=${status}&limit=100&offset=0`,
+        serverApi + `/order/renter?status=${status}&limit=100&offset=0`,
         { headers: headers }
       );
       console.log(response);

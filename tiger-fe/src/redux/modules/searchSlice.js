@@ -3,8 +3,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// const mapKey = process.env.REACT_APP_KAKAO_MAP_RESTAPI;
-const serverApi = process.env.REACT_APP_MEMBER;
+const serverApi = process.env.REACT_APP_SERVER;
 
 const initialState = {
   filteredVehicleList: {},
