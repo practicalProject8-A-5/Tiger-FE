@@ -8,7 +8,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import styled from "styled-components";
 import logo from "../../assets/ta,iger_logo.png";
 
-import kakaoButton from "../../assets/kakao_login_medium_narrow.png";
+import kakaoButton from "../../assets/kakao_login_large_wide.png";
 
 const LoginForm = ({ showModal, goRegister, loginToggle }) => {
   // 카카오로그인 redirect url
@@ -173,6 +173,7 @@ const StLoginForm = styled.div`
       margin-bottom: 18px;
       cursor: pointer;
       box-sizing: border-box;
+      width: 100%;
     }
     .google {
       width: 100%;
