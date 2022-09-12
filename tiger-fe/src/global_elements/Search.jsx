@@ -246,7 +246,7 @@ const Search = () => {
               customInput={<ExampleCustomInput />}
             />
           </StCalendarWrapper>
-          <div className="dateConnection">~</div>
+          <div className="dateConnection">></div>
           <StCalendarWrapper>
             <StNewDatePicker
               selected={endDate}
@@ -340,7 +340,7 @@ const StCalendarContainer = styled.div`
     line-height: 42px;
     top: -7px;
     position: relative;
-    z-index: 100;
+    z-index: 99;
     margin-right: 16px;
     margin-left: 16px;
   }

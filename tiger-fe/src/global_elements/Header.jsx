@@ -11,6 +11,7 @@ import { loader } from "../redux/modules/memberSlice";
 
 const Header = ({ ownerMode }) => {
   const memberApi = process.env.REACT_APP_MEMBER;
+  const navigate = useNavigate();
 
   const [IsModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
@@ -19,31 +20,32 @@ const Header = ({ ownerMode }) => {
   // console.log("현재 :", IsModalOpen);
 
   const [inOwner, setInOwner] = useState(false);
-  const navigate = useNavigate();
+
+  const ownerToggle = useMatch("/*");
+  // const ownerToggle = useMatch("/");
+  console.log(ownerToggle);
+
   const onClick = () => {
     if (ownerToggle !== null) {
-      setInOwner((prev) => !prev);
+      setInOwner(!inOwner);
       setTimeout(() => {
         navigate("/owner");
       }, 1000);
     } else {
-      setInOwner((prev) => !prev);
+      setInOwner(!inOwner);
       setTimeout(() => {
-        navigate("/");
+        navigate("/*");
       }, 1000);
     }
   };
   // console.log(inOwner);
 
-  const ownerToggle = useMatch(`/`);
-  // console.log(ownerToggle);
-
+  // 로그인 여부
   const dispatch = useDispatch();
-
   const userInfo = useSelector((state) => state.memberSlice.userInfo);
   console.log(userInfo);
 
-  // logout
+  // 로그아웃 delete 호출
   const __userLogout = async () => {
     const confirm = window.confirm("Are you Sure?");
     if (confirm === true) {
@@ -95,22 +97,41 @@ const Header = ({ ownerMode }) => {
             )}
           </div>
           <div className="header__menu__R">
-            <div className="header__switch">
-              <span className="text">오너모드로 전환</span>
-              {!inOwner ? (
-                <label className="switch">
-                  <input id="switch" type="checkbox" onClick={onClick} />
-                  <span className="slider"></span>
-                </label>
-              ) : (
-                <label
-                  className="switch"
-                  style={{ backgroundColor: "#ff881b" }}>
-                  <input id="switch" type="checkbox" onClick={onClick} />
-                  <span className="slider"></span>
-                </label>
-              )}
-            </div>
+            {userInfo.name ? (
+              <div className="header__switch">
+                <span className="text">오너모드로 전환</span>
+                {!inOwner ? (
+                  <label className="switch">
+                    <input id="switch" type="checkbox" onClick={onClick} />
+                    <span className="slider"></span>
+                  </label>
+                ) : (
+                  <label
+                    className="switch"
+                    style={{ backgroundColor: "#ff881b" }}>
+                    <input id="switch" type="checkbox" onClick={onClick} />
+                    <span className="slider"></span>
+                  </label>
+                )}
+              </div>
+            ) : (
+              <div className="header__switch" style={{ display: "none" }}>
+                <span className="text">오너모드로 전환</span>
+                {!inOwner ? (
+                  <label className="switch">
+                    <input id="switch" type="checkbox" onClick={onClick} />
+                    <span className="slider"></span>
+                  </label>
+                ) : (
+                  <label
+                    className="switch"
+                    style={{ backgroundColor: "#ff881b" }}>
+                    <input id="switch" type="checkbox" onClick={onClick} />
+                    <span className="slider"></span>
+                  </label>
+                )}
+              </div>
+            )}
 
             {userInfo.name ? (
               <>
