@@ -88,6 +88,7 @@ export const __kakaoLogin = createAsyncThunk(
       localStorage.setItem("userToken", response.headers.authorization);
       localStorage.setItem("email", response.data.output.email);
       localStorage.setItem("phone", response.data.output.tel);
+      localStorage.setItem("profileImage", response.data.output.profileImage);
       localStorage.setItem("name", response.data.output.name);
       localStorage.setItem("refreshToken", response.headers.refreshtoken);
       window.alert("카카오 성공");
@@ -108,9 +109,10 @@ const memberSlice = createSlice({
       const email = localStorage.getItem("email");
       const phone = localStorage.getItem("phone");
       const name = localStorage.getItem("name");
+      const profileImage = localStorage.getItem("profileImage");
       // console.log(payload);
       if (userToken !== null) {
-        state.userInfo = { email, phone, name };
+        state.userInfo = { email, phone, name, profileImage };
       } else {
         state.userInfo = {};
       }

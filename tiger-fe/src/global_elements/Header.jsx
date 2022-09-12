@@ -23,7 +23,7 @@ const Header = ({ ownerMode }) => {
 
   const ownerToggle = useMatch("/*");
   // const ownerToggle = useMatch("/");
-  console.log(ownerToggle);
+  // console.log(ownerToggle);
 
   const onClick = () => {
     if (ownerToggle !== null) {

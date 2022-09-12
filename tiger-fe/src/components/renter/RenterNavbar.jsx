@@ -1,6 +1,7 @@
 // eslint-disable-next-line
 
 import React from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import styled, { css } from "styled-components";
@@ -29,11 +30,40 @@ const RenterNavbar = ({ category, onSelect }) => {
     },
   ];
 
+  useEffect(() => {
+    if (category === "RESERVED") {
+      dispatch(__getRenterItemList("RESERVED"));
+    }
+  }, [dispatch]);
+
   return (
     <>
       <StNavBar>
         <div className="wrap">
-          {categories.map((c) => (
+          {category === "RESERVED"
+            ? categories.map((c) => (
+                <Category
+                  key={c.name}
+                  active={category === c.name}
+                  onClick={() => {
+                    dispatch(__getRenterItemList(c.name));
+                    onSelect(c.name);
+                  }}>
+                  {c.text}
+                </Category>
+              ))
+            : categories.map((c) => (
+                <Category
+                  key={c.name}
+                  active={category === c.name}
+                  onClick={() => {
+                    dispatch(__getRenterItemList(c.name));
+                    onSelect(c.name);
+                  }}>
+                  {c.text}
+                </Category>
+              ))}
+          {/* {categories.map((c) => (
             <Category
               key={c.name}
               active={category === c.name}
@@ -43,7 +73,7 @@ const RenterNavbar = ({ category, onSelect }) => {
               }}>
               {c.text}
             </Category>
-          ))}
+          ))} */}
         </div>
       </StNavBar>
     </>
