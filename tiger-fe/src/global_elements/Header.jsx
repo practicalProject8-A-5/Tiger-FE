@@ -108,7 +108,8 @@ const Header = ({ ownerMode }) => {
                 ) : (
                   <label
                     className="switch"
-                    style={{ backgroundColor: "#ff881b" }}>
+                    style={{ backgroundColor: "#ff881b" }}
+                  >
                     <input id="switch" type="checkbox" onClick={onClick} />
                     <span className="slider"></span>
                   </label>
@@ -125,7 +126,8 @@ const Header = ({ ownerMode }) => {
                 ) : (
                   <label
                     className="switch"
-                    style={{ backgroundColor: "#ff881b" }}>
+                    style={{ backgroundColor: "#ff881b" }}
+                  >
                     <input id="switch" type="checkbox" onClick={onClick} />
                     <span className="slider"></span>
                   </label>

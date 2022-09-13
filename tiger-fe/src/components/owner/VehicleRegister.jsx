@@ -14,9 +14,16 @@ import { useDispatch } from "react-redux";
 import { __ownerRegisterInfo } from "../../redux/modules/ownerRegister";
 
 const VehicleRegister = () => {
-  const memberApi = process.env.REACT_APP_MEMBER;
+  const serverApi = process.env.REACT_APP_SERVER;
   // const dispatch = useDispatch();
 
+  // const [selectFuelType, setSelectFuelType] = useState({ value: "0" });
+  // const [selectTransmission, setSelectTransmission] = useState({ value: "0" });
+  // const [selectCarType, setSelectCarType] = useState({ value: "0" });
+
+  // console.log(selectFuelType.value);
+  // console.log(selectTransmission.value);
+  // console.log(selectCarType.value);
   //유효성 검사 및 select 최적화
   const {
     register,
@@ -25,6 +32,8 @@ const VehicleRegister = () => {
     watch,
     formState: { errors },
   } = useForm();
+
+  // console.log(watch("fuelType"));
 
   //value가 서버에 보내는 값, label view에 보여주는 값
   const cartypeOption = [
@@ -48,13 +57,16 @@ const VehicleRegister = () => {
 
   //파일 상태관리 및 Array로 만들기 위해
   const [files, setFiles] = useState([]);
+  const [fileList, setFileList] = useState();
   const [isShowImg, setIsShowImg] = useState(true);
 
   const changeImg = (e) => {
     const files = e.target.files;
     const fileList = Array.from(files);
     const urlList = fileList.map((file) => URL.createObjectURL(file));
+    setFileList(files);
 
+    console.log(files);
     console.log(fileList);
     console.log(urlList);
 
@@ -71,6 +83,8 @@ const VehicleRegister = () => {
   //location
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [address, setAddress] = useState("");
+  const [locationObj, setLocationObj] = useState({});
+  console.log(locationObj);
 
   const onChangeHandler = (e) => {
     setAddress(e.target.value);
@@ -106,45 +120,66 @@ const VehicleRegister = () => {
     console.log(address);
   };
 
-  // redux 없이
-  // const imgfiles = [];
-  const onSubmit = async () => {
+  // console.log(fileList);
+
+  const onSubmit = async ({
+    vbrand,
+    vname,
+    years,
+    passengers,
+    fuelEfficiency,
+    description,
+    location,
+    // locationObj,
+  }) => {
     //이미지 업로드
-    const imgFormData = new FormData();
-
-    for (let i = 0; i < files.length; i++) {
-      imgFormData.append("imageList", files[i]);
+    // const imgFormData = new FormData();
+    const formData = new FormData();
+    formData.append("vbarnd", vbrand);
+    formData.append("vname", vname);
+    formData.append("years", years);
+    formData.append("passengers", passengers);
+    formData.append("fuelEfficiency", fuelEfficiency);
+    formData.append("fuelType", watch("fuelType").value);
+    formData.append("transmission", watch("transmission").value);
+    formData.append("type", watch("cartype").value);
+    formData.append("description", description);
+    formData.append("location", location);
+    formData.append("locationX", locationObj.locationX);
+    formData.append("locationY", locationObj.locationY);
+    // formData.append("imageList", fileList[0]);
+    // console.log(locationObj.locationX);
+    // console.log(locationObj.locationY);
+    // console.log(locationObj);
+    for (let i = 0; i < fileList.length; i++) {
+      // formData.append("imageList", imgfile[i]);
+      // let fileUrl = new File(blob[i], "image.jpg");
+      formData.append("imageList", fileList[i]);
+      // console.log("files ===>", fileUrl);
     }
 
-    const myform = document.getElementById("form");
-    const formdata = new FormData(myform);
-
-    // for (let value of formdata.values()) {
-    //   console.log(value);
-    // }
-    // string
-    for (let value of formdata.values()) {
-      console.log(value);
+    for (let value of formData.values()) {
+      console.log("value:", value);
     }
-
-    for (let value of imgFormData.values()) {
-      console.log(value);
-    }
+    // const req = {};
+    // const json = JSON.stringify(req);
 
     const userToken = localStorage.getItem("userToken");
     const refreshToken = localStorage.getItem("refreshToken");
     try {
-      const jsonType = { "Content-Type": "application/json" };
+      // const jsonType = { "Content-Type": "application/json" };
       const multipartType = { "Content-Type": "multipart/form-data" };
-      const resp = await axios.post(
-        `${memberApi}/vehicle/management`,
-        imgFormData,
-        {
-          headers: multipartType,
+      // const json = JSON.stringify(obj)
+      await axios.post(`${serverApi}/vehicle/management`, formData, {
+        headers: {
+          multipartType,
           Authorization: userToken,
           RefreshToken: refreshToken,
-        }
-      );
+        },
+        // headers: jsonType,
+        // Authorization: userToken,
+        // RefreshToken: refreshToken,
+      });
     } catch (err) {
       console.log(err);
     }
@@ -305,6 +340,7 @@ const VehicleRegister = () => {
               )}
               <th>연료</th>
               {errors.fuelType ? (
+                // alert(errors.fuelType.message)
                 <td style={{ border: " 2px solid #EB3434" }}>
                   <Controller
                     name="fuelType"
@@ -315,27 +351,29 @@ const VehicleRegister = () => {
                         {...field}
                         placeholder={errors.fuelType.message}
                         options={fueltypeOption}
+                        // onChange={setSelectFuelType}
                       />
                     )}
                     control={control}
-                    defaultValue=""
+                    // defaultValue=""
                   />
                 </td>
               ) : (
                 <td>
                   <Controller
+                    control={control}
                     name="fuelType"
                     className="select"
                     rules={{ required: "필수로 선택하셔야합니다." }}
                     render={({ field }) => (
                       <Select
                         {...field}
+                        name="fuelType"
                         placeholder="연료 종류"
                         options={fueltypeOption}
+                        // onChange={setSelectFuelType.value}
                       />
                     )}
-                    control={control}
-                    defaultValue=""
                   />
                 </td>
               )}
@@ -358,27 +396,30 @@ const VehicleRegister = () => {
                         {...field}
                         placeholder={errors.transmission.message}
                         options={transmissionOption}
+                        // onChange={setSelectTransmission.value}
                       />
                     )}
                     control={control}
-                    defaultValue=""
+                    // defaultValue={transmissionOption.value}
                   />
                 </td>
               ) : (
                 <td>
                   <Controller
+                    control={control}
                     name="transmission"
                     className="select"
                     rules={{ required: "필수로 선택하셔야합니다." }}
                     render={({ field }) => (
                       <Select
                         {...field}
+                        name="transmission"
                         placeholder="변속기 종류"
                         options={transmissionOption}
+                        // onChange={setSelectTransmission}
                       />
                     )}
-                    control={control}
-                    defaultValue=""
+                    // defaultValue=""
                   />
                 </td>
               )}
@@ -386,6 +427,7 @@ const VehicleRegister = () => {
               {errors.cartype ? (
                 <td>
                   <Controller
+                    control={control}
                     name="cartype"
                     // className="select"
                     className="select"
@@ -395,10 +437,10 @@ const VehicleRegister = () => {
                         {...field}
                         placeholder={errors.cartype.message}
                         options={cartypeOption}
+                        // onChange={setSelectCarType}
                       />
                     )}
-                    control={control}
-                    defaultValue=""
+                    // defaultValue=""
                   />
                 </td>
               ) : (
@@ -406,16 +448,17 @@ const VehicleRegister = () => {
                   <Controller
                     name="cartype"
                     className="select"
+                    control={control}
                     rules={{ required: "필수로 선택하셔야합니다." }}
                     render={({ field }) => (
                       <Select
                         {...field}
                         placeholder="차 종류"
                         options={cartypeOption}
+                        // onChange={setSelectCarType}
                       />
                     )}
-                    control={control}
-                    defaultValue=""
+                    // defaultValue=""
                   />
                 </td>
               )}
@@ -426,12 +469,19 @@ const VehicleRegister = () => {
         <div className="desc">
           {/* <Controller name="desc" as={ParseTextarea} control={control} /> */}
           <textarea
-            name="description"
+            // name="description"
+            {...register("description")}
             id="description"
             placeholder="차량에 대한 설명을 입력해주세요."
             cols="50"
             rows="10"
           ></textarea>
+          {/* <input
+            type="text"
+            id="description"
+            placeholder="차량에 대한 설명을 입력해주세요"
+            {...register("description")}
+          /> */}
         </div>
 
         {/* 렌터정보 */}
@@ -485,7 +535,11 @@ const VehicleRegister = () => {
           )}
         </div>
 
-        <OwnerKakaoMap address={address} />
+        <OwnerKakaoMap
+          address={address}
+          locationObj={locationObj}
+          setLocationObj={setLocationObj}
+        />
         <button>제출</button>
       </form>
     </StVehicleRegister>
@@ -566,7 +620,7 @@ const StVehicleRegister = styled.div`
         border: 1px solid #8b8b8b;
         border-radius: 12px;
         font-family: "Noto Sans KR", sans-serif;
-        color: #cccccc;
+        color: #000;
       }
     }
     table {
@@ -621,7 +675,7 @@ const StVehicleRegister = styled.div`
               padding: 0 16px;
               box-sizing: border-box;
               font-family: "Noto Sans KR", sans-serif;
-              color: #cccccc;
+              color: #000;
             }
           }
         }
@@ -661,7 +715,7 @@ const StVehicleRegister = styled.div`
         margin-bottom: 18px;
         box-sizing: border-box;
         padding: 15px 14px;
-        color: #cccccc;
+        color: #000;
         font-family: "Noto Sans KR", sans-serif;
       }
     }

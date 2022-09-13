@@ -76,10 +76,17 @@ const VehicleModify = () => {
     register,
     handleSubmit,
     control,
-    // watch,
+    watch,
     formState: { errors },
     // defaultValues: {},
   } = useForm();
+  //   {
+  //   defaultValues: {
+  //     location: inputs.location,
+  //   },
+  // }
+
+  console.log(watch());
 
   const cartypeOption = [
     { value: "경형", label: "경형" },
@@ -400,12 +407,16 @@ const VehicleModify = () => {
         <div className="location">
           <h2>렌터지역</h2>
           <input
+            type="text"
             id="location"
             className="location_input"
             // value={}
             // defaultValue={inputs.location || ""}
             defaultValue={address}
             onClick={onClickEditLocation}
+            // onChange={(e) => {
+            //   location.onChange(e);
+            // }}
             // onClickEditLocation={onClickEditLocation}
             // onChange={onChangeHandler}
             placeholder="상세 주소를 입력해주세요."
