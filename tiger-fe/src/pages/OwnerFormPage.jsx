@@ -14,7 +14,7 @@ const OwnerFormPage = () => {
       {/* <NavBar /> */}
       <GlobalLayout>
         <VehicleRegister />
-        <PaymentInfo />
+        {/* <PaymentInfo /> */}
         {/* <Calender /> */}
         {/* <TestCalender /> */}
       </GlobalLayout>

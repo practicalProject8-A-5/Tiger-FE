@@ -4,13 +4,14 @@ import styled from "styled-components";
 import VehicleModify from "./VehicleModify";
 
 const OwnerItem = ({ list, category, vid }) => {
-  // console.log(vId);
-  const onClick = () => {
-    console.log("눌림");
+  console.log(list);
+  const onClick = (e) => {
+    navigate(`/vdetail/${vid}`);
   };
 
   const navigate = useNavigate();
-  const goUpdate = (list) => {
+  const goUpdate = (e) => {
+    e.stopPropagation();
     navigate(`/owner/${vid}/modi`);
   };
 
@@ -62,7 +63,7 @@ const OwnerItem = ({ list, category, vid }) => {
 export default OwnerItem;
 
 const StOwnerItem = styled.div`
-  border: 1px solid;
+  /* border: 1px solid; */
   width: 100%;
   height: 134px;
   /* background-color: skyblue; */

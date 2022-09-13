@@ -10,7 +10,7 @@ const OwnerKakaoMap = ({ address, locationObj, setLocationObj }) => {
   // console.log(isEditLocation);
   // console.log(address);
   // console.log(locationInfo);
-
+  // console.log(address);
   const locationOnMap = address;
   console.log(locationOnMap);
   console.log(locationObj);
