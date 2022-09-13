@@ -12,16 +12,15 @@ import OwnerFormPage from "../pages/OwnerFormPage";
 import OwnerItemList from "../components/owner/OwnerItemList";
 import KakaoLogin from "../components/member/KakaoLogin";
 import OwnerModifyPage from "../pages/OwnerModifyPage";
-// import isLoggedin from "../components/member/isLoggedin";
 import { useSelector } from "react-redux";
 
 const GlobalRouter = () => {
   const userInfo = useSelector((state) => state.memberSlice.userInfo);
-  // console.log(userInfo);
+  console.log(userInfo);
   return (
     <Routes>
       <Route exact path="/" element={<RentMainPage />} />
-      {!userInfo.name ? (
+      {userInfo.name === null ? (
         <Route path="/owner" element={<Navigate to="/" />} />
       ) : (
         <Route path="/owner" element={<OwnerPage />} />
@@ -31,7 +30,7 @@ const GlobalRouter = () => {
       <Route path="/owner/:id/modi" element={<OwnerModifyPage />} />
 
       <Route path="/intro" element={<HomePage />} />
-      {!userInfo.name ? (
+      {userInfo.name === null ? (
         <Route path="/renter" element={<Navigate to="/" />} />
       ) : (
         <Route path="/renter" element={<RenterPage />} />

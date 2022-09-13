@@ -48,10 +48,9 @@ export default OwnerInfo;
 const StOwnerInfo = styled.div`
   position: fixed;
   /* z-index: 9; */
-  top: 130px;
+  top: 261px;
   right: 259px;
   width: 520px;
-  /* overflow: hidden; */
   height: 550px;
   display: flex;
   justify-content: center;
@@ -94,7 +93,7 @@ const StOwnerInfo = styled.div`
           }
           .bash {
             border-radius: 20px;
-            background: #d9d9d9;
+            background: #ffb979;
             width: 34px;
             height: 20px;
             font-weight: 600;

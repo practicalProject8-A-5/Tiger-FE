@@ -230,7 +230,7 @@ const StRenterInfoWrapper = styled.div`
   .infoWrapper_personal {
     margin-top: 64px;
     display: flex;
-    &__picture {
+    &__picture img {
       width: 56px;
       height: 56px;
       border-radius: 50%;

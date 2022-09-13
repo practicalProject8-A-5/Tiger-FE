@@ -2,18 +2,12 @@
 
 import React from "react";
 import { useSelector } from "react-redux";
-// import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const RenterInfo = () => {
-  // const navigate = useNavigate("");
-  // const toForm = () => {
-  //   navigate("/ownerregisterform");
-  // };
-
   const memberInfo = useSelector((state) => state.memberSlice.userInfo);
-
   console.log(memberInfo);
+
   return (
     <StRenterInfo>
       <div className="userProfile">

@@ -63,7 +63,6 @@ const OwnerItemList = ({ category }) => {
   );
 };
 
-export default OwnerItemList;
 const StOwnerItemList = styled.div`
   width: 790px;
   height: 890px;
@@ -71,4 +70,4 @@ const StOwnerItemList = styled.div`
   /* border: 1px solid; */
 `;
 
-// const Loading = styled.div``;
+export default OwnerItemList;
