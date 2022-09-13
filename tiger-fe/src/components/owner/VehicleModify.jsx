@@ -447,6 +447,7 @@ const VehicleModify = () => {
           address={address}
           locationInfo={locationInfo}
           setLocationObj={setLocationObj}
+          locationObj={locationObj}
           // isEditLocation={isEditLocation}
         />
 

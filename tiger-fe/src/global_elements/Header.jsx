@@ -67,6 +67,12 @@ const Header = ({ ownerMode }) => {
     }
   };
 
+  // 메뉴바 글씨 클릭시 색상 변환 유지
+  const [textColor, setTextColor] = useState("black");
+  const handleChnageTextColor = (e) => {
+    setTextColor(textColor === "black" ? "#CCCCCC" : "black");
+  };
+
   return (
     <StHeader>
       <div className="wrap">
@@ -78,14 +84,23 @@ const Header = ({ ownerMode }) => {
 
         <div className="header__menu">
           <div className="header__menu__L">
-            <Link to="/intro" style={{ textDecoration: "none" }}>
+            <Link
+              to="/intro"
+              style={{ textDecoration: "none", color: textColor }}
+              onClick={handleChnageTextColor}>
               <div className="header__home">홈</div>
             </Link>
-            <Link to="/" style={{ textDecoration: "none" }}>
+            <Link
+              to="/"
+              style={{ textDecoration: "none", color: textColor }}
+              onClick={handleChnageTextColor}>
               <div className="header__main">24렌트</div>
             </Link>
             {userInfo.name ? (
-              <Link to="/renter" style={{ textDecoration: "none" }}>
+              <Link
+                to="/renter"
+                style={{ textDecoration: "none", color: textColor }}
+                onClick={handleChnageTextColor}>
                 <div className="header__mypage">마이페이지</div>
               </Link>
             ) : (
@@ -108,8 +123,7 @@ const Header = ({ ownerMode }) => {
                 ) : (
                   <label
                     className="switch"
-                    style={{ backgroundColor: "#ff881b" }}
-                  >
+                    style={{ backgroundColor: "#ff881b" }}>
                     <input id="switch" type="checkbox" onClick={onClick} />
                     <span className="slider"></span>
                   </label>
@@ -126,8 +140,7 @@ const Header = ({ ownerMode }) => {
                 ) : (
                   <label
                     className="switch"
-                    style={{ backgroundColor: "#ff881b" }}
-                  >
+                    style={{ backgroundColor: "#ff881b" }}>
                     <input id="switch" type="checkbox" onClick={onClick} />
                     <span className="slider"></span>
                   </label>
@@ -201,6 +214,7 @@ const StHeader = styled.div`
           line-height: 23px;
           margin-right: 44px;
           cursor: pointer;
+          color: black;
         }
         .header__main {
           width: 65px;
@@ -211,6 +225,7 @@ const StHeader = styled.div`
           line-height: 23px;
           margin-right: 44px;
           cursor: pointer;
+          color: black;
         }
         .header__mypage {
           width: 92px;
@@ -219,6 +234,7 @@ const StHeader = styled.div`
           font-size: 20px;
           line-height: 23px;
           cursor: pointer;
+          color: black;
         }
       }
       .header__menu__R {

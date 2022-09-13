@@ -46,15 +46,19 @@ const OwnerItem = ({ list, category, vid }) => {
         <StOwnerItem onClick={onClick}>
           <img src={list.thumbnail} alt="차량" />
           <div className="carInfo">
-            <p>{list.vname}</p>
-            <span>랜터 닉네임</span>
-            <p>{list.price}/24시간</p>
+            <p>
+              {list.vbrand}
+              {list.vname}
+            </p>
+            <span>오너 네임</span>
+            <p>₩{list.price}/1일</p>
             <p>{list.location}</p>
           </div>
-          <div className="dateBtn">{list.createdAt}</div>
+          {/* <div className="dateBtn">{list.createdAt}</div> */}
           <div className="flex_wrap">
             <span className="item_date">
-              {list.startDate} ~ {list.endDate}
+              {/* {list.startDate} ~ {list.endDate} */}
+              2022-08-01 ~ 2022-08-02
             </span>
             <div className="btn_box">
               <span className="modify" onClick={goUpdate}>
@@ -70,15 +74,19 @@ const OwnerItem = ({ list, category, vid }) => {
         <StOwnerItem onClick={onClick}>
           <img src={list.thumbnail} alt="차량" />
           <div className="carInfo">
-            <p>{list.vname}</p>
-            <span>랜터 닉네임</span>
+            <p>
+              {list.vbrand}
+              {list.vname}
+            </p>
+            <span>오너 네임</span>
             <p>{list.price}/24시간</p>
             <p>{list.location}</p>
           </div>
-          <div className="dateBtn">{list.createdAt}</div>
+          {/* <div className="dateBtn">{list.createdAt}</div> */}
           <div className="flex_wrap">
             <span className="item_date">
-              {list.startDate} ~ {list.endDate}
+              {/* {list.startDate} ~ {list.endDate} */}
+              2022-08-01 ~ 2022-08-02
             </span>
           </div>
         </StOwnerItem>
@@ -90,7 +98,7 @@ const OwnerItem = ({ list, category, vid }) => {
 export default OwnerItem;
 
 const StOwnerItem = styled.div`
-  border: 1px solid;
+  /* border: 1px solid; */
   width: 100%;
   height: 134px;
   /* background-color: skyblue; */
@@ -152,12 +160,14 @@ const StOwnerItem = styled.div`
         color: #000;
         text-decoration: underline;
         margin-right: 12px;
+        cursor: pointer;
       }
       .delete {
         font-weight: 500;
         font-size: 14px;
         color: #eb3434;
         text-decoration: underline;
+        cursor: pointer;
       }
     }
   }
