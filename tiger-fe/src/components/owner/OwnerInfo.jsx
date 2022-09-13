@@ -1,8 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const OwnerInfo = () => {
+  const memberInfo = useSelector((state) => state.memberSlice.userInfo);
+
   const navigate = useNavigate("");
   const toForm = () => {
     navigate("/ownerregisterform");
@@ -12,24 +15,26 @@ const OwnerInfo = () => {
     <StOwnerInfo>
       <div className="userProfile">
         <div className="profile__top">
-          <div className="userimg"></div>
+          <div className="userimg">
+            <img src={memberInfo.profileImage} alt="profileImage" />
+          </div>
           <div className="userMiniProfile">
             <div className="userMiniProfile__top">
-              <h3>o o o님</h3>
+              <h3>{memberInfo.name}님</h3>
               <div className="bash">오너</div>
             </div>
-            <div className="userEmail">12346789@gmail.com</div>
+            <div className="userEmail">{memberInfo.email}</div>
           </div>
         </div>
 
         <div className="profileTitle">오너 네임</div>
-        <div className="profileValue">심채운</div>
+        <div className="profileValue">{memberInfo.name}</div>
 
         <div className="profileTitle">오너 전화번호</div>
-        <div className="profileValue">010-0000-0000</div>
+        <div className="profileValue">{memberInfo.phone || memberInfo.tel}</div>
 
         <div className="profileTitle">오너 연락 메일 주소</div>
-        <div className="profileValue">123456789@gmail.com</div>
+        <div className="profileValue">{memberInfo.email}</div>
         <div className="createBtn" onClick={toForm}>
           차량 등록
         </div>
@@ -70,7 +75,7 @@ const StOwnerInfo = styled.div`
       height: 100%;
       display: flex;
       margin-bottom: 60px;
-      .userimg {
+      .userimg img {
         width: 56px;
         height: 56px;
         border-radius: 50%;
