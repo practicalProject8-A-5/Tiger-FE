@@ -92,7 +92,7 @@ const LoginForm = ({ showModal, goRegister, loginToggle }) => {
             className="form-input"
             {...register("password")}
           />
-          <div className="find">아이디/비밀번호 찾기</div>
+          {/* <div className="find">아이디/비밀번호 찾기</div> */}
           <button type="submit">로그인</button>
         </form>
       </div>

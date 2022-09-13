@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -181,15 +181,10 @@ const RegisterForm = ({
                   message: "16자 이하로 사용가능합니다.",
                 },
                 pattern: {
-                  value: /^[A-Za-z0-9]{6,12}$/,
+                  value: regExgPw,
                   message:
                     "비밀번호는 영문(대/소문자 구분), 숫자 조합하여 6~12자리로 입력해 주세요.",
                 },
-                // validate: {
-                //   type: (value) =>
-                //     emailCheck(value) ||
-                //     "You should write in proper email format.",
-                // },
               })}
             />
           ) : (
@@ -213,11 +208,6 @@ const RegisterForm = ({
                   message:
                     "비밀번호는 영문(대/소문자 구분), 숫자 조합하여 6~12자리로 입력해 주세요.",
                 },
-                // validate: {
-                //   type: (value) =>
-                //     emailCheck(value) ||
-                //     "You should write in proper email format.",
-                // },
               })}
             />
           )}
@@ -248,11 +238,6 @@ const RegisterForm = ({
                   message:
                     "비밀번호는 영문(대/소문자 구분), 숫자 조합하여 6~12자리로 입력해 주세요.",
                 },
-                // validate: {
-                //   type: (value) =>
-                //     emailCheck(value) ||
-                //     "You should write in proper email format.",
-                // },
               })}
             />
           ) : (
@@ -276,11 +261,11 @@ const RegisterForm = ({
                   message:
                     "비밀번호는 영문(대/소문자 구분), 숫자 조합하여 6~12자리로 입력해 주세요.",
                 },
-                // validate: {
-                //   type: (value) =>
-                //     emailCheck(value) ||
-                //     "You should write in proper email format.",
-                // },
+                validate: (value) => {
+                  if (watch("password") !== value) {
+                    return "비밀번호가 일치하지 않습니다.";
+                  }
+                },
               })}
             />
           )}
