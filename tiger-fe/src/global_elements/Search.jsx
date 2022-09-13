@@ -58,9 +58,6 @@ const Search = () => {
     console.log(address);
   };
 
-  // const [latitude, setLatitude] = useState("");
-  // const [longitude, setLongitude] = useState("");
-
   const [locationObj, setLocationObj] = useState({});
 
   const getCoords = (address) => {
@@ -90,6 +87,8 @@ const Search = () => {
   console.log(locationX, locationY);
 
   // 검색한 주소로 위도경도 구하기
+  // const [latitude, setLatitude] = useState("");
+  // const [longitude, setLongitude] = useState("");
   // const geocoder = new kakao.maps.services.Geocoder();
   // geocoder.addressSearch(address, function (result, status) {
   //   if (status === kakao.maps.services.Status.OK) {

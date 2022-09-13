@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const serverApi = process.env.REACT_APP_SERVER;
+
 const initialState = {
   ownerModiRegisterInfo: {
     vbrand: "",
@@ -30,16 +32,14 @@ const initialState = {
 export const __ownerModiRegisterInfo = createAsyncThunk(
   "ownerRegister/__ownerModiRegisterInfo",
   async (payload, thunkAPI) => {
+    const vId = payload;
     try {
       const headers = {
         "Content-Type": "application/json",
       };
-      const resp = await axios.get(
-        "https://run.mocky.io/v3/a007a5cd-6e49-4807-9586-6b4100ae5e86",
-        // `/api/vehicle/management/{ownerId}`
-        {},
-        { headers: headers }
-      );
+      const resp = await axios.get(`${serverApi}/vehicle/management/${vId}`, {
+        headers: headers,
+      });
       // console.log(resp.data);
       return thunkAPI.fulfillWithValue(resp.data.output);
     } catch (error) {

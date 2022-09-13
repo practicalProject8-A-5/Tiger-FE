@@ -15,6 +15,8 @@ const OwnerItemList = ({ category }) => {
     (state) => state.ownerItemListSlice.OwnerItemList
   );
 
+  console.log(OwnerItemLists);
+
   // const id = useSelector(
   //   (state) => state.ownerItemListSlice.OwnerItemList.output
   // );
@@ -53,7 +55,7 @@ const OwnerItemList = ({ category }) => {
         OwnerItemLists.output &&
         OwnerItemLists.output.map((list, i) => {
           return (
-            <OwnerItem key={i} list={list} category={category} vId={list.vId} />
+            <OwnerItem key={i} list={list} category={category} vid={list.vid} />
           );
         })
       )}

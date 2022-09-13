@@ -15,10 +15,14 @@ import ModifyImgViewBox from "./ModifyImgViewBox";
 import { __ownerModiRegisterInfo } from "../../redux/modules/ownerModify";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 const VehicleModify = () => {
   const [locationObj, setLocationObj] = useState({});
   console.log(locationObj);
+
+  const vid = useParams();
+  console.log(vid.id);
 
   const VehicleInfo = useSelector(
     (state) => state.ownerModiRegisterInfoSlice.ownerModiRegisterInfo
@@ -27,7 +31,7 @@ const VehicleModify = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(__ownerModiRegisterInfo());
+    dispatch(__ownerModiRegisterInfo(parseInt(vid.id)));
   }, []);
 
   useEffect(() => {

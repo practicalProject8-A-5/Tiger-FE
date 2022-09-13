@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import VehicleModify from "./VehicleModify";
 
-const OwnerItem = ({ list, category, vId }) => {
+const OwnerItem = ({ list, category, vid }) => {
   // console.log(vId);
   const onClick = () => {
     console.log("눌림");
@@ -11,7 +11,7 @@ const OwnerItem = ({ list, category, vId }) => {
 
   const navigate = useNavigate();
   const goUpdate = (list) => {
-    navigate(`/owner/${vId}/modi`);
+    navigate(`/owner/${vid}/modi`);
   };
 
   return (
