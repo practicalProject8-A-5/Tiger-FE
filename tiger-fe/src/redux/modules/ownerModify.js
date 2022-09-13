@@ -3,9 +3,6 @@ import axios from "axios";
 
 const serverApi = process.env.REACT_APP_SERVER;
 
-const userToken = localStorage.getItem("userToken");
-const refreshToken = localStorage.getItem("refreshToken");
-
 const initialState = {
   ownerModiRegisterInfo: {
     vbrand: "",
@@ -37,6 +34,8 @@ export const __ownerModiRegisterInfo = createAsyncThunk(
   async (payload, thunkAPI) => {
     const vId = payload;
     try {
+      const userToken = localStorage.getItem("userToken");
+      const refreshToken = localStorage.getItem("refreshToken");
       const headers = {
         "Content-Type": "application/json",
         Authorization: userToken,
