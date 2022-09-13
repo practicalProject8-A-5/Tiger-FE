@@ -1,5 +1,9 @@
+// eslint-disable-next-line
+
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+
+const serverApi = process.env.REACT_APP_SERVER;
 
 const initialState = {
   OwnerItemList: {},
@@ -8,6 +12,9 @@ const initialState = {
   error: null,
 };
 
+const userToken = localStorage.getItem("userToken");
+const refreshToken = localStorage.getItem("refreshToken");
+
 //등록 차량
 export const __registeredItemList = createAsyncThunk(
   "owner/__registeredItemList",
@@ -15,13 +22,12 @@ export const __registeredItemList = createAsyncThunk(
     try {
       const headers = {
         "Content-Type": "application/json",
+        Authorization: userToken,
+        RefreshToken: refreshToken,
       };
-      const resp = await axios.get(
-        "https://run.mocky.io/v3/26e54b5f-a7d8-4d8b-a170-dd2cd520d144",
-        // `/api/vehicle/management/{ownerId}`
-        {},
-        { headers: headers }
-      );
+      const resp = await axios.get(`${serverApi}/vehicle/management`, {
+        headers: headers,
+      });
       // console.log(resp.data);
       return thunkAPI.fulfillWithValue(resp.data);
     } catch (error) {
@@ -37,11 +43,11 @@ export const __reservedItemList = createAsyncThunk(
     try {
       const headers = {
         "Content-Type": "application/json",
+        Authorization: userToken,
+        RefreshToken: refreshToken,
       };
       const resp = await axios.get(
-        "https://run.mocky.io/v3/5f220712-9eb7-4a27-8870-c1ccd794306b",
-        // `/api/order/owner?status=reserved&limit={limit}&{offset}`
-        {},
+        `${serverApi}/order/owner?status=RESERVED&limit=100&offset=0`,
         { headers: headers }
       );
       // console.log(resp.data);
@@ -59,11 +65,11 @@ export const __useItemList = createAsyncThunk(
     try {
       const headers = {
         "Content-Type": "application/json",
+        Authorization: userToken,
+        RefreshToken: refreshToken,
       };
       const resp = await axios.get(
-        "https://run.mocky.io/v3/1e6388f7-a986-495a-91d1-2494f9a3d1e6",
-        // `/api/order/owner?status=use&limit={limit}&{offset}`
-        {},
+        `${serverApi}/order/owner?status=USE&limit=100&offset=0`,
         { headers: headers }
       );
       // console.log(resp.data);
@@ -81,11 +87,11 @@ export const __returnItemList = createAsyncThunk(
     try {
       const headers = {
         "Content-Type": "application/json",
+        Authorization: userToken,
+        RefreshToken: refreshToken,
       };
       const resp = await axios.get(
-        "https://run.mocky.io/v3/9166c33e-e74b-4bb4-baf8-6cfda2b15fe3",
-        // `/api/order/owner?status=return&limit={limit}&{offset}`
-        {},
+        `${serverApi}/order/owner?status=RETURN&limit=100&offset=0`,
         { headers: headers }
       );
       // console.log(resp.data);
@@ -103,11 +109,11 @@ export const __cancleItemList = createAsyncThunk(
     try {
       const headers = {
         "Content-Type": "application/json",
+        Authorization: userToken,
+        RefreshToken: refreshToken,
       };
       const resp = await axios.get(
-        "https://run.mocky.io/v3/a511fe1c-9069-4b6b-a874-ec4476bff96d",
-        // `/api/order/owner?status=cancle&limit={limit}&{offset}`
-        {},
+        `${serverApi}/order/owner?status=CANCEL&limit=100&offset=0`,
         { headers: headers }
       );
       // console.log(resp.data);
