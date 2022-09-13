@@ -12,14 +12,13 @@ const initialState = {
   error: null,
 };
 
-const userToken = localStorage.getItem("userToken");
-const refreshToken = localStorage.getItem("refreshToken");
-
 //등록 차량
 export const __registeredItemList = createAsyncThunk(
   "owner/__registeredItemList",
   async (payload, thunkAPI) => {
     try {
+      const userToken = localStorage.getItem("userToken");
+      const refreshToken = localStorage.getItem("refreshToken");
       const headers = {
         "Content-Type": "application/json",
         Authorization: userToken,
@@ -41,6 +40,8 @@ export const __reservedItemList = createAsyncThunk(
   "owner/__reservedItemList",
   async (payload, thunkAPI) => {
     try {
+      const userToken = localStorage.getItem("userToken");
+      const refreshToken = localStorage.getItem("refreshToken");
       const headers = {
         "Content-Type": "application/json",
         Authorization: userToken,
@@ -63,6 +64,8 @@ export const __useItemList = createAsyncThunk(
   "owner/__useItemList",
   async (payload, thunkAPI) => {
     try {
+      const userToken = localStorage.getItem("userToken");
+      const refreshToken = localStorage.getItem("refreshToken");
       const headers = {
         "Content-Type": "application/json",
         Authorization: userToken,
@@ -85,6 +88,8 @@ export const __returnItemList = createAsyncThunk(
   "owner/__returnItemList",
   async (payload, thunkAPI) => {
     try {
+      const userToken = localStorage.getItem("userToken");
+      const refreshToken = localStorage.getItem("refreshToken");
       const headers = {
         "Content-Type": "application/json",
         Authorization: userToken,
@@ -107,6 +112,8 @@ export const __cancleItemList = createAsyncThunk(
   "owner/__cancleItemList",
   async (payload, thunkAPI) => {
     try {
+      const userToken = localStorage.getItem("userToken");
+      const refreshToken = localStorage.getItem("refreshToken");
       const headers = {
         "Content-Type": "application/json",
         Authorization: userToken,
