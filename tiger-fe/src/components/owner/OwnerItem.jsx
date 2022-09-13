@@ -6,16 +6,19 @@ import { __registeredItemList } from "../../redux/modules/ownerItemListSlice";
 import { useDispatch } from "react-redux";
 
 const OwnerItem = ({ list, category, vid }) => {
+
+  const onClick = (e) => {
+    navigate(`/vdetail/${vid}`);
+}
   const serverApi = process.env.REACT_APP_SERVER;
 
   const dispatch = useDispatch();
 
-  const onClick = () => {
-    console.log("눌림");
-  };
+  
 
   const navigate = useNavigate();
-  const goUpdate = (list) => {
+  const goUpdate = (e) => {
+    e.stopPropagation();
     navigate(`/owner/${vid}/modi`);
   };
 

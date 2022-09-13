@@ -15,25 +15,34 @@ import ModifyImgViewBox from "./ModifyImgViewBox";
 import { __ownerModiRegisterInfo } from "../../redux/modules/ownerModify";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 const VehicleModify = () => {
-  const [locationObj, setLocationObj] = useState({});
-  console.log(locationObj);
+  const navigate = useNavigate();
+
+  //.env
+  const serverApi = process.env.REACT_APP_SERVER;
+
+  //userInfo
+  const userInfo = useSelector((state) => state.memberSlice.userInfo);
+  // console.log(userInfo);
 
   const vid = useParams();
   console.log(vid.id);
+  const numVid = parseInt(vid.id);
 
+  //vehicleInfo
   const VehicleInfo = useSelector(
     (state) => state.ownerModiRegisterInfoSlice.ownerModiRegisterInfo
   );
-  // console.log(VehicleInfo);
 
+  //vehicle정보 불러오기 (리덕스)
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(__ownerModiRegisterInfo(parseInt(vid.id)));
+    dispatch(__ownerModiRegisterInfo(numVid));
   }, []);
 
+  //수정페이지 기본 정보 값
   useEffect(() => {
     setInputs({
       ...inputs,
@@ -43,7 +52,7 @@ const VehicleModify = () => {
       email: VehicleInfo.email,
       fuelEfficiency: VehicleInfo.fuelEfficiency,
       fuelType: VehicleInfo.fuelType,
-      location: VehicleInfo.location,
+      // location: VehicleInfo.location,
       oname: VehicleInfo.oname,
       passengers: VehicleInfo.passengers,
       price: VehicleInfo.price,
@@ -53,20 +62,15 @@ const VehicleModify = () => {
       type: VehicleInfo.type,
       vname: VehicleInfo.vname,
       years: VehicleInfo.years,
-      imageList: VehicleInfo.imageList,
+      // imageList: VehicleInfo.imageList,
     });
   }, [VehicleInfo]);
-  // console.log(VehicleInfo.location);
 
   const [inputs, setInputs] = useState(VehicleInfo);
-  // console.log(inputs.imageList);
+  // console.log(inputs.transmission);
 
-  const imageList = VehicleInfo.imageList;
-  const locationInfo = VehicleInfo.location;
-  // console.log(locationInfo);
-  // console.log(inputs.fuelType);
-  // console.log(inputs);
-  // console.log(imageList);
+  // const imageList = VehicleInfo.imageList;
+  // const locationInfo = VehicleInfo.location;
 
   const onChange = (e) => {
     const name = e.target.name;
@@ -75,8 +79,8 @@ const VehicleModify = () => {
       ...inputs,
       [name]: value,
     });
-    console.log(value);
-    console.log(name);
+    // console.log(value);
+    // console.log(name);
   };
 
   const {
@@ -86,12 +90,12 @@ const VehicleModify = () => {
     watch,
     formState: { errors },
     // defaultValues: {},
-  } = useForm();
-  //   {
-  //   defaultValues: {
-  //     location: inputs.location,
-  //   },
-  // }
+  } = useForm({
+    defaultValues: {
+      vbrand: inputs.vbrand,
+      vname: inputs.vname,
+    },
+  });
 
   console.log(watch());
 
@@ -118,12 +122,15 @@ const VehicleModify = () => {
   // console.log(default_value_fuelType);
   //파일 상태관리 및 Array로 만들기 위해
   const [files, setFiles] = useState([]);
+  const [fileList, setFileList] = useState();
   const [isShowImg, setIsShowImg] = useState(true);
 
   const changeImg = (e) => {
     const files = e.target.files;
     const fileList = Array.from(files);
     const urlList = fileList.map((file) => URL.createObjectURL(file));
+
+    setFileList(files);
 
     setFiles([...urlList]);
     // setFiles([]);
@@ -135,16 +142,14 @@ const VehicleModify = () => {
 
   //location
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [address, setAddress] = useState(inputs.location);
-  // console.log(inputs.location);
-  console.log(address);
+  const [address, setAddress] = useState("");
+  const [locationObj, setLocationObj] = useState({});
+  // console.log(locationObj);
+  // console.log(address);
 
   const onChangeHandler = (e) => {
-    console.log(e.target.defaultValue);
-    setAddress(e.target.defaultValue);
+    setAddress(e.target.value);
   };
-
-  // console.log(address);
 
   const RegisterPostCodeStyle = {
     display: "block",
@@ -170,47 +175,103 @@ const VehicleModify = () => {
       }
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
-    console.log("fullAddress:", fullAddress);
     setAddress(fullAddress);
+    console.log("fullAddress:", fullAddress);
+    console.log("address:", address);
   };
   // console.log(address);
 
-  //임시 submit handler
-  // const onSubmit = (data) => {
-  //   // dispatch(__ownerRegisterInfo(data));
-  //   // setAddress("");
-  //   // setValue("");
-  //   console.log("onSubmit");
-  // };
+  // 임시 submit handler
+  console.log(inputs.vbrand);
+  // console.log(inputs.vbrand)
+  // console.log(inputs.vbrand)
+  const onSubmit = async ({
+    vbrand,
+    vname,
+    years,
+    passengers,
+    fuelEfficiency,
+    description,
+    location,
+    price,
+    // locationObj,
+  }) => {
+    //이미지 업로드
+    // const imgFormData = new FormData();
+    const formData = new FormData();
+    formData.append("vbrand", vbrand);
+    formData.append("vname", vname);
+    formData.append("years", years);
+    formData.append("passengers", passengers);
+    formData.append("fuelEfficiency", fuelEfficiency);
+    formData.append("fuelType", watch("fuelType").value);
+    formData.append("transmission", watch("transmission").value);
+    formData.append("type", watch("cartype").value);
+    formData.append("description", description);
+    formData.append("location", location);
+    formData.append("locationX", locationObj.locationX);
+    formData.append("locationY", locationObj.locationY);
+    formData.append("price", price);
+    for (let i = 0; i < fileList.length; i++) {
+      formData.append("imageList", fileList[i]);
+    }
 
-  // console.log(inputs.vbrand);
-  // console.log(info);
-  const [isEdit, setIsEdit] = useState(false);
-  const [isEditLocation, setIsEditLocation] = useState(false);
-  const [showMap, setShowMap] = useState(false);
-  const onClickEdit = () => {
-    setIsEdit(!isEdit);
+    for (let value of formData.values()) {
+      console.log("value:", value);
+    }
+
+    const userToken = localStorage.getItem("userToken");
+    const refreshToken = localStorage.getItem("refreshToken");
+    try {
+      // const jsonType = { "Content-Type": "application/json" };
+      const multipartType = { "Content-Type": "multipart/form-data" };
+      // const json = JSON.stringify(obj)
+      await axios.put(`${serverApi}/vehicle/management/${numVid}`, formData, {
+        headers: {
+          multipartType,
+          Authorization: userToken,
+          RefreshToken: refreshToken,
+        },
+        // headers: jsonType,
+        // Authorization: userToken,
+        // RefreshToken: refreshToken,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+
+    navigate(`/owner`);
   };
-  const onClickEditLocation = () => {
-    // setAddress();
-    setIsPopupOpen(!isPopupOpen);
-    // setIsEditLocation(!isEditLocation);
-  };
+
+  // const onClickEditLocation = () => {
+  //   // setAddress();
+  //   setIsPopupOpen(!isPopupOpen);
+  //   // setIsEditLocation(!isEditLocation);
+  // };
   // const showMapHandler = () => {
   //   setShowMap(!showMap);
   // };
   // console.log("isEditLocation:", isEditLocation);
   // console.log("isEdit:", isEdit);
-  // console.log("address:", address);
+  console.log("address:", address);
   return (
     <StVehicleModify>
-      <form>
+      <form id="form" onSubmit={handleSubmit(onSubmit, watch)}>
         {/* //이미지 */}
-        <div className="onchange__imgbox">
+        {/* <div className="onchange__imgbox">
           {!isEdit ? (
             <ModifyImgViewBox files={files} imageList={imageList} />
           ) : (
             <ImgViewBox files={files} imageList={imageList} />
+          )}
+        </div> */}
+        <div className="onchange__imgbox">
+          {!isShowImg ? (
+            <ImgViewBox files={files} />
+          ) : (
+            <p className="imgbox_text">
+              등록하실 차량의 이미지를 아래 버튼을 통해 업로드 해주세요:)
+            </p>
           )}
         </div>
 
@@ -219,7 +280,7 @@ const VehicleModify = () => {
             type="file"
             className="img"
             onChange={changeImg}
-            onClick={onClickEdit}
+            // onClick={onClickEdit}
             multiple="multiple"
             accept="image/jpg, image/png, image/jpeg"
           />
@@ -228,25 +289,17 @@ const VehicleModify = () => {
         {/* 브랜드명, 차종 */}
         <div className="input__top">
           <div className="input__box">
-            <label htmlFor="brand">브랜드명</label>
+            <label htmlFor="vbrand">브랜드명</label>
             <input
               type="text"
-              id="brand"
+              id="vbrand"
               placeholder="ex. 테슬라"
               defaultValue={inputs.vbrand || ""}
               // value={inputs.vbrand || ""}
               name="vbrand"
               onChange={onchange}
-              {...register("brand", {
+              {...register("vbrand", {
                 required: "브랜드명을 입력해주세요",
-                mimLength: {
-                  value: 2,
-                  message: "2글자 이상",
-                },
-                maxLength: {
-                  value: 10,
-                  message: "10글자 이하",
-                },
               })}
             />
             {errors.model ? (
@@ -333,18 +386,20 @@ const VehicleModify = () => {
                   name="fuelType"
                   className="select"
                   rules={{ required: "필수로 선택하셔야합니다." }}
-                  render={({ field, onChange, value }) => (
+                  render={({ field }) => (
                     <Select
                       {...field}
                       placeholder="연료 종류"
                       options={fueltypeOption}
+                      // value={fueltypeOption.find(
+                      //   (option) => option.label === inputs.fuelType
+                      // )}
                       // value={fueltypeOption.find((c) => c.value === value)}
-                      // onChange={(val) => onChange(val.value)}
-                      // value={fueltypeOption.value || ""}
+                      // onChange={(e) => e.target.value}
                     />
                   )}
                   control={control}
-                  defaultValue={inputs.fuelType || ""}
+                  // defaultValue={inputs.fuelType || ""}
                 />
               </td>
             </tr>
@@ -355,15 +410,19 @@ const VehicleModify = () => {
                   name="transmission"
                   className="select"
                   rules={{ required: "필수로 선택하셔야합니다." }}
-                  render={({ field }) => (
+                  render={({ field, value }) => (
                     <Select
                       {...field}
                       placeholder="변속기 종류"
                       options={transmissionOption}
+                      // value={transmissionOption.filter(
+                      //   (option) => option.label === inputs.transmission
+                      // )}
+                      // onChange={(value) => inputs.transmission.onChange(value)}
                     />
                   )}
                   control={control}
-                  defaultValue={inputs.transmission || ""}
+                  // defaultValue={inputs.transmission || ""}
                 />
               </td>
               <th>차 종류</th>
@@ -372,20 +431,36 @@ const VehicleModify = () => {
                   name="cartype"
                   className="select"
                   rules={{ required: "필수로 선택하셔야합니다." }}
-                  render={({ field }) => (
+                  render={({ field, value }) => (
                     <Select
                       {...field}
                       placeholder="차 종류"
                       options={cartypeOption}
+                      // value={cartypeOption.filter(
+                      //   (option) => option.label === inputs.type
+                      // )}
                     />
                   )}
                   control={control}
-                  defaultValue={inputs.type || ""}
+                  // defaultValue={inputs.type || ""}
                 />
               </td>
             </tr>
           </tbody>
         </table>
+
+        <div className="desc">
+          {/* <Controller name="desc" as={ParseTextarea} control={control} /> */}
+          <textarea
+            // name="description"
+            defaultValue={inputs.description || ""}
+            {...register("description")}
+            id="description"
+            placeholder="차량에 대한 설명을 입력해주세요."
+            cols="50"
+            rows="10"
+          ></textarea>
+        </div>
 
         {/* 렌터정보 */}
         <StRenterInfoWrapper>
@@ -393,7 +468,7 @@ const VehicleModify = () => {
             <h1>Owner 정보</h1>
           </div>
           <div className="infoWrapper_personal">
-            <img src={userImg} alt="userimg" />
+            <img src={userInfo.profileImage} alt="userimg" />
             <div className="infoWrapper_personal__info">
               <p className="name">{inputs.oname}</p>
               <div className="infoWrapper_personal__info__wrapper">
@@ -414,18 +489,14 @@ const VehicleModify = () => {
         <div className="location">
           <h2>렌터지역</h2>
           <input
-            type="text"
+            // type="text"
             id="location"
             className="location_input"
-            // value={}
-            // defaultValue={inputs.location || ""}
-            defaultValue={address}
-            onClick={onClickEditLocation}
-            // onChange={(e) => {
-            //   location.onChange(e);
-            // }}
-            // onClickEditLocation={onClickEditLocation}
-            // onChange={onChangeHandler}
+            value={address}
+            onClick={() => {
+              setIsPopupOpen(!isPopupOpen);
+            }}
+            onChange={onChangeHandler}
             placeholder="상세 주소를 입력해주세요."
             {...register("location", {
               required: "주소를 입력해주세요",
@@ -445,13 +516,23 @@ const VehicleModify = () => {
 
         <OwnerKakaoMap
           address={address}
-          locationInfo={locationInfo}
-          setLocationObj={setLocationObj}
           locationObj={locationObj}
-          // isEditLocation={isEditLocation}
+          setLocationObj={setLocationObj}
         />
 
-        <button>제출</button>
+        <div className="price" style={{ marginTop: 30 }}>
+          <label htmlFor="price">가격</label>
+          <input
+            type="text"
+            id="price"
+            defaultValue={inputs.price || ""}
+            placeholder="가격을 입력해주세요"
+            {...register("price", {
+              required: "가격을 입력해주세요",
+            })}
+          />
+        </div>
+        <button>수정하기</button>
       </form>
     </StVehicleModify>
   );

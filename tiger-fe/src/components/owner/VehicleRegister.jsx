@@ -12,9 +12,12 @@ import phone from "../../assets/registerphone.png";
 import OwnerKakaoMap from "./OwnerKakaoMap";
 import { useDispatch } from "react-redux";
 import { __ownerRegisterInfo } from "../../redux/modules/ownerRegister";
+import { useNavigate } from "react-router-dom";
 
 const VehicleRegister = () => {
   const serverApi = process.env.REACT_APP_SERVER;
+
+  const navigate = useNavigate();
   // const dispatch = useDispatch();
 
   // const [selectFuelType, setSelectFuelType] = useState({ value: "0" });
@@ -66,9 +69,9 @@ const VehicleRegister = () => {
     const urlList = fileList.map((file) => URL.createObjectURL(file));
     setFileList(files);
 
-    console.log(files);
-    console.log(fileList);
-    console.log(urlList);
+    // console.log(files);
+    // console.log(fileList);
+    // console.log(urlList);
 
     setFiles([...urlList]);
     // setFiles([]);
@@ -185,6 +188,8 @@ const VehicleRegister = () => {
     } catch (err) {
       console.log(err);
     }
+
+    navigate("/owner");
   };
 
   return (
@@ -478,12 +483,6 @@ const VehicleRegister = () => {
             cols="50"
             rows="10"
           ></textarea>
-          {/* <input
-            type="text"
-            id="description"
-            placeholder="차량에 대한 설명을 입력해주세요"
-            {...register("description")}
-          /> */}
         </div>
 
         {/* 렌터정보 */}
@@ -551,7 +550,7 @@ const VehicleRegister = () => {
             required: "가격을 입력해주세요",
           })}
         />
-        <button>제출</button>
+        <button type="submit">제출</button>
       </form>
     </StVehicleRegister>
   );
