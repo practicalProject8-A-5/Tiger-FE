@@ -81,8 +81,8 @@ const Search = () => {
       });
   };
 
-  const locationX = locationObj.locationX;
-  const locationY = locationObj.locationY;
+  const locationX = Number(locationObj.locationX);
+  const locationY = Number(locationObj.locationY);
 
   console.log(locationX, locationY);
 
@@ -124,8 +124,7 @@ const Search = () => {
       className="example-custom-input"
       // value={value}
       onClick={onClick}
-      ref={ref}
-    >
+      ref={ref}>
       {value}
     </button>
   ));
@@ -203,8 +202,7 @@ const Search = () => {
               setIsPopupOpen(!isPopupOpen);
             }}
             onChange={onChangeHandler}
-            placeholder="어디서?"
-          ></input>
+            placeholder="어디서?"></input>
 
           {isPopupOpen ? (
             <div>

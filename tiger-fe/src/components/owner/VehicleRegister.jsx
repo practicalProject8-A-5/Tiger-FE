@@ -149,12 +149,12 @@ const VehicleRegister = () => {
     formData.append("type", watch("cartype").value);
     formData.append("description", description);
     formData.append("location", location);
-    formData.append("locationX", locationObj.locationX);
-    formData.append("locationY", locationObj.locationY);
+    formData.append("locationX", Number(locationObj.locationX));
+    formData.append("locationY", Number(locationObj.locationY));
     formData.append("price", price);
     // formData.append("imageList", fileList[0]);
-    // console.log(locationObj.locationX);
-    // console.log(locationObj.locationY);
+    // console.log(Number(locationObj.locationX));
+    // console.log(Number(locationObj.locationY));
     // console.log(locationObj);
     for (let i = 0; i < fileList.length; i++) {
       // formData.append("imageList", imgfile[i]);
@@ -392,8 +392,7 @@ const VehicleRegister = () => {
                   style={{
                     // backgroundColor: "rgba(235,52,52,0.8) ",
                     border: "2px solid #EB3434",
-                  }}
-                >
+                  }}>
                   <Controller
                     name="transmission"
                     className="select"
@@ -481,8 +480,7 @@ const VehicleRegister = () => {
             id="description"
             placeholder="차량에 대한 설명을 입력해주세요."
             cols="50"
-            rows="10"
-          ></textarea>
+            rows="10"></textarea>
         </div>
 
         {/* 렌터정보 */}

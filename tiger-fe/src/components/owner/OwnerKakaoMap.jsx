@@ -115,10 +115,11 @@ const OwnerKakaoMap = ({ address, locationObj, setLocationObj }) => {
 
       console.log(coords);
 
-      const locationX = locationObj.locationX;
-      const locationY = locationObj.locationY;
-      // 위도경도 값
-      console.log(locationX, locationY);
+      // const locationX = parseInt(locationObj.locationX);
+      // const locationY = parseInt(locationObj.locationY);
+      // // 위도경도 값
+      // console.log(locationX, locationY);
+      // console.log(typeof locationX);
     }
   };
 

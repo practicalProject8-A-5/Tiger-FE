@@ -6,15 +6,12 @@ import { __registeredItemList } from "../../redux/modules/ownerItemListSlice";
 import { useDispatch } from "react-redux";
 
 const OwnerItem = ({ list, category, vid }) => {
-
   const onClick = (e) => {
     navigate(`/vdetail/${vid}`);
-}
+  };
   const serverApi = process.env.REACT_APP_SERVER;
 
   const dispatch = useDispatch();
-
-  
 
   const navigate = useNavigate();
   const goUpdate = (e) => {
@@ -50,10 +47,10 @@ const OwnerItem = ({ list, category, vid }) => {
           <img src={list.thumbnail} alt="차량" />
           <div className="carInfo">
             <p>
-              {list.vbrand}
+              {list.vbrand} &nbsp;
               {list.vname}
             </p>
-            <span>오너 네임</span>
+            <span>{list.oname}</span>
             <p>₩{list.price}/1일</p>
             <p>{list.location}</p>
           </div>
