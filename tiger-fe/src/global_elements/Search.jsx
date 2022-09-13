@@ -124,7 +124,8 @@ const Search = () => {
       className="example-custom-input"
       // value={value}
       onClick={onClick}
-      ref={ref}>
+      ref={ref}
+    >
       {value}
     </button>
   ));
@@ -202,7 +203,8 @@ const Search = () => {
               setIsPopupOpen(!isPopupOpen);
             }}
             onChange={onChangeHandler}
-            placeholder="어디서?"></input>
+            placeholder="어디서?"
+          ></input>
 
           {isPopupOpen ? (
             <div>
@@ -245,7 +247,7 @@ const Search = () => {
               customInput={<ExampleCustomInput />}
             />
           </StCalendarWrapper>
-          <div className="dateConnection">></div>
+          <div className="dateConnection"></div>
           <StCalendarWrapper>
             <StNewDatePicker
               selected={endDate}
