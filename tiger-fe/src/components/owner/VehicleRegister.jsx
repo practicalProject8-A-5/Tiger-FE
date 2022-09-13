@@ -130,12 +130,13 @@ const VehicleRegister = () => {
     fuelEfficiency,
     description,
     location,
+    price,
     // locationObj,
   }) => {
     //이미지 업로드
     // const imgFormData = new FormData();
     const formData = new FormData();
-    formData.append("vbarnd", vbrand);
+    formData.append("vbrand", vbrand);
     formData.append("vname", vname);
     formData.append("years", years);
     formData.append("passengers", passengers);
@@ -147,6 +148,7 @@ const VehicleRegister = () => {
     formData.append("location", location);
     formData.append("locationX", locationObj.locationX);
     formData.append("locationY", locationObj.locationY);
+    formData.append("price", price);
     // formData.append("imageList", fileList[0]);
     // console.log(locationObj.locationX);
     // console.log(locationObj.locationY);
@@ -539,6 +541,15 @@ const VehicleRegister = () => {
           address={address}
           locationObj={locationObj}
           setLocationObj={setLocationObj}
+        />
+        <label htmlFor="price">가격</label>
+        <input
+          type="text"
+          id="price"
+          placeholder="가격을 입력해주세요"
+          {...register("price", {
+            required: "가격을 입력해주세요",
+          })}
         />
         <button>제출</button>
       </form>
