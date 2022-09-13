@@ -114,6 +114,11 @@ const OwnerKakaoMap = ({ address, locationObj, setLocationObj }) => {
       map.setCenter(coords);
 
       console.log(coords);
+
+      const locationX = locationObj.locationX;
+      const locationY = locationObj.locationY;
+      // 위도경도 값
+      console.log(locationX, locationY);
     }
   };
 
@@ -125,11 +130,6 @@ const OwnerKakaoMap = ({ address, locationObj, setLocationObj }) => {
   useEffect(() => {
     createMap();
   }, [locationObj]);
-
-  const locationX = locationObj.locationX;
-  const locationY = locationObj.locationY;
-  // 위도경도 값
-  console.log(locationX, locationY);
 
   // --------------익현 끝 --------------------------------------
 

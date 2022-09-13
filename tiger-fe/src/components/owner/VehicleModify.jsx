@@ -17,6 +17,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 const VehicleModify = () => {
+  const [locationObj, setLocationObj] = useState({});
+  console.log(locationObj);
+
   const VehicleInfo = useSelector(
     (state) => state.ownerModiRegisterInfoSlice.ownerModiRegisterInfo
   );
@@ -439,6 +442,7 @@ const VehicleModify = () => {
         <OwnerKakaoMap
           address={address}
           locationInfo={locationInfo}
+          setLocationObj={setLocationObj}
           // isEditLocation={isEditLocation}
         />
 
