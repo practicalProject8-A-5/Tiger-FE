@@ -14,13 +14,17 @@ const VehicleDetailRight = () => {
   const vehicleDetails = useSelector(
     (state) => state.vehicleDetailSlice.vehicleDetailList
   );
-  // console.log(vehicleDetails);
+  console.log(vehicleDetails);
+
+  const startDate = new URL(window.location.href).searchParams.get("startDate");
+  const endDate = new URL(window.location.href).searchParams.get("endDate");
+
   return (
     <StPaymentBox>
       <h1>결제 정보</h1>
       <StPaymentPeriod>
-        <h2>대여시간 {vehicleDetails.startDate}</h2>
-        <h2>대여끝나는 시간 {vehicleDetails.endDate}</h2>
+        <h2>대여시간 {startDate}</h2>
+        <h2>대여끝나는 시간 {endDate}</h2>
       </StPaymentPeriod>
       <StPaymentPriceInfo>
         <p>대여요금 ₩{vehicleDetails.vehicleList.price}</p>

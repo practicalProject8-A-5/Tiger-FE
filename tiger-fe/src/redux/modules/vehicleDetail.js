@@ -23,20 +23,28 @@ export const __vehicleDetail = createAsyncThunk(
       const headers = {
         "Content-Type": "application/json",
       };
-      const response = await axios.get(
-        `${serverApi}/vehicle/${vId}?startDate=${startDate}&endDate=${endDate}`,
-        // {},
-        { headers: headers }
-      );
-      console.log(response.data);
-      return thunkAPI.fulfillWithValue(response.data.output);
+      if (startDate === null && endDate === null) {
+        const responseNull = await axios.get(
+          `${serverApi}/vehicle/${vId}?startDate=&endDate=`,
+          // {},
+          { headers: headers }
+        );
+        return thunkAPI.fulfillWithValue(responseNull.data.output);
+      } else {
+        const response = await axios.get(
+          `${serverApi}/vehicle/${vId}?startDate=${startDate}&endDate=${endDate}`,
+          // {},
+          { headers: headers }
+        );
+        return thunkAPI.fulfillWithValue(response.data.output);
+      }
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
   }
 );
 
-// 검색된 차량
+// 검색된 차량 리스트 생성
 export const __vehicleSearchList = createAsyncThunk(
   "detail/__vehicleSearchList",
   async (payload, thunkAPI) => {

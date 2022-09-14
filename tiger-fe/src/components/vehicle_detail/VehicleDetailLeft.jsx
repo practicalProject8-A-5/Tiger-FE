@@ -7,12 +7,9 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import KakaoMapDetail from "./KakaoMapDetail";
-// import { __vehicleDetail } from "../../redux/modules/vehicleDetail";
 
 import email from "../../assets/email.jpg";
 import phone from "../../assets/phone.jpg";
-
-import axios from "axios";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Scrollbar } from "swiper";
@@ -20,7 +17,6 @@ import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
 import { __vehicleDetail } from "../../redux/modules/vehicleDetail";
-import { useState } from "react";
 
 const VehicleDetailLeft = () => {
   const dispatch = useDispatch();
@@ -28,22 +24,17 @@ const VehicleDetailLeft = () => {
   const id = useParams();
   const vId = parseInt(id.id);
 
-  // const serverApi = process.env.REACT_APP_SERVER;
-
   // get response for vehicle info
   const vehicleDetails = useSelector(
     (state) => state.vehicleDetailSlice.vehicleDetailList
   );
   console.log(vehicleDetails.startDate);
 
-  const filteredVehicle = useSelector(
-    (state) => state.vehicleDetailSlice.filteredVehicleList
-  );
-  console.log(filteredVehicle);
+  const startDate = new URL(window.location.href).searchParams.get("startDate");
+  const endDate = new URL(window.location.href).searchParams.get("endDate");
 
-  const startDate = filteredVehicle.startDate;
   console.log(startDate);
-  const endDate = filteredVehicle.endDate;
+  console.log(endDate);
 
   useEffect(() => {
     dispatch(__vehicleDetail({ vId, startDate, endDate }));
