@@ -2,29 +2,11 @@
   "result": "true",
   "status ": {
     "code": "200",
-    "msg": "상품이 성공적으로 조회되었습니다."
+    "msg": "스케줄이 성공적으로 조회되었습니다."
   },
   "output": {
     "vId": 1,
-    "price": 30000,
-    "description": "람보르기니 최신 SUV",
-    "location": "경기도 성남시 분당구 판교로 421",
-    "imageList": [
-      "https:i.pinimg.com/originals/ac/42/db/ac42db304b9ad02f5024a22a89c65914.jpg",
-      "https:blog.kakaocdn.net/dn/mSTN8/btqOtfCzxis/AvYW2xo58bxNQid0mmvkLk/img.jpg",
-      "https:encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL7xW4ku7cZasqw93svYsjzReCkt98YSzg6A&usqp=CAU"
-    ],
-    "vbrand": "람보르기니",
-    "vname": "우루스",
-    "type": "수입",
-    "years": "2020",
-    "fuelType": "휘발유",
-    "passengers": "5",
-    "transmission": "자동",
-    "fuelEfficiency": "6",
-    "oname": "최준우",
-    "email": "jun_chois@naver.com",
-    "tel": "050-9897-2356",
-    "profileImage": "https://downloadwap.com/thumbs2/wallpapers/p2ls/new/37/YpINegBlPp.jpg"
+    "reservedDateList": ["2022-08-11", "2022-08-12", "2022-08-13"],
+    "openDateList": ["2022-08-01", "2022-08-02", "2022-08-03", "2022-08-04"]
   }
 }

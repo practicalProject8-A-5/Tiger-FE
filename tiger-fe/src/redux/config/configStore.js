@@ -10,6 +10,7 @@ import memberSlice from "../modules/memberSlice";
 import ownerRegisterInfoSlice from "../modules/ownerRegister";
 import renterItemListSlice from "../modules/renterItemListSlice";
 import ownerModiRegisterInfoSlice from "../modules/ownerModify";
+import getDateListSlice from "../modules/DateSlice";
 
 const reducer = combineReducers({
   searchSlice,
@@ -20,6 +21,7 @@ const reducer = combineReducers({
   ownerRegisterInfoSlice,
   renterItemListSlice,
   ownerModiRegisterInfoSlice,
+  getDateListSlice,
 });
 
 const store = configureStore({
