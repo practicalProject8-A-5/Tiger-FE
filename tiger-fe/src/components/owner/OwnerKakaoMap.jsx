@@ -1,16 +1,14 @@
 /*global kakao*/
 
-import React, { useEffect, useState } from "react";
+// eslint-disable-next-line
+
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
 const OwnerKakaoMap = ({ address, locationObj, setLocationObj }) => {
   const mapKey = process.env.REACT_APP_REST_API_KEY;
 
-  // console.log(isEditLocation);
-  // console.log(address);
-  // console.log(locationInfo);
-  // console.log(address);
   const locationOnMap = address;
   console.log(locationOnMap);
   console.log(locationObj);
@@ -57,11 +55,11 @@ const OwnerKakaoMap = ({ address, locationObj, setLocationObj }) => {
 
   // const [locationObj, setLocationObj] = useState({});
 
-  const getCoords = (locationOnMap) => {
+  const getCoords = async (locationOnMap) => {
     const headers = {
       Authorization: `KakaoAK ${mapKey}`,
     };
-    axios
+    await axios
       .get(
         `https://dapi.kakao.com/v2/local/search/address.json?query=${locationOnMap}`,
         {
@@ -93,6 +91,7 @@ const OwnerKakaoMap = ({ address, locationObj, setLocationObj }) => {
     // const resultY = locationObj.locationY;
 
     if (locationOnMap) {
+      console.log(locationOnMap);
       var coords = new kakao.maps.LatLng(
         locationObj.locationY,
         locationObj.locationX
@@ -133,7 +132,7 @@ const OwnerKakaoMap = ({ address, locationObj, setLocationObj }) => {
   }, [locationObj]);
 
   // --------------익현 끝 --------------------------------------
-
+  // return <div></div>;
   return (
     <StOwnerMap>
       <div id="map"></div>

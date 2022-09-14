@@ -1,5 +1,6 @@
-/*global kakao*/
-import React, { useState } from "react";
+// eslint-disable-next-line
+
+import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
 import styled, { css } from "styled-components";
@@ -10,15 +11,11 @@ import userImg from "../../assets/dan-gold-N7RiDzfF2iw-unsplash.jpg";
 import email from "../../assets/registermail.png";
 import phone from "../../assets/registerphone.png";
 import OwnerKakaoMap from "./OwnerKakaoMap";
-import { useDispatch } from "react-redux";
-import { __ownerRegisterInfo } from "../../redux/modules/ownerRegister";
 import { useNavigate } from "react-router-dom";
 
 const VehicleRegister = () => {
   const serverApi = process.env.REACT_APP_SERVER;
-
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
 
   // const [selectFuelType, setSelectFuelType] = useState({ value: "0" });
   // const [selectTransmission, setSelectTransmission] = useState({ value: "0" });
@@ -27,6 +24,7 @@ const VehicleRegister = () => {
   // console.log(selectFuelType.value);
   // console.log(selectTransmission.value);
   // console.log(selectCarType.value);
+
   //유효성 검사 및 select 최적화
   const {
     register,
@@ -81,8 +79,6 @@ const VehicleRegister = () => {
     }
   };
 
-  // useEffect(() => {}, [files]);
-
   //location
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [address, setAddress] = useState("");
@@ -105,6 +101,7 @@ const VehicleRegister = () => {
     zIndex: "999",
   };
 
+  // useEffect(() => {});
   const handlePostCode = (data) => {
     let fullAddress = data.address;
     let extraAddress = "";
@@ -166,8 +163,6 @@ const VehicleRegister = () => {
     for (let value of formData.values()) {
       console.log("value:", value);
     }
-    // const req = {};
-    // const json = JSON.stringify(req);
 
     const userToken = localStorage.getItem("userToken");
     const refreshToken = localStorage.getItem("refreshToken");
@@ -181,9 +176,6 @@ const VehicleRegister = () => {
           Authorization: userToken,
           RefreshToken: refreshToken,
         },
-        // headers: jsonType,
-        // Authorization: userToken,
-        // RefreshToken: refreshToken,
       });
     } catch (err) {
       console.log(err);
@@ -205,7 +197,6 @@ const VehicleRegister = () => {
             </p>
           )}
         </div>
-
         <div className="imgbox">
           <input
             type="file"
@@ -215,7 +206,6 @@ const VehicleRegister = () => {
             accept="image/jpg, image/png, image/jpeg"
           />
         </div>
-
         {/* 브랜드명, 차종 */}
         <div className="input__top">
           <div className="input__box">
@@ -256,7 +246,6 @@ const VehicleRegister = () => {
             ) : null}
           </div>
         </div>
-
         {/* 차량정보 */}
         <table>
           <caption>차량정보</caption>
@@ -548,7 +537,12 @@ const VehicleRegister = () => {
             required: "가격을 입력해주세요",
           })}
         />
-        <button type="submit">제출</button>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+          }}>
+          제출
+        </button>
       </form>
     </StVehicleRegister>
   );

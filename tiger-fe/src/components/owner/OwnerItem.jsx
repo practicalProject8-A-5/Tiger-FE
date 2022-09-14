@@ -43,9 +43,9 @@ const OwnerItem = ({ list, category, vid }) => {
   return (
     <>
       {category === "Registration" ? (
-        <StOwnerItem onClick={onClick}>
-          <img src={list.thumbnail} alt="차량" />
-          <div className="carInfo">
+        <StOwnerItem>
+          <img src={list.thumbnail} alt="차량" onClick={onClick} />
+          <div className="carInfo" onClick={onClick}>
             <p>
               {list.vbrand} &nbsp;
               {list.vname}
@@ -71,9 +71,9 @@ const OwnerItem = ({ list, category, vid }) => {
           </div>
         </StOwnerItem>
       ) : (
-        <StOwnerItem onClick={onClick}>
-          <img src={list.thumbnail} alt="차량" />
-          <div className="carInfo">
+        <StOwnerItem>
+          <img src={list.thumbnail} alt="차량" onClick={onClick} />
+          <div className="carInfo" onClick={onClick}>
             <p>
               {list.vbrand}
               {list.vname}
