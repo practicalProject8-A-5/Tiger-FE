@@ -26,7 +26,7 @@ const OwnerItem = ({ list, category, vid }) => {
   };
 
   const vId = vid;
-  // console.log(vId);
+  console.log(vId);
 
   const deleteHandler = async (e) => {
     e.stopPropagation();
@@ -90,7 +90,9 @@ const OwnerItem = ({ list, category, vid }) => {
             </div>
           </StOwnerItem>
 
-          {isModalOpen && <CalenderBox setIsModalOpen={setIsModalOpen} />}
+          {isModalOpen && (
+            <CalenderBox setIsModalOpen={setIsModalOpen} vId={vId} />
+          )}
         </>
       ) : (
         <StOwnerItem onClick={onClick}>

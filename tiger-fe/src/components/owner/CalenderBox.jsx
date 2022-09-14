@@ -2,12 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import Calender from "./Calender";
 
-const CalenderBox = ({ setIsModalOpen }) => {
+const CalenderBox = ({ setIsModalOpen, vId }) => {
   console.log(setIsModalOpen);
+  console.log(vId);
   return (
     <Stblur>
       <div className="background">
-        <Calender setIsModalOpen={setIsModalOpen} />
+        <Calender setIsModalOpen={setIsModalOpen} vId={vId} />
       </div>
     </Stblur>
   );

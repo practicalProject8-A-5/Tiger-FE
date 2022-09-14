@@ -13,6 +13,7 @@ import OwnerKakaoMap from "./OwnerKakaoMap";
 import { useDispatch } from "react-redux";
 import { __ownerRegisterInfo } from "../../redux/modules/ownerRegister";
 import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
 
 const VehicleRegister = () => {
   const serverApi = process.env.REACT_APP_SERVER;
@@ -505,7 +506,7 @@ const VehicleRegister = () => {
           <input
             id="location"
             className="location_input"
-            value={address}
+            // value={address}
             onClick={() => {
               setIsPopupOpen(!isPopupOpen);
             }}
@@ -541,7 +542,7 @@ const VehicleRegister = () => {
             required: "가격을 입력해주세요",
           })}
         />
-        <button type="submit">제출</button>
+        <button>제출</button>
       </form>
     </StVehicleRegister>
   );
