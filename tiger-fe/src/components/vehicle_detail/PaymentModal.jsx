@@ -1,20 +1,61 @@
 // eslint-disable-next-line
 
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { AiOutlineClose } from "react-icons/ai";
 import logo from "../../assets/ta,iger_logo.png";
+import axios from "axios";
 
 const PaymentModal = ({ showModal, vehicleDetails }) => {
+  const serverApi = process.env.REACT_APP_SERVER;
+
   console.log(vehicleDetails);
 
-  const onClickPayment = () => {
-    console.log("결제할거야");
-  };
-
   const vehicleImage = vehicleDetails.vehicleList.imageList[0];
-
   const totalCost = vehicleDetails.vehicleList.price + 500 + 500;
+
+  const [payMethod, setPayMethod] = useState();
+  console.log(payMethod);
+
+  const confirmPayment = async () => {
+    const confirm = window.confirm("결제하시겠습니까?");
+
+    if (confirm === true && payMethod === undefined) {
+      alert("결제방식을 선택해주세요");
+    } else if (confirm === false) {
+      return null;
+    } else if (confirm === true && payMethod !== undefined) {
+      const vid = vehicleDetails.vehicleList.vid;
+      const paidAmount = vehicleDetails.vehicleList.price;
+      const startDate = vehicleDetails.startDate;
+      const endDate = vehicleDetails.endDate;
+
+      const userToken = localStorage.getItem("userToken");
+      const refreshToken = localStorage.getItem("refreshToken");
+
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: userToken,
+        RefreshToken: refreshToken,
+      };
+      await axios
+        .post(
+          serverApi + `/order/${vid}`,
+          {
+            id: "01010101",
+            paidAmount,
+            startDate,
+            endDate,
+            payMethod,
+            impUid: "0000",
+          },
+          { headers: headers }
+        )
+        .then((res) => {
+          console.log(res);
+        });
+    }
+  };
 
   return (
     <StPaymentModal>
@@ -72,10 +113,26 @@ const PaymentModal = ({ showModal, vehicleDetails }) => {
             <div className="priceInfo">총액</div>
             <div className="price">₩ {totalCost}</div>
           </div>
-
-          <button type="submit" onClick={onClickPayment}>
-            결제하기
-          </button>
+          <form className="vehiclePayMethod">
+            <select
+              required
+              value={payMethod}
+              defaultValue="default"
+              name="payMethod"
+              id="payMethod"
+              onChange={(e) => {
+                setPayMethod(e.target.value);
+              }}>
+              <option value="default" disabled>
+                결제방식
+              </option>
+              <option value="CARD">CARD</option>
+              <option value="CASH">CASH</option>
+            </select>
+            <button type="submit" onClick={confirmPayment}>
+              결제하기
+            </button>
+          </form>
         </div>
       </StPaymentInfo>
     </StPaymentModal>
@@ -109,7 +166,7 @@ const StPaymentInfo = styled.div`
     .icon {
       font-size: 22px;
       position: absolute;
-      top: 28px;
+      top: 18px;
       left: 30px;
       cursor: pointer;
     }
@@ -118,7 +175,7 @@ const StPaymentInfo = styled.div`
       height: 40px;
       /* background-color: pink; */
       text-align: center;
-      margin: 36px 0 25px 0;
+      margin: 25px 0 25px 0;
       img {
         width: 121px;
         height: 100%;
@@ -177,7 +234,6 @@ const StPaymentInfo = styled.div`
         }
       }
     }
-
     .vehicle__desc {
       width: 100%;
       height: 22px;
@@ -258,6 +314,12 @@ const StPaymentInfo = styled.div`
         line-height: 20px !important;
         color: rgb(34, 34, 34) !important;
       }
+    }
+    .vehiclePayMethod {
+      margin-top: 10px;
+      width: 100%;
+      float: right;
+      text-align: right;
     }
     button {
       width: 100%;
