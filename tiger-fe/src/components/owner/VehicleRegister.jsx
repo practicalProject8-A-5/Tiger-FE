@@ -18,15 +18,6 @@ const VehicleRegister = () => {
   const serverApi = process.env.REACT_APP_SERVER;
 
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
-
-  // const [selectFuelType, setSelectFuelType] = useState({ value: "0" });
-  // const [selectTransmission, setSelectTransmission] = useState({ value: "0" });
-  // const [selectCarType, setSelectCarType] = useState({ value: "0" });
-
-  // console.log(selectFuelType.value);
-  // console.log(selectTransmission.value);
-  // console.log(selectCarType.value);
   //유효성 검사 및 select 최적화
   const {
     register,

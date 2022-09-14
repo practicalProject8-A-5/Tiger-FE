@@ -20,7 +20,7 @@ const OwnerPage = () => {
       <Header />
       <NavBar category={category} onSelect={onSelect} />
       <GlobalLayout>
-        <OwnerInfo />
+        {/* <OwnerInfo /> */}
         <OwnerItemList category={category} onSelect={onSelect} />
       </GlobalLayout>
     </>

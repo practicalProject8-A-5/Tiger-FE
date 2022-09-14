@@ -1,187 +1,181 @@
 import React, { useState } from "react";
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
-// 자바스크립트 날짜 관련 함수의 총 집합 라이브러리
-import { format, addMonths, subMonths } from "date-fns";
-import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from "date-fns";
-// import { addMonths } from "date-fns/addMonths";
-import { isSameMonth, isSameDay, addDays, parse } from "date-fns";
+// import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import DatePanel from "react-multi-date-picker/plugins/date_panel";
+import DatePicker, { DateObject } from "react-multi-date-picker";
 import styled from "styled-components";
+// import InputIcon from "react-multi-date-picker/components/input_icon";
+import Icon from "react-multi-date-picker/components/icon";
+import { useEffect } from "react";
+import { useRef } from "react";
+import { GrClose } from "react-icons/gr";
 
-// 왼쪽 월
-const RenderHeaderL = ({ currentMonth, prevMonth, nextMonth }) => {
-  return (
-    <div className="headerL row">
-      <div className="col col-start">
-        <span className="text">
-          <span className="text month">{format(currentMonth, "M")}월</span>
-          {format(currentMonth, "yyyy")}
-        </span>
-      </div>
-      <FaAngleRight className="btnnext" onClick={nextMonth} />
-    </div>
-  );
-};
+const Calender = ({ setIsModalOpen }) => {
+  // console.log(setIsModalOpen);
+  // const today = new Date();
+  // const tomorrow = new Date();
 
-// 오른쪽 월
-// const RenderHeaderR = ({ currentMonth, nextMonth }) => {
-//   return (
-//     <div className="headerR row">
-//       <div className="col col-start">
-//         <span className="text">
-//           <span className="text month">{format(currentMonth, "M")}월</span>
-//           {format(currentMonth, "yyyy")}
-//         </span>
-//       </div>
-//       <FaAngleRight className="btnnext" onClick={nextMonth} />
-//     </div>
-//   );
-// };
+  // tomorrow.setDate(tomorrow.getDate() + 1);
 
-//요일
-const RenderDays = () => {
-  const days = [];
-  const date = ["일", "월", "화", "수", "목", "금", "토"];
+  // const [values, setValues] = useState(new Date());
+  // console.log(values);
 
-  for (let i = 0; i < 7; i++) {
-    days.push(
-      <div className="col" key={i}>
-        {date[i]}
-      </div>
-    );
-  }
+  // const date = new DateObject();
+  // const [dates, setDates] = useState([
+  //   new DateObject().setDay(5),
+  //   new DateObject().setDay(12),
+  //   new DateObject().setDay(14).add(1, "month"),
+  //   new DateObject().setDay(23).add(1, "month"),
+  // ]);
 
-  return <div className="days row">{days}</div>;
-};
+  //값 넣기
+  // const [dates, setDates] = useState([
+  //   new DateObject().setDay(5),
+  //   new DateObject().setDay(12),
+  //   new DateObject().setDay(14).add(1, "month"),
+  //   new DateObject().setDay(23).add(1, "month"),
+  // ]);
+  // let [date, submitDate] = useState([]);
+  // console.log(date);
 
-//1~30,31
-const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
-  const monthStart = startOfMonth(currentMonth);
-  const monthEnd = endOfMonth(monthStart);
-  const startDate = startOfWeek(monthStart);
-  const endDate = endOfWeek(monthEnd);
+  // let [value, setValue] = useState([new Date()]);
+  // console.log(value);
+  // console.log(setValue);
+  // console.log(value[0].year);
 
-  const rows = [];
-  let days = [];
-  let day = startDate;
-  let formattedDate = "";
-  // console.log("day:", day);
-  // console.log("endDate:", endDate);
+  //js일때
+  // let makeList = function () {
+  //   const day = [];
+  //   for (let i = 0; i < value.length; i++) {
+  //     // console.log(value[i]);
+  //     const date = `${value[i].year}-${value[i].month}-${value[i].day}`;
+  //     // console.log(date);
+  //     day.push(date);
+  //     console.log(day);
+  //     // setValue();
+  //   }
+  //   return day;
+  // };
+  // makeList();
 
-  while (day <= endDate) {
-    for (let i = 0; i < 7; i++) {
-      formattedDate = format(day, "d");
-      const cloneDay = day;
-      // console.log("cloneDay:", cloneDay);
-      days.push(
-        <div
-          className={`col cell ${
-            !isSameMonth(day, monthStart)
-              ? "disabled"
-              : isSameDay(day, selectedDate)
-              ? "selected"
-              : format(currentMonth, "M") !== format(day, "M")
-              ? "not-valid"
-              : "valid"
-          }`}
-          key={day}
-          onClick={() => onDateClick(parse(cloneDay))}
-          // onClick={(e)=> e.target.currentMonth}
-        >
-          <span
-            className={
-              format(currentMonth, "M") !== format(day, "M")
-                ? "text not-valid"
-                : ""
-            }
-          >
-            {formattedDate}
-          </span>
-        </div>
-      );
-      day = addDays(day, 1);
+  //useEffect 사용
+  // let [value, setValue] = useState([new Date()]);
+  // useEffect(() => {
+  //   const day = [];
+  //   for (let i = 0; i < value.length; i++) {
+  //     // console.log(value[i]);
+  //     const date = `${value[i].year}-${value[i].month}-${value[i].day}`;
+  //     // console.log(date);
+  //     day.push(date);
+  //     console.log(day);
+  //     setValue();
+  //   }
+  // }, [value]);
+  // console.log(value);
+  // const days = value;
+  // console.log(days);
+
+  //월
+  const months = [
+    "1월",
+    "2월",
+    "3월",
+    "4월",
+    "5월",
+    "6월",
+    "7월",
+    "8월",
+    "9월",
+    "10월",
+    "11월",
+    "12월",
+  ];
+  //요일
+  const weekDays = ["일", "월", "화", "수", "목", "금", "토"];
+  const format = "YYYY-MM-DD";
+
+  const [dates, setDates] = useState([]);
+  useEffect(() => {
+    const dateList = [];
+    for (let i = 0; i < dates.length; i++) {
+      // console.log(dates[i]);
+      const date = `${dates[i].year}-${dates[i].month}-${dates[i].day}`;
+      // console.log(date);
+      dateList.push(date);
+      //  setValue();
     }
-    rows.push(
-      <div className="row" key={day}>
-        {days}
-      </div>
-    );
-    days = [];
-  }
-  return <div className="body">{rows}</div>;
-};
+    console.log(dateList);
+  }, [dates]);
+  // console.log(dates);
 
-const Calender = () => {
-  const [currentMonth, setCurrentMonth] = useState(new Date());
-  const [futureMonth, setFutureMonth] = useState(addMonths(currentMonth, 1));
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  // const [tomorrowMonth, setTomorrowMonth] = useState(new Date(), 1);
-  const month = addMonths(currentMonth, 1);
-  console.log(month);
-  console.log(currentMonth);
-  console.log(selectedDate);
-  const prevMonth = () => {
-    setCurrentMonth(subMonths(currentMonth, 1));
-    // console.log(currentMonth);
-  };
-  const nextMonth = () => {
-    setCurrentMonth(addMonths(currentMonth, 1));
-  };
-  const onDateClick = (day) => {
-    setSelectedDate(day);
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
-  // const onChange = (e)=>{
-  //   e.target.val
-  // }
-
-  // const dateHandler = (e) => {
-  //   // e.target.current
-  //   setCurrentMonth(e.target.value);
-  // };
-  // console.log();
-  //마우스
-  // const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  // const handleMouseMove = (event) => {
-  //   setMousePosition({ x: event.clientX, y: event.clientY });
-  //   // console.log(mousePosition);
+  // 모달 밖에 누르면 끄기
+  // const closeModal = () => {
+  //   setIsModalOpen(false);
   // };
 
+  // const modalRef = useRef();
+  // console.log(modalRef);
+  // useEffect(() => {
+  //   const handler = (e) => {
+  //     if (modalRef.current && !modalRef.current) {
+  //       setIsModalOpen(false);
+  //     }
+  //   };
+
+  //   // document.addEventListener("mousedown", handler);
+  // });
   return (
     <StCalender>
-      <h2>렌트 가능 날짜 선택</h2>
+      {/* 1안 */}
+      {/* <h2>렌트 가능 날짜 선택</h2>
       <p>시작 날짜를 먼저 선택한 후 마감 날짜를 선택해주세요.</p>
       <div className="calender__box">
-        {/* onMouseMove={handleMouseMove} */}
-        {/* Mouse X = {mousePosition.x} Y = {mousePosition.y} */}
-        <div className="box_left">
-          <RenderHeaderL
-            currentMonth={currentMonth}
-            prevMonth={prevMonth}
-            nextMonth={nextMonth}
-          ></RenderHeaderL>
-          <RenderDays />
-          <RenderCells
-            // onMouseMove={handleMouseMove}
-            currentMonth={currentMonth}
-            selectedDate={selectedDate}
-            onDateClick={onDateClick}
+        <form>
+          <DatePicker
+            multiple
+            plugins={[<DatePanel />]}
+            weekDays={weekDays}
+            months={months}
+            numberOfMonths={2}
+            onChange={setValue}
+            render={<Icon />}
           />
-        </div>
-        {/* <div className="box_right">
-          <RenderHeaderR
-            currentMonth={currentMonth}
-            nextMonth={nextMonth}
-          ></RenderHeaderR>
-          <RenderDays />
-          <RenderCells
-            // onMouseMove={handleMouseMove}
-            currentMonth={currentMonth}
-            selectedDate={selectedDate}
-            onDateClick={onDateClick}
-          />
-        </div> */}
+          <button className="submit">등록</button>
+        </form>
+      </div> */}
+      {/* 2안 */}
+      {/* <div className="App"> */}
+      <h2>렌트 가능 날짜 선택</h2>
+      <p>시작 날짜를 먼저 선택한 후 마감 날짜를 선택해주세요.</p>
+      {/* <div style={{ textAlign: "center" }}> */}
+      <StDatePicker
+        value={dates}
+        onChange={setDates}
+        multiple
+        format={format}
+        // onChange={setValue}
+        weekDays={weekDays}
+        months={months}
+        plugins={[<DatePanel />]}
+        render={<Icon style={{ marginBottom: 15 }} />}
+        numberOfMonths={2}
+      />
+      <div className="close" onClick={closeModal}>
+        <GrClose />
       </div>
+      {/* </div> */}
+      <form>
+        <ul>
+          {dates.map((date, index) => (
+            <li key={index}>{date.format()}</li>
+          ))}
+        </ul>
+        <button className="submit">등록</button>
+      </form>
+      {/* </div> */}
     </StCalender>
   );
 };
@@ -189,18 +183,16 @@ const Calender = () => {
 export default Calender;
 
 const StCalender = styled.div`
-  /* margin-top: 50px; */
-  width: 766px;
-  height: 550px;
-  /* background-color: pink; */
+  width: 765px;
+  /* height: 550px; */
   padding: 40px;
-  box-sizing: border-box;
-  box-shadow: 0px 46px 96px rgba(0, 0, 0, 0.08),
-    0px 15.375px 26.2996px rgba(0, 0, 0, 0.0521271),
-    0px 6.38599px 10.2342px rgba(0, 0, 0, 0.04),
-    0px 2.30969px 3.45191px rgba(0, 0, 0, 0.0278729);
-  border-radius: 12px;
-  position: relative;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  animation: modal-show 1.5s;
+  background-color: #fff;
   h2 {
     font-weight: 600;
     font-size: 20px;
@@ -210,222 +202,69 @@ const StCalender = styled.div`
   p {
     font-weight: 600;
     font-size: 16px;
-    color: #cccccc;
+    color: #656060;
     margin-bottom: 52px;
   }
-  .calender__box {
-    display: flex;
-    justify-content: space-between;
-    .box_left {
-      width: 300px;
-      /* background-color: #484848; */
-      /* opacity: 09; */
-      /* height: 285px; */
-      .headerL {
-        width: 100%;
-        height: 25px;
-        /* background-color: pink; */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        margin-bottom: 30px;
-        /* color: #fff; */
-        color: #000;
-        .btnprev {
-          width: 20px;
-          height: 20px;
-          position: absolute;
-          left: 11px;
-          /* color: #fff; */
-          color: #cccccc;
-          /* background-color: royalblue; */
-        }
-        .col {
-          /* background-color: gray; */
-          .text {
-            font-weight: 600;
-            font-size: 18px;
-            /* background-color: yellow; */
-            .text .month {
-            }
-          }
-        }
-        .btnnext {
-          width: 20px;
-          height: 20px;
-          position: absolute;
-          right: 11px;
-          /* color: #fff; */
-          color: #cccccc;
-        }
-      }
-
-      .days {
-        width: 100%;
-        font-weight: 600;
-        font-size: 14px;
-        /* color: #fff; */
-        color: #8b8b8b;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 12px;
-        /* background-color: yellow; */
-        .col {
-          width: 40px;
-          height: 40px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-      }
-      .body {
-        width: 100%;
-        /* background-color: royalblue; */
-        .row {
-          width: 100%;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          /* background-color: red; */
-
-          .col {
-            /* background-color: yellow; */
-            width: 38px;
-            height: 38px;
-            margin: 2px 3px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-sizing: border-box;
-
-            /* ---------------------------------------------- */
-            /* opacity: 0.5; */
-            /* border: 1px solid #fff; */
-            /* transition: all 0.4s; */
-            :hover {
-              /* opacity: 1.4; */
-              cursor: pointer;
-            }
-
-            .not-valid {
-              display: none;
-              /* color: #bfbcbc; */
-            }
-          }
-          .col.cell.valid {
-            font-weight: 600;
-            font-size: 14px;
-
-            /* color: #fff; */
-            color: #cccccc;
-          }
-          .col.cell.selected {
-            /* color: #fff; */
-            font-weight: 700;
-            color: #6a6969;
-            border-radius: 50%;
-            background-color: #cccccc;
-          }
-        }
-      }
+  @keyframes modal-show {
+    from {
+      opacity: 0;
+      margin-top: -50px;
     }
-    .box_right {
-      width: 300px;
-      .headerR {
-        width: 100%;
-        height: 25px;
-        /* background-color: pink; */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        margin-bottom: 30px;
-        /* background-color: skyblue; */
-        /* color: #fff; */
-        color: #000;
-        .btnnext {
-          width: 20px;
-          height: 20px;
-          position: absolute;
-          right: 11px;
-          /* color: #fff; */
-          color: #cccccc;
-          /* background-color: royalblue; */
-        }
-        .col {
-          /* background-color: gray; */
-          .text {
-            font-weight: 600;
-            font-size: 18px;
-            /* background-color: yellow; */
-            .text .month {
-            }
-          }
-        }
-      }
-    }
-    .days {
-      width: 100%;
-      font-weight: 600;
-      font-size: 14px;
-      color: #8b8b8b;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-      .col {
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-    }
-    .body {
-      width: 100%;
-      .row {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        .col {
-          width: 38px;
-          height: 38px;
-          margin: 2px 3px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          box-sizing: border-box;
-          :hover {
-            cursor: pointer;
-            border-radius: 50%;
-            background-color: #eee;
-          }
-
-          .not-valid {
-            display: none;
-          }
-        }
-        .col.cell.valid {
-          font-weight: 600;
-          font-size: 14px;
-          color: #cccccc;
-        }
-        .col.cell.selected {
-          /* font-weight: 700; */
-          /* color: #6a6969; */
-          color: #cccccc;
-        }
-      }
+    to {
+      opacity: 1;
+      margin-top: 0;
     }
   }
+  form {
+    width: 100%;
+    position: relative;
+    /* margin-top: 15px; */
+    /* background-color: pink; */
+    svg {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 15px;
+    }
+    .submit {
+      position: fixed;
+      width: 78px;
+      height: 40px;
+      right: 40px;
+      top: 40px;
+      border: none;
+      background: #ff881b;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 18px;
+      color: #fff;
+      cursor: pointer;
+    }
+    ul {
+      width: auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 1px;
+      /* margin: 0 auto;
+      text-align: center; */
+      /* justify-content: center; */
+      li {
+        margin: 0 22px;
+      }
+      /* position: absolute;
+      top: 40%;
+      right: 20%; */
+    }
+  }
+  .close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    /* background-color: pink; */
+    font-size: 22px;
+    cursor: pointer;
+  }
+`;
 
-  /* .mouse {
-    width: 30px;
-    height: 30px;
-    background-color: pink;
-  } */
+const StDatePicker = styled(DatePicker)`
+  margin-bottom: 15px;
 `;

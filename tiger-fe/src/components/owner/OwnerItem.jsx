@@ -4,17 +4,20 @@ import styled from "styled-components";
 import axios from "axios";
 import { __registeredItemList } from "../../redux/modules/ownerItemListSlice";
 import { useDispatch } from "react-redux";
+import { FaCalendarAlt } from "react-icons/fa";
+import { useState } from "react";
+
+import Calender from "./Calender";
+
+import CalenderBox from "../owner/CalenderBox";
 
 const OwnerItem = ({ list, category, vid }) => {
-
   const onClick = (e) => {
     navigate(`/vdetail/${vid}`);
-}
+  };
   const serverApi = process.env.REACT_APP_SERVER;
 
   const dispatch = useDispatch();
-
-  
 
   const navigate = useNavigate();
   const goUpdate = (e) => {
@@ -25,7 +28,8 @@ const OwnerItem = ({ list, category, vid }) => {
   const vId = vid;
   // console.log(vId);
 
-  const deleteHandler = async () => {
+  const deleteHandler = async (e) => {
+    e.stopPropagation();
     const userToken = localStorage.getItem("userToken");
     const refreshToken = localStorage.getItem("refreshToken");
     const headers = {
@@ -43,36 +47,51 @@ const OwnerItem = ({ list, category, vid }) => {
     dispatch(__registeredItemList());
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  // console.log("isOpenModal ===>", isModalOpen);
+
+  const onClickCalender = (e) => {
+    e.stopPropagation();
+    // console.log("눌림");
+    setIsModalOpen(!isModalOpen);
+  };
+  // console.log(isModalOpen);
+
   return (
     <>
       {category === "Registration" ? (
-        <StOwnerItem onClick={onClick}>
-          <img src={list.thumbnail} alt="차량" />
-          <div className="carInfo">
-            <p>
-              {list.vbrand}
-              {list.vname}
-            </p>
-            <span>오너 네임</span>
-            <p>₩{list.price}/1일</p>
-            <p>{list.location}</p>
-          </div>
-          {/* <div className="dateBtn">{list.createdAt}</div> */}
-          <div className="flex_wrap">
-            <span className="item_date">
-              {/* {list.startDate} ~ {list.endDate} */}
-              2022-08-01 ~ 2022-08-02
-            </span>
-            <div className="btn_box">
-              <span className="modify" onClick={goUpdate}>
-                수정
-              </span>
-              <span className="delete" onClick={deleteHandler}>
-                삭제
-              </span>
+        <>
+          <StOwnerItem onClick={onClick}>
+            <img src={list.thumbnail} alt="차량" />
+            <div className="carInfo">
+              <p>
+                {list.vbrand}
+                {list.vname}
+              </p>
+              <span>오너 네임</span>
+              <p>₩{list.price}/1일</p>
+              <p>{list.location}</p>
             </div>
-          </div>
-        </StOwnerItem>
+            {/* <div className="dateBtn">{list.createdAt}</div> */}
+            <div className="flex_wrap">
+              <span className="item_date">{list.createdAt}</span>
+              <div className="calender" onClick={onClickCalender}>
+                {/* <Calender /> */}
+                <FaCalendarAlt />
+              </div>
+              <div className="btn_box">
+                <span className="modify" onClick={goUpdate}>
+                  수정
+                </span>
+                <span className="delete" onClick={deleteHandler}>
+                  삭제
+                </span>
+              </div>
+            </div>
+          </StOwnerItem>
+
+          {isModalOpen && <CalenderBox setIsModalOpen={setIsModalOpen} />}
+        </>
       ) : (
         <StOwnerItem onClick={onClick}>
           <img src={list.thumbnail} alt="차량" />
@@ -87,10 +106,7 @@ const OwnerItem = ({ list, category, vid }) => {
           </div>
           {/* <div className="dateBtn">{list.createdAt}</div> */}
           <div className="flex_wrap">
-            <span className="item_date">
-              {/* {list.startDate} ~ {list.endDate} */}
-              2022-08-01 ~ 2022-08-02
-            </span>
+            <span className="item_date">{list.createdAt}</span>
           </div>
         </StOwnerItem>
       )}
@@ -103,7 +119,7 @@ export default OwnerItem;
 const StOwnerItem = styled.div`
   /* border: 1px solid; */
   width: 100%;
-  height: 134px;
+  /* height: 100%; */
   /* background-color: skyblue; */
   display: flex;
   position: relative;
@@ -111,7 +127,7 @@ const StOwnerItem = styled.div`
   cursor: pointer;
   img {
     width: 250px;
-    height: 134px;
+    height: 100%;
     object-fit: cover;
     border-radius: 12px;
     margin-right: 24px;
@@ -121,6 +137,7 @@ const StOwnerItem = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    width: 430px;
     p {
       margin-bottom: 11px;
       font-weight: 500;
@@ -138,7 +155,7 @@ const StOwnerItem = styled.div`
   .dateBtn {
     width: 97px;
     height: 20px;
-    /* background-color: yellowgreen; */
+    background-color: yellowgreen;
     position: absolute;
     top: 0;
     right: 0;
@@ -147,15 +164,38 @@ const StOwnerItem = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
+    /* position: relative; */
+    .calender {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* background-color: khaki; */
+      /* position: absolute;
+      right: 0;
+      top: 30px; */
+      /* display: flex;
+      justify-content: center;
+      align-items: center; */
+      .calender__icon {
+        font-size: 20px;
+        cursor: pointer;
+      }
+    }
     .item_date {
+      /* position: absolute; */
       font-weight: 500;
       font-size: 16px;
       color: #8b8b8b;
+      /* background-color: pink; */
+      /* line-height: ; */
     }
     .btn_box {
       margin-bottom: 11px;
       display: flex;
-      justify-content: end;
+      justify-content: space-around;
       /* background-color: pink; */
       .modify {
         font-weight: 500;
