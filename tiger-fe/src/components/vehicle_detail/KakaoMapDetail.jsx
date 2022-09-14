@@ -5,15 +5,15 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 // import axios from "axios";
 
-const KakaoMapDetail = () => {
+const KakaoMapDetail = ({ vehicleDetails }) => {
   // const mapKey = process.env.REACT_APP_REST_API_KEY;
 
-  const vehicleDetails = useSelector(
-    (state) => state.vehicleDetailSlice.vehicleDetailList
-  );
-  console.log(vehicleDetails);
-  console.log(vehicleDetails.locationX);
-  console.log(vehicleDetails.locationY);
+  // const vehicleDetails = useSelector(
+  //   (state) => state.vehicleDetailSlice.vehicleDetailList
+  // );
+  // console.log(vehicleDetails);
+  // console.log(vehicleDetails.locationX);
+  // console.log(vehicleDetails.locationY);
 
   const createMap = () => {
     const mapContainer = document.getElementById("map");

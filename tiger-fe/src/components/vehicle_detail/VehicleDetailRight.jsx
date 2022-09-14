@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 
 import Button from "../../global_elements/Button";
 
@@ -19,12 +19,13 @@ const VehicleDetailRight = () => {
     <StPaymentBox>
       <h1>결제 정보</h1>
       <StPaymentPeriod>
-        <h2>대여시간</h2>
+        <h2>대여시간 {vehicleDetails.startDate}</h2>
+        <h2>대여끝나는 시간 {vehicleDetails.endDate}</h2>
       </StPaymentPeriod>
       <StPaymentPriceInfo>
-        <p>대여요금 ₩{vehicleDetails.price}</p>
+        <p>대여요금 ₩{vehicleDetails.vehicleList.price}</p>
         <p>기타 수수료, 보험료</p>
-        <p>총 예약 금액</p>
+        <p>총 예약 금액 ₩{vehicleDetails.vehicleList.price}</p>
       </StPaymentPriceInfo>
       <StPaymentButton>예약하기</StPaymentButton>
     </StPaymentBox>
@@ -68,7 +69,7 @@ const StPaymentPriceInfo = styled.div`
     font-weight: 500;
     font-size: 22px;
     line-height: 26px;
-    padding-top: 50px;
+    padding-top: 28px;
   }
 `;
 

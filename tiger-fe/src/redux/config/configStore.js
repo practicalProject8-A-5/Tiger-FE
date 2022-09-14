@@ -2,7 +2,6 @@
 
 import logger from "redux-logger";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import searchSlice from "../modules/searchSlice";
 import vehicleDetailSlice from "../modules/vehicleDetail";
 import ownerItemListSlice from "../modules/ownerItemListSlice";
 import incomeItemListSlice from "../modules/incomeItemListSlice";
@@ -11,8 +10,10 @@ import ownerRegisterInfoSlice from "../modules/ownerRegister";
 import renterItemListSlice from "../modules/renterItemListSlice";
 import ownerModiRegisterInfoSlice from "../modules/ownerModify";
 
+import storage from "redux-persist/lib/storage";
+import { persistReducer, persistStore } from "redux-persist";
+
 const reducer = combineReducers({
-  searchSlice,
   ownerItemListSlice,
   vehicleDetailSlice,
   incomeItemListSlice,
@@ -22,13 +23,20 @@ const reducer = combineReducers({
   ownerModiRegisterInfoSlice,
 });
 
-const store = configureStore({
-  reducer,
+const persistConfig = {
+  key: "root",
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, reducer);
+
+export const store = configureStore({
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
     }).concat(logger),
-  devTools: true,
+  devTools: process.env.NODE_ENV !== "production",
 });
 
-export default store;
+export const persistor = persistStore(store);

@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 
-import React, { useState, useEffect, forwardRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, forwardRef } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
@@ -10,7 +10,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
 import Button from "./Button";
-import { __vehicleSearchList } from "../redux/modules/searchSlice";
+import { __vehicleSearchList } from "../redux/modules/vehicleDetail";
 
 import pin from "../assets/pin_trans.png";
 import clock from "../assets/clock.png";
@@ -33,11 +33,11 @@ const Search = () => {
 
   // search full address
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [address, setAddress] = useState("");
+  const [location, setLocation] = useState("");
 
   // search address
   const onChangeHandler = (e) => {
-    setAddress(e.target.value);
+    setLocation(e.target.value);
   };
   const handlePostCode = (data) => {
     let fullAddress = data.address;
@@ -53,20 +53,21 @@ const Search = () => {
       }
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
-    setAddress(fullAddress);
+    setLocation(fullAddress);
     getCoords(fullAddress);
-    console.log(address);
   };
+
+  console.log(location);
 
   const [locationObj, setLocationObj] = useState({});
 
-  const getCoords = (address) => {
+  const getCoords = (location) => {
     const headers = {
       Authorization: `KakaoAK ${mapKey}`,
     };
     axios
       .get(
-        `https://dapi.kakao.com/v2/local/search/address.json?query=${address}`,
+        `https://dapi.kakao.com/v2/local/search/address.json?query=${location}`,
         {
           headers: headers,
         }
@@ -110,14 +111,14 @@ const Search = () => {
   };
 
   // search reservation dates
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [startDates, setStartDates] = useState(new Date());
+  const [endDates, setEndDates] = useState(new Date());
 
-  const newStartDate = new Date(startDate).toISOString().slice(0, 10);
-  const newEndDate = new Date(endDate).toISOString().slice(0, 10);
+  const startDate = new Date(startDates).toISOString().slice(0, 10);
+  const endDate = new Date(endDates).toISOString().slice(0, 10);
 
-  console.log(newStartDate);
-  console.log(newEndDate);
+  console.log(startDate);
+  console.log(endDate);
 
   const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
     <button
@@ -130,38 +131,42 @@ const Search = () => {
   ));
 
   //search vehicle type
-  const [typeValue, setTypeValue] = useState();
+  const [type, setType] = useState();
   const handleChange = (e) => {
-    setTypeValue(e.target.value);
+    setType(e.target.value);
   };
-  console.log(typeValue);
+  console.log(type);
 
   // submit handler
-  const onSubmitHandler = (e) => {
-    if (
-      startDate === "" ||
-      endDate === "" ||
-      address === "" ||
-      typeValue === ""
-    ) {
-      alert("검색을 완료 해주세요");
-    } else {
-      e.preventDefault();
+  const onSubmitHandler = async (e) => {
+    try {
+      if (
+        startDates === "" ||
+        endDates === "" ||
+        location === "" ||
+        type === ""
+      ) {
+        alert("검색을 완료 해주세요");
+      } else {
+        e.preventDefault();
 
-      dispatch(
-        __vehicleSearchList({
-          address,
-          newStartDate,
-          newEndDate,
-          typeValue,
-          locationX,
-          locationY,
-        })
-      );
-      navigate("/vlist");
-      setAddress("");
-      setTypeValue("");
-      setLocationObj({});
+        await dispatch(
+          __vehicleSearchList({
+            location,
+            startDate,
+            endDate,
+            type,
+            locationX,
+            locationY,
+          })
+        );
+        navigate("/vlist");
+        // setAddress("");
+        // setType("");
+        // setLocationObj({});
+      }
+    } catch (err) {
+      console.log(err);
     }
 
     // setAddress("");
@@ -197,7 +202,7 @@ const Search = () => {
         <StSearchLocationContainer>
           <input
             className="location_input"
-            value={address}
+            value={location}
             onClick={() => {
               setIsPopupOpen(!isPopupOpen);
             }}
@@ -232,11 +237,11 @@ const Search = () => {
         <StCalendarContainer>
           <StCalendarWrapper>
             <StNewDatePicker
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
+              selected={startDates}
+              onChange={(date) => setStartDates(date)}
               selectsStart
-              startDate={startDate}
-              endDate={endDate}
+              startDate={startDates}
+              endDate={endDates}
               locale={ko}
               dateFormat="yyyy-MM-dd"
               minDate={new Date()}
@@ -248,12 +253,12 @@ const Search = () => {
           <div className="dateConnection"></div>
           <StCalendarWrapper>
             <StNewDatePicker
-              selected={endDate}
-              onChange={(date) => setEndDate(date)}
+              selected={endDates}
+              onChange={(date) => setEndDates(date)}
               selectsEnd
-              startDate={startDate}
-              endDate={endDate}
-              minDate={startDate}
+              startDate={startDates}
+              endDate={endDates}
+              minDate={startDates}
               locale={ko}
               dateFormat="yyyy-MM-dd"
               shouldCloseOnSelect={true}
@@ -264,7 +269,7 @@ const Search = () => {
         </StCalendarContainer>
 
         <StVehicleTypeContainer>
-          <select value={typeValue} onChange={handleChange}>
+          <select value={type} onChange={handleChange}>
             <option defaultValue="" hidden>
               자동차 종류
             </option>
