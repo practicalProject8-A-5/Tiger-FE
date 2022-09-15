@@ -6,13 +6,13 @@ import { AiOutlineClose } from "react-icons/ai";
 import logo from "../../assets/ta,iger_logo.png";
 import axios from "axios";
 
-const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
+const PaymentModal = ({ showPaymentModal, vehicleDetails, vehicleDates }) => {
   const serverApi = process.env.REACT_APP_SERVER;
 
   console.log(vehicleDetails);
 
-  const vehicleImage = vehicleDetails.vehicleList.imageList[0];
-  const totalCost = vehicleDetails.vehicleList.price + 500 + 500;
+  const vehicleImage = vehicleDetails.imageList[0];
+  const totalCost = vehicleDetails.price + 500 + 500;
 
   const [payMethod, setPayMethod] = useState();
   console.log(payMethod);
@@ -25,10 +25,10 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
     } else if (confirm === false) {
       return null;
     } else if (confirm === true && payMethod !== undefined) {
-      const vid = vehicleDetails.vehicleList.vid;
-      const paidAmount = vehicleDetails.vehicleList.price;
-      const startDate = vehicleDetails.startDate;
-      const endDate = vehicleDetails.endDate;
+      const vid = vehicleDetails.vid;
+      const paidAmount = vehicleDetails.price;
+      const startDate = vehicleDates.startDate;
+      const endDate = vehicleDates.endDate;
 
       const userToken = localStorage.getItem("userToken");
       const refreshToken = localStorage.getItem("refreshToken");
@@ -76,16 +76,13 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
             </div>
             <div className="vehicleInfo">
               <div>
-                <div className="vehicleAddress">
-                  {vehicleDetails.vehicleList.location}
-                </div>
+                <div className="vehicleAddress">{vehicleDetails.location}</div>
                 <div className="vehicleFullName">
-                  {vehicleDetails.vehicleList.vbrand}{" "}
-                  {vehicleDetails.vehicleList.vname}
+                  {vehicleDetails.vbrand} {vehicleDetails.vname}
                 </div>
               </div>
               <div className="vehicleRentPeriod">
-                {vehicleDetails.startDate} ~ {vehicleDetails.endDate}
+                {vehicleDates.startDate} ~ {vehicleDates.endDate}
               </div>
             </div>
           </div>
@@ -99,7 +96,7 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
           </div> */}
           <div className="vehiclePrice">
             <div className="priceInfo">대여요금</div>
-            <div className="price">₩ {vehicleDetails.vehicleList.price}</div>
+            <div className="price">₩ {vehicleDetails.price}</div>
           </div>
           <div className="vehiclePrice">
             <div className="priceInfo">보험료</div>

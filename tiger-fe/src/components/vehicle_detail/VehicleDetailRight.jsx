@@ -12,16 +12,21 @@ import styled from "styled-components";
 
 const VehicleDetailRight = () => {
   // get response for vehicle info
+  const vehicleDates = useSelector(
+    (state) => state.vehicleDetailSlice.vehicleDates
+  );
+  console.log(vehicleDates);
+
   const vehicleDetails = useSelector(
-    (state) => state.vehicleDetailSlice.vehicleDetailList
+    (state) => state.vehicleDetailSlice.vehicleDetails
   );
   console.log(vehicleDetails);
 
   const userInfo = useSelector((state) => state.memberSlice.userInfo);
   console.log(userInfo);
 
-  const startDate = new URL(window.location.href).searchParams.get("startDate");
-  const endDate = new URL(window.location.href).searchParams.get("endDate");
+  // const startDate = new URL(window.location.href).searchParams.get("startDate");
+  // const endDate = new URL(window.location.href).searchParams.get("endDate");
 
   const [paymentModalOpen, setPaymentModalOpen] = useState();
   const showPaymentModal = () => {
@@ -37,13 +42,13 @@ const VehicleDetailRight = () => {
     <StPaymentBox>
       <h1>결제 정보</h1>
       <StPaymentPeriod>
-        <h2>대여시간 {startDate}</h2>
-        <h2>대여끝나는 시간 {endDate}</h2>
+        <h2>대여시간 {vehicleDates.startDate}</h2>
+        <h2>대여끝나는 시간 {vehicleDates.endDate}</h2>
       </StPaymentPeriod>
       <StPaymentPriceInfo>
-        <p>대여요금 ₩{vehicleDetails.vehicleList.price}</p>
+        <p>대여요금 ₩{vehicleDetails.price}</p>
         <p>기타 수수료, 보험료</p>
-        <p>총 예약 금액 ₩{vehicleDetails.vehicleList.price}</p>
+        <p>총 예약 금액 ₩{vehicleDetails.price}</p>
       </StPaymentPriceInfo>
       {userInfo.name ? (
         <StPaymentButton onClick={showPaymentModal}>예약하기</StPaymentButton>
@@ -54,6 +59,7 @@ const VehicleDetailRight = () => {
         <PaymentModal
           showPaymentModal={showPaymentModal}
           vehicleDetails={vehicleDetails}
+          vehicleDates={vehicleDates}
         />
       )}
       {/* {loginModal && <LoginModal showModal={showModal} />} */}

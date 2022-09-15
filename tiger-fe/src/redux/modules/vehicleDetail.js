@@ -7,10 +7,11 @@ const serverApi = process.env.REACT_APP_SERVER;
 
 const initialState = {
   filteredVehicleList: {},
-  vehicleDetailList: {},
+  vehicleDetails: {},
   isLoading: false,
   success: null,
   error: null,
+  vehicleDates: {},
 };
 
 // single vehicle info
@@ -26,14 +27,13 @@ export const __vehicleDetail = createAsyncThunk(
       if (startDate === null && endDate === null) {
         const responseNull = await axios.get(
           `${serverApi}/vehicle/${vId}?startDate=&endDate=`,
-          // {},
           { headers: headers }
         );
+        console.log(responseNull.data.output);
         return thunkAPI.fulfillWithValue(responseNull.data.output);
       } else {
         const response = await axios.get(
           `${serverApi}/vehicle/${vId}?startDate=${startDate}&endDate=${endDate}`,
-          // {},
           { headers: headers }
         );
         return thunkAPI.fulfillWithValue(response.data.output);
@@ -90,8 +90,9 @@ export const vehicleDetailSlice = createSlice({
     },
     [__vehicleDetail.fulfilled]: (state, action) => {
       state.isLoading = false;
-      // console.log(payload);
-      state.vehicleDetailList = action.payload;
+      // console.log(actions);
+      state.vehicleDates = action.payload;
+      state.vehicleDetails = action.payload.vehicleList;
       // console.log(payload);
       console.log(state.vehicleDetailList);
     },
