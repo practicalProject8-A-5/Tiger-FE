@@ -26,7 +26,7 @@ const OwnerItem = ({ list, category, vid }) => {
   };
 
   const vId = vid;
-  console.log(vId);
+  // console.log(vId);
 
   const deleteHandler = async (e) => {
     e.stopPropagation();
@@ -43,7 +43,7 @@ const OwnerItem = ({ list, category, vid }) => {
         headers: headers,
       }
     );
-    console.log(response);
+    // console.log(response);
     dispatch(__registeredItemList());
   };
 
@@ -60,44 +60,41 @@ const OwnerItem = ({ list, category, vid }) => {
   return (
     <>
       {category === "Registration" ? (
-        <>
-          <StOwnerItem onClick={onClick}>
-            <img src={list.thumbnail} alt="차량" />
-            <div className="carInfo">
-              <p>
-                {list.vbrand}
-                {list.vname}
-              </p>
-              <span>오너 네임</span>
-              <p>₩{list.price}/1일</p>
-              <p>{list.location}</p>
+        <StOwnerItem>
+          <img src={list.thumbnail} alt="차량" onClick={onClick} />
+          <div className="carInfo" onClick={onClick}>
+            <p>
+              {list.vbrand} &nbsp;
+              {list.vname}
+            </p>
+            <span>{list.oname}</span>
+            <p>₩{list.price}/1일</p>
+            <p>{list.location}</p>
+          </div>
+          {/* <div className="dateBtn">{list.createdAt}</div> */}
+          <div className="flex_wrap">
+            <span className="item_date">{list.createdAt}</span>
+            <div className="calender" onClick={onClickCalender}>
+              {/* <Calender /> */}
+              <FaCalendarAlt />
             </div>
-            {/* <div className="dateBtn">{list.createdAt}</div> */}
-            <div className="flex_wrap">
-              <span className="item_date">{list.createdAt}</span>
-              <div className="calender" onClick={onClickCalender}>
-                {/* <Calender /> */}
-                <FaCalendarAlt />
-              </div>
-              <div className="btn_box">
-                <span className="modify" onClick={goUpdate}>
-                  수정
-                </span>
-                <span className="delete" onClick={deleteHandler}>
-                  삭제
-                </span>
-              </div>
+            <div className="btn_box">
+              <span className="modify" onClick={goUpdate}>
+                수정
+              </span>
+              <span className="delete" onClick={deleteHandler}>
+                삭제
+              </span>
             </div>
-          </StOwnerItem>
-
+          </div>
           {isModalOpen && (
             <CalenderBox setIsModalOpen={setIsModalOpen} vId={vId} />
           )}
-        </>
+        </StOwnerItem>
       ) : (
-        <StOwnerItem onClick={onClick}>
-          <img src={list.thumbnail} alt="차량" />
-          <div className="carInfo">
+        <StOwnerItem>
+          <img src={list.thumbnail} alt="차량" onClick={onClick} />
+          <div className="carInfo" onClick={onClick}>
             <p>
               {list.vbrand}
               {list.vname}

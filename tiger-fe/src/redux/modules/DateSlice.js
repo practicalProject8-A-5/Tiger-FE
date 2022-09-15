@@ -7,6 +7,7 @@ const serverApi = process.env.REACT_APP_SERVER;
 
 const initialState = {
   DateList: {},
+  temp: [],
   isLoading: false,
   success: null,
   error: null,
@@ -34,7 +35,7 @@ export const __getDateList = createAsyncThunk(
             headers: headers,
           }
         );
-      console.log(resp.data.output);
+      // console.log(resp.data.output);
       return thunkAPI.fulfillWithValue(resp.data.output);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -53,8 +54,17 @@ const getDateListSlice = createSlice({
     },
     [__getDateList.fulfilled]: (state, action) => {
       state.isLoading = false;
-      // console.log(action.payload);
+      console.log(action.payload);
       state.DateList = action.payload;
+      // const temp = action.payload.reservedDateList.length;
+      const temp = [];
+      for (let i = 0; i < action.payload.reservedDateList.length; i++) {
+        temp.push(parseInt(action.payload.reservedDateList[i].slice(8, 10)));
+
+        // console.log(reserveDateDay);
+      }
+      console.log(temp);
+      state.temp = temp;
     },
     [__getDateList.rejected]: (state, action) => {
       state.isLoading = false;

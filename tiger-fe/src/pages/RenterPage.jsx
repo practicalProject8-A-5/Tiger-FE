@@ -7,7 +7,6 @@ import RenterNavbar from "../components/renter/RenterNavbar";
 import GlobalLayout from "../global/GlobalLayout";
 import RenterInfo from "../components/renter/RenterInfo";
 import RenterItem from "../components/renter/RenterItem";
-import { useEffect } from "react";
 
 const RenterPage = () => {
   const [category, setCategory] = useState("RESERVED");

@@ -35,30 +35,18 @@ const Calender = ({ setIsModalOpen, vId }) => {
   const weekDays = ["일", "월", "화", "수", "목", "금", "토"];
   const format = "YYYY-MM-DD";
 
-  const [dates, setDates] = useState([]);
-  // useEffect(() => {
-  //   const dateList = [];
-  //   for (let i = 0; i < dates.length; i++) {
-  //     console.log(dates[i]);
-  //     const date = `${dates[i].year}-${dates[i].month}-${dates[i].day}`;
-  //     console.log(date);
-  //     dateList.push(date);
-  //     //  setValue();
-  //   }
-  //   console.log(dateList);
-  // }, [dates]);
-  // console.log(dates);
-
   const closeModal = () => {
     setIsModalOpen(false);
   };
 
+  const [dates, setDates] = useState([]);
+  //날짜 등록
   const submitHandler = async () => {
     //날짜 추출
-    const dateList = [];
+    const openDateList = [];
     for (let i = 0; i < dates.length; i++) {
       const date = `${dates[i].year}-${dates[i].month}-${dates[i].day}`;
-      dateList.push(date);
+      openDateList.push(date);
     }
 
     const userToken = localStorage.getItem("userToken");
@@ -67,7 +55,7 @@ const Calender = ({ setIsModalOpen, vId }) => {
       await axios.post(
         `${serverApi}/vehicle/schedule/${vId}`,
         // `${serverApiTest}/vehicle/schedule/`,
-        { dateList },
+        { openDateList },
         {
           headers: {
             Authorization: userToken,
@@ -75,7 +63,34 @@ const Calender = ({ setIsModalOpen, vId }) => {
           },
         }
       );
-      console.log(dateList);
+      console.log(openDateList);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  //수정보내기
+  const editSubmitHandler = async () => {
+    const editDateList = [];
+    for (let i = 0; i < openDateList.length; i++) {
+      const date = `${dates[i].year}-${dates[i].month}-${dates[i].day}`;
+      editDateList.push(date);
+    }
+    const userToken = localStorage.getItem("userToken");
+    const refreshToken = localStorage.getItem("refreshToken");
+    try {
+      await axios.put(
+        `${serverApi}/vehicle/schedule/${vId}`,
+        // `${serverApiTest}/vehicle/schedule/`,
+        { editDateList },
+        {
+          headers: {
+            Authorization: userToken,
+            RefreshToken: refreshToken,
+          },
+        }
+      );
+      console.log(editDateList);
     } catch (err) {
       console.log(err);
     }
@@ -83,16 +98,10 @@ const Calender = ({ setIsModalOpen, vId }) => {
 
   // get 불러오기
   const DateList = useSelector((state) => state.getDateListSlice.DateList);
-  // console.log(DateList);
-  console.log(DateList.openDateList);
-  // console.log(DateList.reservedDateList);
-  const openDateyear = DateList.openDateList[0].slice(0, 4);
-  console.log(openDateyear);
 
-  // const openDateMonth = Date.list.openDateList[0].slice(6, 2);
-  // console.log(openDateMonth);
-  // openDateMonth.slice(0, 2);
-  // console.log(openDateMonth);
+  const reservedDate = useSelector((state) => state.getDateListSlice.temp);
+  console.log("reservedDate :", reservedDate);
+  // console.log(DateList.openDateList);
 
   const dispatch = useDispatch();
 
@@ -101,11 +110,35 @@ const Calender = ({ setIsModalOpen, vId }) => {
   }, [dispatch]);
 
   // ---------------------------수정
-  const [openDateList, setOpenDateList] = useState([
-    new DateObject().set({ month: 8, day: 1, format }),
-    new DateObject().set({ month: 8, day: 2, format }),
-    new DateObject().set({ month: 8, day: 3, format }),
-  ]);
+
+  // const openDateyear = Number(DateList.openDateList[0].slice(0, 4));
+  // // console.log(openDateyear);
+
+  // const openDateMonth = Number(DateList.openDateList[0].slice(5, 7));
+  // // console.log(Number(openDateMonth));
+
+  // const openDateDay = Number(DateList.openDateList[0].slice(8, 10));
+  // console.log(openDateDay);
+
+  //open 날짜
+  const [openDateList, setOpenDateList] = useState(
+    // new DateObject().set({
+    //   year: openDateyear,
+    //   month: openDateMonth,
+    //   day: openDateDay,
+    //   format,
+    // }),
+    // new DateObject().set({ month: 8, day: 2, format }),
+    // new DateObject().set({ month: 8, day: 3, format }),
+    DateList.openDateList
+  );
+
+  const [reserveDateList, setReserveDateList] = useState(
+    // new DateObject().set({ month: 9, day: 11, format })
+    DateList.reservedDateList
+  );
+  console.log("reserveDateList :", reserveDateList);
+  // console.log(reserveDateList);
   // console.log("openDateList :", openDateList);
 
   const [editToggle, setEditToggle] = useState(false);
@@ -115,6 +148,25 @@ const Calender = ({ setIsModalOpen, vId }) => {
     setEditToggle(!editToggle);
   };
 
+  // const reserveDateListDay = { ...reserveDateList };
+  // console.log(DateList.reservedDateList[2].slice(8, 10));
+
+  // const temp = [];
+  // for (let i = 0; i <= reserveDateList.length; i++) {
+  //   const reserveDateDay = DateList.reserveDateList[i].slice(8, 10);
+  //   temp.push(reserveDateDay);
+  //   // console.log(reserveDateDay);
+  // }
+  // console.log(reserveDateList.length);
+  // .reserveDateList[0].slice(8, 10)
+  // const alartA = function (e) {
+  //   // if (setOpenDateList.includes(setOpenDateList)) {
+  //   e.preventDefault();
+  //   alert("선택이 불가해요");
+  // };
+  // alert("눌렸어요");
+
+  // console.log(alartA);
   return (
     <StCalender>
       {/* 2안 */}
@@ -130,38 +182,8 @@ const Calender = ({ setIsModalOpen, vId }) => {
             weekDays={weekDays}
             months={months}
             plugins={[<DatePanel />]}
-            render={<Icon style={{ marginBottom: 15 }} />}
+            render={<Icon className="icon" style={{ marginBottom: 15 }} />}
             numberOfMonths={2}
-          />
-          <div className="close" onClick={closeModal}>
-            <GrClose />
-          </div>
-
-          {/* <ul>
-            {dates.map((date, index) => (
-              <li key={index}>{date.format()}</li>
-            ))}
-          </ul> */}
-          <div className="edit" onClick={editHandler}>
-            수정
-          </div>
-          <button className="submit" onClick={submitHandler}>
-            등록
-          </button>
-        </>
-      ) : (
-        <>
-          <h2>렌트 가능 날짜 선택</h2>
-          <p>시작 날짜를 먼저 선택한 후 마감 날짜를 선택해주세요.</p>
-          <Calendar
-            // value={[
-            //   new DateObject().toFirstOfWeek(1),
-            //   new DateObject().toLastOfWeek(2),
-            // ]}
-            // range
-            value={openDateList}
-            plugins={[<DatePanel />]}
-            // readOnly
           />
           <div className="close" onClick={closeModal}>
             <GrClose />
@@ -173,9 +195,72 @@ const Calender = ({ setIsModalOpen, vId }) => {
             ))}
           </ul>
           <div className="edit" onClick={editHandler}>
-            삭제
+            달력보기
           </div>
           <button className="submit" onClick={submitHandler}>
+            등록
+          </button>
+        </>
+      ) : (
+        <>
+          {/* <h2>렌트 가능 날짜 선택</h2>
+          <p>시작 날짜를 먼저 선택한 후 마감 날짜를 선택해주세요.</p> */}
+          <h2 className="open">사용가능한 날짜</h2>
+          <Calendar
+            value={openDateList}
+            // value={reserveDateList}
+            onChange={setOpenDateList}
+            // onChange={() => {
+            //   alartA();
+            // }}
+            plugins={[<DatePanel />]}
+            // onClick={(e) => {
+            //   e.preventDefault();
+            // }}
+            // plugins={[
+            //   <Settings
+            //     position="bottom"
+            //     disabledList={["calendar", "locale", "mode"]}
+            //     defaultActive="others"
+            //     defaultFormat={{
+            //       single: "MM-DD-YYYY",
+            //       onlyMonthPicker: "MMMM YYYY",
+            //       onlyYearPicker: "YYYY",
+            //     }}
+            //   />
+            // ]}
+            mapDays={({ date }) => {
+              let color;
+              console.log(date.months);
+
+              // if ([11, 12, 13, 14].includes(date.day)) color = "red";
+              // if ([9].includes(date.month)) color = "pink";
+              if (reservedDate.includes(date.day)) color = "red";
+
+              if (color) return { className: "highlight-" + color };
+            }}
+            // readOnly
+            // editable={false}
+            // disabled
+          />
+
+          {/* <h2 className="reserve">예약중인 날짜</h2>
+          <div className="reserved">
+            <Calendar
+              value={reserveDateList}
+              onChange={setReserveDateList}
+              plugins={[<DatePanel />]}
+              readOnly
+            />
+          </div> */}
+
+          <div className="close" onClick={closeModal}>
+            <GrClose />
+          </div>
+          <div className="edit" onClick={editHandler}>
+            삭제
+          </div>
+          <button className="submit" onClick={editSubmitHandler}>
             등록
           </button>
         </>
@@ -196,7 +281,7 @@ const StCalender = styled.div`
   /* height: 550px; */
   padding: 40px;
   position: absolute;
-  top: 40%;
+  top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 10px;
@@ -222,6 +307,17 @@ const StCalender = styled.div`
     to {
       opacity: 1;
       margin-top: 0;
+    }
+  }
+  .rmdp-container {
+    animation: slideRight 1.2s;
+    @keyframes slideRight {
+      from {
+        transform: translateX(-40px);
+      }
+      to {
+        transform: translateX(0);
+      }
     }
   }
 
@@ -268,15 +364,20 @@ const StCalender = styled.div`
     display: flex;
     flex-wrap: wrap;
     gap: 8px 1px;
-    /* margin: 0 auto;
-      text-align: center; */
-    /* justify-content: center; */
     li {
       margin: 0 22px;
+      button {
+        display: none;
+      }
     }
     /* position: absolute;
       top: 40%;
       right: 20%; */
+  }
+  .rmdp-panel {
+    button {
+      display: none;
+    }
   }
 
   .close {
@@ -291,6 +392,33 @@ const StCalender = styled.div`
     svg {
       width: 100%;
       height: 100%;
+    }
+  }
+
+  .reserved {
+    /* color: red; */
+    .rmdp-week {
+      .rmdp-day {
+        span {
+          :hover {
+            background-color: #fff;
+            color: #000;
+          }
+        }
+      }
+      .rmdp-selected {
+        /* background-color: pink; */
+        span {
+          text-decoration: line-through;
+          box-shadow: none;
+          color: #000;
+          :hover {
+            background-color: #fff;
+            color: #000;
+            box-shadow: 0 0 3px #8798ad;
+          }
+        }
+      }
     }
   }
 `;

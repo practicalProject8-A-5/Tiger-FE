@@ -3,8 +3,6 @@ import styled from "styled-components";
 import Calender from "./Calender";
 
 const CalenderBox = ({ setIsModalOpen, vId }) => {
-  console.log(setIsModalOpen);
-  console.log(vId);
   return (
     <Stblur>
       <div className="background">
@@ -28,12 +26,12 @@ const Stblur = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* background-color: pink; */
   .background {
     position: fixed;
-    width: 100%;
+    top: 19%;
+    right: 0;
+    width: 100vw;
     height: 100%;
-    /* background-color: rgba(128, 109, 109, 0.15); */
     background-color: rgba(0, 0, 0, 0.7);
     /* backdrop-filter: blur(5px); */
     animation: modal-bg-show 1s;

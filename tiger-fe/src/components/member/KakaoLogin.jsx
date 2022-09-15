@@ -2,7 +2,6 @@
 
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-// import axios from "axios";
 import { useDispatch } from "react-redux";
 import { CircularProgress } from "@mui/material";
 import styled from "styled-components";

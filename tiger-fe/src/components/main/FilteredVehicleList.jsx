@@ -9,19 +9,22 @@ import "swiper/scss/navigation";
 import "swiper/scss/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
+import { useNavigate } from "react-router-dom";
 
 const FilteredVehicleList = () => {
+  const navigate = useNavigate();
+
   const filteredVehicle = useSelector(
-    (state) => state.searchSlice.filteredVehicleList.ouput
+    (state) => state.vehicleDetailSlice.filteredVehicleList
   );
   console.log(filteredVehicle);
 
   return (
-    <StItem>
-      {filteredVehicle &&
-        filteredVehicle.map((list, index) => {
+    <StItemList>
+      {filteredVehicle.vehicleList &&
+        filteredVehicle.vehicleList.map((list, index) => {
           return (
-            <div key={index}>
+            <StItem key={index}>
               <StSwiper
                 pagination={{
                   type: "fraction",
@@ -31,16 +34,18 @@ const FilteredVehicleList = () => {
                 loop={true}
                 modules={[Pagination, Navigation]}
                 className="mySwiper">
-                {list.imageList.map((image, i) => {
-                  return (
-                    <SwiperSlide className="img" key={i}>
-                      <img src={image} alt="imageSlide" />
-                    </SwiperSlide>
-                  );
-                })}
+                <SwiperSlide className="img">
+                  <img src={list.thumbnail} alt="imageSlide" />
+                </SwiperSlide>
               </StSwiper>
               <span className="heart"></span>
-              <div className="desc__box">
+              <div
+                className="desc__box"
+                onClick={() => {
+                  navigate(
+                    `/vdetail/${list.vid}?startDate=${filteredVehicle.startDate}&endDate=${filteredVehicle.endDate}`
+                  );
+                }}>
                 <div className="desc__top">
                   <div className="desc__title">{list.location}</div>
                   <div className="desc__star">4.12</div>
@@ -49,19 +54,27 @@ const FilteredVehicleList = () => {
                   {list.vname} / {list.fuelType}
                 </p>
                 <p className="dates">
-                  {list.startDate} ~ {list.endDate}
+                  {filteredVehicle.startDate} ~ {filteredVehicle.endDate}
                 </p>
-                <p className="km">11581km</p>
                 <div className="desc__bottom">
                   ₩{list.price} <span>/24시간</span>
                 </div>
               </div>
-            </div>
+            </StItem>
           );
         })}
-    </StItem>
+    </StItemList>
   );
 };
+
+const StItemList = styled.div`
+  width: 100%;
+  margin-top: 108px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 59px 46px;
+`;
 
 const StItem = styled.div`
   width: 318px;

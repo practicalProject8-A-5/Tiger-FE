@@ -7,7 +7,6 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import KakaoMapDetail from "./KakaoMapDetail";
-import { __vehicleDetail } from "../../redux/modules/vehicleDetail";
 
 import email from "../../assets/email.jpg";
 import phone from "../../assets/phone.jpg";
@@ -17,26 +16,29 @@ import SwiperCore, { Navigation, Scrollbar } from "swiper";
 import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
+import { __vehicleDetail } from "../../redux/modules/vehicleDetail";
 
 const VehicleDetailLeft = () => {
-  SwiperCore.use([Navigation, Scrollbar]);
-
   const dispatch = useDispatch();
 
   const id = useParams();
-
-  useEffect(() => {
-    dispatch(__vehicleDetail(parseInt(id.id)));
-  }, [dispatch, id]);
-
-  // console.log(id);
+  const vId = parseInt(id.id);
 
   // get response for vehicle info
   const vehicleDetails = useSelector(
     (state) => state.vehicleDetailSlice.vehicleDetailList
   );
-  // console.log(vehicleDetails);
-  // console.log(vehicleDetails.imageList);
+  console.log(vehicleDetails.startDate);
+
+  const startDate = new URL(window.location.href).searchParams.get("startDate");
+  const endDate = new URL(window.location.href).searchParams.get("endDate");
+
+  console.log(startDate);
+  console.log(endDate);
+
+  useEffect(() => {
+    dispatch(__vehicleDetail({ vId, startDate, endDate }));
+  }, [dispatch]);
 
   const styleTh = {
     width: "180px",
@@ -46,12 +48,6 @@ const VehicleDetailLeft = () => {
     lineHeight: "41px",
     backgroundColor: "#F2F2F2",
   };
-  // const styleCol = {
-  //   borderTop: "2px solid #CCCCCC",
-  //   borderBottom: "2px solid #CCCCCC",
-  //   height: "41px",
-  //   lineHeight: "41px",
-  // };
   const styleTd = {
     width: "249px",
     height: "41px",
@@ -61,8 +57,10 @@ const VehicleDetailLeft = () => {
     lineHeight: "41px",
   };
 
-  // const memberInfo = useSelector((state) => state.memberSlice.userInfo);
-  // console.log(memberInfo);
+  // // const memberInfo = useSelector((state) => state.memberSlice.userInfo);
+  // // console.log(memberInfo)
+
+  SwiperCore.use([Navigation, Scrollbar]);
 
   return (
     <>
@@ -73,8 +71,8 @@ const VehicleDetailLeft = () => {
         slidesPerView={1}
         scrollbar={{ draggable: true, dragSize: 24 }}
         navigation={true}>
-        {vehicleDetails.imageList &&
-          vehicleDetails.imageList.map((image, i) => {
+        {vehicleDetails.vehicleList.imageList &&
+          vehicleDetails.vehicleList.imageList.map((image, i) => {
             return (
               <SwiperSlide className="image" key={i}>
                 <img src={image} alt="imageSlide" />
@@ -86,12 +84,13 @@ const VehicleDetailLeft = () => {
         <StVehicleInfoTitleWrapper>
           <h1>
             <span>
-              {vehicleDetails.vbrand} <span>{vehicleDetails.vname}</span>
+              {vehicleDetails.vehicleList.vbrand}{" "}
+              <span>{vehicleDetails.vehicleList.vname}</span>
             </span>
           </h1>
         </StVehicleInfoTitleWrapper>
         <StVehicleInfoLocationWrapper>
-          <p>{vehicleDetails.location}</p>
+          <p>{vehicleDetails.vehicleList.location}</p>
         </StVehicleInfoLocationWrapper>
         <StVehicleInfoContentsWrapper>
           <h1>차량정보</h1>
@@ -103,26 +102,30 @@ const VehicleDetailLeft = () => {
             <tbody>
               <tr>
                 <th style={styleTh}>연식</th>
-                <td style={styleTd}>{vehicleDetails.years}</td>
+                <td style={styleTd}>{vehicleDetails.vehicleList.years}</td>
                 <th style={styleTh}>연료</th>
-                <td style={styleTd}>{vehicleDetails.fuelType}</td>
+                <td style={styleTd}>{vehicleDetails.vehicleList.fuelType}</td>
               </tr>
               <tr>
                 <th style={styleTh}>연비</th>
-                <td style={styleTd}>{vehicleDetails.fuelEfficiency}</td>
+                <td style={styleTd}>
+                  {vehicleDetails.vehicleList.fuelEfficiency}
+                </td>
                 <th style={styleTh}>탑승 가능 인원</th>
-                <td style={styleTd}>{vehicleDetails.passengers}</td>
+                <td style={styleTd}>{vehicleDetails.vehicleList.passengers}</td>
               </tr>
               <tr>
                 <th style={styleTh}>기어 변속</th>
-                <td style={styleTd}>{vehicleDetails.transmission}</td>
+                <td style={styleTd}>
+                  {vehicleDetails.vehicleList.transmission}
+                </td>
                 <th style={styleTh}>차 종류</th>
-                <td style={styleTd}>{vehicleDetails.type}</td>
+                <td style={styleTd}>{vehicleDetails.vehicleList.type}</td>
               </tr>
             </tbody>
           </table>
           <h1>설명</h1>
-          <p>{vehicleDetails.description}</p>
+          <p>{vehicleDetails.vehicleList.description}</p>
         </StVehicleInfoContentsWrapper>
         <StRenterInfoWrapper>
           <div className="infoWrapper_nickname">
@@ -130,15 +133,15 @@ const VehicleDetailLeft = () => {
           </div>
           <div className="infoWrapper_personal">
             <div className="infoWrapper_personal__picture">
-              <img src={vehicleDetails.profileImage} alt="" />
+              <img src={vehicleDetails.vehicleList.profileImage} alt="" />
             </div>
             <div className="infoWrapper_personal__info">
-              <p>{vehicleDetails.oname}</p>
+              <p>{vehicleDetails.vehicleList.oname}</p>
               <div className="infoWrapper_personal__info__wrapper">
                 <div className="infoWrapper_personal__info__wrapper__email"></div>
-                <p>{vehicleDetails.email}</p>
+                <p>{vehicleDetails.vehicleList.email}</p>
                 <div className="infoWrapper_personal__info__wrapper__phone"></div>
-                <p>{vehicleDetails.tel}</p>
+                <p>{vehicleDetails.vehicleList.tel}</p>
               </div>
             </div>
           </div>
@@ -148,7 +151,7 @@ const VehicleDetailLeft = () => {
             </div>
           </div> */}
         </StRenterInfoWrapper>
-        <KakaoMapDetail />
+        <KakaoMapDetail vehicleDetails={vehicleDetails.vehicleList} />
       </StVehicleInfoContainer>
     </>
   );

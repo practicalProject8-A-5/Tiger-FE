@@ -204,8 +204,8 @@ const VehicleModify = () => {
     formData.append("type", watch("cartype").value);
     formData.append("description", description);
     formData.append("location", location);
-    formData.append("locationX", locationObj.locationX);
-    formData.append("locationY", locationObj.locationY);
+    formData.append("locationX", Number(locationObj.locationX));
+    formData.append("locationY", Number(locationObj.locationY));
     formData.append("price", price);
     for (let i = 0; i < fileList.length; i++) {
       formData.append("imageList", fileList[i]);
@@ -454,8 +454,7 @@ const VehicleModify = () => {
             id="description"
             placeholder="차량에 대한 설명을 입력해주세요."
             cols="50"
-            rows="10"
-          ></textarea>
+            rows="10"></textarea>
         </div>
 
         {/* 렌터정보 */}
