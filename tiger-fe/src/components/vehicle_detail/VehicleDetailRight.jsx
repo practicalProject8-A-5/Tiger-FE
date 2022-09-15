@@ -38,18 +38,34 @@ const VehicleDetailRight = () => {
     setLoginModal(!loginModal);
   };
 
+  const totalCost = vehicleDetails.price + 500 + 500;
+
   return (
     <StPaymentBox>
       <h1>결제 정보</h1>
       <StPaymentPeriod>
-        <h2>대여시간 {vehicleDates.startDate}</h2>
-        <h2>대여끝나는 시간 {vehicleDates.endDate}</h2>
+        <div className="paymentTime">대여시간</div>
+        <div className="paymentDates">
+          {vehicleDates.startDate} ~ {vehicleDates.endDate}
+        </div>
       </StPaymentPeriod>
       <StPaymentPriceInfo>
-        <p>대여요금 ₩{vehicleDetails.price}</p>
-        <p>기타 수수료, 보험료</p>
-        <p>총 예약 금액 ₩{vehicleDetails.price}</p>
+        <div className="rentCost">대여요금</div>
+        <div className="rentPrice">₩ {vehicleDetails.price}/1일</div>
       </StPaymentPriceInfo>
+      <StPaymentTax>
+        <div className="paymentTax">기타 수수료</div>
+        <div className="paymentTaxInfo">₩ 500</div>
+      </StPaymentTax>
+      <StPaymentInsurance>
+        <div className="paymentInsurance">보험료</div>
+        <div className="paymentInsuranceCost">₩ 500</div>
+      </StPaymentInsurance>
+      <StPaymentTotal>
+        <div className="paymentTotal">총 예약 금액</div>
+        <div className="paymentTotalCost">₩ {totalCost}</div>
+      </StPaymentTotal>
+
       {userInfo.name ? (
         <StPaymentButton onClick={showPaymentModal}>예약하기</StPaymentButton>
       ) : (
@@ -92,22 +108,131 @@ const StPaymentBox = styled.div`
 `;
 
 const StPaymentPeriod = styled.div`
-  h2 {
+  -webkit-box-align: center !important;
+  -webkit-box-pack: justify !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100%;
+  margin-top: 10px;
+  .paymentTime {
     font-weight: 500;
     font-size: 20px;
     line-height: 23px;
     border-bottom: 1px solid #cccccc;
     padding-top: 25px;
     padding-bottom: 16px;
+    width: 100%;
+  }
+  .paymentDates {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 23px;
+    border-bottom: 1px solid #cccccc;
+    padding-top: 25px;
+    padding-bottom: 16px;
+    width: 100%;
+    text-align: right;
   }
 `;
 
 const StPaymentPriceInfo = styled.div`
-  p {
+  -webkit-box-align: center !important;
+  -webkit-box-pack: justify !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100%;
+  margin-top: 10px;
+  .rentCost {
     font-weight: 500;
-    font-size: 22px;
-    line-height: 26px;
-    padding-top: 28px;
+    font-size: 20px;
+    line-height: 23px;
+    padding-top: 25px;
+    padding-bottom: 16px;
+    width: 100%;
+  }
+  .rentPrice {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 23px;
+    padding-top: 25px;
+    padding-bottom: 16px;
+    width: 100%;
+    text-align: right;
+  }
+`;
+
+const StPaymentTax = styled.div`
+  -webkit-box-align: center !important;
+  -webkit-box-pack: justify !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100%;
+  margin-top: 10px;
+  .paymentTax {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    padding-bottom: 16px;
+    width: 100%;
+  }
+  .paymentTaxInfo {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 23px;
+    padding-bottom: 16px;
+    width: 100%;
+    text-align: right;
+  }
+`;
+
+const StPaymentInsurance = styled.div`
+  -webkit-box-align: center !important;
+  -webkit-box-pack: justify !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100%;
+  margin-top: 10px;
+  .paymentInsurance {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    padding-bottom: 16px;
+    width: 100%;
+  }
+  .paymentInsuranceCost {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 23px;
+    padding-bottom: 16px;
+    width: 100%;
+    text-align: right;
+  }
+`;
+
+const StPaymentTotal = styled.div`
+  -webkit-box-align: center !important;
+  -webkit-box-pack: justify !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100%;
+  margin-top: 10px;
+  .paymentTotal {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    width: 100%;
+  }
+  .paymentTotalCost {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 23px;
+    width: 100%;
+    text-align: right;
   }
 `;
 
