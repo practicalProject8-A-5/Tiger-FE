@@ -2,9 +2,9 @@
 
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-
 import Button from "../../global_elements/Button";
 import PaymentModal from "./PaymentModal";
+import LoginModal from "../../global_elements/LoginModal";
 
 import styled from "styled-components";
 
@@ -17,12 +17,20 @@ const VehicleDetailRight = () => {
   );
   console.log(vehicleDetails);
 
+  const userInfo = useSelector((state) => state.memberSlice.userInfo);
+  console.log(userInfo);
+
   const startDate = new URL(window.location.href).searchParams.get("startDate");
   const endDate = new URL(window.location.href).searchParams.get("endDate");
 
   const [paymentModalOpen, setPaymentModalOpen] = useState();
-  const showModal = () => {
+  const showPaymentModal = () => {
     setPaymentModalOpen(!paymentModalOpen);
+  };
+
+  const [loginModal, setLoginModal] = useState();
+  const showModal = () => {
+    setLoginModal(!loginModal);
   };
 
   return (
@@ -37,10 +45,21 @@ const VehicleDetailRight = () => {
         <p>기타 수수료, 보험료</p>
         <p>총 예약 금액 ₩{vehicleDetails.vehicleList.price}</p>
       </StPaymentPriceInfo>
-      <StPaymentButton onClick={showModal}>예약하기</StPaymentButton>
-      {paymentModalOpen && (
-        <PaymentModal showModal={showModal} vehicleDetails={vehicleDetails} />
+      {userInfo.name ? (
+        <StPaymentButton onClick={showPaymentModal}>예약하기</StPaymentButton>
+      ) : (
+        <StNeedLogin>로그인후 이용해주세요</StNeedLogin>
       )}
+      {paymentModalOpen && (
+        <PaymentModal
+          showPaymentModal={showPaymentModal}
+          vehicleDetails={vehicleDetails}
+        />
+      )}
+      {/* {loginModal && <LoginModal showModal={showModal} />} */}
+      {/* <StNeedLogin onClick={showModal}>
+          로그인후 이용해주세요
+        </StNeedLogin> */}
     </StPaymentBox>
   );
 };
@@ -87,6 +106,18 @@ const StPaymentPriceInfo = styled.div`
 `;
 
 const StPaymentButton = styled(Button)`
+  width: 380px;
+  height: 60px;
+  background: #ff881b;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 30px;
+  color: #ffffff;
+  margin: 40px auto;
+`;
+
+const StNeedLogin = styled(Button)`
   width: 380px;
   height: 60px;
   background: #ff881b;

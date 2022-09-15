@@ -6,7 +6,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import logo from "../../assets/ta,iger_logo.png";
 import axios from "axios";
 
-const PaymentModal = ({ showModal, vehicleDetails }) => {
+const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
   const serverApi = process.env.REACT_APP_SERVER;
 
   console.log(vehicleDetails);
@@ -61,7 +61,7 @@ const PaymentModal = ({ showModal, vehicleDetails }) => {
     <StPaymentModal>
       <StPaymentInfo>
         <div className="wrap">
-          <AiOutlineClose className="icon" onClick={showModal} />
+          <AiOutlineClose className="icon" onClick={showPaymentModal} />
           <div className="login__logo">
             <img src={logo} alt="logo" />
           </div>
