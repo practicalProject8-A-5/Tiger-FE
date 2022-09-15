@@ -2,34 +2,41 @@
 
 import React, { useState } from "react";
 import styled from "styled-components";
+// import { useDispatch } from "react-redux";
 import { AiOutlineClose } from "react-icons/ai";
 import logo from "../../assets/ta,iger_logo.png";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+// import { __getRenterItemList } from "../../redux/modules/renterItemListSlice";
 
 const PaymentModal = ({ showPaymentModal, vehicleDetails, vehicleDates }) => {
+  // const dispatch = useDispatch();
+  const navigate = useNavigate();
   const serverApi = process.env.REACT_APP_SERVER;
-
   console.log(vehicleDetails);
-
   const vehicleImage = vehicleDetails.imageList[0];
-  const totalCost = vehicleDetails.price + 500 + 500;
+
+  const startDate = vehicleDates.startDate;
+  const endDate = vehicleDates.endDate;
+
+  const date1 = new Date(startDate);
+  const date2 = new Date(endDate);
+  const totalDays =
+    (date2.getTime() - date1.getTime()) / (1000 * 3600 * 24) + 1;
+  const paidAmount = totalDays * vehicleDetails.price;
 
   const [payMethod, setPayMethod] = useState();
   console.log(payMethod);
 
-  const confirmPayment = async () => {
+  const confirmPayment = async (e) => {
     const confirm = window.confirm("결제하시겠습니까?");
-
+    e.preventDefault();
     if (confirm === true && payMethod === undefined) {
       alert("결제방식을 선택해주세요");
     } else if (confirm === false) {
       return null;
     } else if (confirm === true && payMethod !== undefined) {
       const vid = vehicleDetails.vid;
-      const paidAmount = vehicleDetails.price;
-      const startDate = vehicleDates.startDate;
-      const endDate = vehicleDates.endDate;
-
       const userToken = localStorage.getItem("userToken");
       const refreshToken = localStorage.getItem("refreshToken");
 
@@ -53,6 +60,8 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails, vehicleDates }) => {
         )
         .then((res) => {
           console.log(res);
+          // dispatch(__getRenterItemList("RESERVED"));
+          navigate("/renter");
         });
     }
   };
@@ -96,19 +105,21 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails, vehicleDates }) => {
           </div> */}
           <div className="vehiclePrice">
             <div className="priceInfo">대여요금</div>
-            <div className="price">₩ {vehicleDetails.price}</div>
+            <div className="price">
+              ₩ {vehicleDetails.price}/{totalDays}일{" "}
+            </div>
           </div>
           <div className="vehiclePrice">
             <div className="priceInfo">보험료</div>
-            <div className="price">₩ 500</div>
+            <div className="price">무료</div>
           </div>
           <div className="vehiclePrice">
             <div className="priceInfo">수수료</div>
-            <div className="price">₩ 500</div>
+            <div className="price">무료</div>
           </div>
           <div className="vehiclePrice">
             <div className="priceInfo">총액</div>
-            <div className="price">₩ {totalCost}</div>
+            <div className="price">₩ {paidAmount}</div>
           </div>
           <form className="vehiclePayMethod">
             <select

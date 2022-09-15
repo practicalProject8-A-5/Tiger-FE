@@ -22,6 +22,15 @@ const VehicleDetailRight = () => {
   );
   console.log(vehicleDetails);
 
+  const startDate = vehicleDates.startDate;
+  const endDate = vehicleDates.endDate;
+
+  const date1 = new Date(startDate);
+  const date2 = new Date(endDate);
+  const totalDays =
+    (date2.getTime() - date1.getTime()) / (1000 * 3600 * 24) + 1;
+  const paidAmount = totalDays * vehicleDetails.price;
+
   const userInfo = useSelector((state) => state.memberSlice.userInfo);
   console.log(userInfo);
 
@@ -38,8 +47,6 @@ const VehicleDetailRight = () => {
     setLoginModal(!loginModal);
   };
 
-  const totalCost = vehicleDetails.price + 500 + 500;
-
   return (
     <StPaymentBox>
       <h1>결제 정보</h1>
@@ -51,19 +58,21 @@ const VehicleDetailRight = () => {
       </StPaymentPeriod>
       <StPaymentPriceInfo>
         <div className="rentCost">대여요금</div>
-        <div className="rentPrice">₩ {vehicleDetails.price}/1일</div>
+        <div className="rentPrice">
+          ₩ {vehicleDetails.price}/{totalDays}일
+        </div>
       </StPaymentPriceInfo>
       <StPaymentTax>
         <div className="paymentTax">기타 수수료</div>
-        <div className="paymentTaxInfo">₩ 500</div>
+        <div className="paymentTaxInfo">무료</div>
       </StPaymentTax>
       <StPaymentInsurance>
         <div className="paymentInsurance">보험료</div>
-        <div className="paymentInsuranceCost">₩ 500</div>
+        <div className="paymentInsuranceCost">무료</div>
       </StPaymentInsurance>
       <StPaymentTotal>
         <div className="paymentTotal">총 예약 금액</div>
-        <div className="paymentTotalCost">₩ {totalCost}</div>
+        <div className="paymentTotalCost">₩ {paidAmount}</div>
       </StPaymentTotal>
 
       {userInfo.name ? (
