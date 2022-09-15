@@ -39,31 +39,6 @@ export const __getRenterItemList = createAsyncThunk(
   }
 );
 
-// export const __deleteRenterItem = createAsyncThunk(
-//   "renter/__deleteRenterItem",
-//   async (payload, thunkAPI) => {
-//     console.log(payload);
-//     const orderId = payload;
-//     const userToken = localStorage.getItem("userToken");
-//     const refreshToken = localStorage.getItem("refreshToken");
-//     try {
-//       const headers = {
-//         "Content-Type": "application/json",
-//         Authorization: userToken,
-//         RefreshToken: refreshToken,
-//       };
-//       const response = await axios.delete(serverApi + `/order/${orderId}`, {
-//         headers: headers,
-//       });
-//       console.log(response);
-//       return thunkAPI.fulfillWithValue(response.data);
-//     } catch (error) {
-//       console.log(error);
-//       return thunkAPI.rejectWithValue(error.response.data);
-//     }
-//   }
-// );
-
 const renterItemListSlice = createSlice({
   name: "renterItemListSlice",
   initialState,
@@ -81,18 +56,6 @@ const renterItemListSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    // [__deleteRenterItem.pending]: (state, action) => {
-    //   state.isLoading = true;
-    // },
-    // [__deleteRenterItem.fulfilled]: (state, action) => {
-    //   state.isLoading = false;
-    //   console.log(action.payload);
-    //   state.status = action.payload;
-    // },
-    // [__deleteRenterItem.rejected]: (state, action) => {
-    //   state.isLoading = false;
-    //   state.error = action.payload;
-    // },
   },
 });
 

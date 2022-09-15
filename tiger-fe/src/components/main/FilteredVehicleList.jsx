@@ -19,9 +19,17 @@ const FilteredVehicleList = () => {
   );
   console.log(filteredVehicle);
 
+  const filteredVehicleLength = useSelector(
+    (state) => state.vehicleDetailSlice.filteredVehicleLength
+  );
+  console.log(filteredVehicle);
+
   return (
     <StItemList>
-      {filteredVehicle.vehicleList &&
+      {filteredVehicleLength.length === 0 ? (
+        <div>등록되지 않는 차량입니다.</div>
+      ) : (
+        filteredVehicle.vehicleList &&
         filteredVehicle.vehicleList.map((list, index) => {
           return (
             <StItem key={index}>
@@ -62,7 +70,8 @@ const FilteredVehicleList = () => {
               </div>
             </StItem>
           );
-        })}
+        })
+      )}
     </StItemList>
   );
 };

@@ -7,6 +7,7 @@ const serverApi = process.env.REACT_APP_SERVER;
 
 const initialState = {
   filteredVehicleList: {},
+  filteredVehicleLength: {},
   vehicleDetails: {},
   isLoading: false,
   success: null,
@@ -107,6 +108,7 @@ export const vehicleDetailSlice = createSlice({
       state.isLoading = false;
       console.log(action.payload);
       state.filteredVehicleList = action.payload;
+      state.filteredVehicleLength = action.payload.vehicleList;
     },
     [__vehicleSearchList.rejected]: (state, action) => {
       state.isLoading = false;
