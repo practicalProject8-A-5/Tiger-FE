@@ -42,12 +42,12 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails, vehicleDates }) => {
         .post(
           serverApi + `/order/${vid}`,
           {
-            id: "01010101",
+            // id: "01010101",
             paidAmount,
             startDate,
             endDate,
             payMethod,
-            impUid: "0000",
+            // impUid: "0000",
           },
           { headers: headers }
         )
