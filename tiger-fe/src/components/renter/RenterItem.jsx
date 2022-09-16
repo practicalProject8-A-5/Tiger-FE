@@ -147,13 +147,7 @@ const RenterItem = ({ category, list, onSelect }) => {
                     {list.startDate} ~ {list.endDate}
                   </span>
                   <div className="btn_box">
-                    <span
-                      className="return"
-                      onClick={() => {
-                        console.log("반납하기");
-                      }}>
-                      반납
-                    </span>
+                    {/* <span className="return">반납</span> */}
                   </div>
                 </div>
               </StRenterItem>

@@ -154,7 +154,7 @@ const OwnerItem = ({ list, category, vid }) => {
             />
           )}
         </StOwnerItem>
-      ) : (
+      ) : category === "Reservation" ? (
         <StOwnerItem>
           <img src={list.thumbnail} alt="차량" onClick={onClick} />
           <div className="carInfo" onClick={onClick}>
@@ -181,7 +181,96 @@ const OwnerItem = ({ list, category, vid }) => {
             </span>
           </div>
         </StOwnerItem>
-      )}
+      ) : category === "progress" ? (
+        <StOwnerItem>
+          <img src={list.thumbnail} alt="차량" onClick={onClick} />
+          <div className="carInfo" onClick={onClick}>
+            <p>
+              {list.vbrand}
+              {list.vname}
+            </p>
+            {/* <span>오너 네임</span> */}
+            <p>
+              ₩ {list.price}/
+              {(new Date(list.endDate).getTime() -
+                new Date(list.startDate).getTime()) /
+                (1000 * 3600 * 24) +
+                1}
+              일
+            </p>
+            <p>{list.location}</p>
+          </div>
+          {/* <div className="dateBtn">{list.createdAt}</div> */}
+          <div className="flex_wrap">
+            {/* <span className="item_date">{list.createdAt}</span> */}
+            <span className="item_date">
+              {list.startDate} ~ {list.endDate}
+            </span>
+            <div className="btn_box">
+              <span className="modify">{/* 수정 */}</span>
+              <span className="delete">반납확인</span>
+            </div>
+          </div>
+        </StOwnerItem>
+      ) : category === "progress" ? (
+        <StOwnerItem>
+          <img src={list.thumbnail} alt="차량" onClick={onClick} />
+          <div className="carInfo" onClick={onClick}>
+            <p>
+              {list.vbrand}
+              {list.vname}
+            </p>
+            {/* <span>오너 네임</span> */}
+            <p>
+              ₩ {list.price}/
+              {(new Date(list.endDate).getTime() -
+                new Date(list.startDate).getTime()) /
+                (1000 * 3600 * 24) +
+                1}
+              일
+            </p>
+            <p>{list.location}</p>
+          </div>
+          {/* <div className="dateBtn">{list.createdAt}</div> */}
+          <div className="flex_wrap">
+            {/* <span className="item_date">{list.createdAt}</span> */}
+            <span className="item_date">
+              {list.startDate} ~ {list.endDate}
+            </span>
+          </div>
+        </StOwnerItem>
+      ) : category === "Refund" ? (
+        <StOwnerItem>
+          <img src={list.thumbnail} alt="차량" onClick={onClick} />
+          <div className="carInfo" onClick={onClick}>
+            <p>
+              {list.vbrand}
+              {list.vname}
+            </p>
+            {/* <span>오너 네임</span> */}
+            <p>
+              ₩ {list.price}/
+              {(new Date(list.endDate).getTime() -
+                new Date(list.startDate).getTime()) /
+                (1000 * 3600 * 24) +
+                1}
+              일
+            </p>
+            <p>{list.location}</p>
+          </div>
+          {/* <div className="dateBtn">{list.createdAt}</div> */}
+          <div className="flex_wrap">
+            {/* <span className="item_date">{list.createdAt}</span> */}
+            <span className="item_date">
+              {list.startDate} ~ {list.endDate}
+            </span>
+            <div className="btn_box">
+              <span className="modify">{/* 수정 */}</span>
+              <span className="delete">환불완료</span>
+            </div>
+          </div>
+        </StOwnerItem>
+      ) : null}
     </>
   );
 };
