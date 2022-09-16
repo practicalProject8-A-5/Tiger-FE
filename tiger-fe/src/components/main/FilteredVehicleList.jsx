@@ -71,7 +71,7 @@ const FilteredVehicleList = () => {
                   {filteredVehicle.startDate} ~ {filteredVehicle.endDate}
                 </p>
                 <div className="desc__bottom">
-                  ₩{list.price} <span>/24시간</span>
+                  ₩{list.price} <span>/1일</span>
                 </div>
               </div>
             </StItem>
