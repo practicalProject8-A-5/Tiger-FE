@@ -91,7 +91,7 @@ const RenterItem = ({ category, list, onSelect }) => {
               </StRenterItem>
             );
           })
-        ) : (
+        ) : category === "CANCEL" ? (
           renterItemLists.output &&
           renterItemLists.output.map((list, i) => {
             return (
@@ -119,7 +119,81 @@ const RenterItem = ({ category, list, onSelect }) => {
               </StRenterItem>
             );
           })
-        )}
+        ) : category === "USE" ? (
+          renterItemLists.output &&
+          renterItemLists.output.map((list, i) => {
+            return (
+              <StRenterItem key={i}>
+                <img
+                  src={list.thumbnail}
+                  alt="차량"
+                  onClick={() => {
+                    navigate(`/vdetail/${list.vid}`);
+                  }}
+                />
+                <div
+                  className="carInfo"
+                  onClick={() => {
+                    navigate(`/vdetail/${list.vid}`);
+                  }}>
+                  <p>{list.vname}</p>
+                  <span>{list.oname}</span>
+                  <p>₩{list.price}</p>
+                  <p>{list.location}</p>
+                </div>
+                {/* <div className="dateBtn">{list.createdAt}</div> */}
+                <div className="flex_wrap">
+                  <span className="item_date">
+                    {list.startDate} ~ {list.endDate}
+                  </span>
+                  <div className="btn_box">
+                    <span
+                      className="return"
+                      onClick={() => {
+                        console.log("반납하기");
+                      }}>
+                      반납
+                    </span>
+                  </div>
+                </div>
+              </StRenterItem>
+            );
+          })
+        ) : category === "RETURN" ? (
+          renterItemLists.output &&
+          renterItemLists.output.map((list, i) => {
+            return (
+              <StRenterItem key={i}>
+                <img
+                  src={list.thumbnail}
+                  alt="차량"
+                  onClick={() => {
+                    navigate(`/vdetail/${list.vid}`);
+                  }}
+                />
+                <div
+                  className="carInfo"
+                  onClick={() => {
+                    navigate(`/vdetail/${list.vid}`);
+                  }}>
+                  <p>{list.vname}</p>
+                  <span>{list.oname}</span>
+                  <p>₩{list.price}</p>
+                  <p>{list.location}</p>
+                </div>
+                {/* <div className="dateBtn">{list.createdAt}</div> */}
+                <div className="flex_wrap">
+                  <span className="item_date">
+                    {list.startDate} ~ {list.endDate}
+                  </span>
+                  <div className="btn_box">
+                    <span className="returned">반납완료</span>
+                  </div>
+                </div>
+              </StRenterItem>
+            );
+          })
+        ) : null}
       </StRenterItemList>
     </div>
   );
@@ -202,11 +276,18 @@ const StRenterItem = styled.div`
         text-decoration: underline;
         cursor: pointer;
       }
+      .returned,
       .refunded {
         font-weight: 500;
         font-size: 14px;
         color: #8b8b8b;
+      }
+      .return {
+        font-weight: 500;
+        font-size: 14px;
+        color: #eb3434;
         text-decoration: underline;
+        cursor: pointer;
       }
     }
   }

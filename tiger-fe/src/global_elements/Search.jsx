@@ -15,6 +15,7 @@ import { __vehicleSearchList } from "../redux/modules/vehicleDetail";
 import pin from "../assets/pin_trans.png";
 import clock from "../assets/clock.png";
 import vehicle from "../assets/vehicle.png";
+import { format } from "date-fns";
 
 // import DatePicker, {
 //   DateObject,
@@ -111,14 +112,14 @@ const Search = () => {
   };
 
   // search reservation dates
-  const [startDates, setStartDates] = useState(new Date());
-  const [endDates, setEndDates] = useState(new Date());
+  const [startDates, setStartDates] = useState(null);
+  const [endDates, setEndDates] = useState(null);
 
-  const startDate = new Date(startDates).toISOString().slice(0, 10);
-  const endDate = new Date(endDates).toISOString().slice(0, 10);
+  const startDate = format(new Date(startDates), "yyyy-MM-dd");
+  const endDate = format(new Date(endDates), "yyyy-MM-dd");
 
-  // console.log(startDate);
-  // console.log(endDate);
+  console.log(startDate);
+  console.log(endDate);
 
   const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
     <button
@@ -356,8 +357,10 @@ const StCalendarWrapper = styled.div`
     background-repeat: no-repeat;
     background-size: 22px;
     background-position: 1px 4px;
-    text-indent: 34px;
+    text-indent: 0px;
     border: 0px;
+    width: 100%;
+    height: 30px;
   }
 `;
 
