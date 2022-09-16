@@ -7,15 +7,17 @@ import styled, { css } from "styled-components";
 import ImgViewBox from "./ImgViewBox";
 import axios from "axios";
 import DaumPostcode from "react-daum-postcode";
-import userImg from "../../assets/dan-gold-N7RiDzfF2iw-unsplash.jpg";
 import email from "../../assets/registermail.png";
 import phone from "../../assets/registerphone.png";
 import OwnerKakaoMap from "./OwnerKakaoMap";
 import { useNavigate } from "react-router-dom";
-import { useRef } from "react";
+import { useSelector } from "react-redux";
 
 const VehicleRegister = () => {
   const serverApi = process.env.REACT_APP_SERVER;
+
+  const userInfo = useSelector((state) => state.memberSlice.userInfo);
+  console.log(userInfo);
   const navigate = useNavigate();
   //유효성 검사 및 select 최적화
   const {
@@ -484,17 +486,17 @@ const VehicleRegister = () => {
             <h1>Owner 정보</h1>
           </div>
           <div className="infoWrapper_personal">
-            <img src={userImg} alt="userimg" />
+            <img src={userInfo.profileImage} alt="userimg" />
             <div className="infoWrapper_personal__info">
-              <p className="name">권익현</p>
+              <p className="name">{userInfo.name}</p>
               <div className="infoWrapper_personal__info__wrapper">
                 <div className="infoWrapper_personal__info__wrapper__email"></div>
                 <a href="mailto:kwonih1020@gmail.com">
-                  <p>1234590@gmail.com</p>
+                  <p>{userInfo.email}</p>
                 </a>
                 <div className="infoWrapper_personal__info__wrapper__phone"></div>
                 <a href="010-1234-1234">
-                  <p>010-1234-1234</p>
+                  <p>{userInfo.phone || userInfo.tel}</p>
                 </a>
               </div>
             </div>
