@@ -90,12 +90,7 @@ const VehicleModify = () => {
     watch,
     formState: { errors },
     // defaultValues: {},
-  } = useForm({
-    defaultValues: {
-      vbrand: inputs.vbrand,
-      vname: inputs.vname,
-    },
-  });
+  } = useForm();
 
   // console.log(watch());
 
@@ -294,7 +289,8 @@ const VehicleModify = () => {
               type="text"
               id="vbrand"
               placeholder="ex. 테슬라"
-              defaultValue={inputs.vbrand || ""}
+              defaultValue={inputs.vbrand}
+              // defaultValue={vbrand}
               // value={inputs.vbrand || ""}
               name="vbrand"
               onChange={onchange}
@@ -303,7 +299,7 @@ const VehicleModify = () => {
               })}
             />
             {errors.model ? (
-              <div className="error">{errors.brand.message}</div>
+              <div className="error">{errors.vbrand.message}</div>
             ) : null}
           </div>
 

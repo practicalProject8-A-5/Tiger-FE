@@ -12,19 +12,11 @@ import email from "../../assets/registermail.png";
 import phone from "../../assets/registerphone.png";
 import OwnerKakaoMap from "./OwnerKakaoMap";
 import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
 
 const VehicleRegister = () => {
   const serverApi = process.env.REACT_APP_SERVER;
   const navigate = useNavigate();
-
-  // const [selectFuelType, setSelectFuelType] = useState({ value: "0" });
-  // const [selectTransmission, setSelectTransmission] = useState({ value: "0" });
-  // const [selectCarType, setSelectCarType] = useState({ value: "0" });
-
-  // console.log(selectFuelType.value);
-  // console.log(selectTransmission.value);
-  // console.log(selectCarType.value);
-
   //유효성 검사 및 select 최적화
   const {
     register,
@@ -245,6 +237,21 @@ const VehicleRegister = () => {
             ) : null}
           </div>
         </div>
+
+        {/* 가격 */}
+        <div className="price_box">
+          <label htmlFor="price">렌트 요금</label>
+          <input
+            type="text"
+            id="price"
+            placeholder="가격을 입력해주세요"
+            {...register("price", {
+              required: "가격을 입력해주세요",
+            })}
+          />
+          <span>₩/24시간</span>
+        </div>
+
         {/* 차량정보 */}
         <table>
           <caption>차량정보</caption>
@@ -380,7 +387,8 @@ const VehicleRegister = () => {
                   style={{
                     // backgroundColor: "rgba(235,52,52,0.8) ",
                     border: "2px solid #EB3434",
-                  }}>
+                  }}
+                >
                   <Controller
                     name="transmission"
                     className="select"
@@ -468,7 +476,8 @@ const VehicleRegister = () => {
             id="description"
             placeholder="차량에 대한 설명을 입력해주세요."
             cols="50"
-            rows="10"></textarea>
+            rows="10"
+          ></textarea>
         </div>
 
         {/* 렌터정보 */}
@@ -527,21 +536,8 @@ const VehicleRegister = () => {
           locationObj={locationObj}
           setLocationObj={setLocationObj}
         />
-        <label htmlFor="price">가격</label>
-        <input
-          type="text"
-          id="price"
-          placeholder="가격을 입력해주세요"
-          {...register("price", {
-            required: "가격을 입력해주세요",
-          })}
-        />
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-          }}>
-          제출
-        </button>
+
+        <button>제출</button>
       </form>
     </StVehicleRegister>
   );
@@ -565,6 +561,7 @@ const StVehicleRegister = styled.div`
   margin-bottom: 80px;
   form {
     /* background-color: yellowgreen; */
+    margin: 0 auto;
     width: 845px;
     .onchange__imgbox {
       width: 844px;
@@ -622,6 +619,30 @@ const StVehicleRegister = styled.div`
         border-radius: 12px;
         font-family: "Noto Sans KR", sans-serif;
         color: #000;
+      }
+    }
+    .price_box {
+      /* background-color: pink; */
+      margin-bottom: 80px;
+      label {
+        display: block;
+        font-weight: 600;
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+      input {
+        width: 160px;
+        height: 38px;
+        outline: none;
+        border: 1px solid #8b8b8b;
+        border-radius: 12px;
+        padding: 12px;
+        box-sizing: border-box;
+        margin-right: 8px;
+      }
+      span {
+        font-weight: 500;
+        font-size: 16px;
       }
     }
     table {
@@ -685,18 +706,17 @@ const StVehicleRegister = styled.div`
 
     .desc {
       width: 100%;
-      /* height: 320px; */
       /* background-color: pink; */
-      /* textarea {
+      textarea {
+        padding: 28px 26px;
+        box-sizing: border-box;
         width: 100%;
         height: 320px;
         border: 1px solid #8b8b8b;
         border-radius: 20px;
-        padding: 28px 26px;
-        box-sizing: border-box;
         outline: none;
         resize: none;
-      } */
+      }
     }
 
     .location {
@@ -732,24 +752,29 @@ const StVehicleRegister = styled.div`
     }
   }
   button {
-    margin-top: 30px;
+    width: 100%;
+    height: 50px;
+    border-radius: 12px;
+    margin-top: 80px;
+    background-color: #ff881b;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 22px;
+    color: #ffffff;
+    border: none;
   }
 `;
 const StRenterInfoWrapper = styled.div`
   width: 100%;
   margin: 80px 0;
-  /* background-color: pink; */
-
   .infoWrapper_nickname {
     font-weight: 600;
     font-size: 20px;
     line-height: 27px;
-    /* background-color: skyblue; */
   }
   .infoWrapper_personal {
     margin-top: 24px;
     display: flex;
-    /* background-color: yellow; */
     align-items: center;
     img {
       width: 56px;

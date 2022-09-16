@@ -24,7 +24,8 @@ const MainItem = ({ list }) => {
         navigation={true}
         loop={true}
         modules={[Pagination, Navigation]}
-        className="mySwiper">
+        className="mySwiper"
+      >
         {MainItemListImage.map((image, i) => {
           return (
             <SwiperSlide className="img" key={i}>
@@ -38,7 +39,8 @@ const MainItem = ({ list }) => {
         className="desc__box"
         onClick={() => {
           navigate(`/vdetail/${list.vid}`);
-        }}>
+        }}
+      >
         <div className="desc__top">
           <div className="desc__title">{list.location}</div>
           <div className="desc__star">4.12</div>
@@ -70,7 +72,7 @@ const StItem = styled.div`
   .heart {
     width: 28px;
     height: 28px;
-    background-color: pink;
+    /* background-color: pink; */
     position: absolute;
     top: 18px;
     right: 18px;

@@ -47,6 +47,7 @@ const OwnerItemList = ({ category }) => {
 
   // console.log(id);
   // console.log(OwnerItemLists);
+
   return (
     <StOwnerItemList>
       {OwnerItemLists.output && OwnerItemLists.output.length === 0 ? (
@@ -65,8 +66,9 @@ const OwnerItemList = ({ category }) => {
 
 const StOwnerItemList = styled.div`
   width: 790px;
-  height: 890px;
-  margin-top: 65px;
+  /* height: 890px; */
+  padding-top: 65px;
+  /* margin-top: 65px; */
   /* border: 1px solid; */
 `;
 

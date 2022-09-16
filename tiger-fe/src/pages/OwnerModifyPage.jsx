@@ -9,6 +9,7 @@ import PaymentInfo from "../components/owner/PaymentInfo";
 import Calender from "../components/owner/Calender";
 import TestCalender from "../components/owner/TestCalender";
 import VehicleModify from "../components/owner/VehicleModify";
+import ModifyTest from "../components/owner/ModifyTest";
 
 const OwnerModifyPage = () => {
   return (
@@ -17,6 +18,7 @@ const OwnerModifyPage = () => {
       {/* <NavBar /> */}
       <GlobalLayout>
         <VehicleModify />
+        <ModifyTest />
         {/* <h1>수정 페이지</h1> */}
       </GlobalLayout>
     </>
