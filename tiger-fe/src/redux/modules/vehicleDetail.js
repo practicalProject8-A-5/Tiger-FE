@@ -101,6 +101,7 @@ export const vehicleDetailSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+
     [__vehicleSearchList.pending]: (state, action) => {
       state.isLoading = true;
     },

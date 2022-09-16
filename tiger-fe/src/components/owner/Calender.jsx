@@ -19,8 +19,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { __getDateList } from "../../redux/modules/DateSlice";
 import { Calendar } from "react-multi-date-picker";
 
-const Calender = ({ setIsModalOpen, vId }) => {
-  // console.log("vId :", vId);
+const Calender = ({ setIsModalOpen, vId, dateList }) => {
+  const DateList = useSelector((state) => state.getDateListSlice.DateList);
+  console.log(DateList);
+
+  const [reserveDateList, setReserveDateList] = useState([]);
+
+  console.log("reserveDateList :", reserveDateList);
+
+  //open 날짜
+  const [openDateLists, setOpenDateLists] = useState([]);
+  console.log("openDateLists:", openDateLists);
+
+  console.log("vId :", vId);
   const serverApi = process.env.REACT_APP_SERVER;
   //월
   const months = [
@@ -86,6 +97,7 @@ const Calender = ({ setIsModalOpen, vId }) => {
       console.log(err);
     }
     alert("상품 등록 성공");
+    setIsModalOpen(false);
   };
 
   const dispatch = useDispatch();
@@ -94,20 +106,13 @@ const Calender = ({ setIsModalOpen, vId }) => {
     dispatch(__getDateList(vId));
   }, [dispatch, vId]);
 
+  useEffect(() => {
+    setReserveDateList([...DateList.reservedDateList]);
+    setOpenDateLists([...DateList.openDateList]);
+  }, [DateList]);
+
   // get 불러오기 (reserveDate, openDate)
-  const DateList = useSelector((state) => state.getDateListSlice.DateList);
 
-  const [reserveDateList, setReserveDateList] = useState(
-    DateList.reservedDateList
-  );
-
-  console.log("reserveDateList :", reserveDateList);
-  // console.log(reservedDate);
-
-  //open 날짜
-  const [openDateLists, setOpenDateLists] = useState(DateList.openDateList);
-
-  console.log("openDateLists:", openDateLists);
   return (
     <StCalender>
       <>
@@ -403,25 +408,3 @@ const StCalender = styled.div`
     }
   }
 `;
-
-const StLi = styled.div`
-  background-color: pink;
-`;
-
-/* 1안 */
-/* <h2>렌트 가능 날짜 선택</h2>
-      <p>시작 날짜를 먼저 선택한 후 마감 날짜를 선택해주세요.</p>
-      <div className="calender__box">
-        <form>
-          <DatePicker
-            multiple
-            plugins={[<DatePanel />]}
-            weekDays={weekDays}
-            months={months}
-            numberOfMonths={2}
-            onChange={setValue}
-            render={<Icon />}
-          />
-          <button className="submit">등록</button>
-        </form>
-      </div> */

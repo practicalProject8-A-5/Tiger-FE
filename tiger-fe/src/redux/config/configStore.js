@@ -11,6 +11,7 @@ import renterItemListSlice from "../modules/renterItemListSlice";
 import ownerModiRegisterInfoSlice from "../modules/ownerModify";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
+import getDateListSlice from "../modules/DateSlice";
 
 const reducer = combineReducers({
   ownerItemListSlice,
@@ -20,6 +21,7 @@ const reducer = combineReducers({
   ownerRegisterInfoSlice,
   renterItemListSlice,
   ownerModiRegisterInfoSlice,
+  getDateListSlice,
 });
 
 const persistConfig = {
@@ -32,13 +34,13 @@ const persistedReducer = persistReducer(persistConfig, reducer);
 export const store = configureStore({
   reducer: persistedReducer,
   // reducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ serializableCheck: false }).concat(logger),
-  devTools: process.env.NODE_ENV !== "production",
-
   // middleware: (getDefaultMiddleware) =>
-  //   getDefaultMiddleware({ serializableCheck: false }),
+  //   getDefaultMiddleware({ serializableCheck: false }).concat(logger),
   // devTools: process.env.NODE_ENV !== "production",
+
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }),
+  devTools: process.env.NODE_ENV !== "production",
 });
 
 export const persistor = persistStore(store);
