@@ -3,14 +3,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-
 import styled from "styled-components";
-
 import KakaoMapDetail from "./KakaoMapDetail";
-
 import email from "../../assets/email.jpg";
 import phone from "../../assets/phone.jpg";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Scrollbar } from "swiper";
 import "swiper/scss";
@@ -25,20 +21,25 @@ const VehicleDetailLeft = () => {
   const vId = parseInt(id.id);
 
   // get response for vehicle info
-  const vehicleDetails = useSelector(
-    (state) => state.vehicleDetailSlice.vehicleDetailList
+  const vehicleDates = useSelector(
+    (state) => state.vehicleDetailSlice.vehicleDates
   );
-  console.log(vehicleDetails.startDate);
+  // console.log(vehicleDates);
+
+  const vehicleDetails = useSelector(
+    (state) => state.vehicleDetailSlice.vehicleDetails
+  );
+  // console.log(vehicleDetails);
 
   const startDate = new URL(window.location.href).searchParams.get("startDate");
   const endDate = new URL(window.location.href).searchParams.get("endDate");
 
-  console.log(startDate);
-  console.log(endDate);
+  // console.log(startDate);
+  // console.log(endDate);
 
   useEffect(() => {
     dispatch(__vehicleDetail({ vId, startDate, endDate }));
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   const styleTh = {
     width: "180px",
@@ -71,8 +72,8 @@ const VehicleDetailLeft = () => {
         slidesPerView={1}
         scrollbar={{ draggable: true, dragSize: 24 }}
         navigation={true}>
-        {vehicleDetails.vehicleList.imageList &&
-          vehicleDetails.vehicleList.imageList.map((image, i) => {
+        {vehicleDetails.imageList &&
+          vehicleDetails.imageList.map((image, i) => {
             return (
               <SwiperSlide className="image" key={i}>
                 <img src={image} alt="imageSlide" />
@@ -84,13 +85,12 @@ const VehicleDetailLeft = () => {
         <StVehicleInfoTitleWrapper>
           <h1>
             <span>
-              {vehicleDetails.vehicleList.vbrand}{" "}
-              <span>{vehicleDetails.vehicleList.vname}</span>
+              {vehicleDetails.vbrand} <span>{vehicleDetails.vname}</span>
             </span>
           </h1>
         </StVehicleInfoTitleWrapper>
         <StVehicleInfoLocationWrapper>
-          <p>{vehicleDetails.vehicleList.location}</p>
+          <p>{vehicleDetails.location}</p>
         </StVehicleInfoLocationWrapper>
         <StVehicleInfoContentsWrapper>
           <h1>차량정보</h1>
@@ -102,30 +102,26 @@ const VehicleDetailLeft = () => {
             <tbody>
               <tr>
                 <th style={styleTh}>연식</th>
-                <td style={styleTd}>{vehicleDetails.vehicleList.years}</td>
+                <td style={styleTd}>{vehicleDetails.years}</td>
                 <th style={styleTh}>연료</th>
-                <td style={styleTd}>{vehicleDetails.vehicleList.fuelType}</td>
+                <td style={styleTd}>{vehicleDetails.fuelType}</td>
               </tr>
               <tr>
                 <th style={styleTh}>연비</th>
-                <td style={styleTd}>
-                  {vehicleDetails.vehicleList.fuelEfficiency}
-                </td>
+                <td style={styleTd}>{vehicleDetails.fuelEfficiency}</td>
                 <th style={styleTh}>탑승 가능 인원</th>
-                <td style={styleTd}>{vehicleDetails.vehicleList.passengers}</td>
+                <td style={styleTd}>{vehicleDetails.passengers}</td>
               </tr>
               <tr>
                 <th style={styleTh}>기어 변속</th>
-                <td style={styleTd}>
-                  {vehicleDetails.vehicleList.transmission}
-                </td>
+                <td style={styleTd}>{vehicleDetails.transmission}</td>
                 <th style={styleTh}>차 종류</th>
-                <td style={styleTd}>{vehicleDetails.vehicleList.type}</td>
+                <td style={styleTd}>{vehicleDetails.type}</td>
               </tr>
             </tbody>
           </table>
           <h1>설명</h1>
-          <p>{vehicleDetails.vehicleList.description}</p>
+          <p>{vehicleDetails.description}</p>
         </StVehicleInfoContentsWrapper>
         <StRenterInfoWrapper>
           <div className="infoWrapper_nickname">
@@ -133,15 +129,15 @@ const VehicleDetailLeft = () => {
           </div>
           <div className="infoWrapper_personal">
             <div className="infoWrapper_personal__picture">
-              <img src={vehicleDetails.vehicleList.profileImage} alt="" />
+              <img src={vehicleDetails.profileImage} alt="" />
             </div>
             <div className="infoWrapper_personal__info">
-              <p>{vehicleDetails.vehicleList.oname}</p>
+              <p>{vehicleDetails.oname}</p>
               <div className="infoWrapper_personal__info__wrapper">
                 <div className="infoWrapper_personal__info__wrapper__email"></div>
-                <p>{vehicleDetails.vehicleList.email}</p>
+                <p>{vehicleDetails.email}</p>
                 <div className="infoWrapper_personal__info__wrapper__phone"></div>
-                <p>{vehicleDetails.vehicleList.tel}</p>
+                <p>{vehicleDetails.tel}</p>
               </div>
             </div>
           </div>
@@ -151,7 +147,7 @@ const VehicleDetailLeft = () => {
             </div>
           </div> */}
         </StRenterInfoWrapper>
-        <KakaoMapDetail vehicleDetails={vehicleDetails.vehicleList} />
+        <KakaoMapDetail vehicleDetails={vehicleDetails} />
       </StVehicleInfoContainer>
     </>
   );

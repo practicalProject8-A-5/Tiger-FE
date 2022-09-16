@@ -29,7 +29,6 @@ const Category = () => {
 };
 
 export default Category;
-// top 82
 
 const StCategory = styled.div`
   display: flex;

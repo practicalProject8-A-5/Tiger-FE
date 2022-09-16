@@ -42,7 +42,7 @@ export const __registerUser = createAsyncThunk(
         config
       );
       window.alert("회원가입 성공");
-      console.log(response.data);
+      // console.log(response.data);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       window.alert("회원가입 실패!");
@@ -65,7 +65,8 @@ export const __userLogin = createAsyncThunk(
       localStorage.setItem("phone", response.data.output.tel);
       localStorage.setItem("name", response.data.output.name);
       localStorage.setItem("refreshToken", response.headers.refreshtoken);
-      console.log(response.data);
+      localStorage.setItem("profileImage", response.data.output.profileImage);
+      // console.log(response.data);
       window.alert("로그인 성공");
       loader();
       return thunkAPI.fulfillWithValue(response.data.output);
@@ -84,7 +85,7 @@ export const __kakaoLogin = createAsyncThunk(
         kakaoApi + `/user/kakao/callback?code=${code}`,
         {}
       );
-      console.log(response);
+      // console.log(response);
       localStorage.setItem("userToken", response.headers.authorization);
       localStorage.setItem("email", response.data.output.email);
       localStorage.setItem("phone", response.data.output.tel);
@@ -95,7 +96,7 @@ export const __kakaoLogin = createAsyncThunk(
       loader();
       return thunkAPI.fulfillWithValue(response.data.output);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
@@ -126,12 +127,12 @@ const memberSlice = createSlice({
     },
     [__userLogin.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      console.log(payload);
+      // console.log(payload);
       state.userInfo = payload;
     },
     [__userLogin.rejected]: (state, { payload }) => {
       state.isLoading = false;
-      console.log(payload);
+      // console.log(payload);
       state.error = payload.message;
     },
     // 카카오 로그인
@@ -141,12 +142,12 @@ const memberSlice = createSlice({
     },
     [__kakaoLogin.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      console.log(payload);
+      // console.log(payload);
       state.userInfo = payload;
     },
     [__kakaoLogin.rejected]: (state, { payload }) => {
       state.isLoading = false;
-      console.log(payload);
+      // console.log(payload);
       state.error = payload.message;
     },
     // register user

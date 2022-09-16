@@ -1,19 +1,13 @@
+// eslint-disable-next-line
+
 /*global kakao*/
 
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
 import styled from "styled-components";
 // import axios from "axios";
 
 const KakaoMapDetail = ({ vehicleDetails }) => {
   // const mapKey = process.env.REACT_APP_REST_API_KEY;
-
-  // const vehicleDetails = useSelector(
-  //   (state) => state.vehicleDetailSlice.vehicleDetailList
-  // );
-  // console.log(vehicleDetails);
-  // console.log(vehicleDetails.locationX);
-  // console.log(vehicleDetails.locationY);
 
   const createMap = () => {
     const mapContainer = document.getElementById("map");
@@ -44,7 +38,7 @@ const KakaoMapDetail = ({ vehicleDetails }) => {
     // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
     map.setCenter(coords);
 
-    console.log(coords);
+    // console.log(coords);
   };
 
   useEffect(() => {

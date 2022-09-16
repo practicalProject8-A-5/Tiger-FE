@@ -4,10 +4,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {
-  // __deleteRenterItem,
-  __getRenterItemList,
-} from "../../redux/modules/renterItemListSlice";
+import { __getRenterItemList } from "../../redux/modules/renterItemListSlice";
 import axios from "axios";
 
 const RenterItem = ({ category, list, onSelect }) => {
@@ -65,9 +62,16 @@ const RenterItem = ({ category, list, onSelect }) => {
                     navigate(`/vdetail/${list.vid}`);
                   }}>
                   <p>{list.vname}</p>
-                  <span>{/* {list.oname} */}</span>
-                  <p>₩{list.price}/1일</p>
-                  <p>{list.location}</p>
+                  <span>{list.oname}</span>
+                  <p>
+                    ₩{list.price}/
+                    {(new Date(list.endDate).getTime() -
+                      new Date(list.startDate).getTime()) /
+                      (1000 * 3600 * 24) +
+                      1}
+                    일
+                  </p>
+                  <p className="carInfo__location">{list.location}</p>
                 </div>
                 {/* <div className="dateBtn">{list.createdAt}</div> */}
                 <div className="flex_wrap">
@@ -99,8 +103,8 @@ const RenterItem = ({ category, list, onSelect }) => {
                 <img src={list.thumbnail} alt="차량" />
                 <div className="carInfo">
                   <p>{list.vname}</p>
-                  <span>{/* {list.oname} */}</span>
-                  <p>₩{list.price}/1일</p>
+                  <span>{list.oname}</span>
+                  <p>₩{list.price}</p>
                   <p>{list.location}</p>
                 </div>
                 {/* <div className="dateBtn">{list.createdAt}</div> */}
@@ -130,7 +134,6 @@ const StRenterItemList = styled.div`
 const StRenterItem = styled.div`
   width: 100%;
   height: 134px;
-  /* background-color: skyblue; */
   display: flex;
   position: relative;
   margin-bottom: 40px;
@@ -143,7 +146,6 @@ const StRenterItem = styled.div`
     margin-right: 24px;
   }
   .carInfo {
-    /* background-color: yellow; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -160,11 +162,15 @@ const StRenterItem = styled.div`
       color: #8b8b8b;
       margin-bottom: 13px;
     }
+    &__location {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
   }
   .dateBtn {
     width: 97px;
     height: 20px;
-    /* background-color: yellowgreen; */
     position: absolute;
     top: 0;
     right: 0;
@@ -182,7 +188,6 @@ const StRenterItem = styled.div`
       margin-bottom: 11px;
       display: flex;
       justify-content: end;
-      /* background-color: pink; */
       .modify {
         font-weight: 500;
         font-size: 14px;

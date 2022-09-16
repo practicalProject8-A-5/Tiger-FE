@@ -2,45 +2,93 @@
 
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-
 import Button from "../../global_elements/Button";
 import PaymentModal from "./PaymentModal";
-
+import LoginModal from "../../global_elements/LoginModal";
 import styled from "styled-components";
-
 // import { __vehicleDetail } from "../../redux/modules/vehicleDetail";
 
 const VehicleDetailRight = () => {
   // get response for vehicle info
-  const vehicleDetails = useSelector(
-    (state) => state.vehicleDetailSlice.vehicleDetailList
+  const vehicleDates = useSelector(
+    (state) => state.vehicleDetailSlice.vehicleDates
   );
-  console.log(vehicleDetails);
+  // console.log(vehicleDates);
 
-  const startDate = new URL(window.location.href).searchParams.get("startDate");
-  const endDate = new URL(window.location.href).searchParams.get("endDate");
+  const vehicleDetails = useSelector(
+    (state) => state.vehicleDetailSlice.vehicleDetails
+  );
+  // console.log(vehicleDetails);
+
+  const startDate = vehicleDates.startDate;
+  const endDate = vehicleDates.endDate;
+
+  const date1 = new Date(startDate);
+  const date2 = new Date(endDate);
+  const totalDays =
+    (date2.getTime() - date1.getTime()) / (1000 * 3600 * 24) + 1;
+  const paidAmount = totalDays * vehicleDetails.price;
+
+  const userInfo = useSelector((state) => state.memberSlice.userInfo);
+  // console.log(userInfo);
+
+  // const startDate = new URL(window.location.href).searchParams.get("startDate");
+  // const endDate = new URL(window.location.href).searchParams.get("endDate");
 
   const [paymentModalOpen, setPaymentModalOpen] = useState();
-  const showModal = () => {
+  const showPaymentModal = () => {
     setPaymentModalOpen(!paymentModalOpen);
+  };
+
+  const [loginModal, setLoginModal] = useState();
+  const showModal = () => {
+    setLoginModal(!loginModal);
   };
 
   return (
     <StPaymentBox>
       <h1>결제 정보</h1>
       <StPaymentPeriod>
-        <h2>대여시간 {startDate}</h2>
-        <h2>대여끝나는 시간 {endDate}</h2>
+        <div className="paymentTime">대여시간</div>
+        <div className="paymentDates">
+          {vehicleDates.startDate} ~ {vehicleDates.endDate}
+        </div>
       </StPaymentPeriod>
       <StPaymentPriceInfo>
-        <p>대여요금 ₩{vehicleDetails.vehicleList.price}</p>
-        <p>기타 수수료, 보험료</p>
-        <p>총 예약 금액 ₩{vehicleDetails.vehicleList.price}</p>
+        <div className="rentCost">대여요금</div>
+        <div className="rentPrice">
+          ₩ {vehicleDetails.price}/{totalDays}일
+        </div>
       </StPaymentPriceInfo>
-      <StPaymentButton onClick={showModal}>예약하기</StPaymentButton>
-      {paymentModalOpen && (
-        <PaymentModal showModal={showModal} vehicleDetails={vehicleDetails} />
+      <StPaymentTax>
+        <div className="paymentTax">기타 수수료</div>
+        <div className="paymentTaxInfo">무료</div>
+      </StPaymentTax>
+      <StPaymentInsurance>
+        <div className="paymentInsurance">보험료</div>
+        <div className="paymentInsuranceCost">무료</div>
+      </StPaymentInsurance>
+      <StPaymentTotal>
+        <div className="paymentTotal">총 예약 금액</div>
+        <div className="paymentTotalCost">₩ {paidAmount}</div>
+      </StPaymentTotal>
+
+      {userInfo.name ? (
+        <StPaymentButton onClick={showPaymentModal}>예약하기</StPaymentButton>
+      ) : (
+        <StNeedLogin>로그인후 이용해주세요</StNeedLogin>
       )}
+      {paymentModalOpen && (
+        <PaymentModal
+          showPaymentModal={showPaymentModal}
+          vehicleDetails={vehicleDetails}
+          vehicleDates={vehicleDates}
+        />
+      )}
+      {/* {loginModal && <LoginModal showModal={showModal} />} */}
+      {/* <StNeedLogin onClick={showModal}>
+          로그인후 이용해주세요
+        </StNeedLogin> */}
     </StPaymentBox>
   );
 };
@@ -67,26 +115,147 @@ const StPaymentBox = styled.div`
 `;
 
 const StPaymentPeriod = styled.div`
-  h2 {
+  -webkit-box-align: center !important;
+  -webkit-box-pack: justify !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100%;
+  margin-top: 10px;
+  .paymentTime {
     font-weight: 500;
     font-size: 20px;
     line-height: 23px;
     border-bottom: 1px solid #cccccc;
     padding-top: 25px;
     padding-bottom: 16px;
+    width: 100%;
+  }
+  .paymentDates {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 23px;
+    border-bottom: 1px solid #cccccc;
+    padding-top: 25px;
+    padding-bottom: 16px;
+    width: 100%;
+    text-align: right;
   }
 `;
 
 const StPaymentPriceInfo = styled.div`
-  p {
+  -webkit-box-align: center !important;
+  -webkit-box-pack: justify !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100%;
+  margin-top: 10px;
+  .rentCost {
     font-weight: 500;
-    font-size: 22px;
-    line-height: 26px;
-    padding-top: 28px;
+    font-size: 20px;
+    line-height: 23px;
+    padding-top: 25px;
+    padding-bottom: 16px;
+    width: 100%;
+  }
+  .rentPrice {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 23px;
+    padding-top: 25px;
+    padding-bottom: 16px;
+    width: 100%;
+    text-align: right;
+  }
+`;
+
+const StPaymentTax = styled.div`
+  -webkit-box-align: center !important;
+  -webkit-box-pack: justify !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100%;
+  margin-top: 10px;
+  .paymentTax {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    padding-bottom: 16px;
+    width: 100%;
+  }
+  .paymentTaxInfo {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 23px;
+    padding-bottom: 16px;
+    width: 100%;
+    text-align: right;
+  }
+`;
+
+const StPaymentInsurance = styled.div`
+  -webkit-box-align: center !important;
+  -webkit-box-pack: justify !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100%;
+  margin-top: 10px;
+  .paymentInsurance {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    padding-bottom: 16px;
+    width: 100%;
+  }
+  .paymentInsuranceCost {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 23px;
+    padding-bottom: 16px;
+    width: 100%;
+    text-align: right;
+  }
+`;
+
+const StPaymentTotal = styled.div`
+  -webkit-box-align: center !important;
+  -webkit-box-pack: justify !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100%;
+  margin-top: 10px;
+  .paymentTotal {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    width: 100%;
+  }
+  .paymentTotalCost {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 23px;
+    width: 100%;
+    text-align: right;
   }
 `;
 
 const StPaymentButton = styled(Button)`
+  width: 380px;
+  height: 60px;
+  background: #ff881b;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 30px;
+  color: #ffffff;
+  margin: 40px auto;
+`;
+
+const StNeedLogin = styled(Button)`
   width: 380px;
   height: 60px;
   background: #ff881b;

@@ -1,9 +1,10 @@
+// eslint-disable-next-line
+
 import React from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import TestCalender from "./TestCalender";
-import { useEffect } from "react";
 
 const PaymentInfo = () => {
   const {

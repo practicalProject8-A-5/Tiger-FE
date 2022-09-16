@@ -1,5 +1,6 @@
+// eslint-disable-next-line
+
 import React from "react";
-import { useState } from "react";
 import styled from "styled-components";
 
 import "swiper/scss";
@@ -44,8 +45,7 @@ const ModifyImgViewBox = ({ files, imageList }) => {
           navigation={true}
           // loop={true}
           modules={[Pagination, Navigation]}
-          className="mySwiper"
-        >
+          className="mySwiper">
           {imageList.map((image, i) => {
             return (
               <SwiperSlide className="img" key={i}>

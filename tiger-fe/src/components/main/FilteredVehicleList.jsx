@@ -10,6 +10,7 @@ import "swiper/scss/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
 import { useNavigate } from "react-router-dom";
+import NotFound from "../../global_elements/NotFound";
 
 const FilteredVehicleList = () => {
   const navigate = useNavigate();
@@ -17,11 +18,24 @@ const FilteredVehicleList = () => {
   const filteredVehicle = useSelector(
     (state) => state.vehicleDetailSlice.filteredVehicleList
   );
-  console.log(filteredVehicle);
+  // console.log(filteredVehicle);
+
+  const filteredVehicleLength = useSelector(
+    (state) => state.vehicleDetailSlice.filteredVehicleLength
+  );
+  // console.log(filteredVehicle);
 
   return (
     <StItemList>
-      {filteredVehicle.vehicleList &&
+      {filteredVehicleLength.length === 0 ? (
+        <NotFound
+          upperText={<div>등록차량을 찾을수 없습니다.</div>}
+          lowerText={
+            <div>검색 조건을 변경하여 더 많은 차량을 찾아보세요!.</div>
+          }
+        />
+      ) : (
+        filteredVehicle.vehicleList &&
         filteredVehicle.vehicleList.map((list, index) => {
           return (
             <StItem key={index}>
@@ -62,7 +76,8 @@ const FilteredVehicleList = () => {
               </div>
             </StItem>
           );
-        })}
+        })
+      )}
     </StItemList>
   );
 };
@@ -103,9 +118,12 @@ const StItem = styled.div`
       font-weight: 600;
       font-size: 18px;
       margin-bottom: 6px;
-      /* .desc__title {
+      .desc__title {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
       }
-      .desc__star {
+      /* .desc__star {
       } */
     }
     p {

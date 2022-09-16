@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+
 import React from "react";
 import styled, { css } from "styled-components";
 
@@ -36,8 +38,7 @@ const NavBar = ({ category, onSelect }) => {
             active={category === c.name}
             onClick={() => {
               onSelect(c.name);
-            }}
-          >
+            }}>
             {c.text}
           </Category>
         ))}

@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
 import styled, { css } from "styled-components";
@@ -75,7 +75,7 @@ const VehicleRegister = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [address, setAddress] = useState("");
   const [locationObj, setLocationObj] = useState({});
-  console.log(locationObj);
+  // console.log(locationObj);
 
   const onChangeHandler = (e) => {
     setAddress(e.target.value);
@@ -93,7 +93,6 @@ const VehicleRegister = () => {
     zIndex: "999",
   };
 
-  // useEffect(() => {});
   const handlePostCode = (data) => {
     let fullAddress = data.address;
     let extraAddress = "";
@@ -109,7 +108,7 @@ const VehicleRegister = () => {
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
     setAddress(fullAddress);
-    console.log(address);
+    // console.log(address);
   };
 
   // console.log(fileList);
@@ -152,9 +151,9 @@ const VehicleRegister = () => {
       // console.log("files ===>", fileUrl);
     }
 
-    for (let value of formData.values()) {
-      console.log("value:", value);
-    }
+    // for (let value of formData.values()) {
+    //   // console.log("value:", value);
+    // }
 
     const userToken = localStorage.getItem("userToken");
     const refreshToken = localStorage.getItem("refreshToken");
@@ -170,7 +169,7 @@ const VehicleRegister = () => {
         },
       });
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
 
     navigate("/owner");

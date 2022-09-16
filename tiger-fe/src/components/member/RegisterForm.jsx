@@ -1,17 +1,11 @@
 // eslint-disable-next-line
 
-import React, { useEffect, useRef, useState } from "react";
-
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { __registerUser } from "../../redux/modules/memberSlice";
-
 import styled from "styled-components";
 import { BiChevronLeft } from "react-icons/bi";
-
 import { useForm } from "react-hook-form";
-
 import axios from "axios";
 
 const RegisterForm = ({
@@ -51,7 +45,7 @@ const RegisterForm = ({
     const headers = {
       "Content-Type": "application/json",
     };
-    console.log(checkEmail);
+    // console.log(checkEmail);
     try {
       const response = await axios.post(
         `${memberApi}/member/emailCheck`,
@@ -70,10 +64,10 @@ const RegisterForm = ({
         // 그 외에는 사용 불가한 아이디
         alert("사용 불가한 아이디입니다.");
       }
-      console.log(response);
+      // console.log(response);
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -85,8 +79,8 @@ const RegisterForm = ({
     } else {
       dispatch(__registerUser(data));
       loginToggle();
-      console.log(data);
-      console.log("눌림");
+      // console.log(data);
+      // console.log("눌림");
     }
   };
 

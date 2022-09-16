@@ -57,7 +57,7 @@ const Search = () => {
     getCoords(fullAddress);
   };
 
-  console.log(location);
+  // console.log(location);
 
   const [locationObj, setLocationObj] = useState({});
 
@@ -73,7 +73,7 @@ const Search = () => {
         }
       )
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         const location = res.data.documents[0];
         setLocationObj({
           locationX: location.address.x,
@@ -85,7 +85,7 @@ const Search = () => {
   const locationX = Number(locationObj.locationX);
   const locationY = Number(locationObj.locationY);
 
-  console.log(locationX, locationY);
+  // console.log(locationX, locationY);
 
   // 검색한 주소로 위도경도 구하기
   // const [latitude, setLatitude] = useState("");
@@ -117,8 +117,8 @@ const Search = () => {
   const startDate = new Date(startDates).toISOString().slice(0, 10);
   const endDate = new Date(endDates).toISOString().slice(0, 10);
 
-  console.log(startDate);
-  console.log(endDate);
+  // console.log(startDate);
+  // console.log(endDate);
 
   const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
     <button
@@ -135,7 +135,7 @@ const Search = () => {
   const handleChange = (e) => {
     setType(e.target.value);
   };
-  console.log(type);
+  // console.log(type);
 
   // submit handler
   const onSubmitHandler = async (e) => {
@@ -149,8 +149,7 @@ const Search = () => {
         alert("검색을 완료 해주세요");
       } else {
         e.preventDefault();
-
-        await dispatch(
+        dispatch(
           __vehicleSearchList({
             location,
             startDate,
@@ -161,18 +160,10 @@ const Search = () => {
           })
         );
         navigate("/vlist");
-        // setAddress("");
-        // setType("");
-        // setLocationObj({});
       }
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
-
-    // setAddress("");
-    // setTypeValue("");
-    // setLatitude("");
-    // setLongitude("");
   };
 
   // ----------------------------------------------------------------
@@ -246,11 +237,11 @@ const Search = () => {
               dateFormat="yyyy-MM-dd"
               minDate={new Date()}
               shouldCloseOnSelect={true}
-              placeholder="언제부터"
+              placeholderText="언제부터"
               customInput={<ExampleCustomInput />}
             />
           </StCalendarWrapper>
-          <div className="dateConnection"></div>
+          <div className="dateConnection">~</div>
           <StCalendarWrapper>
             <StNewDatePicker
               selected={endDates}
@@ -262,7 +253,7 @@ const Search = () => {
               locale={ko}
               dateFormat="yyyy-MM-dd"
               shouldCloseOnSelect={true}
-              placeholder="언제까지"
+              placeholderText="언제까지"
               customInput={<ExampleCustomInput />}
             />
           </StCalendarWrapper>
@@ -326,23 +317,14 @@ const StSearchLocationContainer = styled.div`
 
 const StCalendarContainer = styled.div`
   display: flex;
-  justify-content: center;
-  width: 374px;
-  height: 42px;
-  box-sizing: border-box;
-  font-size: 14px;
-  margin: 25px 0 25px 0;
-  cursor: pointer;
-  background: #f2f2f2;
-  border-radius: 12px;
-  padding: 5px;
-  border: 1px solid;
+  justify-content: space-around;
+  align-content: space-around;
   .dateConnection {
     height: 42px;
     box-sizing: border-box;
     font-size: 18px;
     line-height: 42px;
-    top: -7px;
+    top: 25px;
     position: relative;
     z-index: 99;
     margin-right: 16px;
@@ -352,7 +334,18 @@ const StCalendarContainer = styled.div`
 
 const StCalendarWrapper = styled.div`
   z-index: 99;
-  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 180px;
+  height: 42px;
+  box-sizing: border-box;
+  font-size: 14px;
+  margin: 25px 0 25px 0;
+  cursor: pointer;
+  background: #f2f2f2;
+  border-radius: 12px;
+  padding: 5px;
+  border: 1px solid;
   .example-custom-input {
     box-sizing: border-box;
     font-size: 14px;

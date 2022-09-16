@@ -5,31 +5,36 @@ import styled from "styled-components";
 import { AiOutlineClose } from "react-icons/ai";
 import logo from "../../assets/ta,iger_logo.png";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const PaymentModal = ({ showModal, vehicleDetails }) => {
+const PaymentModal = ({ showPaymentModal, vehicleDetails, vehicleDates }) => {
+  // const dispatch = useDispatch();
+  const navigate = useNavigate();
   const serverApi = process.env.REACT_APP_SERVER;
+  // console.log(vehicleDetails);
+  const vehicleImage = vehicleDetails.imageList[0];
 
-  console.log(vehicleDetails);
+  const startDate = vehicleDates.startDate;
+  const endDate = vehicleDates.endDate;
 
-  const vehicleImage = vehicleDetails.vehicleList.imageList[0];
-  const totalCost = vehicleDetails.vehicleList.price + 500 + 500;
+  const date1 = new Date(startDate);
+  const date2 = new Date(endDate);
+  const totalDays =
+    (date2.getTime() - date1.getTime()) / (1000 * 3600 * 24) + 1;
+  const paidAmount = totalDays * vehicleDetails.price;
 
   const [payMethod, setPayMethod] = useState();
-  console.log(payMethod);
+  // console.log(payMethod);
 
-  const confirmPayment = async () => {
+  const confirmPayment = async (e) => {
     const confirm = window.confirm("결제하시겠습니까?");
-
+    e.preventDefault();
     if (confirm === true && payMethod === undefined) {
       alert("결제방식을 선택해주세요");
     } else if (confirm === false) {
       return null;
     } else if (confirm === true && payMethod !== undefined) {
-      const vid = vehicleDetails.vehicleList.vid;
-      const paidAmount = vehicleDetails.vehicleList.price;
-      const startDate = vehicleDetails.startDate;
-      const endDate = vehicleDetails.endDate;
-
+      const vid = vehicleDetails.vid;
       const userToken = localStorage.getItem("userToken");
       const refreshToken = localStorage.getItem("refreshToken");
 
@@ -42,17 +47,19 @@ const PaymentModal = ({ showModal, vehicleDetails }) => {
         .post(
           serverApi + `/order/${vid}`,
           {
-            id: "01010101",
+            // id: "01010101",
             paidAmount,
             startDate,
             endDate,
             payMethod,
-            impUid: "0000",
+            // impUid: "0000",
           },
           { headers: headers }
         )
         .then((res) => {
-          console.log(res);
+          // console.log(res);
+          // dispatch(__getRenterItemList("RESERVED"));
+          navigate("/renter");
         });
     }
   };
@@ -61,7 +68,7 @@ const PaymentModal = ({ showModal, vehicleDetails }) => {
     <StPaymentModal>
       <StPaymentInfo>
         <div className="wrap">
-          <AiOutlineClose className="icon" onClick={showModal} />
+          <AiOutlineClose className="icon" onClick={showPaymentModal} />
           <div className="login__logo">
             <img src={logo} alt="logo" />
           </div>
@@ -76,16 +83,13 @@ const PaymentModal = ({ showModal, vehicleDetails }) => {
             </div>
             <div className="vehicleInfo">
               <div>
-                <div className="vehicleAddress">
-                  {vehicleDetails.vehicleList.location}
-                </div>
+                <div className="vehicleAddress">{vehicleDetails.location}</div>
                 <div className="vehicleFullName">
-                  {vehicleDetails.vehicleList.vbrand}{" "}
-                  {vehicleDetails.vehicleList.vname}
+                  {vehicleDetails.vbrand} {vehicleDetails.vname}
                 </div>
               </div>
               <div className="vehicleRentPeriod">
-                {vehicleDetails.startDate} ~ {vehicleDetails.endDate}
+                {vehicleDates.startDate} ~ {vehicleDates.endDate}
               </div>
             </div>
           </div>
@@ -99,19 +103,21 @@ const PaymentModal = ({ showModal, vehicleDetails }) => {
           </div> */}
           <div className="vehiclePrice">
             <div className="priceInfo">대여요금</div>
-            <div className="price">₩ {vehicleDetails.vehicleList.price}</div>
+            <div className="price">
+              ₩ {vehicleDetails.price}/{totalDays}일{" "}
+            </div>
           </div>
           <div className="vehiclePrice">
             <div className="priceInfo">보험료</div>
-            <div className="price">₩ 500</div>
+            <div className="price">무료</div>
           </div>
           <div className="vehiclePrice">
             <div className="priceInfo">수수료</div>
-            <div className="price">₩ 500</div>
+            <div className="price">무료</div>
           </div>
           <div className="vehiclePrice">
             <div className="priceInfo">총액</div>
-            <div className="price">₩ {totalCost}</div>
+            <div className="price">₩ {paidAmount}</div>
           </div>
           <form className="vehiclePayMethod">
             <select

@@ -1,4 +1,7 @@
+// eslint-disable-next-line
+
 // /*global kakao*/
+
 import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
@@ -6,16 +9,13 @@ import styled, { css } from "styled-components";
 import ImgViewBox from "./ImgViewBox";
 import axios from "axios";
 import DaumPostcode from "react-daum-postcode";
-import userImg from "../../assets/dan-gold-N7RiDzfF2iw-unsplash.jpg";
 import email from "../../assets/registermail.png";
 import phone from "../../assets/registerphone.png";
 import OwnerKakaoMap from "./OwnerKakaoMap";
-import ModifyImgViewBox from "./ModifyImgViewBox";
-
 import { __ownerModiRegisterInfo } from "../../redux/modules/ownerModify";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const VehicleModify = () => {
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ const VehicleModify = () => {
   // console.log(userInfo);
 
   const vid = useParams();
-  console.log(vid.id);
+  // console.log(vid.id);
   const numVid = parseInt(vid.id);
 
   //vehicleInfo
@@ -92,7 +92,7 @@ const VehicleModify = () => {
     // defaultValues: {},
   } = useForm();
 
-  console.log(watch());
+  // console.log(watch());
 
   const cartypeOption = [
     { value: "경형", label: "경형" },
@@ -171,13 +171,13 @@ const VehicleModify = () => {
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
     setAddress(fullAddress);
-    console.log("fullAddress:", fullAddress);
-    console.log("address:", address);
+    // console.log("fullAddress:", fullAddress);
+    // console.log("address:", address);
   };
   // console.log(address);
 
   // 임시 submit handler
-  console.log(inputs.vbrand);
+  // console.log(inputs.vbrand);
   // console.log(inputs.vbrand)
   // console.log(inputs.vbrand)
   const onSubmit = async ({
@@ -212,7 +212,7 @@ const VehicleModify = () => {
     }
 
     for (let value of formData.values()) {
-      console.log("value:", value);
+      // console.log("value:", value);
     }
 
     const userToken = localStorage.getItem("userToken");
@@ -232,7 +232,7 @@ const VehicleModify = () => {
         // RefreshToken: refreshToken,
       });
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
 
     navigate(`/owner`);
@@ -248,7 +248,7 @@ const VehicleModify = () => {
   // };
   // console.log("isEditLocation:", isEditLocation);
   // console.log("isEdit:", isEdit);
-  console.log("address:", address);
+  // console.log("address:", address);
   return (
     <StVehicleModify>
       <form id="form" onSubmit={handleSubmit(onSubmit, watch)}>

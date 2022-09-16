@@ -1,8 +1,12 @@
+// eslint-disable-next-line
+
 import React, { useState } from "react";
-// import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
-import DatePanel from "react-multi-date-picker/plugins/date_panel";
-import { Calendar } from "react-multi-date-picker";
-import DatePicker, { DateObject } from "react-multi-date-picker";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+// 자바스크립트 날짜 관련 함수의 총 집합 라이브러리
+import { format, addMonths, subMonths } from "date-fns";
+import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from "date-fns";
+// import { addMonths } from "date-fns/addMonths";
+import { isSameMonth, isSameDay, addDays, parse } from "date-fns";
 import styled from "styled-components";
 // import InputIcon from "react-multi-date-picker/components/input_icon";
 import Settings from "react-multi-date-picker/plugins/settings";

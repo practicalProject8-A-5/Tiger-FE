@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 const RenterInfo = () => {
   const memberInfo = useSelector((state) => state.memberSlice.userInfo);
-  console.log(memberInfo);
+  // console.log(memberInfo);
 
   return (
     <StRenterInfo>
