@@ -271,14 +271,8 @@ const StCalender = styled.div`
                     :hover {
                       background-color: #fff !important;
                       color: #8b8b8b !important;
-                      /* pointer-events: none; */
-                      /* cursor-: ; */
                     }
                   }
-                  /* .rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden)
-                    span:hover {
-                    background-color: #8b8b8b;
-                  } */
                 }
                 .rmdp-day.rmdp-today span {
                   background-color: #fff;
