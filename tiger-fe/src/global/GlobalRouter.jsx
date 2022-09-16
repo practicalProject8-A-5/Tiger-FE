@@ -13,6 +13,10 @@ import OwnerItemList from "../components/owner/OwnerItemList";
 import KakaoLogin from "../components/member/KakaoLogin";
 import OwnerModifyPage from "../pages/OwnerModifyPage";
 import { useSelector } from "react-redux";
+import NotFound from "../global_elements/NotFound";
+import GlobalLayout from "./GlobalLayout";
+import Header from "../global_elements/Header";
+import Search from "../global_elements/Search";
 
 const GlobalRouter = () => {
   const userInfo = useSelector((state) => state.memberSlice.userInfo);
@@ -39,6 +43,15 @@ const GlobalRouter = () => {
       <Route path="/vdetail/:id" element={<VehicleDetailPage />} />
       <Route path="/vlist" element={<VehicleListPage />} />
       <Route path="/user/kakao/callback" element={<KakaoLogin />} />
+      <Route
+        path="*"
+        element={
+          <NotFound
+            upperText={<div>해당 페이지를 찾지 못했습니다.</div>}
+            lowerText={<div>이용에 불편함을 끼쳐드려 죄송합니다.</div>}
+          />
+        }
+      />
     </Routes>
   );
 };

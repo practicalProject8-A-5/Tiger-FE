@@ -86,9 +86,12 @@ const StItem = styled.div`
       font-weight: 600;
       font-size: 18px;
       margin-bottom: 6px;
-      /* .desc__title {
+      .desc__title {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
       }
-      .desc__star {
+      /* .desc__star {
       } */
     }
     p {

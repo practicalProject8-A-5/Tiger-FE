@@ -101,7 +101,6 @@ const VehicleRegister = () => {
     zIndex: "999",
   };
 
-  // useEffect(() => {});
   const handlePostCode = (data) => {
     let fullAddress = data.address;
     let extraAddress = "";

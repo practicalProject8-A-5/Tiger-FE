@@ -54,7 +54,7 @@ const OwnerItem = ({ list, category, vid }) => {
             </p>
             <span>{list.oname}</span>
             <p>₩{list.price}/1일</p>
-            <p>{list.location}</p>
+            <p className="carInfo__location">{list.location}</p>
           </div>
           {/* <div className="dateBtn">{list.createdAt}</div> */}
           <div className="flex_wrap">
@@ -132,6 +132,11 @@ const StOwnerItem = styled.div`
       font-size: 16px;
       color: #8b8b8b;
       margin-bottom: 13px;
+    }
+    &__location {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
     }
   }
   .dateBtn {

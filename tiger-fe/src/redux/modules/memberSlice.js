@@ -65,6 +65,7 @@ export const __userLogin = createAsyncThunk(
       localStorage.setItem("phone", response.data.output.tel);
       localStorage.setItem("name", response.data.output.name);
       localStorage.setItem("refreshToken", response.headers.refreshtoken);
+      localStorage.setItem("profileImage", response.data.output.profileImage);
       // console.log(response.data);
       window.alert("로그인 성공");
       loader();

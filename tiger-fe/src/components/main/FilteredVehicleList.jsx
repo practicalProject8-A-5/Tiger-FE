@@ -10,6 +10,7 @@ import "swiper/scss/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
 import { useNavigate } from "react-router-dom";
+import NotFound from "../../global_elements/NotFound";
 
 const FilteredVehicleList = () => {
   const navigate = useNavigate();
@@ -27,7 +28,12 @@ const FilteredVehicleList = () => {
   return (
     <StItemList>
       {filteredVehicleLength.length === 0 ? (
-        <div>등록되지 않는 차량입니다.</div>
+        <NotFound
+          upperText={<div>등록차량을 찾을수 없습니다.</div>}
+          lowerText={
+            <div>검색 조건을 변경하여 더 많은 차량을 찾아보세요!.</div>
+          }
+        />
       ) : (
         filteredVehicle.vehicleList &&
         filteredVehicle.vehicleList.map((list, index) => {
@@ -112,9 +118,12 @@ const StItem = styled.div`
       font-weight: 600;
       font-size: 18px;
       margin-bottom: 6px;
-      /* .desc__title {
+      .desc__title {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
       }
-      .desc__star {
+      /* .desc__star {
       } */
     }
     p {
