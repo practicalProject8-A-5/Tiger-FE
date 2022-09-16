@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { __getDateList } from "../../redux/modules/DateSlice";
 import { Calendar } from "react-multi-date-picker";
 
-const Calender = ({ setIsModalOpen, vId }) => {
+const Calender = ({ setIsModalOpen, vId, dateList }) => {
   const DateList = useSelector((state) => state.getDateListSlice.DateList);
   console.log(DateList);
 
@@ -28,7 +28,6 @@ const Calender = ({ setIsModalOpen, vId }) => {
   //open 날짜
   const [openDateLists, setOpenDateLists] = useState([]);
   console.log("openDateLists:", openDateLists);
-
 
   console.log("vId :", vId);
   const serverApi = process.env.REACT_APP_SERVER;
@@ -98,18 +97,19 @@ const Calender = ({ setIsModalOpen, vId }) => {
   useEffect(() => {
     dispatch(__getDateList(vId));
   }, [dispatch, vId]);
-  
+
   useEffect(() => {
     setReserveDateList([...DateList.reservedDateList]);
     setOpenDateLists([...DateList.openDateList]);
   }, [DateList]);
 
   // get 불러오기 (reserveDate, openDate)
+
   return (
     <StCalender>
       <>
         <h2>렌트 가능 날짜 선택</h2>
-        <p>시작 날짜를 먼저 선택한 후 마감 날짜를 선택해주세요.</p>
+        <p>오픈날짜를 선택해주세요.</p>
         <Calendar
           months={months}
           weekDays={weekDays}
@@ -251,21 +251,15 @@ const StCalender = styled.div`
                 .rmdp-day {
                   /* background-color: pink; */
                   .highlight-red {
-                    color: #8b8b8b;
+                    color: #6b6868 !important;
                     text-decoration: line-through;
                     background-color: #fff !important;
                     box-shadow: none;
                     :hover {
                       background-color: #fff !important;
                       color: #8b8b8b !important;
-                      /* pointer-events: none; */
-                      /* cursor-: ; */
                     }
                   }
-                  /* .rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden)
-                    span:hover {
-                    background-color: #8B8B8B;
-                  } */
                 }
                 .rmdp-day.rmdp-today span {
                   background-color: #fff;
@@ -392,4 +386,3 @@ const StCalender = styled.div`
     }
   }
 `;
-
