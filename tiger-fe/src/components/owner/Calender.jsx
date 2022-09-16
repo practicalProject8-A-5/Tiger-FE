@@ -5,6 +5,7 @@ import { Calendar } from "react-multi-date-picker";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import styled from "styled-components";
 // import InputIcon from "react-multi-date-picker/components/input_icon";
+import Settings from "react-multi-date-picker/plugins/settings";
 import Icon from "react-multi-date-picker/components/icon";
 import { useEffect } from "react";
 import { useRef } from "react";
@@ -15,7 +16,6 @@ import { __getDateList } from "../../redux/modules/DateSlice";
 
 const Calender = ({ setIsModalOpen, vId }) => {
   const serverApi = process.env.REACT_APP_SERVER;
-  // const serverApiTest = process.env.REACT_APP_SERVER_TEST;
   //월
   const months = [
     "1월",
@@ -39,22 +39,40 @@ const Calender = ({ setIsModalOpen, vId }) => {
     setIsModalOpen(false);
   };
 
-  const [dates, setDates] = useState([]);
   //날짜 등록
   const submitHandler = async () => {
     //날짜 추출
+    //중복 제거
     const openDateList = [];
-    for (let i = 0; i < dates.length; i++) {
-      const date = `${dates[i].year}-${dates[i].month}-${dates[i].day}`;
-      openDateList.push(date);
-    }
+    const openDateListRemove = [...new Set(openDateLists)];
+    console.log("openDateListRemove :", openDateListRemove);
+    // for (let i = 0; i < openDateListRemove.length; i++) {
+    //   const year = `${openDateListRemove[i].split("-")[0]}`;
+    //   const month = `${openDateListRemove[i].split("-")[1]}`;
+    //   const day = `${openDateListRemove[i].split("-")[2]}`;
+    //   let zeroMonth;
+    //   let zeroDay;
+    //   if (Number(month) < 10) {
+    //     zeroMonth = "0" + Number(month);
+    //   } else {
+    //     zeroMonth = Number(month);
+    //   }
+    //   if (Number(day) < 10) {
+    //     zeroDay = "0" + Number(day);
+    //   } else {
+    //     zeroDay = Number(day);
+    //   }
+    //   const date = `${year}-${zeroMonth}-${zeroDay}`;
+    //   openDateList.push(date);
+    // }
+    //보내는 값
+    console.log(openDateList);
 
     const userToken = localStorage.getItem("userToken");
     const refreshToken = localStorage.getItem("refreshToken");
     try {
       await axios.post(
         `${serverApi}/vehicle/schedule/${vId}`,
-        // `${serverApiTest}/vehicle/schedule/`,
         { openDateList },
         {
           headers: {
@@ -69,207 +87,90 @@ const Calender = ({ setIsModalOpen, vId }) => {
     }
   };
 
-  //수정보내기
-  const editSubmitHandler = async () => {
-    const editDateList = [];
-    for (let i = 0; i < openDateList.length; i++) {
-      const date = `${dates[i].year}-${dates[i].month}-${dates[i].day}`;
-      editDateList.push(date);
-    }
-    const userToken = localStorage.getItem("userToken");
-    const refreshToken = localStorage.getItem("refreshToken");
-    try {
-      await axios.put(
-        `${serverApi}/vehicle/schedule/${vId}`,
-        // `${serverApiTest}/vehicle/schedule/`,
-        { editDateList },
-        {
-          headers: {
-            Authorization: userToken,
-            RefreshToken: refreshToken,
-          },
-        }
-      );
-      console.log(editDateList);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  // get 불러오기
-  const DateList = useSelector((state) => state.getDateListSlice.DateList);
-
-  const reservedDate = useSelector((state) => state.getDateListSlice.temp);
-  console.log("reservedDate :", reservedDate);
-  // console.log(DateList.openDateList);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(__getDateList());
   }, [dispatch]);
 
-  // ---------------------------수정
+  // get 불러오기 (reserveDate, openDate)
+  const DateList = useSelector((state) => state.getDateListSlice.DateList);
+  // console.log(DateList);
 
-  // const openDateyear = Number(DateList.openDateList[0].slice(0, 4));
-  // // console.log(openDateyear);
-
-  // const openDateMonth = Number(DateList.openDateList[0].slice(5, 7));
-  // // console.log(Number(openDateMonth));
-
-  // const openDateDay = Number(DateList.openDateList[0].slice(8, 10));
-  // console.log(openDateDay);
-
-  //open 날짜
-  const [openDateList, setOpenDateList] = useState(
-    // new DateObject().set({
-    //   year: openDateyear,
-    //   month: openDateMonth,
-    //   day: openDateDay,
-    //   format,
-    // }),
-    // new DateObject().set({ month: 8, day: 2, format }),
-    // new DateObject().set({ month: 8, day: 3, format }),
-    DateList.openDateList
-  );
+  // temp (reserveDate : text-deco)
+  const reservedDate = useSelector((state) => state.getDateListSlice.temp);
+  // console.log("reservedDate :", reservedDate);
 
   const [reserveDateList, setReserveDateList] = useState(
-    // new DateObject().set({ month: 9, day: 11, format })
     DateList.reservedDateList
   );
-  console.log("reserveDateList :", reserveDateList);
-  // console.log(reserveDateList);
-  // console.log("openDateList :", openDateList);
+  // console.log("reserveDateList :", reserveDateList);
 
-  const [editToggle, setEditToggle] = useState(false);
-  // console.log(editToggle);
-  const editHandler = () => {
-    console.log("눌림");
-    setEditToggle(!editToggle);
-  };
+  //open 날짜
+  const [openDateLists, setOpenDateLists] = useState(DateList.openDateList);
 
-  // const reserveDateListDay = { ...reserveDateList };
-  // console.log(DateList.reservedDateList[2].slice(8, 10));
-
-  // const temp = [];
-  // for (let i = 0; i <= reserveDateList.length; i++) {
-  //   const reserveDateDay = DateList.reserveDateList[i].slice(8, 10);
-  //   temp.push(reserveDateDay);
-  //   // console.log(reserveDateDay);
-  // }
-  // console.log(reserveDateList.length);
-  // .reserveDateList[0].slice(8, 10)
-  // const alartA = function (e) {
-  //   // if (setOpenDateList.includes(setOpenDateList)) {
-  //   e.preventDefault();
-  //   alert("선택이 불가해요");
-  // };
-  // alert("눌렸어요");
-
-  // console.log(alartA);
+  console.log("openDateLists:", openDateLists);
   return (
     <StCalender>
-      {/* 2안 */}
-      {!editToggle ? (
-        <>
-          <h2>렌트 가능 날짜 선택</h2>
-          <p>시작 날짜를 먼저 선택한 후 마감 날짜를 선택해주세요.</p>
-          <StDatePicker
-            value={dates}
-            onChange={setDates}
-            multiple
-            format={format}
-            weekDays={weekDays}
-            months={months}
-            plugins={[<DatePanel />]}
-            render={<Icon className="icon" style={{ marginBottom: 15 }} />}
-            numberOfMonths={2}
-          />
-          <div className="close" onClick={closeModal}>
-            <GrClose />
-          </div>
+      <>
+        <h2>렌트 가능 날짜 선택</h2>
+        <p>시작 날짜를 먼저 선택한 후 마감 날짜를 선택해주세요.</p>
+        <Calendar
+          months={months}
+          weekDays={weekDays}
+          value={openDateLists}
+          format={format}
+          // showOtherDays
+          // minDate={new Date()}
+          numberOfMonths={2}
+          onChange={(e) => {
+            console.log(e);
+            const target = e.at(-1);
+            const targetStr = `${target.year}-${target.month.number}-${target.day}`;
 
-          <ul>
-            {dates.map((date, index) => (
-              <li key={index}>{date.format()}</li>
-            ))}
-          </ul>
-          <div className="edit" onClick={editHandler}>
-            달력보기
-          </div>
-          <button className="submit" onClick={submitHandler}>
-            등록
-          </button>
-        </>
-      ) : (
-        <>
-          {/* <h2>렌트 가능 날짜 선택</h2>
-          <p>시작 날짜를 먼저 선택한 후 마감 날짜를 선택해주세요.</p> */}
-          <h2 className="open">사용가능한 날짜</h2>
-          <Calendar
-            value={openDateList}
-            // value={reserveDateList}
-            onChange={setOpenDateList}
-            // onChange={() => {
-            //   alartA();
-            // }}
-            plugins={[<DatePanel />]}
-            // onClick={(e) => {
-            //   e.preventDefault();
-            // }}
-            // plugins={[
-            //   <Settings
-            //     position="bottom"
-            //     disabledList={["calendar", "locale", "mode"]}
-            //     defaultActive="others"
-            //     defaultFormat={{
-            //       single: "MM-DD-YYYY",
-            //       onlyMonthPicker: "MMMM YYYY",
-            //       onlyYearPicker: "YYYY",
-            //     }}
-            //   />
-            // ]}
-            mapDays={({ date }) => {
-              let color;
-              console.log(date.months);
+            if (!reserveDateList.includes(targetStr)) {
+              //true일때
+              // if (openDateLists.includes(targetStr)) {
+              //   //포함되어 있을때
+              //   console.log("2");
+              //   console.log(targetStr);
+              //   // setOpenDateLists(
+              //   //   openDateLists.filter((Str) => Str !== targetStr)
+              //   // );
+              //   // setOpenDateLists([...openDateLists], null);
+              //   setOpenDateLists(e);
+              // } else {
+              //   //포함되지 않았을때
+              //   console.log("1");
+              //   setOpenDateLists([...openDateLists, targetStr]);
+              // }
+              setOpenDateLists(e);
+            } else {
+              e.pop();
+            }
+          }}
+          // plugins={[<DatePanel />]}
+          mapDays={({ date }) => {
+            let color;
+            // if ([11, 12, 13, 14].includes(date.day)) color = "red";
+            if (reservedDate.includes(`${date.year}-${date.month}-${date.day}`))
+              color = "red";
+            return { className: "highlight-" + color };
+          }}
+        />
+        <div className="close" onClick={closeModal}>
+          <GrClose />
+        </div>
 
-              // if ([11, 12, 13, 14].includes(date.day)) color = "red";
-              // if ([9].includes(date.month)) color = "pink";
-              if (reservedDate.includes(date.day)) color = "red";
-
-              if (color) return { className: "highlight-" + color };
-            }}
-            // readOnly
-            // editable={false}
-            // disabled
-          />
-
-          {/* <h2 className="reserve">예약중인 날짜</h2>
-          <div className="reserved">
-            <Calendar
-              value={reserveDateList}
-              onChange={setReserveDateList}
-              plugins={[<DatePanel />]}
-              readOnly
-            />
-          </div> */}
-
-          <div className="close" onClick={closeModal}>
-            <GrClose />
-          </div>
-          <div className="edit" onClick={editHandler}>
-            삭제
-          </div>
-          <button className="submit" onClick={editSubmitHandler}>
-            등록
-          </button>
-        </>
-      )}
-
-      {/* 3안 */}
-      {/* <Calendar /> */}
-
-      {/* </div> */}
+        <button className="submit" onClick={submitHandler}>
+          등록
+        </button>
+        {/* <ul>
+          {openDateLists.map((date, i) => (
+            <li key={i}>{date}</li>
+          ))}
+        </ul> */}
+      </>
     </StCalender>
   );
 };
@@ -278,7 +179,6 @@ export default Calender;
 
 const StCalender = styled.div`
   width: 765px;
-  /* height: 550px; */
   padding: 40px;
   position: absolute;
   top: 35%;
@@ -319,6 +219,102 @@ const StCalender = styled.div`
         transform: translateX(0);
       }
     }
+  }
+  .rmdp-wrapper {
+    width: 100%;
+    /* background-color: pink; */
+    .rmdp-top-class {
+      /* background-color: skyblue; */
+      .rmdp-calendar {
+        width: 100%;
+        /* background-color: yellow; */
+        .rmdp-header {
+          div {
+            .rmdp-arrow-container {
+              /* background-color: #ddd; */
+              background-color: #fff;
+              .rmdp-arrow {
+                border: solid #000;
+                border-width: 0 2px 2px 0;
+                display: inline-block;
+                height: 3px;
+                margin-top: 5px;
+                padding: 2px;
+                width: 3px;
+              }
+            }
+            .rmdp-header-values {
+              font-weight: 600;
+              font-size: 18px;
+              color: #000;
+            }
+            div {
+            }
+          }
+        }
+        div {
+          /* background-color: yellow; */
+          .rmdp-day-picker {
+            display: flex;
+            justify-content: space-around;
+            /* width: calc(100% / 2); */
+            /* background-color: skyblue; */
+
+            div {
+              /* width: 300px; */
+              /* height: ; */
+              /* background-color: pink; */
+              .rmdp-week {
+                /* background-color: pink; */
+                .rmdp-week-day {
+                  font-weight: 600;
+                  font-size: 14px;
+                  color: #8b8b8b;
+                }
+                .rmdp-day {
+                  /* background-color: pink; */
+                  .highlight-red {
+                    color: #8b8b8b;
+                    text-decoration: line-through;
+                    background-color: #fff !important;
+                    box-shadow: none;
+                    :hover {
+                      background-color: #fff !important;
+                      color: #8b8b8b !important;
+                      /* pointer-events: none; */
+                      /* cursor-: ; */
+                    }
+                  }
+                  /* .rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden)
+                    span:hover {
+                    background-color: #8b8b8b;
+                  } */
+                }
+                .rmdp-day.rmdp-today span {
+                  background-color: #fff;
+                  color: royalblue;
+                  text-decoration: underline;
+                  :hover {
+                    background-color: #8b8b8b;
+                  }
+                }
+                .rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) span:hover {
+                  background-color: #8b8b8b;
+                  color: #fff;
+                }
+                .rmdp-day.rmdp-selected span:not(.highlight) {
+                  background-color: #000;
+                  /* color: #fff; */
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .rmdp-shadow {
+    box-shadow: none;
   }
 
   /* margin-top: 15px; */
@@ -423,8 +419,8 @@ const StCalender = styled.div`
   }
 `;
 
-const StDatePicker = styled(DatePicker)`
-  margin-bottom: 15px;
+const StLi = styled.div`
+  background-color: pink;
 `;
 
 /* 1안 */

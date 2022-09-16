@@ -15,7 +15,7 @@ const OwnerItemList = ({ category }) => {
     (state) => state.ownerItemListSlice.OwnerItemList
   );
 
-  console.log(OwnerItemLists);
+  // console.log(OwnerItemLists);
 
   // const id = useSelector(
   //   (state) => state.ownerItemListSlice.OwnerItemList.output

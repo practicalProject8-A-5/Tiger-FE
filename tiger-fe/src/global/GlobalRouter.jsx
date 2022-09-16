@@ -16,7 +16,7 @@ import { useSelector } from "react-redux";
 
 const GlobalRouter = () => {
   const userInfo = useSelector((state) => state.memberSlice.userInfo);
-  console.log(userInfo);
+  // console.log(userInfo);
   return (
     <Routes>
       <Route exact path="/" element={<RentMainPage />} />

@@ -28,7 +28,7 @@ const Stblur = styled.div`
   align-items: center;
   .background {
     position: fixed;
-    top: 19%;
+    top: 21%;
     right: 0;
     width: 100vw;
     height: 100%;

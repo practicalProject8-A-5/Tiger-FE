@@ -27,14 +27,14 @@ export const __getDateList = createAsyncThunk(
         Authorization: userToken,
         RefreshToken: refreshToken,
       };
-      const resp =
-        // await axios.get(`${serverApi}/vehicle/schedule/${vId}`,
-        await axios.get(
-          `https://run.mocky.io/v3/4069fe02-f210-4a8e-b6f3-a4d045e2df03`,
-          {
-            headers: headers,
-          }
-        );
+      const resp = await axios.get(
+        // `${serverApi}/vehicle/schedule/${vId}`,
+        // await axios.get(
+        `https://run.mocky.io/v3/476da7e6-de13-49e2-9658-d18c83185cdc`,
+        {
+          headers: headers,
+        }
+      );
       // console.log(resp.data.output);
       return thunkAPI.fulfillWithValue(resp.data.output);
     } catch (error) {
@@ -54,17 +54,18 @@ const getDateListSlice = createSlice({
     },
     [__getDateList.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log(action.payload);
+      // console.log(action.payload);
       state.DateList = action.payload;
-      // const temp = action.payload.reservedDateList.length;
-      const temp = [];
-      for (let i = 0; i < action.payload.reservedDateList.length; i++) {
-        temp.push(parseInt(action.payload.reservedDateList[i].slice(8, 10)));
 
-        // console.log(reserveDateDay);
+      const tempNoParsing = action.payload.reservedDateList;
+      // console.log(tempNoParsing[0]);
+      for (let i = 0; i < tempNoParsing.length; i++) {
+        const temp = [];
+        for (let i = 0; i < action.payload.reservedDateList.length; i++) {
+          temp.push(action.payload.reservedDateList[i]);
+        }
+        state.temp = temp;
       }
-      console.log(temp);
-      state.temp = temp;
     },
     [__getDateList.rejected]: (state, action) => {
       state.isLoading = false;
