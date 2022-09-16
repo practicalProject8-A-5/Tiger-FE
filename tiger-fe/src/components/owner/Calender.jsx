@@ -1,24 +1,26 @@
 // eslint-disable-next-line
 
 import React, { useState } from "react";
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import styled from "styled-components";
 // 자바스크립트 날짜 관련 함수의 총 집합 라이브러리
 import { format, addMonths, subMonths } from "date-fns";
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from "date-fns";
 // import { addMonths } from "date-fns/addMonths";
 import { isSameMonth, isSameDay, addDays, parse } from "date-fns";
-import styled from "styled-components";
 // import InputIcon from "react-multi-date-picker/components/input_icon";
 import Settings from "react-multi-date-picker/plugins/settings";
 import Icon from "react-multi-date-picker/components/icon";
-import { useEffect } from "react";
 import { useRef } from "react";
+
+import { useEffect } from "react";
 import { GrClose } from "react-icons/gr";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { __getDateList } from "../../redux/modules/DateSlice";
+import { Calendar } from "react-multi-date-picker";
 
 const Calender = ({ setIsModalOpen, vId }) => {
+  // console.log("vId :", vId);
   const serverApi = process.env.REACT_APP_SERVER;
   //월
   const months = [
@@ -45,33 +47,27 @@ const Calender = ({ setIsModalOpen, vId }) => {
 
   //날짜 등록
   const submitHandler = async () => {
-    //날짜 추출
-    //중복 제거
-    const openDateList = [];
-    const openDateListRemove = [...new Set(openDateLists)];
-    console.log("openDateListRemove :", openDateListRemove);
-    // for (let i = 0; i < openDateListRemove.length; i++) {
-    //   const year = `${openDateListRemove[i].split("-")[0]}`;
-    //   const month = `${openDateListRemove[i].split("-")[1]}`;
-    //   const day = `${openDateListRemove[i].split("-")[2]}`;
-    //   let zeroMonth;
-    //   let zeroDay;
-    //   if (Number(month) < 10) {
-    //     zeroMonth = "0" + Number(month);
-    //   } else {
-    //     zeroMonth = Number(month);
-    //   }
-    //   if (Number(day) < 10) {
-    //     zeroDay = "0" + Number(day);
-    //   } else {
-    //     zeroDay = Number(day);
-    //   }
-    //   const date = `${year}-${zeroMonth}-${zeroDay}`;
-    //   openDateList.push(date);
-    // }
+    console.log(openDateLists);
+    console.log(openDateLists.length);
+
+    // let zeroMonth = "";
+    let openDateList = [];
+    for (let i = 0; i < openDateLists.length; i++) {
+      let year = `${openDateLists[i].year}`;
+      let month = `${openDateLists[i].month}`;
+      let day = `${openDateLists[i].day}`;
+
+      console.log(`${year}-${month}-${day}`);
+      if (month < 10) {
+        month = "0" + month;
+      }
+      if (day < 10) {
+        day = "0" + day;
+      }
+      openDateList.push(`${year}-${month}-${day}`);
+    }
     //보내는 값
     console.log(openDateList);
-
     const userToken = localStorage.getItem("userToken");
     const refreshToken = localStorage.getItem("refreshToken");
     try {
@@ -85,30 +81,28 @@ const Calender = ({ setIsModalOpen, vId }) => {
           },
         }
       );
-      console.log(openDateList);
+      // console.log(openDateList);
     } catch (err) {
       console.log(err);
     }
+    alert("상품 등록 성공");
   };
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(__getDateList());
-  }, [dispatch]);
+    dispatch(__getDateList(vId));
+  }, [dispatch, vId]);
 
   // get 불러오기 (reserveDate, openDate)
   const DateList = useSelector((state) => state.getDateListSlice.DateList);
-  // console.log(DateList);
-
-  // temp (reserveDate : text-deco)
-  const reservedDate = useSelector((state) => state.getDateListSlice.temp);
-  // console.log("reservedDate :", reservedDate);
 
   const [reserveDateList, setReserveDateList] = useState(
     DateList.reservedDateList
   );
-  // console.log("reserveDateList :", reserveDateList);
+
+  console.log("reserveDateList :", reserveDateList);
+  // console.log(reservedDate);
 
   //open 날짜
   const [openDateLists, setOpenDateLists] = useState(DateList.openDateList);
@@ -125,29 +119,14 @@ const Calender = ({ setIsModalOpen, vId }) => {
           value={openDateLists}
           format={format}
           // showOtherDays
-          // minDate={new Date()}
+          minDate={new Date()}
           numberOfMonths={2}
           onChange={(e) => {
-            console.log(e);
+            // console.log(e);
             const target = e.at(-1);
             const targetStr = `${target.year}-${target.month.number}-${target.day}`;
 
             if (!reserveDateList.includes(targetStr)) {
-              //true일때
-              // if (openDateLists.includes(targetStr)) {
-              //   //포함되어 있을때
-              //   console.log("2");
-              //   console.log(targetStr);
-              //   // setOpenDateLists(
-              //   //   openDateLists.filter((Str) => Str !== targetStr)
-              //   // );
-              //   // setOpenDateLists([...openDateLists], null);
-              //   setOpenDateLists(e);
-              // } else {
-              //   //포함되지 않았을때
-              //   console.log("1");
-              //   setOpenDateLists([...openDateLists, targetStr]);
-              // }
               setOpenDateLists(e);
             } else {
               e.pop();
@@ -157,7 +136,9 @@ const Calender = ({ setIsModalOpen, vId }) => {
           mapDays={({ date }) => {
             let color;
             // if ([11, 12, 13, 14].includes(date.day)) color = "red";
-            if (reservedDate.includes(`${date.year}-${date.month}-${date.day}`))
+            if (
+              reserveDateList.includes(`${date.year}-${date.month}-${date.day}`)
+            )
               color = "red";
             return { className: "highlight-" + color };
           }}
@@ -296,8 +277,8 @@ const StCalender = styled.div`
                 }
                 .rmdp-day.rmdp-today span {
                   background-color: #fff;
-                  color: royalblue;
-                  text-decoration: underline;
+                  font-weight: 800;
+                  color: inherit;
                   :hover {
                     background-color: #8b8b8b;
                   }
@@ -308,7 +289,7 @@ const StCalender = styled.div`
                 }
                 .rmdp-day.rmdp-selected span:not(.highlight) {
                   background-color: #000;
-                  /* color: #fff; */
+                  color: #fff;
                 }
               }
             }

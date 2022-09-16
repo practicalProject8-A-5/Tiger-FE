@@ -39,10 +39,10 @@ export const store = configureStore({
   //   getDefaultMiddleware({
   //     serializableCheck: false,
   //   }).concat(logger),
-  // middleware: (getDefaultMiddleware) =>
-  //   getDefaultMiddleware({
-  //     serializableCheck: false,
-  //   }),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
   // // devTools: process.env.NODE_ENV !== "production",
 });
 

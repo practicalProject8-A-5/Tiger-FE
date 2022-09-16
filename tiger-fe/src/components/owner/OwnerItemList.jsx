@@ -47,6 +47,7 @@ const OwnerItemList = ({ category }) => {
 
   // console.log(id);
   // console.log(OwnerItemLists);
+
   return (
     <StOwnerItemList>
       {OwnerItemLists.output && OwnerItemLists.output.length === 0 ? (

@@ -14,9 +14,10 @@ import Calender from "./Calender";
 import CalenderBox from "../owner/CalenderBox";
 
 const OwnerItem = ({ list, category, vid }) => {
-  const onClick = (e) => {
+  const onClick = () => {
     navigate(`/vdetail/${vid}`);
   };
+  // console.log(vid);
   const serverApi = process.env.REACT_APP_SERVER;
 
   const dispatch = useDispatch();
