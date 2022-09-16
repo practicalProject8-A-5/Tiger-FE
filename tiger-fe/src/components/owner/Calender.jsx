@@ -1,15 +1,6 @@
 // eslint-disable-next-line
 import React, { useState } from "react";
 import styled from "styled-components";
-// 자바스크립트 날짜 관련 함수의 총 집합 라이브러리
-import { format, addMonths, subMonths } from "date-fns";
-import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from "date-fns";
-// import { addMonths } from "date-fns/addMonths";
-import { isSameMonth, isSameDay, addDays, parse } from "date-fns";
-// import InputIcon from "react-multi-date-picker/components/input_icon";
-import Settings from "react-multi-date-picker/plugins/settings";
-import Icon from "react-multi-date-picker/components/icon";
-import { useRef } from "react";
 import { useEffect } from "react";
 import { GrClose } from "react-icons/gr";
 import axios from "axios";
@@ -17,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { __getDateList } from "../../redux/modules/DateSlice";
 import { Calendar } from "react-multi-date-picker";
 
-const Calender = ({ setIsModalOpen, vId, dateList }) => {
+const Calender = ({ setIsModalOpen, vId }) => {
   const DateList = useSelector((state) => state.getDateListSlice.DateList);
   console.log(DateList);
 
@@ -86,7 +77,6 @@ const Calender = ({ setIsModalOpen, vId, dateList }) => {
           },
         }
       );
-      // console.log(openDateList);
     } catch (err) {
       console.log(err);
     }
@@ -99,11 +89,13 @@ const Calender = ({ setIsModalOpen, vId, dateList }) => {
   }, [dispatch, vId]);
 
   useEffect(() => {
+    if (undefined) {
+      setReserveDateList([...DateList.reservedDateList]);
+      setOpenDateLists([...DateList.openDateList]);
+    }
     setReserveDateList([...DateList.reservedDateList]);
     setOpenDateLists([...DateList.openDateList]);
   }, [DateList]);
-
-  // get 불러오기 (reserveDate, openDate)
 
   return (
     <StCalender>
@@ -145,11 +137,6 @@ const Calender = ({ setIsModalOpen, vId, dateList }) => {
         <button className="submit" onClick={submitHandler}>
           등록
         </button>
-        {/* <ul>
-          {openDateLists.map((date, i) => (
-            <li key={i}>{date}</li>
-          ))}
-        </ul> */}
       </>
     </StCalender>
   );
@@ -200,16 +187,12 @@ const StCalender = styled.div`
   }
   .rmdp-wrapper {
     width: 100%;
-    /* background-color: pink; */
     .rmdp-top-class {
-      /* background-color: skyblue; */
       .rmdp-calendar {
         width: 100%;
-        /* background-color: yellow; */
         .rmdp-header {
           div {
             .rmdp-arrow-container {
-              /* background-color: #ddd; */
               background-color: #fff;
               .rmdp-arrow {
                 border: solid #000;
@@ -231,25 +214,17 @@ const StCalender = styled.div`
           }
         }
         div {
-          /* background-color: yellow; */
           .rmdp-day-picker {
             display: flex;
             justify-content: space-around;
-            /* width: calc(100% / 2); */
-            /* background-color: skyblue; */
             div {
-              /* width: 300px; */
-              /* height: ; */
-              /* background-color: pink; */
               .rmdp-week {
-                /* background-color: pink; */
                 .rmdp-week-day {
                   font-weight: 600;
                   font-size: 14px;
                   color: #8b8b8b;
                 }
                 .rmdp-day {
-                  /* background-color: pink; */
                   .highlight-red {
                     color: #6b6868 !important;
                     text-decoration: line-through;
@@ -287,8 +262,6 @@ const StCalender = styled.div`
   .rmdp-shadow {
     box-shadow: none;
   }
-  /* margin-top: 15px; */
-  /* background-color: pink; */
   svg {
     width: 40px;
     height: 40px;
@@ -336,9 +309,6 @@ const StCalender = styled.div`
         display: none;
       }
     }
-    /* position: absolute;
-      top: 40%;
-      right: 20%; */
   }
   .rmdp-panel {
     button {
@@ -351,7 +321,6 @@ const StCalender = styled.div`
     position: absolute;
     top: 15px;
     right: 15px;
-    /* background-color: pink; */
     font-size: 22px;
     cursor: pointer;
     svg {
@@ -360,7 +329,6 @@ const StCalender = styled.div`
     }
   }
   .reserved {
-    /* color: red; */
     .rmdp-week {
       .rmdp-day {
         span {
@@ -371,7 +339,6 @@ const StCalender = styled.div`
         }
       }
       .rmdp-selected {
-        /* background-color: pink; */
         span {
           text-decoration: line-through;
           box-shadow: none;
