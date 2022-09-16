@@ -280,7 +280,6 @@ const VehicleModify = () => {
             accept="image/jpg, image/png, image/jpeg"
           />
         </div>
-
         {/* 브랜드명, 차종 */}
         <div className="input__top">
           <div className="input__box">
@@ -320,6 +319,20 @@ const VehicleModify = () => {
               <div className="error">{errors.vname.message}</div>
             ) : null}
           </div>
+        </div>
+
+        <div className="price_box">
+          <label htmlFor="price">가격</label>
+          <input
+            type="text"
+            id="price"
+            defaultValue={inputs.price || ""}
+            placeholder="가격을 입력해주세요"
+            {...register("price", {
+              required: "가격을 입력해주세요",
+            })}
+          />
+          <span>₩/1일</span>
         </div>
 
         {/* 차량정보 */}
@@ -514,19 +527,6 @@ const VehicleModify = () => {
           locationObj={locationObj}
           setLocationObj={setLocationObj}
         />
-
-        <div className="price" style={{ marginTop: 30 }}>
-          <label htmlFor="price">가격</label>
-          <input
-            type="text"
-            id="price"
-            defaultValue={inputs.price || ""}
-            placeholder="가격을 입력해주세요"
-            {...register("price", {
-              required: "가격을 입력해주세요",
-            })}
-          />
-        </div>
         <button>수정하기</button>
       </form>
     </StVehicleModify>
@@ -536,10 +536,12 @@ const VehicleModify = () => {
 export default VehicleModify;
 
 const StVehicleModify = styled.div`
-  height: 250vh;
+  /* height: 250vh; */
+  margin-bottom: 80px;
   form {
     /* background-color: yellowgreen; */
     width: 845px;
+    margin: 0 auto;
     .onchange__imgbox {
       width: 844px;
       height: 429px;
@@ -596,6 +598,30 @@ const StVehicleModify = styled.div`
         border-radius: 12px;
         font-family: "Noto Sans KR", sans-serif;
         color: #000;
+      }
+    }
+    .price_box {
+      /* background-color: pink; */
+      margin-bottom: 80px;
+      label {
+        display: block;
+        font-weight: 600;
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+      input {
+        width: 160px;
+        height: 38px;
+        outline: none;
+        border: 1px solid #8b8b8b;
+        border-radius: 12px;
+        padding: 12px;
+        box-sizing: border-box;
+        margin-right: 8px;
+      }
+      span {
+        font-weight: 500;
+        font-size: 16px;
       }
     }
     table {
@@ -656,6 +682,20 @@ const StVehicleModify = styled.div`
         }
       }
     }
+    .desc {
+      width: 100%;
+      /* background-color: pink; */
+      textarea {
+        padding: 28px 26px;
+        box-sizing: border-box;
+        width: 100%;
+        height: 320px;
+        border: 1px solid #8b8b8b;
+        border-radius: 20px;
+        outline: none;
+        resize: none;
+      }
+    }
     .location {
       position: relative;
       h2 {
@@ -688,22 +728,30 @@ const StVehicleModify = styled.div`
       }
     }
   }
+  button {
+    width: 100%;
+    height: 50px;
+    border-radius: 12px;
+    margin-top: 80px;
+    background-color: #ff881b;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 22px;
+    color: #ffffff;
+    border: none;
+  }
 `;
 const StRenterInfoWrapper = styled.div`
   width: 100%;
   margin: 80px 0;
-  /* background-color: pink; */
-
   .infoWrapper_nickname {
     font-weight: 600;
     font-size: 20px;
     line-height: 27px;
-    /* background-color: skyblue; */
   }
   .infoWrapper_personal {
     margin-top: 24px;
     display: flex;
-    /* background-color: yellow; */
     align-items: center;
     img {
       width: 56px;

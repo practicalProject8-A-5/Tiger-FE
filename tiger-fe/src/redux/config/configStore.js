@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 
-import logger from "redux-logger";
+// import logger from "redux-logger";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import vehicleDetailSlice from "../modules/vehicleDetail";
 import ownerItemListSlice from "../modules/ownerItemListSlice";
@@ -24,16 +24,16 @@ const reducer = combineReducers({
   getDateListSlice,
 });
 
-const persistConfig = {
-  key: "root",
-  storage,
-};
+// const persistConfig = {
+//   key: "root",
+//   storage,
+// };
 
-const persistedReducer = persistReducer(persistConfig, reducer);
+// const persistedReducer = persistReducer(persistConfig, reducer);
 
 export const store = configureStore({
-  reducer: persistedReducer,
-  // reducer,
+  // reducer: persistedReducer,
+  reducer,
   // middleware: (getDefaultMiddleware) =>
   //   getDefaultMiddleware({ serializableCheck: false }).concat(logger),
   // devTools: process.env.NODE_ENV !== "production",
@@ -43,5 +43,5 @@ export const store = configureStore({
   devTools: process.env.NODE_ENV !== "production",
 });
 
-export const persistor = persistStore(store);
-// export default store;
+// export const persistor = persistStore(store);
+export default store;
