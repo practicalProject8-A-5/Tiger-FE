@@ -117,7 +117,7 @@ const Calender = ({ setIsModalOpen, vId, dateList }) => {
     <StCalender>
       <>
         <h2>렌트 가능 날짜 선택</h2>
-        <p>시작 날짜를 먼저 선택한 후 마감 날짜를 선택해주세요.</p>
+        <p>오픈날짜를 선택해주세요.</p>
         <Calendar
           months={months}
           weekDays={weekDays}
@@ -264,7 +264,7 @@ const StCalender = styled.div`
                 .rmdp-day {
                   /* background-color: pink; */
                   .highlight-red {
-                    color: #8b8b8b;
+                    color: #6b6868 !important;
                     text-decoration: line-through;
                     background-color: #fff !important;
                     box-shadow: none;
