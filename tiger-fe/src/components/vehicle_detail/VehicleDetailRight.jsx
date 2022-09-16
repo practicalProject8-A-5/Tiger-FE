@@ -50,9 +50,16 @@ const VehicleDetailRight = () => {
       <h1>결제 정보</h1>
       <StPaymentPeriod>
         <div className="paymentTime">대여시간</div>
-        <div className="paymentDates">
-          {vehicleDates.startDate} ~ {vehicleDates.endDate}
-        </div>
+        {vehicleDates.startDate === null && vehicleDetails.endDate === null ? (
+          <div className="paymentDates">
+            <div>검색후 이용해주세요</div>
+          </div>
+        ) : (
+          <div className="paymentDates">
+            {vehicleDates.startDate} ~ {vehicleDates.endDate}
+          </div>
+        )}
+        {/* {vehicleDates.startDate} ~ {vehicleDates.endDate} */}
       </StPaymentPeriod>
       <StPaymentPriceInfo>
         <div className="rentCost">대여요금</div>
