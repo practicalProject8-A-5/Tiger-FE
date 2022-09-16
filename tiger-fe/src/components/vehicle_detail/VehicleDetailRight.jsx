@@ -4,21 +4,18 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Button from "../../global_elements/Button";
 import PaymentModal from "./PaymentModal";
-import LoginModal from "../../global_elements/LoginModal";
+// import LoginModal from "../../global_elements/LoginModal";
 import styled from "styled-components";
 // import { __vehicleDetail } from "../../redux/modules/vehicleDetail";
 
 const VehicleDetailRight = () => {
-  // get response for vehicle info
   const vehicleDates = useSelector(
     (state) => state.vehicleDetailSlice.vehicleDates
   );
-  // console.log(vehicleDates);
-
   const vehicleDetails = useSelector(
     (state) => state.vehicleDetailSlice.vehicleDetails
   );
-  // console.log(vehicleDetails);
+  const userInfo = useSelector((state) => state.memberSlice.userInfo);
 
   const startDate = vehicleDates.startDate;
   const endDate = vehicleDates.endDate;
@@ -28,12 +25,6 @@ const VehicleDetailRight = () => {
   const totalDays =
     (date2.getTime() - date1.getTime()) / (1000 * 3600 * 24) + 1;
   const paidAmount = totalDays * vehicleDetails.price;
-
-  const userInfo = useSelector((state) => state.memberSlice.userInfo);
-  // console.log(userInfo);
-
-  // const startDate = new URL(window.location.href).searchParams.get("startDate");
-  // const endDate = new URL(window.location.href).searchParams.get("endDate");
 
   const [paymentModalOpen, setPaymentModalOpen] = useState();
   const showPaymentModal = () => {
@@ -59,7 +50,6 @@ const VehicleDetailRight = () => {
             {vehicleDates.startDate} ~ {vehicleDates.endDate}
           </div>
         )}
-        {/* {vehicleDates.startDate} ~ {vehicleDates.endDate} */}
       </StPaymentPeriod>
       <StPaymentPriceInfo>
         <div className="rentCost">대여요금</div>
@@ -79,11 +69,12 @@ const VehicleDetailRight = () => {
         <div className="paymentTotal">총 예약 금액</div>
         <div className="paymentTotalCost">₩ {paidAmount}</div>
       </StPaymentTotal>
-
-      {userInfo.name ? (
-        <StPaymentButton onClick={showPaymentModal}>예약하기</StPaymentButton>
-      ) : (
+      {userInfo.email === vehicleDetails.email ? (
+        <StNeedLogin>본인 차량입니다</StNeedLogin>
+      ) : !userInfo.name ? (
         <StNeedLogin>로그인후 이용해주세요</StNeedLogin>
+      ) : (
+        <StPaymentButton onClick={showPaymentModal}>예약하기</StPaymentButton>
       )}
       {paymentModalOpen && (
         <PaymentModal

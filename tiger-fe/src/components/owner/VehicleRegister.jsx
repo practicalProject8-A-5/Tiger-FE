@@ -249,7 +249,7 @@ const VehicleRegister = () => {
               required: "가격을 입력해주세요",
             })}
           />
-          <span>₩/24시간</span>
+          <span>₩/1일</span>
         </div>
 
         {/* 차량정보 */}
@@ -387,8 +387,7 @@ const VehicleRegister = () => {
                   style={{
                     // backgroundColor: "rgba(235,52,52,0.8) ",
                     border: "2px solid #EB3434",
-                  }}
-                >
+                  }}>
                   <Controller
                     name="transmission"
                     className="select"
@@ -476,8 +475,7 @@ const VehicleRegister = () => {
             id="description"
             placeholder="차량에 대한 설명을 입력해주세요."
             cols="50"
-            rows="10"
-          ></textarea>
+            rows="10"></textarea>
         </div>
 
         {/* 렌터정보 */}
