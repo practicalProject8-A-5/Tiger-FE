@@ -118,8 +118,8 @@ const Search = () => {
   const startDate = format(new Date(startDates), "yyyy-MM-dd");
   const endDate = format(new Date(endDates), "yyyy-MM-dd");
 
-  console.log(startDate);
-  console.log(endDate);
+  // console.log(startDate);
+  // console.log(endDate);
 
   const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
     <button
