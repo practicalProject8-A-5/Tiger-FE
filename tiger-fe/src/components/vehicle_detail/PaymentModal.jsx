@@ -135,9 +135,14 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails, vehicleDates }) => {
               <option value="CARD">CARD</option>
               <option value="CASH">CASH</option>
             </select>
-            <button type="submit" onClick={confirmPayment}>
-              결제하기
-            </button>
+            {vehicleDates.startDate === null &&
+            vehicleDetails.endDate === null ? (
+              <div className="noneSearched">검색후 이용해주세요</div>
+            ) : (
+              <button type="submit" onClick={confirmPayment}>
+                결제하기
+              </button>
+            )}
           </form>
         </div>
       </StPaymentInfo>
@@ -327,6 +332,22 @@ const StPaymentInfo = styled.div`
       float: right;
       text-align: right;
     }
+    .noneSearched {
+      width: 100%;
+      height: 56px;
+      background: #ff881b;
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 19px;
+      border: none;
+      margin-bottom: 20px;
+      padding: 0;
+      margin-top: 15px;
+      text-align: center;
+      line-height: 56px;
+      border-radius: 10px;
+    }
+
     button {
       width: 100%;
       height: 56px;
