@@ -133,7 +133,7 @@ const memberSlice = createSlice({
     [__userLogin.rejected]: (state, { payload }) => {
       state.isLoading = false;
       // console.log(payload);
-      state.error = payload.message;
+      state.error = payload;
     },
     // 카카오 로그인
     [__kakaoLogin.pending]: (state) => {
