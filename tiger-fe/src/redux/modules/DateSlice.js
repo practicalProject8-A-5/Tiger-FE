@@ -30,7 +30,7 @@ export const __getDateList = createAsyncThunk(
       const resp = await axios.get(`${serverApi}/vehicle/schedule/${vId}`, {
         headers: headers,
       });
-      // console.log(resp.data.output);
+      console.log(resp.data.output);
       return thunkAPI.fulfillWithValue(resp.data.output);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
