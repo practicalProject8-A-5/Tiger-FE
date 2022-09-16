@@ -16,7 +16,20 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { __getDateList } from "../../redux/modules/DateSlice";
 import { Calendar } from "react-multi-date-picker";
+
 const Calender = ({ setIsModalOpen, vId }) => {
+  const DateList = useSelector((state) => state.getDateListSlice.DateList);
+  console.log(DateList);
+
+  const [reserveDateList, setReserveDateList] = useState([]);
+
+  console.log("reserveDateList :", reserveDateList);
+
+  //open 날짜
+  const [openDateLists, setOpenDateLists] = useState([]);
+  console.log("openDateLists:", openDateLists);
+
+
   console.log("vId :", vId);
   const serverApi = process.env.REACT_APP_SERVER;
   //월
@@ -79,22 +92,19 @@ const Calender = ({ setIsModalOpen, vId }) => {
       console.log(err);
     }
     alert("상품 등록 성공");
-    setIsModalOpen(true);
+    setIsModalOpen(false);
   };
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(__getDateList(vId));
   }, [dispatch, vId]);
+  
+  useEffect(() => {
+    setReserveDateList([...DateList.reservedDateList]);
+    setOpenDateLists([...DateList.openDateList]);
+  }, [DateList]);
+
   // get 불러오기 (reserveDate, openDate)
-  const DateList = useSelector((state) => state.getDateListSlice.DateList);
-  const [reserveDateList, setReserveDateList] = useState(
-    DateList.reservedDateList
-  );
-  console.log("reserveDateList :", reserveDateList);
-  // console.log(reservedDate);
-  //open 날짜
-  const [openDateLists, setOpenDateLists] = useState(DateList.openDateList);
-  console.log("openDateLists:", openDateLists);
   return (
     <StCalender>
       <>
@@ -382,6 +392,4 @@ const StCalender = styled.div`
     }
   }
 `;
-const StLi = styled.div`
-  background-color: pink;
-`;
+

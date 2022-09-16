@@ -12,9 +12,58 @@ import { useState } from "react";
 import Calender from "./Calender";
 
 import CalenderBox from "../owner/CalenderBox";
+import { useEffect } from "react";
 
 const OwnerItem = ({ list, category, vid }) => {
-  console.log(list);
+  // console.log(vid);
+
+  // 캘린더 날짜 불러오기
+  // 날짜 불러오기
+  // const getDateList = async () => {
+  //   try {
+  //     // console.log("redux-get===>", vId);
+  //     const userToken = localStorage.getItem("userToken");
+  //     const refreshToken = localStorage.getItem("refreshToken");
+
+  //     const headers = {
+  //       "Content-Type": "application/json",
+  //       Authorization: userToken,
+  //       RefreshToken: refreshToken,
+  //     };
+
+  //     const resp = await axios.get(`${serverApi}/vehicle/schedule/${vId}`, {
+  //       headers: headers,
+  //     });
+  //     // setDateList({
+  //     //   ...dateList,
+  //     //   openDateList: resp.data.output.openDateList,
+  //     //   reservedDateList: resp.data.output.reservedDateList,
+  //     // });
+
+  //     console.log(resp.data.output.openDateList);
+  //     console.log(resp.data.output.reservedDateList);
+
+  //     setDateList(resp.data.output.openDateList);
+
+  //     // const openDateLists = resp.data.output.openDateList;
+  //     // const reserveDateList = resp.data.output.reservedDateList;
+
+  //     // setDate(resp);
+  //   } catch (err) {
+  //     alert(err);
+  //   }
+  // };
+
+  // const [dateList, setDateList] = useState();
+
+  // // useEffect(() => {}, []);
+  // console.log(dateList);
+  // console.log(openDateLists)
+  // useEffect(() => {
+  //   getDateList();
+  // }, []);
+
+  // console.log(openDateLists);
   const onClick = (e) => {
     navigate(`/vdetail/${vid}`);
   };
@@ -56,7 +105,7 @@ const OwnerItem = ({ list, category, vid }) => {
 
   const onClickCalender = (e) => {
     e.stopPropagation();
-    // console.log("눌림");
+    // getDateList();
     setIsModalOpen(!isModalOpen);
   };
   // console.log(isModalOpen);
@@ -77,8 +126,8 @@ const OwnerItem = ({ list, category, vid }) => {
           </div>
           {/* <div className="dateBtn">{list.createdAt}</div> */}
           <div className="flex_wrap">
-
             {/* <span className="item_date">{list.createdAt}</span> */}
+
             <div className="calender" onClick={onClickCalender}>
               {/* <Calender /> */}
               <FaCalendarAlt />
@@ -98,7 +147,11 @@ const OwnerItem = ({ list, category, vid }) => {
             </div>
           </div>
           {isModalOpen && (
-            <CalenderBox setIsModalOpen={setIsModalOpen} vId={vId} />
+            <CalenderBox
+              setIsModalOpen={setIsModalOpen}
+              // dateList={dateList}
+              vId={vId}
+            />
           )}
         </StOwnerItem>
       ) : (
@@ -126,7 +179,6 @@ const OwnerItem = ({ list, category, vid }) => {
             <span className="item_date">
               {list.startDate} ~ {list.endDate}
             </span>
-
           </div>
         </StOwnerItem>
       )}

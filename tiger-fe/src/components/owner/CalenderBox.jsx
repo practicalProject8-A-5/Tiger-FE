@@ -1,12 +1,21 @@
 import React from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import Calender from "./Calender";
 
-const CalenderBox = ({ setIsModalOpen, vId }) => {
+const CalenderBox = ({ setIsModalOpen, vId, dateList }) => {
+  // useEffect(() => {
+  //   // console.log(dateList);
+  // }, [dateList]);
+  // console.log(dateList);
   return (
     <Stblur>
       <div className="background">
-        <Calender setIsModalOpen={setIsModalOpen} vId={vId} />
+        <Calender
+          setIsModalOpen={setIsModalOpen}
+          vId={vId}
+          dateList={dateList}
+        />
       </div>
     </Stblur>
   );

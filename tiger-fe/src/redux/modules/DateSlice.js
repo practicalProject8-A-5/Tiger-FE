@@ -19,7 +19,7 @@ export const __getDateList = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const vId = payload;
-      // console.log(payload);
+      console.log("redux-get===>", vId);
       const userToken = localStorage.getItem("userToken");
       const refreshToken = localStorage.getItem("refreshToken");
       const headers = {
@@ -50,7 +50,7 @@ const getDateListSlice = createSlice({
     [__getDateList.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.DateList = action.payload;
-      // console.log(action.payload);
+      console.log(action.payload);
     },
     [__getDateList.rejected]: (state, action) => {
       state.isLoading = false;
