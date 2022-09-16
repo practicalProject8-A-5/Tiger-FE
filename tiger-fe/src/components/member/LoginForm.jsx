@@ -20,19 +20,19 @@ const LoginForm = ({ showModal, goRegister, loginToggle }) => {
   const { register, handleSubmit } = useForm();
 
   const error = useSelector((state) => state.memberSlice.error);
-  console.log(error);
+  // console.log(error);
 
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     dispatch(__userLogin(data)).then(
       (result) => {
         // console.log(result);
         if (result.error?.message === "Rejected") {
           return alert(result.payload.message);
         } else {
-          console.log("loggedin");
+          // console.log("loggedin");
           showModal();
         }
       }

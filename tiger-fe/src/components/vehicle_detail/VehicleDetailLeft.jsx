@@ -3,14 +3,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-
 import styled from "styled-components";
-
 import KakaoMapDetail from "./KakaoMapDetail";
-
 import email from "../../assets/email.jpg";
 import phone from "../../assets/phone.jpg";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Scrollbar } from "swiper";
 import "swiper/scss";
@@ -28,18 +24,18 @@ const VehicleDetailLeft = () => {
   const vehicleDates = useSelector(
     (state) => state.vehicleDetailSlice.vehicleDates
   );
-  console.log(vehicleDates);
+  // console.log(vehicleDates);
 
   const vehicleDetails = useSelector(
     (state) => state.vehicleDetailSlice.vehicleDetails
   );
-  console.log(vehicleDetails);
+  // console.log(vehicleDetails);
 
   const startDate = new URL(window.location.href).searchParams.get("startDate");
   const endDate = new URL(window.location.href).searchParams.get("endDate");
 
-  console.log(startDate);
-  console.log(endDate);
+  // console.log(startDate);
+  // console.log(endDate);
 
   useEffect(() => {
     dispatch(__vehicleDetail({ vId, startDate, endDate }));

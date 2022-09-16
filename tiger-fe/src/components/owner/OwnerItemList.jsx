@@ -1,5 +1,6 @@
-// import axios from "axios";
-import React, { useState, useEffect } from "react";
+// eslint-disable-next-line
+
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import OwnerItem from "./OwnerItem";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,14 +9,13 @@ import { __reservedItemList } from "../../redux/modules/ownerItemListSlice";
 import { __useItemList } from "../../redux/modules/ownerItemListSlice";
 import { __returnItemList } from "../../redux/modules/ownerItemListSlice";
 import { __cancleItemList } from "../../redux/modules/ownerItemListSlice";
-import { useParams } from "react-router-dom";
 
 const OwnerItemList = ({ category }) => {
   const OwnerItemLists = useSelector(
     (state) => state.ownerItemListSlice.OwnerItemList
   );
 
-  console.log(OwnerItemLists);
+  // console.log(OwnerItemLists);
 
   // const id = useSelector(
   //   (state) => state.ownerItemListSlice.OwnerItemList.output

@@ -10,7 +10,7 @@ const MainItemList = () => {
     (state) => state.incomeItemListSlice.incomeItemList
   );
 
-  console.log(MainItemLists);
+  // console.log(MainItemLists);
   const dispatch = useDispatch();
 
   useEffect(() => {

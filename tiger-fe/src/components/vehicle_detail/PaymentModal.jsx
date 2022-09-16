@@ -2,18 +2,16 @@
 
 import React, { useState } from "react";
 import styled from "styled-components";
-// import { useDispatch } from "react-redux";
 import { AiOutlineClose } from "react-icons/ai";
 import logo from "../../assets/ta,iger_logo.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-// import { __getRenterItemList } from "../../redux/modules/renterItemListSlice";
 
 const PaymentModal = ({ showPaymentModal, vehicleDetails, vehicleDates }) => {
   // const dispatch = useDispatch();
   const navigate = useNavigate();
   const serverApi = process.env.REACT_APP_SERVER;
-  console.log(vehicleDetails);
+  // console.log(vehicleDetails);
   const vehicleImage = vehicleDetails.imageList[0];
 
   const startDate = vehicleDates.startDate;
@@ -26,7 +24,7 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails, vehicleDates }) => {
   const paidAmount = totalDays * vehicleDetails.price;
 
   const [payMethod, setPayMethod] = useState();
-  console.log(payMethod);
+  // console.log(payMethod);
 
   const confirmPayment = async (e) => {
     const confirm = window.confirm("결제하시겠습니까?");
@@ -59,7 +57,7 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails, vehicleDates }) => {
           { headers: headers }
         )
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           // dispatch(__getRenterItemList("RESERVED"));
           navigate("/renter");
         });

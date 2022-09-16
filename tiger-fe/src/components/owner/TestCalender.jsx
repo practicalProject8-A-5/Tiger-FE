@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+
 import React, { useState } from "react";
 import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -14,7 +16,7 @@ const TestCalender = ({
   setIsShow,
   isShow,
 }) => {
-  console.log("isOpenPayInfo:", isOpenPayInfo);
+  // console.log("isOpenPayInfo:", isOpenPayInfo);
 
   const onSubmit = () => {
     setIsOpenPayInfo(!isOpenPayInfo);

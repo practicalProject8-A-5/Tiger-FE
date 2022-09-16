@@ -51,7 +51,7 @@ const Header = ({ ownerMode }) => {
     if (confirm === true) {
       const userToken = localStorage.getItem("userToken");
       const refreshToken = localStorage.getItem("refreshToken");
-      console.log(refreshToken);
+      // console.log(refreshToken);
       const headers = {
         "Content-Type": "application/json",
         Authorization: userToken,

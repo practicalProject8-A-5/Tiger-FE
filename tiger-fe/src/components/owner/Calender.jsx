@@ -1,9 +1,9 @@
+// eslint-disable-next-line
+
 import React, { useState } from "react";
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
-// 자바스크립트 날짜 관련 함수의 총 집합 라이브러리
+import { FaAngleRight } from "react-icons/fa";
 import { format, addMonths, subMonths } from "date-fns";
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from "date-fns";
-// import { addMonths } from "date-fns/addMonths";
 import { isSameMonth, isSameDay, addDays, parse } from "date-fns";
 import styled from "styled-components";
 
@@ -92,8 +92,7 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
               format(currentMonth, "M") !== format(day, "M")
                 ? "text not-valid"
                 : ""
-            }
-          >
+            }>
             {formattedDate}
           </span>
         </div>
@@ -116,9 +115,9 @@ const Calender = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   // const [tomorrowMonth, setTomorrowMonth] = useState(new Date(), 1);
   const month = addMonths(currentMonth, 1);
-  console.log(month);
-  console.log(currentMonth);
-  console.log(selectedDate);
+  // console.log(month);
+  // console.log(currentMonth);
+  // console.log(selectedDate);
   const prevMonth = () => {
     setCurrentMonth(subMonths(currentMonth, 1));
     // console.log(currentMonth);
@@ -158,8 +157,7 @@ const Calender = () => {
           <RenderHeaderL
             currentMonth={currentMonth}
             prevMonth={prevMonth}
-            nextMonth={nextMonth}
-          ></RenderHeaderL>
+            nextMonth={nextMonth}></RenderHeaderL>
           <RenderDays />
           <RenderCells
             // onMouseMove={handleMouseMove}

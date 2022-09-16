@@ -1,7 +1,8 @@
+// eslint-disable-next-line
+
 /*global kakao*/
 
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
 import styled from "styled-components";
 // import axios from "axios";
 
@@ -37,7 +38,7 @@ const KakaoMapDetail = ({ vehicleDetails }) => {
     // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
     map.setCenter(coords);
 
-    console.log(coords);
+    // console.log(coords);
   };
 
   useEffect(() => {

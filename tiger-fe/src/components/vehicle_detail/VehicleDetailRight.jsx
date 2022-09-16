@@ -5,9 +5,7 @@ import { useSelector } from "react-redux";
 import Button from "../../global_elements/Button";
 import PaymentModal from "./PaymentModal";
 import LoginModal from "../../global_elements/LoginModal";
-
 import styled from "styled-components";
-
 // import { __vehicleDetail } from "../../redux/modules/vehicleDetail";
 
 const VehicleDetailRight = () => {
@@ -15,12 +13,12 @@ const VehicleDetailRight = () => {
   const vehicleDates = useSelector(
     (state) => state.vehicleDetailSlice.vehicleDates
   );
-  console.log(vehicleDates);
+  // console.log(vehicleDates);
 
   const vehicleDetails = useSelector(
     (state) => state.vehicleDetailSlice.vehicleDetails
   );
-  console.log(vehicleDetails);
+  // console.log(vehicleDetails);
 
   const startDate = vehicleDates.startDate;
   const endDate = vehicleDates.endDate;
@@ -32,7 +30,7 @@ const VehicleDetailRight = () => {
   const paidAmount = totalDays * vehicleDetails.price;
 
   const userInfo = useSelector((state) => state.memberSlice.userInfo);
-  console.log(userInfo);
+  // console.log(userInfo);
 
   // const startDate = new URL(window.location.href).searchParams.get("startDate");
   // const endDate = new URL(window.location.href).searchParams.get("endDate");

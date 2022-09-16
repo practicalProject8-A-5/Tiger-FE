@@ -17,12 +17,12 @@ const FilteredVehicleList = () => {
   const filteredVehicle = useSelector(
     (state) => state.vehicleDetailSlice.filteredVehicleList
   );
-  console.log(filteredVehicle);
+  // console.log(filteredVehicle);
 
   const filteredVehicleLength = useSelector(
     (state) => state.vehicleDetailSlice.filteredVehicleLength
   );
-  console.log(filteredVehicle);
+  // console.log(filteredVehicle);
 
   return (
     <StItemList>

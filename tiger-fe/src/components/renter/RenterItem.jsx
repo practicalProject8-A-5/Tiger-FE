@@ -16,7 +16,7 @@ const RenterItem = ({ category, list, onSelect }) => {
   const renterItemLists = useSelector(
     (state) => state.renterItemListSlice.renterItemLists
   );
-  console.log(renterItemLists);
+  // console.log(renterItemLists);
 
   useEffect(() => {
     if (category) {
@@ -35,7 +35,7 @@ const RenterItem = ({ category, list, onSelect }) => {
     const response = await axios.delete(serverApi + `/order/${oid}`, {
       headers: headers,
     });
-    console.log(response);
+    // console.log(response);
     dispatch(__getRenterItemList("RESERVED"));
   };
 

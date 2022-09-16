@@ -2,9 +2,7 @@
 
 import React from "react";
 import { useDispatch } from "react-redux";
-
 import styled, { css } from "styled-components";
-
 import { __getRenterItemList } from "../../redux/modules/renterItemListSlice";
 
 const RenterNavbar = ({ category, onSelect }) => {

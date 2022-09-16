@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -29,7 +31,7 @@ export const __ownerRegisterInfo = createAsyncThunk(
       fuelEfficiency,
       // formData,
     } = payload;
-    console.log(payload);
+    // console.log(payload);
     const userToken = localStorage.getItem("userToken");
     const refreshToken = localStorage.getItem("refreshToken");
     try {
@@ -63,7 +65,7 @@ export const __ownerRegisterInfo = createAsyncThunk(
         { headers: headers }
       );
       // console.log(resp.data);
-      console.log(vbrand);
+      // console.log(vbrand);
       return thunkAPI.fulfillWithValue(resp.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

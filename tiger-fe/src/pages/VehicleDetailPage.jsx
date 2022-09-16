@@ -2,7 +2,6 @@
 
 import React from "react";
 import styled from "styled-components";
-
 import VehicleDetailLeft from "../components/vehicle_detail/VehicleDetailLeft";
 import VehicleDetailRight from "../components/vehicle_detail/VehicleDetailRight";
 import GlobalLayout from "../global/GlobalLayout";

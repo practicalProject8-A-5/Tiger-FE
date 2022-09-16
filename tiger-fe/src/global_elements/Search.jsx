@@ -57,7 +57,7 @@ const Search = () => {
     getCoords(fullAddress);
   };
 
-  console.log(location);
+  // console.log(location);
 
   const [locationObj, setLocationObj] = useState({});
 
@@ -73,7 +73,7 @@ const Search = () => {
         }
       )
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         const location = res.data.documents[0];
         setLocationObj({
           locationX: location.address.x,
@@ -85,7 +85,7 @@ const Search = () => {
   const locationX = Number(locationObj.locationX);
   const locationY = Number(locationObj.locationY);
 
-  console.log(locationX, locationY);
+  // console.log(locationX, locationY);
 
   // 검색한 주소로 위도경도 구하기
   // const [latitude, setLatitude] = useState("");
@@ -117,8 +117,8 @@ const Search = () => {
   const startDate = new Date(startDates).toISOString().slice(0, 10);
   const endDate = new Date(endDates).toISOString().slice(0, 10);
 
-  console.log(startDate);
-  console.log(endDate);
+  // console.log(startDate);
+  // console.log(endDate);
 
   const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
     <button
@@ -135,7 +135,7 @@ const Search = () => {
   const handleChange = (e) => {
     setType(e.target.value);
   };
-  console.log(type);
+  // console.log(type);
 
   // submit handler
   const onSubmitHandler = async (e) => {
@@ -166,7 +166,7 @@ const Search = () => {
         // setLocationObj({});
       }
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
 
     // setAddress("");

@@ -16,7 +16,7 @@ const initialState = {
 export const __getRenterItemList = createAsyncThunk(
   "renter/__getRenterItemList",
   async (payload, thunkAPI) => {
-    console.log(payload);
+    // console.log(payload);
     const status = payload;
     const userToken = localStorage.getItem("userToken");
     const refreshToken = localStorage.getItem("refreshToken");
@@ -30,10 +30,10 @@ export const __getRenterItemList = createAsyncThunk(
         serverApi + `/order/renter?status=${status}&limit=100&offset=0`,
         { headers: headers }
       );
-      console.log(response);
+      // console.log(response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
@@ -49,7 +49,7 @@ const renterItemListSlice = createSlice({
     },
     [__getRenterItemList.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log(action.payload);
+      // console.log(action.payload);
       state.renterItemLists = action.payload;
     },
     [__getRenterItemList.rejected]: (state, action) => {

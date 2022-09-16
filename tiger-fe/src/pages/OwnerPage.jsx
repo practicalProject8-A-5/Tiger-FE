@@ -2,7 +2,6 @@
 
 import React, { useCallback, useState } from "react";
 import NavBar from "../components/owner/NavBar";
-
 import GlobalLayout from "../global/GlobalLayout";
 import Header from "../global_elements/Header";
 import OwnerItemList from "../components/owner/OwnerItemList";
