@@ -17,7 +17,7 @@ const VehicleRegister = () => {
   const serverApi = process.env.REACT_APP_SERVER;
 
   const userInfo = useSelector((state) => state.memberSlice.userInfo);
-  console.log(userInfo);
+  // console.log(userInfo);
   const navigate = useNavigate();
   //유효성 검사 및 select 최적화
   const {
