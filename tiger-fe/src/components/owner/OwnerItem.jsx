@@ -159,7 +159,7 @@ const OwnerItem = ({ list, category, vid }) => {
           <img src={list.thumbnail} alt="차량" onClick={onClick} />
           <div className="carInfo" onClick={onClick}>
             <p>
-              {list.vbrand}
+              {list.vbrand} &nbsp;
               {list.vname}
             </p>
             {/* <span>오너 네임</span> */}
@@ -186,7 +186,7 @@ const OwnerItem = ({ list, category, vid }) => {
           <img src={list.thumbnail} alt="차량" onClick={onClick} />
           <div className="carInfo" onClick={onClick}>
             <p>
-              {list.vbrand}
+              {list.vbrand} &nbsp;
               {list.vname}
             </p>
             {/* <span>오너 네임</span> */}
@@ -217,7 +217,7 @@ const OwnerItem = ({ list, category, vid }) => {
           <img src={list.thumbnail} alt="차량" onClick={onClick} />
           <div className="carInfo" onClick={onClick}>
             <p>
-              {list.vbrand}
+              {list.vbrand} &nbsp;
               {list.vname}
             </p>
             {/* <span>오너 네임</span> */}
@@ -244,7 +244,7 @@ const OwnerItem = ({ list, category, vid }) => {
           <img src={list.thumbnail} alt="차량" onClick={onClick} />
           <div className="carInfo" onClick={onClick}>
             <p>
-              {list.vbrand}
+              {list.vbrand} &nbsp;
               {list.vname}
             </p>
             {/* <span>오너 네임</span> */}
