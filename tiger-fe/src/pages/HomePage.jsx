@@ -14,6 +14,7 @@ const HomePage = () => {
       <Banner />
       <HomeSearch />
       <Section />
+      <div className="top"></div>
     </StHomePage>
   );
 };

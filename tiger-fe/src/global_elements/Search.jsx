@@ -126,7 +126,8 @@ const Search = () => {
       className="example-custom-input"
       // value={value}
       onClick={onClick}
-      ref={ref}>
+      ref={ref}
+    >
       {value}
     </button>
   ));
@@ -199,7 +200,8 @@ const Search = () => {
               setIsPopupOpen(!isPopupOpen);
             }}
             onChange={onChangeHandler}
-            placeholder="어디서?"></input>
+            placeholder="어디서?"
+          ></input>
 
           {isPopupOpen ? (
             <div>
@@ -301,6 +303,8 @@ const StSearch = styled.div`
 const StSearchLocationContainer = styled.div`
   /* margin: 26px; */
   .location_input {
+    outline: none;
+    border: none;
     width: 350px;
     height: 28px;
     cursor: pointer;
@@ -312,7 +316,7 @@ const StSearchLocationContainer = styled.div`
     background-size: 16px;
     background-position: 9px 7px;
     text-indent: 30px;
-    border: 1px solid;
+    /* border: 1px solid; */
   }
 `;
 
@@ -346,8 +350,9 @@ const StCalendarWrapper = styled.div`
   background: #f2f2f2;
   border-radius: 12px;
   padding: 5px;
-  border: 1px solid;
+  /* border: 1px solid; */
   .example-custom-input {
+    outline: none;
     box-sizing: border-box;
     font-size: 14px;
     cursor: pointer;
@@ -358,7 +363,7 @@ const StCalendarWrapper = styled.div`
     background-size: 22px;
     background-position: 1px 4px;
     text-indent: 0px;
-    border: 0px;
+    border: none;
     width: 100%;
     height: 30px;
   }

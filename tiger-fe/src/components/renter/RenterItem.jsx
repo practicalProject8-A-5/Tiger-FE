@@ -60,7 +60,8 @@ const RenterItem = ({ category, list, onSelect }) => {
                   className="carInfo"
                   onClick={() => {
                     navigate(`/vdetail/${list.vid}`);
-                  }}>
+                  }}
+                >
                   <p>{list.vname}</p>
                   <span>{list.oname}</span>
                   <p>
@@ -73,17 +74,19 @@ const RenterItem = ({ category, list, onSelect }) => {
                   </p>
                   <p className="carInfo__location">{list.location}</p>
                 </div>
-                {/* <div className="dateBtn">{list.createdAt}</div> */}
                 <div className="flex_wrap">
-                  <span className="item_date">
-                    {list.startDate} ~ {list.endDate}
-                  </span>
+                  <div className="item_date">
+                    <div>{list.startDate}</div>
+                    <span>~</span>
+                    <span>{list.endDate}</span>
+                  </div>
                   <div className="btn_box">
                     <span
                       className="refund"
                       onClick={() => {
                         deleteHandler(list.oid);
-                      }}>
+                      }}
+                    >
                       환불
                     </span>
                   </div>
@@ -99,7 +102,8 @@ const RenterItem = ({ category, list, onSelect }) => {
                 onClick={() => {
                   navigate(`/vdetail/${list.vid}`);
                 }}
-                key={i}>
+                key={i}
+              >
                 <img src={list.thumbnail} alt="차량" />
                 <div className="carInfo">
                   <p>{list.vname}</p>
@@ -107,11 +111,12 @@ const RenterItem = ({ category, list, onSelect }) => {
                   <p>₩{list.price}</p>
                   <p>{list.location}</p>
                 </div>
-                {/* <div className="dateBtn">{list.createdAt}</div> */}
                 <div className="flex_wrap">
-                  <span className="item_date">
-                    {list.startDate} ~ {list.endDate}
-                  </span>
+                  <div className="item_date">
+                    <div>{list.startDate}</div>
+                    <span>~</span>
+                    <span>{list.endDate}</span>
+                  </div>
                   <div className="btn_box">
                     <span className="refunded">환불 완료</span>
                   </div>
@@ -135,23 +140,26 @@ const RenterItem = ({ category, list, onSelect }) => {
                   className="carInfo"
                   onClick={() => {
                     navigate(`/vdetail/${list.vid}`);
-                  }}>
+                  }}
+                >
                   <p>{list.vname}</p>
                   <span>{list.oname}</span>
                   <p>₩{list.price}</p>
                   <p>{list.location}</p>
                 </div>
-                {/* <div className="dateBtn">{list.createdAt}</div> */}
                 <div className="flex_wrap">
-                  <span className="item_date">
-                    {list.startDate} ~ {list.endDate}
-                  </span>
+                  <div className="item_date">
+                    <div className="what">{list.startDate}</div>
+                    <span>~</span>
+                    <span>{list.endDate}</span>
+                  </div>
                   <div className="btn_box">
                     <span
                       className="return"
                       onClick={() => {
                         console.log("반납하기");
-                      }}>
+                      }}
+                    >
                       반납
                     </span>
                   </div>
@@ -175,17 +183,19 @@ const RenterItem = ({ category, list, onSelect }) => {
                   className="carInfo"
                   onClick={() => {
                     navigate(`/vdetail/${list.vid}`);
-                  }}>
+                  }}
+                >
                   <p>{list.vname}</p>
                   <span>{list.oname}</span>
                   <p>₩{list.price}</p>
                   <p>{list.location}</p>
                 </div>
-                {/* <div className="dateBtn">{list.createdAt}</div> */}
                 <div className="flex_wrap">
-                  <span className="item_date">
-                    {list.startDate} ~ {list.endDate}
-                  </span>
+                  <div className="item_date">
+                    <div>{list.startDate}</div>
+                    <span>~</span>
+                    <span>{list.endDate}</span>
+                  </div>
                   <div className="btn_box">
                     <span className="returned">반납완료</span>
                   </div>
@@ -223,6 +233,7 @@ const StRenterItem = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 430px;
     p {
       margin-bottom: 11px;
       font-weight: 500;
@@ -257,11 +268,16 @@ const StRenterItem = styled.div`
       font-weight: 500;
       font-size: 16px;
       color: #8b8b8b;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* background-color: pink; */
     }
     .btn_box {
       margin-bottom: 11px;
       display: flex;
       justify-content: end;
+      /* background-color: yellow; */
       .modify {
         font-weight: 500;
         font-size: 14px;

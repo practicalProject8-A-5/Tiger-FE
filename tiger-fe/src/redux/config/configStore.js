@@ -11,7 +11,7 @@ import renterItemListSlice from "../modules/renterItemListSlice";
 import ownerModiRegisterInfoSlice from "../modules/ownerModify";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
-import getDateListSlice from "../modules/DateSlice";
+import getDateListSlice from "../modules/dateSlice";
 
 const reducer = combineReducers({
   ownerItemListSlice,

@@ -14,20 +14,6 @@ const OwnerItemList = ({ category }) => {
   const OwnerItemLists = useSelector(
     (state) => state.ownerItemListSlice.OwnerItemList
   );
-
-  // console.log(OwnerItemLists);
-
-  // const id = useSelector(
-  //   (state) => state.ownerItemListSlice.OwnerItemList.output
-  // );
-  // const id = useParams();
-  // console.log(id);
-
-  // console.log(OwnerItemLists.output.vId);
-  // const [loading, setLoading] = useState(false);
-  // console.log("List category:", category);
-  // const id = useParams(OwnerItemLists.output.vId);
-  // console.log(id);
   const dispatch = useDispatch();
 
   // console.log();
@@ -44,9 +30,6 @@ const OwnerItemList = ({ category }) => {
       dispatch(__cancleItemList());
     }
   }, [dispatch, category]);
-
-  // console.log(id);
-  // console.log(OwnerItemLists);
 
   return (
     <StOwnerItemList>
@@ -66,10 +49,7 @@ const OwnerItemList = ({ category }) => {
 
 const StOwnerItemList = styled.div`
   width: 790px;
-  /* height: 890px; */
   padding-top: 65px;
-  /* margin-top: 65px; */
-  /* border: 1px solid; */
 `;
 
 export default OwnerItemList;
