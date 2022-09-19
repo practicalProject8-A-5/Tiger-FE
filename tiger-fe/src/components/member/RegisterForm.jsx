@@ -6,6 +6,8 @@ import { __registerUser } from "../../redux/modules/memberSlice";
 import styled from "styled-components";
 import { BiChevronLeft } from "react-icons/bi";
 import { useForm } from "react-hook-form";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
 const RegisterForm = ({
@@ -16,6 +18,18 @@ const RegisterForm = ({
 }) => {
   const dispatch = useDispatch();
   const memberApi = process.env.REACT_APP_SERVER;
+  const eye = <FontAwesomeIcon icon={faEye} />;
+
+  const [passwordShown, setPasswordShown] = useState(false);
+  const [passwordConfirmShown, setPasswordConfirmShown] = useState(false);
+
+  const togglePasswordVisiblity = () => {
+    setPasswordShown(passwordShown ? false : true);
+  };
+
+  const togglePasswordConfirmVisiblity = () => {
+    setPasswordConfirmShown(passwordConfirmShown ? false : true);
+  };
 
   // use Form Hook
   const {
@@ -67,7 +81,7 @@ const RegisterForm = ({
       // console.log(response);
       return response;
     } catch (error) {
-      // console.log(error);
+      return error;
     }
   };
 
@@ -158,52 +172,58 @@ const RegisterForm = ({
             <span className="import">*</span>비밀번호
           </label>
           {errors.password ? (
-            <input
-              style={{ border: "2px solid #EB3434" }}
-              type="password"
-              id="pw"
-              placeholder="비밀번호 (영문+숫자+특수문자 8자 이상)"
-              className="Register__input"
-              {...register("password", {
-                required: "비밀번호를 입력해주세요.",
-                minLength: {
-                  value: 8,
-                  message: "비밀번호는 8자 이상이여야 합니다,",
-                },
-                maxLength: {
-                  value: 16,
-                  message: "16자 이하로 사용가능합니다.",
-                },
-                pattern: {
-                  value: regExgPw,
-                  message:
-                    "비밀번호는 영문(대/소문자 구분), 숫자 조합하여 6~12자리로 입력해 주세요.",
-                },
-              })}
-            />
+            <div className="password_wrapper">
+              <input
+                style={{ border: "2px solid #EB3434" }}
+                type={passwordShown ? "text" : "password"}
+                id="pw"
+                placeholder="비밀번호 (영문+숫자+특수문자 8자 이상)"
+                className="Register__input"
+                {...register("password", {
+                  required: "비밀번호를 입력해주세요.",
+                  minLength: {
+                    value: 8,
+                    message: "비밀번호는 8자 이상이여야 합니다,",
+                  },
+                  maxLength: {
+                    value: 16,
+                    message: "16자 이하로 사용가능합니다.",
+                  },
+                  pattern: {
+                    value: regExgPw,
+                    message:
+                      "비밀번호는 영문(대/소문자 구분), 숫자 조합하여 6~12자리로 입력해 주세요.",
+                  },
+                })}
+              />
+              <i onClick={togglePasswordVisiblity}>{eye}</i>
+            </div>
           ) : (
-            <input
-              type="password"
-              id="password"
-              placeholder="비밀번호 (영문+숫자+특수문자 8자 이상)"
-              className="Register__input"
-              {...register("password", {
-                required: "비밀번호를 입력해주세요.",
-                minLength: {
-                  value: 8,
-                  message: "비밀번호는 8자 이상이여야 합니다,",
-                },
-                maxLength: {
-                  value: 16,
-                  message: "16자 이하로 사용가능합니다.",
-                },
-                pattern: {
-                  value: regExgPw,
-                  message:
-                    "비밀번호는 영문(대/소문자 구분), 숫자 조합하여 6~12자리로 입력해 주세요.",
-                },
-              })}
-            />
+            <div className="password_wrapper">
+              <input
+                type={passwordShown ? "text" : "password"}
+                id="password"
+                placeholder="비밀번호 (영문+숫자+특수문자 8자 이상)"
+                className="Register__input"
+                {...register("password", {
+                  required: "비밀번호를 입력해주세요.",
+                  minLength: {
+                    value: 8,
+                    message: "비밀번호는 8자 이상이여야 합니다,",
+                  },
+                  maxLength: {
+                    value: 16,
+                    message: "16자 이하로 사용가능합니다.",
+                  },
+                  pattern: {
+                    value: regExgPw,
+                    message:
+                      "비밀번호는 영문(대/소문자 구분), 숫자 조합하여 6~12자리로 입력해 주세요.",
+                  },
+                })}
+              />
+              <i onClick={togglePasswordVisiblity}>{eye}</i>
+            </div>
           )}
           {errors.password ? (
             <div className="error">{errors.password.message}</div>
@@ -211,57 +231,65 @@ const RegisterForm = ({
 
           {/* 비밀번호 체크 */}
           {errors.passwordConfirm ? (
-            <input
-              style={{ border: " 2px solid #EB3434" }}
-              type="password"
-              id="passwordConfirm"
-              placeholder="비밀번호 확인"
-              className="Register__input__ck"
-              {...register("passwordConfirm", {
-                required: "비밀번호 불일치",
-                minLength: {
-                  value: 8,
-                  message: "비밀번호는 8자 이상이여야 합니다,",
-                },
-                maxLength: {
-                  value: 16,
-                  message: "16자 이하로 사용가능합니다.",
-                },
-                pattern: {
-                  value: regExgPw,
-                  message:
-                    "비밀번호는 영문(대/소문자 구분), 숫자 조합하여 6~12자리로 입력해 주세요.",
-                },
-              })}
-            />
+            <div className="password_wrapper">
+              <input
+                style={{ border: " 2px solid #EB3434" }}
+                type={passwordConfirmShown ? "text" : "password"}
+                id="passwordConfirm"
+                placeholder="비밀번호 확인"
+                className="Register__input__ck"
+                {...register("passwordConfirm", {
+                  required: "비밀번호 불일치",
+                  minLength: {
+                    value: 8,
+                    message: "비밀번호는 8자 이상이여야 합니다,",
+                  },
+                  maxLength: {
+                    value: 16,
+                    message: "16자 이하로 사용가능합니다.",
+                  },
+                  pattern: {
+                    value: regExgPw,
+                    message:
+                      "비밀번호는 영문(대/소문자 구분), 숫자 조합하여 6~12자리로 입력해 주세요.",
+                  },
+                })}
+              />
+              <i onClick={togglePasswordConfirmVisiblity}>{eye}</i>
+            </div>
           ) : (
-            <input
-              type="password"
-              id="passwordConfirm"
-              placeholder="비밀번호 확인"
-              className="Register__input__ck"
-              {...register("passwordConfirm", {
-                required: "비밀번호 불일치",
-                minLength: {
-                  value: 8,
-                  message: "비밀번호는 8자 이상이여야 합니다,",
-                },
-                maxLength: {
-                  value: 16,
-                  message: "16자 이하로 사용가능합니다.",
-                },
-                pattern: {
-                  value: regExgPw,
-                  message:
-                    "비밀번호는 영문(대/소문자 구분), 숫자 조합하여 6~12자리로 입력해 주세요.",
-                },
-                validate: (value) => {
-                  if (watch("password") !== value) {
-                    return "비밀번호가 일치하지 않습니다.";
-                  }
-                },
-              })}
-            />
+            <div className="password_wrapper">
+              <input
+                type={passwordConfirmShown ? "text" : "password"}
+                id="passwordConfirm"
+                placeholder="비밀번호 확인"
+                className="Register__input__ck"
+                {...register("passwordConfirm", {
+                  required: "비밀번호 불일치",
+                  minLength: {
+                    value: 8,
+                    message: "비밀번호는 8자 이상이여야 합니다,",
+                  },
+                  maxLength: {
+                    value: 16,
+                    message: "16자 이하로 사용가능합니다.",
+                  },
+                  pattern: {
+                    value: regExgPw,
+                    message:
+                      "비밀번호는 영문(대/소문자 구분), 숫자 조합하여 6~12자리로 입력해 주세요.",
+                  },
+                  validate: (value) => {
+                    if (watch("password") !== value) {
+                      return "비밀번호가 일치하지 않습니다.";
+                    }
+                  },
+                })}
+              />
+              <i className="eyeIcon" onClick={togglePasswordConfirmVisiblity}>
+                {eye}
+              </i>
+            </div>
           )}
           {errors.passwordConfirm ? (
             <div className="error">{errors.passwordConfirm.message}</div>
@@ -309,48 +337,6 @@ const RegisterForm = ({
             <div className="error">{errors.name.message}</div>
           ) : null}
         </div>
-
-        {/* 전화번호 */}
-        {/* <div className="formbox">
-          <label htmlFor="phone" className="Register__label">
-            <span className="import">*</span>전화번호
-          </label>
-          {errors.phone ? (
-            <input
-              style={{ border: " 2px solid #EB3434" }}
-              type="text"
-              id="phone"
-              placeholder="전화번호를 입력해주세요."
-              className="Register__input"
-              {...register("phone", {
-                required: "전화번호를 입력해주세요.",
-                // validate: {
-                //   type: (value) =>
-                //     emailCheck(value) ||
-                //     "You should write in proper email format.",
-                // },
-              })}
-            />
-          ) : (
-            <input
-              type="text"
-              id="phone"
-              placeholder="전화번호를 입력해주세요."
-              className="Register__input"
-              {...register("phone", {
-                required: "전화번호를 입력해주세요.",
-                // validate: {
-                //   type: (value) =>
-                //     emailCheck(value) ||
-                //     "You should write in proper email format.",
-                // },
-              })}
-            />
-          )}
-          {errors.phone ? (
-            <div className="error">{errors.phone.message}</div>
-          ) : null}
-        </div> */}
         <button type="submit">회원가입</button>
       </form>
     </StRegisterForm>
@@ -496,6 +482,29 @@ const StRegisterForm = styled.div`
         color: #8b8b8b;
         margin-top: 14px;
         font-family: "Noto Sans KR", sans-serif;
+      }
+      .password_wrapper {
+        position: relative;
+        display: flex;
+        margin-bottom: 14px;
+        .eyeIcon {
+          position: absolute;
+          top: 46%;
+          right: 4%;
+        }
+        .eyeIcon:hover {
+          color: #00fcb6;
+          cursor: pointer;
+        }
+        i {
+          position: absolute;
+          top: 28%;
+          right: 4%;
+        }
+        i:hover {
+          color: #00fcb6;
+          cursor: pointer;
+        }
       }
       .error {
         width: 100%;

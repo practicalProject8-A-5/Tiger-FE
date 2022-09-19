@@ -16,7 +16,7 @@ const RenterItem = ({ category, list, onSelect }) => {
   const renterItemLists = useSelector(
     (state) => state.renterItemListSlice.renterItemLists
   );
-  console.log(renterItemLists);
+  // console.log(renterItemLists);
 
   useEffect(() => {
     if (category) {
@@ -35,7 +35,7 @@ const RenterItem = ({ category, list, onSelect }) => {
     const response = await axios.delete(serverApi + `/order/${oid}`, {
       headers: headers,
     });
-    console.log(response);
+    // console.log(response);
     dispatch(__getRenterItemList("RESERVED"));
   };
 
@@ -60,8 +60,8 @@ const RenterItem = ({ category, list, onSelect }) => {
                   className="carInfo"
                   onClick={() => {
                     navigate(`/vdetail/${list.vid}`);
-                  }}
-                >
+                  }}>
+                  <p>{list.vbrand}</p>
                   <p>{list.vname}</p>
                   <span>{list.oname}</span>
                   <p>
@@ -106,6 +106,7 @@ const RenterItem = ({ category, list, onSelect }) => {
               >
                 <img src={list.thumbnail} alt="차량" />
                 <div className="carInfo">
+                  <p>{list.vbrand}</p>
                   <p>{list.vname}</p>
                   <span>{list.oname}</span>
                   <p>₩{list.price}</p>
@@ -140,8 +141,8 @@ const RenterItem = ({ category, list, onSelect }) => {
                   className="carInfo"
                   onClick={() => {
                     navigate(`/vdetail/${list.vid}`);
-                  }}
-                >
+                  }}>
+                  <p>{list.vbrand}</p>
                   <p>{list.vname}</p>
                   <span>{list.oname}</span>
                   <p>₩{list.price}</p>
@@ -154,14 +155,7 @@ const RenterItem = ({ category, list, onSelect }) => {
                     <span>{list.endDate}</span>
                   </div>
                   <div className="btn_box">
-                    <span
-                      className="return"
-                      onClick={() => {
-                        console.log("반납하기");
-                      }}
-                    >
-                      반납
-                    </span>
+                    {/* <span className="return">반납</span> */}
                   </div>
                 </div>
               </StRenterItem>
@@ -183,8 +177,8 @@ const RenterItem = ({ category, list, onSelect }) => {
                   className="carInfo"
                   onClick={() => {
                     navigate(`/vdetail/${list.vid}`);
-                  }}
-                >
+                  }}>
+                  <p>{list.vbrand}</p>
                   <p>{list.vname}</p>
                   <span>{list.oname}</span>
                   <p>₩{list.price}</p>

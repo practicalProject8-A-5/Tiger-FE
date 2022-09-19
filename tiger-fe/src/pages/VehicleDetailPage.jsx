@@ -29,9 +29,6 @@ const VehicleDetailPage = () => {
 
 const StDetailContainer = styled.div`
   @media (min-width: 1200px) {
-    /* max-width: 1060px; */
-    /* height: 100vh;
-    padding: 20px 0 80px; */
     position: relative;
     margin: 50px auto;
   }

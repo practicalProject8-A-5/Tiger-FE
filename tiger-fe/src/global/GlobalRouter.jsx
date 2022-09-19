@@ -14,9 +14,6 @@ import KakaoLogin from "../components/member/KakaoLogin";
 import OwnerModifyPage from "../pages/OwnerModifyPage";
 import { useSelector } from "react-redux";
 import NotFound from "../global_elements/NotFound";
-import GlobalLayout from "./GlobalLayout";
-import Header from "../global_elements/Header";
-import Search from "../global_elements/Search";
 
 const GlobalRouter = () => {
   const userInfo = useSelector((state) => state.memberSlice.userInfo);
@@ -29,17 +26,27 @@ const GlobalRouter = () => {
       ) : (
         <Route path="/owner" element={<OwnerPage />} />
       )}
-      <Route path="/owner/:category" element={<OwnerItemList />} />
-      <Route path="/ownerregisterform" element={<OwnerFormPage />} />
-      <Route path="/owner/:id/modi" element={<OwnerModifyPage />} />
-
-      <Route path="/intro" element={<HomePage />} />
+      {userInfo.name === null ? (
+        <Route path="/owner/:category" element={<Navigate to="/" />} />
+      ) : (
+        <Route path="/owner/:category" element={<OwnerItemList />} />
+      )}
+      {userInfo.name === null ? (
+        <Route path="/ownerregisterform" element={<Navigate to="/" />} />
+      ) : (
+        <Route path="/ownerregisterform" element={<OwnerFormPage />} />
+      )}
+      {userInfo.name === null ? (
+        <Route path="/owner/:id/modi" element={<Navigate to="/" />} />
+      ) : (
+        <Route path="/owner/:id/modi" element={<OwnerModifyPage />} />
+      )}
       {userInfo.name === null ? (
         <Route path="/renter" element={<Navigate to="/" />} />
       ) : (
         <Route path="/renter" element={<RenterPage />} />
       )}
-      <Route path="/renter" element={<RenterPage />} />
+      <Route path="/intro" element={<HomePage />} />
       <Route path="/vdetail/:id" element={<VehicleDetailPage />} />
       <Route path="/vlist" element={<VehicleListPage />} />
       <Route path="/user/kakao/callback" element={<KakaoLogin />} />

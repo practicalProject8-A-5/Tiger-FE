@@ -10,17 +10,17 @@ import { Calendar } from "react-multi-date-picker";
 
 const Calender = ({ setIsModalOpen, vId }) => {
   const DateList = useSelector((state) => state.getDateListSlice.DateList);
-  console.log(DateList);
+  // console.log(DateList);
 
   const [reserveDateList, setReserveDateList] = useState([]);
 
-  console.log("reserveDateList :", reserveDateList);
+  // console.log("reserveDateList :", reserveDateList);
 
   //open 날짜
   const [openDateLists, setOpenDateLists] = useState([]);
-  console.log("openDateLists:", openDateLists);
+  // console.log("openDateLists:", openDateLists);
 
-  console.log("vId :", vId);
+  // console.log("vId :", vId);
   const serverApi = process.env.REACT_APP_SERVER;
   //월
   const months = [
@@ -45,15 +45,15 @@ const Calender = ({ setIsModalOpen, vId }) => {
   };
   //날짜 등록
   const submitHandler = async () => {
-    console.log(openDateLists);
-    console.log(openDateLists.length);
+    // console.log(openDateLists);
+    // console.log(openDateLists.length);
     // let zeroMonth = "";
     let openDateList = [];
     for (let i = 0; i < openDateLists.length; i++) {
       let year = `${openDateLists[i].year}`;
       let month = `${openDateLists[i].month}`;
       let day = `${openDateLists[i].day}`;
-      console.log(`${year}-${month}-${day}`);
+      // console.log(`${year}-${month}-${day}`);
       if (month < 10) {
         month = "0" + month;
       }
@@ -63,7 +63,7 @@ const Calender = ({ setIsModalOpen, vId }) => {
       openDateList.push(`${year}-${month}-${day}`);
     }
     //보내는 값
-    console.log(openDateList);
+    // console.log(openDateList);
     const userToken = localStorage.getItem("userToken");
     const refreshToken = localStorage.getItem("refreshToken");
     try {
@@ -78,7 +78,7 @@ const Calender = ({ setIsModalOpen, vId }) => {
         }
       );
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
     alert("상품 등록 성공");
     setIsModalOpen(false);
