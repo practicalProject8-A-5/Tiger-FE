@@ -108,7 +108,6 @@ const RenterItem = ({ category, list, onSelect }) => {
                 <img src={list.thumbnail} alt="차량" />
                 <div className="carInfo">
                   <p>{list.vbrand}</p>
-                  <p>{list.vbrand}</p>
                   <p>{list.vname}</p>
                   <span>{list.oname}</span>
                   <p>₩{list.price}</p>
@@ -283,7 +282,13 @@ const StRenterItem = styled.div`
         text-decoration: underline;
         margin-right: 12px;
       }
-
+      .refund {
+        font-weight: 500;
+        font-size: 14px;
+        color: #eb3434;
+        text-decoration: underline;
+        cursor: pointer;
+      }
       .returned,
       .refunded {
         font-weight: 500;
