@@ -282,13 +282,7 @@ const StRenterItem = styled.div`
         text-decoration: underline;
         margin-right: 12px;
       }
-      .refund {
-        font-weight: 500;
-        font-size: 14px;
-        color: #eb3434;
-        text-decoration: underline;
-        cursor: pointer;
-      }
+
       .returned,
       .refunded {
         font-weight: 500;
