@@ -7,15 +7,14 @@ import logo from "../../assets/ta,iger_logo.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const PaymentModal = ({ showPaymentModal, vehicleDetails, vehicleDates }) => {
-  // const dispatch = useDispatch();
+const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
   const navigate = useNavigate();
   const serverApi = process.env.REACT_APP_SERVER;
   // console.log(vehicleDetails);
   const vehicleImage = vehicleDetails.imageList[0];
 
-  const startDate = vehicleDates.startDate;
-  const endDate = vehicleDates.endDate;
+  const startDate = vehicleDetails.startDate;
+  const endDate = vehicleDetails.endDate;
 
   const date1 = new Date(startDate);
   const date2 = new Date(endDate);
@@ -62,7 +61,6 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails, vehicleDates }) => {
             navigate("/renter");
           });
       } catch (error) {
-        // console.log(error.response.data.code);
         setErrorMessage(error.response.data.code);
         navigate(-1);
       }
@@ -93,9 +91,14 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails, vehicleDates }) => {
                   {vehicleDetails.vbrand} {vehicleDetails.vname}
                 </div>
               </div>
-              <div className="vehicleRentPeriod">
-                {vehicleDates.startDate} ~ {vehicleDates.endDate}
-              </div>
+              {vehicleDetails.startDate === null &&
+              vehicleDetails.endDate === null ? (
+                <div className="vehicleRentPeriod"></div>
+              ) : (
+                <div className="vehicleRentPeriod">
+                  {vehicleDetails.startDate} ~ {vehicleDetails.endDate}
+                </div>
+              )}
             </div>
           </div>
           <div className="vehicle__payment">
@@ -103,9 +106,6 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails, vehicleDates }) => {
             <div className="text">결제정보</div>
             <div className="lineR"></div>
           </div>
-          {/* <div className="vehiclePaymentInfo">
-            <div className="title">요금 세부정보</div>
-          </div> */}
           <div className="vehiclePrice">
             <div className="priceInfo">대여요금</div>
             <div className="price">
@@ -140,7 +140,7 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails, vehicleDates }) => {
               <option value="CARD">CARD</option>
               <option value="CASH">CASH</option>
             </select>
-            {vehicleDates.startDate === null &&
+            {vehicleDetails.startDate === null &&
             vehicleDetails.endDate === null ? (
               <div className="noneSearched">검색후 이용해주세요</div>
             ) : (

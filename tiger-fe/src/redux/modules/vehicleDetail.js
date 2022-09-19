@@ -7,12 +7,9 @@ const serverApi = process.env.REACT_APP_SERVER;
 
 const initialState = {
   filteredVehicleList: {},
-  filteredVehicleLength: {},
   vehicleDetails: {},
   isLoading: false,
-  success: null,
   error: null,
-  vehicleDates: {},
 };
 
 // single vehicle info
@@ -30,13 +27,14 @@ export const __vehicleDetail = createAsyncThunk(
           `${serverApi}/vehicle/${vId}?startDate=&endDate=`,
           { headers: headers }
         );
-        // console.log(responseNull.data.output);
+        console.log(responseNull.data.output);
         return thunkAPI.fulfillWithValue(responseNull.data.output);
       } else {
         const response = await axios.get(
           `${serverApi}/vehicle/${vId}?startDate=${startDate}&endDate=${endDate}`,
           { headers: headers }
         );
+        console.log(response.data.output);
         return thunkAPI.fulfillWithValue(response.data.output);
       }
     } catch (error) {
@@ -51,12 +49,6 @@ export const __vehicleSearchList = createAsyncThunk(
   async (payload, thunkAPI) => {
     const { location, startDate, endDate, type, locationX, locationY } =
       payload;
-    // console.log(location);
-    // console.log(startDate);
-    // console.log(endDate);
-    // console.log(type);
-    // console.log(locationX);
-    // console.log(locationY);
     try {
       const headers = {
         "Content-Type": "application/json",
@@ -73,7 +65,7 @@ export const __vehicleSearchList = createAsyncThunk(
         },
         { headers: headers }
       );
-      // console.log(response.data);
+      console.log(response.data.output);
       return thunkAPI.fulfillWithValue(response.data.output);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -91,9 +83,8 @@ export const vehicleDetailSlice = createSlice({
     },
     [__vehicleDetail.fulfilled]: (state, action) => {
       state.isLoading = false;
-      // console.log(actions);
-      state.vehicleDates = action.payload;
-      state.vehicleDetails = action.payload.vehicleList;
+      // console.log(action.payload);
+      state.vehicleDetails = action.payload;
       // console.log(payload);
       // console.log(state.vehicleDetailList);
     },
@@ -109,7 +100,6 @@ export const vehicleDetailSlice = createSlice({
       state.isLoading = false;
       // console.log(action.payload);
       state.filteredVehicleList = action.payload;
-      state.filteredVehicleLength = action.payload.vehicleList;
     },
     [__vehicleSearchList.rejected]: (state, action) => {
       state.isLoading = false;
