@@ -99,7 +99,7 @@ const OwnerItem = ({ list, category, vid }) => {
                 1}
               일
             </p>
-            <p>{list.location}</p>
+            <p className="carInfo__location">{list.location}</p>
           </div>
           <div className="flex_wrap">
             <div className="item_date">
@@ -126,7 +126,7 @@ const OwnerItem = ({ list, category, vid }) => {
                 1}
               일
             </p>
-            <p>{list.location}</p>
+            <p className="carInfo__location">{list.location}</p>
           </div>
           {/* <div className="dateBtn">{list.createdAt}</div> */}
           <div className="flex_wrap">
@@ -157,7 +157,7 @@ const OwnerItem = ({ list, category, vid }) => {
                 1}
               일
             </p>
-            <p>{list.location}</p>
+            <p className="carInfo__location">{list.location}</p>
           </div>
           {/* <div className="dateBtn">{list.createdAt}</div> */}
           <div className="flex_wrap">
@@ -184,7 +184,7 @@ const OwnerItem = ({ list, category, vid }) => {
                 1}
               일
             </p>
-            <p>{list.location}</p>
+            <p className="carInfo__location">{list.location}</p>
           </div>
           {/* <div className="dateBtn">{list.createdAt}</div> */}
           <div className="flex_wrap">
