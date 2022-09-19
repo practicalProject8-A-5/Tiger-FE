@@ -25,6 +25,8 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails, vehicleDates }) => {
 
   const [payMethod, setPayMethod] = useState();
   // console.log(payMethod);
+  const [errorMessage, setErrorMessage] = useState("");
+  console.log(errorMessage);
 
   const confirmPayment = async (e) => {
     const confirm = window.confirm("결제하시겠습니까?");
@@ -37,30 +39,33 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails, vehicleDates }) => {
       const vid = vehicleDetails.vid;
       const userToken = localStorage.getItem("userToken");
       const refreshToken = localStorage.getItem("refreshToken");
-
-      const headers = {
-        "Content-Type": "application/json",
-        Authorization: userToken,
-        RefreshToken: refreshToken,
-      };
-      await axios
-        .post(
-          serverApi + `/order/${vid}`,
-          {
-            // id: "01010101",
-            paidAmount,
-            startDate,
-            endDate,
-            payMethod,
-            // impUid: "0000",
-          },
-          { headers: headers }
-        )
-        .then((res) => {
-          // console.log(res);
-          // dispatch(__getRenterItemList("RESERVED"));
-          navigate("/renter");
-        });
+      try {
+        const headers = {
+          "Content-Type": "application/json",
+          Authorization: userToken,
+          RefreshToken: refreshToken,
+        };
+        await axios
+          .post(
+            serverApi + `/order/${vid}`,
+            {
+              // id: "01010101",
+              paidAmount,
+              startDate,
+              endDate,
+              payMethod,
+              // impUid: "0000",
+            },
+            { headers: headers }
+          )
+          .then((res) => {
+            navigate("/renter");
+          });
+      } catch (error) {
+        // console.log(error.response.data.code);
+        setErrorMessage(error.response.data.code);
+        navigate(-1);
+      }
     }
   };
 
@@ -143,6 +148,9 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails, vehicleDates }) => {
                 결제하기
               </button>
             )}
+            {errorMessage === "DUPLICATE_ORDERDATE"
+              ? alert("이미 예약이 되었습니다.")
+              : null}
           </form>
         </div>
       </StPaymentInfo>

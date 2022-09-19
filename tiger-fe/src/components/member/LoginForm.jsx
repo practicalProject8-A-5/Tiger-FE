@@ -8,7 +8,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import styled from "styled-components";
 import logo from "../../assets/ta,iger_logo.png";
 
-import kakaoButton from "../../assets/kakao_login_large_wide.png";
+import kakaoLogo from "../../assets/kakaoLogin.png";
 
 const LoginForm = ({ showModal, goRegister, loginToggle }) => {
   // 카카오로그인 redirect url
@@ -58,12 +58,10 @@ const LoginForm = ({ showModal, goRegister, loginToggle }) => {
           <div className="text">간편 로그인/회원가입</div>
           <div className="lineR"></div>
         </div>
-
-        <img
-          src={`${kakaoButton}`}
-          alt="kakaoButton"
-          className="kakao"
-          onClick={kakaoLogin}></img>
+        <img className="kakao_logo" src={kakaoLogo} alt="kakaoLogo" />
+        <div className="kakao_button" onClick={kakaoLogin}>
+          카카오 로그인
+        </div>
         <div className="google">구글로 간편 로그인</div>
         <div className="email" onClick={loginToggle}>
           이메일로 회원가입
@@ -177,11 +175,26 @@ const StLoginForm = styled.div`
         background-color: #8b8b8b;
       }
     }
-    .kakao {
-      margin-bottom: 18px;
+    .kakao_logo {
+      width: 30px;
+      position: relative;
+      right: 212px;
+      top: 45px;
       cursor: pointer;
-      box-sizing: border-box;
+    }
+    .kakao_button {
       width: 100%;
+      height: 56px;
+      border-radius: 12px;
+      margin-bottom: 18px;
+      font-size: 18px;
+      color: #4a4a4a;
+      background-color: #fff115;
+      text-align: center;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 56px;
+      cursor: pointer;
     }
     .google {
       width: 100%;
