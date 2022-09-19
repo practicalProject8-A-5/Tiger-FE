@@ -2,9 +2,15 @@
 
 import React from "react";
 import styled from "styled-components";
+import Header from "../global_elements/Header";
 
 const GlobalLayout = ({ children }) => {
-  return <GlobalLayoutContainer>{children}</GlobalLayoutContainer>;
+  return (
+    <GlobalLayoutContainer>
+      {/* <Header /> */}
+      {children}
+    </GlobalLayoutContainer>
+  );
 };
 
 const GlobalLayoutContainer = styled.div`
