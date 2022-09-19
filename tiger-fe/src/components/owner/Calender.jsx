@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { GrClose } from "react-icons/gr";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { __getDateList } from "../../redux/modules/DateSlice";
+import { __getDateList } from "../../redux/modules/dateSlice";
 import { Calendar } from "react-multi-date-picker";
 
 const Calender = ({ setIsModalOpen, vId }) => {
