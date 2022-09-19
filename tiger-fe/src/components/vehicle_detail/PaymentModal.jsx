@@ -7,15 +7,14 @@ import logo from "../../assets/ta,iger_logo.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const PaymentModal = ({ showPaymentModal, vehicleDetails, vehicleDates }) => {
-  // const dispatch = useDispatch();
+const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
   const navigate = useNavigate();
   const serverApi = process.env.REACT_APP_SERVER;
   // console.log(vehicleDetails);
   const vehicleImage = vehicleDetails.imageList[0];
 
-  const startDate = vehicleDates.startDate;
-  const endDate = vehicleDates.endDate;
+  const startDate = vehicleDetails.startDate;
+  const endDate = vehicleDetails.endDate;
 
   const date1 = new Date(startDate);
   const date2 = new Date(endDate);
@@ -25,6 +24,8 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails, vehicleDates }) => {
 
   const [payMethod, setPayMethod] = useState();
   // console.log(payMethod);
+  const [errorMessage, setErrorMessage] = useState("");
+  console.log(errorMessage);
 
   const confirmPayment = async (e) => {
     const confirm = window.confirm("결제하시겠습니까?");
@@ -37,30 +38,32 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails, vehicleDates }) => {
       const vid = vehicleDetails.vid;
       const userToken = localStorage.getItem("userToken");
       const refreshToken = localStorage.getItem("refreshToken");
-
-      const headers = {
-        "Content-Type": "application/json",
-        Authorization: userToken,
-        RefreshToken: refreshToken,
-      };
-      await axios
-        .post(
-          serverApi + `/order/${vid}`,
-          {
-            // id: "01010101",
-            paidAmount,
-            startDate,
-            endDate,
-            payMethod,
-            // impUid: "0000",
-          },
-          { headers: headers }
-        )
-        .then((res) => {
-          // console.log(res);
-          // dispatch(__getRenterItemList("RESERVED"));
-          navigate("/renter");
-        });
+      try {
+        const headers = {
+          "Content-Type": "application/json",
+          Authorization: userToken,
+          RefreshToken: refreshToken,
+        };
+        await axios
+          .post(
+            serverApi + `/order/${vid}`,
+            {
+              // id: "01010101",
+              paidAmount,
+              startDate,
+              endDate,
+              payMethod,
+              // impUid: "0000",
+            },
+            { headers: headers }
+          )
+          .then((res) => {
+            navigate("/renter");
+          });
+      } catch (error) {
+        setErrorMessage(error.response.data.code);
+        navigate(-1);
+      }
     }
   };
 
@@ -88,9 +91,14 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails, vehicleDates }) => {
                   {vehicleDetails.vbrand} {vehicleDetails.vname}
                 </div>
               </div>
-              <div className="vehicleRentPeriod">
-                {vehicleDates.startDate} ~ {vehicleDates.endDate}
-              </div>
+              {vehicleDetails.startDate === null &&
+              vehicleDetails.endDate === null ? (
+                <div className="vehicleRentPeriod"></div>
+              ) : (
+                <div className="vehicleRentPeriod">
+                  {vehicleDetails.startDate} ~ {vehicleDetails.endDate}
+                </div>
+              )}
             </div>
           </div>
           <div className="vehicle__payment">
@@ -98,9 +106,6 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails, vehicleDates }) => {
             <div className="text">결제정보</div>
             <div className="lineR"></div>
           </div>
-          {/* <div className="vehiclePaymentInfo">
-            <div className="title">요금 세부정보</div>
-          </div> */}
           <div className="vehiclePrice">
             <div className="priceInfo">대여요금</div>
             <div className="price">
@@ -135,7 +140,7 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails, vehicleDates }) => {
               <option value="CARD">CARD</option>
               <option value="CASH">CASH</option>
             </select>
-            {vehicleDates.startDate === null &&
+            {vehicleDetails.startDate === null &&
             vehicleDetails.endDate === null ? (
               <div className="noneSearched">검색후 이용해주세요</div>
             ) : (
@@ -143,6 +148,9 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails, vehicleDates }) => {
                 결제하기
               </button>
             )}
+            {errorMessage === "DUPLICATE_ORDERDATE"
+              ? alert("이미 예약이 되었습니다.")
+              : null}
           </form>
         </div>
       </StPaymentInfo>

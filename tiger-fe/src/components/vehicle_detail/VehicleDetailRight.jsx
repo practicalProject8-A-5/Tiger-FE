@@ -9,16 +9,13 @@ import styled from "styled-components";
 // import { __vehicleDetail } from "../../redux/modules/vehicleDetail";
 
 const VehicleDetailRight = () => {
-  const vehicleDates = useSelector(
-    (state) => state.vehicleDetailSlice.vehicleDates
-  );
   const vehicleDetails = useSelector(
     (state) => state.vehicleDetailSlice.vehicleDetails
   );
   const userInfo = useSelector((state) => state.memberSlice.userInfo);
 
-  const startDate = vehicleDates.startDate;
-  const endDate = vehicleDates.endDate;
+  const startDate = vehicleDetails.startDate;
+  const endDate = vehicleDetails.endDate;
 
   const date1 = new Date(startDate);
   const date2 = new Date(endDate);
@@ -31,23 +28,24 @@ const VehicleDetailRight = () => {
     setPaymentModalOpen(!paymentModalOpen);
   };
 
-  const [loginModal, setLoginModal] = useState();
-  const showModal = () => {
-    setLoginModal(!loginModal);
-  };
+  // const [loginModal, setLoginModal] = useState();
+  // const showModal = () => {
+  //   setLoginModal(!loginModal);
+  // };
 
   return (
     <StPaymentBox>
       <h1>결제 정보</h1>
       <StPaymentPeriod>
         <div className="paymentTime">대여시간</div>
-        {vehicleDates.startDate === null && vehicleDetails.endDate === null ? (
+        {vehicleDetails.startDate === null &&
+        vehicleDetails.endDate === null ? (
           <div className="paymentDates">
             <div>검색후 이용해주세요</div>
           </div>
         ) : (
           <div className="paymentDates">
-            {vehicleDates.startDate} ~ {vehicleDates.endDate}
+            {vehicleDetails.startDate} ~ {vehicleDetails.endDate}
           </div>
         )}
       </StPaymentPeriod>
@@ -80,7 +78,6 @@ const VehicleDetailRight = () => {
         <PaymentModal
           showPaymentModal={showPaymentModal}
           vehicleDetails={vehicleDetails}
-          vehicleDates={vehicleDates}
         />
       )}
       {/* {loginModal && <LoginModal showModal={showModal} />} */}

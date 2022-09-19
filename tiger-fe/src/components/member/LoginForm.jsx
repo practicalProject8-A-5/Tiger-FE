@@ -1,14 +1,16 @@
 // eslint-disable-next-line
 
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { __userLogin } from "../../redux/modules/memberSlice";
 import { AiOutlineClose } from "react-icons/ai";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import logo from "../../assets/ta,iger_logo.png";
 
-import kakaoButton from "../../assets/kakao_login_large_wide.png";
+import kakaoLogo from "../../assets/kakaoLogin.png";
 
 const LoginForm = ({ showModal, goRegister, loginToggle }) => {
   // 카카오로그인 redirect url
@@ -17,29 +19,31 @@ const LoginForm = ({ showModal, goRegister, loginToggle }) => {
     window.location.href = kakaoUrl;
   };
 
+  const eye = <FontAwesomeIcon icon={faEye} />;
+
   const { register, handleSubmit } = useForm();
 
-  const error = useSelector((state) => state.memberSlice.error);
+  const [passwordShown, setPasswordShown] = useState(false);
+  const togglePasswordVisiblity = () => {
+    setPasswordShown(passwordShown ? false : true);
+  };
+
+  // const error = useSelector((state) => state.memberSlice.error);
   // console.log(error);
 
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
     // console.log(data);
-    dispatch(__userLogin(data)).then(
-      (result) => {
-        // console.log(result);
-        if (result.error?.message === "Rejected") {
-          return alert(result.payload.message);
-        } else {
-          // console.log("loggedin");
-          showModal();
-        }
+    dispatch(__userLogin(data)).then((result) => {
+      // console.log(result);
+      if (result.error?.message === "Rejected") {
+        return alert(result.payload.message);
+      } else {
+        // console.log("loggedin");
+        showModal();
       }
-      // (error) => {
-      //   console.log(error);
-      // }
-    );
+    });
   };
 
   return (
@@ -58,12 +62,10 @@ const LoginForm = ({ showModal, goRegister, loginToggle }) => {
           <div className="text">간편 로그인/회원가입</div>
           <div className="lineR"></div>
         </div>
-
-        <img
-          src={`${kakaoButton}`}
-          alt="kakaoButton"
-          className="kakao"
-          onClick={kakaoLogin}></img>
+        <img className="kakao_logo" src={kakaoLogo} alt="kakaoLogo" />
+        <div className="kakao_button" onClick={kakaoLogin}>
+          카카오 로그인
+        </div>
         <div className="google">구글로 간편 로그인</div>
         <div className="email" onClick={loginToggle}>
           이메일로 회원가입
@@ -84,14 +86,18 @@ const LoginForm = ({ showModal, goRegister, loginToggle }) => {
             {...register("email")}
             placeholder="아이디를 입력하세요"
           />
-          <input
-            type="password"
-            placeholder="비밀번호"
-            required={true}
-            minLength={3}
-            className="form-input"
-            {...register("password")}
-          />
+          <div className="password_wrapper">
+            <input
+              type={passwordShown ? "text" : "password"}
+              placeholder="비밀번호"
+              required={true}
+              minLength={3}
+              className="form-input"
+              {...register("password")}
+            />
+            <i onClick={togglePasswordVisiblity}>{eye}</i>
+          </div>
+
           {/* <div className="find">아이디/비밀번호 찾기</div> */}
           <button type="submit">로그인</button>
         </form>
@@ -101,21 +107,12 @@ const LoginForm = ({ showModal, goRegister, loginToggle }) => {
 };
 
 const StLoginForm = styled.div`
-  /* background-color: skyblue; */
   .login__header {
     width: 100%;
     height: 78px;
-    /* background-color: pink; */
     position: relative;
     color: #000;
     border-bottom: 1px solid #f2f2f2;
-    /* .icon {
-      font-size: 22px;
-      position: absolute;
-      top: 28px;
-      left: 30px;
-      cursor: pointer;
-    } */
     .login__text {
       font-weight: 600;
       font-size: 18px;
@@ -131,8 +128,6 @@ const StLoginForm = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* background-color: skyblue; */
-    /* justify-content: center; */
     .icon {
       font-size: 22px;
       position: absolute;
@@ -143,7 +138,6 @@ const StLoginForm = styled.div`
     .login__logo {
       width: 100%;
       height: 40px;
-      /* background-color: pink; */
       text-align: center;
       margin: 36px 0 40px 0;
       img {
@@ -177,11 +171,26 @@ const StLoginForm = styled.div`
         background-color: #8b8b8b;
       }
     }
-    .kakao {
-      margin-bottom: 18px;
+    .kakao_logo {
+      width: 30px;
+      position: relative;
+      right: 212px;
+      top: 45px;
       cursor: pointer;
-      box-sizing: border-box;
+    }
+    .kakao_button {
       width: 100%;
+      height: 56px;
+      border-radius: 12px;
+      margin-bottom: 18px;
+      font-size: 18px;
+      color: #4a4a4a;
+      background-color: #fff115;
+      text-align: center;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 56px;
+      cursor: pointer;
     }
     .google {
       width: 100%;
@@ -213,6 +222,20 @@ const StLoginForm = styled.div`
     }
     form {
       width: 100%;
+      .password_wrapper {
+        position: relative;
+        display: flex;
+        margin-bottom: 14px;
+        i {
+          position: absolute;
+          top: 28%;
+          right: 4%;
+        }
+        i:hover {
+          color: #00fcb6;
+          cursor: pointer;
+        }
+      }
       input {
         display: block;
         width: 100%;

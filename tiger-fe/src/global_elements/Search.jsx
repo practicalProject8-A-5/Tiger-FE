@@ -17,20 +17,11 @@ import clock from "../assets/clock.png";
 import vehicle from "../assets/vehicle.png";
 import { format } from "date-fns";
 
-// import DatePicker, {
-//   DateObject,
-//   getAllDatesInRange,
-// } from "react-multi-date-picker";
-// import DatePanel from "react-multi-date-picker/plugins/date_panel";
-
 const Search = () => {
   const mapKey = process.env.REACT_APP_REST_API_KEY;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  // 추후 서버 열리면 밑에 div 에 정보들을 뿌릴 예정
-  // const getVehicleList = useSelector((state) => state.searchSlice.filteredVehicleList);
 
   // search full address
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -87,19 +78,6 @@ const Search = () => {
   const locationY = Number(locationObj.locationY);
 
   // console.log(locationX, locationY);
-
-  // 검색한 주소로 위도경도 구하기
-  // const [latitude, setLatitude] = useState("");
-  // const [longitude, setLongitude] = useState("");
-  // const geocoder = new kakao.maps.services.Geocoder();
-  // geocoder.addressSearch(address, function (result, status) {
-  //   if (status === kakao.maps.services.Status.OK) {
-  //     const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-  //     console.log(coords);
-  //     setLatitude(coords.Ma);
-  //     setLongitude(coords.La);
-  //   }
-  // });
 
   const postCodeStyle = {
     display: "block",
@@ -164,30 +142,9 @@ const Search = () => {
         navigate("/vlist");
       }
     } catch (err) {
-      // console.log(err);
+      return err;
     }
   };
-
-  // ----------------------------------------------------------------
-
-  // const today = new Date();
-  // const tomorrow = new Date();
-  // tomorrow.setDate(tomorrow.getDate() + 1);
-
-  // const [dates, setDates] = useState([]);
-  // const [allDates, setAllDates] = useState([]);
-
-  // const dateLists = allDates.map((date, index) => {
-  //   return date.format();
-  // });
-  // console.log(dateLists);
-
-  // const onSubmitHandler = (e) => {
-  //   e.preventDefault();
-  //   dispatch(__vehicleSearchList({ address, typeValue, dateLists }));
-  //   setAddress("");
-  //   setTypeValue("");
-  // };
 
   return (
     <StSearch>
@@ -211,23 +168,6 @@ const Search = () => {
             !isPopupOpen
           )}
         </StSearchLocationContainer>
-
-        {/* <StCalendarContainer>
-          <StCalendarWrapper>
-            <StNewDatePicker
-              range
-              value={dates}
-              onChange={(dateObjects) => {
-                setDates(dateObjects);
-                setAllDates(getAllDatesInRange(dateObjects));
-              }}
-              plugins={[<DatePanel eachDaysInRange />]}
-              format="YYYY-MM-DD"
-              minDate={new Date()}
-            />
-          </StCalendarWrapper>
-        </StCalendarContainer> */}
-
         <StCalendarContainer>
           <StCalendarWrapper>
             <StNewDatePicker
@@ -261,7 +201,6 @@ const Search = () => {
             />
           </StCalendarWrapper>
         </StCalendarContainer>
-
         <StVehicleTypeContainer>
           <select value={type} onChange={handleChange}>
             <option defaultValue="" hidden>
@@ -290,10 +229,8 @@ const StSearch = styled.div`
     0px 12.5216px 10px rgba(0, 0, 0, 0.02);
   display: flex;
   justify-content: space-evenly;
-  /* background-color: skyblue; */
   .wrap {
     width: 100%;
-    /* background-color: pink; */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -301,7 +238,6 @@ const StSearch = styled.div`
 `;
 
 const StSearchLocationContainer = styled.div`
-  /* margin: 26px; */
   .location_input {
     outline: none;
     border: none;
@@ -372,7 +308,6 @@ const StCalendarWrapper = styled.div`
 const StNewDatePicker = styled(DatePicker)``;
 
 const StVehicleTypeContainer = styled.div`
-  /* margin: 25px; */
   select {
     width: 300px;
     height: 42px;

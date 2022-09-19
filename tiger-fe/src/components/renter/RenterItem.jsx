@@ -108,6 +108,7 @@ const RenterItem = ({ category, list, onSelect }) => {
                 <img src={list.thumbnail} alt="차량" />
                 <div className="carInfo">
                   <p>{list.vbrand}</p>
+                  <p>{list.vbrand}</p>
                   <p>{list.vname}</p>
                   <span>{list.oname}</span>
                   <p>₩{list.price}</p>

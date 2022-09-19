@@ -3,7 +3,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-
 import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
@@ -20,14 +19,9 @@ const FilteredVehicleList = () => {
   );
   // console.log(filteredVehicle);
 
-  const filteredVehicleLength = useSelector(
-    (state) => state.vehicleDetailSlice.filteredVehicleLength
-  );
-  // console.log(filteredVehicle);
-
   return (
     <StItemList>
-      {filteredVehicleLength.length === 0 ? (
+      {filteredVehicle.length === 0 ? (
         <NotFound
           upperText={<div>등록차량을 찾을수 없습니다.</div>}
           lowerText={
@@ -35,8 +29,8 @@ const FilteredVehicleList = () => {
           }
         />
       ) : (
-        filteredVehicle.vehicleList &&
-        filteredVehicle.vehicleList.map((list, index) => {
+        filteredVehicle &&
+        filteredVehicle.map((list, index) => {
           return (
             <StItem key={index}>
               <StSwiper
@@ -57,7 +51,7 @@ const FilteredVehicleList = () => {
                 className="desc__box"
                 onClick={() => {
                   navigate(
-                    `/vdetail/${list.vid}?startDate=${filteredVehicle.startDate}&endDate=${filteredVehicle.endDate}`
+                    `/vdetail/${list.vid}?startDate=${list.startDate}&endDate=${list.endDate}`
                   );
                 }}>
                 <div className="desc__top">
@@ -68,7 +62,7 @@ const FilteredVehicleList = () => {
                   {list.vname} / {list.fuelType}
                 </p>
                 <p className="dates">
-                  {filteredVehicle.startDate} ~ {filteredVehicle.endDate}
+                  {list.startDate} ~ {list.endDate}
                 </p>
                 <div className="desc__bottom">
                   ₩{list.price} <span>/1일</span>

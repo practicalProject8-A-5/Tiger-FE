@@ -9,10 +9,10 @@ import email from "../../assets/email.jpg";
 import phone from "../../assets/phone.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Scrollbar } from "swiper";
+import { __vehicleDetail } from "../../redux/modules/vehicleDetail";
 import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
-import { __vehicleDetail } from "../../redux/modules/vehicleDetail";
 
 const VehicleDetailLeft = () => {
   const dispatch = useDispatch();
@@ -21,11 +21,6 @@ const VehicleDetailLeft = () => {
   const vId = parseInt(id.id);
 
   // get response for vehicle info
-  const vehicleDates = useSelector(
-    (state) => state.vehicleDetailSlice.vehicleDates
-  );
-  // console.log(vehicleDates);
-
   const vehicleDetails = useSelector(
     (state) => state.vehicleDetailSlice.vehicleDetails
   );
@@ -33,9 +28,6 @@ const VehicleDetailLeft = () => {
 
   const startDate = new URL(window.location.href).searchParams.get("startDate");
   const endDate = new URL(window.location.href).searchParams.get("endDate");
-
-  // console.log(startDate);
-  // console.log(endDate);
 
   useEffect(() => {
     dispatch(__vehicleDetail({ vId, startDate, endDate }));
@@ -58,9 +50,6 @@ const VehicleDetailLeft = () => {
     lineHeight: "41px",
   };
 
-  // // const memberInfo = useSelector((state) => state.memberSlice.userInfo);
-  // // console.log(memberInfo)
-
   SwiperCore.use([Navigation, Scrollbar]);
 
   return (
@@ -71,8 +60,7 @@ const VehicleDetailLeft = () => {
         spaceBetween={8}
         slidesPerView={1}
         scrollbar={{ draggable: true, dragSize: 24 }}
-        navigation={true}
-      >
+        navigation={true}>
         {vehicleDetails.imageList &&
           vehicleDetails.imageList.map((image, i) => {
             return (
@@ -142,11 +130,6 @@ const VehicleDetailLeft = () => {
               </div>
             </div>
           </div>
-          {/* <div className="infoWrapper_desc">
-            <div>
-              <p>렌터 설명란</p>
-            </div>
-          </div> */}
         </StRenterInfoWrapper>
         <KakaoMapDetail vehicleDetails={vehicleDetails} />
       </StVehicleInfoContainer>
