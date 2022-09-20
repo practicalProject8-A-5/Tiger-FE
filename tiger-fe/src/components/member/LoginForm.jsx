@@ -5,8 +5,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { __userLogin } from "../../redux/modules/memberSlice";
 import { AiOutlineClose } from "react-icons/ai";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import styled from "styled-components";
 import logo from "../../assets/ta,iger_logo.png";
 
@@ -19,7 +18,8 @@ const LoginForm = ({ showModal, goRegister, loginToggle }) => {
     window.location.href = kakaoUrl;
   };
 
-  const eye = <FontAwesomeIcon icon={faEye} />;
+  const eye = <FaEye />;
+  const eyeHover = <FaEyeSlash />;
 
   const { register, handleSubmit } = useForm();
 
@@ -95,7 +95,9 @@ const LoginForm = ({ showModal, goRegister, loginToggle }) => {
               className="form-input"
               {...register("password")}
             />
-            <i onClick={togglePasswordVisiblity}>{eye}</i>
+            <i onClick={togglePasswordVisiblity}>
+              {passwordShown ? eye : eyeHover}
+            </i>
           </div>
 
           {/* <div className="find">아이디/비밀번호 찾기</div> */}
@@ -227,12 +229,14 @@ const StLoginForm = styled.div`
         display: flex;
         margin-bottom: 14px;
         i {
+          width: 20px;
+          height: 20px;
           position: absolute;
           top: 28%;
           right: 4%;
+          color: #8b8b8b;
         }
         i:hover {
-          color: #00fcb6;
           cursor: pointer;
         }
       }

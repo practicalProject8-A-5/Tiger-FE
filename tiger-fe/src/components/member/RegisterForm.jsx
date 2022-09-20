@@ -5,9 +5,8 @@ import { useDispatch } from "react-redux";
 import { __registerUser } from "../../redux/modules/memberSlice";
 import styled from "styled-components";
 import { BiChevronLeft } from "react-icons/bi";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useForm } from "react-hook-form";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
 const RegisterForm = ({
@@ -18,7 +17,9 @@ const RegisterForm = ({
 }) => {
   const dispatch = useDispatch();
   const memberApi = process.env.REACT_APP_SERVER;
-  const eye = <FontAwesomeIcon icon={faEye} />;
+
+  const eye = <FaEye />;
+  const eyeHover = <FaEyeSlash />;
 
   const [passwordShown, setPasswordShown] = useState(false);
   const [passwordConfirmShown, setPasswordConfirmShown] = useState(false);
@@ -196,7 +197,9 @@ const RegisterForm = ({
                   },
                 })}
               />
-              <i onClick={togglePasswordVisiblity}>{eye}</i>
+              <i onClick={togglePasswordVisiblity}>
+                {passwordShown ? eye : eyeHover}
+              </i>
             </div>
           ) : (
             <div className="password_wrapper">
@@ -222,7 +225,9 @@ const RegisterForm = ({
                   },
                 })}
               />
-              <i onClick={togglePasswordVisiblity}>{eye}</i>
+              <i onClick={togglePasswordVisiblity}>
+                {passwordShown ? eye : eyeHover}
+              </i>
             </div>
           )}
           {errors.password ? (
@@ -255,7 +260,9 @@ const RegisterForm = ({
                   },
                 })}
               />
-              <i onClick={togglePasswordConfirmVisiblity}>{eye}</i>
+              <i className="eyeIcon" onClick={togglePasswordConfirmVisiblity}>
+                {passwordConfirmShown ? eye : eyeHover}
+              </i>
             </div>
           ) : (
             <div className="password_wrapper">
@@ -287,7 +294,7 @@ const RegisterForm = ({
                 })}
               />
               <i className="eyeIcon" onClick={togglePasswordConfirmVisiblity}>
-                {eye}
+                {passwordConfirmShown ? eye : eyeHover}
               </i>
             </div>
           )}
@@ -491,18 +498,18 @@ const StRegisterForm = styled.div`
           position: absolute;
           top: 46%;
           right: 4%;
+          color: #8b8b8b;
         }
         .eyeIcon:hover {
-          color: #00fcb6;
           cursor: pointer;
         }
         i {
           position: absolute;
           top: 28%;
           right: 4%;
+          color: #8b8b8b;
         }
         i:hover {
-          color: #00fcb6;
           cursor: pointer;
         }
       }

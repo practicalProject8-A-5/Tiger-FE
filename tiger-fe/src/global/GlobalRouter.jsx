@@ -14,6 +14,7 @@ import KakaoLogin from "../components/member/KakaoLogin";
 import OwnerModifyPage from "../pages/OwnerModifyPage";
 import { useSelector } from "react-redux";
 import NotFound from "../global_elements/NotFound";
+import ChatPage from "../pages/ChatPage";
 
 const GlobalRouter = () => {
   const userInfo = useSelector((state) => state.memberSlice.userInfo);
@@ -50,6 +51,7 @@ const GlobalRouter = () => {
       <Route path="/vdetail/:id" element={<VehicleDetailPage />} />
       <Route path="/vlist" element={<VehicleListPage />} />
       <Route path="/user/kakao/callback" element={<KakaoLogin />} />
+      <Route path="/chat" element={<ChatPage />} />
       <Route
         path="*"
         element={
