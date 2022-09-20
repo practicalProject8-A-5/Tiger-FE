@@ -14,22 +14,24 @@ const LoginModal = ({ showModal }) => {
   };
 
   return (
-    <StLoginModal>
-      {goRegister === false ? (
-        <LoginForm
-          showModal={showModal}
-          goRegister={goRegister}
-          loginToggle={loginToggle}
-        />
-      ) : (
-        <RegisterForm
-          showModal={showModal}
-          goRegister={goRegister}
-          setGoRegister={setGoRegister}
-          loginToggle={loginToggle}
-        />
-      )}
-    </StLoginModal>
+    <StBackground>
+      <StLoginModal>
+        {goRegister === false ? (
+          <LoginForm
+            showModal={showModal}
+            goRegister={goRegister}
+            loginToggle={loginToggle}
+          />
+        ) : (
+          <RegisterForm
+            showModal={showModal}
+            goRegister={goRegister}
+            setGoRegister={setGoRegister}
+            loginToggle={loginToggle}
+          />
+        )}
+      </StLoginModal>
+    </StBackground>
   );
 };
 
@@ -37,13 +39,20 @@ export default LoginModal;
 
 const StLoginModal = styled.div`
   position: absolute;
-  top: 57%;
-  right: 0;
-  transform: translate(-90%, -59%);
-  z-index: 100;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99999;
   width: 688px;
   height: 722px;
   background-color: #fff;
   border-radius: 16px;
   border: 1px solid #eee;
+`;
+
+const StBackground = styled.div`
+  width: 100vw;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.7);
 `;

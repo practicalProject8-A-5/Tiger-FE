@@ -81,8 +81,8 @@ const Search = () => {
   const [endDates, setEndDates] = useState(null);
   const startDate = format(new Date(startDates), "yyyy-MM-dd");
   const endDate = format(new Date(endDates), "yyyy-MM-dd");
-  console.log(startDate);
-  console.log(endDate);
+  // console.log(startDate);
+  // console.log(endDate);
 
   const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
     <button
@@ -149,7 +149,7 @@ const Search = () => {
           )}
         </StSearchLocationContainer>
         <StCalendarContainer>
-          <StCalendarWrapper>
+          <StCalendarWrapper style={{ zIndex: 999 }}>
             <img src={clock} alt="시계" />
             <StNewDatePicker
               selected={startDates}
