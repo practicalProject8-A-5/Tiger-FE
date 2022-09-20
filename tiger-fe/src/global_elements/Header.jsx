@@ -8,6 +8,7 @@ import logo from "../assets/ta,iger_logo.png";
 import axios from "axios";
 import LoginModal from "./LoginModal";
 import { loader } from "../redux/modules/memberSlice";
+import LoginBox from "./LoginBox";
 
 const Header = ({ ownerMode }) => {
   const memberApi = process.env.REACT_APP_SERVER;
@@ -24,7 +25,7 @@ const Header = ({ ownerMode }) => {
   const ownerToggle = useMatch("/*");
   // const ownerToggle = useMatch("/");
   // console.log(ownerToggle);
-
+  console.log(inOwner);
   const onClick = () => {
     if (ownerToggle !== null) {
       setInOwner(!inOwner);
@@ -87,26 +88,30 @@ const Header = ({ ownerMode }) => {
             <Link
               to="/intro"
               style={{ textDecoration: "none", color: textColor }}
-              onClick={handleChnageTextColor}>
+              onClick={handleChnageTextColor}
+            >
               <div className="header__home">홈</div>
             </Link>
             <Link
               to="/"
               style={{ textDecoration: "none", color: textColor }}
-              onClick={handleChnageTextColor}>
+              onClick={handleChnageTextColor}
+            >
               <div className="header__main">24렌트</div>
             </Link>
             {userInfo.name ? (
               <Link
                 to="/renter"
                 style={{ textDecoration: "none", color: textColor }}
-                onClick={handleChnageTextColor}>
+                onClick={handleChnageTextColor}
+              >
                 <div className="header__mypage">마이페이지</div>
               </Link>
             ) : (
               <Link
                 to="/renter"
-                style={{ textDecoration: "none", display: "none" }}>
+                style={{ textDecoration: "none", display: "none" }}
+              >
                 <div className="header__mypage">마이페이지</div>
               </Link>
             )}
@@ -123,7 +128,8 @@ const Header = ({ ownerMode }) => {
                 ) : (
                   <label
                     className="switch"
-                    style={{ backgroundColor: "#ff881b" }}>
+                    style={{ backgroundColor: "#ff881b" }}
+                  >
                     <input id="switch" type="checkbox" onClick={onClick} />
                     <span className="slider"></span>
                   </label>
@@ -140,7 +146,8 @@ const Header = ({ ownerMode }) => {
                 ) : (
                   <label
                     className="switch"
-                    style={{ backgroundColor: "#ff881b" }}>
+                    style={{ backgroundColor: "#ff881b" }}
+                  >
                     <input id="switch" type="checkbox" onClick={onClick} />
                     <span className="slider"></span>
                   </label>
@@ -162,7 +169,7 @@ const Header = ({ ownerMode }) => {
                 로그인
               </div>
             )}
-            {IsModalOpen && <LoginModal showModal={showModal} />}
+            {IsModalOpen && <LoginBox showModal={showModal} />}
           </div>
         </div>
       </div>
@@ -276,8 +283,9 @@ const StHeader = styled.div`
               height: 20px;
               border-radius: 50%;
               background-color: #fff;
-              border: 1px solid;
+              /* border: 1px solid #ddd; */
               transition: all 0.5s;
+              box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
             }
           }
         }

@@ -148,7 +148,7 @@ const Search = () => {
           )}
         </StSearchLocationContainer>
         <StCalendarContainer>
-          <StCalendarWrapper>
+          <StCalendarWrapper style={{ zIndex: 999 }}>
             <img src={clock} alt="시계" />
             <StNewDatePicker
               selected={startDates}
