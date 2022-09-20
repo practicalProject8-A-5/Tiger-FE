@@ -12,6 +12,7 @@ import ownerModiRegisterInfoSlice from "../modules/ownerModify";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import getDateListSlice from "../modules/dateSlice";
+import chatSlice from "../modules/chatSlice";
 
 const reducer = combineReducers({
   ownerItemListSlice,
@@ -22,6 +23,7 @@ const reducer = combineReducers({
   renterItemListSlice,
   ownerModiRegisterInfoSlice,
   getDateListSlice,
+  // chatSlice,
 });
 
 const persistConfig = {

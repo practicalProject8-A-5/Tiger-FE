@@ -14,6 +14,7 @@ import pin from "../assets/pin_trans.png";
 import clock from "../assets/clock.png";
 import vehicle from "../assets/vehicle.png";
 import { format } from "date-fns";
+
 const Search = () => {
   const mapKey = process.env.REACT_APP_REST_API_KEY;
   const dispatch = useDispatch();
@@ -80,18 +81,19 @@ const Search = () => {
   const [endDates, setEndDates] = useState(null);
   const startDate = format(new Date(startDates), "yyyy-MM-dd");
   const endDate = format(new Date(endDates), "yyyy-MM-dd");
-  // console.log(startDate);
-  // console.log(endDate);
+  console.log(startDate);
+  console.log(endDate);
+
   const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
     <button
       className="example-custom-input"
       // value={value}
       onClick={onClick}
-      ref={ref}
-    >
+      ref={ref}>
       {value}
     </button>
   ));
+
   //search vehicle type
   const [type, setType] = useState();
   const handleChange = (e) => {
@@ -137,8 +139,7 @@ const Search = () => {
               setIsPopupOpen(!isPopupOpen);
             }}
             onChange={onChangeHandler}
-            placeholder="어디서?"
-          ></input>
+            placeholder="어디서?"></input>
           {isPopupOpen ? (
             <div>
               <DaumPostcode style={postCodeStyle} onComplete={handlePostCode} />

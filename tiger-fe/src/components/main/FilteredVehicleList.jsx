@@ -17,7 +17,7 @@ const FilteredVehicleList = () => {
   const filteredVehicle = useSelector(
     (state) => state.vehicleDetailSlice.filteredVehicleList
   );
-  // console.log(filteredVehicle);
+  console.log(filteredVehicle);
 
   return (
     <StItemList>
