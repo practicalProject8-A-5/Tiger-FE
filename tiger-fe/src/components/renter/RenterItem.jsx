@@ -60,7 +60,8 @@ const RenterItem = ({ category, list, onSelect }) => {
                   className="carInfo"
                   onClick={() => {
                     navigate(`/vdetail/${list.vid}`);
-                  }}>
+                  }}
+                >
                   <p>{list.vbrand}</p>
                   <p>{list.vname}</p>
                   <span>{list.oname}</span>
@@ -141,7 +142,8 @@ const RenterItem = ({ category, list, onSelect }) => {
                   className="carInfo"
                   onClick={() => {
                     navigate(`/vdetail/${list.vid}`);
-                  }}>
+                  }}
+                >
                   <p>{list.vbrand}</p>
                   <p>{list.vname}</p>
                   <span>{list.oname}</span>
@@ -177,7 +179,8 @@ const RenterItem = ({ category, list, onSelect }) => {
                   className="carInfo"
                   onClick={() => {
                     navigate(`/vdetail/${list.vid}`);
-                  }}>
+                  }}
+                >
                   <p>{list.vbrand}</p>
                   <p>{list.vname}</p>
                   <span>{list.oname}</span>

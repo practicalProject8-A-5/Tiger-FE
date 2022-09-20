@@ -1,5 +1,4 @@
 // eslint-disable-next-line
-
 import React, { useState, forwardRef } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -11,22 +10,17 @@ import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
 import Button from "./Button";
 import { __vehicleSearchList } from "../redux/modules/vehicleDetail";
-
 import pin from "../assets/pin_trans.png";
 import clock from "../assets/clock.png";
 import vehicle from "../assets/vehicle.png";
 import { format } from "date-fns";
-
 const Search = () => {
   const mapKey = process.env.REACT_APP_REST_API_KEY;
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   // search full address
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [location, setLocation] = useState("");
-
   // search address
   const onChangeHandler = (e) => {
     setLocation(e.target.value);
@@ -34,7 +28,6 @@ const Search = () => {
   const handlePostCode = (data) => {
     let fullAddress = data.address;
     let extraAddress = "";
-
     if (data.addressType === "R") {
       if (data.bname !== "") {
         extraAddress += data.bname;
@@ -48,11 +41,8 @@ const Search = () => {
     setLocation(fullAddress);
     getCoords(fullAddress);
   };
-
   // console.log(location);
-
   const [locationObj, setLocationObj] = useState({});
-
   const getCoords = (location) => {
     const headers = {
       Authorization: `KakaoAK ${mapKey}`,
@@ -73,12 +63,9 @@ const Search = () => {
         });
       });
   };
-
   const locationX = Number(locationObj.locationX);
   const locationY = Number(locationObj.locationY);
-
   // console.log(locationX, locationY);
-
   const postCodeStyle = {
     display: "block",
     position: "absolute",
@@ -88,17 +75,13 @@ const Search = () => {
     border: "1px solid black",
     zIndex: "99",
   };
-
   // search reservation dates
   const [startDates, setStartDates] = useState(null);
   const [endDates, setEndDates] = useState(null);
-
   const startDate = format(new Date(startDates), "yyyy-MM-dd");
   const endDate = format(new Date(endDates), "yyyy-MM-dd");
-
   // console.log(startDate);
   // console.log(endDate);
-
   const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
     <button
       className="example-custom-input"
@@ -109,14 +92,12 @@ const Search = () => {
       {value}
     </button>
   ));
-
   //search vehicle type
   const [type, setType] = useState();
   const handleChange = (e) => {
     setType(e.target.value);
   };
   // console.log(type);
-
   // submit handler
   const onSubmitHandler = async (e) => {
     try {
@@ -145,7 +126,6 @@ const Search = () => {
       return err;
     }
   };
-
   return (
     <StSearch>
       <div className="wrap">
@@ -159,7 +139,6 @@ const Search = () => {
             onChange={onChangeHandler}
             placeholder="어디서?"
           ></input>
-
           {isPopupOpen ? (
             <div>
               <DaumPostcode style={postCodeStyle} onComplete={handlePostCode} />
@@ -170,6 +149,7 @@ const Search = () => {
         </StSearchLocationContainer>
         <StCalendarContainer>
           <StCalendarWrapper>
+            <img src={clock} alt="시계" />
             <StNewDatePicker
               selected={startDates}
               onChange={(date) => setStartDates(date)}
@@ -181,12 +161,14 @@ const Search = () => {
               minDate={new Date()}
               shouldCloseOnSelect={true}
               placeholderText="언제부터"
-              customInput={<ExampleCustomInput />}
+              // customInput={<ExampleCustomInput />}
             />
           </StCalendarWrapper>
           <div className="dateConnection">~</div>
           <StCalendarWrapper>
+            <img src={clock} alt="시계" />
             <StNewDatePicker
+              className="StNewDatePicker"
               selected={endDates}
               onChange={(date) => setEndDates(date)}
               selectsEnd
@@ -197,7 +179,7 @@ const Search = () => {
               dateFormat="yyyy-MM-dd"
               shouldCloseOnSelect={true}
               placeholderText="언제까지"
-              customInput={<ExampleCustomInput />}
+              // customInput={<ExampleCustomInput />}
             />
           </StCalendarWrapper>
         </StCalendarContainer>
@@ -218,7 +200,6 @@ const Search = () => {
     </StSearch>
   );
 };
-
 const StSearch = styled.div`
   width: 100%;
   height: 93px;
@@ -236,7 +217,6 @@ const StSearch = styled.div`
     justify-content: space-between;
   }
 `;
-
 const StSearchLocationContainer = styled.div`
   .location_input {
     outline: none;
@@ -255,11 +235,11 @@ const StSearchLocationContainer = styled.div`
     /* border: 1px solid; */
   }
 `;
-
 const StCalendarContainer = styled.div`
   display: flex;
   justify-content: space-around;
   align-content: space-around;
+  /* background-color: pink; */
   .dateConnection {
     height: 42px;
     box-sizing: border-box;
@@ -272,11 +252,11 @@ const StCalendarContainer = styled.div`
     margin-left: 16px;
   }
 `;
-
 const StCalendarWrapper = styled.div`
   z-index: 99;
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 180px;
   height: 42px;
   box-sizing: border-box;
@@ -286,27 +266,102 @@ const StCalendarWrapper = styled.div`
   background: #f2f2f2;
   border-radius: 12px;
   padding: 5px;
-  /* border: 1px solid; */
-  .example-custom-input {
-    outline: none;
-    box-sizing: border-box;
-    font-size: 14px;
-    cursor: pointer;
-    background: #f2f2f2;
-    padding: 7px;
-    background-image: url(${clock});
-    background-repeat: no-repeat;
-    background-size: 22px;
-    background-position: 1px 4px;
-    text-indent: 0px;
-    border: none;
+  img {
+    width: 22px;
+    height: 22px;
+  }
+  .react-datepicker-wrapper {
+    margin-left: 8px;
     width: 100%;
-    height: 30px;
+    input {
+      width: 100%;
+      outline: none;
+      border: none;
+      padding: 0;
+      background: #f2f2f2;
+    }
+  }
+  .react-datepicker__tab-loop {
+    .react-datepicker-popper {
+      /* background-color: pink; */
+      position: absolute;
+      inset: 0px auto auto 0px;
+      transform: translate(641px, 179px);
+      div {
+        .react-datepicker {
+          width: 100%;
+          .react-datepicker__month-container {
+            width: 400px;
+            /* width: 100%; */
+            /* background-color: pink; */
+            .react-datepicker__header {
+              background-color: #fff;
+              border: none;
+              font-weight: 600;
+              font-size: 18px;
+              .react-datepicker__current-month {
+                /* margin-top: 20px; */
+                position: absolute;
+                top: 20%;
+                left: 50%;
+                transform: translateX(-50%);
+              }
+              .react-datepicker__day-names {
+                margin-top: 30px;
+                display: flex;
+                justify-content: space-between;
+                .react-datepicker__day-name {
+                  font-weight: 600;
+                  font-size: 14px;
+                  color: #8b8b8b;
+                }
+              }
+            }
+            .react-datepicker__month {
+              .react-datepicker__week {
+                display: flex;
+                justify-content: space-between;
+                .react-datepicker__day--weekend {
+                  /* color: red; */
+                }
+                .react-datepicker__day--selected {
+                  background-color: #000 !important;
+                  border-radius: 50%;
+                  color: #fff !important;
+                }
+                .react-datepicker__day--today {
+                  font-weight: 800;
+                  border-radius: 50%;
+                  background-color: transparent;
+                  color: #000;
+                  :hover {
+                    background-color: #f0f0f0;
+                  }
+                }
+                .react-datepicker__day {
+                  :hover {
+                    border-radius: 50%;
+                  }
+                }
+                .react-datepicker__day--in-selecting-range {
+                  background-color: #000;
+                  color: #fff;
+                  border-radius: 50%;
+                  :hover {
+                    border-radius: 50%;
+                  }
+                }
+              }
+            }
+          }
+          .react-datepicker__triangle {
+          }
+        }
+      }
+    }
   }
 `;
-
 const StNewDatePicker = styled(DatePicker)``;
-
 const StVehicleTypeContainer = styled.div`
   select {
     width: 300px;
@@ -321,7 +376,9 @@ const StVehicleTypeContainer = styled.div`
     background-size: 23px;
     background-position: 9px 7px;
     text-indent: 34px;
+    border: none;
+    outline: none;
+    color: #8b8b8b;
   }
 `;
-
 export default Search;
