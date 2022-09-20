@@ -2,11 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import LoginModal from "./LoginModal";
 
-const LoginBox = ({ showModal }) => {
+const LoginBox = ({ showModal, IsModalOpen }) => {
+  // console.log(showModal);
+  // console.log(IsModalOpen);
   return (
     <Stblur>
       <div className="bg">
-        <LoginModal />
+        <LoginModal showModal={showModal} IsModalOpen={IsModalOpen} />
       </div>
     </Stblur>
   );
@@ -34,12 +36,12 @@ const Stblur = styled.div`
     animation: modal-bg-show 1s;
     @keyframes modal-bg-show {
       from {
-        transform: translateY(-50%);
+        /* transform: translateY(-50%); */
         opacity: 0;
       }
       to {
         opacity: 1;
-        transform: translateY(0);
+        /* transform: translateY(0); */
       }
     }
   }

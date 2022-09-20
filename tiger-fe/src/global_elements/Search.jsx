@@ -82,6 +82,7 @@ const Search = () => {
   const endDate = format(new Date(endDates), "yyyy-MM-dd");
   // console.log(startDate);
   // console.log(endDate);
+
   const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
     <button
       className="example-custom-input"
@@ -92,6 +93,7 @@ const Search = () => {
       {value}
     </button>
   ));
+
   //search vehicle type
   const [type, setType] = useState();
   const handleChange = (e) => {
