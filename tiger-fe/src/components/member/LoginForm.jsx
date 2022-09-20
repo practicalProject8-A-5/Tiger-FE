@@ -234,6 +234,7 @@ const StLoginForm = styled.div`
           position: absolute;
           top: 28%;
           right: 4%;
+          color: #8b8b8b;
         }
         i:hover {
           cursor: pointer;

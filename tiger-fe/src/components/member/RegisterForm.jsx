@@ -498,15 +498,16 @@ const StRegisterForm = styled.div`
           position: absolute;
           top: 46%;
           right: 4%;
+          color: #8b8b8b;
         }
         .eyeIcon:hover {
-          color: #00fcb6;
           cursor: pointer;
         }
         i {
           position: absolute;
           top: 28%;
           right: 4%;
+          color: #8b8b8b;
         }
         i:hover {
           cursor: pointer;
