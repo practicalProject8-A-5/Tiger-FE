@@ -1,5 +1,8 @@
 // eslint-disable-next-line
 
+import test from "../../assets/kakaoLogin.png";
+import test1 from "../../assets/car6jpg.jpg";
+
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -55,6 +58,7 @@ const OwnerItem = ({ list, category, vid }) => {
     <>
       {category === "Registration" ? (
         <StOwnerItem>
+          {/* <div className="thumnail" onClick={onClick}></div> */}
           <img src={list.thumbnail} alt="차량" onClick={onClick} />
           <div className="carInfo" onClick={onClick}>
             <p>
@@ -211,6 +215,8 @@ const StOwnerItem = styled.div`
   position: relative;
   margin-bottom: 40px;
   cursor: pointer;
+  /* 임시로 */
+  height: 150px;
   img {
     width: 250px;
     height: 100%;
@@ -218,17 +224,33 @@ const StOwnerItem = styled.div`
     border-radius: 12px;
     margin-right: 24px;
   }
+  /* 이미지 test */
+  /* .thumnail {
+    width: 250px;
+    height: 150px;
+    background-color: pink;
+    border-radius: 12px;
+    margin-right: 24px;
+    background-image: url(${test});
+    background-image: url(${test1});
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  } */
   .carInfo {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     width: 430px;
+    padding: 10px 0 5px 0;
+    box-sizing: border-box;
     p {
       margin-bottom: 11px;
       font-weight: 500;
       font-size: 18px;
       color: #000;
     }
+
     span {
       font-style: normal;
       font-weight: 500;
@@ -240,6 +262,7 @@ const StOwnerItem = styled.div`
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
+      margin-bottom: 0px;
     }
   }
   .dateBtn {

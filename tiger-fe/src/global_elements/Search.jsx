@@ -83,16 +83,16 @@ const Search = () => {
   // console.log(startDate);
   // console.log(endDate);
 
-  const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
-    <button
-      className="example-custom-input"
-      // value={value}
-      onClick={onClick}
-      ref={ref}
-    >
-      {value}
-    </button>
-  ));
+  // const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
+  //   <button
+  //     className="example-custom-input"
+  //     // value={value}
+  //     onClick={onClick}
+  //     ref={ref}
+  //   >
+  //     {value}
+  //   </button>
+  // ));
 
   //search vehicle type
   const [type, setType] = useState();
