@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -10,6 +10,9 @@ import phone from "../../assets/phone.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Scrollbar } from "swiper";
 import { __vehicleDetail } from "../../redux/modules/vehicleDetail";
+import like from "../../assets/Love.png";
+import liked from "../../assets/liked.png";
+import { __isLike } from "../../redux/modules/likeSlice";
 import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
@@ -32,6 +35,13 @@ const VehicleDetailLeft = () => {
   useEffect(() => {
     dispatch(__vehicleDetail({ vId, startDate, endDate }));
   }, [dispatch, id]);
+
+  const [isLike, setIsLike] = useState(false);
+
+  const likeClickHandler = () => {
+    dispatch(__isLike(vId));
+    setIsLike(!isLike);
+  };
 
   const styleTh = {
     width: "180px",
@@ -79,15 +89,18 @@ const VehicleDetailLeft = () => {
           </h1>
         </StVehicleInfoTitleWrapper>
         <StVehicleInfoLocationWrapper>
-          <p>{vehicleDetails.location}</p>
+          <div className="locationTitle">
+            <p>{vehicleDetails.location}</p>
+            <img
+              src={isLike ? liked : like}
+              alt="liked"
+              onClick={likeClickHandler}
+            />
+          </div>
         </StVehicleInfoLocationWrapper>
         <StVehicleInfoContentsWrapper>
           <h1>차량정보</h1>
           <table border="1" cellSpacing="5" cellPadding="10">
-            {/* <col style={styleCol} />
-            <col style={styleCol} />
-            <col style={styleCol} />
-            <col style={styleCol} /> */}
             <tbody>
               <tr>
                 <th style={styleTh}>연식</th>
@@ -179,12 +192,25 @@ const StVehicleInfoTitleWrapper = styled.div`
 `;
 
 const StVehicleInfoLocationWrapper = styled.div`
-  p {
-    font-family: 700;
-    font-size: 18px;
-    line-height: 25px;
-    border-bottom: 1px solid #cccccc;
-    padding-bottom: 64px;
+  display: flex;
+  justify-content: space-between;
+  .locationTitle {
+    width: 100%;
+    display: flex;
+    p {
+      font-family: 700;
+      font-size: 18px;
+      line-height: 25px;
+      border-bottom: 1px solid #cccccc;
+      padding-bottom: 64px;
+      width: 100%;
+    }
+    img {
+      height: 25px;
+      width: 25px;
+      float: right;
+      padding-top: 55px;
+    }
   }
 `;
 
