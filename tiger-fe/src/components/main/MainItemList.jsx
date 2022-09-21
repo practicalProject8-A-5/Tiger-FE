@@ -4,6 +4,7 @@ import MainItem from "./MainItem";
 import { __incomeItemList } from "../../redux/modules/incomeItemListSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { option } from "../../redux/modules/incomeItemListSlice";
 
 const MainItemList = () => {
   const MainItemLists = useSelector(
@@ -15,14 +16,16 @@ const MainItemList = () => {
 
   useEffect(() => {
     dispatch(__incomeItemList());
-    // console.log("11");
+    return () => {
+      dispatch(option());
+    };
   }, [dispatch]);
+
   return (
     <StItemList>
       {MainItemLists.output &&
         MainItemLists.output.map((list, i) => <MainItem key={i} list={list} />)}
     </StItemList>
-    // <h1>차량</h1>
   );
 };
 

@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import like from "../../assets/Love.png";
 import liked from "../../assets/liked.png";
@@ -14,20 +14,32 @@ import "swiper/scss/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const MainItem = ({ list }) => {
+  const email = localStorage.getItem("email");
   const MainItemListImage = list.imageList;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [isLike, setIsLike] = useState(false);
+  console.log(list);
+
+  const [isLike, setIsLike] = useState(list.heart);
+  console.log(isLike);
 
   const likeClickHandler = () => {
     dispatch(__isLike(list.vid));
+    console.log("222");
     setIsLike(!isLike);
   };
 
-  // console.log(list);
+  useEffect(() => {
+    console.log(list.heart);
+    setIsLike(list.heart);
+    return () => {
+      setIsLike(!isLike);
+    };
+  }, []);
 
   return (
     <StItem>
@@ -48,9 +60,19 @@ const MainItem = ({ list }) => {
           );
         })}
       </StSwiper>
-      <span className="heart" onClick={likeClickHandler}>
-        <img src={isLike ? liked : like} alt="liked" />
-      </span>
+      {email ? (
+        isLike === true ? (
+          <span className="heart" onClick={likeClickHandler}>
+            <img src={liked} alt="liked" />
+          </span>
+        ) : isLike === false ? (
+          <span className="heart" onClick={likeClickHandler}>
+            <img src={like} alt="liked" />
+          </span>
+        ) : null
+      ) : (
+        <span className="heart" style={{ display: "none" }}></span>
+      )}
       <div
         className="desc__box"
         onClick={() => {

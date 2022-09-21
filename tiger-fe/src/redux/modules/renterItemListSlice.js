@@ -33,7 +33,7 @@ export const __getRenterItemList = createAsyncThunk(
           headers: headers,
         });
         // console.log(responseLiked.data);
-        return thunkAPI.fulfillWithValue(responseLiked.data.output);
+        return thunkAPI.fulfillWithValue(responseLiked.data);
       } catch (error) {
         return thunkAPI.rejectWithValue(error);
       }

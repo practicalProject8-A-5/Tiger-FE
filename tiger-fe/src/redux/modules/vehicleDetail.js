@@ -43,32 +43,62 @@ export const __vehicleDetail = createAsyncThunk(
   }
 );
 
+const email = localStorage.getItem("email");
+const userToken = localStorage.getItem("userToken");
+const refreshToken = localStorage.getItem("refreshToken");
+
 // 검색된 차량 리스트 생성
 export const __vehicleSearchList = createAsyncThunk(
   "detail/__vehicleSearchList",
   async (payload, thunkAPI) => {
     const { location, startDate, endDate, type, locationX, locationY } =
       payload;
-    try {
-      const headers = {
-        "Content-Type": "application/json",
-      };
-      const response = await axios.post(
-        `${serverApi}/vehicle/search`,
-        {
-          location: location,
-          locationX: locationX,
-          locationY: locationY,
-          type: type,
-          startDate: startDate,
-          endDate: endDate,
-        },
-        { headers: headers }
-      );
-      console.log(response.data.output);
-      return thunkAPI.fulfillWithValue(response.data.output);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+    if (email) {
+      try {
+        const headers = {
+          "Content-Type": "application/json",
+          Authorization: userToken,
+          RefreshToken: refreshToken,
+        };
+        const response = await axios.post(
+          `${serverApi}/vehicle/search`,
+          {
+            location: location,
+            locationX: locationX,
+            locationY: locationY,
+            type: type,
+            startDate: startDate,
+            endDate: endDate,
+          },
+          { headers: headers }
+        );
+        console.log(response.data.output);
+        return thunkAPI.fulfillWithValue(response.data.output);
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error);
+      }
+    } else {
+      try {
+        const headers = {
+          "Content-Type": "application/json",
+        };
+        const response = await axios.post(
+          `${serverApi}/vehicle/search`,
+          {
+            location: location,
+            locationX: locationX,
+            locationY: locationY,
+            type: type,
+            startDate: startDate,
+            endDate: endDate,
+          },
+          { headers: headers }
+        );
+        console.log(response.data.output);
+        return thunkAPI.fulfillWithValue(response.data.output);
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error);
+      }
     }
   }
 );
