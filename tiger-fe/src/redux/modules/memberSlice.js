@@ -64,6 +64,7 @@ export const __userLogin = createAsyncThunk(
       localStorage.setItem("email", response.data.output.email);
       localStorage.setItem("phone", response.data.output.tel);
       localStorage.setItem("name", response.data.output.name);
+      localStorage.setItem("id", response.data.output.id);
       localStorage.setItem("refreshToken", response.headers.refreshtoken);
       localStorage.setItem("profileImage", response.data.output.profileImage);
       // console.log(response.data);
@@ -89,6 +90,7 @@ export const __kakaoLogin = createAsyncThunk(
       localStorage.setItem("userToken", response.headers.authorization);
       localStorage.setItem("email", response.data.output.email);
       localStorage.setItem("phone", response.data.output.tel);
+      localStorage.setItem("id", response.data.output.id);
       localStorage.setItem("profileImage", response.data.output.profileImage);
       localStorage.setItem("name", response.data.output.name);
       localStorage.setItem("refreshToken", response.headers.refreshtoken);
@@ -111,9 +113,10 @@ const memberSlice = createSlice({
       const phone = localStorage.getItem("phone");
       const name = localStorage.getItem("name");
       const profileImage = localStorage.getItem("profileImage");
+      const id = localStorage.getItem("id");
       // console.log(payload);
       if (userToken !== null) {
-        state.userInfo = { email, phone, name, profileImage };
+        state.userInfo = { email, phone, name, profileImage, id };
       } else {
         state.userInfo = {};
       }

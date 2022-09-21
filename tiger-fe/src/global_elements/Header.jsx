@@ -25,7 +25,7 @@ const Header = ({ ownerMode }) => {
   const ownerToggle = useMatch("/*");
   // const ownerToggle = useMatch("/");
   // console.log(ownerToggle);
-  console.log(inOwner);
+  // console.log(inOwner);
   const onClick = () => {
     if (ownerToggle !== null) {
       setInOwner(!inOwner);
@@ -88,30 +88,26 @@ const Header = ({ ownerMode }) => {
             <Link
               to="/intro"
               style={{ textDecoration: "none", color: textColor }}
-              onClick={handleChnageTextColor}
-            >
+              onClick={handleChnageTextColor}>
               <div className="header__home">홈</div>
             </Link>
             <Link
               to="/"
               style={{ textDecoration: "none", color: textColor }}
-              onClick={handleChnageTextColor}
-            >
+              onClick={handleChnageTextColor}>
               <div className="header__main">24렌트</div>
             </Link>
             {userInfo.name ? (
               <Link
                 to="/renter"
                 style={{ textDecoration: "none", color: textColor }}
-                onClick={handleChnageTextColor}
-              >
+                onClick={handleChnageTextColor}>
                 <div className="header__mypage">마이페이지</div>
               </Link>
             ) : (
               <Link
                 to="/renter"
-                style={{ textDecoration: "none", display: "none" }}
-              >
+                style={{ textDecoration: "none", display: "none" }}>
                 <div className="header__mypage">마이페이지</div>
               </Link>
             )}
@@ -128,8 +124,7 @@ const Header = ({ ownerMode }) => {
                 ) : (
                   <label
                     className="switch"
-                    style={{ backgroundColor: "#ff881b" }}
-                  >
+                    style={{ backgroundColor: "#ff881b" }}>
                     <input id="switch" type="checkbox" onClick={onClick} />
                     <span className="slider"></span>
                   </label>
@@ -146,8 +141,7 @@ const Header = ({ ownerMode }) => {
                 ) : (
                   <label
                     className="switch"
-                    style={{ backgroundColor: "#ff881b" }}
-                  >
+                    style={{ backgroundColor: "#ff881b" }}>
                     <input id="switch" type="checkbox" onClick={onClick} />
                     <span className="slider"></span>
                   </label>

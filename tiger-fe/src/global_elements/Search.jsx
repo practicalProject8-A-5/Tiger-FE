@@ -84,15 +84,15 @@ const Search = () => {
   // console.log(startDate);
   // console.log(endDate);
 
-  const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
-    <button
-      className="example-custom-input"
-      // value={value}
-      onClick={onClick}
-      ref={ref}>
-      {value}
-    </button>
-  ));
+  // const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
+  //   <button
+  //     className="example-custom-input"
+  //     // value={value}
+  //     onClick={onClick}
+  //     ref={ref}>
+  //     {value}
+  //   </button>
+  // ));
 
   //search vehicle type
   const [type, setType] = useState();
@@ -149,7 +149,7 @@ const Search = () => {
           )}
         </StSearchLocationContainer>
         <StCalendarContainer>
-          <StCalendarWrapper style={{ zIndex: 999 }}>
+          <StCalendarWrapper style={{ zIndex: 98 }}>
             <img src={clock} alt="시계" />
             <StNewDatePicker
               selected={startDates}
@@ -248,13 +248,13 @@ const StCalendarContainer = styled.div`
     line-height: 42px;
     top: 25px;
     position: relative;
-    z-index: 99;
+    z-index: 98;
     margin-right: 16px;
     margin-left: 16px;
   }
 `;
 const StCalendarWrapper = styled.div`
-  z-index: 99;
+  z-index: 98;
   display: flex;
   justify-content: center;
   align-items: center;

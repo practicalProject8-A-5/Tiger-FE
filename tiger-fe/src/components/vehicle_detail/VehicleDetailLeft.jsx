@@ -24,7 +24,7 @@ const VehicleDetailLeft = () => {
   const vehicleDetails = useSelector(
     (state) => state.vehicleDetailSlice.vehicleDetails
   );
-  // console.log(vehicleDetails);
+  console.log(vehicleDetails);
 
   const startDate = new URL(window.location.href).searchParams.get("startDate");
   const endDate = new URL(window.location.href).searchParams.get("endDate");
