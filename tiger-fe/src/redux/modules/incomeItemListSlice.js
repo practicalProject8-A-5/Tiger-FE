@@ -11,6 +11,9 @@ const initialState = {
   error: null,
 };
 
+// const userToken = localStorage.getItem("userToken");
+// const refreshToken = localStorage.getItem("refreshToken");
+
 //등록 차량
 export const __incomeItemList = createAsyncThunk(
   "main/__incomeItemList",

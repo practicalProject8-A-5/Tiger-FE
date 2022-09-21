@@ -19,10 +19,10 @@ const RenterItem = ({ category, list, onSelect }) => {
   console.log(renterItemLists);
 
   useEffect(() => {
-    if (category) {
+    if (category === "RESERVED") {
       dispatch(__getRenterItemList("RESERVED"));
     }
-  }, [dispatch]);
+  }, []);
 
   const deleteHandler = async (oid) => {
     const userToken = localStorage.getItem("userToken");
@@ -218,16 +218,6 @@ const RenterItem = ({ category, list, onSelect }) => {
                   <p>₩{list.price}</p>
                   <p>{list.location}</p>
                 </div>
-                {/* <div className="flex_wrap">
-                  <div className="item_date">
-                    <div>{list.startDate}</div>
-                    <span>~</span>
-                    <span>{list.endDate}</span>
-                  </div>
-                  <div className="btn_box">
-                    <span className="returned">반납완료</span>
-                  </div>
-                </div> */}
               </StRenterItem>
             );
           })

@@ -6,7 +6,7 @@ import axios from "axios";
 const serverApi = process.env.REACT_APP_SERVER;
 
 const initialState = {
-  renterItemLists: {},
+  renterItemLists: [],
   isLoading: false,
   result: null,
   error: null,
@@ -33,7 +33,7 @@ export const __getRenterItemList = createAsyncThunk(
           headers: headers,
         });
         // console.log(responseLiked.data);
-        return thunkAPI.fulfillWithValue(responseLiked.data.output);
+        return thunkAPI.fulfillWithValue(responseLiked.data);
       } catch (error) {
         return thunkAPI.rejectWithValue(error);
       }
