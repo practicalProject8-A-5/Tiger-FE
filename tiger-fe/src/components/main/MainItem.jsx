@@ -1,7 +1,12 @@
 // eslint-disable-next-line
 
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import like from "../../assets/Love.png";
+import liked from "../../assets/liked.png";
+
+import { __isLike } from "../../redux/modules/likeSlice";
 
 import "swiper/scss";
 import "swiper/scss/navigation";
@@ -13,6 +18,14 @@ import { useNavigate } from "react-router-dom";
 const MainItem = ({ list }) => {
   const MainItemListImage = list.imageList;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [isLike, setIsLike] = useState(false);
+
+  const likeClickHandler = () => {
+    dispatch(__isLike(list.vid));
+    setIsLike(!isLike);
+  };
 
   return (
     <StItem>
@@ -24,8 +37,7 @@ const MainItem = ({ list }) => {
         navigation={true}
         loop={true}
         modules={[Pagination, Navigation]}
-        className="mySwiper"
-      >
+        className="mySwiper">
         {MainItemListImage.map((image, i) => {
           return (
             <SwiperSlide className="img" key={i}>
@@ -34,13 +46,14 @@ const MainItem = ({ list }) => {
           );
         })}
       </StSwiper>
-      <span className="heart"></span>
+      <span className="heart" onClick={likeClickHandler}>
+        <img src={isLike ? liked : like} alt="liked" />
+      </span>
       <div
         className="desc__box"
         onClick={() => {
           navigate(`/vdetail/${list.vid}`);
-        }}
-      >
+        }}>
         <div className="desc__top">
           <div className="desc__title">{list.location}</div>
           <div className="desc__star">4.12</div>
@@ -66,16 +79,17 @@ const StItem = styled.div`
   height: 421px;
   position: relative;
   cursor: pointer;
-
-  /* background-color: pink; */
-
   .heart {
     width: 28px;
     height: 28px;
-    /* background-color: pink; */
     position: absolute;
     top: 18px;
     right: 18px;
+    z-index: 100;
+    img {
+      height: 25px;
+      width: 25px;
+    }
   }
   .desc__box {
     margin-top: 19px;
