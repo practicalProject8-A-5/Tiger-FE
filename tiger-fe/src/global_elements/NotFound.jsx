@@ -19,8 +19,10 @@ const NotFound = (props) => {
           <div className="warning__textLower"> {props.lowerText} </div>
         </div>
         <img src={NotFoundLogo} alt="NotFoundLogo" />
+        <StBackToMain onClick={backToMainHandler}>
+          메인페이지로 이동
+        </StBackToMain>
       </StNotFoundContainer>
-      <StBackToMain onClick={backToMainHandler}>메인페이지로 이동</StBackToMain>
     </>
   );
 };

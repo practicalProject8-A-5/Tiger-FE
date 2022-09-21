@@ -13,9 +13,10 @@ const ChatFloat = () => {
   const location = useLocation();
   const isChatModalOn = useMatch("/chat/*");
   const notification = useSelector((state) => state.chatSlice.notification);
+  console.log("notification :", notification);
   // 추후 memberId or userId 연결해야함
   const userId = useSelector((state) => state.memberSlice.userInfo.id);
-  console.log(userId);
+  console.log("userId :", userId);
 
   const eventSource = useRef();
 
@@ -47,7 +48,7 @@ const ChatFloat = () => {
         eventSource.current = null;
       }
     };
-  }, [userId, dispatch]);
+  }, [userId, dispatch, authorization]);
 
   return (
     <>
