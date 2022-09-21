@@ -6,7 +6,7 @@ import axios from "axios";
 const serverApi = process.env.REACT_APP_SERVER;
 
 const initialState = {
-  renterItemLists: [],
+  renterItemLists: {},
   isLoading: false,
   result: null,
   error: null,

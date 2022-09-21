@@ -11,26 +11,46 @@ const initialState = {
   error: null,
 };
 
-// const userToken = localStorage.getItem("userToken");
-// const refreshToken = localStorage.getItem("refreshToken");
+const userToken = localStorage.getItem("userToken");
+const refreshToken = localStorage.getItem("refreshToken");
+const email = localStorage.getItem("email");
 
 //등록 차량
 export const __incomeItemList = createAsyncThunk(
   "main/__incomeItemList",
   async (payload, thunkAPI) => {
-    try {
-      const headers = {
-        "Content-Type": "application/json",
-      };
-      const resp = await axios.get(
-        `${serverApi}/vehicle`,
-        // {},
-        { headers: headers }
-      );
-      // console.log(resp.data);
-      return thunkAPI.fulfillWithValue(resp.data);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+    if (email) {
+      try {
+        const headers = {
+          "Content-Type": "application/json",
+          Authorization: userToken,
+          RefreshToken: refreshToken,
+        };
+        const resp = await axios.get(
+          `${serverApi}/vehicle`,
+          // {},
+          { headers: headers }
+        );
+        console.log(resp.data);
+        return thunkAPI.fulfillWithValue(resp.data);
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+    } else {
+      try {
+        const headers = {
+          "Content-Type": "application/json",
+        };
+        const resp = await axios.get(
+          `${serverApi}/vehicle`,
+          // {},
+          { headers: headers }
+        );
+        console.log(resp.data);
+        return thunkAPI.fulfillWithValue(resp.data);
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
     }
   }
 );
@@ -38,7 +58,11 @@ export const __incomeItemList = createAsyncThunk(
 const incomeItemListSlice = createSlice({
   name: "incomeItemListSlice",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    option: (state, action) => {
+      state.incomeItemList = [];
+    },
+  },
   extraReducers: {
     [__incomeItemList.pending]: (state, action) => {
       state.isLoading = true;
@@ -56,5 +80,5 @@ const incomeItemListSlice = createSlice({
   },
 });
 
-// export const {} = incomeItemListSlice.actions;
+export const { option } = incomeItemListSlice.actions;
 export default incomeItemListSlice.reducer;
