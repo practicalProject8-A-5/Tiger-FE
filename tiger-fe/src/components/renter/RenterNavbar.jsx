@@ -39,7 +39,8 @@ const RenterNavbar = ({ category, onSelect }) => {
                   onClick={() => {
                     dispatch(__getRenterItemList(c.name));
                     onSelect(c.name);
-                  }}>
+                  }}
+                >
                   {c.text}
                 </Category>
               ))
@@ -50,21 +51,11 @@ const RenterNavbar = ({ category, onSelect }) => {
                   onClick={() => {
                     dispatch(__getRenterItemList(c.name));
                     onSelect(c.name);
-                  }}>
+                  }}
+                >
                   {c.text}
                 </Category>
               ))}
-          {/* {categories.map((c) => (
-            <Category
-              key={c.name}
-              active={category === c.name}
-              onClick={() => {
-                dispatch(__getRenterItemList(c.name));
-                onSelect(c.name);
-              }}>
-              {c.text}
-            </Category>
-          ))} */}
         </div>
       </StNavBar>
     </>

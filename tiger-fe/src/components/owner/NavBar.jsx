@@ -28,6 +28,14 @@ const NavBar = ({ category, onSelect }) => {
       name: "Refund",
       text: "환불",
     },
+    {
+      name: "profit",
+      text: "수익 현황",
+    },
+    {
+      name: "calculate",
+      text: "정산 관리",
+    },
   ];
   return (
     <StNavBar>
@@ -38,7 +46,8 @@ const NavBar = ({ category, onSelect }) => {
             active={category === c.name}
             onClick={() => {
               onSelect(c.name);
-            }}>
+            }}
+          >
             {c.text}
           </Category>
         ))}

@@ -6,6 +6,7 @@ import MainItemList from "../components/main/MainItemList";
 import Header from "../global_elements/Header";
 import Search from "../global_elements/Search";
 import GlobalLayout from "../global/GlobalLayout";
+import TopBtn from "../global_elements/TopBtn";
 
 const RentMainPage = () => {
   // const [inOwner, setInOwner] = useState(false);
@@ -17,6 +18,7 @@ const RentMainPage = () => {
       <Search />
       <GlobalLayout>
         <MainItemList />
+        <TopBtn />
       </GlobalLayout>
     </StHomePage>
   );
@@ -25,5 +27,6 @@ const RentMainPage = () => {
 export default RentMainPage;
 
 const StHomePage = styled.div`
-  height: 300vh;
+  /* height: 300vh; */
+  position: relative;
 `;

@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import Banner from "../../assets/home_image/banner.png";
+
 const banner = () => {
   return (
     <StBanner>
@@ -19,10 +21,10 @@ const StBanner = styled.div`
   width: 100%;
   height: 660px;
   position: relative;
+  background-image: url(${Banner});
   .text_box {
     width: 650px;
     height: 127px;
-    /* background-color: skyblue; */
     position: absolute;
     bottom: 101px;
     left: 55px;

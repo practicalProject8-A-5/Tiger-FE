@@ -9,8 +9,13 @@ import { __reservedItemList } from "../../redux/modules/ownerItemListSlice";
 import { __useItemList } from "../../redux/modules/ownerItemListSlice";
 import { __returnItemList } from "../../redux/modules/ownerItemListSlice";
 import { __cancleItemList } from "../../redux/modules/ownerItemListSlice";
+import Profit from "./accounting/Profit";
+import { useNavigate } from "react-router-dom";
+import Calculate from "./accounting/Calculate";
 
 const OwnerItemList = ({ category }) => {
+  const navigate = useNavigate();
+
   const OwnerItemLists = useSelector(
     (state) => state.ownerItemListSlice.OwnerItemList
   );
@@ -33,7 +38,9 @@ const OwnerItemList = ({ category }) => {
 
   return (
     <StOwnerItemList>
-      {OwnerItemLists.output && OwnerItemLists.output.length === 0 ? (
+      {OwnerItemLists.output &&
+      OwnerItemLists.output.length === 0 &&
+      (category !== "profit" || category !== "calculate") ? (
         <p>등록된 차량이 없습니다.</p>
       ) : (
         OwnerItemLists.output &&
@@ -42,6 +49,16 @@ const OwnerItemList = ({ category }) => {
             <OwnerItem key={i} list={list} category={category} vid={list.vid} />
           );
         })
+      )}
+      {category === "profit" && (
+        <div>
+          <Profit />
+        </div>
+      )}
+      {category === "calculate" && (
+        <div>
+          <Calculate />
+        </div>
       )}
     </StOwnerItemList>
   );
