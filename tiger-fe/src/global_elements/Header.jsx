@@ -25,7 +25,7 @@ const Header = ({ ownerMode }) => {
   const ownerToggle = useMatch("/*");
   // const ownerToggle = useMatch("/");
   // console.log(ownerToggle);
-  console.log(inOwner);
+  // console.log(inOwner);
   const onClick = () => {
     if (ownerToggle !== null) {
       setInOwner(!inOwner);
