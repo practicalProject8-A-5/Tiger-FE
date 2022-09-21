@@ -9,7 +9,7 @@ import axios from "axios";
 
 const RenterItem = ({ category, list, onSelect }) => {
   const serverApi = process.env.REACT_APP_SERVER;
-  const chatApi = process.env.REACT_APP_CHAT_URL;
+  const chatApi = process.env.REACT_APP_CHAT;
 
   // const userId = useSelector((state) => state.memberSlice.userInfo.id);
   const location = useLocation();
@@ -40,6 +40,12 @@ const RenterItem = ({ category, list, onSelect }) => {
       headers: headers,
     });
     dispatch(__getRenterItemList("RESERVED"));
+  };
+
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: localStorage.getItem("userToken"),
+    RefreshToken: localStorage.getItem("refreshToken"),
   };
 
   return (
@@ -96,9 +102,15 @@ const RenterItem = ({ category, list, onSelect }) => {
                       onClick={() => {
                         const ownerId = list.ownerId;
                         try {
-                          const response = axios.post(`${chatApi}/chat/room`, {
-                            ownerId,
-                          });
+                          const response = axios.post(
+                            `${chatApi}/chat/room`,
+                            {
+                              ownerId,
+                            },
+                            {
+                              headers: headers,
+                            }
+                          );
                           console.log(response.data.output);
                           navigate(`/chat/${response.data.output}`, {
                             state: { backgroundLocation: location },
@@ -144,9 +156,15 @@ const RenterItem = ({ category, list, onSelect }) => {
                       onClick={() => {
                         const ownerId = list.ownerId;
                         try {
-                          const response = axios.post(`${chatApi}/chat/room`, {
-                            ownerId,
-                          });
+                          const response = axios.post(
+                            `${chatApi}/chat/room`,
+                            {
+                              ownerId,
+                            },
+                            {
+                              headers: headers,
+                            }
+                          );
                           console.log(response.data.output);
                           navigate(`/chat/${response.data.output}`, {
                             state: { backgroundLocation: location },
@@ -198,9 +216,15 @@ const RenterItem = ({ category, list, onSelect }) => {
                       onClick={() => {
                         const ownerId = list.ownerId;
                         try {
-                          const response = axios.post(`${chatApi}/chat/room`, {
-                            ownerId,
-                          });
+                          const response = axios.post(
+                            `${chatApi}/chat/room`,
+                            {
+                              ownerId,
+                            },
+                            {
+                              headers: headers,
+                            }
+                          );
                           console.log(response.data.output);
                           navigate(`/chat/${response.data.output}`, {
                             state: { backgroundLocation: location },
@@ -252,9 +276,15 @@ const RenterItem = ({ category, list, onSelect }) => {
                       onClick={() => {
                         const ownerId = list.ownerId;
                         try {
-                          const response = axios.post(`${chatApi}/chat/room`, {
-                            ownerId,
-                          });
+                          const response = axios.post(
+                            `${chatApi}/chat/room`,
+                            {
+                              ownerId,
+                            },
+                            {
+                              headers: headers,
+                            }
+                          );
                           console.log(response.data.output);
                           navigate(`/chat/${response.data.output}`, {
                             state: { backgroundLocation: location },
