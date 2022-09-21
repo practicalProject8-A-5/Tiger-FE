@@ -6,10 +6,17 @@ import Banner from "../components/home/Banner";
 import HomeSearch from "../components/home/HomeSearch";
 import styled from "styled-components";
 import Section from "../components/home/Section";
+import { current } from "@reduxjs/toolkit";
 
 const HomePage = () => {
+  const handleScrolling = (e) => {
+    // console.log("Height :", e.target.scrollHeight);
+    console.log("scrollTop :", e.target.scrollTop);
+    // console.log("clientY :", e.currentTarget.clientHeight);
+  };
+
   return (
-    <StHomePage>
+    <StHomePage onScroll={handleScrolling}>
       <Header />
       <Banner />
       <HomeSearch />
@@ -23,4 +30,6 @@ export default HomePage;
 
 const StHomePage = styled.div`
   position: relative;
+  overflow-y: scroll;
+  height: 100vh;
 `;
