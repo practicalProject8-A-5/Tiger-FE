@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import styled from "styled-components";
 
 const TopBtn = () => {
-  console.log(window.scrollY);
+  // console.log(window.scrollY);
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,

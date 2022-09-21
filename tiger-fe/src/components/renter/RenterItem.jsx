@@ -20,7 +20,7 @@ const RenterItem = ({ category, list, onSelect }) => {
   const renterItemLists = useSelector(
     (state) => state.renterItemListSlice.renterItemLists
   );
-  // console.log(renterItemLists);
+  console.log(renterItemLists);
 
   useEffect(() => {
     if (category) {
@@ -297,6 +297,42 @@ const RenterItem = ({ category, list, onSelect }) => {
                     </div>
                   </div>
                 </div>
+              </StRenterItem>
+            );
+          })
+        ) : category === "LIKE" ? (
+          renterItemLists.output &&
+          renterItemLists.output.map((list, i) => {
+            return (
+              <StRenterItem key={i}>
+                <img
+                  src={list.thumbnail}
+                  alt="차량"
+                  onClick={() => {
+                    navigate(`/vdetail/${list.vid}`);
+                  }}
+                />
+                <div
+                  className="carInfo"
+                  onClick={() => {
+                    navigate(`/vdetail/${list.vid}`);
+                  }}>
+                  <p>{list.vbrand}</p>
+                  <p>{list.vname}</p>
+                  <span>{list.oname}</span>
+                  <p>₩{list.price}</p>
+                  <p>{list.location}</p>
+                </div>
+                {/* <div className="flex_wrap">
+                  <div className="item_date">
+                    <div>{list.startDate}</div>
+                    <span>~</span>
+                    <span>{list.endDate}</span>
+                  </div>
+                  <div className="btn_box">
+                    <span className="returned">반납완료</span>
+                  </div>
+                </div> */}
               </StRenterItem>
             );
           })

@@ -25,6 +25,10 @@ const RenterNavbar = ({ category, onSelect }) => {
       name: "CANCEL",
       text: "환불",
     },
+    {
+      name: "LIKE",
+      text: "찜",
+    },
   ];
 
   return (
@@ -39,23 +43,37 @@ const RenterNavbar = ({ category, onSelect }) => {
                   onClick={() => {
                     dispatch(__getRenterItemList(c.name));
                     onSelect(c.name);
-                  }}
-                >
+                  }}>
                   {c.text}
                 </Category>
               ))
-            : categories.map((c) => (
+            : category === "USE" ||
+              category === "RETURN" ||
+              category === "CANCEL"
+            ? categories.map((c) => (
                 <Category
                   key={c.name}
                   active={category === c.name}
                   onClick={() => {
                     dispatch(__getRenterItemList(c.name));
                     onSelect(c.name);
-                  }}
-                >
+                  }}>
                   {c.text}
                 </Category>
-              ))}
+              ))
+            : category === "LIKE"
+            ? categories.map((c) => (
+                <Category
+                  key={c.name}
+                  active={category === c.name}
+                  onClick={() => {
+                    dispatch(__getRenterItemList(c.name));
+                    onSelect(c.name);
+                  }}>
+                  {c.text}
+                </Category>
+              ))
+            : null}
         </div>
       </StNavBar>
     </>
