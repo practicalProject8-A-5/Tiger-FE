@@ -1,5 +1,6 @@
 // eslint-disable-next-line
-import React, { useState, forwardRef } from "react";
+
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -14,6 +15,7 @@ import pin from "../assets/pin_trans.png";
 import clock from "../assets/clock.png";
 import vehicle from "../assets/vehicle.png";
 import { format } from "date-fns";
+
 const Search = () => {
   const mapKey = process.env.REACT_APP_REST_API_KEY;
   const dispatch = useDispatch();
@@ -83,17 +85,6 @@ const Search = () => {
   // console.log(startDate);
   // console.log(endDate);
 
-  // const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
-  //   <button
-  //     className="example-custom-input"
-  //     // value={value}
-  //     onClick={onClick}
-  //     ref={ref}
-  //   >
-  //     {value}
-  //   </button>
-  // ));
-
   //search vehicle type
   const [type, setType] = useState();
   const handleChange = (e) => {
@@ -139,8 +130,7 @@ const Search = () => {
               setIsPopupOpen(!isPopupOpen);
             }}
             onChange={onChangeHandler}
-            placeholder="어디서?"
-          ></input>
+            placeholder="어디서?"></input>
           {isPopupOpen ? (
             <div>
               <DaumPostcode style={postCodeStyle} onComplete={handlePostCode} />
