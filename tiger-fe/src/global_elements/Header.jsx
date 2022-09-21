@@ -68,6 +68,12 @@ const Header = ({ ownerMode }) => {
     }
   };
 
+  // 로그인 드랍메뉴
+  const [isDropDown, setIsDropDown] = useState(false);
+  const openDropDown = () => {
+    setIsDropDown(!isDropDown);
+  };
+
   // 메뉴바 글씨 클릭시 색상 변환 유지
   const [textColor, setTextColor] = useState("black");
   const handleChnageTextColor = (e) => {
@@ -151,11 +157,17 @@ const Header = ({ ownerMode }) => {
 
             {userInfo.name ? (
               <>
-                <div className="header__loggedin">
-                  <span>반갑습니다!</span> <span>{userInfo.name}님</span>
-                </div>
-                <div className="header__logout" onClick={__userLogout}>
-                  로그아웃
+                <div className="header__loggedin" onClick={openDropDown}>
+                  <img src={userInfo.profileImage} alt="profileImage" />
+                  <div className="header__loggedin__text">
+                    <span>반갑습니다!</span>
+                    <span>{userInfo.name}님</span>
+                  </div>
+                  {isDropDown && (
+                    <ul>
+                      <li onClick={__userLogout}>로그아웃</li>
+                    </ul>
+                  )}
                 </div>
               </>
             ) : (
@@ -286,35 +298,71 @@ const StHeader = styled.div`
           }
         }
         .header__login {
-          width: 56px;
-          height: 23px;
+          width: 102px;
+          height: 40px;
+          opacity: 0.98;
+          border: 2px solid #f2f2f2;
+          box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+          border-radius: 20px;
+          font-style: normal;
           font-weight: 500;
-          font-size: 20px;
-          line-height: 23px;
-          color: #ff881b;
-          margin-left: 50px;
+          line-height: 40px;
+          text-align: center;
           cursor: pointer;
         }
         .header__loggedin {
+          margin-left: 40px;
+          width: 102px;
+          height: 40px;
+          opacity: 0.98;
+          border: 2px solid #f2f2f2;
+          box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+          border-radius: 20px;
+          font-style: normal;
           font-weight: 500;
-          font-size: 20px;
-          line-height: 23px;
-          color: #ff881b;
-          margin-left: 50px;
-          display: flex;
-          justify-content: space-between;
-          flex-direction: column;
-          text-align: center;
-          gap: 5px;
-        }
-        .header__logout {
-          font-weight: 500;
-          font-size: 20px;
-          line-height: 23px;
-          color: #ff881b;
-          margin-left: 50px;
+          line-height: 40px;
           text-align: center;
           cursor: pointer;
+          ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            position: relative;
+            top: 9px;
+          }
+          li {
+            font-size: 15px;
+            display: block;
+            float: left;
+            width: 102px;
+            border: 2px solid #f2f2f2;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+            border-radius: 5px 5px 10px 10px;
+          }
+          li:hover {
+            background-color: rgba(0, 0, 0, 0.14);
+            cursor: pointer;
+          }
+          .header__loggedin__text {
+            display: flex;
+            flex-direction: column;
+            float: right;
+            margin-top: 6px;
+            margin-right: 10px;
+          }
+          span {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 10px;
+            line-height: 14px;
+          }
+          img {
+            width: 26px;
+            height: 26px;
+            float: left;
+            margin-top: 6px;
+            margin-left: 6px;
+          }
         }
       }
     }
