@@ -1,7 +1,6 @@
 // eslint-disable-next-line
 
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import like from "../../assets/Love.png";
