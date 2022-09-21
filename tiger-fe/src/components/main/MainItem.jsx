@@ -27,6 +27,8 @@ const MainItem = ({ list }) => {
     setIsLike(!isLike);
   };
 
+  // console.log(list);
+
   return (
     <StItem>
       <StSwiper
@@ -180,7 +182,6 @@ const StSwiper = styled(Swiper)`
     :hover {
       transform: scale(1.25);
     }
-
     :after {
       line-height: 32px;
       font-size: 12px;

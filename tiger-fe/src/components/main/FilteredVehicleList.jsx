@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import "swiper/scss";
 import "swiper/scss/navigation";
@@ -10,14 +10,20 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
 import { useNavigate } from "react-router-dom";
 import NotFound from "../../global_elements/NotFound";
+import { __isLike } from "../../redux/modules/likeSlice";
+import like from "../../assets/Love.png";
+import liked from "../../assets/liked.png";
 
 const FilteredVehicleList = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const filteredVehicle = useSelector(
     (state) => state.vehicleDetailSlice.filteredVehicleList
   );
-  // console.log(filteredVehicle);
+  console.log(filteredVehicle);
+
+  const [isLike, setIsLike] = useState(false);
 
   return (
     <StItemList>
@@ -46,7 +52,14 @@ const FilteredVehicleList = () => {
                   <img src={list.thumbnail} alt="imageSlide" />
                 </SwiperSlide>
               </StSwiper>
-              <span className="heart"></span>
+              <span
+                className="heart"
+                onClick={() => {
+                  dispatch(__isLike(list.vid));
+                  setIsLike(!isLike);
+                }}>
+                <img src={isLike ? liked : like} alt="liked" />
+              </span>
               <div
                 className="desc__box"
                 onClick={() => {
@@ -90,16 +103,17 @@ const StItem = styled.div`
   height: 421px;
   position: relative;
   cursor: pointer;
-
-  /* background-color: pink; */
-
   .heart {
     width: 28px;
     height: 28px;
-    background-color: pink;
     position: absolute;
     top: 18px;
     right: 18px;
+    z-index: 100;
+    img {
+      height: 25px;
+      width: 25px;
+    }
   }
   .desc__box {
     margin-top: 19px;

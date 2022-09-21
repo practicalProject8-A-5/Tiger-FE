@@ -3,7 +3,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const memberApi = process.env.REACT_APP_SERVER;
+const serverApi = process.env.REACT_APP_SERVER;
 const initialState = {
   incomeItemList: {},
   isLoading: false,
@@ -20,7 +20,7 @@ export const __incomeItemList = createAsyncThunk(
         "Content-Type": "application/json",
       };
       const resp = await axios.get(
-        `${memberApi}/vehicle`,
+        `${serverApi}/vehicle`,
         // {},
         { headers: headers }
       );

@@ -26,7 +26,7 @@ export const __isLike = createAsyncThunk(
         RefreshToken: refreshToken,
       };
       const response = await axios.post(
-        `${serverApi}/vehicle/heart/${vid}`,
+        `${serverApi}/heart/vehicle/${vid}`,
         {},
         { headers: headers }
       );
@@ -50,8 +50,6 @@ export const likeSlice = createSlice({
       state.isLoading = false;
       // console.log(action.payload);
       state.isLike = action.payload;
-      // console.log(payload);
-      // console.log(state.vehicleDetailList);
     },
     [__isLike.rejected]: (state, action) => {
       state.isLoading = false;
@@ -60,5 +58,5 @@ export const likeSlice = createSlice({
   },
 });
 
-// export const {} = vehicleDetailSlice.actions;
+// export const {} = likeSlice.actions;
 export default likeSlice.reducer;

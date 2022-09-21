@@ -13,28 +13,47 @@ const initialState = {
   status: 0,
 };
 
+// 렌터 마이페이지 navbar 상태 불러오기
 export const __getRenterItemList = createAsyncThunk(
   "renter/__getRenterItemList",
   async (payload, thunkAPI) => {
     // console.log(payload);
     const status = payload;
+    console.log(typeof status);
     const userToken = localStorage.getItem("userToken");
     const refreshToken = localStorage.getItem("refreshToken");
-    try {
-      const headers = {
-        "Content-Type": "application/json",
-        Authorization: userToken,
-        RefreshToken: refreshToken,
-      };
-      const response = await axios.get(
-        serverApi + `/order/renter?status=${status}&limit=100&offset=0`,
-        { headers: headers }
-      );
-      // console.log(response);
-      return thunkAPI.fulfillWithValue(response.data);
-    } catch (error) {
-      // console.log(error);
-      return thunkAPI.rejectWithValue(error.response.data);
+    if (status === "LIKE") {
+      try {
+        const headers = {
+          "Content-Type": "application/json",
+          Authorization: userToken,
+          RefreshToken: refreshToken,
+        };
+        const responseLiked = await axios.get(`${serverApi}/heart/vehicle`, {
+          headers: headers,
+        });
+        // console.log(responseLiked.data);
+        return thunkAPI.fulfillWithValue(responseLiked.data.output);
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error);
+      }
+    } else {
+      try {
+        const headers = {
+          "Content-Type": "application/json",
+          Authorization: userToken,
+          RefreshToken: refreshToken,
+        };
+        const response = await axios.get(
+          serverApi + `/order/renter?status=${status}&limit=100&offset=0`,
+          { headers: headers }
+        );
+        // console.log(response);
+        return thunkAPI.fulfillWithValue(response.data);
+      } catch (error) {
+        // console.log(error);
+        return thunkAPI.rejectWithValue(error.response.data);
+      }
     }
   }
 );

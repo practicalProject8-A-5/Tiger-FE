@@ -16,7 +16,7 @@ const RenterItem = ({ category, list, onSelect }) => {
   const renterItemLists = useSelector(
     (state) => state.renterItemListSlice.renterItemLists
   );
-  // console.log(renterItemLists);
+  console.log(renterItemLists);
 
   useEffect(() => {
     if (category) {
@@ -32,7 +32,7 @@ const RenterItem = ({ category, list, onSelect }) => {
       Authorization: userToken,
       RefreshToken: refreshToken,
     };
-    const response = await axios.delete(serverApi + `/order/${oid}`, {
+    await axios.delete(serverApi + `/order/${oid}`, {
       headers: headers,
     });
     // console.log(response);
@@ -60,8 +60,7 @@ const RenterItem = ({ category, list, onSelect }) => {
                   className="carInfo"
                   onClick={() => {
                     navigate(`/vdetail/${list.vid}`);
-                  }}
-                >
+                  }}>
                   <p>{list.vbrand}</p>
                   <p>{list.vname}</p>
                   <span>{list.oname}</span>
@@ -86,8 +85,7 @@ const RenterItem = ({ category, list, onSelect }) => {
                       className="refund"
                       onClick={() => {
                         deleteHandler(list.oid);
-                      }}
-                    >
+                      }}>
                       환불
                     </span>
                   </div>
@@ -103,8 +101,7 @@ const RenterItem = ({ category, list, onSelect }) => {
                 onClick={() => {
                   navigate(`/vdetail/${list.vid}`);
                 }}
-                key={i}
-              >
+                key={i}>
                 <img src={list.thumbnail} alt="차량" />
                 <div className="carInfo">
                   <p>{list.vbrand}</p>
@@ -142,8 +139,7 @@ const RenterItem = ({ category, list, onSelect }) => {
                   className="carInfo"
                   onClick={() => {
                     navigate(`/vdetail/${list.vid}`);
-                  }}
-                >
+                  }}>
                   <p>{list.vbrand}</p>
                   <p>{list.vname}</p>
                   <span>{list.oname}</span>
@@ -179,8 +175,7 @@ const RenterItem = ({ category, list, onSelect }) => {
                   className="carInfo"
                   onClick={() => {
                     navigate(`/vdetail/${list.vid}`);
-                  }}
-                >
+                  }}>
                   <p>{list.vbrand}</p>
                   <p>{list.vname}</p>
                   <span>{list.oname}</span>
@@ -197,6 +192,42 @@ const RenterItem = ({ category, list, onSelect }) => {
                     <span className="returned">반납완료</span>
                   </div>
                 </div>
+              </StRenterItem>
+            );
+          })
+        ) : category === "LIKE" ? (
+          renterItemLists.output &&
+          renterItemLists.output.map((list, i) => {
+            return (
+              <StRenterItem key={i}>
+                <img
+                  src={list.thumbnail}
+                  alt="차량"
+                  onClick={() => {
+                    navigate(`/vdetail/${list.vid}`);
+                  }}
+                />
+                <div
+                  className="carInfo"
+                  onClick={() => {
+                    navigate(`/vdetail/${list.vid}`);
+                  }}>
+                  <p>{list.vbrand}</p>
+                  <p>{list.vname}</p>
+                  <span>{list.oname}</span>
+                  <p>₩{list.price}</p>
+                  <p>{list.location}</p>
+                </div>
+                {/* <div className="flex_wrap">
+                  <div className="item_date">
+                    <div>{list.startDate}</div>
+                    <span>~</span>
+                    <span>{list.endDate}</span>
+                  </div>
+                  <div className="btn_box">
+                    <span className="returned">반납완료</span>
+                  </div>
+                </div> */}
               </StRenterItem>
             );
           })
