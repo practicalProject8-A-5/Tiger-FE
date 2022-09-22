@@ -58,7 +58,7 @@ const GlobalRouter = () => {
         ) : (
           <Route path="/renter" element={<RenterPage />} />
         )}
-        <Route path="/intro" element={<HomePage />} />
+        <Route path="/home" element={<HomePage />} />
         <Route path="/vdetail/:id" element={<VehicleDetailPage />} />
         <Route path="/vlist" element={<VehicleListPage />} />
         <Route path="/user/kakao/callback" element={<KakaoLogin />} />
