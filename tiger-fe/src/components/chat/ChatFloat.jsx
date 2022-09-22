@@ -75,16 +75,16 @@ const ChatFloat = () => {
 const FloatWrap = styled.div`
   z-index: 9;
   position: fixed;
-  bottom: 30px;
-  right: 30px;
+  bottom: 124px;
+  right: 250px;
   @media screen and (max-width: 768px) {
     bottom: 20px;
     right: 20px;
   }
 `;
 const ChatButtonWrap = styled.div`
-  width: 57px;
-  height: 57px;
+  width: 64px;
+  height: 64px;
   border-radius: 50px;
   border: none;
   background: #ffffff;
