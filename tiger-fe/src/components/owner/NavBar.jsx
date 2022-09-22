@@ -29,11 +29,11 @@ const NavBar = ({ category, onSelect }) => {
       text: "환불",
     },
     {
-      name: "profit",
+      name: "Profit",
       text: "수익 현황",
     },
     {
-      name: "calculate",
+      name: "Calculate",
       text: "정산 관리",
     },
   ];

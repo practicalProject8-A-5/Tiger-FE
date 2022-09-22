@@ -71,7 +71,7 @@ const Search = () => {
   const postCodeStyle = {
     display: "block",
     position: "absolute",
-    top: "18.8%",
+    top: "190px",
     width: "400px",
     height: "400px",
     border: "1px solid black",

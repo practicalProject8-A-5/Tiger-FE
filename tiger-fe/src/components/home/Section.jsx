@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import logo from "../../assets/apple-icon.png";
+import logo from "../../assets/home_image/logo_opacity2.png";
 import pin from "../../assets/home_image/MAP.png";
 import calender from "../../assets/home_image/CALENDAR.png";
 import finance from "../../assets/home_image/FINANCE.png";

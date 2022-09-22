@@ -12,6 +12,8 @@ import { __cancleItemList } from "../../redux/modules/ownerItemListSlice";
 import Profit from "./accounting/Profit";
 import { useNavigate } from "react-router-dom";
 import Calculate from "./accounting/Calculate";
+import OwnerInfo from "./OwnerInfo";
+import ProfitTest from "./accounting/ProfitTest";
 
 const OwnerItemList = ({ category }) => {
   const navigate = useNavigate();
@@ -40,22 +42,25 @@ const OwnerItemList = ({ category }) => {
     <StOwnerItemList>
       {OwnerItemLists.output &&
       OwnerItemLists.output.length === 0 &&
-      (category !== "profit" || category !== "calculate") ? (
+      category !== "Profit" &&
+      category !== "Calculate" ? (
         <p>등록된 차량이 없습니다.</p>
       ) : (
         OwnerItemLists.output &&
         OwnerItemLists.output.map((list, i) => {
           return (
             <OwnerItem key={i} list={list} category={category} vid={list.vid} />
+            //  <OwnerInfo />
           );
         })
       )}
-      {category === "profit" && (
+      {category === "Profit" && (
         <div>
           <Profit />
+          {/* <ProfitTest /> */}
         </div>
       )}
-      {category === "calculate" && (
+      {category === "Calculate" && (
         <div>
           <Calculate />
         </div>
@@ -65,7 +70,7 @@ const OwnerItemList = ({ category }) => {
 };
 
 const StOwnerItemList = styled.div`
-  width: 790px;
+  /* width: 790px; */
   padding-top: 65px;
 `;
 
