@@ -37,14 +37,11 @@ const OwnerKakaoMap = ({ address, locationObj, setLocationObj }) => {
   const createMap = () => {
     const mapContainer = document.getElementById("map");
     const mapOption = {
-      center: new window.kakao.maps.LatLng(
-        37.365264512305174,
-        127.10676860117488
-      ),
+      center: new kakao.maps.LatLng(37.365264512305174, 127.10676860117488),
       level: 3,
     };
     // 지도를 생성합니다
-    var map = new window.kakao.maps.Map(mapContainer, mapOption);
+    var map = new kakao.maps.Map(mapContainer, mapOption);
 
     // console.log(map);
 
@@ -53,7 +50,7 @@ const OwnerKakaoMap = ({ address, locationObj, setLocationObj }) => {
 
     if (locationOnMap) {
       // console.log(locationOnMap);
-      var coords = new window.kakao.maps.LatLng(
+      var coords = new kakao.maps.LatLng(
         locationObj.locationY,
         locationObj.locationX
       );
@@ -64,7 +61,7 @@ const OwnerKakaoMap = ({ address, locationObj, setLocationObj }) => {
       });
 
       // 인포윈도우로 장소에 대한 설명을 표시합니다
-      var infowindow = new window.kakao.maps.InfoWindow({
+      var infowindow = new kakao.maps.InfoWindow({
         content:
           '<div style="width:150px;text-align:center;padding:6px 0;">차량 위치</div>',
       });
