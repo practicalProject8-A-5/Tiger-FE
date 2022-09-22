@@ -113,7 +113,18 @@ const Search = () => {
             locationY,
           })
         );
+        localStorage.setItem("location", location);
+        localStorage.setItem("startDate", startDate);
+        localStorage.setItem("endDate", endDate);
+        localStorage.setItem("type", type);
+        localStorage.setItem("locationX", locationX);
+        localStorage.setItem("locationY", locationY);
+
         navigate("/vlist");
+        // setStartDates(localStorage.getItem("location"));
+        // setEndDates(localStorage.getItem("startDate"));
+        // setLocation(localStorage.getItem("endDate"));
+        // setType(localStorage.getItem("type"));
       }
     } catch (err) {
       return err;
