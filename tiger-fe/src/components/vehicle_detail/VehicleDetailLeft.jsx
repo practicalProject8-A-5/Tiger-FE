@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import KakaoMapDetail from "./KakaoMapDetail";
-import email from "../../assets/email.jpg";
+import emails from "../../assets/email.jpg";
 import phone from "../../assets/phone.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Scrollbar } from "swiper";
@@ -16,8 +16,11 @@ import { __isLike } from "../../redux/modules/likeSlice";
 import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
+import { options } from "../../redux/modules/vehicleDetail";
 
 const VehicleDetailLeft = () => {
+  const email = localStorage.getItem("email");
+  console.log(email);
   const dispatch = useDispatch();
 
   const id = useParams();
@@ -27,21 +30,32 @@ const VehicleDetailLeft = () => {
   const vehicleDetails = useSelector(
     (state) => state.vehicleDetailSlice.vehicleDetails
   );
-  // console.log(vehicleDetails);
+  console.log(vehicleDetails);
 
   const startDate = new URL(window.location.href).searchParams.get("startDate");
   const endDate = new URL(window.location.href).searchParams.get("endDate");
 
   useEffect(() => {
     dispatch(__vehicleDetail({ vId, startDate, endDate }));
+    return () => {
+      dispatch(options());
+    };
   }, [dispatch, id]);
 
-  const [isLike, setIsLike] = useState(false);
+  const [isLike, setIsLike] = useState(vehicleDetails.heart);
+  console.log(isLike);
+  console.log(vehicleDetails.heart);
 
   const likeClickHandler = () => {
-    dispatch(__isLike(vId));
+    dispatch(__isLike(vehicleDetails.vid));
+    // console.log("222");
     setIsLike(!isLike);
   };
+
+  useEffect(() => {
+    // console.log(list.heart);
+    setIsLike(vehicleDetails.heart);
+  }, [vehicleDetails]);
 
   const styleTh = {
     width: "180px",
@@ -91,11 +105,19 @@ const VehicleDetailLeft = () => {
         <StVehicleInfoLocationWrapper>
           <div className="locationTitle">
             <p>{vehicleDetails.location}</p>
-            <img
-              src={isLike ? liked : like}
-              alt="liked"
-              onClick={likeClickHandler}
-            />
+            {email ? (
+              isLike === true ? (
+                <span className="heart" onClick={likeClickHandler}>
+                  <img src={liked} alt="liked" />
+                </span>
+              ) : (
+                <span className="heart" onClick={likeClickHandler}>
+                  <img src={like} alt="liked" />
+                </span>
+              )
+            ) : (
+              <span className="heart" style={{ display: "none" }}></span>
+            )}
           </div>
         </StVehicleInfoLocationWrapper>
         <StVehicleInfoContentsWrapper>
@@ -259,7 +281,7 @@ const StRenterInfoWrapper = styled.div`
           color: black;
         }
         &__email {
-          background-image: url(${email});
+          background-image: url(${emails});
           background-size: contain;
           background-repeat: no-repeat;
           width: 20px;

@@ -2,36 +2,30 @@
 
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import styled from "styled-components";
-import like from "../../assets/Love.png";
-import liked from "../../assets/liked.png";
-import { __isLike } from "../../redux/modules/likeSlice";
+import { useNavigate } from "react-router-dom";
 import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
-import { useNavigate } from "react-router-dom";
+import { __isLike } from "../../redux/modules/likeSlice";
+import like from "../../assets/Love.png";
+import liked from "../../assets/liked.png";
+import styled from "styled-components";
 
-const MainItem = ({ list }) => {
+const FliteredVehicle = ({ list }) => {
   const email = localStorage.getItem("email");
-  const MainItemListImage = list.imageList;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // console.log(list);
-
   const [isLike, setIsLike] = useState(list.heart);
-  // console.log(isLike);
 
   const likeClickHandler = () => {
     dispatch(__isLike(list.vid));
-    // console.log("222");
     setIsLike(!isLike);
   };
 
   useEffect(() => {
-    // console.log(list.heart);
     setIsLike(list.heart);
     return () => {
       setIsLike(!isLike);
@@ -49,13 +43,9 @@ const MainItem = ({ list }) => {
         loop={true}
         modules={[Pagination, Navigation]}
         className="mySwiper">
-        {MainItemListImage.map((image, i) => {
-          return (
-            <SwiperSlide className="img" key={i}>
-              <img src={image} alt="imageSlide" />
-            </SwiperSlide>
-          );
-        })}
+        <SwiperSlide className="img">
+          <img src={list.thumbnail} alt="imageSlide" />
+        </SwiperSlide>
       </StSwiper>
       {email ? (
         isLike === true ? (
@@ -73,17 +63,19 @@ const MainItem = ({ list }) => {
       <div
         className="desc__box"
         onClick={() => {
-          navigate(`/vdetail/${list.vid}`);
+          navigate(
+            `/vdetail/${list.vid}?startDate=${list.startDate}&endDate=${list.endDate}`
+          );
         }}>
         <div className="desc__top">
           <div className="desc__title">{list.location}</div>
           <div className="desc__star">4.12</div>
         </div>
         <p>
-          {list.years} {list.vbrand} {list.vname}
+          {list.vname} / {list.fuelType}
         </p>
-        <p className="km">
-          {list.fuelType} / {list.transmission}
+        <p className="dates">
+          {list.startDate} ~ {list.endDate}
         </p>
         <div className="desc__bottom">
           ₩{list.price} <span>/1일</span>
@@ -92,8 +84,6 @@ const MainItem = ({ list }) => {
     </StItem>
   );
 };
-
-export default MainItem;
 
 const StItem = styled.div`
   width: 318px;
@@ -106,7 +96,7 @@ const StItem = styled.div`
     position: absolute;
     top: 18px;
     right: 18px;
-    z-index: 70;
+    z-index: 100;
     img {
       height: 25px;
       width: 25px;
@@ -137,6 +127,9 @@ const StItem = styled.div`
       color: #777777;
     }
     .km {
+      margin: 5px 0 7px 0;
+    }
+    .dates {
       margin: 5px 0 7px 0;
     }
     .desc__bottom {
@@ -201,6 +194,7 @@ const StSwiper = styled(Swiper)`
     :hover {
       transform: scale(1.25);
     }
+
     :after {
       line-height: 32px;
       font-size: 12px;
@@ -234,3 +228,5 @@ const StSwiper = styled(Swiper)`
     border-radius: 20px;
   }
 `;
+
+export default FliteredVehicle;
