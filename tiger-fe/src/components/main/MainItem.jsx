@@ -22,19 +22,19 @@ const MainItem = ({ list }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  console.log(list);
+  // console.log(list);
 
   const [isLike, setIsLike] = useState(list.heart);
-  console.log(isLike);
+  // console.log(isLike);
 
   const likeClickHandler = () => {
     dispatch(__isLike(list.vid));
-    console.log("222");
+    // console.log("222");
     setIsLike(!isLike);
   };
 
   useEffect(() => {
-    console.log(list.heart);
+    // console.log(list.heart);
     setIsLike(list.heart);
     return () => {
       setIsLike(!isLike);
@@ -51,8 +51,7 @@ const MainItem = ({ list }) => {
         navigation={true}
         loop={true}
         modules={[Pagination, Navigation]}
-        className="mySwiper"
-      >
+        className="mySwiper">
         {MainItemListImage.map((image, i) => {
           return (
             <SwiperSlide className="img" key={i}>
@@ -78,8 +77,7 @@ const MainItem = ({ list }) => {
         className="desc__box"
         onClick={() => {
           navigate(`/vdetail/${list.vid}`);
-        }}
-      >
+        }}>
         <div className="desc__top">
           <div className="desc__title">{list.location}</div>
           <div className="desc__star">4.12</div>
