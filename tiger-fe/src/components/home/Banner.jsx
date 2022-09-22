@@ -17,7 +17,7 @@ const banner = () => {
 export default banner;
 
 const StBanner = styled.div`
-  background-color: pink;
+  /* background-color: pink; */
   width: 100%;
   height: 660px;
   position: relative;

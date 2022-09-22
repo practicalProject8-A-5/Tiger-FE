@@ -1,8 +1,5 @@
 // eslint-disable-next-line
 
-import test from "../../assets/kakaoLogin.png";
-import test1 from "../../assets/car6jpg.jpg";
-
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -231,8 +228,6 @@ const StOwnerItem = styled.div`
     background-color: pink;
     border-radius: 12px;
     margin-right: 24px;
-    background-image: url(${test});
-    background-image: url(${test1});
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;

@@ -11,12 +11,15 @@ const OwnerPage = () => {
   const [category, setCategory] = useState("Registration");
   const onSelect = useCallback((category) => setCategory(category), []);
 
+  // console.log(category);
+
   return (
     <>
       <Header />
       <NavBar category={category} onSelect={onSelect} />
       <GlobalLayout>
-        <OwnerInfo />
+        {/* <OwnerInfo /> */}
+        {category !== "Profit" && category !== "Calculate" && <OwnerInfo />}
         <OwnerItemList category={category} onSelect={onSelect} />
       </GlobalLayout>
     </>
