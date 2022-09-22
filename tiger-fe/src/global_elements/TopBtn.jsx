@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import styled from "styled-components";
 
+import topBtn from "../assets/home_image/top_button_icon.png";
+
 const TopBtn = () => {
   // console.log(window.scrollY);
   const scrollToTop = () => {
@@ -29,7 +31,13 @@ const TopBtn = () => {
     };
   }, []);
 
-  return showBtn && <StTopBtn onClick={scrollToTop}>Top</StTopBtn>;
+  return (
+    showBtn && (
+      <StTopBtn onClick={scrollToTop}>
+        <img src={topBtn} alt="top" />
+      </StTopBtn>
+    )
+  );
 };
 
 export default TopBtn;

@@ -1,8 +1,8 @@
 import React from "react";
-import styled from "styled-components";
-
 import { Chart as ChartJS } from "chart.js";
-import { Line } from "react-chartjs-2";
+import { Pie } from "react-chartjs-2";
+import styled from "styled-components";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 
 import {
   Chart,
@@ -56,47 +56,43 @@ ChartJS.register(
   Legend,
   Title,
   Tooltip,
-  SubTitle
+  SubTitle,
+  ChartDataLabels
 );
 
 const data = {
   // labels: ["6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-  labels: [
-    "2022-01",
-    "2022-02",
-    "2022-03",
-    "2022-04",
-    "2022-05",
-    "2022-06",
-    "2022-07",
-    "2022-08",
-    "2022-09",
-    "2022-10",
-    "2022-11",
-    "2022-12",
-  ],
+  labels: ["차종1", "차종2", "차종3", "차종4", "차종5", "차종6"],
   datasets: [
     {
-      label: "월별",
-      data: [
-        { x: "2022-01", y: 0 },
-        { x: "2022-02", y: 20 },
-        { x: "2022-03", y: 10 },
-        { x: "2022-04", y: 50 },
-        { x: "2022-05", y: 40 },
-        { x: "2022-06", y: 90 },
-        { x: "2022-07", y: 150 },
-        { x: "2022-08", y: 20 },
-        { x: "2022-09", y: 60 },
-        { x: "2022-10", y: 58 },
-        { x: "2022-11", y: 49 },
-        { x: "2022-12", y: 29 },
+      // label: "# of Votes",
+      data: [12, 19, 3, 5, 2, 3],
+      // fill: true,
+      backgroundColor: [
+        "rgba(255, 99, 132, 0.2)",
+        "rgba(54, 162, 235, 0.2)",
+        "rgba(255, 206, 86, 0.2)",
+        "rgba(75, 192, 192, 0.2)",
+        "rgba(153, 102, 255, 0.2)",
+        "rgba(255, 159, 64, 0.2)",
       ],
-      fill: true,
-      backgroundColor: "rgba(244, 117, 96, 0.2",
-      borderColor: "#FF881B",
-      pointBorderColor: "#fc7b02",
+      borderColor: [
+        "rgba(255, 99, 132, 1)",
+        "rgba(54, 162, 235, 1)",
+        "rgba(255, 206, 86, 1)",
+        "rgba(75, 192, 192, 1)",
+        "rgba(153, 102, 255, 1)",
+        "rgba(255, 159, 64, 1)",
+      ],
+      borderWidth: 1,
+      // pointBorderColor: "#fc7b02",
       color: "#8b8b8b",
+      datalabels: {
+        color: "#000",
+        font: {
+          size: "16",
+        },
+      },
     },
   ],
 };
@@ -106,20 +102,23 @@ const options = {
   plugins: {
     legend: {
       display: true,
-      position: "right",
+      position: "bottom",
       labels: {
         font: {
-          size: 20,
+          size: 18,
           style: "italic",
           // family: '"Bungee Spice", cursive',
           family: '"Oswald", sans-serif',
           weight: "800",
         },
+        // padding: {
+        //   left: 30,
+        // },
       },
     },
     title: {
       display: true,
-      text: "월별 수익입니다",
+      text: "차량 별 월 매출입니다",
       color: "#8b8b8b",
       padding: {
         bottom: 30,
@@ -128,34 +127,25 @@ const options = {
         size: 20,
       },
     },
-    tooltip: {},
-  },
-
-  elements: {
-    point: {
-      radius: 5,
-      backgroundColor: ["blue"],
-      borderColor: ["red"],
-      borderWidth: 2,
-      hoverRadius: 8,
-      hoverBorderWidth: 2,
-    },
-    line: {
-      tension: 0.2, //꼭짓점 둥글게
+    datalabels: {
+      display: true,
     },
   },
 };
 
-const Month = () => {
+const MonthPie = () => {
   return (
-    <StMonth>
-      <Line data={data} options={options} />
-    </StMonth>
+    <StMonthPie>
+      <Pie data={data} options={options} />
+    </StMonthPie>
   );
 };
 
-export default Month;
+export default MonthPie;
 
-const StMonth = styled.div`
+const StMonthPie = styled.div`
   margin-top: 48px;
+  width: 50% !important;
+  height: 100% !important;
+  /* background-color: pink; */
 `;

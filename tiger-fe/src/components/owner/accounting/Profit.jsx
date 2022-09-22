@@ -3,8 +3,12 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { GoTriangleDown, GoTriangleUp } from "react-icons/go";
 import { useState } from "react";
-import Year from "./chart/Year";
-import Month from "./chart/Month";
+import DayLine from "./chart/DayLine";
+import MonthLine from "./chart/MonthLine";
+import MonthPie from "./chart/MonthPie";
+import MonthBar from "./chart/MonthBar";
+import DayPie from "./chart/DayPie";
+import DayBar from "./chart/DayBar";
 
 const Profit = () => {
   const memberInfo = useSelector((state) => state.memberSlice.userInfo);
@@ -15,7 +19,7 @@ const Profit = () => {
     setOpenDrop(!openDrop);
   };
 
-  const [month, setMonth] = useState(false);
+  const [month, setMonth] = useState(true);
   const [year, setYear] = useState(false);
 
   const clickMonth = () => {
@@ -29,8 +33,8 @@ const Profit = () => {
   };
 
   // console.log("openDrop :", openDrop);
-  // console.log("month :", month);
-  // console.log("year :", year);
+  console.log("month :", month);
+  console.log("year :", year);
 
   return (
     <StProfit>
@@ -41,7 +45,7 @@ const Profit = () => {
 
       <div className="dropBox" onClick={clickOpen}>
         <div className="box_value">
-          <p>{!month ? "연간" : "월간"}</p>
+          <p>{!month ? "일간" : "월간"}</p>
           {!openDrop ? (
             <GoTriangleDown className="down" />
           ) : (
@@ -55,12 +59,29 @@ const Profit = () => {
               월간
             </div>
             <div className="year" onClick={clickYear}>
-              연간
+              일간
             </div>
           </div>
         )}
       </div>
-      {!month ? <Year /> : <Month />}
+      {/* {!month ? (
+        <>
+          <DayLine />
+          <div className="temp">
+            <DayPie />
+            <DayBar />
+          </div>
+        </>
+      ) : (
+        <>
+          <MonthLine />
+          <div className="temp">
+            <MonthPie />
+            <MonthBar />
+          </div>
+        </>
+      )} */}
+      <DayLine />
     </StProfit>
   );
 };
@@ -68,6 +89,7 @@ const Profit = () => {
 export default Profit;
 const StProfit = styled.div`
   position: relative;
+  height: 300vh;
   h2 {
     font-weight: 500;
     font-size: 32px;
@@ -145,5 +167,10 @@ const StProfit = styled.div`
         }
       }
     }
+  }
+
+  .temp {
+    display: flex;
+    margin-top: 150px;
   }
 `;
