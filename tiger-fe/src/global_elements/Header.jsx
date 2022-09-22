@@ -357,11 +357,12 @@ const StHeader = styled.div`
             line-height: 14px;
           }
           img {
-            width: 26px;
-            height: 26px;
+            width: 30px;
+            height: 30px;
             float: left;
-            margin-top: 6px;
-            margin-left: 6px;
+            margin-top: 5px;
+            margin-left: 7px;
+            border-radius: 50%;
           }
         }
       }
