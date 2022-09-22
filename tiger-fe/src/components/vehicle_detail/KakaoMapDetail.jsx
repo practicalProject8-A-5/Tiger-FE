@@ -12,24 +12,27 @@ const KakaoMapDetail = ({ vehicleDetails }) => {
   const createMap = () => {
     const mapContainer = document.getElementById("map");
     const mapOption = {
-      center: new kakao.maps.LatLng(37.365264512305174, 127.10676860117488),
+      center: new window.kakao.maps.LatLng(
+        37.365264512305174,
+        127.10676860117488
+      ),
       level: 3,
     };
     // 지도를 생성합니다
-    var map = new kakao.maps.Map(mapContainer, mapOption);
+    var map = new window.kakao.maps.Map(mapContainer, mapOption);
 
-    var coords = new kakao.maps.LatLng(
+    var coords = new window.kakao.maps.LatLng(
       vehicleDetails.locationY,
       vehicleDetails.locationX
     );
 
-    var marker = new kakao.maps.Marker({
+    var marker = new window.kakao.maps.Marker({
       map: map,
       position: coords,
     });
 
     // 인포윈도우로 장소에 대한 설명을 표시합니다
-    var infowindow = new kakao.maps.InfoWindow({
+    var infowindow = new window.kakao.maps.InfoWindow({
       content:
         '<div style="width:150px;text-align:center;padding:6px 0;">차량 위치</div>',
     });
@@ -44,89 +47,6 @@ const KakaoMapDetail = ({ vehicleDetails }) => {
   useEffect(() => {
     createMap();
   }, [vehicleDetails]);
-
-  // --------------------------------------------------------------------------------
-
-  // const [locationObj, setLocationObj] = useState({
-  //   locationX: 100,
-  //   locationY: 100,
-  // });
-
-  // const getCoords = async (vehicleDetailsLocation) => {
-  //   const headers = {
-  //     Authorization: `KakaoAK ${mapKey}`,
-  //   };
-  //   const response = await axios.get(
-  //     `https://dapi.kakao.com/v2/local/search/address.json?query=${vehicleDetailsLocation}`,
-  //     {
-  //       headers: headers,
-  //     }
-  //   );
-  //   console.log(response);
-  //   setLocationObj({
-  //     ...locationObj,
-  //     locationX: response.data.documents[0].x,
-  //     locationY: response.data.documents[0].y,
-  //   });
-  //   // return response.data.documents[0];
-
-  //   // .then((res) => {
-  //   //   console.log(res);
-  //   //   const location = res.data.documents[0];
-  //   //   console.log(location);
-  //   //   // setLocationObj({
-  //   //   //   ...locationObj,
-  //   //   //   locationX: res.data.documents[0].x,
-  //   //   //   locationY: res.data.documents[0].y,
-  //   //   // });
-  //   // });
-  // };
-
-  // const createMap = () => {
-  //   const mapContainer = document.getElementById("map");
-  //   const mapOption = {
-  //     center: new kakao.maps.LatLng(37.365264512305174, 127.10676860117488),
-  //     level: 3,
-  //   };
-  //   // 지도를 생성합니다
-  //   var map = new kakao.maps.Map(mapContainer, mapOption);
-
-  //   // const resultX = locationObj.locationX;
-  //   // const resultY = locationObj.locationY;
-
-  //   var coords = new kakao.maps.LatLng(
-  //     locationObj.locationY,
-  //     locationObj.locationX
-  //   );
-
-  //   var marker = new kakao.maps.Marker({
-  //     map: map,
-  //     position: coords,
-  //   });
-
-  //   // 인포윈도우로 장소에 대한 설명을 표시합니다
-  //   var infowindow = new kakao.maps.InfoWindow({
-  //     content:
-  //       '<div style="width:150px;text-align:center;padding:6px 0;">차량 위치</div>',
-  //   });
-  //   infowindow.open(map, marker);
-
-  //   // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-  //   map.setCenter(coords);
-
-  //   console.log(coords);
-  // };
-
-  // // getCoords함수는 처음 랜더링때와 주소가 호출 됐을때 렌더링
-  // // getCoords & createMap이 연결 되어 있기 때문에 서로 무한루프 발생
-  // useEffect(() => {
-  //   if (vehicleDetailsLocation !== undefined) getCoords(vehicleDetailsLocation);
-  // }, [vehicleDetailsLocation]);
-
-  // // 맵을 생성하는 함수를 처음 렌더링 그리고 locationObj가 변경될 때만 랜더링 하고
-  // useEffect(() => {
-  //   createMap();
-  // }, [locationObj]);
 
   return (
     <StVehicleMapContainer>
