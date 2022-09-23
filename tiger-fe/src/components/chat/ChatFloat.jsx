@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useMatch } from "react-router-dom";
 import styled from "styled-components";
 import { setNotification } from "../../redux/modules/chatSlice";
-import { SmileChatSVG } from "../../global_elements/Svg";
+import chat_icon from "../../assets/chat_icon.png";
 
 // 우측 하단 채팅 플로팅 버튼
 const ChatFloat = () => {
@@ -14,28 +14,33 @@ const ChatFloat = () => {
   const isChatModalOn = useMatch("/chat/*");
   const notification = useSelector((state) => state.chatSlice.notification);
   console.log("notification :", notification);
-  // 추후 memberId or userId 연결해야함
-  const userId = useSelector((state) => state.memberSlice.userInfo.id);
+
+  const user = useSelector((state) => state.memberSlice.userInfo.id);
+  const userId = parseInt(user);
   console.log("userId :", userId);
 
   const eventSource = useRef();
 
   const authorization = localStorage.getItem("userToken");
+  const refreshToken = localStorage.getItem("refreshToken");
 
   useEffect(() => {
     if (userId) {
       // SSE 구독 요청
+      console.log("sse: ", userId);
       eventSource.current = new EventSource(
         `${process.env.REACT_APP_CHAT}/user/subscribe/${userId}`,
         {
           headers: {
             Authorization: authorization,
+            RefreshToken: refreshToken,
           },
         }
       );
 
       // 서버에서 메시지가 전송될 때 실행되는 함수
       eventSource.current.onmessage = (message) => {
+        console.log("서버에서 메시지가 전송될 때 실행되는 함수 :", message);
         if (!message.data.includes("EventStream Created")) {
           dispatch(setNotification(true));
         }
@@ -52,7 +57,7 @@ const ChatFloat = () => {
 
   return (
     <>
-      {userId && !isChatModalOn && (
+      {user && !isChatModalOn && (
         <FloatWrap>
           <Link
             to="/chat"
@@ -61,8 +66,7 @@ const ChatFloat = () => {
             <ChatButtonWrap>
               <ChatButton>
                 {notification && <NewNoti />}
-                <SmileChatSVG />
-                <span>채팅</span>
+                <img src={chat_icon} alt="chat icon" />
               </ChatButton>
             </ChatButtonWrap>
           </Link>
@@ -85,15 +89,15 @@ const FloatWrap = styled.div`
 const ChatButtonWrap = styled.div`
   width: 64px;
   height: 64px;
+  line-height: 64px;
   border-radius: 50px;
   border: none;
-  background: #ffffff;
-  box-shadow: 4px 4px 25px rgba(0, 25, 72, 0.21);
+  background: #ffb979;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   font-size: 12px;
   cursor: pointer;
   div {
     text-align: center;
-    padding-top: 9px;
     @media screen and (max-width: 768px) {
       padding-top: 14px;
     }
@@ -115,15 +119,20 @@ const ChatButton = styled.div`
   span {
     color: black;
   }
+  img {
+    width: 34px;
+    height: 34px;
+    padding-top: 17px;
+  }
 `;
 const NewNoti = styled.div`
-  width: 14px;
-  height: 14px;
+  width: 20px;
+  height: 20px;
   border-radius: 10px;
   position: absolute;
-  right: 5px;
-  bottom: 45px;
-  background-color: orange;
+  right: 0px;
+  bottom: 60px;
+  background-color: #eb3434;
   @media screen and (max-width: 768px) {
     right: 2px;
     bottom: 40px;
@@ -134,8 +143,8 @@ const NewNoti = styled.div`
     top: -10%;
     width: 100%;
     height: 120%;
-    background: orange;
-    filter: blur(10px);
+    background: #eb3434;
+    filter: blur(5px);
     content: "";
     opacity: 0;
     animation: flash 0.9s ease-out alternate infinite;

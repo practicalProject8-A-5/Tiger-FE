@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   useLocation,
   useMatch,
@@ -21,6 +21,8 @@ const ChatModal = () => {
   const location = useLocation();
   const isMatchChat = useMatch("/chat");
   const { roomId } = useParams();
+
+  const userInfo = useSelector((state) => state.memberSlice.userInfo);
 
   const onClickClose = () => {
     navigate(location.state.backgroundLocation);
@@ -64,15 +66,28 @@ const ChatModal = () => {
         <LeftWrap isRoom={roomId}>
           <Title>
             채팅
-            <span onClick={onClickClose}>
+            {/* <span onClick={onClickClose}>
               <XSVG />
-            </span>
+            </span> */}
           </Title>
           <ListWrap>
             <ChatRoomList location={location} roomId={roomId} />
           </ListWrap>
         </LeftWrap>
+
         <RoomWrap isRoom={roomId}>
+          <Header isRoom={roomId}>
+            {/* {userInfo.name}
+            <img src={userInfo.profileImage} alt="" /> */}
+            {roomId && (
+              <div className="backToChatRoom" onClick={onClickBack}>
+                뒤로가기
+              </div>
+            )}
+            <span onClick={onClickClose}>
+              <XSVG />
+            </span>
+          </Header>
           {isMatchChat && (
             <HelpMessage>
               <div>
@@ -85,12 +100,6 @@ const ChatModal = () => {
             </HelpMessage>
           )}
           {roomId && <ChatRoom roomId={roomId} />}
-          <Header isRoom={roomId}>
-            <span onClick={onClickClose}>
-              <XSVG />
-            </span>
-            {roomId && <div onClick={onClickBack}>{"<"}</div>}
-          </Header>
         </RoomWrap>
       </Wrap>
     </FloatWrap>
@@ -133,11 +142,12 @@ const Wrap = styled.div`
   }
 `;
 const Title = styled.div`
-  margin: 30px;
-  font-weight: 700;
-  font-size: 27px;
+  margin: 24px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
   span {
     cursor: pointer;
     /* @media screen and (min-width: 768px) {
@@ -146,7 +156,7 @@ const Title = styled.div`
   }
 `;
 const LeftWrap = styled.div`
-  width: 33%;
+  width: 35%;
   /* @media screen and (max-width: 768px) {
     display: none;
     width: 100%;
@@ -155,14 +165,13 @@ const LeftWrap = styled.div`
 const ListWrap = styled.div`
   height: 80%;
   overflow-y: auto;
-  border-top: 1px solid gray;
+  border-top: 3px solid #eee;
 `;
 const RoomWrap = styled.div`
-  padding-top: 45px;
   width: 65%;
   display: flex;
   flex-direction: column-reverse;
-  border-left: 1px solid gray;
+  border-left: 3px solid #eee;
   position: relative;
   /* @media screen and (max-width: 768px) {
     display: none;
@@ -175,22 +184,32 @@ const Header = styled.div`
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
-  position: absolute;
-  padding: 20px 20px 15px 0;
-  border-radius: 30px 30px 0 0;
+  padding: 20px 0px 23px 0;
+  border-radius: 0px 30px 0 0;
   top: 0;
+  border-bottom: 3px solid #eee;
+  position: absolute;
   @media screen and (max-width: 768px) {
     padding: 20px 20px 5px 0;
   }
   span {
     cursor: pointer;
+    position: relative;
     padding-top: 5px;
+    right: 20px;
   }
   div {
     cursor: pointer;
-    font-size: 35px;
-    font-weight: 100;
-    padding-left: 20px;
+    color: black;
+    background-color: #fff;
+    border: solid 1px black;
+    font-size: 12px;
+    padding: 6px 10px;
+    position: absolute;
+    z-index: 2;
+    top: 18px;
+    right: 123px;
+    border-radius: 15px;
     /* @media screen and (min-width: 768px) {
       display: none;
     } */

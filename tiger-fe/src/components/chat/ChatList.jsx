@@ -18,9 +18,11 @@ const ChatList = () => {
   const scrollRef = useRef();
   const user = useSelector((state) => state.memberSlice.userInfo);
   let messageList = useSelector((state) => state.chatSlice.messageList);
+  console.log(messageList);
 
   useEffect(() => {
     dispatch(cleanUpMessage());
+    console.log("cleanUpMessage");
     dispatch(getMessageListDB(parseInt(roomId)));
   }, [roomId]);
 
@@ -40,6 +42,7 @@ const ChatList = () => {
     let slicedList = [];
     messageList.forEach((message) => {
       slicedList = [...slicedList, message];
+      // console.log("message :", message);
       if (message.type === "STATUS" && message.senderEmail === user.email) {
         slicedList = [];
       }
@@ -52,9 +55,10 @@ const ChatList = () => {
       {messageList.map((chat, index) => {
         const date = moment(chat.date).format("HH:mm");
         const isMe = chat?.senderEmail === user?.email;
+        console.log(chat.senderEmail);
         return (
           <>
-            {chat.date.split("T")[0] !==
+            {chat.date?.split("T")[0] !==
               messageList[index - 1]?.date?.split("T")[0] && (
               <ChatListDate key={chat.date}>
                 {moment(chat.date).format("YYYY.MM.DD")}
@@ -62,12 +66,12 @@ const ChatList = () => {
             )}
             {chat.type === "TALK" ? (
               <Message key={chat.messageId} me={isMe}>
-                {(chat.senderEmail !== messageList[index - 1]?.senderEmail ||
+                {(chat.senderName !== messageList[index - 1]?.senderName ||
                   messageList[index - 1].type === "STATUS" ||
                   date !==
                     moment(messageList[index - 1]?.date).format("HH:mm")) && (
                   <NickAndDate me={isMe}>
-                    <Nickname>{chat?.senderName}</Nickname>
+                    <Nickname>{chat?.senderNickname}</Nickname>
                     <Date me={isMe}>{date}</Date>
                   </NickAndDate>
                 )}
@@ -97,30 +101,33 @@ const MessageWrap = styled.div`
 const Message = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  margin: 0 0 0 10%;
+  align-items: ${({ me }) => me && "flex-end"};
+  margin: ${({ me }) => (me ? "0 0 0 10%" : "0 10% 0 0")};
 `;
 const NickAndDate = styled.div`
   display: flex;
-  flex-direction: row-reverse;
-  justify-content: end;
+  flex-direction: ${({ me }) => me && "row-reverse"};
+  justify-content: ${({ me }) => (me ? "end" : "start")};
   align-items: center;
   margin: 10px 0;
-  text-align: end;
+  text-align: ${({ me }) => (me ? "end" : "start")};
 `;
 const Nickname = styled.span`
   font-size: 18px;
 `;
 const Date = styled.span`
   color: gray;
-  margin: 0 20px 0 0;
+  margin: ${({ me }) => (me ? "0 20px 0 0" : "0 0 0 20px")};
 `;
 const Bubble = styled.div`
   width: fit-content;
+  height: 46px;
+  line-height: 46px;
   margin: 0;
-  background-color: #f2f2f2;
-  border-radius: 15px 0 15px 15px;
-  padding: 20px 30px;
+  background: ${({ me }) => (me ? "#ffd6b0" : "#fff")};
+  border: ${({ me }) => (me ? "none" : "2px solid #FFD6B0;")};
+  border-radius: ${({ me }) => (me ? "15px 0 15px 15px" : "0 15px 15px 15px")};
+  padding: 0 13px 0 13px;
   @media screen and (max-width: 768px) {
     padding: 15px 25px;
   }

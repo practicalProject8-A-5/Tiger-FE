@@ -2,17 +2,21 @@
 
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useMatch, useNavigate } from "react-router-dom";
+import { Link, useMatch, useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../assets/ta,iger_logo.png";
 import axios from "axios";
-import LoginModal from "./LoginModal";
 import { loader } from "../redux/modules/memberSlice";
 import LoginBox from "./LoginBox";
+import { setNotification } from "../redux/modules/chatSlice";
 
 const Header = ({ ownerMode }) => {
   const memberApi = process.env.REACT_APP_SERVER;
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const notification = useSelector((state) => state.chatSlice.notification);
+  console.log("notification :", notification);
 
   const [IsModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
@@ -162,10 +166,17 @@ const Header = ({ ownerMode }) => {
                   <div className="header__loggedin__text">
                     <span>반갑습니다!</span>
                     <span>{userInfo.name}님</span>
+                    {notification && <NewNoti />}
                   </div>
                   {isDropDown && (
                     <ul>
-                      <li>메세지</li>
+                      <Link
+                        to="/chat"
+                        state={{ backgroundLocation: location }}
+                        style={{ textDecoration: "none", color: "#000" }}>
+                        {/* {notification && <NewNoti />} */}
+                        <li>메세지</li>
+                      </Link>
                       <Link
                         style={{ textDecoration: "none", color: "#000" }}
                         to="/owner">
@@ -395,6 +406,37 @@ const StHeader = styled.div`
           }
         }
       }
+    }
+  }
+`;
+
+const NewNoti = styled.div`
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  position: relative;
+  left: -15px;
+  bottom: 31px;
+  background-color: #eb3434;
+  @media screen and (max-width: 768px) {
+    right: 2px;
+    bottom: 40px;
+  }
+  /* &:before {
+    position: absolute;
+    left: 0;
+    top: -10%;
+    width: 100%;
+    height: 120%;
+    background: red;
+    filter: blur(5px);
+    content: "";
+    opacity: 0;
+    animation: flash 0.9s ease-out alternate infinite;
+  } */
+  @keyframes flash {
+    to {
+      opacity: 1;
     }
   }
 `;

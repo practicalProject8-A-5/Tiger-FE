@@ -27,9 +27,10 @@ export const getRoomListDB = createAsyncThunk(
       const response = await axios.get(`${chatApi}/chat/rooms`, {
         headers: headers,
       });
-      // console.log(resp.data.output);
-      return thunkAPI.fulfillWithValue(response.data.output);
+      console.log("getRoomListDB :", response);
+      return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
+      console.log("getRoomListDBError :", error);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -41,12 +42,13 @@ export const getMessageListDB = createAsyncThunk(
   async (payload, thunkAPI) => {
     const roomId = payload;
     try {
-      const response = await axios.get(`${chatApi}/chat/rooms/${roomId}`, {
+      const response = await axios.get(`${chatApi}/chat/room/${roomId}`, {
         headers: headers,
       });
-      // console.log(resp.data.output);
-      return thunkAPI.fulfillWithValue(response.data.output);
+      console.log("getMessageListDB :", response);
+      return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
+      console.log("getMessageListDB :", error);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -58,13 +60,16 @@ const chatSlice = createSlice({
   reducers: {
     // 채팅 메시지 추가
     addMessage: (state, { payload }) => {
-      state.messageList.push(payload.messageObj);
+      console.log("addmessage :", payload);
+      state.messageList.push(payload);
+      // state.messageList = [...state.messageList, payload.messageObj];
+      // state.messageList.push(payload);
     },
     // 채팅 리스트의 메시지 갱신
     updateRoomMessage: (state, { payload }) => {
-      state.roomList[payload.messageObj.index].message =
-        payload.messageObj.message;
-      state.roomList[payload.messageObj.index].date = payload.messageObj.date;
+      console.log("updateRoomMessagePayload :", payload);
+      state.roomList[payload.index].message = payload.message;
+      state.roomList[payload.index].date = payload.date;
     },
     // 메시지 지우기
     cleanUpMessage: (state, { payload }) => {
@@ -72,13 +77,18 @@ const chatSlice = createSlice({
     },
     // 알림 표시
     setNotification: (state, { payload }) => {
-      state.notification = payload.notification;
+      console.log("notification", payload);
+      state.notification = payload;
     },
     // 알림 개수 초기화
     readMessage: (state, { payload }) => {
-      if (state.roomList[payload.index]?.unreadCnt) {
-        state.roomList[payload.index].unreadCnt = 0;
+      console.log("readMessgaePayload :", payload);
+      if (state.roomList[payload]?.unreadCnt) {
+        state.roomList[payload].unreadCnt = 0;
       }
+      // if (state.roomList[payload.index]?.unreadCnt) {
+      //   state.roomList[payload.index].unreadCnt = 0;
+      // }
     },
   },
   extraReducers: {
@@ -88,8 +98,8 @@ const chatSlice = createSlice({
     },
     [getRoomListDB.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      state.roomList = payload.roomList;
-      // console.log(action.payload);
+      console.log("getRoomListDB-checked :", payload);
+      state.roomList = payload;
     },
     [getRoomListDB.rejected]: (state, action) => {
       state.isLoading = false;
@@ -101,8 +111,8 @@ const chatSlice = createSlice({
     },
     [getMessageListDB.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      state.messageList = payload.messageList;
-      // console.log(action.payload);
+      console.log("getMessageListDB-checked :", payload);
+      state.messageList = payload;
     },
     [getMessageListDB.rejected]: (state, action) => {
       state.isLoading = false;
