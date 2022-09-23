@@ -27,9 +27,10 @@ export const getRoomListDB = createAsyncThunk(
       const response = await axios.get(`${chatApi}/chat/rooms`, {
         headers: headers,
       });
-      // console.log(resp.data.output);
-      return thunkAPI.fulfillWithValue(response.data.output);
+      console.log("getRoomListDB :", response);
+      return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
+      console.log("getRoomListDBError :", error);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -41,12 +42,13 @@ export const getMessageListDB = createAsyncThunk(
   async (payload, thunkAPI) => {
     const roomId = payload;
     try {
-      const response = await axios.get(`${chatApi}/chat/rooms/${roomId}`, {
+      const response = await axios.get(`${chatApi}/chat/room/${roomId}`, {
         headers: headers,
       });
-      // console.log(resp.data.output);
-      return thunkAPI.fulfillWithValue(response.data.output);
+      console.log("getMessageListDB :", response);
+      return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
+      console.log("getMessageListDB :", error);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -58,10 +60,14 @@ const chatSlice = createSlice({
   reducers: {
     // 채팅 메시지 추가
     addMessage: (state, { payload }) => {
+      console.log("addmessage :", payload.messageObj);
       state.messageList.push(payload.messageObj);
+      // state.messageList = [...state.messageList, payload.messageObj];
+      // state.messageList.push(payload);
     },
     // 채팅 리스트의 메시지 갱신
     updateRoomMessage: (state, { payload }) => {
+      console.log("updateRoomMessagePayload :", payload);
       state.roomList[payload.messageObj.index].message =
         payload.messageObj.message;
       state.roomList[payload.messageObj.index].date = payload.messageObj.date;
@@ -76,9 +82,13 @@ const chatSlice = createSlice({
     },
     // 알림 개수 초기화
     readMessage: (state, { payload }) => {
-      if (state.roomList[payload.index]?.unreadCnt) {
-        state.roomList[payload.index].unreadCnt = 0;
+      console.log("readMessgaePayload :", payload);
+      if (state.roomList[payload]?.unreadCnt) {
+        state.roomList[payload].unreadCnt = 0;
       }
+      // if (state.roomList[payload.index]?.unreadCnt) {
+      //   state.roomList[payload.index].unreadCnt = 0;
+      // }
     },
   },
   extraReducers: {
@@ -88,7 +98,8 @@ const chatSlice = createSlice({
     },
     [getRoomListDB.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      state.roomList = payload.roomList;
+      console.log(payload);
+      state.roomList = payload;
       // console.log(action.payload);
     },
     [getRoomListDB.rejected]: (state, action) => {
@@ -101,7 +112,7 @@ const chatSlice = createSlice({
     },
     [getMessageListDB.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      state.messageList = payload.messageList;
+      state.messageList = payload;
       // console.log(action.payload);
     },
     [getMessageListDB.rejected]: (state, action) => {

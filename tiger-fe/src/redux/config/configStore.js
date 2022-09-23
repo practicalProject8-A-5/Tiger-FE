@@ -38,13 +38,13 @@ const reducer = combineReducers({
 export const store = configureStore({
   // reducer: persistedReducer,
   reducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ serializableCheck: false }).concat(logger),
-  devTools: process.env.NODE_ENV !== "production",
-
   // middleware: (getDefaultMiddleware) =>
-  //   getDefaultMiddleware({ serializableCheck: false }),
+  //   getDefaultMiddleware({ serializableCheck: false }).concat(logger),
   // devTools: process.env.NODE_ENV !== "production",
+
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }),
+  devTools: process.env.NODE_ENV !== "production",
 });
 
 // export const persistor = persistStore(store);

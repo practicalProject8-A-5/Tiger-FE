@@ -19,7 +19,7 @@ export const __getRenterItemList = createAsyncThunk(
   async (payload, thunkAPI) => {
     // console.log(payload);
     const status = payload;
-    console.log(typeof status);
+    // console.log(typeof status);
     const userToken = localStorage.getItem("userToken");
     const refreshToken = localStorage.getItem("refreshToken");
     if (status === "LIKE") {

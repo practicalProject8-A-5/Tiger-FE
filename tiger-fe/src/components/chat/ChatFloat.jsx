@@ -14,13 +14,15 @@ const ChatFloat = () => {
   const isChatModalOn = useMatch("/chat/*");
   const notification = useSelector((state) => state.chatSlice.notification);
   console.log("notification :", notification);
-  // 추후 memberId or userId 연결해야함
-  const userId = useSelector((state) => state.memberSlice.userInfo.id);
+
+  const user = useSelector((state) => state.memberSlice.userInfo.id);
+  const userId = parseInt(user);
   console.log("userId :", userId);
 
   const eventSource = useRef();
 
   const authorization = localStorage.getItem("userToken");
+  const refreshToken = localStorage.getItem("refreshToken");
 
   useEffect(() => {
     if (userId) {
@@ -30,6 +32,7 @@ const ChatFloat = () => {
         {
           headers: {
             Authorization: authorization,
+            RefreshToken: refreshToken,
           },
         }
       );
@@ -52,7 +55,7 @@ const ChatFloat = () => {
 
   return (
     <>
-      {userId && !isChatModalOn && (
+      {user && !isChatModalOn && (
         <FloatWrap>
           <Link
             to="/chat"

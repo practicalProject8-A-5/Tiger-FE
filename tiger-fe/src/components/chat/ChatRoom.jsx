@@ -1,7 +1,8 @@
 // eslint-disable-next-line
 
 import SockJS from "sockjs-client";
-import Stomp from "stompjs";
+import webstomp from "webstomp-client";
+// import Stomp from "stompjs";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
@@ -19,22 +20,35 @@ import axios from "axios";
 // 채팅 모달 > 채팅방
 const ChatRoom = () => {
   const dispatch = useDispatch();
-  const location = useLocation();
   const navigate = useNavigate();
+
+  const location = useLocation();
+
   const { roomId } = useParams();
   console.log(roomId);
+  const roomIdNum = parseInt(roomId);
+
   const inputRef = useRef();
   let stompClient = useRef(null);
+
   const [isLoading, setIsLoading] = useState(false);
+
   // const user = useSelector((state) => state.user.user);
+
   const user = useSelector((state) => state.memberSlice.userInfo);
+  console.log("user", user);
+  const senderId = parseInt(user.id);
+
   const authorization = localStorage.getItem("userToken");
-  const chatApi = process.env.REACT_APP_CHAT_URL;
+  const refreshToken = localStorage.getItem("refreshToken");
+
+  const chatApi = process.env.REACT_APP_CHAT;
 
   // 웹소켓 연결 요청 & 구독 요청
   const socketConnect = () => {
-    const webSocket = new SockJS(`${process.env.REACT_APP_CHAT_URL}/wss-stomp`);
-    stompClient.current = Stomp.over(webSocket);
+    const webSocket = new SockJS(`${chatApi}/ws`);
+    stompClient.current = webstomp.over(webSocket);
+    console.log(webSocket);
 
     // STOMPJS console log 지워주는 부분
     // stompClient.current.debug = null;
@@ -42,6 +56,7 @@ const ChatRoom = () => {
     stompClient.current.connect(
       {
         Authorization: authorization,
+        RefreshToken: refreshToken,
         type: "TALK",
       },
 
@@ -51,6 +66,7 @@ const ChatRoom = () => {
           `/sub/chat/room/${roomId}`,
           (response) => {
             const messageFromServer = JSON.parse(response.body);
+            console.log("messageFromServer,", messageFromServer);
             dispatch(addMessage(messageFromServer));
             dispatch(
               updateRoomMessage({
@@ -59,8 +75,9 @@ const ChatRoom = () => {
               })
             );
           },
-          { Authorization: authorization }
+          { Authorization: authorization, RefreshToken: refreshToken }
         );
+        // console.log("123");
         setIsLoading(false);
       }
     );
@@ -77,23 +94,25 @@ const ChatRoom = () => {
     event.preventDefault();
 
     const message = event.target.chat.value;
-
+    console.log(message);
     if (message === "" || message.trim() === "") return false;
 
-    // 추후 조정 필요
     const messageObj = {
-      roomId: roomId,
-      senderId: user.id,
+      roomId: roomIdNum,
+      senderId: senderId,
       message: event.target.chat.value,
       isRead: false,
       type: "TALK",
       name: user.name,
     };
 
+    console.log(messageObj);
+
     stompClient.current.send(
       `/pub/chat/message`,
-      { Authorization: authorization },
-      JSON.stringify(messageObj)
+
+      JSON.stringify(messageObj),
+      { Authorization: authorization, RefreshToken: refreshToken }
     );
 
     event.target.chat.value = null;
@@ -112,6 +131,7 @@ const ChatRoom = () => {
     return () => {
       // 언마운트 시 연결 해제
       if (stompClient.current) socketDisconnect();
+      console.log("locationStateIndex", location.state.index);
       dispatch(readMessage(location.state.index));
     };
   }, [roomId]);
@@ -121,6 +141,8 @@ const ChatRoom = () => {
     const confirm = window.confirm("채팅방을 나가시겠어요?");
     const headers = {
       "Content-Type": "application/json",
+      Authorization: authorization,
+      RefreshToken: refreshToken,
     };
     if (confirm) {
       await axios.get(`${chatApi}/chat/room/exit/${roomId}`, {
