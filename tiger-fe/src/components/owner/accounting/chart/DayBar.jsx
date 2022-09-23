@@ -61,88 +61,94 @@ ChartJS.register(
   ChartDataLabels
 );
 
-// const labels = props.data.map(c => c.label)
-const labels = ["January", "February", "March", "April", "May", "June", "July"];
+const BarChart = ({ dayBarData }) => {
+  // console.log(dayBarData);
 
-const data = {
-  // labels: ["6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-  labels,
-  datasets: [
-    {
-      label: "Dataset 1",
-      // data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-      // data: labels.map((temp) => temp),
-      data: [10, 20, 30, 40, 50, 60, 70],
-      backgroundColor: "rgb(255, 99, 132)",
-      datalabels: {
-        color: "white",
-      },
-    },
-    {
-      label: "Dataset 2",
-      // data: labels.map((temp) => temp),
-      data: [20, 40, 60, 80, 100, 120, 140],
-      backgroundColor: "rgb(75, 192, 192)",
-      datalabels: {
-        color: "white",
-      },
-    },
-    {
-      label: "Dataset 3",
-      // data: labels.map((temp) => temp),
-      data: [30, 60, 90, 120, 150, 180, 210],
-      backgroundColor: "rgb(53, 162, 235)",
-      datalabels: {
-        color: "white",
-      },
-    },
-  ],
-  tooltips: {},
-};
+  // const labels = props.data.map(c => c.label)
+  const labels = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+  ];
 
-const options = {
-  plugins: {
-    title: {
-      display: true,
-      text: "차량 별 일 매출입니다",
-      color: "#8b8b8b",
-      padding: {
-        bottom: 30,
-      },
-      font: {
-        size: 20,
-      },
-    },
-    legend: {
-      display: true,
-      position: "bottom",
-      strokeStyle: "red",
-      labels: {
-        font: {
-          size: 12,
-          style: "italic",
-          family: '"Oswald", sans-serif',
-          weight: "800",
+  const data = {
+    // labels: ["6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+    labels,
+    datasets: [
+      {
+        label: "Dataset 1",
+        data: [10000, 12000, 12000, 12000, 12000],
+        backgroundColor: "rgb(255, 99, 132)",
+        datalabels: {
+          color: "white",
         },
       },
-    },
-    datalabels: {
-      display: true,
-    },
-  },
-  responsive: true,
-  maintainAspectRatio: false,
-  scales: {
-    x: {
-      stacked: true,
-    },
-    y: {
-      stacked: true,
-    },
-  },
-};
+      {
+        label: "Dataset 2",
+        data: [9000, 9000, 9000, 10000, 12000, 9000, 15000],
+        backgroundColor: "rgb(75, 192, 192)",
+        datalabels: {
+          color: "white",
+        },
+      },
+      {
+        label: "Dataset 3",
+        data: [8000, 14000, 9000, 11000, 10000, 12000],
+        backgroundColor: "rgb(53, 162, 235)",
+        datalabels: {
+          color: "white",
+        },
+      },
+    ],
+    tooltips: {},
+  };
 
-const BarChart = () => {
+  const options = {
+    plugins: {
+      title: {
+        display: true,
+        text: "차량 별 일 매출입니다",
+        color: "#8b8b8b",
+        padding: {
+          bottom: 30,
+        },
+        font: {
+          size: 20,
+        },
+      },
+      legend: {
+        display: true,
+        position: "bottom",
+        strokeStyle: "red",
+        labels: {
+          font: {
+            size: 12,
+            style: "italic",
+            family: '"Oswald", sans-serif',
+            weight: "800",
+          },
+        },
+      },
+      datalabels: {
+        display: true,
+      },
+    },
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        stacked: true,
+      },
+      y: {
+        stacked: true,
+      },
+    },
+  };
+
   return (
     <StDayBar>
       <Bar data={data} options={options} />

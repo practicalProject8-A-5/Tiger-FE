@@ -63,14 +63,28 @@ ChartJS.register(
   ChartDataLabels
 );
 
-const DayPie = () => {
+const DayPie = ({ dayPieData }) => {
+  console.log("dayPieData :", dayPieData);
+
+  //브랜드 + 이름
+  let reformatName = dayPieData.map((obj) => {
+    let robj = {
+      name: "",
+    };
+    robj = `${obj.vbrand}${obj.vname}`;
+    return robj;
+  });
+
+  let dataSum = dayPieData.map((el) => el.sum);
+
   const data = {
-    // labels: ["6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-    labels: ["차종1", "차종2", "차종3", "차종4", "차종5", "차종6"],
+    // labels: ["차종1", "차종2", "차종3", "차종4", "차종5", "차종6"],
+    labels: [...reformatName],
     datasets: [
       {
         // label: "# of Votes",
-        data: [12, 19, 3, 5, 2, 3],
+        // data: [12, 19, 3, 5, 2, 3],
+        data: [...dataSum],
         // fill: true,
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",

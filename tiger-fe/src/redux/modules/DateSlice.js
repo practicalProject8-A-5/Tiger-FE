@@ -6,7 +6,10 @@ import axios from "axios";
 const serverApi = process.env.REACT_APP_SERVER;
 
 const initialState = {
-  DateList: {},
+  DateList: {
+    openDateList: [],
+    reservedDateList: [],
+  },
   temp: [],
   isLoading: false,
   success: null,

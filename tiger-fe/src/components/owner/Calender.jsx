@@ -89,10 +89,11 @@ const Calender = ({ setIsModalOpen, vId }) => {
   }, [dispatch, vId]);
 
   useEffect(() => {
-    if (undefined) {
-      setReserveDateList([...DateList.reservedDateList]);
-      setOpenDateLists([...DateList.openDateList]);
-    }
+    // console.log(DateList);
+    // if (undefined) {
+    //   setReserveDateList([...DateList.reservedDateList]);
+    //   setOpenDateLists([...DateList.openDateList]);
+    // }
     setReserveDateList([...DateList.reservedDateList]);
     setOpenDateLists([...DateList.openDateList]);
   }, [DateList]);
