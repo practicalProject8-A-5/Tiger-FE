@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { GoTriangleDown, GoTriangleUp } from "react-icons/go";
 import { useState } from "react";
-import Year from "./chart/Year";
-import Month from "./chart/Month";
+import Year from "./chart/DayLine";
+import Month from "./chart/MonthLine";
 
 const Calculate = () => {
   const memberInfo = useSelector((state) => state.memberSlice.userInfo);

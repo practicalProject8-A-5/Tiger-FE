@@ -1,0 +1,63 @@
+{
+  "result": true,
+  "status": {
+    "code": "200 OK",
+    "msg": "월 수익현황을 가져왔습니다."
+  },
+  "output": [
+    {
+      "date": "2022-09-03",
+      "sum": 5000,
+      "incomeList": [
+        {
+          "vid": 1,
+          "vbrand": "브랜드",
+          "vname": " 차이름",
+          "price": "2000"
+        },
+        {
+          "vid": 2,
+          "vbrand": "브랜드",
+          "vname": " 차이름",
+          "price": "3000"
+        }
+      ]
+    },
+    {
+      "date": "2022-09-03",
+      "sum": 5000,
+      "incomeList": [
+        {
+          "vid": 1,
+          "vbrand": "브랜드",
+          "vname": " 차이름",
+          "price": "2000"
+        },
+        {
+          "vid": 2,
+          "vbrand": "브랜드",
+          "vname": " 차이름",
+          "price": "3000"
+        }
+      ]
+    },
+    {
+      "date": "2022-09-03",
+      "sum": 5000,
+      "incomeList": [
+        {
+          "vid": 1,
+          "vbrand": "브랜드",
+          "vname": " 차이름",
+          "price": "2000"
+        },
+        {
+          "vid": 2,
+          "vbrand": "브랜드",
+          "vname": " 차이름",
+          "price": "3000"
+        }
+      ]
+    }
+  ]
+}
