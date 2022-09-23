@@ -2,17 +2,21 @@
 
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useMatch, useNavigate } from "react-router-dom";
+import { Link, useMatch, useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../assets/ta,iger_logo.png";
 import axios from "axios";
-import LoginModal from "./LoginModal";
 import { loader } from "../redux/modules/memberSlice";
 import LoginBox from "./LoginBox";
+import { setNotification } from "../redux/modules/chatSlice";
 
 const Header = ({ ownerMode }) => {
   const memberApi = process.env.REACT_APP_SERVER;
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const notification = useSelector((state) => state.chatSlice.notification);
+  console.log("notification :", notification);
 
   const [IsModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
@@ -162,9 +166,32 @@ const Header = ({ ownerMode }) => {
                   <div className="header__loggedin__text">
                     <span>반갑습니다!</span>
                     <span>{userInfo.name}님</span>
+                    {notification && <NewNoti />}
                   </div>
                   {isDropDown && (
                     <ul>
+                      <Link
+                        to="/chat"
+                        state={{ backgroundLocation: location }}
+                        style={{ textDecoration: "none", color: "#000" }}>
+                        {/* {notification && <NewNoti />} */}
+                        <li>메세지</li>
+                      </Link>
+                      <Link
+                        style={{ textDecoration: "none", color: "#000" }}
+                        to="/owner">
+                        <li>오너페이지</li>
+                      </Link>
+                      <Link
+                        style={{ textDecoration: "none", color: "#000" }}
+                        to="/renter">
+                        <li>마이페이지</li>
+                      </Link>
+                      <Link
+                        style={{ textDecoration: "none", color: "#000" }}
+                        to="/home">
+                        <li>도움말</li>
+                      </Link>
                       <li onClick={__userLogout}>로그아웃</li>
                     </ul>
                   )}
@@ -323,21 +350,34 @@ const StHeader = styled.div`
           line-height: 40px;
           text-align: center;
           cursor: pointer;
+          z-index: 9;
           ul {
             list-style: none;
             padding: 0;
             margin: 0;
             position: relative;
-            top: 9px;
+            top: 15px;
+            width: 212px;
+            overflow: hidden;
+            right: 110px;
+            box-shadow: 0px -2px 80px rgba(0, 0, 0, 0.04),
+              0px -0.6px 30px rgba(0, 0, 0, 0.04),
+              0px -0.375647px 17.7806px rgba(0, 0, 0, 0.04),
+              0px -0.1px 6.4309px rgba(0, 0, 0, 0.02);
+            border-radius: 12px;
+            background: #fff;
           }
           li {
-            font-size: 15px;
+            font-weight: 400;
+            font-size: 14px;
+            height: 42px;
+            line-height: 42px;
             display: block;
-            float: left;
-            width: 102px;
-            border: 2px solid #f2f2f2;
-            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
-            border-radius: 5px 5px 10px 10px;
+            text-align: center;
+            border-top: 1px solid #eee;
+            :nth-last-child(5) {
+              border-top: none;
+            }
           }
           li:hover {
             background-color: rgba(0, 0, 0, 0.14);
@@ -366,6 +406,37 @@ const StHeader = styled.div`
           }
         }
       }
+    }
+  }
+`;
+
+const NewNoti = styled.div`
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  position: relative;
+  left: -15px;
+  bottom: 31px;
+  background-color: #eb3434;
+  @media screen and (max-width: 768px) {
+    right: 2px;
+    bottom: 40px;
+  }
+  /* &:before {
+    position: absolute;
+    left: 0;
+    top: -10%;
+    width: 100%;
+    height: 120%;
+    background: red;
+    filter: blur(5px);
+    content: "";
+    opacity: 0;
+    animation: flash 0.9s ease-out alternate infinite;
+  } */
+  @keyframes flash {
+    to {
+      opacity: 1;
     }
   }
 `;

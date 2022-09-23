@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 
-// import logger from "redux-logger";
+import logger from "redux-logger";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import vehicleDetailSlice from "../modules/vehicleDetail";
 import ownerItemListSlice from "../modules/ownerItemListSlice";
@@ -12,6 +12,7 @@ import ownerModiRegisterInfoSlice from "../modules/ownerModify";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import getDateListSlice from "../modules/dateSlice";
+import chatSlice from "../modules/chatSlice";
 import likeSlice from "../modules/likeSlice";
 
 const reducer = combineReducers({
@@ -23,19 +24,20 @@ const reducer = combineReducers({
   renterItemListSlice,
   ownerModiRegisterInfoSlice,
   getDateListSlice,
+  chatSlice,
   likeSlice,
 });
 
-const persistConfig = {
-  key: "root",
-  storage,
-};
+// const persistConfig = {
+//   key: "root",
+//   storage,
+// };
 
-const persistedReducer = persistReducer(persistConfig, reducer);
+// const persistedReducer = persistReducer(persistConfig, reducer);
 
 export const store = configureStore({
-  reducer: persistedReducer,
-  // reducer,
+  // reducer: persistedReducer,
+  reducer,
   // middleware: (getDefaultMiddleware) =>
   //   getDefaultMiddleware({ serializableCheck: false }).concat(logger),
   // devTools: process.env.NODE_ENV !== "production",
@@ -45,5 +47,5 @@ export const store = configureStore({
   devTools: process.env.NODE_ENV !== "production",
 });
 
-export const persistor = persistStore(store);
-// export default store;
+// export const persistor = persistStore(store);
+export default store;

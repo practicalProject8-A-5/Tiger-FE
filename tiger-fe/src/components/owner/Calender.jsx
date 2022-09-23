@@ -96,6 +96,7 @@ const Calender = ({ setIsModalOpen, vId }) => {
     // }
     setReserveDateList([...DateList.reservedDateList]);
     setOpenDateLists([...DateList.openDateList]);
+
   }, [DateList]);
 
   return (

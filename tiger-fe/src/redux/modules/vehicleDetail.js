@@ -12,40 +12,67 @@ const initialState = {
   error: null,
 };
 
-// single vehicle info
+const email = localStorage.getItem("email");
+const userToken = localStorage.getItem("userToken");
+const refreshToken = localStorage.getItem("refreshToken");
+
+// vehicle detail page
 export const __vehicleDetail = createAsyncThunk(
   "detail/__vehicleDetail",
   async (payload, thunkAPI) => {
     const { vId, startDate, endDate } = payload;
     // console.log(vId);
-    try {
-      const headers = {
-        "Content-Type": "application/json",
-      };
-      if (startDate === null && endDate === null) {
-        const responseNull = await axios.get(
-          `${serverApi}/vehicle/${vId}?startDate=&endDate=`,
-          { headers: headers }
-        );
-        console.log(responseNull.data.output);
-        return thunkAPI.fulfillWithValue(responseNull.data.output);
-      } else {
-        const response = await axios.get(
-          `${serverApi}/vehicle/${vId}?startDate=${startDate}&endDate=${endDate}`,
-          { headers: headers }
-        );
-        console.log(response.data.output);
-        return thunkAPI.fulfillWithValue(response.data.output);
+    if (email) {
+      try {
+        const headers = {
+          "Content-Type": "application/json",
+          Authorization: userToken,
+          RefreshToken: refreshToken,
+        };
+        if (startDate === null && endDate === null) {
+          const responseNull = await axios.get(
+            `${serverApi}/vehicle/${vId}?startDate=&endDate=`,
+            { headers: headers }
+          );
+          // console.log(responseNull.data.output);
+          return thunkAPI.fulfillWithValue(responseNull.data.output);
+        } else {
+          const response = await axios.get(
+            `${serverApi}/vehicle/${vId}?startDate=${startDate}&endDate=${endDate}`,
+            { headers: headers }
+          );
+          console.log(response.data.output);
+          return thunkAPI.fulfillWithValue(response.data.output);
+        }
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error);
       }
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+    } else {
+      try {
+        const headers = {
+          "Content-Type": "application/json",
+        };
+        if (startDate === null && endDate === null) {
+          const responseNull = await axios.get(
+            `${serverApi}/vehicle/${vId}?startDate=&endDate=`,
+            { headers: headers }
+          );
+          // console.log(responseNull.data.output);
+          return thunkAPI.fulfillWithValue(responseNull.data.output);
+        } else {
+          const response = await axios.get(
+            `${serverApi}/vehicle/${vId}?startDate=${startDate}&endDate=${endDate}`,
+            { headers: headers }
+          );
+          console.log(response.data.output);
+          return thunkAPI.fulfillWithValue(response.data.output);
+        }
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error);
+      }
     }
   }
 );
-
-const email = localStorage.getItem("email");
-const userToken = localStorage.getItem("userToken");
-const refreshToken = localStorage.getItem("refreshToken");
 
 // 검색된 차량 리스트 생성
 export const __vehicleSearchList = createAsyncThunk(
@@ -106,7 +133,14 @@ export const __vehicleSearchList = createAsyncThunk(
 export const vehicleDetailSlice = createSlice({
   name: "vehicleDetailSlice",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    options: (state, action) => {
+      state.vehicleDetails = {};
+    },
+    filteredOptions: (state, action) => {
+      state.filteredVehicleList = [];
+    },
+  },
   extraReducers: {
     [__vehicleDetail.pending]: (state, action) => {
       state.isLoading = true;
@@ -115,14 +149,11 @@ export const vehicleDetailSlice = createSlice({
       state.isLoading = false;
       // console.log(action.payload);
       state.vehicleDetails = action.payload;
-      // console.log(payload);
-      // console.log(state.vehicleDetailList);
     },
     [__vehicleDetail.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
-
     [__vehicleSearchList.pending]: (state, action) => {
       state.isLoading = true;
     },
@@ -138,5 +169,5 @@ export const vehicleDetailSlice = createSlice({
   },
 });
 
-// export const {} = vehicleDetailSlice.actions;
+export const { options, filteredOptions } = vehicleDetailSlice.actions;
 export default vehicleDetailSlice.reducer;

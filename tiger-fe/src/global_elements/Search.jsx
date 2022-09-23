@@ -113,7 +113,18 @@ const Search = () => {
             locationY,
           })
         );
+        localStorage.setItem("location", location);
+        localStorage.setItem("startDate", startDate);
+        localStorage.setItem("endDate", endDate);
+        localStorage.setItem("type", type);
+        localStorage.setItem("locationX", locationX);
+        localStorage.setItem("locationY", locationY);
+
         navigate("/vlist");
+        // setStartDates(localStorage.getItem("location"));
+        // setEndDates(localStorage.getItem("startDate"));
+        // setLocation(localStorage.getItem("endDate"));
+        // setType(localStorage.getItem("type"));
       }
     } catch (err) {
       return err;
@@ -140,7 +151,7 @@ const Search = () => {
           )}
         </StSearchLocationContainer>
         <StCalendarContainer>
-          <StCalendarWrapper style={{ zIndex: 999 }}>
+          <StCalendarWrapper style={{ zIndex: 98 }}>
             <img src={clock} alt="시계" />
             <StNewDatePicker
               selected={startDates}
@@ -239,13 +250,13 @@ const StCalendarContainer = styled.div`
     line-height: 42px;
     top: 25px;
     position: relative;
-    z-index: 99;
+    z-index: 98;
     margin-right: 16px;
     margin-left: 16px;
   }
 `;
 const StCalendarWrapper = styled.div`
-  z-index: 99;
+  z-index: 98;
   display: flex;
   justify-content: center;
   align-items: center;

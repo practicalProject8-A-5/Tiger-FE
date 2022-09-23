@@ -3,12 +3,16 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { __getRenterItemList } from "../../redux/modules/renterItemListSlice";
 import axios from "axios";
 
 const RenterItem = ({ category, list, onSelect }) => {
   const serverApi = process.env.REACT_APP_SERVER;
+  const chatApi = process.env.REACT_APP_CHAT;
+
+  // const userId = useSelector((state) => state.memberSlice.userInfo.id);
+  const location = useLocation();
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -16,7 +20,7 @@ const RenterItem = ({ category, list, onSelect }) => {
   const renterItemLists = useSelector(
     (state) => state.renterItemListSlice.renterItemLists
   );
-  console.log(renterItemLists);
+  // console.log(renterItemLists);
 
   useEffect(() => {
     if (category === "RESERVED") {
@@ -35,8 +39,13 @@ const RenterItem = ({ category, list, onSelect }) => {
     await axios.delete(serverApi + `/order/${oid}`, {
       headers: headers,
     });
-    // console.log(response);
     dispatch(__getRenterItemList("RESERVED"));
+  };
+
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: localStorage.getItem("userToken"),
+    RefreshToken: localStorage.getItem("refreshToken"),
   };
 
   return (
@@ -88,6 +97,32 @@ const RenterItem = ({ category, list, onSelect }) => {
                       }}>
                       환불
                     </span>
+                    <div
+                      className="chatButton"
+                      onClick={async () => {
+                        const ownerId = list.ownerId;
+                        console.log(list.ownerId);
+                        try {
+                          const response = await axios.post(
+                            `${chatApi}/chat/room`,
+                            {
+                              ownerId,
+                            },
+                            {
+                              headers: headers,
+                            }
+                          );
+                          console.log(response);
+                          navigate(`/chat/${response.data}`, {
+                            state: { backgroundLocation: location },
+                          });
+                        } catch (error) {
+                          console.log(error);
+                          return error;
+                        }
+                      }}>
+                      채팅하기
+                    </div>
                   </div>
                 </div>
               </StRenterItem>
@@ -118,6 +153,31 @@ const RenterItem = ({ category, list, onSelect }) => {
                   </div>
                   <div className="btn_box">
                     <span className="refunded">환불 완료</span>
+                    <div
+                      className="chatButton"
+                      onClick={async () => {
+                        const ownerId = list.ownerId;
+                        console.log(list.ownerId);
+                        try {
+                          const response = await axios.post(
+                            `${chatApi}/chat/room`,
+                            {
+                              ownerId,
+                            },
+                            {
+                              headers: headers,
+                            }
+                          );
+                          console.log(response);
+                          navigate(`/chat/${response.data}`, {
+                            state: { backgroundLocation: location },
+                          });
+                        } catch (error) {
+                          return error;
+                        }
+                      }}>
+                      채팅하기
+                    </div>
                   </div>
                 </div>
               </StRenterItem>
@@ -154,6 +214,31 @@ const RenterItem = ({ category, list, onSelect }) => {
                   </div>
                   <div className="btn_box">
                     {/* <span className="return">반납</span> */}
+                    <div
+                      className="chatButton"
+                      onClick={async () => {
+                        const ownerId = list.ownerId;
+                        console.log(list.ownerId);
+                        try {
+                          const response = await axios.post(
+                            `${chatApi}/chat/room`,
+                            {
+                              ownerId,
+                            },
+                            {
+                              headers: headers,
+                            }
+                          );
+                          console.log(response);
+                          navigate(`/chat/${response.data}`, {
+                            state: { backgroundLocation: location },
+                          });
+                        } catch (error) {
+                          return error;
+                        }
+                      }}>
+                      채팅하기
+                    </div>
                   </div>
                 </div>
               </StRenterItem>
@@ -190,6 +275,31 @@ const RenterItem = ({ category, list, onSelect }) => {
                   </div>
                   <div className="btn_box">
                     <span className="returned">반납완료</span>
+                    <div
+                      className="chatButton"
+                      onClick={async () => {
+                        const ownerId = list.ownerId;
+                        console.log(list.ownerId);
+                        try {
+                          const response = await axios.post(
+                            `${chatApi}/chat/room`,
+                            {
+                              ownerId,
+                            },
+                            {
+                              headers: headers,
+                            }
+                          );
+                          console.log(response);
+                          navigate(`/chat/${response.data}`, {
+                            state: { backgroundLocation: location },
+                          });
+                        } catch (error) {
+                          return error;
+                        }
+                      }}>
+                      채팅하기
+                    </div>
                   </div>
                 </div>
               </StRenterItem>
@@ -323,8 +433,18 @@ const StRenterItem = styled.div`
         text-decoration: underline;
         cursor: pointer;
       }
+      .chatButton {
+        font-weight: 500;
+        font-size: 14px;
+        width: auto;
+        cursor: pointer;
+        margin-left: 5px;
+        text-decoration: underline;
+      }
     }
   }
 `;
+
+const ChattingBtn = styled.div``;
 
 export default RenterItem;

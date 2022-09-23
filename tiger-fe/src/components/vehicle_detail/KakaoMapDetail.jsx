@@ -1,10 +1,8 @@
 // eslint-disable-next-line
 
 /*global kakao*/
-
 import React, { useEffect } from "react";
 import styled from "styled-components";
-// import axios from "axios";
 
 const KakaoMapDetail = ({ vehicleDetails }) => {
   const createMap = () => {
