@@ -96,7 +96,7 @@ const Header = ({ ownerMode }) => {
         <div className="header__menu">
           <div className="header__menu__L">
             <Link
-              to="/intro"
+              to="/home"
               style={{ textDecoration: "none", color: textColor }}
               onClick={handleChnageTextColor}>
               <div className="header__home">홈</div>
