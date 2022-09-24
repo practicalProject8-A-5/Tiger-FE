@@ -12,8 +12,8 @@ import styled from "styled-components";
 import { getRoomListDB, setNotification } from "../../redux/modules/chatSlice";
 import ChatRoom from "./ChatRoom";
 import ChatRoomList from "./ChatRoomList";
+import { XSVG } from "../../global_elements/Svg";
 import chatIcon from "../../assets/chat_icon2.png";
-import exit from "../../assets/exit_icon.png";
 
 // 채팅 모달
 const ChatModal = () => {
@@ -26,12 +26,7 @@ const ChatModal = () => {
   const userInfo = useSelector((state) => state.memberSlice.userInfo);
 
   const onClickClose = () => {
-    const confirm = window.confirm("채팅방을 나가시겠어요?");
-    if (confirm === true) {
-      navigate(location.state.backgroundLocation);
-    } else if (confirm === false) {
-      return;
-    }
+    navigate(location.state.backgroundLocation);
   };
   console.log(location.state);
 
@@ -88,7 +83,7 @@ const ChatModal = () => {
               </div>
             )}
             <span onClick={onClickClose}>
-              <img src={exit} alt="exitButton" />
+              <XSVG />
             </span>
           </Header>
           {isMatchChat && (
@@ -203,9 +198,6 @@ const Header = styled.div`
     cursor: pointer;
     position: absolute;
     right: 20px;
-    width: 21px;
-    height: 21px;
-    top: 18px;
   }
   .backToChatRoom {
     cursor: pointer;
