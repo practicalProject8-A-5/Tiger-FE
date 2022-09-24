@@ -72,9 +72,9 @@ const ChatModal = () => {
 
         <RoomWrap isRoom={roomId}>
           <Header isRoom={roomId}>
-            <div>
+            <div className="userInfoChat">
               <img src={userInfo.profileImage} alt="profileImage" />
-              {userInfo.name}
+              <div className="userInfoChat__name">{userInfo.name}</div>
             </div>
             {roomId && (
               <div className="backToChatRoom" onClick={onClickBack}>
@@ -181,21 +181,21 @@ const Header = styled.div`
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
-  padding: 20px 0px 23px 0;
+  padding: 15px 0px 15px 0;
   border-radius: 0px 30px 0 0;
   top: 0;
   border-bottom: 3px solid #eee;
   position: absolute;
+  align-items: center;
   @media screen and (max-width: 768px) {
     padding: 20px 20px 5px 0;
   }
   span {
     cursor: pointer;
-    position: relative;
-    padding-top: 5px;
+    position: absolute;
     right: 20px;
   }
-  div {
+  .backToChatRoom {
     cursor: pointer;
     color: black;
     background-color: #fff;
@@ -210,6 +210,20 @@ const Header = styled.div`
     /* @media screen and (min-width: 768px) {
       display: none;
     } */
+  }
+  .userInfoChat {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    gap: 8px;
+    img {
+      width: 36px;
+      height: 36px;
+    }
+    &__name {
+    }
   }
 `;
 const HelpMessage = styled.div`

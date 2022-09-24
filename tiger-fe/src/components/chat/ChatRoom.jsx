@@ -224,11 +224,13 @@ const ExitButton = styled(SendButton)`
   background-color: #fff;
   border: solid 1px black;
   font-size: 12px;
-  padding: 5px 10px;
   position: absolute;
   z-index: 2;
   top: 18px;
   right: 60px;
+  line-height: 4px;
+  box-sizing: border-box;
+  padding: 11px;
 `;
 
 export default ChatRoom;
