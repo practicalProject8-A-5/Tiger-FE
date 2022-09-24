@@ -341,7 +341,6 @@ const StHeader = styled.div`
         }
         .header__loggedin {
           margin-left: 40px;
-          width: 102px;
           height: 40px;
           opacity: 0.98;
           border: 2px solid #f2f2f2;
@@ -391,6 +390,7 @@ const StHeader = styled.div`
             float: right;
             margin-top: 6px;
             margin-right: 10px;
+            margin-left: 6px;
           }
           span {
             font-style: normal;

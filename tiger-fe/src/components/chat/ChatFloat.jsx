@@ -77,7 +77,7 @@ const ChatFloat = () => {
 };
 
 const FloatWrap = styled.div`
-  z-index: 9;
+  z-index: 99;
   position: fixed;
   bottom: 124px;
   right: 250px;
