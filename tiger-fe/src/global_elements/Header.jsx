@@ -100,26 +100,30 @@ const Header = ({ ownerMode }) => {
             <Link
               to="/home"
               style={{ textDecoration: "none", color: textColor }}
-              onClick={handleChnageTextColor}>
+              onClick={handleChnageTextColor}
+            >
               <div className="header__home">홈</div>
             </Link>
             <Link
               to="/"
               style={{ textDecoration: "none", color: textColor }}
-              onClick={handleChnageTextColor}>
+              onClick={handleChnageTextColor}
+            >
               <div className="header__main">24렌트</div>
             </Link>
             {userInfo.name ? (
               <Link
                 to="/renter"
                 style={{ textDecoration: "none", color: textColor }}
-                onClick={handleChnageTextColor}>
+                onClick={handleChnageTextColor}
+              >
                 <div className="header__mypage">마이페이지</div>
               </Link>
             ) : (
               <Link
                 to="/renter"
-                style={{ textDecoration: "none", display: "none" }}>
+                style={{ textDecoration: "none", display: "none" }}
+              >
                 <div className="header__mypage">마이페이지</div>
               </Link>
             )}
@@ -136,7 +140,8 @@ const Header = ({ ownerMode }) => {
                 ) : (
                   <label
                     className="switch"
-                    style={{ backgroundColor: "#ff881b" }}>
+                    style={{ backgroundColor: "#ff881b" }}
+                  >
                     <input id="switch" type="checkbox" onClick={onClick} />
                     <span className="slider"></span>
                   </label>
@@ -153,7 +158,8 @@ const Header = ({ ownerMode }) => {
                 ) : (
                   <label
                     className="switch"
-                    style={{ backgroundColor: "#ff881b" }}>
+                    style={{ backgroundColor: "#ff881b" }}
+                  >
                     <input id="switch" type="checkbox" onClick={onClick} />
                     <span className="slider"></span>
                   </label>
@@ -175,23 +181,27 @@ const Header = ({ ownerMode }) => {
                       <Link
                         to="/chat"
                         state={{ backgroundLocation: location }}
-                        style={{ textDecoration: "none", color: "#000" }}>
+                        style={{ textDecoration: "none", color: "#000" }}
+                      >
                         {/* {notification && <NewNoti />} */}
                         <li>메세지</li>
                       </Link>
                       <Link
                         style={{ textDecoration: "none", color: "#000" }}
-                        to="/owner">
+                        to="/owner"
+                      >
                         <li>오너페이지</li>
                       </Link>
                       <Link
                         style={{ textDecoration: "none", color: "#000" }}
-                        to="/renter">
+                        to="/renter"
+                      >
                         <li>마이페이지</li>
                       </Link>
                       <Link
                         style={{ textDecoration: "none", color: "#000" }}
-                        to="/home">
+                        to="/home"
+                      >
                         <li>도움말</li>
                       </Link>
                       <li onClick={__userLogout}>로그아웃</li>
@@ -352,15 +362,16 @@ const StHeader = styled.div`
           text-align: center;
           cursor: pointer;
           z-index: 9;
+          position: relative;
           ul {
             list-style: none;
             padding: 0;
             margin: 0;
-            position: relative;
-            top: 15px;
+            position: absolute;
+            top: 50px;
             width: 212px;
             overflow: hidden;
-            right: 110px;
+            right: 0px;
             box-shadow: 0px -2px 80px rgba(0, 0, 0, 0.04),
               0px -0.6px 30px rgba(0, 0, 0, 0.04),
               0px -0.375647px 17.7806px rgba(0, 0, 0, 0.04),
