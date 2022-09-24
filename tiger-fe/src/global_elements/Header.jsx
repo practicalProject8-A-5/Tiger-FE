@@ -127,6 +127,9 @@ const Header = ({ ownerMode }) => {
                 <div className="header__mypage">마이페이지</div>
               </Link>
             )}
+            <Link to="/owner" style={{ textDecoration: "none" }}>
+              <div className="header__ownerpage">오너페이지</div>
+            </Link>
           </div>
           <div className="header__menu__R">
             {userInfo.name ? (
@@ -262,27 +265,37 @@ const StHeader = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
+        gap: 44px;
         .header__home {
           font-size: 20px;
           font-weight: 500;
           line-height: 23px;
-          margin-right: 44px;
+          /* margin-right: 44px; */
           cursor: pointer;
           color: black;
         }
         .header__main {
-          width: 65px;
+          /* width: 65px; */
           height: 23px;
           color: #ff881b;
           font-weight: 500;
           font-size: 20px;
           line-height: 23px;
-          margin-right: 44px;
+          /* margin-right: 44px; */
           cursor: pointer;
           color: black;
         }
         .header__mypage {
-          width: 92px;
+          /* width: 92px; */
+          height: 23px;
+          font-weight: 500;
+          font-size: 20px;
+          line-height: 23px;
+          cursor: pointer;
+          color: black;
+        }
+        .header__ownerpage {
+          /* width: 92px; */
           height: 23px;
           font-weight: 500;
           font-size: 20px;

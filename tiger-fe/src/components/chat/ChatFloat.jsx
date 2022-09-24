@@ -62,7 +62,8 @@ const ChatFloat = () => {
           <Link
             to="/chat"
             state={{ backgroundLocation: location }}
-            style={{ textDecoration: "none" }}>
+            style={{ textDecoration: "none" }}
+          >
             <ChatButtonWrap>
               <ChatButton>
                 {notification && <NewNoti />}
@@ -79,8 +80,8 @@ const ChatFloat = () => {
 const FloatWrap = styled.div`
   z-index: 99;
   position: fixed;
-  bottom: 124px;
-  right: 250px;
+  bottom: 204px;
+  right: 100px;
   @media screen and (max-width: 768px) {
     bottom: 20px;
     right: 20px;

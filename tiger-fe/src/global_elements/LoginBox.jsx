@@ -32,7 +32,7 @@ const Stblur = styled.div`
     width: 100vw;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(5px);
+    /* backdrop-filter: blur(5px); */
     animation: modal-bg-show 1s;
     @keyframes modal-bg-show {
       from {

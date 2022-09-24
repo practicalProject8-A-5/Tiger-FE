@@ -147,7 +147,8 @@ const HomeSearch = () => {
             setIsPopupOpen(!isPopupOpen);
           }}
           onChange={onChangeHandler}
-          placeholder="어디서?"></input>
+          placeholder="어디서?"
+        ></input>
         {isPopupOpen ? (
           <div>
             <DaumPostcode style={postCodeStyle} onComplete={handlePostCode} />
@@ -316,18 +317,23 @@ const StCalendarWrapper = styled.div`
   border-radius: 12px;
   padding: 5px;
   img {
-    width: 22px;
-    height: 22px;
+    width: 21px;
+    height: 21px;
   }
   .react-datepicker-wrapper {
     margin-left: 8px;
     width: 100%;
-    input {
-      width: 100%;
-      outline: none;
-      border: none;
-      padding: 0;
-      background: #f2f2f2;
+    /* background-color: pink; */
+    .react-datepicker__input-container {
+      background-color: pink;
+      input {
+        width: 100%;
+        outline: none;
+        border: none;
+        padding: 0;
+        background: #f2f2f2;
+        /* background-color: pink; */
+      }
     }
   }
   .react-datepicker__tab-loop {
