@@ -12,6 +12,8 @@ import MonthBar from "./chart/MonthBar";
 import DayPie from "./chart/DayPie";
 import DayBar from "./chart/DayBar";
 
+const serverApi = process.env.REACT_APP_SERVER;
+
 const Profit = () => {
   const memberInfo = useSelector((state) => state.memberSlice.userInfo);
 
@@ -51,7 +53,13 @@ const Profit = () => {
   // console.log(monthBarData);
 
   // 일별 라인차트
-  let date = new Date().getDate();
+  let today = new Date();
+
+  let dateYear = today.getFullYear();
+  let dateMonth = ("0" + (today.getMonth() + 1)).slice(-2);
+  let dateDate = ("0" + today.getDate()).slice(-2);
+
+  let date = `${dateYear}-${dateMonth}-${dateDate}`;
   console.log(date);
   const getDayLineChart = async () => {
     // setLoading(true);
@@ -65,7 +73,7 @@ const Profit = () => {
       };
       const resp = await axios.get(
         // `https://run.mocky.io/v3/bbdeb8e0-1230-48f0-95c7-7e420ece1f3b`,
-        `/api/order/payout/day?date=${date}`,
+        `${serverApi}/order/payout/day?date=${date}`,
         {
           headers: headers,
         }
@@ -101,7 +109,7 @@ const Profit = () => {
       setMonthLineData(resp.data.output);
       // setLoading(false);
     } catch (error) {
-      window.alert(error);
+      // window.alert(error);
       console.log(error);
     }
   };

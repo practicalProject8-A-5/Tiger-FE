@@ -64,18 +64,15 @@ ChartJS.register(
 
 const MonthLine = ({ monthLineData }) => {
   let currentYear = new Date().getFullYear();
+  //달
   // let currentMonth = new Date().getMonth() + 1;
   // let month = new Date().getMonth();
   let labelDate = new Date(currentYear, 9, 0).getDate(); // 일수 구하기
   // labelDate.split(" ");
 
-  // console.log(labelDate);
-  // console.log(labelDate);
-  // console.log(currentMonth);
   console.log(currentYear);
 
   const [year, setYear] = useState(currentYear);
-  // console.log(month);
 
   const clickNext = () => {
     if (year < currentYear) {
@@ -89,8 +86,6 @@ const MonthLine = ({ monthLineData }) => {
     }
     console.log("prev");
   };
-
-  // console.log(monthLineData);
 
   let dataSum = monthLineData.map((el) => el.sum);
   let dataDate = [
