@@ -12,7 +12,8 @@ import styled from "styled-components";
 import { getRoomListDB, setNotification } from "../../redux/modules/chatSlice";
 import ChatRoom from "./ChatRoom";
 import ChatRoomList from "./ChatRoomList";
-import { OrangeChatSVG, XSVG } from "../../global_elements/Svg";
+import chatIcon from "../../assets/chat_icon2.png";
+import exit from "../../assets/exit_icon.png";
 
 // 채팅 모달
 const ChatModal = () => {
@@ -25,7 +26,12 @@ const ChatModal = () => {
   const userInfo = useSelector((state) => state.memberSlice.userInfo);
 
   const onClickClose = () => {
-    navigate(location.state.backgroundLocation);
+    const confirm = window.confirm("채팅방을 나가시겠어요?");
+    if (confirm === true) {
+      navigate(location.state.backgroundLocation);
+    } else if (confirm === false) {
+      return;
+    }
   };
   console.log(location.state);
 
@@ -82,17 +88,20 @@ const ChatModal = () => {
               </div>
             )}
             <span onClick={onClickClose}>
-              <XSVG />
+              <img src={exit} alt="exitButton" />
             </span>
           </Header>
           {isMatchChat && (
             <HelpMessage>
               <div>
-                <OrangeChatSVG />
+                <img src={chatIcon} alt="chatIcon" />
               </div>
               <>
-                왼쪽 채팅 목록을 클릭하여 <br />
-                채팅 내용을 확인해주세요!
+                <span className="checkMessage">메세지를 확인해주세요.</span>
+                <br />
+                <span className="checkList">
+                  왼쪽 리스트에서 렌트/오너와 대화를 이어가보세요!
+                </span>
               </>
             </HelpMessage>
           )}
@@ -194,6 +203,9 @@ const Header = styled.div`
     cursor: pointer;
     position: absolute;
     right: 20px;
+    width: 21px;
+    height: 21px;
+    top: 18px;
   }
   .backToChatRoom {
     cursor: pointer;
@@ -236,6 +248,24 @@ const HelpMessage = styled.div`
   text-align: center;
   line-height: 1.2;
   margin: auto 0;
+  img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 20px;
+  }
+  .checkMessage {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 35px;
+  }
+  .checkList {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 27px;
+    color: #8b8b8b;
+  }
 `;
 
 export default ChatModal;

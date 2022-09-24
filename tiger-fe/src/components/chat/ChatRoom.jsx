@@ -16,6 +16,7 @@ import {
 } from "../../redux/modules/chatSlice";
 import ChatList from "./ChatList";
 import axios from "axios";
+import send from "../../assets/send_icon.png";
 
 // 채팅 모달 > 채팅방
 const ChatRoom = () => {
@@ -176,7 +177,7 @@ const ChatRoom = () => {
             placeholder="메시지를 입력해주세요."
             maxLength={150}
           />
-          <SendButton>보내기</SendButton>
+          <SendButton></SendButton>
         </form>
       </ChatInputWrap>
       <ChatList />
@@ -189,14 +190,14 @@ const ChatInputWrap = styled.div`
   margin: 0 30px 30px 30px;
   border-radius: 15px;
   border: 1px solid gray;
-  padding: 10px 10px;
+  padding: 4px;
   @media screen and (max-width: 768px) {
     margin: 0 10px 10px 10px;
   }
 `;
 const ChatInput = styled.input`
   border: none;
-  width: calc(100% - 100px);
+  width: calc(100% - 60px);
   text-indent: 20px;
 
   &:focus {
@@ -218,8 +219,14 @@ const SendButton = styled.button`
   border-radius: 15px;
   border: none;
   cursor: pointer;
+  width: 47px;
+  height: 41px;
+  background-image: url(${send});
+  background-size: contain;
+  background-repeat: no-repeat;
+  vertical-align: sub;
 `;
-const ExitButton = styled(SendButton)`
+const ExitButton = styled.button`
   color: black;
   background-color: #fff;
   border: solid 1px black;
@@ -231,6 +238,7 @@ const ExitButton = styled(SendButton)`
   line-height: 4px;
   box-sizing: border-box;
   padding: 11px;
+  border-radius: 15px;
 `;
 
 export default ChatRoom;
