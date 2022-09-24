@@ -217,12 +217,17 @@ const Header = styled.div`
     align-items: center;
     align-content: center;
     width: 100%;
-    gap: 8px;
+    gap: 15px;
     img {
       width: 36px;
       height: 36px;
+      border-radius: 50%;
     }
     &__name {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 25px;
     }
   }
 `;
