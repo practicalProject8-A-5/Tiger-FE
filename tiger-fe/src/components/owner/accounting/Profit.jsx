@@ -12,6 +12,8 @@ import MonthBar from "./chart/MonthBar";
 import DayPie from "./chart/DayPie";
 import DayBar from "./chart/DayBar";
 
+const serverApi = process.env.REACT_APP_SERVER;
+
 const Profit = () => {
   const memberInfo = useSelector((state) => state.memberSlice.userInfo);
 
@@ -43,6 +45,8 @@ const Profit = () => {
   const [monthPieData, setMonthPieData] = useState([]);
   const [dayBarData, setDayBarData] = useState([]);
   const [monthBarData, setMonthBarData] = useState([]);
+
+  const [noRevenue, setNoRevenue] = useState(false);
   // console.log(dayLineData);
   // console.log(monthLineData);
   // console.log(dayPieData);
@@ -51,8 +55,15 @@ const Profit = () => {
   // console.log(monthBarData);
 
   // 일별 라인차트
-  let date = new Date().getDate();
-  console.log(date);
+  let today = new Date();
+
+  let dateYear = today.getFullYear();
+  let dateMonth = ("0" + (today.getMonth() + 1)).slice(-2);
+  let dateDate = ("0" + today.getDate()).slice(-2);
+
+  let date = `${dateYear}-${dateMonth}-${dateDate}`;
+  // console.log(date);
+
   const getDayLineChart = async () => {
     // setLoading(true);
     try {
@@ -64,14 +75,13 @@ const Profit = () => {
         RefreshToken: refreshToken,
       };
       const resp = await axios.get(
-        // `https://run.mocky.io/v3/bbdeb8e0-1230-48f0-95c7-7e420ece1f3b`,
-        `/api/order/payout/day?date=${date}`,
+        `${serverApi}/order/owner/payout/day?date=${date}`,
         {
           headers: headers,
         }
       );
-      // console.log(resp.data.output);
-      setDayLineData(resp.data.output);
+      // console.log(resp.data.output.Line);
+      setDayLineData(resp.data.output.Line);
       // setLoading(false);
     } catch (error) {
       window.alert(error);
@@ -91,17 +101,16 @@ const Profit = () => {
         RefreshToken: refreshToken,
       };
       const resp = await axios.get(
-        `https://run.mocky.io/v3/0065177e-db04-4f49-9240-b486a7920527`,
-        // `/api/order/payout/line/month?date={date}`,
+        `${serverApi}/order/owner/payout/month?date=${date}`,
         {
           headers: headers,
         }
       );
       // console.log(resp.data.output);
-      setMonthLineData(resp.data.output);
+      setMonthLineData(resp.data.output.Line);
       // setLoading(false);
     } catch (error) {
-      window.alert(error);
+      // window.alert(error);
       console.log(error);
     }
   };
@@ -118,14 +127,18 @@ const Profit = () => {
         RefreshToken: refreshToken,
       };
       const resp = await axios.get(
-        `https://run.mocky.io/v3/d874ccb5-4ea1-4b49-96c0-59b9572978f5`,
-        // `/api/order/payout/pie/day?date={date}`,
+        `${serverApi}/order/owner/payout/day?date=${date}`,
         {
           headers: headers,
         }
       );
-      // console.log(resp.data.output);
-      setDayPieData(resp.data.output);
+      // console.log(resp.data.output.pie);
+      if (resp.data.output.pie.length === 0) {
+        setNoRevenue(true);
+      } else {
+        setDayPieData(resp.data.output.pie);
+      }
+      // set;
       // setLoading(false);
     } catch (error) {
       // window.alert(error);
@@ -145,14 +158,13 @@ const Profit = () => {
         RefreshToken: refreshToken,
       };
       const resp = await axios.get(
-        `https://run.mocky.io/v3/bb81dda4-62b0-467e-aa51-25fc57a812d1`,
-        // `/api/order/payout/pie/month?date={date}`,
+        `${serverApi}/order/owner/payout/month?date=${date}`,
         {
           headers: headers,
         }
       );
-      // console.log(resp.data.output);
-      setMonthPieData(resp.data.output);
+      // console.log(resp.data.output.pie);
+      setMonthPieData(resp.data.output.pie);
       // setLoading(false);
     } catch (error) {
       // window.alert(error);
@@ -172,14 +184,13 @@ const Profit = () => {
         RefreshToken: refreshToken,
       };
       const resp = await axios.get(
-        `https://run.mocky.io/v3/bbdeb8e0-1230-48f0-95c7-7e420ece1f3b`,
-        // `/api/order/payout/bar/day?date={date}`,
+        `${serverApi}/order/owner/payout/day?date=${date}`,
         {
           headers: headers,
         }
       );
-      // console.log(resp.data.output);
-      setDayBarData(resp.data.output);
+      // console.log(resp.data.output.bar);
+      setDayBarData(resp.data.output.bar);
       // setLoading(false);
     } catch (error) {
       window.alert(error);
@@ -215,11 +226,11 @@ const Profit = () => {
   };
 
   useEffect(() => {
-    getDayLineChart();
+    // getDayLineChart();
     // getMonthLineChart();
     // getDayPieChart();
     // getMonthPieChart();
-    // getDayBarChart();
+    getDayBarChart();
     // getMonthBarChart();
     // console.log("1");
   }, []);
@@ -270,11 +281,11 @@ const Profit = () => {
         </>
       )} */}
 
-      <DayLine dayLineData={dayLineData} />
-      {/* <MonthLine monthLineData={monthLineData} /> */}
+      {/* <DayLine dayLineData={dayLineData} />
+      <MonthLine monthLineData={monthLineData} /> */}
       {/* <DayPie dayPieData={dayPieData} /> */}
       {/* <MonthPie monthPieData={monthPieData} /> */}
-      {/* <DayBar dayBarData={dayBarData} /> */}
+      <DayBar dayBarData={dayBarData} />
       {/* <MonthBar monthBarData={monthBarData}/> */}
     </StProfit>
   );

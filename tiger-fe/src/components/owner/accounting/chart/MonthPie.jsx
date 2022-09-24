@@ -61,7 +61,7 @@ ChartJS.register(
 );
 
 const MonthPie = ({ monthPieData }) => {
-  // console.log("monthPieData :", monthPieData);
+  console.log("monthPieData :", monthPieData);
 
   let reformatName = monthPieData.map((obj) => {
     let robj = {
@@ -73,8 +73,14 @@ const MonthPie = ({ monthPieData }) => {
 
   let dataSum = monthPieData.map((el) => el.sum);
 
+  let total = 0;
+  dataSum.forEach((item) => {
+    total += item;
+  });
+
   const data = {
     labels: [...reformatName],
+    // labels: ["1", "2"],
     datasets: [
       {
         // label: "# of Votes",
@@ -103,7 +109,7 @@ const MonthPie = ({ monthPieData }) => {
         datalabels: {
           color: "#000",
           font: {
-            size: "16",
+            size: "13",
           },
         },
       },
@@ -138,6 +144,18 @@ const MonthPie = ({ monthPieData }) => {
         },
         font: {
           size: 20,
+        },
+      },
+      subtitle: {
+        display: true,
+        text: `총 수익은 ${total}원`,
+        padding: {
+          bottom: 10,
+        },
+        font: {
+          size: 15,
+          weight: 600,
+          style: "oblique",
         },
       },
       datalabels: {

@@ -63,19 +63,12 @@ ChartJS.register(
 );
 
 const MonthLine = ({ monthLineData }) => {
+  console.log(monthLineData);
   let currentYear = new Date().getFullYear();
-  // let currentMonth = new Date().getMonth() + 1;
-  // let month = new Date().getMonth();
-  let labelDate = new Date(currentYear, 9, 0).getDate(); // 일수 구하기
-  // labelDate.split(" ");
-
-  // console.log(labelDate);
-  // console.log(labelDate);
-  // console.log(currentMonth);
-  console.log(currentYear);
+  //달
+  // let labelDate = new Date(currentYear, 9, 0).getDate(); // 일수 구하기
 
   const [year, setYear] = useState(currentYear);
-  // console.log(month);
 
   const clickNext = () => {
     if (year < currentYear) {
@@ -90,46 +83,48 @@ const MonthLine = ({ monthLineData }) => {
     console.log("prev");
   };
 
-  // console.log(monthLineData);
-
   let dataSum = monthLineData.map((el) => el.sum);
-  let dataDate = [
-    `${year}-01`,
-    `${year}-02`,
-    `${year}-03`,
-    `${year}-04`,
-    `${year}-05`,
-    `${year}-06`,
-    `${year}-07`,
-    `${year}-08`,
-    `${year}-09`,
-    `${year}-10`,
-    `${year}-11`,
-    `${year}-12`,
+  // let dataMonth =
+  console.log(dataSum);
+
+  let labelData = [
+    { date: `${year}-01`, sum: 0 },
+    { date: `${year}-02`, sum: 0 },
+    { date: `${year}-03`, sum: 0 },
+    { date: `${year}-04`, sum: 0 },
+    { date: `${year}-05`, sum: 0 },
+    { date: `${year}-06`, sum: 0 },
+    { date: `${year}-07`, sum: 0 },
+    { date: `${year}-08`, sum: 0 },
+    { date: `${year}-09`, sum: 0 },
+    { date: `${year}-10`, sum: 0 },
+    { date: `${year}-11`, sum: 0 },
+    { date: `${year}-12`, sum: 0 },
   ];
-  // let dataDate = monthLineData.map((el) => el.date);
-  console.log(dataDate);
+
+  let formatData = [];
+
+  labelData.forEach((formatDataEl) => {
+    const filterData = monthLineData.filter(
+      (dataEl) => dataEl.date === formatDataEl.date
+    );
+    if (filterData.length === 1) {
+      formatData.push(filterData[0].sum);
+    } else {
+      formatData.push(0);
+    }
+    // console.log(filterData);
+  });
+  console.log(formatData);
 
   const data = {
-    // labels: ["6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-    labels: [...dataDate],
+    labels: [...labelData.map((el) => (el = el.date))],
     datasets: [
       {
         label: `월별`,
         data: [
-          ...dataSum,
+          ...formatData,
           // { x: "2022-01", y: 0 },
-          // { x: "2022-02", y: 20 },
-          // { x: "2022-03", y: 10 },
-          // { x: "2022-04", y: 50 },
-          // { x: "2022-05", y: 40 },
-          // { x: "2022-06", y: 90 },
-          // { x: "2022-07", y: 150 },
-          // { x: "2022-08", y: 20 },
-          // { x: "2022-09", y: 60 },
-          // { x: "2022-10", y: 58 },
-          // { x: "2022-11", y: 49 },
-          // { x: "2022-12", y: 29 },
         ],
         fill: true,
         backgroundColor: "rgba(244, 117, 96, 0.2",
@@ -186,6 +181,16 @@ const MonthLine = ({ monthLineData }) => {
       },
       line: {
         tension: 0.2, //꼭짓점 둥글게
+      },
+    },
+
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+      x: {
+        // display: false,
+        display: true,
       },
     },
   };
