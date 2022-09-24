@@ -62,22 +62,44 @@ ChartJS.register(
 );
 
 const BarChart = ({ dayBarData }) => {
-  // console.log(dayBarData);
+  console.log(dayBarData);
+  let today = new Date();
+  let dateYear = today.getFullYear();
+  let dateMonth = ("0" + (today.getMonth() + 1)).slice(-2);
+  let dateDate = ("0" + today.getDate()).slice(-2);
 
-  // const labels = props.data.map(c => c.label)
-  const labels = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-  ];
+  let last = new Date(dateYear, dateMonth, 0).getDate();
+  // console.log(last);
+
+  let labelData = [];
+  for (let i = 1; i <= last; i++) {
+    if (i < 10) {
+      labelData.push({ date: `${dateYear}-${dateMonth}-0${i}`, sum: 0 });
+    } else {
+      labelData.push({ date: `${dateYear}-${dateMonth}-${i}`, sum: 0 });
+    }
+  }
+  // console.log(labelData); // 매월 1일~마지막 일 과 default 가격(0)
+
+  let formatData = [];
+
+  labelData.forEach((formatDataEl) => {
+    const filterData = dayBarData.filter(
+      (dataEl) => dataEl.date === formatDataEl.date
+    );
+    if (filterData.length === 1) {
+      formatData.push(filterData[0].sum);
+    } else {
+      formatData.push(0);
+    }
+    // console.log(filterData);
+  });
 
   const data = {
-    // labels: ["6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-    labels,
+    // labels: [...labelData.map((el) => (el = el.date))],
+    labels: ["1월", "2월", "3월", "4월", "5월", "6월"],
+
+    // labels,
     datasets: [
       {
         label: "Dataset 1",
@@ -145,6 +167,9 @@ const BarChart = ({ dayBarData }) => {
       },
       y: {
         stacked: true,
+        min: 0,
+        max: 50000,
+        // beginAtZero: true,
       },
     },
   };
@@ -160,6 +185,6 @@ export default BarChart;
 
 const StDayBar = styled.div`
   margin-top: 48px;
-  width: 50% !important;
-  height: 705px !important;
+  /* width: 50% !important; */
+  /* height: 705px !important; */
 `;

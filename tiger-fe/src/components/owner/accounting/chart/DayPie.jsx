@@ -75,7 +75,16 @@ const DayPie = ({ dayPieData }) => {
     return robj;
   });
 
+  // console.log(reformatName);
   let dataSum = dayPieData.map((el) => el.sum);
+  // console.log(dataSum);
+
+  let total = 0;
+  dataSum.forEach((item) => {
+    total += item;
+  });
+  // console.log(total);
+  // console.log(typeof dataSum[0]);
 
   const data = {
     // labels: ["차종1", "차종2", "차종3", "차종4", "차종5", "차종6"],
@@ -143,6 +152,18 @@ const DayPie = ({ dayPieData }) => {
         },
         font: {
           size: 20,
+        },
+      },
+      subtitle: {
+        display: true,
+        text: `총 수익은 ${total}원`,
+        padding: {
+          bottom: 10,
+        },
+        font: {
+          size: 15,
+          weight: 600,
+          style: "oblique",
         },
       },
       datalabels: {

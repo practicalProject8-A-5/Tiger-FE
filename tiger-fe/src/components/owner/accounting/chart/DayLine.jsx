@@ -63,20 +63,46 @@ ChartJS.register(
 );
 
 const DayLine = ({ dayLineData }) => {
-  console.log(dayLineData);
+  let today = new Date();
+  let dateYear = today.getFullYear();
+  let dateMonth = ("0" + (today.getMonth() + 1)).slice(-2);
+  let dateDate = ("0" + today.getDate()).slice(-2);
 
-  let dataSum = dayLineData.map((el) => el.sum);
-  let dataDate = dayLineData.map((el) => el.date);
+  let last = new Date(dateYear, dateMonth, 0).getDate();
+  // console.log(last);
 
-  console.log(dataSum);
-  console.log(dataDate);
+  let labelData = [];
+  for (let i = 1; i <= last; i++) {
+    if (i < 10) {
+      labelData.push({ date: `${dateYear}-${dateMonth}-0${i}`, sum: 0 });
+    } else {
+      labelData.push({ date: `${dateYear}-${dateMonth}-${i}`, sum: 0 });
+    }
+  }
+  // console.log(labelData); // 매월 1일~마지막 일 과 default 가격(0)
+
+  let formatData = [];
+
+  labelData.forEach((formatDataEl) => {
+    const filterData = dayLineData.filter(
+      (dataEl) => dataEl.date === formatDataEl.date
+    );
+    if (filterData.length === 1) {
+      formatData.push(filterData[0].sum);
+    } else {
+      formatData.push(0);
+    }
+    // console.log(filterData);
+  });
+
+  // console.log(formatData);
 
   const data = {
-    labels: [...dataDate],
+    labels: [...labelData.map((el) => (el = el.date))],
     datasets: [
       {
         label: "일별",
-        data: [...dataSum],
+        data: [...formatData],
         fill: true,
         backgroundColor: "rgba(244, 117, 96, 0.2",
         borderColor: "#FF881B",
