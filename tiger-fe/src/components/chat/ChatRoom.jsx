@@ -239,6 +239,7 @@ const ExitButton = styled.button`
   box-sizing: border-box;
   padding: 11px;
   border-radius: 15px;
+  cursor: pointer;
 `;
 
 export default ChatRoom;
