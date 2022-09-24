@@ -57,7 +57,7 @@ const ChatList = () => {
         const isMe = chat?.senderEmail === user?.email;
         console.log(chat.senderEmail);
         return (
-          <>
+          <div key={index}>
             {chat.date?.split("T")[0] !==
               messageList[index - 1]?.date?.split("T")[0] && (
               <ChatListDate key={chat.date}>
@@ -80,7 +80,7 @@ const ChatList = () => {
             ) : (
               <Status>{chat?.message}</Status>
             )}
-          </>
+          </div>
         );
       })}
       <div ref={scrollRef} />

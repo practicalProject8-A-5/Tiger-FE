@@ -5,12 +5,6 @@ import axios from "axios";
 
 const chatApi = process.env.REACT_APP_CHAT;
 
-const headers = {
-  "Content-Type": "application/json",
-  Authorization: localStorage.getItem("userToken"),
-  RefreshToken: localStorage.getItem("refreshToken"),
-};
-
 const initialState = {
   roomList: [],
   messageList: [],
@@ -25,7 +19,11 @@ export const getRoomListDB = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const response = await axios.get(`${chatApi}/chat/rooms`, {
-        headers: headers,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem("userToken"),
+          RefreshToken: localStorage.getItem("refreshToken"),
+        },
       });
       console.log("getRoomListDB :", response);
       return thunkAPI.fulfillWithValue(response.data);
@@ -43,7 +41,11 @@ export const getMessageListDB = createAsyncThunk(
     const roomId = payload;
     try {
       const response = await axios.get(`${chatApi}/chat/room/${roomId}`, {
-        headers: headers,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem("userToken"),
+          RefreshToken: localStorage.getItem("refreshToken"),
+        },
       });
       console.log("getMessageListDB :", response);
       return thunkAPI.fulfillWithValue(response.data);
@@ -68,12 +70,19 @@ const chatSlice = createSlice({
     // 채팅 리스트의 메시지 갱신
     updateRoomMessage: (state, { payload }) => {
       console.log("updateRoomMessagePayload :", payload);
-      state.roomList[payload.index].message = payload.message;
-      state.roomList[payload.index].date = payload.date;
+      // state.roomList[payload.index].message = payload.message;
+      // state.roomList[payload.index].date = payload.date;
+      if (state.roomList[payload.index] !== undefined) {
+        state.roomList[payload.index].message = payload.message;
+        state.roomList[payload.index].date = payload.date;
+      }
     },
     // 메시지 지우기
     cleanUpMessage: (state, { payload }) => {
-      state.messageList = initialState.messageList;
+      state.messageList = [];
+    },
+    cleanUpRoomList: (state, { payload }) => {
+      state.roomList = [];
     },
     // 알림 표시
     setNotification: (state, { payload }) => {
@@ -127,5 +136,6 @@ export const {
   cleanUpMessage,
   setNotification,
   readMessage,
+  cleanUpRoomList,
 } = chatSlice.actions;
 export default chatSlice.reducer;

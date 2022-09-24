@@ -9,6 +9,7 @@ import axios from "axios";
 import { loader } from "../redux/modules/memberSlice";
 import LoginBox from "./LoginBox";
 import { setNotification } from "../redux/modules/chatSlice";
+import { cleanUpRoomList } from "../redux/modules/chatSlice";
 
 const Header = ({ ownerMode }) => {
   const memberApi = process.env.REACT_APP_SERVER;
@@ -66,6 +67,7 @@ const Header = ({ ownerMode }) => {
         headers: headers,
       });
       window.localStorage.clear();
+      dispatch(cleanUpRoomList());
       dispatch(loader());
     } else if (confirm === false) {
       return;

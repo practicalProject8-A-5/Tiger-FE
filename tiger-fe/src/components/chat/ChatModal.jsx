@@ -64,12 +64,7 @@ const ChatModal = () => {
       <Dim />
       <Wrap>
         <LeftWrap isRoom={roomId}>
-          <Title>
-            채팅
-            {/* <span onClick={onClickClose}>
-              <XSVG />
-            </span> */}
-          </Title>
+          <Title>채팅</Title>
           <ListWrap>
             <ChatRoomList location={location} roomId={roomId} />
           </ListWrap>
@@ -77,8 +72,10 @@ const ChatModal = () => {
 
         <RoomWrap isRoom={roomId}>
           <Header isRoom={roomId}>
-            {/* {userInfo.name}
-            <img src={userInfo.profileImage} alt="" /> */}
+            <div>
+              <img src={userInfo.profileImage} alt="profileImage" />
+              {userInfo.name}
+            </div>
             {roomId && (
               <div className="backToChatRoom" onClick={onClickBack}>
                 뒤로가기

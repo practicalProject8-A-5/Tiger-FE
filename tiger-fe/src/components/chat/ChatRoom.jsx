@@ -44,9 +44,12 @@ const ChatRoom = () => {
 
   const chatApi = process.env.REACT_APP_CHAT;
 
+  const roomList = useSelector((state) => state.chatSlice.roomList);
+  console.log("roomList :", roomList);
+
   // 웹소켓 연결 요청 & 구독 요청
   const socketConnect = () => {
-    const webSocket = new SockJS(`${chatApi}/ws`);
+    const webSocket = new SockJS(`${chatApi}/wss-stomp`);
     stompClient.current = webstomp.over(webSocket);
     console.log(webSocket);
 
@@ -69,6 +72,9 @@ const ChatRoom = () => {
             const messageFromServer = JSON.parse(response.body);
             console.log("messageFromServer,", messageFromServer);
             dispatch(addMessage(messageFromServer));
+            // if(roomList.length === 0) {
+            //   dispatch(getRoomListDB())
+            // }
             console.log("___________________");
             dispatch(
               updateRoomMessage({

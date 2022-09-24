@@ -21,6 +21,7 @@ const ChatRoomList = ({ location, roomId }) => {
 
   return (
     <>
+      {roomList.length === 0 && <List>진행 중인 채팅이 없습니다.</List>}
       {roomList &&
         roomList.map((room, index) => {
           const isExit =
@@ -71,14 +72,13 @@ const ChatRoomList = ({ location, roomId }) => {
             </Link>
           );
         })}
-      {roomList.length < 1 && <List>진행 중인 채팅이 없습니다.</List>}
     </>
   );
 };
 
 const List = styled.div`
   padding: 19px 38px 19px 38px;
-  color: #fff;
+  color: black;
   border-bottom: 1px solid #eee;
   background-color: ${({ selected }) => (selected ? "#eee" : "white")};
   span {
