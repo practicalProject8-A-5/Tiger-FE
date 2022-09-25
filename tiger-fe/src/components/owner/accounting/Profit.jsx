@@ -132,12 +132,12 @@ const Profit = () => {
           headers: headers,
         }
       );
-      // console.log(resp.data.output.pie);
-      if (resp.data.output.pie.length === 0) {
-        setNoRevenue(true);
-      } else {
-        setDayPieData(resp.data.output.pie);
-      }
+      console.log(resp.data.output.pie);
+      // if (resp.data.output.pie.length === 0) {
+      //   setNoRevenue(true);
+      // } else {
+      // }
+      setDayPieData(resp.data.output.pie);
       // set;
       // setLoading(false);
     } catch (error) {
@@ -163,7 +163,7 @@ const Profit = () => {
           headers: headers,
         }
       );
-      // console.log(resp.data.output.pie);
+      console.log(resp.data.output.pie);
       setMonthPieData(resp.data.output.pie);
       // setLoading(false);
     } catch (error) {
@@ -189,7 +189,7 @@ const Profit = () => {
           headers: headers,
         }
       );
-      // console.log(resp.data.output.bar);
+      // console.log(resp.data);
       setDayBarData(resp.data.output.bar);
       // setLoading(false);
     } catch (error) {
@@ -210,14 +210,13 @@ const Profit = () => {
         RefreshToken: refreshToken,
       };
       const resp = await axios.get(
-        // `https://run.mocky.io/v3/bbdeb8e0-1230-48f0-95c7-7e420ece1f3b`,
-        // `/api/order/payout/bar/month?date={date}`,
+        `${serverApi}/order/owner/payout/month?date=${date}`,
         {
           headers: headers,
         }
       );
-      // console.log(resp.data.output);
-      setMonthBarData(resp.data.output);
+      // console.log(resp.data.output.bar);
+      setMonthBarData(resp.data.output.bar);
       // setLoading(false);
     } catch (error) {
       window.alert(error);
@@ -226,13 +225,12 @@ const Profit = () => {
   };
 
   useEffect(() => {
-    // getDayLineChart();
-    // getMonthLineChart();
-    // getDayPieChart();
-    // getMonthPieChart();
+    getDayLineChart();
+    getMonthLineChart();
+    getDayPieChart();
+    getMonthPieChart();
     getDayBarChart();
-    // getMonthBarChart();
-    // console.log("1");
+    getMonthBarChart();
   }, []);
 
   return (
@@ -263,30 +261,32 @@ const Profit = () => {
           </div>
         )}
       </div>
-      {/* {!month ? (
+      {!month ? (
         <>
           <DayLine dayLineData={dayLineData} />
-          <div className="temp">
-            <DayPie dayPieData={dayPieData} />
-            <DayBar dayBarData={dayBarData} />
-          </div>
+          <DayPie dayPieData={dayPieData} />
+          <DayBar dayBarData={dayBarData} />
+          {/* <div className="temp">
+            
+          </div> */}
         </>
       ) : (
         <>
           <MonthLine monthLineData={monthLineData} />
-          <div className="temp">
-            <MonthPie monthPieData={monthPieData} />
-            <MonthBar monthBarData={monthBarData} />
-          </div>
+          <MonthPie monthPieData={monthPieData} />
+          <MonthBar monthBarData={monthBarData} />
+          {/* <div className="temp">
+            
+          </div> */}
         </>
-      )} */}
+      )}
 
-      {/* <DayLine dayLineData={dayLineData} />
-      <MonthLine monthLineData={monthLineData} /> */}
+      {/* <DayLine dayLineData={dayLineData} /> */}
+      {/* <MonthLine monthLineData={monthLineData} /> */}
       {/* <DayPie dayPieData={dayPieData} /> */}
       {/* <MonthPie monthPieData={monthPieData} /> */}
-      <DayBar dayBarData={dayBarData} />
-      {/* <MonthBar monthBarData={monthBarData}/> */}
+      {/* <DayBar dayBarData={dayBarData} /> */}
+      {/* <MonthBar monthBarData={monthBarData} /> */}
     </StProfit>
   );
 };

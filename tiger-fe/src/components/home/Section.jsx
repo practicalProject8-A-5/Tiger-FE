@@ -162,8 +162,8 @@ const StSection = styled.div`
     padding: 0 130px;
     box-sizing: border-box;
     .item_box {
-      width: 500px;
-      height: 460px;
+      width: 480px;
+      height: 440px;
       background: #ffffff;
       box-shadow: 0px -2px 80px rgba(0, 0, 0, 0.04),
         0px -0.6px 30px rgba(0, 0, 0, 0.04),
@@ -207,7 +207,7 @@ const StSection = styled.div`
     padding: 0 130px;
     box-sizing: border-box;
     .list {
-      width: 100%;
+      width: 1600px;
       height: 222px;
       background-color: pink;
       margin-bottom: 58px;
@@ -221,6 +221,7 @@ const StSection = styled.div`
         0px -0.1px 6.4309px rgba(0, 0, 0, 0.02);
       border-radius: 36px;
       position: relative;
+      margin: 0 auto 58px auto;
       span {
         font-weight: 600;
         font-size: 42px;

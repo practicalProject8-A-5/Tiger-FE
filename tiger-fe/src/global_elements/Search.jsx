@@ -15,6 +15,7 @@ import pin from "../assets/pin_trans.png";
 import clock from "../assets/clock.png";
 import vehicle from "../assets/vehicle.png";
 import { format } from "date-fns";
+import { FaAngleRight } from "react-icons/fa";
 
 const Search = () => {
   const mapKey = process.env.REACT_APP_REST_API_KEY;
@@ -141,7 +142,8 @@ const Search = () => {
               setIsPopupOpen(!isPopupOpen);
             }}
             onChange={onChangeHandler}
-            placeholder="어디서?"></input>
+            placeholder="어디서?"
+          ></input>
           {isPopupOpen ? (
             <div>
               <DaumPostcode style={postCodeStyle} onComplete={handlePostCode} />
@@ -151,40 +153,46 @@ const Search = () => {
           )}
         </StSearchLocationContainer>
         <StCalendarContainer>
-          <StCalendarWrapper style={{ zIndex: 98 }}>
-            <img src={clock} alt="시계" />
-            <StNewDatePicker
-              selected={startDates}
-              onChange={(date) => setStartDates(date)}
-              selectsStart
-              startDate={startDates}
-              endDate={endDates}
-              locale={ko}
-              dateFormat="yyyy-MM-dd"
-              minDate={new Date()}
-              shouldCloseOnSelect={true}
-              placeholderText="언제부터"
-              // customInput={<ExampleCustomInput />}
+          <div className="wrapper_box">
+            <StCalendarWrapper style={{ zIndex: 99, position: "relative" }}>
+              <img src={clock} alt="시계" />
+              <StNewDatePicker
+                selected={startDates}
+                onChange={(date) => setStartDates(date)}
+                selectsStart
+                startDate={startDates}
+                endDate={endDates}
+                locale={ko}
+                dateFormat="yyyy-MM-dd"
+                minDate={new Date()}
+                shouldCloseOnSelect={true}
+                placeholderText="언제부터"
+                // customInput={<ExampleCustomInput />}
+              />
+            </StCalendarWrapper>
+            {/* <div className="dateConnection"></div> */}
+            <FaAngleRight
+              style={{ color: "#CCCCCC", fontSize: 18, marginRight: 27 }}
             />
-          </StCalendarWrapper>
-          <div className="dateConnection">~</div>
-          <StCalendarWrapper>
-            <img src={clock} alt="시계" />
-            <StNewDatePicker
-              className="StNewDatePicker"
-              selected={endDates}
-              onChange={(date) => setEndDates(date)}
-              selectsEnd
-              startDate={startDates}
-              endDate={endDates}
-              minDate={startDates}
-              locale={ko}
-              dateFormat="yyyy-MM-dd"
-              shouldCloseOnSelect={true}
-              placeholderText="언제까지"
-              // customInput={<ExampleCustomInput />}
-            />
-          </StCalendarWrapper>
+            <StCalendarWrapper>
+              <img src={clock} alt="시계" />
+              <StNewDatePicker
+                className="StNewDatePicker"
+                selected={endDates}
+                onChange={(date) => setEndDates(date)}
+                selectsEnd
+                startDate={startDates}
+                endDate={endDates}
+                minDate={startDates}
+                locale={ko}
+                dateFormat="yyyy-MM-dd"
+                shouldCloseOnSelect={true}
+                placeholderText="언제까지"
+                // customInput={<ExampleCustomInput />}
+              />
+            </StCalendarWrapper>
+            <div className="hour">24시간</div>
+          </div>
         </StCalendarContainer>
         <StVehicleTypeContainer>
           <select value={type} onChange={handleChange}>
@@ -222,6 +230,9 @@ const StSearch = styled.div`
 `;
 const StSearchLocationContainer = styled.div`
   .location_input {
+    color: #757575;
+    font-weight: 700;
+    font-size: 18px;
     outline: none;
     border: none;
     width: 350px;
@@ -239,20 +250,32 @@ const StSearchLocationContainer = styled.div`
   }
 `;
 const StCalendarContainer = styled.div`
+  width: 540px;
   display: flex;
-  justify-content: space-around;
-  align-content: space-around;
+  /* flex-direction: row; */
+  /* justify-content: space-around; */
+  /* align-content: space-around; */
+  background-color: #f2f2f2;
   /* background-color: pink; */
-  .dateConnection {
-    height: 42px;
-    box-sizing: border-box;
-    font-size: 18px;
-    line-height: 42px;
-    top: 25px;
+  padding: 0 16px;
+  box-sizing: border-box;
+  border-radius: 12px;
+  .wrapper_box {
+    /* background-color: skyblue; */
+    width: 100%;
+    display: flex;
+    align-items: center;
     position: relative;
-    z-index: 98;
-    margin-right: 16px;
-    margin-left: 16px;
+    .hour {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      z-index: 99;
+      font-weight: 500;
+      font-size: 18px;
+      color: #8b8b8b;
+    }
   }
 `;
 const StCalendarWrapper = styled.div`
@@ -264,8 +287,9 @@ const StCalendarWrapper = styled.div`
   height: 42px;
   box-sizing: border-box;
   font-size: 14px;
-  margin: 25px 0 25px 0;
-  cursor: pointer;
+
+  /* margin: 25px 0 25px 0; */
+  /* cursor: pointer; */
   background: #f2f2f2;
   border-radius: 12px;
   padding: 5px;
@@ -281,6 +305,10 @@ const StCalendarWrapper = styled.div`
       outline: none;
       border: none;
       padding: 0;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 18px;
+      color: #8b8b8b;
       background: #f2f2f2;
     }
   }
@@ -364,7 +392,9 @@ const StCalendarWrapper = styled.div`
     }
   }
 `;
-const StNewDatePicker = styled(DatePicker)``;
+const StNewDatePicker = styled(DatePicker)`
+  color: #8b8b8b;
+`;
 const StVehicleTypeContainer = styled.div`
   select {
     width: 300px;
@@ -382,6 +412,12 @@ const StVehicleTypeContainer = styled.div`
     border: none;
     outline: none;
     color: #8b8b8b;
+    font-weight: 700;
+    font-size: 18px;
+    option {
+      /* background-color: pink; */
+      border-radius: 12px;
+    }
   }
 `;
 export default Search;

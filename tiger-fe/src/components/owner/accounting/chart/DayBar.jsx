@@ -69,8 +69,70 @@ const BarChart = ({ dayBarData }) => {
   let dateDate = ("0" + today.getDate()).slice(-2);
 
   let last = new Date(dateYear, dateMonth, 0).getDate();
-  // console.log(last);
 
+  //vid 중복 제거 새로운 객체 배열
+  const vidData = dayBarData.filter(
+    (arr, index, callback) =>
+      index === callback.findIndex((el) => el.vid === arr.vid)
+  );
+  // console.log(vidData);
+
+  let reformatName = vidData.map((obj) => {
+    let robj = {
+      name: "",
+    };
+    robj = `${obj.vbrand}${obj.vname}`;
+    return robj;
+  });
+
+  // console.log(reformatName);
+
+  // 임시객체
+  let carList = {};
+  for (let i = 0; i < reformatName.length; i++) {
+    let newArray = new Array(last).fill(0);
+    carList[reformatName[i]] = newArray;
+  }
+  // console.log(carList);
+
+  const bgColor = [
+    "rgba(255, 99, 132, 0.9)",
+    "rgba(54, 162, 235, 0.9)",
+    "rgba(255, 206, 86, 0.9)",
+    "rgba(75, 192, 192, 0.9)",
+    "rgba(153, 102, 255, 0.9)",
+    "rgba(255, 159, 64, 0.2)",
+    "rgba(255, 99, 132, 1)",
+    "rgba(54, 162, 235, 1)",
+    "rgba(75, 192, 192, 1)",
+    "rgba(153, 102, 255, 1)",
+    "rgba(255, 159, 64, 1)",
+  ];
+
+  // console.log(bgColor);
+
+  //datasets 객체 생성
+  let objData = [];
+  for (let i = 0; i <= vidData.length - 1; i++) {
+    objData.push({
+      label: reformatName[i],
+      data: [],
+      backgroundColor: bgColor[i],
+      datalabels: {
+        color: "white",
+      },
+    });
+  }
+  // console.log("objData :", objData);
+
+  // console.log(last);
+  // let vidData = dayBarData.filter(
+  //   (arr, index, callback) =>
+  //     index === callback.findIndex((el) => el.vid === arr.id)
+  // );
+  // console.log(vidData);
+
+  //큰 라벨(X축 생성)
   let labelData = [];
   for (let i = 1; i <= last; i++) {
     if (i < 10) {
@@ -83,51 +145,44 @@ const BarChart = ({ dayBarData }) => {
 
   let formatData = [];
 
-  labelData.forEach((formatDataEl) => {
+  labelData.forEach((formatDataEl, idx) => {
     const filterData = dayBarData.filter(
       (dataEl) => dataEl.date === formatDataEl.date
     );
-    if (filterData.length === 1) {
-      formatData.push(filterData[0].sum);
+    if (filterData.length >= 1) {
+      formatData.push(filterData);
     } else {
       formatData.push(0);
     }
-    // console.log(filterData);
+    // console.log("idx :", idx + 1);
+    // console.log("filterData :", filterData);
+
+    filterData.map((el) => {
+      let carName = `${el.vbrand}${el.vname}`;
+      carList[carName][idx] = el.sum;
+    });
+  });
+  // console.log("carList ==>", carList);
+
+  objData.forEach((el) => {
+    const tempLabel = el.label;
+    el.data = carList[tempLabel];
+    // el.backgroundColor =
   });
 
+  // console.log("newobjData :", objData);
+  // console.log("formatData :", formatData);
+
+  // ------------------------------------------------------
   const data = {
-    // labels: [...labelData.map((el) => (el = el.date))],
-    labels: ["1월", "2월", "3월", "4월", "5월", "6월"],
+    labels: [...labelData.map((el) => (el = el.date))],
+    // labels: ["1월", "2월", "3월", "4월", "5월", "6월"],
 
     // labels,
-    datasets: [
-      {
-        label: "Dataset 1",
-        data: [10000, 12000, 12000, 12000, 12000],
-        backgroundColor: "rgb(255, 99, 132)",
-        datalabels: {
-          color: "white",
-        },
-      },
-      {
-        label: "Dataset 2",
-        data: [9000, 9000, 9000, 10000, 12000, 9000, 15000],
-        backgroundColor: "rgb(75, 192, 192)",
-        datalabels: {
-          color: "white",
-        },
-      },
-      {
-        label: "Dataset 3",
-        data: [8000, 14000, 9000, 11000, 10000, 12000],
-        backgroundColor: "rgb(53, 162, 235)",
-        datalabels: {
-          color: "white",
-        },
-      },
-    ],
+    datasets: [...objData],
     tooltips: {},
   };
+  // console.log(data.datasets);
 
   const options = {
     plugins: {
@@ -167,8 +222,8 @@ const BarChart = ({ dayBarData }) => {
       },
       y: {
         stacked: true,
-        min: 0,
-        max: 50000,
+        // min: 0,
+        // max: 50000,
         // beginAtZero: true,
       },
     },
@@ -186,5 +241,5 @@ export default BarChart;
 const StDayBar = styled.div`
   margin-top: 48px;
   /* width: 50% !important; */
-  /* height: 705px !important; */
+  height: 705px !important;
 `;

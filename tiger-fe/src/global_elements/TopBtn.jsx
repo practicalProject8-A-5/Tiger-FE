@@ -48,8 +48,8 @@ const StTopBtn = styled.div`
   background: #ffb979;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   position: fixed;
-  right: 249px;
-  bottom: 50px;
+  bottom: 130px;
+  right: 100px;
   z-index: 9;
   display: flex;
   justify-content: center;

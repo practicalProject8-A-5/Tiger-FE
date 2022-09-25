@@ -183,6 +183,6 @@ export default DayPie;
 
 const StDayPie = styled.div`
   margin-top: 48px;
-  width: 50% !important;
-  height: 100% !important;
+  /* width: 50% !important;
+  height: 100% !important; */
 `;

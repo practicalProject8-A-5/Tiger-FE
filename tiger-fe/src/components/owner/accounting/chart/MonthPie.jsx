@@ -175,7 +175,7 @@ export default MonthPie;
 
 const StMonthPie = styled.div`
   margin-top: 48px;
-  width: 50% !important;
-  height: 100% !important;
+  /* width: 50% !important;
+  height: 100% !important; */
   /* background-color: pink; */
 `;
