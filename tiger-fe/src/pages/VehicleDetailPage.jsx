@@ -5,6 +5,7 @@ import styled from "styled-components";
 import VehicleDetailLeft from "../components/vehicle_detail/VehicleDetailLeft";
 import VehicleDetailRight from "../components/vehicle_detail/VehicleDetailRight";
 import GlobalLayout from "../global/GlobalLayout";
+import Footer from "../global_elements/Footer";
 import Header from "../global_elements/Header";
 import Search from "../global_elements/Search";
 
@@ -23,6 +24,7 @@ const VehicleDetailPage = () => {
           </StDetailRightSection>
         </StDetailContainer>
       </GlobalLayout>
+      <Footer />
     </>
   );
 };
