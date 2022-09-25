@@ -8,6 +8,7 @@ import GlobalLayout from "../global/GlobalLayout";
 import Footer from "../global_elements/Footer";
 import Header from "../global_elements/Header";
 import Search from "../global_elements/Search";
+// import Footer from "../global_elements/Footer";
 
 const VehicleDetailPage = () => {
   return (
@@ -20,7 +21,7 @@ const VehicleDetailPage = () => {
             <VehicleDetailLeft />
           </StDetailLeftSection>
           <StDetailRightSection>
-            <VehicleDetailRight />
+            {/* <VehicleDetailRight /> */}
           </StDetailRightSection>
         </StDetailContainer>
       </GlobalLayout>
