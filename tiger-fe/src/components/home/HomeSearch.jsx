@@ -12,6 +12,10 @@ import { ko } from "date-fns/esm/locale";
 import { __vehicleSearchList } from "../../redux/modules/vehicleDetail";
 import { format } from "date-fns";
 import { FaSearch } from "react-icons/fa";
+import pin from "../../assets/pin_trans.png";
+import clock from "../../assets/clock.png";
+import vehicle from "../../assets/vehicle.png";
+import { FaAngleRight } from "react-icons/fa";
 
 const HomeSearch = () => {
   const mapKey = process.env.REACT_APP_REST_API_KEY;
@@ -147,8 +151,7 @@ const HomeSearch = () => {
             setIsPopupOpen(!isPopupOpen);
           }}
           onChange={onChangeHandler}
-          placeholder="어디서?"
-        ></input>
+          placeholder="어디서?"></input>
         {isPopupOpen ? (
           <div>
             <DaumPostcode style={postCodeStyle} onComplete={handlePostCode} />
@@ -157,39 +160,47 @@ const HomeSearch = () => {
           !isPopupOpen
         )}
         <StCalendarContainer>
-          <StCalendarWrapper style={{ zIndex: 999 }}>
-            <StNewDatePicker
-              className="StNewDatePicker"
-              selected={startDates}
-              onChange={(date) => setStartDates(date)}
-              selectsStart
-              startDate={startDates}
-              endDate={endDates}
-              locale={ko}
-              dateFormat="yyyy-MM-dd"
-              minDate={new Date()}
-              shouldCloseOnSelect={true}
-              placeholderText="언제부터"
-              // customInput={<ExampleCustomInput />}
+          <div className="wrapper_box">
+            <StCalendarWrapper style={{ zIndex: 999 }}>
+              <img src={clock} alt="시계" />
+              <StNewDatePicker
+                className="StNewDatePicker"
+                selected={startDates}
+                onChange={(date) => setStartDates(date)}
+                selectsStart
+                startDate={startDates}
+                endDate={endDates}
+                locale={ko}
+                dateFormat="yyyy-MM-dd"
+                minDate={new Date()}
+                shouldCloseOnSelect={true}
+                placeholderText="언제부터"
+                // customInput={<ExampleCustomInput />}
+              />
+            </StCalendarWrapper>
+            {/* <div className="dateConnection">~</div> */}
+            <FaAngleRight
+              style={{ color: "#CCCCCC", fontSize: 18, marginRight: 27 }}
             />
-          </StCalendarWrapper>
-          <div className="dateConnection">~</div>
-          <StCalendarWrapper>
-            <StNewDatePicker
-              className="StNewDatePicker"
-              selected={endDates}
-              onChange={(date) => setEndDates(date)}
-              selectsEnd
-              startDate={startDates}
-              endDate={endDates}
-              minDate={startDates}
-              locale={ko}
-              dateFormat="yyyy-MM-dd"
-              shouldCloseOnSelect={true}
-              placeholderText="언제까지"
-              // customInput={<ExampleCustomInput />}
-            />
-          </StCalendarWrapper>
+            <StCalendarWrapper>
+              <img src={clock} alt="시계" />
+              <StNewDatePicker
+                className="StNewDatePicker"
+                selected={endDates}
+                onChange={(date) => setEndDates(date)}
+                selectsEnd
+                startDate={startDates}
+                endDate={endDates}
+                minDate={startDates}
+                locale={ko}
+                dateFormat="yyyy-MM-dd"
+                shouldCloseOnSelect={true}
+                placeholderText="언제까지"
+                // customInput={<ExampleCustomInput />}
+              />
+            </StCalendarWrapper>
+            <div className="hour">24시간</div>
+          </div>
         </StCalendarContainer>
         <StVehicleTypeContainer>
           <select value={type} onChange={handleChange}>
@@ -243,16 +254,25 @@ const StSearch = styled.div`
   }
   .input_box {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     margin-top: 32px;
     input {
-      width: 400px;
-      height: 55px;
+      color: #757575;
+      font-weight: 700;
+      font-size: 18px;
       outline: none;
       border: none;
+      width: 400px;
+      height: 55px;
+      cursor: pointer;
       background: #f2f2f2;
       border-radius: 12px;
-      text-indent: 20px;
+      padding: 5px;
+      background-image: url(${pin});
+      background-repeat: no-repeat;
+      background-size: 16px;
+      background-position: 9px 20px;
+      text-indent: 40px;
     }
     .date {
       width: 540px;
@@ -288,20 +308,27 @@ const StSearch = styled.div`
 `;
 
 const StCalendarContainer = styled.div`
+  width: 540px;
   display: flex;
-  justify-content: space-around;
-  align-content: space-around;
-  height: 55px;
-  .dateConnection {
-    height: 42px;
-    box-sizing: border-box;
-    font-size: 18px;
-    line-height: 42px;
-    top: 5px;
+  background-color: #f2f2f2;
+  padding: 0 16px;
+  box-sizing: border-box;
+  border-radius: 12px;
+  .wrapper_box {
+    width: 100%;
+    display: flex;
+    align-items: center;
     position: relative;
-    z-index: 99;
-    margin-right: 16px;
-    margin-left: 16px;
+    .hour {
+      position: absolute;
+      top: 47%;
+      right: 0;
+      transform: translateY(-50%);
+      z-index: 99;
+      font-weight: 500;
+      font-size: 18px;
+      color: #8b8b8b;
+    }
   }
 `;
 const StCalendarWrapper = styled.div`
@@ -323,16 +350,17 @@ const StCalendarWrapper = styled.div`
   .react-datepicker-wrapper {
     margin-left: 8px;
     width: 100%;
-    /* background-color: pink; */
     .react-datepicker__input-container {
-      background-color: pink;
       input {
         width: 100%;
         outline: none;
         border: none;
         padding: 0;
+        cursor: pointer;
+        font-weight: 700;
+        font-size: 18px;
+        color: #8b8b8b;
         background: #f2f2f2;
-        /* background-color: pink; */
       }
     }
   }
@@ -377,7 +405,6 @@ const StCalendarWrapper = styled.div`
                 display: flex;
                 justify-content: space-between;
                 .react-datepicker__day--weekend {
-                  /* color: red; */
                 }
                 .react-datepicker__day--selected {
                   background-color: #000 !important;
@@ -420,15 +447,25 @@ const StNewDatePicker = styled(DatePicker)``;
 const StVehicleTypeContainer = styled.div`
   select {
     width: 300px;
-    height: 55px;
+    height: 64px;
     padding: 8px;
     cursor: pointer;
     background: #f2f2f2;
     border-radius: 12px;
     padding: 5px;
+    background-image: url(${vehicle});
+    background-repeat: no-repeat;
+    background-size: 23px;
+    background-position: 9px 20px;
     text-indent: 34px;
     border: none;
     outline: none;
     color: #8b8b8b;
+    font-weight: 700;
+    font-size: 18px;
+    option {
+      /* background-color: pink; */
+      border-radius: 12px;
+    }
   }
 `;

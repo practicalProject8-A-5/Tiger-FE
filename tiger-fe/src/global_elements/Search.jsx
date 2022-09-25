@@ -142,8 +142,7 @@ const Search = () => {
               setIsPopupOpen(!isPopupOpen);
             }}
             onChange={onChangeHandler}
-            placeholder="어디서?"
-          ></input>
+            placeholder="어디서?"></input>
           {isPopupOpen ? (
             <div>
               <DaumPostcode style={postCodeStyle} onComplete={handlePostCode} />
@@ -246,22 +245,16 @@ const StSearchLocationContainer = styled.div`
     background-size: 16px;
     background-position: 9px 7px;
     text-indent: 30px;
-    /* border: 1px solid; */
   }
 `;
 const StCalendarContainer = styled.div`
   width: 540px;
   display: flex;
-  /* flex-direction: row; */
-  /* justify-content: space-around; */
-  /* align-content: space-around; */
   background-color: #f2f2f2;
-  /* background-color: pink; */
   padding: 0 16px;
   box-sizing: border-box;
   border-radius: 12px;
   .wrapper_box {
-    /* background-color: skyblue; */
     width: 100%;
     display: flex;
     align-items: center;
@@ -287,9 +280,6 @@ const StCalendarWrapper = styled.div`
   height: 42px;
   box-sizing: border-box;
   font-size: 14px;
-
-  /* margin: 25px 0 25px 0; */
-  /* cursor: pointer; */
   background: #f2f2f2;
   border-radius: 12px;
   padding: 5px;
@@ -353,7 +343,6 @@ const StCalendarWrapper = styled.div`
                 display: flex;
                 justify-content: space-between;
                 .react-datepicker__day--weekend {
-                  /* color: red; */
                 }
                 .react-datepicker__day--selected {
                   background-color: #000 !important;
