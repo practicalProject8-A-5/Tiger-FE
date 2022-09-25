@@ -17,6 +17,8 @@ import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
 import { options } from "../../redux/modules/vehicleDetail";
+import { FaStar, FaRegStar } from "react-icons/fa";
+import { AiFillStar } from "react-icons/ai";
 
 const VehicleDetailLeft = () => {
   const email = localStorage.getItem("email");
@@ -84,7 +86,8 @@ const VehicleDetailLeft = () => {
         spaceBetween={8}
         slidesPerView={1}
         scrollbar={{ draggable: true, dragSize: 24 }}
-        navigation={true}>
+        navigation={true}
+      >
         {vehicleDetails.imageList &&
           vehicleDetails.imageList.map((image, i) => {
             return (
@@ -96,14 +99,16 @@ const VehicleDetailLeft = () => {
       </StNewSwiper>
       <StVehicleInfoContainer>
         <StVehicleInfoTitleWrapper>
-          <h1>
-            <span>
-              {vehicleDetails.vbrand} <span>{vehicleDetails.vname}</span>
-            </span>
-          </h1>
+          <div className="title">
+            {vehicleDetails.vbrand}
+            {vehicleDetails.vname}
+          </div>
         </StVehicleInfoTitleWrapper>
         <StVehicleInfoLocationWrapper>
           <div className="locationTitle">
+            <FaStar className="location_star_ico" />
+            <span className="location_num">4.12</span>
+            <span className="location_comment">후기 24개</span>
             <p>{vehicleDetails.location}</p>
             {email ? (
               isLike === true ? (
@@ -167,21 +172,116 @@ const VehicleDetailLeft = () => {
           </div>
         </StRenterInfoWrapper>
         <KakaoMapDetail vehicleDetails={vehicleDetails} />
+
+        <h2 className="review">렌터 리뷰</h2>
+        <div className="star_box">
+          <div className="star_num">4.0</div>
+          <div className="star">
+            <FaStar className="star_ico" />
+            <FaStar className="star_ico" />
+            <FaStar className="star_ico" />
+            <FaStar className="star_ico" />
+            <FaRegStar className="star_ico_nofill" />
+          </div>
+        </div>
+        <div className="comment_wrap">
+          <div className="comment_item">
+            <div className="user_img">
+              <img src="" alt="" />
+            </div>
+            <div className="comment_main">
+              <div className="comment_main__top">
+                <div className="user_name">김렌터</div>
+                <span className="user_star">
+                  <AiFillStar />
+                </span>
+                <span className="user_total">4.12</span>
+              </div>
+              <div className="comment_desc">
+                이 차 좋아
+                좋아조아조아조앙ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇdddddddddddddddddddsdfsddfs
+              </div>
+            </div>
+            <div className="comment_date">
+              <span>2022-09-24</span>
+            </div>
+          </div>
+
+          <div className="comment_item">
+            <div className="user_img">
+              <img src="" alt="" />
+            </div>
+            <div className="comment_main">
+              <div className="comment_main__top">
+                <div className="user_name">김렌터</div>
+                <span className="user_star">
+                  <AiFillStar />
+                </span>
+                <span className="user_total">4.12</span>
+              </div>
+              <div className="comment_desc">
+                이 차 좋아
+                좋아조아조아조앙ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇdddddddddddddddddddsdfsddfs
+              </div>
+            </div>
+            <div className="comment_date">
+              <span>2022-09-24</span>
+            </div>
+          </div>
+
+          <div className="comment_item">
+            <div className="user_img">
+              <img src="" alt="" />
+            </div>
+            <div className="comment_main">
+              <div className="comment_main__top">
+                <div className="user_name">김렌터</div>
+                <span className="user_star">
+                  <AiFillStar />
+                </span>
+                <span className="user_total">4.12</span>
+              </div>
+              <div className="comment_desc">
+                이 차 좋아
+                좋아조아조아조앙ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇdddddddddddddddddddsdfsddfs
+              </div>
+            </div>
+            <div className="comment_date">
+              <span>2022-09-24</span>
+            </div>
+          </div>
+
+          <div className="comment_item">
+            <div className="user_img">
+              <img src="" alt="" />
+            </div>
+            <div className="comment_main">
+              <div className="comment_main__top">
+                <div className="user_name">김렌터</div>
+                <span className="user_star">
+                  <AiFillStar />
+                </span>
+                <span className="user_total">4.12</span>
+              </div>
+              <div className="comment_desc">
+                이 차 좋아
+                좋아조아조아조앙ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇdddddddddddddddddddsdfsddfs
+              </div>
+            </div>
+            <div className="comment_date">
+              <span>2022-09-24</span>
+            </div>
+          </div>
+        </div>
       </StVehicleInfoContainer>
     </>
   );
 };
 
 const StNewSwiper = styled(Swiper)`
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 0;
   width: 79%;
-  float: left;
   border-radius: 12px;
-  .swiper-slide-active {
-    /* width: auto !important; */
-  }
+  margin: 0 !important;
   .swiper-button-next {
     right: 15px !important;
   }
@@ -199,39 +299,177 @@ const StNewSwiper = styled(Swiper)`
 
 const StVehicleInfoContainer = styled.div`
   display: block;
-  float: left;
+  /* background-color: skyblue; */
   width: 79%;
+  .review {
+    font-weight: 600;
+    font-size: 20px;
+    color: #000000;
+    margin: 50px 0 32px 0;
+  }
+  .star_box {
+    display: flex;
+    align-items: center;
+    margin-bottom: 32px;
+    /* background-color: pink; */
+    .star_num {
+      font-weight: 600;
+      font-size: 32px;
+      color: #000000;
+      margin-right: 20px;
+    }
+    .star {
+      .star_ico {
+        font-size: 30px;
+        color: #ffb979;
+        margin-right: 5px;
+      }
+      .star_ico_nofill {
+        font-size: 30px;
+      }
+    }
+  }
+  .comment_wrap {
+    width: 100%;
+    /* background-color: skyblue; */
+    .comment_item {
+      /* 임시 */
+      width: 830px;
+      height: 58px;
+
+      position: relative;
+      display: flex;
+      border: 1px solid;
+      margin-bottom: 30px;
+      :nth-last-child(1) {
+        margin-bottom: 0;
+      }
+      .user_img {
+        width: 56px;
+        height: 56px;
+        background-color: pink;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 27px;
+        img {
+        }
+      }
+      .comment_main {
+        width: calc(100% - 83px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        /* padding: 5px 0; */
+        box-sizing: border-box;
+        /* background-color: yellowgreen; */
+        .comment_main__top {
+          /* background-color: tomato; */
+          display: flex;
+          align-items: center;
+          .user_name {
+            font-weight: 500;
+            font-size: 18px;
+            color: #000000;
+            margin-right: 7px;
+          }
+          .user_star {
+            font-size: 15px;
+            margin-right: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          .user_total {
+            font-weight: 700;
+            font-size: 18px;
+            color: #4d4d4d;
+          }
+        }
+        .comment_desc {
+          width: 100%;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          font-weight: 300;
+          font-size: 18px;
+          color: #8b8b8b;
+          line-height: 25px;
+          /* background-color: pink; */
+          /* vertical-align: ; */
+        }
+      }
+      .comment_date {
+        position: absolute;
+        top: 0;
+        right: 0;
+        span {
+          font-weight: 300;
+          font-size: 16px;
+          color: #8b8b8b;
+        }
+      }
+    }
+  }
 `;
 
 const StVehicleInfoTitleWrapper = styled.div`
-  h1,
-  span {
+  /* background-color: tomato; */
+  .title {
     margin-top: 29px;
     font-weight: 500;
     font-size: 38px;
     line-height: 52px;
+    /* margin-bottom: 20px; */
   }
 `;
 
 const StVehicleInfoLocationWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  /* background-color: tomato; */
+  padding-bottom: 65px;
+  border-bottom: 1px solid #cccccc;
   .locationTitle {
     width: 100%;
+    line-height: 64px;
     display: flex;
+    align-items: center;
+    position: relative;
+    .location_star_ico {
+      font-size: 18px;
+      margin-right: 9px;
+      color: #ffb979;
+    }
+    .location_num {
+      margin-right: 17px;
+      font-weight: 700;
+      font-size: 18px;
+      color: #000000;
+    }
+    .location_comment {
+      margin-right: 17px;
+      text-decoration: underline;
+      font-weight: 700;
+      font-size: 18px;
+      color: #000000;
+    }
     p {
       font-family: 700;
       font-size: 18px;
-      line-height: 25px;
-      border-bottom: 1px solid #cccccc;
-      padding-bottom: 64px;
-      width: 100%;
+      text-decoration: underline;
+      color: #000000;
     }
-    img {
-      height: 25px;
-      width: 25px;
-      float: right;
-      padding-top: 55px;
+    .heart {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      cursor: pointer;
+      /* background-color: royalblue; */
+      img {
+        height: 25px;
+        width: 25px;
+      }
     }
   }
 `;
@@ -247,6 +485,10 @@ const StVehicleInfoContentsWrapper = styled.div`
     margin-bottom: 34px;
   }
   p {
+    padding: 28px 26px;
+    box-sizing: border-box;
+    border: 1px solid #8b8b8b;
+    border-radius: 20px;
   }
 `;
 
@@ -265,7 +507,7 @@ const StRenterInfoWrapper = styled.div`
       width: 56px;
       height: 56px;
       border-radius: 50%;
-      border: 1px solid black;
+      /* border: 1px solid black; */
       margin-right: 31px;
     }
     &__info {
