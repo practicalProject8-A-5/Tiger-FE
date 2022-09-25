@@ -19,8 +19,12 @@ import "swiper/scss/pagination";
 import { options } from "../../redux/modules/vehicleDetail";
 import { FaStar, FaRegStar } from "react-icons/fa";
 import { AiFillStar } from "react-icons/ai";
+import imgUrl from "../../assets/meta_image2.png";
 
 const VehicleDetailLeft = () => {
+  const key = process.env.REACT_APP_KAKAO_MAP_KEY;
+  const s3 = process.env.REACT_APP_IMAGEURL;
+
   const email = localStorage.getItem("email");
   console.log(email);
   const dispatch = useDispatch();
@@ -45,8 +49,8 @@ const VehicleDetailLeft = () => {
   }, [dispatch, id]);
 
   const [isLike, setIsLike] = useState(vehicleDetails.heart);
-  console.log(isLike);
-  console.log(vehicleDetails.heart);
+  // console.log(isLike);
+  // console.log(vehicleDetails.heart);
 
   const likeClickHandler = () => {
     dispatch(__isLike(vehicleDetails.vid));
@@ -55,9 +59,43 @@ const VehicleDetailLeft = () => {
   };
 
   useEffect(() => {
-    // console.log(list.heart);
     setIsLike(vehicleDetails.heart);
   }, [vehicleDetails]);
+
+  //sdk
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://developers.kakao.com/sdk/js/kakao.js";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => document.body.removeChild(script);
+  }, [dispatch]);
+
+  const shareToKakao = () => {
+    //kakao sdk script 부른 후 window.kakao로 접근
+    if (window.Kakao) {
+      const kakao = window.Kakao;
+
+      //중복 initialization방지
+      //카카오에서 제공하는 key를 이용해 initialize
+      if (!kakao.isInitialized()) {
+        kakao.init(`${key}`);
+      }
+
+      kakao.Link.sendDefault({
+        objectType: "feed",
+        content: {
+          title: "Ta,iger",
+          description: "차가 필요할때든 필요없을때든 타,이거",
+          imageUrl: `${s3}META_IMAGE.png`,
+          link: {
+            mobileWebUrl: "https://taiger.kr/",
+            webUrl: "https://taiger.kr/",
+          },
+        },
+      });
+    }
+  };
 
   const styleTh = {
     width: "180px",
@@ -110,6 +148,9 @@ const VehicleDetailLeft = () => {
             <span className="location_num">4.12</span>
             <span className="location_comment">후기 24개</span>
             <p>{vehicleDetails.location}</p>
+            <div className="share" onClick={shareToKakao}>
+              쉐어
+            </div>
             {email ? (
               isLike === true ? (
                 <span className="heart" onClick={likeClickHandler}>
