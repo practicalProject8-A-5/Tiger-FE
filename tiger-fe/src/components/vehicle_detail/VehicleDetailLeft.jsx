@@ -8,7 +8,7 @@ import KakaoMapDetail from "./KakaoMapDetail";
 import {
   __vehicleDetail,
   options,
-  __vehicleComments,
+  __getVehicleComments,
 } from "../../redux/modules/vehicleDetailSlice";
 import { __isLike } from "../../redux/modules/likeSlice";
 
@@ -23,6 +23,7 @@ import "swiper/scss/navigation";
 import "swiper/scss/pagination";
 import { FaStar, FaRegStar } from "react-icons/fa";
 import { AiFillStar } from "react-icons/ai";
+import { ImStarFull } from "react-icons/im";
 
 const VehicleDetailLeft = () => {
   const key = process.env.REACT_APP_KAKAO_MAP_KEY;
@@ -34,6 +35,15 @@ const VehicleDetailLeft = () => {
 
   const id = useParams();
   const vId = parseInt(id.id);
+
+  useEffect(() => {
+    dispatch(__vehicleDetail({ vId, startDate, endDate }));
+    dispatch(__getVehicleComments(vId));
+    console.log("??");
+    return () => {
+      dispatch(options());
+    };
+  }, [dispatch, vId]);
 
   // get response for vehicle info
   const vehicleDetails = useSelector(
@@ -47,21 +57,22 @@ const VehicleDetailLeft = () => {
   );
   console.log(commentLists);
 
+  // useEffect(() => {
+  //   if (commentLists !== undefined) {
+  //     const ratingNum = commentLists.map((v) => v.rating);
+  //     let ratingSum = 0;
+  //     for (let i = 0; i < ratingNum.length; i++) {
+  //       ratingSum++;
+  //     }
+  //     return ratingSum;
+  //   }
+  // }, []);
+
   // url에서 startDate & endDate params 잡아오기
   const startDate = new URL(window.location.href).searchParams.get("startDate");
   const endDate = new URL(window.location.href).searchParams.get("endDate");
 
-  useEffect(() => {
-    dispatch(__vehicleDetail({ vId, startDate, endDate }));
-    dispatch(__vehicleComments(vId));
-    return () => {
-      dispatch(options());
-    };
-  }, [dispatch, vId]);
-
   const [isLike, setIsLike] = useState(vehicleDetails.heart);
-  // console.log(isLike);
-  // console.log(vehicleDetails.heart);
 
   const likeClickHandler = () => {
     dispatch(__isLike(vehicleDetails.vid));
@@ -155,7 +166,13 @@ const VehicleDetailLeft = () => {
           <div className="locationTitle">
             <FaStar className="location_star_ico" />
             <span className="location_num">4.12</span>
-            <span className="location_comment">후기 24개</span>
+            {commentLists === undefined ? (
+              <span className="location_comment">후기 0개 </span>
+            ) : (
+              <span className="location_comment">
+                후기 {commentLists.length}개
+              </span>
+            )}
             <p>{vehicleDetails.location}</p>
             <div className="share" onClick={shareToKakao}>
               쉐어
@@ -239,12 +256,9 @@ const VehicleDetailLeft = () => {
             return (
               <div className="comment_wrap" key={index}>
                 <div className="comment_item">
-                  <div className="user_img">
-                    <img src={comment.profileImage} alt="profileImage" />
-                  </div>
                   <div className="comment_main">
                     <div className="comment_main__top">
-                      <div className="user_name">{comment.name}</div>
+                      <div className="user_name">{comment.author}</div>
                       <span className="user_star">
                         <AiFillStar />
                       </span>
@@ -253,7 +267,7 @@ const VehicleDetailLeft = () => {
                     <div className="comment_desc">{comment.comment}</div>
                   </div>
                   <div className="comment_date">
-                    <span>{comment.date}</span>
+                    <span>{comment.createdAt}</span>
                   </div>
                 </div>
               </div>
@@ -325,7 +339,7 @@ const StVehicleInfoContainer = styled.div`
 
       position: relative;
       display: flex;
-      border: 1px solid;
+      /* border: 1px solid; */
       margin-bottom: 30px;
       :nth-last-child(1) {
         margin-bottom: 0;

@@ -98,24 +98,6 @@ const Nickname = styled.div`
   text-overflow: ellipsis;
   margin-bottom: 20px;
 `;
-// const RoomOwnerInfo = styled.div`
-//   text-decoration: none;
-//   color: black;
-//   margin-bottom: 4px;
-//   display: flex;
-//   flex-direction: column;
-//   font-style: normal;
-//   font-weight: 500;
-//   font-size: 16px;
-//   justify-content: center;
-//   text-align: center;
-//   span {
-//     text-overflow: ellipsis;
-//     overflow: hidden;
-//     white-space: nowrap;
-//     justify-content: center;
-//   }
-// `;
 const Date = styled.div`
   margin-bottom: 20px;
   color: gray;

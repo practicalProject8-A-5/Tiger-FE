@@ -4,9 +4,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Button from "../../global_elements/Button";
 import PaymentModal from "./PaymentModal";
-// import LoginModal from "../../global_elements/LoginModal";
 import styled from "styled-components";
-// import { __vehicleDetail } from "../../redux/modules/vehicleDetail";
 
 const VehicleDetailRight = () => {
   const vehicleDetails = useSelector(
@@ -27,11 +25,6 @@ const VehicleDetailRight = () => {
   const showPaymentModal = () => {
     setPaymentModalOpen(!paymentModalOpen);
   };
-
-  // const [loginModal, setLoginModal] = useState();
-  // const showModal = () => {
-  //   setLoginModal(!loginModal);
-  // };
 
   return (
     <StPaymentBox>
@@ -80,10 +73,6 @@ const VehicleDetailRight = () => {
           vehicleDetails={vehicleDetails}
         />
       )}
-      {/* {loginModal && <LoginModal showModal={showModal} />} */}
-      {/* <StNeedLogin onClick={showModal}>
-          로그인후 이용해주세요
-        </StNeedLogin> */}
     </StPaymentBox>
   );
 };
