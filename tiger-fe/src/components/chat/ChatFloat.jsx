@@ -48,7 +48,7 @@ const ChatFloat = () => {
       // 서버에서 메시지가 전송될 때 실행되는 함수
       eventSource.current.onmessage = (message) => {
         console.log("서버에서 메시지가 전송될 때 실행되는 함수 :", message);
-        if (!message.data.includes("EventStream Created")) {
+        if (!message.data.includes("EventStream Created.")) {
           dispatch(setNotification(true));
         }
       };
