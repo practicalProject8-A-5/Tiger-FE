@@ -32,11 +32,18 @@ const ChatFloat = () => {
         `${process.env.REACT_APP_CHAT}/user/subscribe/${userId}`,
         {
           headers: {
-            Authorization: authorization,
-            RefreshToken: refreshToken,
+            "Content-Type": "text/event-stream",
+            Connection: "keep-alive",
+            "Cache-Control": "no-cache",
+            // Authorization: authorization,
+            // RefreshToken: refreshToken,
           },
         }
       );
+
+      eventSource.current.onopen = (event) => {
+        console.log("connection opened");
+      };
 
       // 서버에서 메시지가 전송될 때 실행되는 함수
       eventSource.current.onmessage = (message) => {
@@ -51,9 +58,10 @@ const ChatFloat = () => {
       if (eventSource.current) {
         eventSource.current.close();
         eventSource.current = null;
+        console.log("closed");
       }
     };
-  }, [userId, dispatch, authorization]);
+  }, [userId, dispatch, authorization, refreshToken]);
 
   return (
     <>
@@ -62,8 +70,7 @@ const ChatFloat = () => {
           <Link
             to="/chat"
             state={{ backgroundLocation: location }}
-            style={{ textDecoration: "none" }}
-          >
+            style={{ textDecoration: "none" }}>
             <ChatButtonWrap>
               <ChatButton>
                 {notification && <NewNoti />}
