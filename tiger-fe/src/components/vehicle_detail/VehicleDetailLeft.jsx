@@ -5,21 +5,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import KakaoMapDetail from "./KakaoMapDetail";
+import {
+  __vehicleDetail,
+  options,
+  __vehicleComments,
+} from "../../redux/modules/vehicleDetailSlice";
+import { __isLike } from "../../redux/modules/likeSlice";
+
 import emails from "../../assets/email.jpg";
 import phone from "../../assets/phone.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Scrollbar } from "swiper";
-import { __vehicleDetail } from "../../redux/modules/vehicleDetail";
 import like from "../../assets/Love.png";
 import liked from "../../assets/liked.png";
-import { __isLike } from "../../redux/modules/likeSlice";
 import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
-import { options } from "../../redux/modules/vehicleDetail";
 import { FaStar, FaRegStar } from "react-icons/fa";
 import { AiFillStar } from "react-icons/ai";
-import imgUrl from "../../assets/meta_image2.png";
 
 const VehicleDetailLeft = () => {
   const key = process.env.REACT_APP_KAKAO_MAP_KEY;
@@ -38,15 +41,23 @@ const VehicleDetailLeft = () => {
   );
   console.log(vehicleDetails);
 
+  // get comment lists
+  const commentLists = useSelector(
+    (state) => state.vehicleDetailSlice.commentLists
+  );
+  console.log(commentLists);
+
+  // url에서 startDate & endDate params 잡아오기
   const startDate = new URL(window.location.href).searchParams.get("startDate");
   const endDate = new URL(window.location.href).searchParams.get("endDate");
 
   useEffect(() => {
     dispatch(__vehicleDetail({ vId, startDate, endDate }));
+    dispatch(__vehicleComments(vId));
     return () => {
       dispatch(options());
     };
-  }, [dispatch, id]);
+  }, [dispatch, vId]);
 
   const [isLike, setIsLike] = useState(vehicleDetails.heart);
   // console.log(isLike);
@@ -54,7 +65,6 @@ const VehicleDetailLeft = () => {
 
   const likeClickHandler = () => {
     dispatch(__isLike(vehicleDetails.vid));
-    // console.log("222");
     setIsLike(!isLike);
   };
 
@@ -62,7 +72,7 @@ const VehicleDetailLeft = () => {
     setIsLike(vehicleDetails.heart);
   }, [vehicleDetails]);
 
-  //sdk
+  // 카카오 공유하기
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://developers.kakao.com/sdk/js/kakao.js";
@@ -124,8 +134,7 @@ const VehicleDetailLeft = () => {
         spaceBetween={8}
         slidesPerView={1}
         scrollbar={{ draggable: true, dragSize: 24 }}
-        navigation={true}
-      >
+        navigation={true}>
         {vehicleDetails.imageList &&
           vehicleDetails.imageList.map((image, i) => {
             return (
@@ -225,95 +234,31 @@ const VehicleDetailLeft = () => {
             <FaRegStar className="star_ico_nofill" />
           </div>
         </div>
-        <div className="comment_wrap">
-          <div className="comment_item">
-            <div className="user_img">
-              <img src="" alt="" />
-            </div>
-            <div className="comment_main">
-              <div className="comment_main__top">
-                <div className="user_name">김렌터</div>
-                <span className="user_star">
-                  <AiFillStar />
-                </span>
-                <span className="user_total">4.12</span>
+        {commentLists &&
+          commentLists.map((comment, index) => {
+            return (
+              <div className="comment_wrap" key={index}>
+                <div className="comment_item">
+                  <div className="user_img">
+                    <img src={comment.profileImage} alt="profileImage" />
+                  </div>
+                  <div className="comment_main">
+                    <div className="comment_main__top">
+                      <div className="user_name">{comment.name}</div>
+                      <span className="user_star">
+                        <AiFillStar />
+                      </span>
+                      <span className="user_total">{comment.rating}</span>
+                    </div>
+                    <div className="comment_desc">{comment.comment}</div>
+                  </div>
+                  <div className="comment_date">
+                    <span>{comment.date}</span>
+                  </div>
+                </div>
               </div>
-              <div className="comment_desc">
-                이 차 좋아
-                좋아조아조아조앙ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇdddddddddddddddddddsdfsddfs
-              </div>
-            </div>
-            <div className="comment_date">
-              <span>2022-09-24</span>
-            </div>
-          </div>
-
-          <div className="comment_item">
-            <div className="user_img">
-              <img src="" alt="" />
-            </div>
-            <div className="comment_main">
-              <div className="comment_main__top">
-                <div className="user_name">김렌터</div>
-                <span className="user_star">
-                  <AiFillStar />
-                </span>
-                <span className="user_total">4.12</span>
-              </div>
-              <div className="comment_desc">
-                이 차 좋아
-                좋아조아조아조앙ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇdddddddddddddddddddsdfsddfs
-              </div>
-            </div>
-            <div className="comment_date">
-              <span>2022-09-24</span>
-            </div>
-          </div>
-
-          <div className="comment_item">
-            <div className="user_img">
-              <img src="" alt="" />
-            </div>
-            <div className="comment_main">
-              <div className="comment_main__top">
-                <div className="user_name">김렌터</div>
-                <span className="user_star">
-                  <AiFillStar />
-                </span>
-                <span className="user_total">4.12</span>
-              </div>
-              <div className="comment_desc">
-                이 차 좋아
-                좋아조아조아조앙ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇdddddddddddddddddddsdfsddfs
-              </div>
-            </div>
-            <div className="comment_date">
-              <span>2022-09-24</span>
-            </div>
-          </div>
-
-          <div className="comment_item">
-            <div className="user_img">
-              <img src="" alt="" />
-            </div>
-            <div className="comment_main">
-              <div className="comment_main__top">
-                <div className="user_name">김렌터</div>
-                <span className="user_star">
-                  <AiFillStar />
-                </span>
-                <span className="user_total">4.12</span>
-              </div>
-              <div className="comment_desc">
-                이 차 좋아
-                좋아조아조아조앙ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇdddddddddddddddddddsdfsddfs
-              </div>
-            </div>
-            <div className="comment_date">
-              <span>2022-09-24</span>
-            </div>
-          </div>
-        </div>
+            );
+          })}
       </StVehicleInfoContainer>
     </>
   );

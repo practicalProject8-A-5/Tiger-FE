@@ -8,6 +8,7 @@ const serverApi = process.env.REACT_APP_SERVER;
 const initialState = {
   filteredVehicleList: [],
   vehicleDetails: {},
+  commentList: {},
   isLoading: false,
   error: null,
 };
@@ -130,6 +131,29 @@ export const __vehicleSearchList = createAsyncThunk(
   }
 );
 
+// 리뷰 & 평점 리스트 조회하기
+export const __vehicleComments = createAsyncThunk(
+  "detail/__vehicleComments",
+  async (payload, thunkAPI) => {
+    const vid = payload;
+    console.log(vid);
+    try {
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: userToken,
+        RefreshToken: refreshToken,
+      };
+      const response = await axios.get(`${serverApi}/vehicle/review/${vid}`, {
+        headers: headers,
+      });
+      // console.log(responseNull.data.output);
+      return thunkAPI.fulfillWithValue(response.data.output);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 export const vehicleDetailSlice = createSlice({
   name: "vehicleDetailSlice",
   initialState: initialState,
@@ -163,6 +187,18 @@ export const vehicleDetailSlice = createSlice({
       state.filteredVehicleList = action.payload;
     },
     [__vehicleSearchList.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    [__vehicleComments.pending]: (state, action) => {
+      state.isLoading = true;
+    },
+    [__vehicleComments.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      // console.log(action.payload);
+      state.commentLists = action.payload;
+    },
+    [__vehicleComments.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
