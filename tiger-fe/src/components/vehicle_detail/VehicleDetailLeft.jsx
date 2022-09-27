@@ -21,7 +21,6 @@ import liked from "../../assets/liked.png";
 import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
-import { FaStar, FaRegStar } from "react-icons/fa";
 import { AiFillStar } from "react-icons/ai";
 import { ImStarFull } from "react-icons/im";
 
@@ -39,7 +38,7 @@ const VehicleDetailLeft = () => {
   useEffect(() => {
     dispatch(__vehicleDetail({ vId, startDate, endDate }));
     dispatch(__getVehicleComments(vId));
-    console.log("??");
+    // console.log("??");
     return () => {
       dispatch(options());
     };
@@ -153,8 +152,8 @@ const VehicleDetailLeft = () => {
         </StVehicleInfoTitleWrapper>
         <StVehicleInfoLocationWrapper>
           <div className="locationTitle">
-            <FaStar className="location_star_ico" />
-            <span className="location_num">{commentLists.averageRating}</span>
+            <ImStarFull className="location_star_ico" />
+            <span className="location_num">{vehicleDetails.averageRating}</span>
             {commentLists === undefined ? (
               <span className="location_comment">후기 0개 </span>
             ) : (
@@ -231,14 +230,10 @@ const VehicleDetailLeft = () => {
 
         <h2 className="review">렌터 리뷰</h2>
         <div className="star_box">
-          <div className="star_num">{vehicleDetails.averageRating}</div>
           <div className="star">
-            <FaStar className="star_ico" />
-            <FaStar className="star_ico" />
-            <FaStar className="star_ico" />
-            <FaStar className="star_ico" />
-            <FaRegStar className="star_ico_nofill" />
+            <ImStarFull className="star_ico" />
           </div>
+          <div className="star_num">{vehicleDetails.averageRating}</div>
         </div>
         {commentLists &&
           commentLists.map((comment, index) => {

@@ -28,9 +28,9 @@ const CommentModal = ({ showCommentModal, singleVehicle }) => {
   console.log("reviewedComment :", reviewedComment);
 
   const [count, setCount] = useState(0);
-  const [rating, setRating] = useState(reviewedComment.rating);
-  const [hover, setHover] = useState(reviewedComment.rating);
-  const [comment, setComment] = useState(reviewedComment.comment);
+  const [rating, setRating] = useState(reviewedComment?.rating);
+  const [hover, setHover] = useState(reviewedComment?.rating);
+  const [comment, setComment] = useState(reviewedComment?.comment);
 
   const onChangeHandler = (e) => {
     setCount(e.target.value.length);
@@ -64,11 +64,11 @@ const CommentModal = ({ showCommentModal, singleVehicle }) => {
   }, [dispatch, vid]);
 
   useEffect(() => {
-    if (reviewedComment.comment !== undefined) {
-      setCount(reviewedComment.comment.length);
-      setRating(reviewedComment.rating);
-      setHover(reviewedComment.rating);
-      setComment(reviewedComment.comment);
+    if (reviewedComment?.comment !== undefined) {
+      setCount(reviewedComment?.comment.length);
+      setRating(reviewedComment?.rating);
+      setHover(reviewedComment?.rating);
+      setComment(reviewedComment?.comment);
     }
   }, [reviewedComment]);
 
