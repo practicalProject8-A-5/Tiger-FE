@@ -2,13 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import LoginModal from "./LoginModal";
 
-const LoginBox = ({ showModal, IsModalOpen }) => {
-  // console.log(showModal);
-  // console.log(IsModalOpen);
+const LoginBox = ({ showModal, isModalOpen }) => {
   return (
     <Stblur>
       <div className="bg">
-        <LoginModal showModal={showModal} IsModalOpen={IsModalOpen} />
+        <LoginModal showModal={showModal} isModalOpen={isModalOpen} />
       </div>
     </Stblur>
   );

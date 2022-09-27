@@ -5,8 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import NotFound from "../../global_elements/NotFound";
 import FilteredVehicle from "../main/FliteredVehicle";
-import { __vehicleSearchList } from "../../redux/modules/vehicleDetail";
-import { filteredOptions } from "../../redux/modules/vehicleDetail";
+import {
+  __vehicleSearchList,
+  filteredOptions,
+} from "../../redux/modules/vehicleDetailSlice";
 
 const FilteredVehicleList = () => {
   const filteredVehicle = useSelector(

@@ -8,7 +8,6 @@ import logo from "../assets/ta,iger_logo.png";
 import axios from "axios";
 import { loader } from "../redux/modules/memberSlice";
 import LoginBox from "./LoginBox";
-import { setNotification } from "../redux/modules/chatSlice";
 import { cleanUpRoomList } from "../redux/modules/chatSlice";
 
 const Header = ({ ownerMode }) => {
@@ -19,18 +18,15 @@ const Header = ({ ownerMode }) => {
   const notification = useSelector((state) => state.chatSlice.notification);
   // console.log("notification :", notification);
 
-  const [IsModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
-    setIsModalOpen(!IsModalOpen);
+    setIsModalOpen(!isModalOpen);
   };
-  // console.log("현재 :", IsModalOpen);
 
   const [inOwner, setInOwner] = useState(false);
 
   const ownerToggle = useMatch("/*");
-  // const ownerToggle = useMatch("/");
-  // console.log(ownerToggle);
-  // console.log(inOwner);
+
   const onClick = () => {
     if (ownerToggle !== null) {
       setInOwner(!inOwner);
@@ -100,30 +96,26 @@ const Header = ({ ownerMode }) => {
             <Link
               to="/home"
               style={{ textDecoration: "none", color: textColor }}
-              onClick={handleChnageTextColor}
-            >
+              onClick={handleChnageTextColor}>
               <div className="header__home">홈</div>
             </Link>
             <Link
               to="/"
               style={{ textDecoration: "none", color: textColor }}
-              onClick={handleChnageTextColor}
-            >
+              onClick={handleChnageTextColor}>
               <div className="header__main">24렌트</div>
             </Link>
             {userInfo.name ? (
               <Link
                 to="/renter"
                 style={{ textDecoration: "none", color: textColor }}
-                onClick={handleChnageTextColor}
-              >
+                onClick={handleChnageTextColor}>
                 <div className="header__mypage">마이페이지</div>
               </Link>
             ) : (
               <Link
                 to="/renter"
-                style={{ textDecoration: "none", display: "none" }}
-              >
+                style={{ textDecoration: "none", display: "none" }}>
                 <div className="header__mypage">마이페이지</div>
               </Link>
             )}
@@ -143,8 +135,7 @@ const Header = ({ ownerMode }) => {
                 ) : (
                   <label
                     className="switch"
-                    style={{ backgroundColor: "#ff881b" }}
-                  >
+                    style={{ backgroundColor: "#ff881b" }}>
                     <input id="switch" type="checkbox" onClick={onClick} />
                     <span className="slider"></span>
                   </label>
@@ -161,8 +152,7 @@ const Header = ({ ownerMode }) => {
                 ) : (
                   <label
                     className="switch"
-                    style={{ backgroundColor: "#ff881b" }}
-                  >
+                    style={{ backgroundColor: "#ff881b" }}>
                     <input id="switch" type="checkbox" onClick={onClick} />
                     <span className="slider"></span>
                   </label>
@@ -184,27 +174,23 @@ const Header = ({ ownerMode }) => {
                       <Link
                         to="/chat"
                         state={{ backgroundLocation: location }}
-                        style={{ textDecoration: "none", color: "#000" }}
-                      >
+                        style={{ textDecoration: "none", color: "#000" }}>
                         {/* {notification && <NewNoti />} */}
                         <li>메세지</li>
                       </Link>
                       <Link
                         style={{ textDecoration: "none", color: "#000" }}
-                        to="/owner"
-                      >
+                        to="/owner">
                         <li>오너페이지</li>
                       </Link>
                       <Link
                         style={{ textDecoration: "none", color: "#000" }}
-                        to="/renter"
-                      >
+                        to="/renter">
                         <li>마이페이지</li>
                       </Link>
                       <Link
                         style={{ textDecoration: "none", color: "#000" }}
-                        to="/home"
-                      >
+                        to="/home">
                         <li>도움말</li>
                       </Link>
                       <li onClick={__userLogout}>로그아웃</li>
@@ -217,8 +203,8 @@ const Header = ({ ownerMode }) => {
                 로그인
               </div>
             )}
-            {IsModalOpen && (
-              <LoginBox showModal={showModal} IsModalOpen={IsModalOpen} />
+            {isModalOpen && (
+              <LoginBox showModal={showModal} isModalOpen={isModalOpen} />
             )}
           </div>
         </div>
