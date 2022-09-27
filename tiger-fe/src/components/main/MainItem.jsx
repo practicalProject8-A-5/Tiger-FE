@@ -12,6 +12,7 @@ import "swiper/scss/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
 import { useNavigate } from "react-router-dom";
+import { ImStarFull } from "react-icons/im";
 
 const MainItem = ({ list }) => {
   const email = localStorage.getItem("email");
@@ -77,7 +78,12 @@ const MainItem = ({ list }) => {
         }}>
         <div className="desc__top">
           <div className="desc__title">{list.location}</div>
-          <div className="desc__star">{list.averageRating}</div>
+          <div className="desc__star">
+            <div className="star_icon">
+              <ImStarFull />
+            </div>
+            {list.averageRating}
+          </div>
         </div>
         <p>
           {list.years} {list.vbrand} {list.vname}
@@ -128,8 +134,16 @@ const StItem = styled.div`
         overflow: hidden;
         white-space: nowrap;
       }
-      /* .desc__star {
-      } */
+      .desc__star {
+        display: flex;
+        .star_icon {
+          font-size: 15px;
+          color: #ffb979;
+          margin-right: 5px;
+          line-height: 18px;
+          margin-top: 2px;
+        }
+      }
     }
     p {
       font-weight: 500;
