@@ -248,6 +248,9 @@ export const vehicleDetailSlice = createSlice({
     filteredOptions: (state, action) => {
       state.filteredVehicleList = [];
     },
+    reviewedOptions: (state, action) => {
+      state.reviewedComment = {};
+    },
   },
   extraReducers: {
     [__vehicleDetail.pending]: (state, action) => {
@@ -325,5 +328,6 @@ export const vehicleDetailSlice = createSlice({
   },
 });
 
-export const { options, filteredOptions } = vehicleDetailSlice.actions;
+export const { options, filteredOptions, reviewedOptions } =
+  vehicleDetailSlice.actions;
 export default vehicleDetailSlice.reducer;

@@ -8,6 +8,7 @@ import {
   __postVehicleComments,
   __getReviewedComment,
   __deleteComment,
+  reviewedOptions,
 } from "../../redux/modules/vehicleDetailSlice";
 
 import { AiOutlineClose } from "react-icons/ai";
@@ -18,10 +19,7 @@ const CommentModal = ({ showCommentModal, singleVehicle }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const vid = parseInt(singleVehicle.vid);
-
-  useEffect(() => {
-    dispatch(__getReviewedComment(vid));
-  }, [dispatch, vid]);
+  console.log("vid", vid);
 
   // get reviewed comment
   const reviewedComment = useSelector(
@@ -29,7 +27,7 @@ const CommentModal = ({ showCommentModal, singleVehicle }) => {
   );
   console.log("reviewedComment :", reviewedComment);
 
-  const [count, setCount] = useState(reviewedComment.comment.length);
+  const [count, setCount] = useState(0);
   const [rating, setRating] = useState(reviewedComment.rating);
   const [hover, setHover] = useState(reviewedComment.rating);
   const [comment, setComment] = useState(reviewedComment.comment);
@@ -57,6 +55,22 @@ const CommentModal = ({ showCommentModal, singleVehicle }) => {
     setRating(0);
     showCommentModal();
   };
+
+  useEffect(() => {
+    dispatch(__getReviewedComment(vid));
+    return () => {
+      dispatch(reviewedOptions());
+    };
+  }, [dispatch, vid]);
+
+  useEffect(() => {
+    if (reviewedComment.comment !== undefined) {
+      setCount(reviewedComment.comment.length);
+      setRating(reviewedComment.rating);
+      setHover(reviewedComment.rating);
+      setComment(reviewedComment.comment);
+    }
+  }, [reviewedComment]);
 
   return (
     <StCommentModal>
