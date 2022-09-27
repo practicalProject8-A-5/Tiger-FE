@@ -12,7 +12,7 @@ import { Pagination, Navigation } from "swiper";
 const ImgViewBox = ({ files }) => {
   //트러블 슈팅 하나짜리 이후에 여러개 다시 수정하면 버튼이 안눌림
 
-  // console.log("files :", files);
+  console.log("files :", files);
   return (
     <StImgViewBox>
       {files.length === 1 ? (
@@ -34,7 +34,8 @@ const ImgViewBox = ({ files }) => {
           navigation={true}
           // loop={true}
           modules={[Pagination, Navigation]}
-          className="mySwiper">
+          className="mySwiper"
+        >
           {files.map((image, i) => {
             return (
               <SwiperSlide className="img" key={i}>

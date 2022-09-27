@@ -67,7 +67,7 @@ const VehicleModify = () => {
   }, [VehicleInfo]);
 
   const [inputs, setInputs] = useState(VehicleInfo);
-  // console.log(inputs.transmission);
+  console.log(inputs);
 
   // const imageList = VehicleInfo.imageList;
   // const locationInfo = VehicleInfo.location;
@@ -79,8 +79,6 @@ const VehicleModify = () => {
       ...inputs,
       [name]: value,
     });
-    // console.log(value);
-    // console.log(name);
   };
 
   const {
@@ -207,6 +205,7 @@ const VehicleModify = () => {
     formData.append("locationX", Number(locationObj.locationX));
     formData.append("locationY", Number(locationObj.locationY));
     formData.append("price", price);
+
     for (let i = 0; i < fileList.length; i++) {
       formData.append("imageList", fileList[i]);
     }
@@ -249,6 +248,7 @@ const VehicleModify = () => {
   // console.log("isEditLocation:", isEditLocation);
   // console.log("isEdit:", isEdit);
   // console.log("address:", address);
+  console.log(watch("vname"));
   return (
     <StVehicleModify>
       <form id="form" onSubmit={handleSubmit(onSubmit, watch)}>
@@ -256,10 +256,10 @@ const VehicleModify = () => {
         {/* <div className="onchange__imgbox">
           {!isEdit ? (
             <ModifyImgViewBox files={files} imageList={imageList} />
-          ) : (
-            <ImgViewBox files={files} imageList={imageList} />
-          )}
-        </div> */}
+            ) : (
+              <ImgViewBox files={files} imageList={imageList} />
+              )}
+            </div> */}
         <div className="onchange__imgbox">
           {!isShowImg ? (
             <ImgViewBox files={files} />
@@ -467,7 +467,8 @@ const VehicleModify = () => {
             id="description"
             placeholder="차량에 대한 설명을 입력해주세요."
             cols="50"
-            rows="10"></textarea>
+            rows="10"
+          ></textarea>
         </div>
 
         {/* 렌터정보 */}

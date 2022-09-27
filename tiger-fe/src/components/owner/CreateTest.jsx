@@ -12,6 +12,8 @@ import phone from "../../assets/registerphone.png";
 import OwnerKakaoMap from "./OwnerKakaoMap";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const VehicleRegister = () => {
   const serverApi = process.env.REACT_APP_SERVER;
@@ -61,11 +63,6 @@ const VehicleRegister = () => {
     const fileList = Array.from(files);
     const urlList = fileList.map((file) => URL.createObjectURL(file));
     setFileList(files);
-
-    // console.log(files);
-    // console.log(fileList);
-    // console.log(urlList);
-
     setFiles([...urlList]);
     // setFiles([]);
 
@@ -144,27 +141,27 @@ const VehicleRegister = () => {
     formData.append("locationX", Number(locationObj.locationX));
     formData.append("locationY", Number(locationObj.locationY));
     formData.append("price", price);
-    // formData.append("imageList", fileList[0]);
-    // console.log(Number(locationObj.locationX));
-    // console.log(Number(locationObj.locationY));
-    // console.log(locationObj);
-    for (let i = 0; i < fileList.length; i++) {
-      // formData.append("imageList", imgfile[i]);
-      // let fileUrl = new File(blob[i], "image.jpg");
-      formData.append("imageList", fileList[i]);
-      // console.log("files ===>", fileUrl);
+
+    console.log(files);
+    console.log(fileList);
+    if (fileList === undefined) {
+      // if (fileList.length === 0) {
+      toast.warn("이미지등록은 필수에요.", {
+        theme: "dark",
+        autoClose: 100000,
+        // icon: "🚀",
+        // theme: "#06bc0b",
+      });
     }
 
-    // for (let value of formData.values()) {
-    //   // console.log("value:", value);
-    // }
+    for (let i = 0; i < fileList.length; i++) {
+      formData.append("imageList", fileList[i]);
+    }
 
     const userToken = localStorage.getItem("userToken");
     const refreshToken = localStorage.getItem("refreshToken");
     try {
-      // const jsonType = { "Content-Type": "application/json" };
       const multipartType = { "Content-Type": "multipart/form-data" };
-      // const json = JSON.stringify(obj)
       await axios.post(`${serverApi}/vehicle/management`, formData, {
         headers: {
           multipartType,
@@ -172,11 +169,37 @@ const VehicleRegister = () => {
           RefreshToken: refreshToken,
         },
       });
+      navigate("/owner");
     } catch (err) {
+      alert("이미지 양식을 지켜주세요.");
       // console.log(err);
     }
+  };
 
-    navigate("/owner");
+  const style = {
+    control: (base) => ({
+      ...base,
+      border: 0,
+      color: "red",
+      boxShadow: "none",
+    }),
+  };
+
+  const errorStyle = {
+    control: (base) => ({
+      ...base,
+      border: "2px solid red",
+      boxShadow: "none",
+      "&:hover": {
+        border: "2px solid red",
+      },
+    }),
+    placeholder: (defaultStyles) => {
+      return {
+        ...defaultStyles,
+        color: "#eb3434",
+      };
+    },
   };
 
   return (
@@ -209,24 +232,13 @@ const VehicleRegister = () => {
               type="text"
               id="vbrand"
               placeholder="ex. 테슬라"
-              {...register(
-                "vbrand"
-                // {
-                //   required: "브랜드명을 입력해주세요",
-                //   mimLength: {
-                //     value: 2,
-                //     message: "2글자 이상",
-                //   },
-                //   maxLength: {
-                //     value: 10,
-                //     message: "10글자 이하",
-                //   },
-                // }
-              )}
+              {...register("vbrand", {
+                required: "브랜드명을 입력해주세요",
+              })}
             />
-            {/* {errors.model ? (
+            {errors.vbrand ? (
               <div className="error">{errors.vbrand.message}</div>
-            ) : null} */}
+            ) : null}
           </div>
 
           <div className="input__box">
@@ -235,16 +247,13 @@ const VehicleRegister = () => {
               type="text"
               id="vname"
               placeholder="ex. 모델 3 롱레인지"
-              {...register(
-                "vname"
-                // {
-                //   required: "차종을 입력해주세요",
-                // }
-              )}
+              {...register("vname", {
+                required: "차종을 입력해주세요",
+              })}
             />
-            {/* {errors.vname ? (
+            {errors.vname ? (
               <div className="error">{errors.vname.message}</div>
-            ) : null} */}
+            ) : null}
           </div>
         </div>
 
@@ -254,26 +263,28 @@ const VehicleRegister = () => {
           <input
             type="text"
             id="price"
-            placeholder="가격을 입력해주세요"
-            {...register(
-              "price"
-              // {
-              //   required: "가격을 입력해주세요",
-              // }
-            )}
+            placeholder="가격 입력"
+            {...register("price", {
+              required: "가격을 입력해주세요",
+            })}
           />
           <span>₩/1일</span>
+          {errors.price ? (
+            <div className="error">{errors.price.message}</div>
+          ) : null}
         </div>
 
         {/* 차량정보 */}
         <table>
           <caption>차량정보</caption>
           <tbody>
+            {/* 1행 */}
             <tr>
+              {/* 연식 */}
               <th>
                 <label htmlFor="years">연식</label>
               </th>
-              {/* {errors.years ? (
+              {errors.years ? (
                 <td style={{ border: " 2px solid #EB3434" }}>
                   <input
                     type="text"
@@ -281,7 +292,7 @@ const VehicleRegister = () => {
                     placeholder={errors.years.message}
                     className="error_input"
                     {...register("years", {
-                      required: "연식을 입력해주세요",
+                      required: "연식을 입력해주세요.",
                     })}
                   />
                 </td>
@@ -292,29 +303,17 @@ const VehicleRegister = () => {
                     id="years"
                     placeholder="연식"
                     {...register("years", {
-                      required: "연식을 입력해주세요",
+                      required: "연식을 입력해주세요.",
                     })}
                   />
                 </td>
-              )} */}
-              <td>
-                <input
-                  type="text"
-                  id="years"
-                  placeholder="연식"
-                  {...register(
-                    "years"
-                    // {
-                    //   required: "연식을 입력해주세요",
-                    // }
-                  )}
-                />
-              </td>
+              )}
 
+              {/* 탑승자 수 */}
               <th>
                 <label htmlFor="passengers">탑승 가능 인원</label>
               </th>
-              {/* {errors.passengers ? (
+              {errors.passengers ? (
                 <td style={{ border: " 2px solid #EB3434" }}>
                   <input
                     type="text"
@@ -337,26 +336,15 @@ const VehicleRegister = () => {
                     })}
                   />
                 </td>
-              )} */}
-              <td>
-                <input
-                  type="text"
-                  id="passengers"
-                  placeholder="탑승자 수"
-                  {...register(
-                    "passengers"
-                    // {
-                    //   required: "탑승자 수를 입력해주세요.",
-                    // }
-                  )}
-                />
-              </td>
+              )}
             </tr>
+
             <tr>
+              {/* 연비 */}
               <th>
                 <label htmlFor="fuelEfficiency">연비</label>
               </th>
-              {/* {errors.fuelEfficiency ? (
+              {errors.fuelEfficiency ? (
                 <td style={{ border: " 2px solid #EB3434" }}>
                   <input
                     type="text"
@@ -379,45 +367,34 @@ const VehicleRegister = () => {
                     })}
                   />
                 </td>
-              )} */}
-              <td>
-                <input
-                  type="text"
-                  id="fuelEfficiency"
-                  placeholder="연비"
-                  {...register(
-                    "fuelEfficiency"
-                    // {
-                    //   required: "연비를 입력해주세요.",
-                    // }
-                  )}
-                />
-              </td>
-              <th>{/* <label htmlFor="fuelEfficiency">연료</label> */}</th>
-              <th>연료</th>
+              )}
 
+              {/* 드롭박스 : 연료 */}
+              <th>
+                <label htmlFor="fuelType">연료</label>
+              </th>
               {errors.fuelType ? (
-                // alert(errors.fuelType.message)
-                <td style={{ border: " 2px solid #EB3434" }}>
+                <td>
                   <Controller
+                    id="fuelType"
+                    control={control}
                     name="fuelType"
-                    className="select"
                     rules={{ required: "필수로 선택하셔야합니다." }}
                     render={({ field }) => (
                       <Select
                         {...field}
+                        name="fuelType"
                         placeholder={errors.fuelType.message}
                         options={fueltypeOption}
-                        // onChange={setSelectFuelType}
+                        styles={errorStyle}
                       />
                     )}
-                    control={control}
-                    // defaultValue=""
                   />
                 </td>
               ) : (
                 <td>
                   <Controller
+                    id="fuelType"
                     control={control}
                     name="fuelType"
                     className="select"
@@ -426,61 +403,44 @@ const VehicleRegister = () => {
                       <Select
                         {...field}
                         name="fuelType"
-                        placeholder="연료 종류"
+                        placeholder="연료 종류 선택"
                         options={fueltypeOption}
-                        // onChange={setSelectFuelType.value}
+                        styles={style}
                       />
                     )}
                   />
                 </td>
               )}
-
-              <td>
-                <Controller
-                  control={control}
-                  name="fuelType"
-                  className="select"
-                  // rules={{ required: "필수로 선택하셔야합니다." }}
-                  render={({ field }) => (
-                    <Select
-                      {...field}
-                      name="fuelType"
-                      placeholder="연료 종류"
-                      options={fueltypeOption}
-                      // onChange={setSelectFuelType.value}
-                    />
-                  )}
-                />
-              </td>
             </tr>
+
             <tr>
-              <th>기어 변속</th>
-              {/* {errors.transmission ? (
-                <td
-                  style={{
-                    // backgroundColor: "rgba(235,52,52,0.8) ",
-                    border: "2px solid #EB3434",
-                  }}
-                >
+              {/* 드롭박스 : 변속기 */}
+              <th>
+                <label htmlFor="transmission">변속기</label>
+              </th>
+              {errors.transmission ? (
+                <td>
                   <Controller
+                    id="transmission"
+                    control={control}
                     name="transmission"
-                    className="select"
                     rules={{ required: "필수로 선택하셔야합니다." }}
                     render={({ field }) => (
                       <Select
                         {...field}
+                        name="transmission"
                         placeholder={errors.transmission.message}
                         options={transmissionOption}
-                        // onChange={setSelectTransmission.value}
+                        styles={errorStyle}
+                        // onChange={setSelectTransmission}
                       />
                     )}
-                    control={control}
-                    // defaultValue={transmissionOption.value}
                   />
                 </td>
               ) : (
                 <td>
                   <Controller
+                    id="transmission"
                     control={control}
                     name="transmission"
                     className="select"
@@ -489,56 +449,43 @@ const VehicleRegister = () => {
                       <Select
                         {...field}
                         name="transmission"
-                        placeholder="변속기 종류"
+                        placeholder="변속기 종류 선택"
                         options={transmissionOption}
-                        // onChange={setSelectTransmission}
+                        styles={style}
                       />
                     )}
-                    // defaultValue=""
                   />
                 </td>
-              )} */}
-              <td>
-                <Controller
-                  control={control}
-                  name="transmission"
-                  className="select"
-                  // rules={{ required: "필수로 선택하셔야합니다." }}
-                  render={({ field }) => (
-                    <Select
-                      {...field}
-                      name="transmission"
-                      placeholder="변속기 종류"
-                      options={transmissionOption}
-                      // onChange={setSelectTransmission}
-                    />
-                  )}
-                  // defaultValue=""
-                />
-              </td>
-              <th>차 종류</th>
-              {/* {errors.cartype ? (
+              )}
+
+              {/* 드롭박스 : 차 타입 */}
+              <th>
+                <label htmlFor="cartype">차 종류</label>
+              </th>
+
+              {errors.cartype ? (
                 <td>
                   <Controller
-                    control={control}
+                    id="cartype"
                     name="cartype"
-                    // className="select"
                     className="select"
+                    control={control}
                     rules={{ required: "필수로 선택하셔야합니다." }}
                     render={({ field }) => (
                       <Select
                         {...field}
                         placeholder={errors.cartype.message}
                         options={cartypeOption}
+                        styles={errorStyle}
                         // onChange={setSelectCarType}
                       />
                     )}
-                    // defaultValue=""
                   />
                 </td>
               ) : (
                 <td>
                   <Controller
+                    id="cartype"
                     name="cartype"
                     className="select"
                     control={control}
@@ -546,32 +493,15 @@ const VehicleRegister = () => {
                     render={({ field }) => (
                       <Select
                         {...field}
-                        placeholder="차 종류"
+                        placeholder="차 종류 선택"
                         options={cartypeOption}
+                        styles={style}
                         // onChange={setSelectCarType}
                       />
                     )}
-                    // defaultValue=""
                   />
                 </td>
-              )} */}
-              <td>
-                <Controller
-                  name="cartype"
-                  className="select"
-                  control={control}
-                  // rules={{ required: "필수로 선택하셔야합니다." }}
-                  render={({ field }) => (
-                    <Select
-                      {...field}
-                      placeholder="차 종류"
-                      options={cartypeOption}
-                      // onChange={setSelectCarType}
-                    />
-                  )}
-                  // defaultValue=""
-                />
-              </td>
+              )}
             </tr>
           </tbody>
         </table>
@@ -584,7 +514,6 @@ const VehicleRegister = () => {
             placeholder="차량에 대한 설명을 입력해주세요."
             cols="50"
             rows="10"
-            rules={{ required: "설명을 입력해주세요" }}
           ></textarea>
         </div>
 
@@ -614,39 +543,7 @@ const VehicleRegister = () => {
         {/* 위치 */}
         <div className="location">
           <h2>렌터지역</h2>
-          {errors.location ? (
-            <input
-              type="text"
-              id="location"
-              className="error_input"
-              value={address}
-              onClick={() => {
-                setIsPopupOpen(!isPopupOpen);
-              }}
-              onChange={onChangeHandler}
-              placeholder={errors.location.message}
-              {...register("location", {
-                required: "상세 주소 입력은 필수입니다.",
-              })}
-            />
-          ) : (
-            <input
-              type="text"
-              id="location"
-              className="location_input"
-              value={address}
-              onClick={() => {
-                setIsPopupOpen(!isPopupOpen);
-              }}
-              onChange={onChangeHandler}
-              placeholder="상세 주소를 입력해주세요."
-              {...register("location", {
-                required: "상세 주소 입력은 필수입니다.",
-              })}
-            />
-          )}
-          {/* <input
-            type="text"
+          <input
             id="location"
             className="location_input"
             value={address}
@@ -655,13 +552,11 @@ const VehicleRegister = () => {
             }}
             onChange={onChangeHandler}
             placeholder="상세 주소를 입력해주세요."
-            {...register("location", {
-              required: "상세 주소 입력은 필수입니다.",
-            })}
-          /> */}
+            {...register("location")}
+          />
           {/* {errors.location ? (
-            <div className="error">{errors.location.message}</div>
-          ) : '하이'} */}
+            <div className="location_error">{errors.location.message}</div>
+          ) : null} */}
           {isPopupOpen ? (
             <div>
               <DaumPostcode
@@ -681,6 +576,10 @@ const VehicleRegister = () => {
         />
 
         <button>제출</button>
+        <div>
+          {/* <button onClick={imgAlert}>제출</button> */}
+          <ToastContainer />
+        </div>
       </form>
     </StVehicleRegister>
   );
@@ -691,7 +590,6 @@ export default VehicleRegister;
 const StVehicleRegister = styled.div`
   margin-bottom: 80px;
   form {
-    /* background-color: yellowgreen; */
     margin: 0 auto;
     width: 845px;
     .onchange__imgbox {
@@ -726,10 +624,8 @@ const StVehicleRegister = styled.div`
       }
     }
     .input__top {
-      /* background-color: skyblue; */
       padding-top: 50px;
       display: flex;
-      /* background-color: yellow; */
       margin-bottom: 80px;
       display: flex;
       justify-content: space-between;
@@ -737,7 +633,6 @@ const StVehicleRegister = styled.div`
         font-weight: 600;
         font-size: 18px;
         margin-bottom: 21px;
-        /* background-color: pink; */
         display: block;
       }
       input {
@@ -753,7 +648,6 @@ const StVehicleRegister = styled.div`
       }
     }
     .price_box {
-      /* background-color: pink; */
       margin-bottom: 80px;
       label {
         display: block;
@@ -791,7 +685,6 @@ const StVehicleRegister = styled.div`
         border-bottom: 2px solid #cccccc;
         tr {
           text-align: center;
-          /* display: flex; */
           th {
             border-bottom: 1px solid #cccccc;
             box-sizing: border-box;
@@ -805,7 +698,6 @@ const StVehicleRegister = styled.div`
             box-sizing: border-box;
             text-align: left;
             label {
-              /* background-color: pink;/ */
               width: 100%;
               height: 100%;
               display: block;
@@ -816,7 +708,6 @@ const StVehicleRegister = styled.div`
             width: 269px;
             height: 50px;
             box-sizing: border-box;
-            /* background-color: yellow; */
             vertical-align: middle;
 
             input {
@@ -837,7 +728,6 @@ const StVehicleRegister = styled.div`
 
     .desc {
       width: 100%;
-      /* background-color: pink; */
       textarea {
         padding: 28px 26px;
         box-sizing: border-box;
@@ -869,6 +759,13 @@ const StVehicleRegister = styled.div`
         padding: 15px 14px;
         color: #000;
         font-family: "Noto Sans KR", sans-serif;
+      }
+      .location_error {
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: red;
+        font-size: 13px;
       }
     }
     .error {

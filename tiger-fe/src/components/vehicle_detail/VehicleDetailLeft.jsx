@@ -19,7 +19,8 @@ import "swiper/scss/pagination";
 import { options } from "../../redux/modules/vehicleDetail";
 import { FaStar, FaRegStar } from "react-icons/fa";
 import { AiFillStar } from "react-icons/ai";
-import imgUrl from "../../assets/meta_image2.png";
+import { IoIosShareAlt } from "react-icons/io";
+// import imgUrl from "../../assets/meta_image2.png";
 
 const VehicleDetailLeft = () => {
   const key = process.env.REACT_APP_KAKAO_MAP_KEY;
@@ -148,9 +149,7 @@ const VehicleDetailLeft = () => {
             <span className="location_num">4.12</span>
             <span className="location_comment">후기 24개</span>
             <p>{vehicleDetails.location}</p>
-            <div className="share" onClick={shareToKakao}>
-              쉐어
-            </div>
+            <IoIosShareAlt className="share" onClick={shareToKakao} />
             {email ? (
               isLike === true ? (
                 <span className="heart" onClick={likeClickHandler}>
@@ -499,6 +498,14 @@ const StVehicleInfoLocationWrapper = styled.div`
       font-size: 18px;
       text-decoration: underline;
       color: #000000;
+    }
+    .share {
+      font-size: 30px;
+      position: absolute;
+      top: 40%;
+      right: 35px;
+      transform: translateY(-50%);
+      cursor: pointer;
     }
     .heart {
       position: absolute;

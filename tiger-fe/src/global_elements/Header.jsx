@@ -17,7 +17,7 @@ const Header = ({ ownerMode }) => {
   const location = useLocation();
 
   const notification = useSelector((state) => state.chatSlice.notification);
-  console.log("notification :", notification);
+  // console.log("notification :", notification);
 
   const [IsModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {

@@ -21,7 +21,7 @@ const VehicleDetailPage = () => {
             <VehicleDetailLeft />
           </StDetailLeftSection>
           <StDetailRightSection>
-            {/* <VehicleDetailRight /> */}
+            <VehicleDetailRight />
           </StDetailRightSection>
         </StDetailContainer>
       </GlobalLayout>
