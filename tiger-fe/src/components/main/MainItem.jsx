@@ -77,7 +77,7 @@ const MainItem = ({ list }) => {
         }}>
         <div className="desc__top">
           <div className="desc__title">{list.location}</div>
-          <div className="desc__star">4.12</div>
+          <div className="desc__star">{list.averageRating}</div>
         </div>
         <p>
           {list.years} {list.vbrand} {list.vname}

@@ -57,17 +57,6 @@ const VehicleDetailLeft = () => {
   );
   console.log(commentLists);
 
-  // useEffect(() => {
-  //   if (commentLists !== undefined) {
-  //     const ratingNum = commentLists.map((v) => v.rating);
-  //     let ratingSum = 0;
-  //     for (let i = 0; i < ratingNum.length; i++) {
-  //       ratingSum++;
-  //     }
-  //     return ratingSum;
-  //   }
-  // }, []);
-
   // url에서 startDate & endDate params 잡아오기
   const startDate = new URL(window.location.href).searchParams.get("startDate");
   const endDate = new URL(window.location.href).searchParams.get("endDate");
@@ -165,7 +154,7 @@ const VehicleDetailLeft = () => {
         <StVehicleInfoLocationWrapper>
           <div className="locationTitle">
             <FaStar className="location_star_ico" />
-            <span className="location_num">4.12</span>
+            <span className="location_num">{commentLists.averageRating}</span>
             {commentLists === undefined ? (
               <span className="location_comment">후기 0개 </span>
             ) : (
@@ -242,7 +231,7 @@ const VehicleDetailLeft = () => {
 
         <h2 className="review">렌터 리뷰</h2>
         <div className="star_box">
-          <div className="star_num">4.0</div>
+          <div className="star_num">{vehicleDetails.averageRating}</div>
           <div className="star">
             <FaStar className="star_ico" />
             <FaStar className="star_ico" />
