@@ -121,6 +121,7 @@ const CommentModal = ({ showCommentModal, singleVehicle }) => {
               </button>
             );
           })}
+          <div className="ratingNum">{rating}/5점</div>
         </StCommentRating>
         <form>
           <StCommentTextArea
@@ -130,13 +131,13 @@ const CommentModal = ({ showCommentModal, singleVehicle }) => {
             value={comment}
             placeholder="등록 혹은 수정하세요"
             onChange={onChangeHandler}></StCommentTextArea>
-          <div className="textCount">{count}/50</div>
+          <div className="textCount">{count}/50자</div>
           <div className="buttonContainer">
             <button className="reviewButton" onClick={onSubmitHandler}>
               리뷰 등록하기
             </button>
             <button className="reviewButton" onClick={onDeleteHandler}>
-              삭제
+              리뷰삭제
             </button>
           </div>
         </form>
@@ -262,6 +263,7 @@ const StCommentVehicleInfo = styled.div`
 
 const StCommentRating = styled.div`
   margin-bottom: 29px;
+  display: flex;
   button {
     background-color: transparent;
     border: none;
@@ -269,12 +271,21 @@ const StCommentRating = styled.div`
     cursor: pointer;
     height: 34px;
   }
+  .ratingNum {
+    margin-left: 20px;
+    line-height: 34px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    color: #CCCCCC;
+  }
   .on {
     color: #ff881b;
   }
   .off {
     color: #ccc;
   }
+  .
 `;
 
 const StCommentTextContainer = styled.div`
