@@ -1,17 +1,18 @@
 // eslint-disable-next-line
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { __getRenterItemList } from "../../redux/modules/renterItemListSlice";
 import axios from "axios";
+import CommentModal from "./CommentModal";
+// import CommentEditModal from "./CommentEditModal";
 
 const RenterItem = ({ category, list, onSelect }) => {
   const serverApi = process.env.REACT_APP_SERVER;
   const chatApi = process.env.REACT_APP_CHAT;
 
-  // const userId = useSelector((state) => state.memberSlice.userInfo.id);
   const location = useLocation();
 
   const navigate = useNavigate();
@@ -42,11 +43,20 @@ const RenterItem = ({ category, list, onSelect }) => {
     dispatch(__getRenterItemList("RESERVED"));
   };
 
-  const headers = {
-    "Content-Type": "application/json",
-    Authorization: localStorage.getItem("userToken"),
-    RefreshToken: localStorage.getItem("refreshToken"),
+  const [commentModal, setCommentModal] = useState(false);
+  const [singleVehicle, setSingleVehicle] = useState({});
+
+  const showCommentModal = (list) => {
+    setCommentModal(!commentModal);
+    setSingleVehicle(list);
   };
+
+  // const [commentEditModal, setCommentEditModal] = useState(false);
+
+  // const showCommentEditModal = (list) => {
+  //   setCommentEditModal(!commentEditModal);
+  //   setSingleVehicle(list);
+  // };
 
   return (
     <div>
@@ -109,7 +119,13 @@ const RenterItem = ({ category, list, onSelect }) => {
                               ownerId,
                             },
                             {
-                              headers: headers,
+                              headers: {
+                                "Content-Type": "application/json",
+                                Authorization:
+                                  localStorage.getItem("userToken"),
+                                RefreshToken:
+                                  localStorage.getItem("refreshToken"),
+                              },
                             }
                           );
                           console.log(response);
@@ -165,7 +181,13 @@ const RenterItem = ({ category, list, onSelect }) => {
                               ownerId,
                             },
                             {
-                              headers: headers,
+                              headers: {
+                                "Content-Type": "application/json",
+                                Authorization:
+                                  localStorage.getItem("userToken"),
+                                RefreshToken:
+                                  localStorage.getItem("refreshToken"),
+                              },
                             }
                           );
                           console.log(response);
@@ -226,7 +248,13 @@ const RenterItem = ({ category, list, onSelect }) => {
                               ownerId,
                             },
                             {
-                              headers: headers,
+                              headers: {
+                                "Content-Type": "application/json",
+                                Authorization:
+                                  localStorage.getItem("userToken"),
+                                RefreshToken:
+                                  localStorage.getItem("refreshToken"),
+                              },
                             }
                           );
                           console.log(response);
@@ -248,61 +276,64 @@ const RenterItem = ({ category, list, onSelect }) => {
           renterItemLists.output &&
           renterItemLists.output.map((list, i) => {
             return (
-              <StRenterItem key={i}>
-                <img
-                  src={list.thumbnail}
-                  alt="차량"
-                  onClick={() => {
-                    navigate(`/vdetail/${list.vid}`);
-                  }}
-                />
-                <div
-                  className="carInfo"
-                  onClick={() => {
-                    navigate(`/vdetail/${list.vid}`);
-                  }}>
-                  <p>{list.vbrand}</p>
-                  <p>{list.vname}</p>
-                  <span>{list.oname}</span>
-                  <p>₩{list.price}</p>
-                  <p>{list.location}</p>
-                </div>
-                <div className="flex_wrap">
-                  <div className="item_date">
-                    <div>{list.startDate}</div>
-                    <span>~</span>
-                    <span>{list.endDate}</span>
+              <div key={list.vid}>
+                <StRenterItem>
+                  <img
+                    src={list.thumbnail}
+                    alt="차량"
+                    onClick={() => {
+                      navigate(`/vdetail/${list.vid}`);
+                    }}
+                  />
+                  <div
+                    className="carInfo"
+                    onClick={() => {
+                      navigate(`/vdetail/${list.vid}`);
+                    }}>
+                    <p>{list.vbrand}</p>
+                    <p>{list.vname}</p>
+                    <span>{list.oname}</span>
+                    <p>₩{list.price}</p>
+                    <p>{list.location}</p>
                   </div>
-                  <div className="btn_box">
-                    <span className="returned">반납완료</span>
-                    <div
-                      className="chatButton"
-                      onClick={async () => {
-                        const ownerId = list.ownerId;
-                        console.log(list.ownerId);
-                        try {
-                          const response = await axios.post(
-                            `${chatApi}/chat/room`,
-                            {
-                              ownerId,
-                            },
-                            {
-                              headers: headers,
-                            }
-                          );
-                          console.log(response);
-                          navigate(`/chat/${response.data}`, {
-                            state: { backgroundLocation: location },
-                          });
-                        } catch (error) {
-                          return error;
-                        }
-                      }}>
-                      채팅하기
+                  <div className="flex_wrap">
+                    <div className="item_date">
+                      <div>{list.startDate}</div>
+                      <span>~</span>
+                      <span>{list.endDate}</span>
+                    </div>
+                    <div className="btn_box">
+                      <span className="returned">반납완료</span>
+                      <div
+                        className="comments"
+                        onClick={() => {
+                          showCommentModal(list);
+                        }}>
+                        리뷰
+                      </div>
+                      {/* <div
+                        className="comments"
+                        onClick={() => {
+                          showCommentEditModal(list);
+                        }}>
+                        수정
+                      </div> */}
                     </div>
                   </div>
-                </div>
-              </StRenterItem>
+                </StRenterItem>
+                {commentModal && (
+                  <CommentModal
+                    showCommentModal={showCommentModal}
+                    singleVehicle={singleVehicle}
+                  />
+                )}
+                {/* {commentEditModal && (
+                  <CommentEditModal
+                    showCommentEditModal={showCommentEditModal}
+                    singleVehicle={singleVehicle}
+                  />
+                )} */}
+              </div>
             );
           })
         ) : category === "LIKE" ? (
@@ -433,7 +464,8 @@ const StRenterItem = styled.div`
         text-decoration: underline;
         cursor: pointer;
       }
-      .chatButton {
+      .chatButton,
+      .comments {
         font-weight: 500;
         font-size: 14px;
         width: auto;
@@ -444,7 +476,5 @@ const StRenterItem = styled.div`
     }
   }
 `;
-
-const ChattingBtn = styled.div``;
 
 export default RenterItem;

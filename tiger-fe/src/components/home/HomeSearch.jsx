@@ -9,7 +9,7 @@ import DaumPostcode from "react-daum-postcode";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
-import { __vehicleSearchList } from "../../redux/modules/vehicleDetail";
+import { __vehicleSearchList } from "../../redux/modules/vehicleDetailSlice";
 import { format } from "date-fns";
 import { FaSearch } from "react-icons/fa";
 import pin from "../../assets/pin_trans.png";

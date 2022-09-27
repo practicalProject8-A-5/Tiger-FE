@@ -10,7 +10,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
 import Button from "./Button";
-import { __vehicleSearchList } from "../redux/modules/vehicleDetail";
+import { __vehicleSearchList } from "../redux/modules/vehicleDetailSlice";
 import pin from "../assets/pin_trans.png";
 import clock from "../assets/clock.png";
 import vehicle from "../assets/vehicle.png";

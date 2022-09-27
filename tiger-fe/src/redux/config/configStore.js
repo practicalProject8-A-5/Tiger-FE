@@ -2,7 +2,7 @@
 
 import logger from "redux-logger";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import vehicleDetailSlice from "../modules/vehicleDetail";
+import vehicleDetailSlice from "../modules/vehicleDetailSlice";
 import ownerItemListSlice from "../modules/ownerItemListSlice";
 import incomeItemListSlice from "../modules/incomeItemListSlice";
 import memberSlice from "../modules/memberSlice";
