@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import NotFound from "../../global_elements/NotFound";
 import FilteredVehicle from "../main/FliteredVehicle";
+import FilteredMap from "./FilteredMap";
 import {
   __vehicleSearchList,
   filteredOptions,
@@ -53,7 +54,7 @@ const FilteredVehicleList = () => {
   }, [dispatch]);
 
   return (
-    <StItemList>
+    <StItemContainer>
       {filteredVehicle.length === 0 ? (
         <NotFound
           upperText={<div>등록차량을 찾을수 없습니다.</div>}
@@ -62,22 +63,44 @@ const FilteredVehicleList = () => {
           }
         />
       ) : (
-        filteredVehicle &&
-        filteredVehicle.map((list, index) => (
-          <FilteredVehicle key={index} list={list} />
-        ))
+        <>
+          <StItemLeft>
+            {filteredVehicle &&
+              filteredVehicle.map((list, index) => (
+                <FilteredVehicle key={index} list={list} />
+              ))}
+          </StItemLeft>
+          <StItemRight>
+            <FilteredMap filteredVehicle={filteredVehicle} />
+          </StItemRight>
+        </>
       )}
-    </StItemList>
+    </StItemContainer>
   );
 };
 
-const StItemList = styled.div`
+const StItemContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   width: 100%;
-  margin-top: 108px;
+`;
+
+const StItemLeft = styled.div`
+  width: 65rem;
+  margin-top: 78px;
+  display: flex;
+  /* align-items: center; */
+  flex-wrap: wrap;
+  gap: 0px 40px;
+  overflow: auto;
+  height: 100vh;
+`;
+
+const StItemRight = styled.div`
+  margin-top: 78px;
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 59px 46px;
 `;
 
 export default FilteredVehicleList;

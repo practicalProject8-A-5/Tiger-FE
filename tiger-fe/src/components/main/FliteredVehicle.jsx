@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
 import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
@@ -92,8 +93,8 @@ const FliteredVehicle = ({ list }) => {
 };
 
 const StItem = styled.div`
-  width: 318px;
-  height: 421px;
+  width: 480px;
+  height: 360px;
   position: relative;
   cursor: pointer;
   .heart {
@@ -110,7 +111,7 @@ const StItem = styled.div`
   }
   .desc__box {
     margin-top: 19px;
-    width: 315px;
+    width: 100%;
     height: 102px;
     .desc__top {
       display: flex;
@@ -166,7 +167,7 @@ const StItem = styled.div`
 `;
 
 const StSwiper = styled(Swiper)`
-  width: 318px;
+  width: 100%;
   height: 300px;
   position: relative;
   border-radius: 20px;
@@ -184,7 +185,6 @@ const StSwiper = styled(Swiper)`
     :hover {
       transform: scale(1.25);
     }
-
     :after {
       line-height: 32px;
       font-size: 12px;
@@ -194,7 +194,6 @@ const StSwiper = styled(Swiper)`
       position: relative;
     }
   }
-
   .swiper-button-prev {
     opacity: 0;
     width: 32px;
@@ -208,7 +207,6 @@ const StSwiper = styled(Swiper)`
     :hover {
       transform: scale(1.25);
     }
-
     :after {
       line-height: 32px;
       font-size: 12px;
@@ -221,7 +219,6 @@ const StSwiper = styled(Swiper)`
   .swiper-pagination {
     width: 100%;
     height: 20px;
-    /* opacity: 0.4; */
     span {
       opacity: 1;
       color: #000;
@@ -229,16 +226,14 @@ const StSwiper = styled(Swiper)`
   }
   .swiper-pagination {
     background-color: rgba(255, 255, 255, 0.4);
-    /* background-color: pink; */
     position: absolute;
     bottom: 0;
     border-radius: 0 0 20px 20px;
   }
   img {
-    width: 318px;
+    width: 100%;
     height: 300px;
     object-fit: cover;
-    /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
     border-radius: 20px;
   }
 `;

@@ -27,9 +27,10 @@ const CommentModal = ({ showCommentModal, singleVehicle }) => {
   );
   console.log("reviewedComment :", reviewedComment);
 
-  const [count, setCount] = useState(0);
   const [rating, setRating] = useState(reviewedComment?.rating);
   const [hover, setHover] = useState(reviewedComment?.rating);
+
+  const [count, setCount] = useState(0);
   const [comment, setComment] = useState(reviewedComment?.comment);
 
   const onChangeHandler = (e) => {

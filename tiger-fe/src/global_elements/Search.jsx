@@ -122,10 +122,6 @@ const Search = () => {
         localStorage.setItem("locationY", locationY);
 
         navigate("/vlist");
-        // setStartDates(localStorage.getItem("location"));
-        // setEndDates(localStorage.getItem("startDate"));
-        // setLocation(localStorage.getItem("endDate"));
-        // setType(localStorage.getItem("type"));
       }
     } catch (err) {
       return err;
