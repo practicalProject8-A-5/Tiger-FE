@@ -4,6 +4,7 @@ import React from "react";
 import VehicleRegister from "../components/owner/VehicleRegister";
 import Header from "../global_elements/Header";
 import GlobalLayout from "../global/GlobalLayout";
+// import CreateTest from "../components/owner/VehicleRegister";
 
 const OwnerFormPage = () => {
   return (
@@ -11,6 +12,7 @@ const OwnerFormPage = () => {
       <Header />
       <GlobalLayout>
         <VehicleRegister />
+        {/* <CreateTest /> */}
       </GlobalLayout>
     </>
   );

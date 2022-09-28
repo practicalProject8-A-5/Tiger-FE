@@ -84,7 +84,7 @@ const Profit = () => {
       setDayLineData(resp.data.output.Line);
       // setLoading(false);
     } catch (error) {
-      window.alert(error);
+      // window.alert(error);
       console.log(error);
     }
   };

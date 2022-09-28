@@ -23,7 +23,7 @@ import "swiper/scss/navigation";
 import "swiper/scss/pagination";
 import { AiFillStar } from "react-icons/ai";
 import { ImStarFull } from "react-icons/im";
-
+import { IoIosShareAlt } from "react-icons/io";
 const VehicleDetailLeft = () => {
   const key = process.env.REACT_APP_KAKAO_MAP_KEY;
   const s3 = process.env.REACT_APP_IMAGEURL;
@@ -133,7 +133,8 @@ const VehicleDetailLeft = () => {
         spaceBetween={8}
         slidesPerView={1}
         scrollbar={{ draggable: true, dragSize: 24 }}
-        navigation={true}>
+        navigation={true}
+      >
         {vehicleDetails.imageList &&
           vehicleDetails.imageList.map((image, i) => {
             return (
@@ -162,9 +163,7 @@ const VehicleDetailLeft = () => {
               </span>
             )}
             <p>{vehicleDetails.location}</p>
-            <div className="share" onClick={shareToKakao}>
-              쉐어
-            </div>
+            <IoIosShareAlt className="share" onClick={shareToKakao} />
             {email ? (
               isLike === true ? (
                 <span className="heart" onClick={likeClickHandler}>
@@ -442,6 +441,14 @@ const StVehicleInfoLocationWrapper = styled.div`
       font-size: 18px;
       text-decoration: underline;
       color: #000000;
+    }
+    .share {
+      font-size: 30px;
+      position: absolute;
+      top: 40%;
+      right: 35px;
+      transform: translateY(-50%);
+      cursor: pointer;
     }
     .heart {
       position: absolute;

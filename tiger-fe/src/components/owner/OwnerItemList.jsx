@@ -13,7 +13,7 @@ import Profit from "./accounting/Profit";
 import { useNavigate } from "react-router-dom";
 import Calculate from "./accounting/Calculate";
 import OwnerInfo from "./OwnerInfo";
-import ProfitTest from "./accounting/ProfitTest";
+// import ProfitTest from "./accounting/ProfitTest";
 
 const OwnerItemList = ({ category }) => {
   const navigate = useNavigate();
@@ -57,7 +57,6 @@ const OwnerItemList = ({ category }) => {
       {category === "Profit" && (
         <div>
           <Profit />
-          {/* <ProfitTest /> */}
         </div>
       )}
       {category === "Calculate" && (

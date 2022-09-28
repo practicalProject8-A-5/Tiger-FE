@@ -70,7 +70,8 @@ const ChatFloat = () => {
           <Link
             to="/chat"
             state={{ backgroundLocation: location }}
-            style={{ textDecoration: "none" }}>
+            style={{ textDecoration: "none" }}
+          >
             <ChatButtonWrap>
               <ChatButton>
                 {notification && <NewNoti />}

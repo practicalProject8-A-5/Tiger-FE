@@ -4,6 +4,7 @@ import React from "react";
 import Header from "../global_elements/Header";
 import GlobalLayout from "../global/GlobalLayout";
 import VehicleModify from "../components/owner/VehicleModify";
+// import ModiTest from "../components/owner/VehicleModify";
 
 const OwnerModifyPage = () => {
   return (
@@ -11,6 +12,7 @@ const OwnerModifyPage = () => {
       <Header />
       <GlobalLayout>
         <VehicleModify />
+        {/* <ModiTest /> */}
       </GlobalLayout>
     </>
   );
