@@ -44,7 +44,7 @@ const StLoginModal = styled.div`
   transform: translate(-50%, -50%);
   z-index: 99999;
   width: 688px;
-  height: 722px;
+  height: 688px;
   background-color: #fff;
   border-radius: 16px;
   border: 1px solid #eee;

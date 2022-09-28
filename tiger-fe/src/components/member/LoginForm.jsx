@@ -66,7 +66,7 @@ const LoginForm = ({ showModal, goRegister, loginToggle }) => {
         <div className="kakao_button" onClick={kakaoLogin}>
           카카오 로그인
         </div>
-        <div className="google">구글로 간편 로그인</div>
+        {/* <div className="google">구글로 간편 로그인</div> */}
         <div className="email" onClick={loginToggle}>
           이메일로 회원가입
         </div>

@@ -106,22 +106,31 @@ const Header = ({ ownerMode }) => {
               <div className="header__main">24렌트</div>
             </Link>
             {userInfo.name ? (
-              <Link
-                to="/renter"
-                style={{ textDecoration: "none", color: textColor }}
-                onClick={handleChnageTextColor}>
-                <div className="header__mypage">마이페이지</div>
-              </Link>
+              <>
+                <Link
+                  to="/renter"
+                  style={{ textDecoration: "none", color: textColor }}
+                  onClick={handleChnageTextColor}>
+                  <div className="header__mypage">마이페이지</div>
+                </Link>
+                <Link to="/owner" style={{ textDecoration: "none" }}>
+                  <div className="header__ownerpage">오너페이지</div>
+                </Link>
+              </>
             ) : (
-              <Link
-                to="/renter"
-                style={{ textDecoration: "none", display: "none" }}>
-                <div className="header__mypage">마이페이지</div>
-              </Link>
+              <>
+                <Link
+                  to="/renter"
+                  style={{ textDecoration: "none", display: "none" }}>
+                  <div className="header__mypage">마이페이지</div>
+                </Link>
+                <Link
+                  to="/owner"
+                  style={{ textDecoration: "none", display: "none" }}>
+                  <div className="header__ownerpage">오너페이지</div>
+                </Link>
+              </>
             )}
-            <Link to="/owner" style={{ textDecoration: "none" }}>
-              <div className="header__ownerpage">오너페이지</div>
-            </Link>
           </div>
           <div className="header__menu__R">
             {userInfo.name ? (
