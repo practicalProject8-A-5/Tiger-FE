@@ -32,7 +32,7 @@ export const __incomeItemList = createAsyncThunk(
           { headers: headers }
         );
         // console.log(resp.data);
-        return thunkAPI.fulfillWithValue(resp.data);
+        return thunkAPI.fulfillWithValue(resp.data.output.content);
       } catch (error) {
         return thunkAPI.rejectWithValue(error.message);
       }
@@ -47,7 +47,7 @@ export const __incomeItemList = createAsyncThunk(
           { headers: headers }
         );
         console.log(resp.data);
-        return thunkAPI.fulfillWithValue(resp.data);
+        return thunkAPI.fulfillWithValue(resp.data.output.content);
       } catch (error) {
         return thunkAPI.rejectWithValue(error.message);
       }

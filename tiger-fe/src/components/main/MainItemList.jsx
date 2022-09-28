@@ -22,8 +22,9 @@ const MainItemList = () => {
 
   return (
     <StItemList>
-      {MainItemLists.output &&
-        MainItemLists.output.map((list, i) => <MainItem key={i} list={list} />)}
+      {MainItemLists?.map((list, i) => (
+        <MainItem key={i} list={list} />
+      ))}
     </StItemList>
   );
 };
