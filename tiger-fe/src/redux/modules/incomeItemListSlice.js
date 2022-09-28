@@ -5,7 +5,7 @@ import axios from "axios";
 
 const serverApi = process.env.REACT_APP_SERVER;
 const initialState = {
-  incomeItemList: {},
+  incomeItemList: [],
   isLoading: false,
   success: null,
   error: null,
@@ -19,6 +19,8 @@ const email = localStorage.getItem("email");
 export const __incomeItemList = createAsyncThunk(
   "main/__incomeItemList",
   async (payload, thunkAPI) => {
+    const page = payload;
+    // console.log(page);
     if (email) {
       try {
         const headers = {
@@ -27,12 +29,12 @@ export const __incomeItemList = createAsyncThunk(
           RefreshToken: refreshToken,
         };
         const resp = await axios.get(
-          `${serverApi}/vehicle`,
+          `${serverApi}/vehicle?page=${page}`,
           // {},
           { headers: headers }
         );
         // console.log(resp.data);
-        return thunkAPI.fulfillWithValue(resp.data.output.content);
+        return thunkAPI.fulfillWithValue(resp.data.output);
       } catch (error) {
         return thunkAPI.rejectWithValue(error.message);
       }
@@ -42,12 +44,12 @@ export const __incomeItemList = createAsyncThunk(
           "Content-Type": "application/json",
         };
         const resp = await axios.get(
-          `${serverApi}/vehicle`,
+          `${serverApi}/vehicle?page=${page}`,
           // {},
           { headers: headers }
         );
         console.log(resp.data);
-        return thunkAPI.fulfillWithValue(resp.data.output.content);
+        return thunkAPI.fulfillWithValue(resp.data.output);
       } catch (error) {
         return thunkAPI.rejectWithValue(error.message);
       }
@@ -70,8 +72,8 @@ const incomeItemListSlice = createSlice({
     },
     [__incomeItemList.fulfilled]: (state, action) => {
       state.isLoading = false;
-      // console.log(action.payload);
-      state.incomeItemList = action.payload;
+      // console.log(action.payload.content);
+      state.incomeItemList = action.payload.content;
     },
     [__incomeItemList.rejected]: (state, action) => {
       state.isLoading = false;
