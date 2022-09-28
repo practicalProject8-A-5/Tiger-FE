@@ -2,10 +2,9 @@
 
 /*global kakao*/
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 const FilteredMap = ({ filteredVehicle }) => {
   const navigate = useNavigate();
@@ -36,6 +35,7 @@ const FilteredMap = ({ filteredVehicle }) => {
       let marker = new kakao.maps.Marker({
         map: map,
         position: coords,
+        draggable: true,
       });
 
       let content =
@@ -44,9 +44,10 @@ const FilteredMap = ({ filteredVehicle }) => {
         '        <div class="body">' +
         '            <div class="img">' +
         `                <img src=${filteredVehicle[i].thumbnail} width="73" height="73">` +
-        "           </div>" +
+        "            </div>" +
         '            <div class="desc">' +
-        `            <div class="name"><a href="/vdetail/${filteredVehicle[i].vid}" class="link" style="text-decoration:none">${filteredVehicle[i].vbrand} ${filteredVehicle[i].vname}</a></div>` +
+        `               <div class="name"><a href="/vdetail/${filteredVehicle[i].vid}" class="link" style="text-decoration:none">${filteredVehicle[i].vbrand} ${filteredVehicle[i].vname}</a></div>` +
+        `               <div class="price">₩ ${filteredVehicle[i].price}/1일</div>` +
         `               <div class="ellipsis">${filteredVehicle[i].location}</div>` +
         "            </div>" +
         "        </div>" +
@@ -74,12 +75,7 @@ const FilteredMap = ({ filteredVehicle }) => {
         "mouseout",
         makeOutListener(infowindow)
       );
-      kakao.maps.event.addListener(
-        marker,
-        "click",
-        clickToLink
-        // navigate(`/vdetail/${filteredVehicle[i].vid}`)
-      );
+      kakao.maps.event.addListener(marker, "click", clickToLink);
 
       function makeOverListener(map, marker, infowindow) {
         return function () {
@@ -94,8 +90,19 @@ const FilteredMap = ({ filteredVehicle }) => {
         };
       }
 
-      map.setCenter(centerCoords);
+      // map.setCenter(centerCoords);
     }
+    // 지도 타입 변경 컨트롤을 생성한다
+    var mapTypeControl = new kakao.maps.MapTypeControl();
+
+    // 지도의 상단 우측에 지도 타입 변경 컨트롤을 추가한다
+    map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+
+    // 지도에 확대 축소 컨트롤을 생성한다
+    var zoomControl = new kakao.maps.ZoomControl();
+
+    // 지도의 우측에 확대 축소 컨트롤을 추가한다
+    map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
   };
 
   useEffect(() => {
@@ -137,11 +144,14 @@ const StVehicleMapBox = styled.div`
     white-space: nowrap;
   }
   .desc .name {
-    padding: 5px 0 0 0px;
-    height: 30px;
+    padding: 0px 0 0 0px;
+    height: 22px;
     font-size: 15px;
     font-weight: bold;
     text-decoration: none;
+  }
+  .desc .price {
+    margin-bottom: 7px;
   }
   .info .img {
     position: absolute;

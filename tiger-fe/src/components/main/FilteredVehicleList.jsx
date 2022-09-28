@@ -58,9 +58,7 @@ const FilteredVehicleList = () => {
       {filteredVehicle.length === 0 ? (
         <NotFound
           upperText={<div>등록차량을 찾을수 없습니다.</div>}
-          lowerText={
-            <div>검색 조건을 변경하여 더 많은 차량을 찾아보세요!.</div>
-          }
+          lowerText={<div>검색 조건을 변경하여 더 많은 차량을 찾아보세요!</div>}
         />
       ) : (
         <>
