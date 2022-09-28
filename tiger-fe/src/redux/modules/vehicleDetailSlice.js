@@ -82,7 +82,7 @@ export const __vehicleDetail = createAsyncThunk(
 export const __vehicleSearchList = createAsyncThunk(
   "detail/__vehicleSearchList",
   async (payload, thunkAPI) => {
-    const { location, startDate, endDate, type, locationX, locationY } =
+    const { location, startDate, endDate, type, locationX, locationY, page } =
       payload;
     if (email) {
       try {
@@ -92,7 +92,7 @@ export const __vehicleSearchList = createAsyncThunk(
           RefreshToken: refreshToken,
         };
         const response = await axios.post(
-          `${serverApi}/vehicle/search`,
+          `${serverApi}/vehicle/search?page=${page}`,
           {
             location: location,
             locationX: locationX,
@@ -114,7 +114,7 @@ export const __vehicleSearchList = createAsyncThunk(
           "Content-Type": "application/json",
         };
         const response = await axios.post(
-          `${serverApi}/vehicle/search`,
+          `${serverApi}/vehicle/search?page=${page}`,
           {
             location: location,
             locationX: locationX,
@@ -271,7 +271,7 @@ export const vehicleDetailSlice = createSlice({
     [__vehicleSearchList.fulfilled]: (state, action) => {
       state.isLoading = false;
       // console.log(action.payload);
-      state.filteredVehicleList = action.payload;
+      state.filteredVehicleList = action.payload.content;
     },
     [__vehicleSearchList.rejected]: (state, action) => {
       state.isLoading = false;
