@@ -94,7 +94,7 @@ const FliteredVehicle = ({ list }) => {
 
 const StItem = styled.div`
   width: 480px;
-  height: 360px;
+  height: 438px;
   position: relative;
   cursor: pointer;
   .heart {

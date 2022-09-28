@@ -4,7 +4,6 @@ import MainItem from "./MainItem";
 import { __incomeItemList } from "../../redux/modules/incomeItemListSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { option } from "../../redux/modules/incomeItemListSlice";
-import { useCallback } from "react";
 
 const MainItemList = () => {
   const dispatch = useDispatch();
