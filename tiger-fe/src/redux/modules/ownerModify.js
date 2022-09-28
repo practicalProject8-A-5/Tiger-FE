@@ -75,5 +75,5 @@ const ownerModiRegisterInfoSlice = createSlice({
   },
 });
 
-// export const {} = incomeItemListSlice.actions;
+// export const {} = ownerModiRegisterInfoSlice .actions;
 export default ownerModiRegisterInfoSlice.reducer;

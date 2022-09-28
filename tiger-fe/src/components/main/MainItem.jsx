@@ -15,12 +15,11 @@ import { useNavigate } from "react-router-dom";
 import { ImStarFull } from "react-icons/im";
 
 const MainItem = ({ list }) => {
+  // console.log(list);
   const email = localStorage.getItem("email");
   const MainItemListImage = list.imageList;
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  // console.log(list);
 
   const [isLike, setIsLike] = useState(list.heart);
   // console.log(isLike);
