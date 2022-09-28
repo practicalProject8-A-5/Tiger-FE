@@ -35,28 +35,17 @@ const FilteredVehicleList = () => {
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
-        if (
-          filteredVehicle.length === 0 &&
-          location &&
-          startDate &&
-          endDate &&
-          type &&
-          locationX &&
-          locationY
-        ) {
-          // console.log("works");
-          dispatch(
-            __vehicleSearchList({
-              location,
-              startDate,
-              endDate,
-              type,
-              locationX,
-              locationY,
-              page,
-            })
-          );
-        }
+        dispatch(
+          __vehicleSearchList({
+            location,
+            startDate,
+            endDate,
+            type,
+            locationX,
+            locationY,
+            page,
+          })
+        );
         setPage(page + 1);
       }
     });
@@ -76,6 +65,28 @@ const FilteredVehicleList = () => {
   }, [filteredVehicle]);
 
   useEffect(() => {
+    if (
+      filteredVehicle.length === 0 &&
+      location &&
+      startDate &&
+      endDate &&
+      type &&
+      locationX &&
+      locationY
+    ) {
+      // console.log("works");
+      dispatch(
+        __vehicleSearchList({
+          location,
+          startDate,
+          endDate,
+          type,
+          locationX,
+          locationY,
+          page,
+        })
+      );
+    }
     return () => {
       dispatch(filteredOptions());
     };
@@ -97,6 +108,7 @@ const FilteredVehicleList = () => {
               ))}
             <StObserveContainer ref={target} />
           </StItemLeft>
+
           <StItemRight>
             <FilteredMap filteredVehicle={newItemLists} />
           </StItemRight>
