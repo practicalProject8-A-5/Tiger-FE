@@ -79,10 +79,10 @@ const VehicleRegister = () => {
 
   const onChangeHandler = (e) => {
     setAddress(e.target.value);
-    setValue("location", address);
-  };
 
-  // console.log(address);
+    setValue("location", address);
+    console.log("여기", address);
+  };
 
   const RegisterPostCodeStyle = {
     display: "block",
@@ -513,8 +513,7 @@ const VehicleRegister = () => {
             id="description"
             placeholder="차량에 대한 설명을 입력해주세요."
             cols="50"
-            rows="10"
-          ></textarea>
+            rows="10"></textarea>
         </div>
 
         {/* 렌터정보 */}
