@@ -210,7 +210,11 @@ const MonthBar = ({ monthBarData }) => {
 
   return (
     <StMonthBar>
-      <Bar data={data} options={options} />
+      {monthBarData && monthBarData.length === 0 ? (
+        <p>오늘은 수익이 없어요.</p>
+      ) : (
+        <Bar data={data} options={options} />
+      )}
     </StMonthBar>
   );
 };

@@ -1,20 +1,24 @@
 import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import axios from "axios";
 import DaumPostcode from "react-daum-postcode";
 import email from "../../assets/registermail.png";
 import phone from "../../assets/registerphone.png";
 import OwnerKakaoMap from "./OwnerKakaoMap";
 import ModifyImgViewBox from "./ModifyImgViewBox";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import AsyncSelect from "react-select/async";
-// import TestViewBox from "./ModifyImgViewBox";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
+import {
+  priceCheck,
+  yearsCheck,
+  passengersCheck,
+  fuelEfficiencyCheck,
+} from "../../shared/regex";
 
 const ModiTest = () => {
   const navigate = useNavigate();
@@ -24,10 +28,8 @@ const ModiTest = () => {
 
   const vid = useParams();
   const numVid = parseInt(vid.id);
-  // console.log(numVid);
 
   const [defaultValue, setDefaultValue] = useState({});
-  // console.log(defaultValue);
 
   //axios get 기본 설정 값 가져오기
   const getDefaultValue = async () => {
@@ -42,7 +44,6 @@ const ModiTest = () => {
 
       const resp = await axios.get(
         `${serverApi}/vehicle/management/${numVid}`,
-        // "https://run.mocky.io/v3/737bcf46-4a30-4db6-9589-a8f2d61131a5",
         { headers: headers }
       );
 
@@ -52,8 +53,6 @@ const ModiTest = () => {
     }
   };
 
-  // console.log(defaultValue);
-
   const {
     register,
     handleSubmit,
@@ -61,12 +60,10 @@ const ModiTest = () => {
     watch,
     reset,
     formState: { errors },
-    setValue,
+    // setValue,
   } = useForm({
     mode: "onChange",
   });
-
-  // console.log(watch());
 
   const cartypeOption = [
     { value: "경형", label: "경형" },
@@ -87,11 +84,10 @@ const ModiTest = () => {
     { value: "수소", label: "수소" },
   ];
 
-  const [selectCarType, setSelectCarType] = useState(defaultValue);
+  // const [selectCarType, setSelectCarType] = useState(defaultValue);
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [address, setAddress] = useState("");
-  // console.log(address);
   const [locationObj, setLocationObj] = useState({});
 
   const onChangeHandler = (e) => {
@@ -125,8 +121,6 @@ const ModiTest = () => {
     setAddress(fullAddress);
   };
 
-  // console.log(location)
-
   //put 수정한 값 보내기
   const onSubmit = async ({
     vbrand,
@@ -135,7 +129,6 @@ const ModiTest = () => {
     passengers,
     fuelEfficiency,
     description,
-    // location,
     price,
     imageList,
     removeList,
@@ -155,11 +148,9 @@ const ModiTest = () => {
     formData.append("locationY", Number(locationObj.locationY));
     formData.append("price", price);
     formData.append("removeList", deleteList);
-    // console.log(deleteList);
-    // imageList
+
     for (let i = 0; i < addImgList.length; i++) {
       formData.append("imageList", addImgList[i]);
-      // console.log(addImgList[i]);
     }
 
     const userToken = localStorage.getItem("userToken");
@@ -168,21 +159,29 @@ const ModiTest = () => {
       // for (let value of formData.values()) {
       //   console.log(value);
       // }
-
-      console.log("address:", address);
-      // console.log("location:", location);
-
       const multipartType = { "Content-Type": "multipart/form-data" };
-      await axios.put(`${serverApi}/vehicle/management/${numVid}`, formData, {
-        headers: {
-          multipartType,
-          Authorization: userToken,
-          RefreshToken: refreshToken,
-        },
-      });
-      navigate(`/owner`);
+      const resp = await axios.put(
+        `${serverApi}/vehicle/management/${numVid}`,
+        formData,
+        {
+          headers: {
+            multipartType,
+            Authorization: userToken,
+            RefreshToken: refreshToken,
+          },
+        }
+      );
+      if (resp.data.result === true) {
+        navigate("/owner");
+      }
     } catch (err) {
       console.log(err);
+      if (address === "") {
+        toast.warn("주소등록은 필수에요.", {
+          theme: "dark",
+          autoClose: 1000,
+        });
+      }
     }
   };
 
@@ -227,14 +226,13 @@ const ModiTest = () => {
       description: defaultValue.description,
       location: defaultValue.location,
 
-      fuelType: defaultValue.fuelType,
-      transmission: defaultValue.transmission,
-      cartype: defaultValue.type,
+      // fuelType: defaultValue.fuelType,
+      // transmission: defaultValue.transmission,
+      // cartype: defaultValue.type,
     });
   }, [defaultValue]);
 
   const [thum, setThum] = useState([]);
-  // console.log(thum);
   const [imageList, setImageList] = useState([]);
 
   useEffect(() => {
@@ -246,7 +244,46 @@ const ModiTest = () => {
   const [deleteList, setDeleteList] = useState([]);
   const [addImgList, setAddImgList] = useState([]);
   const [fileList, setFileList] = useState([]);
-  // console.log("address:", address);
+
+  const errorAlert = () => {
+    if (errors.years) {
+      toast.warn(`${errors.years.message}`, {
+        theme: "dark",
+        autoClose: 1000,
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else if (errors.passengers) {
+      toast.success(`${errors.passengers.message}`, {
+        theme: "dark",
+        autoClose: 1000,
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else if (errors.fuelEfficiency) {
+      toast.info(`${errors.fuelEfficiency.message}`, {
+        theme: "light",
+        autoClose: 1000,
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else if (errors.fuelType) {
+      toast.error(`${errors.fuelType.message}`, {
+        theme: "dark",
+        autoClose: 1000,
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else if (errors.transmission) {
+      toast.error(`${errors.transmission.message}`, {
+        theme: "light",
+        autoClose: 1000,
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else if (errors.cartype) {
+      toast.error(`${errors.cartype.message}`, {
+        theme: "light",
+        autoClose: 1000,
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  };
 
   return (
     <StVehicleModify>
@@ -299,6 +336,9 @@ const ModiTest = () => {
                     required: "차종을 입력해주세요",
                   })}
                 />
+                {errors.vname ? (
+                  <div className="error">{errors.vname.message}</div>
+                ) : null}
               </div>
             </div>
 
@@ -311,6 +351,10 @@ const ModiTest = () => {
                 placeholder="가격 입력"
                 {...register("price", {
                   required: "가격을 입력해주세요",
+                  validate: {
+                    type: (value) =>
+                      priceCheck(value) || "숫자만 입력이 가능해요",
+                  },
                 })}
               />
               <span>₩/1일</span>
@@ -337,6 +381,11 @@ const ModiTest = () => {
                         className="error_input"
                         {...register("years", {
                           required: "연식을 입력해주세요.",
+                          validate: {
+                            type: (value) =>
+                              yearsCheck(value) ||
+                              "연식은 숫자만 입력이 가능해요",
+                          },
                         })}
                       />
                     </td>
@@ -348,6 +397,11 @@ const ModiTest = () => {
                         placeholder="연식"
                         {...register("years", {
                           required: "연식을 입력해주세요.",
+                          validate: {
+                            type: (value) =>
+                              yearsCheck(value) ||
+                              "연식은 숫자만 입력이 가능해요",
+                          },
                         })}
                       />
                     </td>
@@ -366,6 +420,11 @@ const ModiTest = () => {
                         className="error_input"
                         {...register("passengers", {
                           required: "탑승자 수를 입력해주세요.",
+                          validate: {
+                            type: (value) =>
+                              passengersCheck(value) ||
+                              "탑승인원은 숫자만 입력이 가능해요",
+                          },
                         })}
                       />
                     </td>
@@ -377,6 +436,11 @@ const ModiTest = () => {
                         placeholder="탑승자 수"
                         {...register("passengers", {
                           required: "탑승자 수를 입력해주세요.",
+                          validate: {
+                            type: (value) =>
+                              passengersCheck(value) ||
+                              "탑승인원은 숫자만 입력이 가능해요",
+                          },
                         })}
                       />
                     </td>
@@ -397,6 +461,11 @@ const ModiTest = () => {
                         className="error_input"
                         {...register("fuelEfficiency", {
                           required: "연비를 입력해주세요.",
+                          validate: {
+                            type: (value) =>
+                              fuelEfficiencyCheck(value) ||
+                              "연비는 숫자만 입력이 가능해요",
+                          },
                         })}
                       />
                     </td>
@@ -408,6 +477,11 @@ const ModiTest = () => {
                         placeholder="연비"
                         {...register("fuelEfficiency", {
                           required: "연비를 입력해주세요.",
+                          validate: {
+                            type: (value) =>
+                              fuelEfficiencyCheck(value) ||
+                              "연비는 숫자만 입력이 가능해요",
+                          },
                         })}
                       />
                     </td>
@@ -423,7 +497,7 @@ const ModiTest = () => {
                         id="fuelType"
                         control={control}
                         name="fuelType"
-                        rules={{ required: "필수로 선택하셔야합니다." }}
+                        rules={{ required: "연료는 필수로 선택하셔야합니다." }}
                         render={({ field }) => (
                           <Select
                             {...field}
@@ -468,7 +542,7 @@ const ModiTest = () => {
                         id="transmission"
                         control={control}
                         name="transmission"
-                        rules={{ required: "필수로 선택하셔야합니다." }}
+                        rules={{ required: "변속기 필수로 선택하셔야합니다." }}
                         render={({ field }) => (
                           <Select
                             {...field}
@@ -514,7 +588,9 @@ const ModiTest = () => {
                         name="cartype"
                         className="select"
                         control={control}
-                        rules={{ required: "필수로 선택하셔야합니다." }}
+                        rules={{
+                          required: "차 종류는 필수로 선택하셔야합니다.",
+                        }}
                         render={({ field }) => (
                           <Select
                             {...field}
@@ -535,24 +611,11 @@ const ModiTest = () => {
                         control={control}
                         rules={{ required: "필수로 선택하셔야합니다." }}
                         render={({ field }) => (
-                          // render={({ onChange, value }) => (
                           <Select
                             {...field}
                             options={cartypeOption}
-                            value={cartypeOption.find(
-                              (c) => c.value === defaultValue.cartype
-                            )}
-                            // onChange={(val) => onChange(val.value)}
-                            // defaultValue={defaultValue.cartype}
                             placeholder="차 종류 선택"
-                            // options={cartypeOption}
                             styles={style}
-                            getOptionValue={(cartypeOption) =>
-                              cartypeOption.value
-                            }
-                            getOptionLabel={(cartypeOption) =>
-                              cartypeOption.value
-                            }
                           />
                         )}
                       />
@@ -628,15 +691,12 @@ const ModiTest = () => {
               setLocationObj={setLocationObj}
             />
 
-            <button>제출</button>
-            <div>
-              {/* <button onClick={imgAlert}>제출</button> */}
-              {/* <ToastContainer /> */}
-            </div>
+            <button onClick={errorAlert}>수정</button>
+            <StyledContainer />
           </form>
         </>
       )}
-      <ToastContainer />
+      <StyledContainer />
     </StVehicleModify>
   );
 };
@@ -909,5 +969,29 @@ const StRenterInfoWrapper = styled.div`
       font-size: 18px;
       line-height: 25px;
     }
+  }
+`;
+const StyledContainer = styled(ToastContainer)`
+  &&&.Toastify__toast-container {
+  }
+  .Toastify__toast {
+    position: relative;
+  }
+  .Toastify__toast-body {
+    height: 100px;
+  }
+  .Toastify__progress-bar {
+  }
+  .Toastify__close-button {
+    border-radius: 12px;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    margin: 0;
   }
 `;

@@ -37,7 +37,7 @@ const ModifyImgViewBox = ({
     console.log(fileLists);
 
     if (fileLists.length >= 2) {
-      toast.error("한번에 한장만 등록이 가능합니다.", {
+      toast.error("이미지는 한번에 한장만 등록이 가능합니다.", {
         autoClose: 3000,
         position: toast.POSITION.TOP_CENTER,
         theme: "dark",
@@ -65,39 +65,27 @@ const ModifyImgViewBox = ({
     setFileList([...fileList, image]);
     const blob = "blob";
     if (image.includes(blob)) {
-      // console.log("포함되어있어요");
     } else {
-      // setDeleteList([...deleteList]);
       setDeleteList([...deleteList, image]);
-      // console.log("포함 안됨");
     }
     console.log(image);
     console.log(image.includes(blob));
   };
 
-  // const [ThumPreView, setThumPreView] = useState([]);
-  // console.log("ThumPreView:", ThumPreView);
   const [oldThum, setOldThum] = useState([]);
   const [newThum, setNewThum] = useState([]);
 
-  const [changeThum, setChangeThum] = useState([]);
-  // console.log("thum:", thum);
-  // console.log("oldThum:", oldThum);
-  // console.log("newThum:", newThum);
+  // const [changeThum, setChangeThum] = useState([]);
 
   const changeThumnail = (e) => {
-    // setThum()
     const files = e.target.files;
-    const fileLists = Array.from(files);
-    const urlList = fileLists.map((file) => URL.createObjectURL(file));
-    // console.log(files);
-    // console.log(fileLists);
-    // console.log(urlList);
+    const thumFileLists = Array.from(files);
+    const urlList = thumFileLists.map((file) => URL.createObjectURL(file));
 
-    if (fileLists.length >= 2) {
-      toast.error("한번에 한장만 등록이 가능합니다.", {
+    if (thumFileLists.length > 1) {
+      toast.error("썸네일은 한번에 한장만 등록이 가능합니다.", {
         autoClose: 3000,
-        position: toast.POSITION.TOP_CENTER,
+        position: toast.POSITION.TOP_RIGHT,
         theme: "dark",
       });
       setOldThum(oldThum);
@@ -105,10 +93,9 @@ const ModifyImgViewBox = ({
       setThum(thum);
     } else {
       setOldThum([...oldThum, thum]);
-      setNewThum(fileLists);
+      setNewThum(thumFileLists);
       setThum(urlList);
-      thumSubmit([...oldThum, thum], fileLists);
-      // thumSubmit(thum, fileLists);
+      thumSubmit([...oldThum, thum], thumFileLists);
     }
   };
 
@@ -118,7 +105,6 @@ const ModifyImgViewBox = ({
 
     const formData = new FormData();
     formData.append("oldThumbnail", oldThum);
-    // formData.append("newThumbnail", newThum);
 
     for (let i = 0; i < newThum.length; i++) {
       formData.append("newThumbnail", newThum[i]);
@@ -127,12 +113,10 @@ const ModifyImgViewBox = ({
     const userToken = localStorage.getItem("userToken");
     const refreshToken = localStorage.getItem("refreshToken");
     try {
-      for (let value of formData.values()) {
-        console.log(value);
-      }
+      // for (let value of formData.values()) {
+      //   console.log(value);
+      // }
 
-      // console.log(formData);
-      // console.log(newThum);
       const multipartType = { "Content-Type": "multipart/form-data" };
       const resp = await axios.put(
         `${serverApi}/vehicle/thumbnail/${numVid}`,
@@ -145,46 +129,27 @@ const ModifyImgViewBox = ({
           },
         }
       );
-      console.log("resp:", resp.data.output.newThumbnail[0]);
-      // setChangeThum(resp.data.output.newThumbnail[0]);
       setThum(resp.data.output.newThumbnail[0]);
-      console.log(thum);
     } catch (err) {
       console.log(err);
     }
   };
-  console.log(changeThum);
-
-  console.log("thum:", thum);
-  console.log("newThum:", newThum);
-  console.log("oldThum:", oldThum);
-  // console.log(Array.isArray(newThum));
-  // console.log(Array.isArray(oldThum));
 
   useEffect(() => {
-    // console.log(imageList);
     if (imageList !== undefined) {
       setPreView([...preView, ...imageList]);
     }
-    // if(thum !== undefined){
-    //   setOldThum([...oldThum])
-    // }
   }, [imageList]);
 
   return (
     <StViewBox>
       <div className="thumnail">
         <img src={thum} alt="Thumnail" />
-        {/* {thum &&
-          thum.map((image) => {
-            return <img src={image} alt="Thumnail" />;
-          })} */}
         <div className="thumbox">대표사진</div>
         <label htmlFor="input_thum" className="btn" onChange={changeThumnail}>
           <input
             id="input_thum"
             type="file"
-            className="img"
             multiple="multiple"
             accept="image/jpg, image/png, image/jpeg"
           />
@@ -208,7 +173,6 @@ const ModifyImgViewBox = ({
           <input
             id="input_img"
             type="file"
-            className="img"
             multiple="multiple"
             accept="image/jpg, image/png, image/jpeg"
           />

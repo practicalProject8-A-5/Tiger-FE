@@ -61,7 +61,7 @@ ChartJS.register(
 );
 
 const MonthPie = ({ monthPieData }) => {
-  console.log("monthPieData :", monthPieData);
+  // console.log("monthPieData :", monthPieData);
 
   let reformatName = monthPieData.map((obj) => {
     let robj = {
@@ -166,7 +166,11 @@ const MonthPie = ({ monthPieData }) => {
 
   return (
     <StMonthPie>
-      <Pie data={data} options={options} />
+      {monthPieData && monthPieData.length === 0 ? (
+        <p>이번달은 수익이 없어요.</p>
+      ) : (
+        <Pie data={data} options={options} />
+      )}
     </StMonthPie>
   );
 };

@@ -174,7 +174,11 @@ const DayPie = ({ dayPieData }) => {
 
   return (
     <StDayPie>
-      <Pie data={data} options={options} />
+      {dayPieData && dayPieData.length === 0 ? (
+        <p>오늘은 수익이 없어요.</p>
+      ) : (
+        <Pie data={data} options={options} />
+      )}
     </StDayPie>
   );
 };

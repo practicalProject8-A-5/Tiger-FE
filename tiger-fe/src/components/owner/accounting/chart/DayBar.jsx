@@ -231,7 +231,11 @@ const BarChart = ({ dayBarData }) => {
 
   return (
     <StDayBar>
-      <Bar data={data} options={options} />
+      {dayBarData && dayBarData.length === 0 ? (
+        <p>오늘은 수익이 없어요.</p>
+      ) : (
+        <Bar data={data} options={options} />
+      )}
     </StDayBar>
   );
 };
