@@ -3,23 +3,25 @@
 import React from "react";
 import styled from "styled-components";
 import { FaGithub, FaInstagramSquare, FaFacebook } from "react-icons/fa";
-// import logo from "../assets/ta,iger_logo.png";
+import logo from "../assets/ta,iger_white.png";
 
 const Footer = () => {
   return (
     <StFooter>
       <div className="footer_top">
         <div className="section1">
-          <div className="logo">ta,iger</div>
+          <div className="logo">
+            <img src={logo} alt="taigerLogo" />
+          </div>
           <div className="member">
             <div className="member_FE">
-              <span>FE</span>:심채운,권익현
+              <span>FE</span> : 심채운,권익현
             </div>
             <div className="member_BE">
-              <span>BE</span>:손성우,정윤혁,최준우
+              <span>BE</span> : 손성우,정윤혁,최준우
             </div>
             <div className="member_DS">
-              <span>DESIGN</span>:허지연
+              <span>UI/UX</span> : 허지연
             </div>
           </div>
         </div>
@@ -46,8 +48,7 @@ const Footer = () => {
           <a
             href="https://github.com/orgs/practicalProject8-A-5/repositories"
             target="_blank"
-            rel="noopener noreferrer"
-          >
+            rel="noopener noreferrer">
             <FaGithub className="git_ico" />
           </a>
         </div>
@@ -56,8 +57,7 @@ const Footer = () => {
           <a
             href="https://github.com/orgs/practicalProject8-A-5/repositories"
             target="_blank"
-            rel="noopener noreferrer"
-          >
+            rel="noopener noreferrer">
             <FaInstagramSquare className="instagram_ico" />
           </a>
         </div>
@@ -66,8 +66,7 @@ const Footer = () => {
           <a
             href="https://github.com/orgs/practicalProject8-A-5/repositories"
             target="_blank"
-            rel="noopener noreferrer"
-          >
+            rel="noopener noreferrer">
             <FaFacebook className="facebook_ico" />
           </a>
         </div>
@@ -83,25 +82,16 @@ const StFooter = styled.div`
   height: 526px;
   padding: 120px 0 0 246px;
   box-sizing: border-box;
-  /* border: 1px solid #f2f2f2; */
   background-color: #000;
   color: #fff;
   .footer_top {
     border-bottom: 1px solid #f2f2f2;
     padding-bottom: 120px;
-    /* background-color: pink; */
     display: flex;
     gap: 290px;
     .section1 {
-      /* background-color: skyblue; */
-      /* margin-right: 300px; */
-
       .logo {
         margin-bottom: 40px;
-        font-weight: 400;
-        font-size: 58px;
-        /* line-height: 58px; */
-        font-family: "Giorgio";
       }
       .member {
         font-size: 24px;
@@ -111,30 +101,32 @@ const StFooter = styled.div`
         .member_FE {
           margin-top: 5px;
           span {
-            font-weight: 800;
+            font-weight: 500;
+            font-size: 22px;
           }
         }
         .member_BE {
           margin-top: 5px;
           span {
-            font-weight: 800;
+            font-weight: 500;
+            font-size: 22px;
           }
         }
         .member_DS {
+          margin-top: 5px;
           span {
-            font-weight: 800;
+            font-weight: 500;
+            font-size: 22px;
           }
         }
       }
     }
 
     .section2 {
-      /* background-color: skyblue; */
       width: 230px;
-      /* margin-right: 300px; */
       h2 {
-        font-weight: 600;
-        font-size: 32px;
+        font-weight: 500;
+        font-size: 28px;
         line-height: 44px;
         color: #ffffff;
         margin-bottom: 32px;
@@ -142,7 +134,7 @@ const StFooter = styled.div`
       }
       .info {
         font-weight: 500;
-        font-size: 24px;
+        font-size: 22px;
         line-height: 33px;
         color: #ffffff;
         .policy {
@@ -150,14 +142,14 @@ const StFooter = styled.div`
           margin-bottom: 16px;
           transition: all 0.4s;
           :hover {
-            font-size: 30px;
+            font-size: 28px;
           }
         }
         .personal_info {
           cursor: pointer;
           transition: all 0.4s;
           :hover {
-            font-size: 30px;
+            font-size: 28px;
           }
         }
       }
@@ -166,7 +158,7 @@ const StFooter = styled.div`
     .section3 {
       h2 {
         font-weight: 600;
-        font-size: 32px;
+        font-size: 28px;
         line-height: 44px;
         color: #ffffff;
         margin-bottom: 32px;
@@ -174,7 +166,7 @@ const StFooter = styled.div`
       }
       .help {
         font-weight: 500;
-        font-size: 24px;
+        font-size: 22px;
         line-height: 33px;
         color: #ffffff;
         .guide {
@@ -182,14 +174,14 @@ const StFooter = styled.div`
           margin-bottom: 16px;
           transition: all 0.4s;
           :hover {
-            font-size: 30px;
+            font-size: 28px;
           }
         }
         .question {
           cursor: pointer;
           transition: all 0.4s;
           :hover {
-            font-size: 30px;
+            font-size: 28px;
           }
         }
       }
@@ -224,8 +216,6 @@ const StFooter = styled.div`
         display: block;
         text-decoration: none;
         color: #fff;
-        /* width: 32px;
-        height: 32px; */
         .instagram_ico {
           font-size: 32px;
         }
@@ -233,8 +223,6 @@ const StFooter = styled.div`
     }
 
     .facebook {
-      /* width: 32px;
-      height: 32px; */
       margin-top: 16px;
       a {
         display: block;
