@@ -33,8 +33,6 @@ const StDetailContainer = styled.div`
   @media (min-width: 1200px) {
     position: relative;
     margin: 50px auto;
-    /* background-color: pink; */
-    display: flex;
   }
   @media (min-width: 768px) and (max-width: 991px) {
     background: #fff;
@@ -66,8 +64,7 @@ const StDetailLeftSection = styled.div`
 const StDetailRightSection = styled.div`
   @media (min-width: 1200px) {
     position: sticky;
-    bottom: 8em;
-    /* top: 10em; */
+    bottom: 9em;
     display: flex;
     flex-direction: row-reverse;
   }
