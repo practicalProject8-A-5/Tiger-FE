@@ -6,7 +6,7 @@ import styled from "styled-components";
 import axios from "axios";
 import {
   __registeredItemList,
-  __returnItemList,
+  __useItemList,
 } from "../../redux/modules/ownerItemListSlice";
 import { useDispatch } from "react-redux";
 import { FaCalendarAlt } from "react-icons/fa";
@@ -167,7 +167,7 @@ const OwnerItem = ({ list, category, vid }) => {
                 className="delete"
                 onClick={() => {
                   returnHandler(list.oid);
-                  dispatch(__returnItemList());
+                  dispatch(__useItemList());
                 }}>
                 반납확인
               </span>
