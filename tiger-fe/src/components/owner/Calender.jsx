@@ -1,4 +1,5 @@
 // eslint-disable-next-line
+
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useEffect } from "react";
@@ -9,19 +10,13 @@ import { __getDateList } from "../../redux/modules/dateSlice";
 import { Calendar } from "react-multi-date-picker";
 
 const Calender = ({ setIsModalOpen, vId }) => {
+  const serverApi = process.env.REACT_APP_SERVER;
   const DateList = useSelector((state) => state.getDateListSlice.DateList);
-  // console.log(DateList);
 
   const [reserveDateList, setReserveDateList] = useState([]);
-
-  // console.log("reserveDateList :", reserveDateList);
-
   //open 날짜
   const [openDateLists, setOpenDateLists] = useState([]);
-  // console.log("openDateLists:", openDateLists);
 
-  // console.log("vId :", vId);
-  const serverApi = process.env.REACT_APP_SERVER;
   //월
   const months = [
     "1월",
@@ -43,17 +38,14 @@ const Calender = ({ setIsModalOpen, vId }) => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
   //날짜 등록
   const submitHandler = async () => {
-    // console.log(openDateLists);
-    // console.log(openDateLists.length);
-    // let zeroMonth = "";
     let openDateList = [];
     for (let i = 0; i < openDateLists.length; i++) {
       let year = `${openDateLists[i].year}`;
       let month = `${openDateLists[i].month}`;
       let day = `${openDateLists[i].day}`;
-      // console.log(`${year}-${month}-${day}`);
       if (month < 10) {
         month = "0" + month;
       }
@@ -63,7 +55,6 @@ const Calender = ({ setIsModalOpen, vId }) => {
       openDateList.push(`${year}-${month}-${day}`);
     }
     //보내는 값
-    // console.log(openDateList);
     const userToken = localStorage.getItem("userToken");
     const refreshToken = localStorage.getItem("refreshToken");
     try {
@@ -89,14 +80,8 @@ const Calender = ({ setIsModalOpen, vId }) => {
   }, [dispatch, vId]);
 
   useEffect(() => {
-    // console.log(DateList);
-    // if (undefined) {
-    //   setReserveDateList([...DateList.reservedDateList]);
-    //   setOpenDateLists([...DateList.openDateList]);
-    // }
     setReserveDateList([...DateList.reservedDateList]);
     setOpenDateLists([...DateList.openDateList]);
-
   }, [DateList]);
 
   return (
@@ -109,7 +94,6 @@ const Calender = ({ setIsModalOpen, vId }) => {
           weekDays={weekDays}
           value={openDateLists}
           format={format}
-          // showOtherDays
           minDate={new Date()}
           numberOfMonths={2}
           onChange={(e) => {
@@ -122,10 +106,8 @@ const Calender = ({ setIsModalOpen, vId }) => {
               e.pop();
             }
           }}
-          // plugins={[<DatePanel />]}
           mapDays={({ date }) => {
             let color;
-            // if ([11, 12, 13, 14].includes(date.day)) color = "red";
             if (
               reserveDateList.includes(`${date.year}-${date.month}-${date.day}`)
             )
