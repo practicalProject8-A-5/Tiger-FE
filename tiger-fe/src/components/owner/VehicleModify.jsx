@@ -24,7 +24,7 @@ const ModiTest = () => {
 
   const vid = useParams();
   const numVid = parseInt(vid.id);
-  console.log(numVid);
+  // console.log(numVid);
 
   const [defaultValue, setDefaultValue] = useState({});
   // console.log(defaultValue);
@@ -52,6 +52,8 @@ const ModiTest = () => {
     }
   };
 
+  // console.log(defaultValue);
+
   const {
     register,
     handleSubmit,
@@ -64,7 +66,7 @@ const ModiTest = () => {
     mode: "onChange",
   });
 
-  console.log(watch());
+  // console.log(watch());
 
   const cartypeOption = [
     { value: "경형", label: "경형" },
@@ -89,6 +91,7 @@ const ModiTest = () => {
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [address, setAddress] = useState("");
+  // console.log(address);
   const [locationObj, setLocationObj] = useState({});
 
   const onChangeHandler = (e) => {
@@ -122,6 +125,8 @@ const ModiTest = () => {
     setAddress(fullAddress);
   };
 
+  // console.log(location)
+
   //put 수정한 값 보내기
   const onSubmit = async ({
     vbrand,
@@ -130,7 +135,7 @@ const ModiTest = () => {
     passengers,
     fuelEfficiency,
     description,
-    location,
+    // location,
     price,
     imageList,
     removeList,
@@ -145,23 +150,30 @@ const ModiTest = () => {
     formData.append("transmission", watch("transmission").value);
     formData.append("type", watch("cartype").value);
     formData.append("description", description);
-    formData.append("location", location);
+    formData.append("location", address);
     formData.append("locationX", Number(locationObj.locationX));
     formData.append("locationY", Number(locationObj.locationY));
     formData.append("price", price);
     formData.append("removeList", deleteList);
-    // console.log(deleteList)
+    // console.log(deleteList);
     // imageList
     for (let i = 0; i < addImgList.length; i++) {
       formData.append("imageList", addImgList[i]);
-      console.log(addImgList[i]);
+      // console.log(addImgList[i]);
     }
 
     const userToken = localStorage.getItem("userToken");
     const refreshToken = localStorage.getItem("refreshToken");
     try {
+      // for (let value of formData.values()) {
+      //   console.log(value);
+      // }
+
+      console.log("address:", address);
+      // console.log("location:", location);
+
       const multipartType = { "Content-Type": "multipart/form-data" };
-      await axios.post(`${serverApi}/vehicle/management/${numVid}`, formData, {
+      await axios.put(`${serverApi}/vehicle/management/${numVid}`, formData, {
         headers: {
           multipartType,
           Authorization: userToken,
@@ -213,6 +225,8 @@ const ModiTest = () => {
       passengers: defaultValue.passengers,
       fuelEfficiency: defaultValue.fuelEfficiency,
       description: defaultValue.description,
+      location: defaultValue.location,
+
       fuelType: defaultValue.fuelType,
       transmission: defaultValue.transmission,
       cartype: defaultValue.type,
@@ -220,6 +234,7 @@ const ModiTest = () => {
   }, [defaultValue]);
 
   const [thum, setThum] = useState([]);
+  // console.log(thum);
   const [imageList, setImageList] = useState([]);
 
   useEffect(() => {
@@ -231,16 +246,7 @@ const ModiTest = () => {
   const [deleteList, setDeleteList] = useState([]);
   const [addImgList, setAddImgList] = useState([]);
   const [fileList, setFileList] = useState([]);
-  // console.log("fileList:", fileList);
-
-  console.log("preView:", preView);
-  console.log("deleteList:", deleteList);
-  console.log("addImgList:", addImgList);
-
-  // let blob = "http";
-  // console.log(blob);
-
-  // console.log(addImgList.length);
+  // console.log("address:", address);
 
   return (
     <StVehicleModify>
@@ -251,6 +257,7 @@ const ModiTest = () => {
             <div className="onchange__imgbox">
               <ModifyImgViewBox
                 thum={thum}
+                setThum={setThum}
                 imageList={imageList}
                 preView={preView}
                 setPreView={setPreView}
@@ -260,6 +267,7 @@ const ModiTest = () => {
                 setDeleteList={setDeleteList}
                 setFileList={setFileList}
                 fileList={fileList}
+                numVid={numVid}
               />
             </div>
 
