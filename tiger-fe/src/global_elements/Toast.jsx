@@ -52,5 +52,6 @@ const StToast = styled(Toast)`
     left: 12px;
     transition: transform 0.6s ease-in;
     animation: toast-in-left 0.7s;
+    background-color: pink;
   }
 `;
