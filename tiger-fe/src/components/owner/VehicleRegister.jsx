@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import ImgViewBox from "./ImgViewBox";
 import axios from "axios";
 import DaumPostcode from "react-daum-postcode";
@@ -14,6 +14,12 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {
+  priceCheck,
+  yearsCheck,
+  passengersCheck,
+  fuelEfficiencyCheck,
+} from "../../shared/regex";
 
 const VehicleRegister = () => {
   const serverApi = process.env.REACT_APP_SERVER;
@@ -127,7 +133,7 @@ const VehicleRegister = () => {
   }) => {
     //이미지 업로드
     // const imgFormData = new FormData();
-    console.log("formdata address :", address);
+    // console.log("formdata address :", address);
     const formData = new FormData();
     formData.append("vbrand", vbrand);
     formData.append("vname", vname);
@@ -142,11 +148,7 @@ const VehicleRegister = () => {
     formData.append("locationX", Number(locationObj.locationX));
     formData.append("locationY", Number(locationObj.locationY));
     formData.append("price", price);
-
-    // console.log(files);
-    // console.log(fileList);
     if (fileList === undefined) {
-      // if (fileList.length === 0) {
       toast.warn("이미지등록은 필수에요.", {
         theme: "dark",
         autoClose: 100000,
@@ -162,24 +164,33 @@ const VehicleRegister = () => {
     const userToken = localStorage.getItem("userToken");
     const refreshToken = localStorage.getItem("refreshToken");
     try {
-      // console.log("in try address :", address);
       for (let value of formData.values()) {
         console.log(value);
       }
       const multipartType = { "Content-Type": "multipart/form-data" };
-      await axios.post(`${serverApi}/vehicle/management`, formData, {
-        headers: {
-          multipartType,
-          Authorization: userToken,
-          RefreshToken: refreshToken,
-        },
-      });
-      // navigate("/owner");
+      const resp = await axios.post(
+        `${serverApi}/vehicle/management`,
+        formData,
+        {
+          headers: {
+            multipartType,
+            Authorization: userToken,
+            RefreshToken: refreshToken,
+          },
+        }
+      );
+      if (resp.data.result === true) {
+        navigate("/owner");
+      }
     } catch (err) {
-      // alert("이미지 양식을 지켜주세요.");
       console.log(err);
+      if (address === "") {
+        toast.warn("주소등록은 필수에요.", {
+          theme: "dark",
+          autoClose: 100000,
+        });
+      }
     }
-    navigate("/owner");
   };
 
   const style = {
@@ -206,6 +217,57 @@ const VehicleRegister = () => {
         color: "#eb3434",
       };
     },
+  };
+  //success
+  // danger
+  // info
+  // warn
+
+  // position: toast.POSITION.TOP_CENTER,
+  // position: toast.POSITION.TOP_LEFT,
+  // position: toast.POSITION.BOTTOM_LEFT,
+  // position: toast.POSITION.BOTTOM_CENTER,
+  // position: toast.POSITION.BOTTOM_RIGHT,
+  // icon: "🚀",
+  // theme: "#06bc0b",
+  const errorAlert = () => {
+    if (errors.years) {
+      toast.warn(`${errors.years.message}`, {
+        theme: "dark",
+        autoClose: 3000,
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else if (errors.passengers) {
+      toast.success(`${errors.passengers.message}`, {
+        theme: "dark",
+        autoClose: 3000,
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else if (errors.fuelEfficiency) {
+      toast.info(`${errors.fuelEfficiency.message}`, {
+        theme: "light",
+        autoClose: 3000,
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else if (errors.fuelType) {
+      toast.error(`${errors.fuelType.message}`, {
+        theme: "dark",
+        autoClose: 3000,
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else if (errors.transmission) {
+      toast.error(`${errors.transmission.message}`, {
+        theme: "light",
+        autoClose: 3000,
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else if (errors.cartype) {
+      toast.error(`${errors.cartype.message}`, {
+        theme: "light",
+        autoClose: 3000,
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
   };
 
   return (
@@ -272,6 +334,9 @@ const VehicleRegister = () => {
             placeholder="가격 입력"
             {...register("price", {
               required: "가격을 입력해주세요",
+              validate: {
+                type: (value) => priceCheck(value) || "숫자만 입력이 가능해요",
+              },
             })}
           />
           <span>₩/1일</span>
@@ -299,6 +364,10 @@ const VehicleRegister = () => {
                     className="error_input"
                     {...register("years", {
                       required: "연식을 입력해주세요.",
+                      validate: {
+                        type: (value) =>
+                          yearsCheck(value) || "연식은 숫자만 입력이 가능해요",
+                      },
                     })}
                   />
                 </td>
@@ -310,6 +379,10 @@ const VehicleRegister = () => {
                     placeholder="연식"
                     {...register("years", {
                       required: "연식을 입력해주세요.",
+                      validate: {
+                        type: (value) =>
+                          yearsCheck(value) || "연식은 숫자만 입력이 가능해요",
+                      },
                     })}
                   />
                 </td>
@@ -328,6 +401,11 @@ const VehicleRegister = () => {
                     className="error_input"
                     {...register("passengers", {
                       required: "탑승자 수를 입력해주세요.",
+                      validate: {
+                        type: (value) =>
+                          passengersCheck(value) ||
+                          "탑승인원은 숫자만 입력이 가능해요",
+                      },
                     })}
                   />
                 </td>
@@ -339,6 +417,11 @@ const VehicleRegister = () => {
                     placeholder="탑승자 수"
                     {...register("passengers", {
                       required: "탑승자 수를 입력해주세요.",
+                      validate: {
+                        type: (value) =>
+                          passengersCheck(value) ||
+                          "탑승인원은 숫자만 입력이 가능해요",
+                      },
                     })}
                   />
                 </td>
@@ -359,6 +442,11 @@ const VehicleRegister = () => {
                     className="error_input"
                     {...register("fuelEfficiency", {
                       required: "연비를 입력해주세요.",
+                      validate: {
+                        type: (value) =>
+                          fuelEfficiencyCheck(value) ||
+                          "연비는 숫자만 입력이 가능해요",
+                      },
                     })}
                   />
                 </td>
@@ -370,6 +458,11 @@ const VehicleRegister = () => {
                     placeholder="연비"
                     {...register("fuelEfficiency", {
                       required: "연비를 입력해주세요.",
+                      validate: {
+                        type: (value) =>
+                          fuelEfficiencyCheck(value) ||
+                          "연비는 숫자만 입력이 가능해요",
+                      },
                     })}
                   />
                 </td>
@@ -385,7 +478,7 @@ const VehicleRegister = () => {
                     id="fuelType"
                     control={control}
                     name="fuelType"
-                    rules={{ required: "필수로 선택하셔야합니다." }}
+                    rules={{ required: "연료는 필수로 선택하셔야합니다." }}
                     render={({ field }) => (
                       <Select
                         {...field}
@@ -430,7 +523,7 @@ const VehicleRegister = () => {
                     id="transmission"
                     control={control}
                     name="transmission"
-                    rules={{ required: "필수로 선택하셔야합니다." }}
+                    rules={{ required: "변속기는 필수로 선택하셔야합니다." }}
                     render={({ field }) => (
                       <Select
                         {...field}
@@ -476,7 +569,7 @@ const VehicleRegister = () => {
                     name="cartype"
                     className="select"
                     control={control}
-                    rules={{ required: "필수로 선택하셔야합니다." }}
+                    rules={{ required: "차 종류는 필수로 선택하셔야합니다." }}
                     render={({ field }) => (
                       <Select
                         {...field}
@@ -583,11 +676,8 @@ const VehicleRegister = () => {
           setLocationObj={setLocationObj}
         />
 
-        <button>제출</button>
-        <div>
-          {/* <button onClick={imgAlert}>제출</button> */}
-          <ToastContainer />
-        </div>
+        <button onClick={errorAlert}>등록</button>
+        <StyledContainer />
       </form>
     </StVehicleRegister>
   );
@@ -860,5 +950,30 @@ const StRenterInfoWrapper = styled.div`
       font-size: 18px;
       line-height: 25px;
     }
+  }
+`;
+
+const StyledContainer = styled(ToastContainer)`
+  &&&.Toastify__toast-container {
+  }
+  .Toastify__toast {
+    position: relative;
+  }
+  .Toastify__toast-body {
+    height: 100px;
+  }
+  .Toastify__progress-bar {
+  }
+  .Toastify__close-button {
+    border-radius: 12px;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    margin: 0;
   }
 `;

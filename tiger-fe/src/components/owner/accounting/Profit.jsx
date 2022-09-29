@@ -238,6 +238,7 @@ const Profit = () => {
       <h2>
         <span>{memberInfo.name}</span>님의 최근 수익 지표
       </h2>
+      {/* {!month ? <span>날짜별</span> : <span>월간</span>} */}
       <p>날짜별 수익 그래프를 확인해보세요.</p>
 
       <div className="dropBox" onClick={clickOpen}>
