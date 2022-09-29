@@ -25,7 +25,7 @@ const ModifyImgViewBox = ({
   numVid,
 }) => {
   const serverApi = process.env.REACT_APP_SERVER;
-  console.log(thum);
+  // console.log(thum);
 
   const onChageHandler = (e) => {
     const files = e.target.files;
@@ -34,7 +34,7 @@ const ModifyImgViewBox = ({
     const fileLists = Array.from(files);
     const urlList = fileLists.map((file) => URL.createObjectURL(file));
 
-    console.log(fileLists);
+    // console.log(fileLists);
 
     if (fileLists.length >= 2) {
       toast.error("이미지는 한번에 한장만 등록이 가능합니다.", {
@@ -68,8 +68,8 @@ const ModifyImgViewBox = ({
     } else {
       setDeleteList([...deleteList, image]);
     }
-    console.log(image);
-    console.log(image.includes(blob));
+    // console.log(image);
+    // console.log(image.includes(blob));
   };
 
   const [oldThum, setOldThum] = useState([]);
@@ -100,8 +100,8 @@ const ModifyImgViewBox = ({
   };
 
   const thumSubmit = async (oldThum, newThum) => {
-    console.log(oldThum);
-    console.log(newThum);
+    // console.log(oldThum);
+    // console.log(newThum);
 
     const formData = new FormData();
     formData.append("oldThumbnail", oldThum);
@@ -131,7 +131,7 @@ const ModifyImgViewBox = ({
       );
       setThum(resp.data.output.newThumbnail[0]);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 

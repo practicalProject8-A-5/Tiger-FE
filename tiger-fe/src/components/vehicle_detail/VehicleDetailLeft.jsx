@@ -29,7 +29,7 @@ const VehicleDetailLeft = () => {
   const s3 = process.env.REACT_APP_IMAGEURL;
 
   const email = localStorage.getItem("email");
-  console.log(email);
+  // console.log(email);
   const dispatch = useDispatch();
 
   const id = useParams();
@@ -48,13 +48,13 @@ const VehicleDetailLeft = () => {
   const vehicleDetails = useSelector(
     (state) => state.vehicleDetailSlice.vehicleDetails
   );
-  console.log(vehicleDetails);
+  // console.log(vehicleDetails);
 
   // get comment lists
   const commentLists = useSelector(
     (state) => state.vehicleDetailSlice.commentLists
   );
-  console.log(commentLists);
+  // console.log(commentLists);
 
   // url에서 startDate & endDate params 잡아오기
   const startDate = new URL(window.location.href).searchParams.get("startDate");
@@ -133,8 +133,7 @@ const VehicleDetailLeft = () => {
         spaceBetween={8}
         slidesPerView={1}
         scrollbar={{ draggable: true, dragSize: 24 }}
-        navigation={true}
-      >
+        navigation={true}>
         {vehicleDetails.imageList &&
           vehicleDetails.imageList.map((image, i) => {
             return (

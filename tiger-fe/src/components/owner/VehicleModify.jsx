@@ -51,7 +51,8 @@ const ModiTest = () => {
 
       setDefaultValue(resp.data.output);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      return error;
     }
   };
 
@@ -177,7 +178,7 @@ const ModiTest = () => {
         navigate("/owner");
       }
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       if (address === "") {
         toast.warn("주소등록은 필수에요.", {
           theme: "dark",

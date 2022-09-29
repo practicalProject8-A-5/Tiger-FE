@@ -2,7 +2,7 @@
 
 /*global kakao*/
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -14,7 +14,7 @@ const FilteredMap = ({ filteredVehicle }) => {
 
   // var centerCoords = new kakao.maps.LatLng(locationY, locationX);
 
-  console.log(filteredVehicle);
+  // console.log(filteredVehicle);
   const createMap = () => {
     var centerCoords = new kakao.maps.LatLng(locationY, locationX);
 

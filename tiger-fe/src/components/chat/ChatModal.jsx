@@ -28,7 +28,7 @@ const ChatModal = () => {
   const onClickClose = () => {
     navigate(location.state.backgroundLocation);
   };
-  console.log(location.state);
+  // console.log(location.state);
 
   const onClickBack = () => {
     navigate("/chat", {

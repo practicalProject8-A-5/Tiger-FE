@@ -19,13 +19,13 @@ const CommentModal = ({ showCommentModal, singleVehicle }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const vid = parseInt(singleVehicle.vid);
-  console.log("vid", vid);
+  // console.log("vid", vid);
 
   // get reviewed comment
   const reviewedComment = useSelector(
     (state) => state.vehicleDetailSlice.reviewedComment
   );
-  console.log("reviewedComment :", reviewedComment);
+  // console.log("reviewedComment :", reviewedComment);
 
   const [rating, setRating] = useState(reviewedComment?.rating);
   const [hover, setHover] = useState(reviewedComment?.rating);

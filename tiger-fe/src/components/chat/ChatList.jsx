@@ -18,11 +18,11 @@ const ChatList = () => {
   const scrollRef = useRef();
   const user = useSelector((state) => state.memberSlice.userInfo);
   let messageList = useSelector((state) => state.chatSlice.messageList);
-  console.log(messageList);
+  // console.log(messageList);
 
   useEffect(() => {
     dispatch(cleanUpMessage());
-    console.log("cleanUpMessage");
+    // console.log("cleanUpMessage");
     dispatch(getMessageListDB(parseInt(roomId)));
   }, [roomId]);
 
@@ -55,7 +55,6 @@ const ChatList = () => {
       {messageList.map((chat, index) => {
         const date = moment(chat.date).format("HH:mm");
         const isMe = chat?.senderEmail === user?.email;
-        console.log(chat.senderEmail);
         return (
           <div key={index}>
             {chat.date?.split("T")[0] !==

@@ -20,7 +20,6 @@ import RouteChangeTracker from "../shared/RouteChangeTracker";
 
 const GlobalRouter = () => {
   const userInfo = useSelector((state) => state.memberSlice.userInfo);
-  console.log(userInfo);
   const location = useLocation();
 
   RouteChangeTracker();

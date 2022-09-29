@@ -25,7 +25,7 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
   const [payMethod, setPayMethod] = useState();
   // console.log(payMethod);
   const [errorMessage, setErrorMessage] = useState("");
-  console.log(errorMessage);
+  // console.log(errorMessage);
 
   const confirmPayment = async (e) => {
     const confirm = window.confirm("결제하시겠습니까?");

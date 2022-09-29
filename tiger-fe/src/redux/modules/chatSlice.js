@@ -25,10 +25,10 @@ export const getRoomListDB = createAsyncThunk(
           RefreshToken: localStorage.getItem("refreshToken"),
         },
       });
-      console.log("getRoomListDB :", response);
+      // console.log("getRoomListDB :", response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
-      console.log("getRoomListDBError :", error);
+      // console.log("getRoomListDBError :", error);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -47,10 +47,10 @@ export const getMessageListDB = createAsyncThunk(
           RefreshToken: localStorage.getItem("refreshToken"),
         },
       });
-      console.log("getMessageListDB :", response);
+      // console.log("getMessageListDB :", response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
-      console.log("getMessageListDB :", error);
+      // console.log("getMessageListDB :", error);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -62,14 +62,14 @@ const chatSlice = createSlice({
   reducers: {
     // 채팅 메시지 추가
     addMessage: (state, { payload }) => {
-      console.log("addmessage :", payload);
+      // console.log("addmessage :", payload);
       state.messageList.push(payload);
       // state.messageList = [...state.messageList, payload.messageObj];
       // state.messageList.push(payload);
     },
     // 채팅 리스트의 메시지 갱신
     updateRoomMessage: (state, { payload }) => {
-      console.log("updateRoomMessagePayload :", payload);
+      // console.log("updateRoomMessagePayload :", payload);
       // state.roomList[payload.index].message = payload.message;
       // state.roomList[payload.index].date = payload.date;
       if (state.roomList[payload.index] !== undefined) {
@@ -86,18 +86,15 @@ const chatSlice = createSlice({
     },
     // 알림 표시
     setNotification: (state, { payload }) => {
-      console.log("notification", payload);
+      // console.log("notification", payload);
       state.notification = payload;
     },
     // 알림 개수 초기화
     readMessage: (state, { payload }) => {
-      console.log("readMessgaePayload :", payload);
+      // console.log("readMessgaePayload :", payload);
       if (state.roomList[payload]?.unreadCnt) {
         state.roomList[payload].unreadCnt = 0;
       }
-      // if (state.roomList[payload.index]?.unreadCnt) {
-      //   state.roomList[payload.index].unreadCnt = 0;
-      // }
     },
   },
   extraReducers: {
@@ -107,7 +104,7 @@ const chatSlice = createSlice({
     },
     [getRoomListDB.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      console.log("getRoomListDB-checked :", payload);
+      // console.log("getRoomListDB-checked :", payload);
       state.roomList = payload;
     },
     [getRoomListDB.rejected]: (state, action) => {
@@ -120,7 +117,7 @@ const chatSlice = createSlice({
     },
     [getMessageListDB.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      console.log("getMessageListDB-checked :", payload);
+      // console.log("getMessageListDB-checked :", payload);
       state.messageList = payload;
     },
     [getMessageListDB.rejected]: (state, action) => {

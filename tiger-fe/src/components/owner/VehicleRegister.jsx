@@ -164,9 +164,9 @@ const VehicleRegister = () => {
     const userToken = localStorage.getItem("userToken");
     const refreshToken = localStorage.getItem("refreshToken");
     try {
-      for (let value of formData.values()) {
-        console.log(value);
-      }
+      // for (let value of formData.values()) {
+      //   console.log(value);
+      // }
       const multipartType = { "Content-Type": "multipart/form-data" };
       const resp = await axios.post(
         `${serverApi}/vehicle/management`,
@@ -183,7 +183,7 @@ const VehicleRegister = () => {
         navigate("/owner");
       }
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       if (address === "") {
         toast.warn("주소등록은 필수에요.", {
           theme: "dark",

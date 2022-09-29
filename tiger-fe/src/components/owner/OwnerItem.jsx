@@ -16,7 +16,7 @@ import CalenderBox from "../owner/CalenderBox";
 const OwnerItem = ({ list, category, vid }) => {
   const serverApi = process.env.REACT_APP_SERVER;
 
-  console.log(category);
+  // console.log(category);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const vId = vid;
@@ -54,7 +54,7 @@ const OwnerItem = ({ list, category, vid }) => {
 
   const returnHandler = async (oid) => {
     const orderId = oid;
-    console.log("orderId", orderId);
+    // console.log("orderId", orderId);
     try {
       const userToken = localStorage.getItem("userToken");
       const refreshToken = localStorage.getItem("refreshToken");
@@ -70,9 +70,10 @@ const OwnerItem = ({ list, category, vid }) => {
           headers: headers,
         }
       );
-      console.log("반납하기 성공", response);
+      // console.log("반납하기 성공", response);
     } catch (error) {
-      console.log("반납하기 실패", error);
+      // console.log("반납하기 실패", error);
+      return error;
     }
   };
 

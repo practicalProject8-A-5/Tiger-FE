@@ -23,14 +23,14 @@ const FilteredVehicleList = () => {
   const filteredVehicle = useSelector(
     (state) => state.vehicleDetailSlice.filteredVehicleList
   );
-  console.log(filteredVehicle);
+  // console.log(filteredVehicle);
 
   const target = useRef(null);
 
   const [newItemLists, setNewItemLists] = useState([]);
   const [page, setPage] = useState(0);
 
-  console.log(newItemLists);
+  // console.log(newItemLists);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {

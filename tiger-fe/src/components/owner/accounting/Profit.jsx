@@ -85,7 +85,8 @@ const Profit = () => {
       // setLoading(false);
     } catch (error) {
       // window.alert(error);
-      console.log(error);
+      // console.log(error);
+      return error;
     }
   };
 
@@ -111,7 +112,8 @@ const Profit = () => {
       // setLoading(false);
     } catch (error) {
       // window.alert(error);
-      console.log(error);
+      // console.log(error);
+      return error;
     }
   };
 
@@ -132,7 +134,7 @@ const Profit = () => {
           headers: headers,
         }
       );
-      console.log(resp.data.output.pie);
+      // console.log(resp.data.output.pie);
       // if (resp.data.output.pie.length === 0) {
       //   setNoRevenue(true);
       // } else {
@@ -141,8 +143,7 @@ const Profit = () => {
       // set;
       // setLoading(false);
     } catch (error) {
-      // window.alert(error);
-      console.log(error);
+      return error;
     }
   };
 
@@ -163,12 +164,13 @@ const Profit = () => {
           headers: headers,
         }
       );
-      console.log(resp.data.output.pie);
+      // console.log(resp.data.output.pie);
       setMonthPieData(resp.data.output.pie);
       // setLoading(false);
     } catch (error) {
       // window.alert(error);
-      console.log(error);
+      // console.log(error);
+      return error;
     }
   };
 

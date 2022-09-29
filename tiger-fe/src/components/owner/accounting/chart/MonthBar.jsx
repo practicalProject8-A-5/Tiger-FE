@@ -62,7 +62,7 @@ ChartJS.register(
 );
 
 const MonthBar = ({ monthBarData }) => {
-  console.log(monthBarData);
+  // console.log(monthBarData);
 
   let currentYear = new Date().getFullYear();
   const [year, setYear] = useState(currentYear);

@@ -54,16 +54,17 @@ const RenterItem = ({ category, list, onSelect }) => {
         Authorization: userToken,
         RefreshToken: refreshToken,
       };
-      const response = await axios.post(
+      await axios.post(
         serverApi + `/order/owner/return/${orderId}`,
         {},
         {
           headers: headers,
         }
       );
-      console.log("반납하기 성공", response);
+      // console.log("반납하기 성공", response);
     } catch (error) {
-      console.log("반납하기 실패", error);
+      // console.log("반납하기 실패", error);
+      return error;
     }
   };
 
@@ -128,7 +129,7 @@ const RenterItem = ({ category, list, onSelect }) => {
                       className="chatButton"
                       onClick={async () => {
                         const ownerId = list.ownerId;
-                        console.log(list.ownerId);
+                        // console.log(list.ownerId);
                         try {
                           const response = await axios.post(
                             `${chatApi}/chat/room`,
@@ -145,12 +146,12 @@ const RenterItem = ({ category, list, onSelect }) => {
                               },
                             }
                           );
-                          console.log(response);
+                          // console.log(response);
                           navigate(`/chat/${response.data}`, {
                             state: { backgroundLocation: location },
                           });
                         } catch (error) {
-                          console.log(error);
+                          // console.log(error);
                           return error;
                         }
                       }}>
@@ -190,7 +191,7 @@ const RenterItem = ({ category, list, onSelect }) => {
                       className="chatButton"
                       onClick={async () => {
                         const ownerId = list.ownerId;
-                        console.log(list.ownerId);
+                        // console.log(list.ownerId);
                         try {
                           const response = await axios.post(
                             `${chatApi}/chat/room`,
@@ -207,7 +208,7 @@ const RenterItem = ({ category, list, onSelect }) => {
                               },
                             }
                           );
-                          console.log(response);
+                          // console.log(response);
                           navigate(`/chat/${response.data}`, {
                             state: { backgroundLocation: location },
                           });
@@ -263,7 +264,7 @@ const RenterItem = ({ category, list, onSelect }) => {
                       className="chatButton"
                       onClick={async () => {
                         const ownerId = list.ownerId;
-                        console.log(list.ownerId);
+                        // console.log(list.ownerId);
                         try {
                           const response = await axios.post(
                             `${chatApi}/chat/room`,
@@ -280,7 +281,7 @@ const RenterItem = ({ category, list, onSelect }) => {
                               },
                             }
                           );
-                          console.log(response);
+                          // console.log(response);
                           navigate(`/chat/${response.data}`, {
                             state: { backgroundLocation: location },
                           });
