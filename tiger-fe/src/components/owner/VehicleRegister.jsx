@@ -19,7 +19,7 @@ import {
   yearsCheck,
   passengersCheck,
   fuelEfficiencyCheck,
-} from "../../shared/regex";
+} from "../../shared/Regex";
 
 const VehicleRegister = () => {
   const serverApi = process.env.REACT_APP_SERVER;

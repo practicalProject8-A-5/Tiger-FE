@@ -4,7 +4,10 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
-import { __registeredItemList } from "../../redux/modules/ownerItemListSlice";
+import {
+  __registeredItemList,
+  __returnItemList,
+} from "../../redux/modules/ownerItemListSlice";
 import { useDispatch } from "react-redux";
 import { FaCalendarAlt } from "react-icons/fa";
 import { useState } from "react";
@@ -13,7 +16,7 @@ import CalenderBox from "../owner/CalenderBox";
 const OwnerItem = ({ list, category, vid }) => {
   const serverApi = process.env.REACT_APP_SERVER;
 
-  console.log(list);
+  console.log(category);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const vId = vid;
@@ -164,6 +167,7 @@ const OwnerItem = ({ list, category, vid }) => {
                 className="delete"
                 onClick={() => {
                   returnHandler(list.oid);
+                  dispatch(__returnItemList());
                 }}>
                 반납확인
               </span>
@@ -195,14 +199,7 @@ const OwnerItem = ({ list, category, vid }) => {
               {list.endDate}
             </span>
             <div className="btn_box">
-              <span className="modify">{/* 수정 */}</span>
-              {/* <span
-                className="delete"
-                onClick={() => {
-                  returnHandler(list.oid);
-                }}>
-                반납확인
-              </span> */}
+              <span className="modify"></span>
             </div>
           </div>
         </StOwnerItem>
@@ -225,14 +222,12 @@ const OwnerItem = ({ list, category, vid }) => {
             </p>
             <p className="carInfo__location">{list.location}</p>
           </div>
-          {/* <div className="dateBtn">{list.createdAt}</div> */}
           <div className="flex_wrap">
-            {/* <span className="item_date">{list.createdAt}</span> */}
             <span className="item_date">
               {list.startDate} ~ {list.endDate}
             </span>
             <div className="btn_box">
-              <span className="modify">{/* 수정 */}</span>
+              <span className="modify"></span>
               <span className="delete">환불완료</span>
             </div>
           </div>

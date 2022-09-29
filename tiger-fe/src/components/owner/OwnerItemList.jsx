@@ -59,11 +59,11 @@ const OwnerItemList = ({ category }) => {
           <Profit />
         </div>
       )}
-      {category === "Calculate" && (
+      {/* {category === "Calculate" && (
         <div>
           <Calculate />
         </div>
-      )}
+      )} */}
     </StOwnerItemList>
   );
 };

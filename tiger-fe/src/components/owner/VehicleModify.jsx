@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+
 import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
@@ -18,7 +20,7 @@ import {
   yearsCheck,
   passengersCheck,
   fuelEfficiencyCheck,
-} from "../../shared/regex";
+} from "../../shared/Regex";
 
 const ModiTest = () => {
   const navigate = useNavigate();
@@ -632,8 +634,7 @@ const ModiTest = () => {
                 id="description"
                 placeholder="차량에 대한 설명을 입력해주세요."
                 cols="50"
-                rows="10"
-              ></textarea>
+                rows="10"></textarea>
             </div>
 
             {/* 렌터정보 */}
