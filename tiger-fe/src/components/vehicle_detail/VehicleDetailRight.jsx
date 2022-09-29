@@ -1,10 +1,11 @@
 // eslint-disable-next-line
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import Button from "../../global_elements/Button";
 import PaymentModal from "./PaymentModal";
 import styled from "styled-components";
+import win from "global";
 
 const VehicleDetailRight = () => {
   const vehicleDetails = useSelector(
@@ -27,53 +28,55 @@ const VehicleDetailRight = () => {
   };
 
   return (
-    <StPaymentBox>
-      <h1>결제 정보</h1>
-      <StPaymentPeriod>
-        <div className="paymentTime">대여시간</div>
-        {vehicleDetails.startDate === null &&
-        vehicleDetails.endDate === null ? (
-          <div className="paymentDates">
-            <div>검색후 이용해주세요</div>
+    <div className="box">
+      <StPaymentBox>
+        <h1>결제 정보</h1>
+        <StPaymentPeriod>
+          <div className="paymentTime">대여시간</div>
+          {vehicleDetails.startDate === null &&
+          vehicleDetails.endDate === null ? (
+            <div className="paymentDates">
+              <div>검색후 이용해주세요</div>
+            </div>
+          ) : (
+            <div className="paymentDates">
+              {vehicleDetails.startDate} ~ {vehicleDetails.endDate}
+            </div>
+          )}
+        </StPaymentPeriod>
+        <StPaymentPriceInfo>
+          <div className="rentCost">대여요금</div>
+          <div className="rentPrice">
+            ₩ {vehicleDetails.price}/{totalDays}일
           </div>
+        </StPaymentPriceInfo>
+        <StPaymentTax>
+          <div className="paymentTax">기타 수수료</div>
+          <div className="paymentTaxInfo">무료</div>
+        </StPaymentTax>
+        <StPaymentInsurance>
+          <div className="paymentInsurance">보험료</div>
+          <div className="paymentInsuranceCost">무료</div>
+        </StPaymentInsurance>
+        <StPaymentTotal>
+          <div className="paymentTotal">총 예약 금액</div>
+          <div className="paymentTotalCost">₩ {paidAmount}</div>
+        </StPaymentTotal>
+        {userInfo.email === vehicleDetails.email ? (
+          <StNeedLogin>본인 차량입니다</StNeedLogin>
+        ) : !userInfo.name ? (
+          <StNeedLogin>로그인후 이용해주세요</StNeedLogin>
         ) : (
-          <div className="paymentDates">
-            {vehicleDetails.startDate} ~ {vehicleDetails.endDate}
-          </div>
+          <StPaymentButton onClick={showPaymentModal}>예약하기</StPaymentButton>
         )}
-      </StPaymentPeriod>
-      <StPaymentPriceInfo>
-        <div className="rentCost">대여요금</div>
-        <div className="rentPrice">
-          ₩ {vehicleDetails.price}/{totalDays}일
-        </div>
-      </StPaymentPriceInfo>
-      <StPaymentTax>
-        <div className="paymentTax">기타 수수료</div>
-        <div className="paymentTaxInfo">무료</div>
-      </StPaymentTax>
-      <StPaymentInsurance>
-        <div className="paymentInsurance">보험료</div>
-        <div className="paymentInsuranceCost">무료</div>
-      </StPaymentInsurance>
-      <StPaymentTotal>
-        <div className="paymentTotal">총 예약 금액</div>
-        <div className="paymentTotalCost">₩ {paidAmount}</div>
-      </StPaymentTotal>
-      {userInfo.email === vehicleDetails.email ? (
-        <StNeedLogin>본인 차량입니다</StNeedLogin>
-      ) : !userInfo.name ? (
-        <StNeedLogin>로그인후 이용해주세요</StNeedLogin>
-      ) : (
-        <StPaymentButton onClick={showPaymentModal}>예약하기</StPaymentButton>
-      )}
-      {paymentModalOpen && (
-        <PaymentModal
-          showPaymentModal={showPaymentModal}
-          vehicleDetails={vehicleDetails}
-        />
-      )}
-    </StPaymentBox>
+        {paymentModalOpen && (
+          <PaymentModal
+            showPaymentModal={showPaymentModal}
+            vehicleDetails={vehicleDetails}
+          />
+        )}
+      </StPaymentBox>
+    </div>
   );
 };
 

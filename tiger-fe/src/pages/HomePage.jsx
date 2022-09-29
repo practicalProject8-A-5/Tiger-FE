@@ -6,6 +6,7 @@ import Banner from "../components/home/Banner";
 import HomeSearch from "../components/home/HomeSearch";
 import styled from "styled-components";
 import Section from "../components/home/Section";
+import Footer from "../global_elements/Footer";
 import topBtn from "../assets/home_image/top_button_icon.png";
 import { current } from "@reduxjs/toolkit";
 
@@ -22,6 +23,7 @@ const HomePage = () => {
       <Banner />
       <HomeSearch />
       <Section />
+      <Footer />
       <div className="top"></div>
     </StHomePage>
   );
