@@ -43,6 +43,30 @@ const RenterItem = ({ category, list, onSelect }) => {
     dispatch(__getRenterItemList("RESERVED"));
   };
 
+  const returnHandler = async (oid) => {
+    // e.stopPropagation();
+    const orderId = oid;
+    try {
+      const userToken = localStorage.getItem("userToken");
+      const refreshToken = localStorage.getItem("refreshToken");
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: userToken,
+        RefreshToken: refreshToken,
+      };
+      const response = await axios.post(
+        serverApi + `/order/owner/return/${orderId}`,
+        {},
+        {
+          headers: headers,
+        }
+      );
+      console.log("반납하기 성공", response);
+    } catch (error) {
+      console.log("반납하기 실패", error);
+    }
+  };
+
   const [commentModal, setCommentModal] = useState(false);
   const [singleVehicle, setSingleVehicle] = useState({});
 
@@ -50,13 +74,6 @@ const RenterItem = ({ category, list, onSelect }) => {
     setCommentModal(!commentModal);
     setSingleVehicle(list);
   };
-
-  // const [commentEditModal, setCommentEditModal] = useState(false);
-
-  // const showCommentEditModal = (list) => {
-  //   setCommentEditModal(!commentEditModal);
-  //   setSingleVehicle(list);
-  // };
 
   return (
     <div>
@@ -235,7 +252,13 @@ const RenterItem = ({ category, list, onSelect }) => {
                     <span>{list.endDate}</span>
                   </div>
                   <div className="btn_box">
-                    {/* <span className="return">반납</span> */}
+                    {/* <span
+                      className="return"
+                      onClick={() => {
+                        returnHandler(list.oid);
+                      }}>
+                      반납
+                    </span> */}
                     <div
                       className="chatButton"
                       onClick={async () => {

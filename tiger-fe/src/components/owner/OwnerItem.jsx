@@ -11,20 +11,28 @@ import { useState } from "react";
 import CalenderBox from "../owner/CalenderBox";
 
 const OwnerItem = ({ list, category, vid }) => {
+  const serverApi = process.env.REACT_APP_SERVER;
+
+  console.log(list);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const vId = vid;
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const onClickCalender = (e) => {
+    e.stopPropagation();
+    setIsModalOpen(!isModalOpen);
+  };
+
   const onClick = (e) => {
     navigate(`/vdetail/${vid}`);
   };
-  const serverApi = process.env.REACT_APP_SERVER;
 
-  const dispatch = useDispatch();
-
-  const navigate = useNavigate();
   const goUpdate = (e) => {
     e.stopPropagation();
     navigate(`/owner/${vid}/modi`);
   };
-
-  const vId = vid;
 
   const deleteHandler = async (e) => {
     e.stopPropagation();
@@ -35,20 +43,34 @@ const OwnerItem = ({ list, category, vid }) => {
       Authorization: userToken,
       RefreshToken: refreshToken,
     };
-    const response = await axios.delete(
-      serverApi + `/vehicle/management/${vId}`,
-      {
-        headers: headers,
-      }
-    );
+    await axios.delete(serverApi + `/vehicle/management/${vId}`, {
+      headers: headers,
+    });
     dispatch(__registeredItemList());
   };
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const onClickCalender = (e) => {
-    e.stopPropagation();
-    setIsModalOpen(!isModalOpen);
+  const returnHandler = async (oid) => {
+    const orderId = oid;
+    console.log("orderId", orderId);
+    try {
+      const userToken = localStorage.getItem("userToken");
+      const refreshToken = localStorage.getItem("refreshToken");
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: userToken,
+        RefreshToken: refreshToken,
+      };
+      const response = await axios.post(
+        serverApi + `/order/owner/return/${orderId}`,
+        {},
+        {
+          headers: headers,
+        }
+      );
+      console.log("반납하기 성공", response);
+    } catch (error) {
+      console.log("반납하기 실패", error);
+    }
   };
 
   return (
@@ -118,7 +140,6 @@ const OwnerItem = ({ list, category, vid }) => {
               {list.vbrand} &nbsp;
               {list.vname}
             </p>
-            {/* <span>오너 네임</span> */}
             <p>
               ₩ {list.price}/
               {(new Date(list.endDate).getTime() -
@@ -133,15 +154,23 @@ const OwnerItem = ({ list, category, vid }) => {
           <div className="flex_wrap">
             {/* <span className="item_date">{list.createdAt}</span> */}
             <span className="item_date">
-              {list.startDate} ~ {list.endDate}
+              {list.startDate}
+              <span>~</span>
+              {list.endDate}
             </span>
             <div className="btn_box">
               <span className="modify">{/* 수정 */}</span>
-              <span className="delete">반납확인</span>
+              <span
+                className="delete"
+                onClick={() => {
+                  returnHandler(list.oid);
+                }}>
+                반납확인
+              </span>
             </div>
           </div>
         </StOwnerItem>
-      ) : category === "progress" ? (
+      ) : category === "return" ? (
         <StOwnerItem>
           <img src={list.thumbnail} alt="차량" onClick={onClick} />
           <div className="carInfo" onClick={onClick}>
@@ -149,7 +178,6 @@ const OwnerItem = ({ list, category, vid }) => {
               {list.vbrand} &nbsp;
               {list.vname}
             </p>
-            {/* <span>오너 네임</span> */}
             <p>
               ₩ {list.price}/
               {(new Date(list.endDate).getTime() -
@@ -160,12 +188,22 @@ const OwnerItem = ({ list, category, vid }) => {
             </p>
             <p className="carInfo__location">{list.location}</p>
           </div>
-          {/* <div className="dateBtn">{list.createdAt}</div> */}
           <div className="flex_wrap">
-            {/* <span className="item_date">{list.createdAt}</span> */}
             <span className="item_date">
-              {list.startDate} ~ {list.endDate}
+              {list.startDate}
+              <span>~</span>
+              {list.endDate}
             </span>
+            <div className="btn_box">
+              <span className="modify">{/* 수정 */}</span>
+              {/* <span
+                className="delete"
+                onClick={() => {
+                  returnHandler(list.oid);
+                }}>
+                반납확인
+              </span> */}
+            </div>
           </div>
         </StOwnerItem>
       ) : category === "Refund" ? (

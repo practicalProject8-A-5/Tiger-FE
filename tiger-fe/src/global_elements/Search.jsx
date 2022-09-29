@@ -159,7 +159,7 @@ const Search = () => {
                 endDate={endDates}
                 locale={ko}
                 dateFormat="yyyy-MM-dd"
-                minDate={new Date()}
+                minDate={new Date(new Date().setDate(new Date().getDate() + 1))}
                 shouldCloseOnSelect={true}
                 placeholderText="언제부터"
                 // customInput={<ExampleCustomInput />}
