@@ -16,11 +16,14 @@ import { useSelector } from "react-redux";
 import NotFound from "../global_elements/NotFound";
 import ChatModal from "../components/chat/ChatModal";
 import ChatFloat from "../components/chat/ChatFloat";
+import RouteChangeTracker from "../redux/shared/RouteChangeTracker";
 
 const GlobalRouter = () => {
   const userInfo = useSelector((state) => state.memberSlice.userInfo);
   // console.log(userInfo);
   const location = useLocation();
+
+  RouteChangeTracker();
 
   return (
     <>
