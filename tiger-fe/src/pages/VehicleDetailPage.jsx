@@ -63,9 +63,11 @@ const StDetailLeftSection = styled.div`
 
 const StDetailRightSection = styled.div`
   @media (min-width: 1200px) {
-    top: 27%;
-    position: fixed;
-    right: calc((100% - 1396px) / 2);
+    position: sticky;
+    bottom: 8em;
+    /* top: 10em; */
+    display: flex;
+    flex-direction: row-reverse;
   }
   @media (min-width: 768px) and (max-width: 991px) {
     bottom: 0;
