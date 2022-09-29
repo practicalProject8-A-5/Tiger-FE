@@ -27,7 +27,7 @@ const VehicleRegister = () => {
     handleSubmit,
     control,
     watch,
-    setValue,
+    // setValue,
     formState: { errors },
   } = useForm();
 
@@ -79,10 +79,10 @@ const VehicleRegister = () => {
 
   const onChangeHandler = (e) => {
     setAddress(e.target.value);
-
-    setValue("location", address);
-    console.log("여기", address);
+    // setValue("location", address);
   };
+
+  console.log("address:", address);
 
   const RegisterPostCodeStyle = {
     display: "block",
@@ -121,12 +121,13 @@ const VehicleRegister = () => {
     passengers,
     fuelEfficiency,
     description,
-    location,
+    // address,
     price,
     // locationObj,
   }) => {
     //이미지 업로드
     // const imgFormData = new FormData();
+    console.log("formdata address :", address);
     const formData = new FormData();
     formData.append("vbrand", vbrand);
     formData.append("vname", vname);
@@ -137,13 +138,13 @@ const VehicleRegister = () => {
     formData.append("transmission", watch("transmission").value);
     formData.append("type", watch("cartype").value);
     formData.append("description", description);
-    formData.append("location", location);
+    formData.append("location", address);
     formData.append("locationX", Number(locationObj.locationX));
     formData.append("locationY", Number(locationObj.locationY));
     formData.append("price", price);
 
-    console.log(files);
-    console.log(fileList);
+    // console.log(files);
+    // console.log(fileList);
     if (fileList === undefined) {
       // if (fileList.length === 0) {
       toast.warn("이미지등록은 필수에요.", {
@@ -161,6 +162,10 @@ const VehicleRegister = () => {
     const userToken = localStorage.getItem("userToken");
     const refreshToken = localStorage.getItem("refreshToken");
     try {
+      // console.log("in try address :", address);
+      for (let value of formData.values()) {
+        console.log(value);
+      }
       const multipartType = { "Content-Type": "multipart/form-data" };
       await axios.post(`${serverApi}/vehicle/management`, formData, {
         headers: {
@@ -169,11 +174,12 @@ const VehicleRegister = () => {
           RefreshToken: refreshToken,
         },
       });
-      navigate("/owner");
+      // navigate("/owner");
     } catch (err) {
-      alert("이미지 양식을 지켜주세요.");
-      // console.log(err);
+      // alert("이미지 양식을 지켜주세요.");
+      console.log(err);
     }
+    navigate("/owner");
   };
 
   const style = {
@@ -551,6 +557,9 @@ const VehicleRegister = () => {
             }}
             onChange={onChangeHandler}
             placeholder="상세 주소를 입력해주세요."
+            // {...register("location", {
+            //   required: "주소를 입력해주세요",
+            // })}
             {...register("location")}
           />
           {/* {errors.location ? (

@@ -3,12 +3,16 @@ import { useEffect } from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { FaPlus, FaExchangeAlt } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
+import axios from "axios";
+import { useCallback } from "react";
+import { set } from "react-hook-form";
 
 const ModifyImgViewBox = ({
   thum,
+  setThum,
   imageList,
   preView,
   addImgList,
@@ -18,10 +22,10 @@ const ModifyImgViewBox = ({
   setDeleteList,
   setFileList,
   fileList,
+  numVid,
 }) => {
-  // console.log(imageList);
-
-  // console.log(preView);
+  const serverApi = process.env.REACT_APP_SERVER;
+  console.log(thum);
 
   const onChageHandler = (e) => {
     const files = e.target.files;
@@ -71,21 +75,121 @@ const ModifyImgViewBox = ({
     console.log(image.includes(blob));
   };
 
+  // const [ThumPreView, setThumPreView] = useState([]);
+  // console.log("ThumPreView:", ThumPreView);
+  const [oldThum, setOldThum] = useState([]);
+  const [newThum, setNewThum] = useState([]);
+
+  const [changeThum, setChangeThum] = useState([]);
+  // console.log("thum:", thum);
+  // console.log("oldThum:", oldThum);
+  // console.log("newThum:", newThum);
+
+  const changeThumnail = (e) => {
+    // setThum()
+    const files = e.target.files;
+    const fileLists = Array.from(files);
+    const urlList = fileLists.map((file) => URL.createObjectURL(file));
+    // console.log(files);
+    // console.log(fileLists);
+    // console.log(urlList);
+
+    if (fileLists.length >= 2) {
+      toast.error("한번에 한장만 등록이 가능합니다.", {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER,
+        theme: "dark",
+      });
+      setOldThum(oldThum);
+      setNewThum(newThum);
+      setThum(thum);
+    } else {
+      setOldThum([...oldThum, thum]);
+      setNewThum(fileLists);
+      setThum(urlList);
+      thumSubmit([...oldThum, thum], fileLists);
+      // thumSubmit(thum, fileLists);
+    }
+  };
+
+  const thumSubmit = async (oldThum, newThum) => {
+    console.log(oldThum);
+    console.log(newThum);
+
+    const formData = new FormData();
+    formData.append("oldThumbnail", oldThum);
+    // formData.append("newThumbnail", newThum);
+
+    for (let i = 0; i < newThum.length; i++) {
+      formData.append("newThumbnail", newThum[i]);
+    }
+
+    const userToken = localStorage.getItem("userToken");
+    const refreshToken = localStorage.getItem("refreshToken");
+    try {
+      for (let value of formData.values()) {
+        console.log(value);
+      }
+
+      // console.log(formData);
+      // console.log(newThum);
+      const multipartType = { "Content-Type": "multipart/form-data" };
+      const resp = await axios.put(
+        `${serverApi}/vehicle/thumbnail/${numVid}`,
+        formData,
+        {
+          headers: {
+            multipartType,
+            Authorization: userToken,
+            RefreshToken: refreshToken,
+          },
+        }
+      );
+      console.log("resp:", resp.data.output.newThumbnail[0]);
+      // setChangeThum(resp.data.output.newThumbnail[0]);
+      setThum(resp.data.output.newThumbnail[0]);
+      console.log(thum);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  console.log(changeThum);
+
+  console.log("thum:", thum);
+  console.log("newThum:", newThum);
+  console.log("oldThum:", oldThum);
+  // console.log(Array.isArray(newThum));
+  // console.log(Array.isArray(oldThum));
+
   useEffect(() => {
     // console.log(imageList);
     if (imageList !== undefined) {
       setPreView([...preView, ...imageList]);
     }
+    // if(thum !== undefined){
+    //   setOldThum([...oldThum])
+    // }
   }, [imageList]);
 
   return (
     <StViewBox>
       <div className="thumnail">
-        <img src={thum} alt="" />
+        <img src={thum} alt="Thumnail" />
+        {/* {thum &&
+          thum.map((image) => {
+            return <img src={image} alt="Thumnail" />;
+          })} */}
         <div className="thumbox">대표사진</div>
-        <div className="btn">
+        <label htmlFor="input_thum" className="btn" onChange={changeThumnail}>
+          <input
+            id="input_thum"
+            type="file"
+            className="img"
+            multiple="multiple"
+            accept="image/jpg, image/png, image/jpeg"
+          />
           <FaExchangeAlt />
-        </div>
+        </label>
       </div>
 
       <div className="sub">
@@ -218,5 +322,13 @@ const StViewBox = styled.div`
     align-items: center;
     justify-content: center;
     font-size: 20px;
+    input {
+      position: absolute;
+      width: 0;
+      height: 0;
+      padding: 0;
+      overflow: hidden;
+      border: 0;
+    }
   }
 `;
