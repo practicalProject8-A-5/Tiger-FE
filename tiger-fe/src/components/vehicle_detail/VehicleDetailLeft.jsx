@@ -313,15 +313,12 @@ const StVehicleInfoContainer = styled.div`
   }
   .comment_wrap {
     width: 100%;
-    /* background-color: skyblue; */
+    border-bottom: 1px solid #fefefe;
     .comment_item {
-      /* 임시 */
       width: 830px;
       height: 58px;
-
       position: relative;
       display: flex;
-      /* border: 1px solid; */
       margin-bottom: 30px;
       :nth-last-child(1) {
         margin-bottom: 0;

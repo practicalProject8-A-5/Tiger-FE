@@ -43,31 +43,6 @@ const RenterItem = ({ category, list, onSelect }) => {
     dispatch(__getRenterItemList("RESERVED"));
   };
 
-  const returnHandler = async (oid) => {
-    // e.stopPropagation();
-    const orderId = oid;
-    try {
-      const userToken = localStorage.getItem("userToken");
-      const refreshToken = localStorage.getItem("refreshToken");
-      const headers = {
-        "Content-Type": "application/json",
-        Authorization: userToken,
-        RefreshToken: refreshToken,
-      };
-      await axios.post(
-        serverApi + `/order/owner/return/${orderId}`,
-        {},
-        {
-          headers: headers,
-        }
-      );
-      // console.log("반납하기 성공", response);
-    } catch (error) {
-      // console.log("반납하기 실패", error);
-      return error;
-    }
-  };
-
   const [commentModal, setCommentModal] = useState(false);
   const [singleVehicle, setSingleVehicle] = useState({});
 
@@ -187,7 +162,7 @@ const RenterItem = ({ category, list, onSelect }) => {
                   </div>
                   <div className="btn_box">
                     <span className="refunded">환불 완료</span>
-                    <div
+                    {/* <div
                       className="chatButton"
                       onClick={async () => {
                         const ownerId = list.ownerId;
@@ -217,7 +192,7 @@ const RenterItem = ({ category, list, onSelect }) => {
                         }
                       }}>
                       채팅하기
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </StRenterItem>
@@ -253,13 +228,6 @@ const RenterItem = ({ category, list, onSelect }) => {
                     <span>{list.endDate}</span>
                   </div>
                   <div className="btn_box">
-                    {/* <span
-                      className="return"
-                      onClick={() => {
-                        returnHandler(list.oid);
-                      }}>
-                      반납
-                    </span> */}
                     <div
                       className="chatButton"
                       onClick={async () => {
@@ -335,13 +303,6 @@ const RenterItem = ({ category, list, onSelect }) => {
                         }}>
                         리뷰
                       </div>
-                      {/* <div
-                        className="comments"
-                        onClick={() => {
-                          showCommentEditModal(list);
-                        }}>
-                        수정
-                      </div> */}
                     </div>
                   </div>
                 </StRenterItem>
@@ -351,12 +312,6 @@ const RenterItem = ({ category, list, onSelect }) => {
                     singleVehicle={singleVehicle}
                   />
                 )}
-                {/* {commentEditModal && (
-                  <CommentEditModal
-                    showCommentEditModal={showCommentEditModal}
-                    singleVehicle={singleVehicle}
-                  />
-                )} */}
               </div>
             );
           })
@@ -454,13 +409,11 @@ const StRenterItem = styled.div`
       display: flex;
       flex-direction: column;
       align-items: center;
-      /* background-color: pink; */
     }
     .btn_box {
       margin-bottom: 11px;
       display: flex;
       justify-content: end;
-      /* background-color: yellow; */
       .modify {
         font-weight: 500;
         font-size: 14px;

@@ -63,7 +63,7 @@ const OwnerItem = ({ list, category, vid }) => {
         Authorization: userToken,
         RefreshToken: refreshToken,
       };
-      const response = await axios.post(
+      await axios.post(
         serverApi + `/order/owner/return/${orderId}`,
         {},
         {
