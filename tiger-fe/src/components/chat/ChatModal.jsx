@@ -135,7 +135,7 @@ const Wrap = styled.div`
   background-color: #fff;
   display: flex;
   border-radius: 24px;
-  z-index: 10000;
+  z-index: 99;
   @media screen and (max-width: 768px) {
     width: 100%;
     height: 100%;

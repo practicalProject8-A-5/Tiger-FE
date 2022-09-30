@@ -84,8 +84,6 @@ const Profit = () => {
       setDayLineData(resp.data.output.Line);
       // setLoading(false);
     } catch (error) {
-      // window.alert(error);
-      // console.log(error);
       return error;
     }
   };
@@ -111,8 +109,6 @@ const Profit = () => {
       setMonthLineData(resp.data.output.Line);
       // setLoading(false);
     } catch (error) {
-      // window.alert(error);
-      // console.log(error);
       return error;
     }
   };
@@ -168,8 +164,6 @@ const Profit = () => {
       setMonthPieData(resp.data.output.pie);
       // setLoading(false);
     } catch (error) {
-      // window.alert(error);
-      // console.log(error);
       return error;
     }
   };
@@ -195,7 +189,6 @@ const Profit = () => {
       setDayBarData(resp.data.output.bar);
       // setLoading(false);
     } catch (error) {
-      window.alert(error);
       console.log(error);
     }
   };
@@ -221,7 +214,6 @@ const Profit = () => {
       setMonthBarData(resp.data.output.bar);
       // setLoading(false);
     } catch (error) {
-      window.alert(error);
       console.log(error);
     }
   };

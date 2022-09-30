@@ -9,6 +9,7 @@ import Section from "../components/home/Section";
 import Footer from "../global_elements/Footer";
 import topBtn from "../assets/home_image/top_button_icon.png";
 import { current } from "@reduxjs/toolkit";
+import TopBtn from "../global_elements/TopBtn";
 
 const HomePage = () => {
   const handleScrolling = (e) => {
@@ -23,8 +24,8 @@ const HomePage = () => {
       <Banner />
       <HomeSearch />
       <Section />
+      <TopBtn />
       <Footer />
-      <div className="top"></div>
     </StHomePage>
   );
 };
@@ -33,6 +34,7 @@ export default HomePage;
 
 const StHomePage = styled.div`
   position: relative;
-  overflow-y: scroll;
-  height: 100vh;
+  /* overflow-y: scroll; */
+  /* height: 100vh; */
+  /* background-color: pink; */
 `;

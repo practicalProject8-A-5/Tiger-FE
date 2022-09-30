@@ -17,7 +17,10 @@ const StButton = styled.button`
   justify-content: center;
   flex-direction: row;
   border: 1px solid #eee;
-  background-color: #fff;
+  background-color: #f2f2f2;
+  color: #8b8b8b;
+  font-weight: 700;
+  font-size: 18px;
   height: 46px;
   border-radius: 8px;
   background-color: ${({ bgColor, disabled }) => (disabled ? "#ddd" : bgColor)};
@@ -35,7 +38,7 @@ const StButton = styled.button`
       case "small":
         return css`
           width: 30px;
-          height: 30px !important;
+          height: 30px;
         `;
       default:
         return css`

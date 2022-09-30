@@ -72,7 +72,8 @@ const FliteredVehicle = ({ list }) => {
           navigate(
             `/vdetail/${list.vid}?startDate=${list.startDate}&endDate=${list.endDate}`
           );
-        }}>
+        }}
+      >
         <div className="desc__top">
           <div className="desc__title">{list.location}</div>
           <div className="desc__star">

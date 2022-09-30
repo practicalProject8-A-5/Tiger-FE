@@ -8,6 +8,8 @@ import { AiOutlineClose } from "react-icons/ai";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import styled from "styled-components";
 import logo from "../../assets/ta,iger_logo.png";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import kakaoLogo from "../../assets/kakaoLogin.png";
 
@@ -38,7 +40,13 @@ const LoginForm = ({ showModal, goRegister, loginToggle }) => {
     dispatch(__userLogin(data)).then((result) => {
       // console.log(result);
       if (result.error?.message === "Rejected") {
-        return alert(result.payload.message);
+        toast.error(`${result.payload.message}`, {
+          theme: "dark",
+          autoClose: 1500,
+          position: toast.POSITION.TOP_CENTER,
+          className: "toatst_error",
+          progressClassName: "error_progress",
+        });
       } else {
         // console.log("loggedin");
         showModal();
@@ -104,6 +112,7 @@ const LoginForm = ({ showModal, goRegister, loginToggle }) => {
           <button type="submit">로그인</button>
         </form>
       </div>
+      <StyledContainer />
     </StLoginForm>
   );
 };
@@ -280,6 +289,33 @@ const StLoginForm = styled.div`
         padding: 0;
       }
     }
+  }
+`;
+const StyledContainer = styled(ToastContainer)`
+  &&&.Toastify__toast-container {
+  }
+  .Toastify__toast {
+    position: relative;
+  }
+  .Toastify__toast-body {
+    height: 100px;
+    .Toastify__toast-icon > svg {
+      fill: #fff;
+    }
+  }
+  .Toastify__progress-bar {
+  }
+  .Toastify__close-button {
+    border-radius: 12px;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    margin: 0;
   }
 `;
 

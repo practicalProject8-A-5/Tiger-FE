@@ -8,6 +8,8 @@ import { BiChevronLeft } from "react-icons/bi";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const RegisterForm = ({
   showModal,
@@ -70,14 +72,33 @@ const RegisterForm = ({
         }
       );
       if (response.data.result === true && checkEmail !== "") {
-        alert("사용 가능한 아이디 입니다."); // 백엔드로 보낸 데이터 결과 200 일 경우
+        // 백엔드로 보낸 데이터 결과 200 일 경우
+        toast.success("사용 가능한 아이디 입니다.", {
+          theme: "dark",
+          autoClose: 1500,
+          position: toast.POSITION.TOP_CENTER,
+          className: "toatst_success",
+          progressClassName: "success_progress",
+        });
         setCheckEmail(!checkEmail); //사용 가능한 아이디 일 경우 state상태에 true값으로 변경, 나중에 회원가입 버튼 클릭 이벤트핸들러에 필요!
       } else if (response.data.result === false) {
-        alert("이미 사용중인 아이디 입니다."); // 이미 데이터베이스에 있는 아이디일 경우 409
+        toast.warn("이미 사용중인 아이디 입니다.", {
+          theme: "dark",
+          autoClose: 1500,
+          position: toast.POSITION.TOP_CENTER,
+          className: "toatst_warn",
+          progressClassName: "warn_progress",
+        }); // 이미 데이터베이스에 있는 아이디일 경우 409
         setCheckEmail("");
       } else {
         // 그 외에는 사용 불가한 아이디
-        alert("사용 불가한 아이디입니다.");
+        toast.error("사용 불가한 아이디입니다.", {
+          theme: "dark",
+          autoClose: 1500,
+          position: toast.POSITION.TOP_CENTER,
+          className: "toatst_error",
+          progressClassName: "error_progress",
+        });
       }
       // console.log(response);
       return response;
@@ -90,7 +111,13 @@ const RegisterForm = ({
 
   const onSubmit = (data) => {
     if (clickCheckEmail === false) {
-      alert("이메일 중복확인 해주세요");
+      toast.warn("이메일 중복확인 해주세요.", {
+        theme: "dark",
+        autoClose: 1500,
+        position: toast.POSITION.TOP_CENTER,
+        className: "toatst_warn",
+        progressClassName: "warn_progress",
+      });
     } else {
       dispatch(__registerUser(data));
       loginToggle();
@@ -129,7 +156,8 @@ const RegisterForm = ({
                   //     "You should write in proper email format.",
                   // },
                 })}
-                onChange={handleChange}></input>
+                onChange={handleChange}
+              ></input>
               <div className="Register__emailCheck" onClick={emailCheck}>
                 중복확인
               </div>
@@ -344,6 +372,7 @@ const RegisterForm = ({
         </div>
         <button type="submit">회원가입</button>
       </form>
+      <StyledContainer />
     </StRegisterForm>
   );
 };
@@ -521,5 +550,31 @@ const StRegisterForm = styled.div`
     }
   }
 `;
-
+const StyledContainer = styled(ToastContainer)`
+  &&&.Toastify__toast-container {
+  }
+  .Toastify__toast {
+    position: relative;
+  }
+  .Toastify__toast-body {
+    height: 100px;
+    .Toastify__toast-icon > svg {
+      fill: #fff;
+    }
+  }
+  .Toastify__progress-bar {
+  }
+  .Toastify__close-button {
+    border-radius: 12px;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    margin: 0;
+  }
+`;
 export default RegisterForm;
