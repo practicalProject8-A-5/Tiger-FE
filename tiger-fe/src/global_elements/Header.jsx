@@ -78,7 +78,7 @@ const Header = ({ ownerMode }) => {
 
   // 메뉴바 글씨 클릭시 색상 변환 유지
   const [textColor, setTextColor] = useState("black");
-  const handleChnageTextColor = (e) => {
+  const handleChangeInputColor = (e) => {
     setTextColor(textColor === "black" ? "#CCCCCC" : "black");
   };
 
@@ -96,13 +96,13 @@ const Header = ({ ownerMode }) => {
             <Link
               to="/home"
               style={{ textDecoration: "none", color: textColor }}
-              onClick={handleChnageTextColor}>
+              onClick={handleChangeInputColor}>
               <div className="header__home">홈</div>
             </Link>
             <Link
               to="/"
               style={{ textDecoration: "none", color: textColor }}
-              onClick={handleChnageTextColor}>
+              onClick={handleChangeInputColor}>
               <div className="header__main">24렌트</div>
             </Link>
             {userInfo.name ? (
@@ -110,7 +110,7 @@ const Header = ({ ownerMode }) => {
                 <Link
                   to="/renter"
                   style={{ textDecoration: "none", color: textColor }}
-                  onClick={handleChnageTextColor}>
+                  onClick={handleChangeInputColor}>
                   <div className="header__mypage">마이페이지</div>
                 </Link>
                 <Link to="/owner" style={{ textDecoration: "none" }}>
