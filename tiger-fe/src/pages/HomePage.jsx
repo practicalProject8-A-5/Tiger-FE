@@ -14,7 +14,7 @@ import TopBtn from "../global_elements/TopBtn";
 const HomePage = () => {
   const handleScrolling = (e) => {
     // console.log("Height :", e.target.scrollHeight);
-    console.log("scrollTop :", e.target.scrollTop);
+    // console.log("scrollTop :", e.target.scrollTop);
     // console.log("clientY :", e.currentTarget.clientHeight);
   };
 

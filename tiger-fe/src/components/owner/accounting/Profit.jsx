@@ -189,7 +189,8 @@ const Profit = () => {
       setDayBarData(resp.data.output.bar);
       // setLoading(false);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      return error;
     }
   };
 
@@ -214,7 +215,8 @@ const Profit = () => {
       setMonthBarData(resp.data.output.bar);
       // setLoading(false);
     } catch (error) {
-      console.log(error);
+      return error;
+      // console.log(error);
     }
   };
 

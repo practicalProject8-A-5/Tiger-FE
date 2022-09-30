@@ -67,7 +67,7 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
             { headers: headers }
           )
           .then(() => {
-            console.log(resp);
+            // console.log(resp);
             // navigate("/renter");
           });
       } catch (error) {
@@ -143,8 +143,7 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
               id="payMethod"
               onChange={(e) => {
                 setPayMethod(e.target.value);
-              }}
-            >
+              }}>
               <option value="default" disabled>
                 결제방식
               </option>

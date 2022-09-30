@@ -62,7 +62,7 @@ ChartJS.register(
 );
 
 const BarChart = ({ dayBarData }) => {
-  console.log(dayBarData);
+  // console.log(dayBarData);
   let today = new Date();
   let dateYear = today.getFullYear();
   let dateMonth = ("0" + (today.getMonth() + 1)).slice(-2);

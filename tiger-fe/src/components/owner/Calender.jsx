@@ -84,8 +84,9 @@ const Calender = ({ setIsModalOpen, vId }) => {
         }, 1200);
         //모달 오픈 넣으면 알럿이 안떠요
       }
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      // console.log(err);
+      return error;
     }
   };
   const dispatch = useDispatch();

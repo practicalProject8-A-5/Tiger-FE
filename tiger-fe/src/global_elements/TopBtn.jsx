@@ -17,7 +17,7 @@ const TopBtn = () => {
   const [showBtn, setShowBtn] = useState(false);
 
   useEffect(() => {
-    console.log("11");
+    // console.log("11");
     const handleShowBtn = () => {
       if (window.scrollY > 400) {
         setShowBtn(!showBtn);
