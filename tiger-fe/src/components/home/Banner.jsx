@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Banner from "../../assets/home_image/banner.png";
-import Event from "../../assets/home_image/event.png";
+// import Event from "../../assets/home_image/event.png";
 
 import "swiper/scss";
 import "swiper/scss/navigation";

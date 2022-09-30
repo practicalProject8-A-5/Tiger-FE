@@ -23,16 +23,35 @@ const FilteredVehicleList = () => {
   const filteredVehicle = useSelector(
     (state) => state.vehicleDetailSlice.filteredVehicleList
   );
-  console.log("f", filteredVehicle);
 
   const target = useRef(null);
 
   const [newItemLists, setNewItemLists] = useState([]);
   const [page, setPage] = useState(0);
 
-  console.log("n", newItemLists);
-
   useEffect(() => {
+    if (
+      filteredVehicle.length === 0 &&
+      location &&
+      startDate &&
+      endDate &&
+      type &&
+      locationX &&
+      locationY
+    ) {
+      dispatch(
+        __vehicleSearchList({
+          location,
+          startDate,
+          endDate,
+          type,
+          locationX,
+          locationY,
+          page,
+        })
+      );
+      setPage(page + 1);
+    }
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         console.log("____!");
@@ -47,8 +66,8 @@ const FilteredVehicleList = () => {
             page,
           })
         );
+        console.log("____!");
         setPage(page + 1);
-        console.log("____??");
       }
     });
     if (target.current !== null) {
@@ -63,41 +82,19 @@ const FilteredVehicleList = () => {
     };
   }, [target, newItemLists.length]);
 
-  useEffect(() => {
-    setNewItemLists([...newItemLists, ...filteredVehicle]);
-  }, [filteredVehicle]);
+  const vidData = newItemLists.filter(
+    (arr, index, callback) =>
+      index === callback.findIndex((el) => el.vid === arr.vid)
+  );
 
   useEffect(() => {
-    if (
-      filteredVehicle.length === 0 &&
-      location &&
-      startDate &&
-      endDate &&
-      type &&
-      locationX &&
-      locationY
-    ) {
-      // console.log("works");
-      dispatch(
-        __vehicleSearchList({
-          location,
-          startDate,
-          endDate,
-          type,
-          locationX,
-          locationY,
-          page,
-        })
-      );
-    }
-    return () => {
-      dispatch(filteredOptions());
-    };
-  }, [dispatch]);
+    setNewItemLists([...newItemLists, ...filteredVehicle]);
+    console.log("setNewItemLists");
+  }, [filteredVehicle]);
 
   return (
     <StItemContainer>
-      {newItemLists.length === 0 ? (
+      {vidData.length === 0 ? (
         <NotFound
           upperText={<div>등록차량을 찾을수 없습니다.</div>}
           lowerText={<div>검색 조건을 변경하여 더 많은 차량을 찾아보세요!</div>}
@@ -105,15 +102,15 @@ const FilteredVehicleList = () => {
       ) : (
         <>
           <StItemLeft>
-            {newItemLists &&
-              newItemLists.map((list, index) => (
+            {vidData &&
+              vidData.map((list, index) => (
                 <FilteredVehicle key={index} list={list} />
               ))}
             <StObserveContainer ref={target} />
           </StItemLeft>
 
           <StItemRight>
-            <FilteredMap filteredVehicle={newItemLists} />
+            <FilteredMap filteredVehicle={vidData} />
           </StItemRight>
         </>
       )}
