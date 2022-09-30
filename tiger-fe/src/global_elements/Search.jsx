@@ -16,6 +16,8 @@ import clock from "../assets/clock.png";
 import vehicle from "../assets/vehicle.png";
 import { format } from "date-fns";
 import { FaAngleRight } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Search = () => {
   const mapKey = process.env.REACT_APP_REST_API_KEY;
@@ -101,7 +103,13 @@ const Search = () => {
         location === "" ||
         type === ""
       ) {
-        alert("검색을 완료 해주세요");
+        toast.warn("검색을 완료 해주세요", {
+          theme: "dark",
+          autoClose: 1500,
+          position: toast.POSITION.TOP_CENTER,
+          className: "toatst_warn",
+          progressClassName: "warn_progress",
+        });
       } else {
         e.preventDefault();
         dispatch(
@@ -138,7 +146,8 @@ const Search = () => {
               setIsPopupOpen(!isPopupOpen);
             }}
             onChange={onChangeHandler}
-            placeholder="어디서?"></input>
+            placeholder="어디서?"
+          ></input>
           {isPopupOpen ? (
             <div>
               <DaumPostcode style={postCodeStyle} onComplete={handlePostCode} />
@@ -203,6 +212,7 @@ const Search = () => {
         </StVehicleTypeContainer>
         <Button onClick={onSubmitHandler}>찾기</Button>
       </div>
+      <StyledContainer />
     </StSearch>
   );
 };
@@ -260,7 +270,7 @@ const StCalendarContainer = styled.div`
       top: 50%;
       right: 0;
       transform: translateY(-50%);
-      z-index: 99;
+      z-index: 98;
       font-weight: 500;
       font-size: 18px;
       color: #8b8b8b;
@@ -403,6 +413,33 @@ const StVehicleTypeContainer = styled.div`
       /* background-color: pink; */
       border-radius: 12px;
     }
+  }
+`;
+const StyledContainer = styled(ToastContainer)`
+  &&&.Toastify__toast-container {
+  }
+  .Toastify__toast {
+    position: relative;
+  }
+  .Toastify__toast-body {
+    height: 100px;
+    .Toastify__toast-icon > svg {
+      fill: #fff;
+    }
+  }
+  .Toastify__progress-bar {
+  }
+  .Toastify__close-button {
+    border-radius: 12px;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    margin: 0;
   }
 `;
 export default Search;

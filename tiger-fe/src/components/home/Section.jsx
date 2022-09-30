@@ -17,6 +17,9 @@ import toggle from "../../assets/home_image/owner_switch.png";
 import btn from "../../assets/home_image/button.png";
 import form from "../../assets/home_image/inform.png";
 
+import chart from "../../assets/home_image/image_chart.png";
+import calculate from "../../assets/home_image/image_chart2.png";
+
 const Section = () => {
   return (
     <StSection>
@@ -90,6 +93,14 @@ const Section = () => {
           <Flip top>
             <p>마이페이지 &rarr; 정산에서 편리하게 수익관리</p>
           </Flip>
+          <div className="img_box">
+            <Swing>
+              <img src={chart} alt="차트" />
+            </Swing>
+            <Swing>
+              <img src={calculate} alt="정산" />
+            </Swing>
+          </div>
           {/* <img src="" alt="" /> */}
           <div className="list_img"></div>
         </div>
@@ -241,7 +252,7 @@ const StSection = styled.div`
       .img_box {
         position: absolute;
         top: 14%;
-        right: 97px;
+        right: 30px;
         display: flex;
         align-items: center;
         gap: 30px;

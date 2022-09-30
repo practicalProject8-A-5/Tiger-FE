@@ -44,7 +44,8 @@ const FliteredVehicle = ({ list }) => {
         navigation={true}
         loop={true}
         modules={[Pagination, Navigation]}
-        className="mySwiper">
+        className="mySwiper"
+      >
         <SwiperSlide className="img">
           <img src={list.thumbnail} alt="imageSlide" />
         </SwiperSlide>
@@ -68,7 +69,8 @@ const FliteredVehicle = ({ list }) => {
           navigate(
             `/vdetail/${list.vid}?startDate=${list.startDate}&endDate=${list.endDate}`
           );
-        }}>
+        }}
+      >
         <div className="desc__top">
           <div className="desc__title">{list.location}</div>
           <div className="desc__star">

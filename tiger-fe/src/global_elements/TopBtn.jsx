@@ -17,6 +17,7 @@ const TopBtn = () => {
   const [showBtn, setShowBtn] = useState(false);
 
   useEffect(() => {
+    console.log("11");
     const handleShowBtn = () => {
       if (window.scrollY > 400) {
         setShowBtn(!showBtn);
@@ -54,7 +55,18 @@ const StTopBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all 0.4s;
+  /* transition: all 0.4s; */
   cursor: pointer;
   z-index: 99;
+  animation: top-btn-show 1s;
+  @keyframes top-btn-show {
+    from {
+      transform: translateX(30px);
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0px);
+    }
+  }
 `;
