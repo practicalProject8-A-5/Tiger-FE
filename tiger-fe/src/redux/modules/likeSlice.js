@@ -30,7 +30,7 @@ export const __isLike = createAsyncThunk(
         {},
         { headers: headers }
       );
-      console.log(response.data);
+      // console.log(response.data);
       return thunkAPI.fulfillWithValue(response.data.output);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

@@ -28,7 +28,7 @@ const ChatModal = () => {
   const onClickClose = () => {
     navigate(location.state.backgroundLocation);
   };
-  console.log(location.state);
+  // console.log(location.state);
 
   const onClickBack = () => {
     navigate("/chat", {
@@ -108,7 +108,7 @@ const ChatModal = () => {
 };
 
 const FloatWrap = styled.div`
-  z-index: 99;
+  z-index: 999;
   position: fixed;
   bottom: 30px;
   right: 30px;

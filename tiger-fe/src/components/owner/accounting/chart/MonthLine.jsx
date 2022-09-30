@@ -63,7 +63,7 @@ ChartJS.register(
 );
 
 const MonthLine = ({ monthLineData }) => {
-  console.log(monthLineData);
+  // console.log(monthLineData);
   let currentYear = new Date().getFullYear();
   //달
   // let labelDate = new Date(currentYear, 9, 0).getDate(); // 일수 구하기
@@ -74,18 +74,18 @@ const MonthLine = ({ monthLineData }) => {
     if (year < currentYear) {
       setYear(year + 1);
     }
-    console.log("next");
+    // console.log("next");
   };
   const clickPrev = () => {
     if (year > 1) {
       setYear(year - 1);
     }
-    console.log("prev");
+    // console.log("prev");
   };
 
   let dataSum = monthLineData.map((el) => el.sum);
   // let dataMonth =
-  console.log(dataSum);
+  // console.log(dataSum);
 
   let labelData = [
     { date: `${year}-01`, sum: 0 },
@@ -115,7 +115,7 @@ const MonthLine = ({ monthLineData }) => {
     }
     // console.log(filterData);
   });
-  console.log(formatData);
+  // console.log(formatData);
 
   const data = {
     labels: [...labelData.map((el) => (el = el.date))],

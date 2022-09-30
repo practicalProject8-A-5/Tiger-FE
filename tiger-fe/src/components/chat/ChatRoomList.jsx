@@ -9,15 +9,15 @@ import moment from "moment";
 // 채팅 > 채팅방 목록
 const ChatRoomList = ({ location, roomId }) => {
   const roomList = useSelector((state) => state.chatSlice.roomList);
-  console.log("roomList :", roomList);
+  // console.log("roomList :", roomList);
 
   const userId = useSelector((state) => state.memberSlice.userInfo.id);
-  console.log("userIdSelctor :", userId);
+  // console.log("userIdSelctor :", userId);
 
   const renterItemLists = useSelector(
     (state) => state.renterItemListSlice.renterItemLists
   );
-  console.log(renterItemLists);
+  // console.log(renterItemLists);
 
   return (
     <>

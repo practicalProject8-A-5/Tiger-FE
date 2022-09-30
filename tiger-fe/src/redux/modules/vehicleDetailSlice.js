@@ -45,7 +45,7 @@ export const __vehicleDetail = createAsyncThunk(
             `${serverApi}/vehicle/${vId}?startDate=${startDate}&endDate=${endDate}`,
             { headers: headers }
           );
-          console.log(response.data.output);
+          // console.log(response.data.output);
           return thunkAPI.fulfillWithValue(response.data.output);
         }
       } catch (error) {
@@ -68,7 +68,7 @@ export const __vehicleDetail = createAsyncThunk(
             `${serverApi}/vehicle/${vId}?startDate=${startDate}&endDate=${endDate}`,
             { headers: headers }
           );
-          console.log(response.data.output);
+          // console.log(response.data.output);
           return thunkAPI.fulfillWithValue(response.data.output);
         }
       } catch (error) {
@@ -103,7 +103,7 @@ export const __vehicleSearchList = createAsyncThunk(
           },
           { headers: headers }
         );
-        console.log(response.data.output);
+        // console.log(response.data.output);
         return thunkAPI.fulfillWithValue(response.data.output);
       } catch (error) {
         return thunkAPI.rejectWithValue(error);
@@ -125,7 +125,7 @@ export const __vehicleSearchList = createAsyncThunk(
           },
           { headers: headers }
         );
-        console.log(response.data.output);
+        // console.log(response.data.output);
         return thunkAPI.fulfillWithValue(response.data.output);
       } catch (error) {
         return thunkAPI.rejectWithValue(error);
@@ -139,7 +139,7 @@ export const __getVehicleComments = createAsyncThunk(
   "detail/__getVehicleComments",
   async (payload, thunkAPI) => {
     const vid = payload;
-    console.log(vid);
+    // console.log(vid);
     try {
       const headers = {
         "Content-Type": "application/json",
@@ -149,7 +149,7 @@ export const __getVehicleComments = createAsyncThunk(
       const response = await axios.get(`${serverApi}/vehicle/review/${vid}`, {
         headers: headers,
       });
-      console.log("getComments", response.data.output);
+      // console.log("getComments", response.data.output);
       return thunkAPI.fulfillWithValue(response.data.output);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -162,7 +162,7 @@ export const __getReviewedComment = createAsyncThunk(
   "detail/__getReviewedComment",
   async (payload, thunkAPI) => {
     const vid = payload;
-    console.log(vid);
+    // console.log(vid);
     try {
       const headers = {
         "Content-Type": "application/json",
@@ -172,7 +172,7 @@ export const __getReviewedComment = createAsyncThunk(
       const response = await axios.get(`${serverApi}/vehicle/reviewed/${vid}`, {
         headers: headers,
       });
-      console.log("getReviewedComment", response.data.output);
+      // console.log("getReviewedComment", response.data.output);
       return thunkAPI.fulfillWithValue(response.data.output);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -185,9 +185,9 @@ export const __postVehicleComments = createAsyncThunk(
   "detail/__postVehicleComments",
   async (payload, thunkAPI) => {
     const { comment, rating, vid } = payload;
-    console.log(vid);
-    console.log(comment);
-    console.log(rating);
+    // console.log(vid);
+    // console.log(comment);
+    // console.log(rating);
     try {
       const headers = {
         "Content-Type": "application/json",
@@ -204,7 +204,7 @@ export const __postVehicleComments = createAsyncThunk(
           headers: headers,
         }
       );
-      console.log("commentPost :", response.data);
+      // console.log("commentPost :", response.data);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -217,7 +217,7 @@ export const __deleteComment = createAsyncThunk(
   "detail/__deleteComment",
   async (payload, thunkAPI) => {
     const vid = payload;
-    console.log(vid);
+    // console.log(vid);
     try {
       const headers = {
         "Content-Type": "application/json",
@@ -230,7 +230,7 @@ export const __deleteComment = createAsyncThunk(
           headers: headers,
         }
       );
-      console.log("commentPut :", response.data);
+      // console.log("commentPut :", response.data);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -306,7 +306,7 @@ export const vehicleDetailSlice = createSlice({
     },
     [__postVehicleComments.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log(action.payload);
+      // console.log(action.payload);
       state.postComment = action.payload;
     },
     [__postVehicleComments.rejected]: (state, action) => {

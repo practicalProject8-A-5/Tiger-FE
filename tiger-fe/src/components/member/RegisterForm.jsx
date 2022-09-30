@@ -18,7 +18,7 @@ const RegisterForm = ({
   goRegister,
 }) => {
   const dispatch = useDispatch();
-  const memberApi = process.env.REACT_APP_SERVER;
+  const serverApi = process.env.REACT_APP_SERVER;
 
   const eye = <FaEye />;
   const eyeHover = <FaEyeSlash />;
@@ -65,7 +65,7 @@ const RegisterForm = ({
     // console.log(checkEmail);
     try {
       const response = await axios.post(
-        `${memberApi}/member/emailCheck`,
+        `${serverApi}/member/emailCheck`,
         { email: checkEmail },
         {
           headers: headers,
@@ -121,8 +121,6 @@ const RegisterForm = ({
     } else {
       dispatch(__registerUser(data));
       loginToggle();
-      // console.log(data);
-      // console.log("눌림");
     }
   };
 
@@ -380,15 +378,12 @@ const RegisterForm = ({
 };
 
 const StRegisterForm = styled.div`
-  /* background-color: pink; */
   .login__header {
     width: 100%;
     height: 78px;
-    /* background-color: pink; */
     position: relative;
     color: #000;
     border-bottom: 1px solid #f2f2f2;
-    /* margin-bottom: 36px; */
     .icon {
       font-size: 22px;
       position: absolute;
@@ -401,7 +396,6 @@ const StRegisterForm = styled.div`
       font-size: 18px;
       text-align: center;
       line-height: 78px;
-      /* background-color: yellow; */
     }
   }
   .Register_wrap {
@@ -412,19 +406,15 @@ const StRegisterForm = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* background-color: skyblue; */
-    /* margin-top: 36px; */
     .formbox {
       width: 100%;
       height: 98px;
-      /* background-color: pink; */
       font-weight: 400;
       font-size: 18px;
       color: #8b8b8b;
       margin-bottom: 37px;
       .import {
         color: #ff881b;
-        /* line-height: 25px; */
         margin-right: 5px;
       }
       .Register__label {
@@ -432,7 +422,6 @@ const StRegisterForm = styled.div`
         width: 100%;
         height: 25px;
         margin-bottom: 14px;
-        /* background-color: skyblue; */
       }
       .Register__input {
         width: 100%;
@@ -467,13 +456,11 @@ const StRegisterForm = styled.div`
         font-size: 14px;
         color: #eb3434;
         text-align: right;
-        /* background-color: pink; */
       }
     }
     .formbox__pw {
       width: 100%;
       height: 190px;
-      /* background-color: pink; */
       font-weight: 400;
       font-size: 18px;
       color: #8b8b8b;
@@ -484,13 +471,11 @@ const StRegisterForm = styled.div`
         font-size: 18px;
         color: #ff881b;
         margin-right: 5px;
-        /* background-color: pink; */
       }
       .Register__label {
         display: block;
         width: 100%;
         height: 25px;
-        /* background-color: skyblue; */
         margin-bottom: 14px;
       }
       .Register__input {
@@ -544,13 +529,11 @@ const StRegisterForm = styled.div`
       }
       .error {
         width: 100%;
-        /* height: 22px; */
         margin-top: 7px;
         font-weight: 500;
         font-size: 14px;
         color: #eb3434;
         text-align: right;
-        /* background-color: pink; */
       }
     }
     button {

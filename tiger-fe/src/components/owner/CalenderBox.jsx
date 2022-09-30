@@ -5,7 +5,7 @@ import Calender from "./Calender";
 
 const CalenderBox = ({ setIsModalOpen, vId, dateList }) => {
   // useEffect(() => {
-  //   // console.log(dateList);
+  // console.log(dateList);
   // }, [dateList]);
   // console.log(dateList);
   return (
