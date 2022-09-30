@@ -431,7 +431,6 @@ const StVehicleInfoLocationWrapper = styled.div`
     }
     .location_comment {
       margin-right: 17px;
-      text-decoration: underline;
       font-weight: 700;
       font-size: 18px;
       color: #000000;
@@ -439,7 +438,6 @@ const StVehicleInfoLocationWrapper = styled.div`
     p {
       font-family: 700;
       font-size: 18px;
-      text-decoration: underline;
       color: #000000;
     }
     .share {
