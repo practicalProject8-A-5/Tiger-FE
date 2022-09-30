@@ -2,6 +2,8 @@
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const serverApi = process.env.REACT_APP_SERVER;
 const kakaoApi = process.env.REACT_APP_KAKAO_LOGIN_API;
@@ -41,11 +43,25 @@ export const __registerUser = createAsyncThunk(
         { email, password, passwordConfirm, name },
         config
       );
-      window.alert("회원가입 성공");
+      toast.success("회원가입 성공", {
+        theme: "dark",
+        autoClose: 1500,
+        position: toast.POSITION.TOP_CENTER,
+        className: "toatst_success",
+        // bodyClassName: "",
+        progressClassName: "success_progress",
+      });
       // console.log(response.data);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
-      window.alert("회원가입 실패!");
+      toast.error("회원가입 실패", {
+        theme: "dark",
+        autoClose: 1500,
+        position: toast.POSITION.TOP_CENTER,
+        className: "toatst_error",
+        // bodyClassName: "",
+        progressClassName: "error_progress",
+      });
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -68,7 +84,14 @@ export const __userLogin = createAsyncThunk(
       localStorage.setItem("refreshToken", response.headers.refreshtoken);
       localStorage.setItem("profileImage", response.data.output.profileImage);
       // console.log(response.data);
-      window.alert("로그인 성공");
+      toast.success("로그인 성공", {
+        theme: "dark",
+        autoClose: 1500,
+        position: toast.POSITION.TOP_CENTER,
+        className: "toatst_success",
+        // bodyClassName: "",
+        progressClassName: "success_progress",
+      });
       loader();
       return thunkAPI.fulfillWithValue(response.data.output);
     } catch (error) {
@@ -94,7 +117,14 @@ export const __kakaoLogin = createAsyncThunk(
       localStorage.setItem("profileImage", response.data.output.profileImage);
       localStorage.setItem("name", response.data.output.name);
       localStorage.setItem("refreshToken", response.headers.refreshtoken);
-      window.alert("카카오 성공");
+      toast.success("카카오로그인 성공", {
+        theme: "dark",
+        autoClose: 1500,
+        position: toast.POSITION.TOP_CENTER,
+        className: "toatst_success",
+        // bodyClassName: "",
+        progressClassName: "success_progress",
+      });
       loader();
       return thunkAPI.fulfillWithValue(response.data.output);
     } catch (error) {

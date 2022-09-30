@@ -36,3 +36,74 @@
     transform: rotate(360deg);
   }
 }
+
+.toatst_error {
+  background-color: #e23f33;
+}
+.error_progress {
+  background-color: #e5c9c3;
+  /* background-color: #eda9a4; */
+}
+
+.toatst_info {
+  background-color: #2b89d1;
+}
+.info_progress {
+  background-color: #b7e6fe;
+}
+
+.toatst_warn {
+  background-color: #ecb90d;
+}
+.warn_progress {
+  background-color: #f8e8a9;
+}
+
+.toatst_success {
+  background-color: #05b20d;
+}
+.success_progress {
+  background-color: #a9e8ad;
+}
+
+/* const StyledContainer = styled(ToastContainer)`
+  &&&.Toastify__toast-container {
+  }
+  .Toastify__toast {
+    position: relative;
+  }
+  .Toastify__toast-body {
+    height: 100px;
+    .Toastify__toast-icon > svg {
+      fill: #fff;
+    }
+  }
+  .Toastify__progress-bar {
+  }
+  .Toastify__close-button {
+    border-radius: 12px;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    margin: 0;
+  }
+`;
+
+<StyledContainer />
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+toast.info("검색을 완료 해주세요", {
+  theme: "dark",
+  autoClose: 1500,
+  position: toast.POSITION.TOP_CENTER,
+  className: "toatst_info",
+  // bodyClassName: "",
+  progressClassName: "info_progress",
+}); */

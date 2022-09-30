@@ -243,12 +243,12 @@ const StPaymentButton = styled(Button)`
 `;
 
 const StNeedLogin = styled(Button)`
-  width: 380px;
+  width: 380px !important;
   height: 60px;
   background: #ff881b;
   border-radius: 12px;
   font-weight: 600;
-  font-size: 22px;
+  font-size: 22px !important;
   line-height: 30px;
   color: #ffffff;
   margin: 40px auto;

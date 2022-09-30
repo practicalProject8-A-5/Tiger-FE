@@ -6,6 +6,8 @@ import { AiOutlineClose } from "react-icons/ai";
 import logo from "../../assets/ta,iger_logo.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
   const navigate = useNavigate();
@@ -25,13 +27,20 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
   const [payMethod, setPayMethod] = useState();
   // console.log(payMethod);
   const [errorMessage, setErrorMessage] = useState("");
-  console.log(errorMessage);
+  // console.log(errorMessage);
 
   const confirmPayment = async (e) => {
     const confirm = window.confirm("결제하시겠습니까?");
     e.preventDefault();
     if (confirm === true && payMethod === undefined) {
-      alert("결제방식을 선택해주세요");
+      toast.warn("결제방식을 선택해주세요.", {
+        theme: "dark",
+        autoClose: 1500,
+        position: toast.POSITION.TOP_RIGHT,
+        className: "toatst_warn",
+        // bodyClassName: "",
+        progressClassName: "warn_progress",
+      });
     } else if (confirm === false) {
       return null;
     } else if (confirm === true && payMethod !== undefined) {
@@ -44,7 +53,7 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
           Authorization: userToken,
           RefreshToken: refreshToken,
         };
-        await axios
+        const resp = await axios
           .post(
             serverApi + `/order/${vid}`,
             {
@@ -57,8 +66,9 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
             },
             { headers: headers }
           )
-          .then((res) => {
-            navigate("/renter");
+          .then(() => {
+            console.log(resp);
+            // navigate("/renter");
           });
       } catch (error) {
         setErrorMessage(error.response.data.code);
@@ -133,7 +143,8 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
               id="payMethod"
               onChange={(e) => {
                 setPayMethod(e.target.value);
-              }}>
+              }}
+            >
               <option value="default" disabled>
                 결제방식
               </option>
@@ -149,9 +160,16 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
               </button>
             )}
             {errorMessage === "DUPLICATE_ORDERDATE"
-              ? alert("이미 예약이 되었습니다.")
+              ? toast.info("이미 예약을 한 차량입니다.", {
+                  theme: "dark",
+                  autoClose: 1500,
+                  position: toast.POSITION.TOP_CENTER,
+                  className: "toatst_info",
+                  progressClassName: "info_progress",
+                })
               : null}
           </form>
+          <StyledContainer />
         </div>
       </StPaymentInfo>
     </StPaymentModal>
@@ -369,6 +387,34 @@ const StPaymentInfo = styled.div`
       padding: 0;
       margin-top: 15px;
     }
+  }
+`;
+const StyledContainer = styled(ToastContainer)`
+  &&&.Toastify__toast-container {
+  }
+  .Toastify__toast {
+    position: relative;
+  }
+  .Toastify__toast-body {
+    height: 100px;
+    .Toastify__toast-icon > svg {
+      fill: #fff;
+    }
+  }
+  .Toastify__progress-bar {
+  }
+  .Toastify__close-button {
+    border-radius: 12px !important;
+    position: absolute !important;
+    top: 12px !important;
+    right: 12px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px !important;
+    height: 25px !important;
+    margin: 0;
+    background-color: transparent !important;
   }
 `;
 

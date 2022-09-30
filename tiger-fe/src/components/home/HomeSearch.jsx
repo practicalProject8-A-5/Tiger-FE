@@ -16,6 +16,8 @@ import pin from "../../assets/pin_trans.png";
 import clock from "../../assets/clock.png";
 import vehicle from "../../assets/vehicle.png";
 import { FaAngleRight } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const HomeSearch = () => {
   const mapKey = process.env.REACT_APP_REST_API_KEY;
@@ -77,10 +79,10 @@ const HomeSearch = () => {
   // console.log(locationX, locationY);
 
   const postCodeStyle = {
-    display: "block",
+    // display: "block",
     position: "absolute",
-    top: "80%",
-    left: "3%",
+    top: "87%",
+    left: "1%",
     width: "400px",
     height: "400px",
     border: "1px solid black",
@@ -111,7 +113,14 @@ const HomeSearch = () => {
         location === "" ||
         type === ""
       ) {
-        alert("검색을 완료 해주세요");
+        toast.info("검색을 완료 해주세요", {
+          theme: "dark",
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER,
+          className: "toatst_info",
+          progressClassName: "info_progress",
+        });
+        // icon: "🚀",
       } else {
         e.preventDefault();
         dispatch(
@@ -144,21 +153,25 @@ const HomeSearch = () => {
         </p>
       </div>
       <div className="input_box">
-        <input
-          className="location_input"
-          value={location}
-          onClick={() => {
-            setIsPopupOpen(!isPopupOpen);
-          }}
-          onChange={onChangeHandler}
-          placeholder="어디서?"></input>
-        {isPopupOpen ? (
-          <div>
-            <DaumPostcode style={postCodeStyle} onComplete={handlePostCode} />
-          </div>
-        ) : (
-          !isPopupOpen
-        )}
+        <div className="location">
+          <input
+            className="location_input"
+            value={location}
+            onClick={() => {
+              setIsPopupOpen(!isPopupOpen);
+            }}
+            onChange={onChangeHandler}
+            placeholder="어디서?"
+          ></input>
+          {isPopupOpen ? (
+            <div>
+              <DaumPostcode style={postCodeStyle} onComplete={handlePostCode} />
+            </div>
+          ) : (
+            !isPopupOpen
+          )}
+        </div>
+
         <StCalendarContainer>
           <div className="wrapper_box">
             <StCalendarWrapper style={{ zIndex: 999 }}>
@@ -220,6 +233,7 @@ const HomeSearch = () => {
         <FaSearch className="search_i" />
         <p>차량 검색</p>
       </div>
+      <StyledContainer />
     </StSearch>
   );
 };
@@ -239,6 +253,8 @@ const StSearch = styled.div`
   position: absolute;
   top: 705px;
   left: 96px;
+  /* background-color: pink; */
+  z-index: 2;
   .text_box {
     width: 100%;
     /* background-color: yellowgreen; */
@@ -253,29 +269,46 @@ const StSearch = styled.div`
     }
   }
   .input_box {
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     margin-top: 32px;
-    input {
-      color: #757575;
-      font-weight: 700;
-      font-size: 18px;
-      outline: none;
-      border: none;
+    /* background-color: skyblue; */
+    gap: 30px;
+    /* padding: 0 30px; */
+    /* box-sizing: border-box; */
+    .location {
+      /* background-color: yellow; */
       width: 400px;
-      height: 55px;
-      cursor: pointer;
-      background: #f2f2f2;
-      border-radius: 12px;
-      padding: 5px;
-      background-image: url(${pin});
-      background-repeat: no-repeat;
-      background-size: 16px;
-      background-position: 9px 20px;
-      text-indent: 40px;
-    }
-    .date {
-      width: 540px;
+      /* width: 100%; */
+      input {
+        width: 400px;
+        height: 100%;
+        color: #757575;
+        font-weight: 700;
+        font-size: 18px;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        background: #f2f2f2;
+        border-radius: 12px;
+        padding: 5px;
+        /* border: 1px solid; */
+        /* background-color: pink; */
+        /* margin-right: 5px; */
+        box-sizing: border-box;
+        background-image: url(${pin});
+        background-repeat: no-repeat;
+        background-size: 16px;
+        background-position: 9px 20px;
+        text-indent: 40px;
+      }
+      /* .date {
+        width: 540px;
+        background-color: pink;
+      } */
     }
   }
   .searh_btn {
@@ -296,6 +329,7 @@ const StSearch = styled.div`
     top: 0px;
     left: calc(100% + 18px);
     cursor: pointer;
+    z-index: 4;
     .search_i {
       font-size: 60px;
       margin-bottom: 31px;
@@ -314,6 +348,8 @@ const StCalendarContainer = styled.div`
   padding: 0 16px;
   box-sizing: border-box;
   border-radius: 12px;
+  /* background-color: pink; */
+  /* margin: 0 100px; */
   .wrapper_box {
     width: 100%;
     display: flex;
@@ -332,6 +368,7 @@ const StCalendarContainer = styled.div`
   }
 `;
 const StCalendarWrapper = styled.div`
+  width: 540px;
   z-index: 99;
   display: flex;
   justify-content: center;
@@ -343,6 +380,8 @@ const StCalendarWrapper = styled.div`
   background: #f2f2f2;
   border-radius: 12px;
   padding: 5px;
+  /* box-sizing: border-box; */
+  margin: 20px auto;
   img {
     width: 21px;
     height: 21px;
@@ -447,7 +486,8 @@ const StNewDatePicker = styled(DatePicker)``;
 const StVehicleTypeContainer = styled.div`
   select {
     width: 300px;
-    height: 64px;
+    /* height: 64px; */
+    height: 100%;
     padding: 8px;
     cursor: pointer;
     background: #f2f2f2;
@@ -467,5 +507,33 @@ const StVehicleTypeContainer = styled.div`
       /* background-color: pink; */
       border-radius: 12px;
     }
+  }
+`;
+const StyledContainer = styled(ToastContainer)`
+  &&&.Toastify__toast-container {
+  }
+  .Toastify__toast {
+    position: relative;
+  }
+  .Toastify__toast-body {
+    height: 100px;
+    .Toastify__toast-icon > svg {
+      fill: #fff;
+    }
+  }
+  .Toastify__progress-bar {
+  }
+  .Toastify__close-button {
+    border-radius: 12px;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    margin: 0;
+    /* background-color: #fff; */
   }
 `;

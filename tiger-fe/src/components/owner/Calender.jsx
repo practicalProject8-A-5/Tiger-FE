@@ -8,6 +8,8 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { __getDateList } from "../../redux/modules/dateSlice";
 import { Calendar } from "react-multi-date-picker";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Calender = ({ setIsModalOpen, vId }) => {
   const serverApi = process.env.REACT_APP_SERVER;
@@ -58,7 +60,7 @@ const Calender = ({ setIsModalOpen, vId }) => {
     const userToken = localStorage.getItem("userToken");
     const refreshToken = localStorage.getItem("refreshToken");
     try {
-      await axios.post(
+      const resp = await axios.post(
         `${serverApi}/vehicle/schedule/${vId}`,
         { openDateList },
         {
@@ -68,11 +70,23 @@ const Calender = ({ setIsModalOpen, vId }) => {
           },
         }
       );
+      if (resp.data.result === true) {
+        toast.success("차량 등록 성공", {
+          theme: "dark",
+          autoClose: 1500,
+          position: toast.POSITION.TOP_CENTER,
+          className: "toatst_success",
+          // bodyClassName: "",
+          progressClassName: "success_progress",
+        });
+        setTimeout(() => {
+          setIsModalOpen(false);
+        }, 1200);
+        //모달 오픈 넣으면 알럿이 안떠요
+      }
     } catch (err) {
-      // console.log(err);
+      console.log(err);
     }
-    alert("상품 등록 성공");
-    setIsModalOpen(false);
   };
   const dispatch = useDispatch();
   useEffect(() => {
@@ -120,12 +134,12 @@ const Calender = ({ setIsModalOpen, vId }) => {
         </div>
         <button className="submit" onClick={submitHandler}>
           등록
+          <StyledContainer />
         </button>
       </>
     </StCalender>
   );
 };
-export default Calender;
 const StCalender = styled.div`
   width: 765px;
   padding: 40px;
@@ -337,3 +351,32 @@ const StCalender = styled.div`
     }
   }
 `;
+
+const StyledContainer = styled(ToastContainer)`
+  &&&.Toastify__toast-container {
+  }
+  .Toastify__toast {
+    position: relative;
+  }
+  .Toastify__toast-body {
+    height: 100px;
+    .Toastify__toast-icon > svg {
+      fill: #fff;
+    }
+  }
+  .Toastify__progress-bar {
+  }
+  .Toastify__close-button {
+    border-radius: 12px;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    margin: 0;
+  }
+`;
+export default Calender;
