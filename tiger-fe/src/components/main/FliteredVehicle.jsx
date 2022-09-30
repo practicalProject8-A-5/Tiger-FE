@@ -34,6 +34,8 @@ const FliteredVehicle = ({ list }) => {
     };
   }, []);
 
+  console.log(list);
+
   return (
     <StItem>
       <StSwiper
@@ -45,13 +47,9 @@ const FliteredVehicle = ({ list }) => {
         loop={true}
         modules={[Pagination, Navigation]}
         className="mySwiper">
-        {list.map((image, i) => {
-          return (
-            <SwiperSlide className="img" key={i}>
-              <img src={image} alt="imageSlide" />
-            </SwiperSlide>
-          );
-        })}
+        <SwiperSlide className="img">
+          <img src={list.thumbnail} alt="imageSlide" />
+        </SwiperSlide>
       </StSwiper>
       {email ? (
         isLike === true ? (
