@@ -29,7 +29,7 @@ const OwnerItem = ({ list, category, vid }) => {
   };
 
   const onClick = (e) => {
-    navigate(`/vdetail/${vid}`);
+    navigate(`/vehicle/${vid}`);
   };
 
   const goUpdate = (e) => {

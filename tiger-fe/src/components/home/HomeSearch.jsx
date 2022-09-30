@@ -133,7 +133,7 @@ const HomeSearch = () => {
             locationY,
           })
         );
-        navigate("/vlist");
+        navigate("/vehicles");
       }
     } catch (err) {
       return err;
@@ -161,8 +161,7 @@ const HomeSearch = () => {
               setIsPopupOpen(!isPopupOpen);
             }}
             onChange={onChangeHandler}
-            placeholder="어디서?"
-          ></input>
+            placeholder="어디서?"></input>
           {isPopupOpen ? (
             <div>
               <DaumPostcode style={postCodeStyle} onComplete={handlePostCode} />

@@ -70,10 +70,9 @@ const FliteredVehicle = ({ list }) => {
         className="desc__box"
         onClick={() => {
           navigate(
-            `/vdetail/${list.vid}?startDate=${list.startDate}&endDate=${list.endDate}`
+            `/vehicle/${list.vid}?startDate=${list.startDate}&endDate=${list.endDate}`
           );
-        }}
-      >
+        }}>
         <div className="desc__top">
           <div className="desc__title">{list.location}</div>
           <div className="desc__star">

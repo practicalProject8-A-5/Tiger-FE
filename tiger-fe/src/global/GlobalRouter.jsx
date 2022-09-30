@@ -46,14 +46,14 @@ const GlobalRouter = () => {
           <Route path="/owner/:category" element={<OwnerItemList />} />
         )}
         {userInfo.name === null ? (
-          <Route path="/ownerregisterform" element={<Navigate to="/" />} />
+          <Route path="/form" element={<Navigate to="/" />} />
         ) : (
-          <Route path="/ownerregisterform" element={<OwnerFormPage />} />
+          <Route path="/form" element={<OwnerFormPage />} />
         )}
         {userInfo.name === null ? (
-          <Route path="/owner/:id/modi" element={<Navigate to="/" />} />
+          <Route path="/owner/:id/form" element={<Navigate to="/" />} />
         ) : (
-          <Route path="/owner/:id/modi" element={<OwnerModifyPage />} />
+          <Route path="/owner/:id/form" element={<OwnerModifyPage />} />
         )}
         {userInfo.name === null ? (
           <Route path="/renter" element={<Navigate to="/" />} />
@@ -61,8 +61,8 @@ const GlobalRouter = () => {
           <Route path="/renter" element={<RenterPage />} />
         )}
         <Route path="/home" element={<HomePage />} />
-        <Route path="/vdetail/:id" element={<VehicleDetailPage />} />
-        <Route path="/vlist" element={<VehicleListPage />} />
+        <Route path="/vehicle/:id" element={<VehicleDetailPage />} />
+        <Route path="/vehicles" element={<VehicleListPage />} />
         <Route path="/user/kakao/callback" element={<KakaoLogin />} />
         <Route
           path="*"

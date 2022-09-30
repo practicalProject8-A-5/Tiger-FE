@@ -73,7 +73,7 @@ const MainItem = ({ list }) => {
       <div
         className="desc__box"
         onClick={() => {
-          navigate(`/vdetail/${list.vid}`);
+          navigate(`/vehicle/${list.vid}`);
         }}>
         <div className="desc__top">
           <div className="desc__title">{list.location}</div>

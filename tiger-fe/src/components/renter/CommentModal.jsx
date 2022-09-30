@@ -45,7 +45,7 @@ const CommentModal = ({ showCommentModal, singleVehicle }) => {
       setComment("");
       setRating(0);
       setHover(0);
-      navigate(`/vdetail/${vid}`);
+      navigate(`/vehicle/${vid}`);
     }
   };
 
