@@ -24,7 +24,7 @@ const VehicleDetailPage = () => {
           </StDetailRightSection>
         </StDetailContainer>
       </GlobalLayout>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

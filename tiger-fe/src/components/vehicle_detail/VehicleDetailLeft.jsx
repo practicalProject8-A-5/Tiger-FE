@@ -404,6 +404,9 @@ const StVehicleInfoTitleWrapper = styled.div`
     font-weight: 500;
     font-size: 38px;
     line-height: 52px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
 `;
 
