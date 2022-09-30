@@ -252,6 +252,7 @@ const StNeedLogin = styled(Button)`
   line-height: 30px;
   color: #ffffff;
   margin: 40px auto;
+  cursor: not-allowed;
 `;
 
 export default VehicleDetailRight;
