@@ -25,11 +25,11 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
   const paidAmount = totalDays * vehicleDetails.price;
 
   const [payMethod, setPayMethod] = useState();
-  console.log(payMethod);
+  // console.log(payMethod);
   const [errorMessage, setErrorMessage] = useState("");
   // console.log(errorMessage);
 
-  const confirmPayment = async (e) => {
+  const confirmPayment = (e) => {
     const confirm = window.confirm("결제하시겠습니까?");
     e.preventDefault();
     if (confirm === true && payMethod === undefined) {
@@ -53,25 +53,24 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
           Authorization: userToken,
           RefreshToken: refreshToken,
         };
-        const resp = await axios.post(
-          serverApi + `/order/${vid}`,
-          {
-            paidAmount,
-            startDate,
-            endDate,
-            payMethod,
-          },
-          { headers: headers }
-        );
-        console.log(resp);
-        // .then(() => {
-        //   console.log(resp);
-        //   return resp;
-        // });
-        navigate("/renter");
+        const resp = axios
+          .post(
+            serverApi + `/order/${vid}`,
+            {
+              paidAmount,
+              startDate,
+              endDate,
+              payMethod,
+            },
+            { headers: headers }
+          )
+          .then(() => {
+            // console.log(resp);
+            navigate("/renter");
+          });
       } catch (error) {
-        console.log(error);
-        setErrorMessage(error.response.data.code);
+        // console.log(error);
+        // setErrorMessage(error.response.data.code);
         navigate(-1);
       }
     }
