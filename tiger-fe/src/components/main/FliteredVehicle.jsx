@@ -34,7 +34,7 @@ const FliteredVehicle = ({ list }) => {
     };
   }, []);
 
-  console.log(list);
+  // console.log(list);
 
   return (
     <StItem>

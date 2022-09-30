@@ -125,7 +125,7 @@ const VehicleDetailLeft = () => {
 
   SwiperCore.use([Navigation, Scrollbar]);
 
-  console.log(commentLists);
+  // console.log(commentLists);
 
   return (
     <>
@@ -204,7 +204,7 @@ const VehicleDetailLeft = () => {
             </tbody>
           </table>
           <h1>설명</h1>
-          <p>{vehicleDetails.description}</p>
+          <div className="detail_desc">{vehicleDetails.description}</div>
         </StVehicleInfoContentsWrapper>
         <StRenterInfoWrapper>
           <div className="infoWrapper_nickname">
@@ -234,7 +234,7 @@ const VehicleDetailLeft = () => {
           </div>
           <div className="star_num">{vehicleDetails.averageRating}</div>
         </div>
-        {commentLists.length === 0 ? (
+        {commentLists?.length === 0 ? (
           <div className="comment_wrap">
             <div className="comment_item">
               <div className="comment_main">
@@ -474,11 +474,13 @@ const StVehicleInfoContentsWrapper = styled.div`
     margin-top: 62px;
     margin-bottom: 34px;
   }
-  p {
+  .detail_desc {
     padding: 28px 26px;
     box-sizing: border-box;
     border: 1px solid #8b8b8b;
     border-radius: 20px;
+    height: auto;
+    word-break: break-all;
   }
 `;
 
