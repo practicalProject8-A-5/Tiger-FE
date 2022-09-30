@@ -45,7 +45,6 @@ const FliteredVehicle = ({ list }) => {
         }}
         navigation={true}
         loop={true}
-        modules={[Pagination, Navigation]}
         className="mySwiper">
         <SwiperSlide className="img">
           <img src={list.thumbnail} alt="imageSlide" />
