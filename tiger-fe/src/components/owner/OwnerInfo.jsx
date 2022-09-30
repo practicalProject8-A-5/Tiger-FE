@@ -10,7 +10,7 @@ const OwnerInfo = () => {
 
   const navigate = useNavigate("");
   const toForm = () => {
-    navigate("/ownerregisterform");
+    navigate("/form");
   };
 
   return (

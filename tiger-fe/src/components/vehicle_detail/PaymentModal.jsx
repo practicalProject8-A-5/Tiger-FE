@@ -29,14 +29,10 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
   const [errorMessage, setErrorMessage] = useState("");
   // console.log(errorMessage);
 
-  const confirmPayment = async (e) => {
-    console.log(payMethod);
+  const confirmPayment = (e) => {
     const confirm = window.confirm("결제하시겠습니까?");
-    console.log("222");
-    // e.preventDefault();
-    console.log("111");
+    e.preventDefault();
     if (confirm === true && payMethod === undefined) {
-      console.log(confirm);
       toast.warn("결제방식을 선택해주세요.", {
         theme: "dark",
         autoClose: 1500,
@@ -58,24 +54,23 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
           Authorization: userToken,
           RefreshToken: refreshToken,
         };
-        await axios
+        const resp = axios
           .post(
             serverApi + `/order/${vid}`,
             {
-              // id: "01010101",
               paidAmount,
               startDate,
               endDate,
               payMethod,
-              // impUid: "0000",
             },
             { headers: headers }
           )
           .then(() => {
             // console.log(resp);
-            // navigate("/renter");
+            navigate("/renter");
           });
       } catch (error) {
+        // console.log(error);
         setErrorMessage(error.response.data.code);
         navigate(-1);
       }
@@ -154,7 +149,7 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
                 결제방식
               </option>
               <option value="CARD">CARD</option>
-              <option value="CASH">CASH</option>
+              {/* <option value="CASH">CASH</option> */}
             </select>
             {vehicleDetails.startDate === null &&
             vehicleDetails.endDate === null ? (

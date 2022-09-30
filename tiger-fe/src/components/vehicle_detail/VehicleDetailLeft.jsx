@@ -125,6 +125,8 @@ const VehicleDetailLeft = () => {
 
   SwiperCore.use([Navigation, Scrollbar]);
 
+  // console.log(commentLists);
+
   return (
     <>
       <StNewSwiper
@@ -146,8 +148,7 @@ const VehicleDetailLeft = () => {
       <StVehicleInfoContainer>
         <StVehicleInfoTitleWrapper>
           <div className="title">
-            {vehicleDetails.vbrand}
-            {vehicleDetails.vname}
+            {vehicleDetails.vbrand} {vehicleDetails.vname}
           </div>
         </StVehicleInfoTitleWrapper>
         <StVehicleInfoLocationWrapper>
@@ -203,7 +204,7 @@ const VehicleDetailLeft = () => {
             </tbody>
           </table>
           <h1>설명</h1>
-          <p>{vehicleDetails.description}</p>
+          <div className="detail_desc">{vehicleDetails.description}</div>
         </StVehicleInfoContentsWrapper>
         <StRenterInfoWrapper>
           <div className="infoWrapper_nickname">
@@ -233,7 +234,16 @@ const VehicleDetailLeft = () => {
           </div>
           <div className="star_num">{vehicleDetails.averageRating}</div>
         </div>
-        {commentLists &&
+        {commentLists?.length === 0 ? (
+          <div className="comment_wrap">
+            <div className="comment_item">
+              <div className="comment_main">
+                <div className="comment_desc">리뷰를 기다리고 있습니다.</div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          commentLists &&
           commentLists.map((comment, index) => {
             return (
               <div className="comment_wrap" key={index}>
@@ -254,7 +264,9 @@ const VehicleDetailLeft = () => {
                 </div>
               </div>
             );
-          })}
+          })
+        )}
+        {}
       </StVehicleInfoContainer>
     </>
   );
@@ -338,11 +350,8 @@ const StVehicleInfoContainer = styled.div`
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        /* padding: 5px 0; */
         box-sizing: border-box;
-        /* background-color: yellowgreen; */
         .comment_main__top {
-          /* background-color: tomato; */
           display: flex;
           align-items: center;
           .user_name {
@@ -373,8 +382,6 @@ const StVehicleInfoContainer = styled.div`
           font-size: 18px;
           color: #8b8b8b;
           line-height: 25px;
-          /* background-color: pink; */
-          /* vertical-align: ; */
         }
       }
       .comment_date {
@@ -392,20 +399,17 @@ const StVehicleInfoContainer = styled.div`
 `;
 
 const StVehicleInfoTitleWrapper = styled.div`
-  /* background-color: tomato; */
   .title {
     margin-top: 29px;
     font-weight: 500;
     font-size: 38px;
     line-height: 52px;
-    /* margin-bottom: 20px; */
   }
 `;
 
 const StVehicleInfoLocationWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  /* background-color: tomato; */
   padding-bottom: 65px;
   border-bottom: 1px solid #cccccc;
   .locationTitle {
@@ -452,7 +456,6 @@ const StVehicleInfoLocationWrapper = styled.div`
       right: 0;
       transform: translateY(-50%);
       cursor: pointer;
-      /* background-color: royalblue; */
       img {
         height: 25px;
         width: 25px;
@@ -471,11 +474,13 @@ const StVehicleInfoContentsWrapper = styled.div`
     margin-top: 62px;
     margin-bottom: 34px;
   }
-  p {
+  .detail_desc {
     padding: 28px 26px;
     box-sizing: border-box;
     border: 1px solid #8b8b8b;
     border-radius: 20px;
+    height: auto;
+    word-break: break-all;
   }
 `;
 
@@ -494,7 +499,6 @@ const StRenterInfoWrapper = styled.div`
       width: 56px;
       height: 56px;
       border-radius: 50%;
-      /* border: 1px solid black; */
       margin-right: 31px;
     }
     &__info {

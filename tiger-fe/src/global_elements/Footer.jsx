@@ -15,10 +15,10 @@ const Footer = () => {
           </div>
           <div className="member">
             <div className="member_FE">
-              <span>FE</span> : 심채운,권익현
+              <span>FE</span> : 심채운, 권익현
             </div>
             <div className="member_BE">
-              <span>BE</span> : 손성우,정윤혁,최준우
+              <span>BE</span> : 손성우, 정윤혁, 최준우
             </div>
             <div className="member_DS">
               <span>UI/UX</span> : 허지연
@@ -26,7 +26,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="section2">
+        {/* <div className="section2">
           <h2>이용안내</h2>
           <div className="info">
             <div className="policy">이용약관</div>
@@ -40,7 +40,7 @@ const Footer = () => {
             <div className="guide">이용가이드</div>
             <div className="question">1:1문의</div>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div className="link">
@@ -56,7 +56,7 @@ const Footer = () => {
 
         <div className="instagram">
           <a
-            href="https://www.instagram.com/ta_iger_hh5/"
+            href="https://www.instagram.com/ta_iger_hh5"
             target="_blank"
             rel="noopener noreferrer"
           >

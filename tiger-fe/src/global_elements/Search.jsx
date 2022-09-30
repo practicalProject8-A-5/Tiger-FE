@@ -129,7 +129,7 @@ const Search = () => {
         localStorage.setItem("locationX", locationX);
         localStorage.setItem("locationY", locationY);
 
-        navigate("/vlist");
+        navigate("/vehicles");
       }
     } catch (err) {
       return err;
@@ -146,8 +146,7 @@ const Search = () => {
               setIsPopupOpen(!isPopupOpen);
             }}
             onChange={onChangeHandler}
-            placeholder="어디서?"
-          ></input>
+            placeholder="어디서?"></input>
           {isPopupOpen ? (
             <div>
               <DaumPostcode style={postCodeStyle} onComplete={handlePostCode} />

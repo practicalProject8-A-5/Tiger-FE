@@ -29,12 +29,12 @@ const OwnerItem = ({ list, category, vid }) => {
   };
 
   const onClick = (e) => {
-    navigate(`/vdetail/${vid}`);
+    navigate(`/vehicle/${vid}`);
   };
 
   const goUpdate = (e) => {
     e.stopPropagation();
-    navigate(`/owner/${vid}/modi`);
+    navigate(`/owner/${vid}/form`);
   };
 
   const deleteHandler = async (e) => {

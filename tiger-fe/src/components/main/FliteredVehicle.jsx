@@ -34,6 +34,8 @@ const FliteredVehicle = ({ list }) => {
     };
   }, []);
 
+  // console.log(list);
+
   return (
     <StItem>
       <StSwiper
@@ -43,17 +45,11 @@ const FliteredVehicle = ({ list }) => {
         }}
         navigation={true}
         loop={true}
-        modules={[Pagination, Navigation]}
         className="mySwiper"
       >
-        {list &&
-          list.map((image, i) => {
-            return (
-              <SwiperSlide className="img" key={i}>
-                <img src={image} alt="imageSlide" />
-              </SwiperSlide>
-            );
-          })}
+        <SwiperSlide className="img">
+          <img src={list.thumbnail} alt="imageSlide" />
+        </SwiperSlide>
       </StSwiper>
       {email ? (
         isLike === true ? (
@@ -72,7 +68,7 @@ const FliteredVehicle = ({ list }) => {
         className="desc__box"
         onClick={() => {
           navigate(
-            `/vdetail/${list.vid}?startDate=${list.startDate}&endDate=${list.endDate}`
+            `/vehicle/${list.vid}?startDate=${list.startDate}&endDate=${list.endDate}`
           );
         }}
       >

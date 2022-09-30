@@ -78,7 +78,7 @@ const Header = ({ ownerMode }) => {
 
   // 메뉴바 글씨 클릭시 색상 변환 유지
   const [textColor, setTextColor] = useState("black");
-  const handleChnageTextColor = (e) => {
+  const handleChangeInputColor = (e) => {
     setTextColor(textColor === "black" ? "#CCCCCC" : "black");
   };
 
@@ -96,15 +96,13 @@ const Header = ({ ownerMode }) => {
             <Link
               to="/home"
               style={{ textDecoration: "none", color: textColor }}
-              onClick={handleChnageTextColor}
-            >
+              onClick={handleChangeInputColor}>
               <div className="header__home">홈</div>
             </Link>
             <Link
               to="/"
               style={{ textDecoration: "none", color: textColor }}
-              onClick={handleChnageTextColor}
-            >
+              onClick={handleChangeInputColor}>
               <div className="header__main">24렌트</div>
             </Link>
             {userInfo.name ? (
@@ -112,8 +110,7 @@ const Header = ({ ownerMode }) => {
                 <Link
                   to="/renter"
                   style={{ textDecoration: "none", color: textColor }}
-                  onClick={handleChnageTextColor}
-                >
+                  onClick={handleChangeInputColor}>
                   <div className="header__mypage">마이페이지</div>
                 </Link>
                 <Link to="/owner" style={{ textDecoration: "none" }}>
@@ -124,21 +121,19 @@ const Header = ({ ownerMode }) => {
               <>
                 <Link
                   to="/renter"
-                  style={{ textDecoration: "none", display: "none" }}
-                >
+                  style={{ textDecoration: "none", display: "none" }}>
                   <div className="header__mypage">마이페이지</div>
                 </Link>
                 <Link
                   to="/owner"
-                  style={{ textDecoration: "none", display: "none" }}
-                >
+                  style={{ textDecoration: "none", display: "none" }}>
                   <div className="header__ownerpage">오너페이지</div>
                 </Link>
               </>
             )}
           </div>
           <div className="header__menu__R">
-            {userInfo.name ? (
+            {/* {userInfo.name ? (
               <div className="header__switch">
                 <span className="text">오너모드로 전환</span>
                 {!inOwner ? (
@@ -174,7 +169,7 @@ const Header = ({ ownerMode }) => {
                   </label>
                 )}
               </div>
-            )}
+            )} */}
 
             {userInfo.name ? (
               <>
@@ -190,27 +185,23 @@ const Header = ({ ownerMode }) => {
                       <Link
                         to="/chat"
                         state={{ backgroundLocation: location }}
-                        style={{ textDecoration: "none", color: "#000" }}
-                      >
+                        style={{ textDecoration: "none", color: "#000" }}>
                         {/* {notification && <NewNoti />} */}
                         <li>메세지</li>
                       </Link>
                       <Link
                         style={{ textDecoration: "none", color: "#000" }}
-                        to="/owner"
-                      >
+                        to="/owner">
                         <li>오너페이지</li>
                       </Link>
                       <Link
                         style={{ textDecoration: "none", color: "#000" }}
-                        to="/renter"
-                      >
+                        to="/renter">
                         <li>마이페이지</li>
                       </Link>
                       <Link
                         style={{ textDecoration: "none", color: "#000" }}
-                        to="/home"
-                      >
+                        to="/home">
                         <li>도움말</li>
                       </Link>
                       <li onClick={__userLogout}>로그아웃</li>

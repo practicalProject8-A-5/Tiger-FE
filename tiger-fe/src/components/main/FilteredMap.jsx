@@ -46,7 +46,7 @@ const FilteredMap = ({ filteredVehicle }) => {
         `                <img src=${filteredVehicle[i].thumbnail} width="73" height="73">` +
         "            </div>" +
         '            <div class="desc">' +
-        `               <div class="name"><a href="/vdetail/${filteredVehicle[i].vid}" class="link" style="text-decoration:none">${filteredVehicle[i].vbrand} ${filteredVehicle[i].vname}</a></div>` +
+        `               <div class="name"><a href="/vehicle/${filteredVehicle[i].vid}" class="link" style="text-decoration:none">${filteredVehicle[i].vbrand} ${filteredVehicle[i].vname}</a></div>` +
         `               <div class="price">₩ ${filteredVehicle[i].price}/1일</div>` +
         `               <div class="ellipsis">${filteredVehicle[i].location}</div>` +
         "            </div>" +
@@ -61,7 +61,7 @@ const FilteredMap = ({ filteredVehicle }) => {
 
       const clickToLink = () => {
         navigate(
-          `/vdetail/${filteredVehicle[i].vid}?startDate=${filteredVehicle[i].startDate}&endDate=${filteredVehicle[i].endDate}`
+          `/vehicle/${filteredVehicle[i].vid}?startDate=${filteredVehicle[i].startDate}&endDate=${filteredVehicle[i].endDate}`
         );
       };
 

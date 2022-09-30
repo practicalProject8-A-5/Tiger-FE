@@ -65,13 +65,13 @@ const RenterItem = ({ category, list, onSelect }) => {
                   src={list.thumbnail}
                   alt="차량"
                   onClick={() => {
-                    navigate(`/vdetail/${list.vid}`);
+                    navigate(`/vehicle/${list.vid}`);
                   }}
                 />
                 <div
                   className="carInfo"
                   onClick={() => {
-                    navigate(`/vdetail/${list.vid}`);
+                    navigate(`/vehicle/${list.vid}`);
                   }}>
                   <p>{list.vbrand}</p>
                   <p>{list.vname}</p>
@@ -143,7 +143,7 @@ const RenterItem = ({ category, list, onSelect }) => {
             return (
               <StRenterItem
                 onClick={() => {
-                  navigate(`/vdetail/${list.vid}`);
+                  navigate(`/vehicle/${list.vid}`);
                 }}
                 key={i}>
                 <img src={list.thumbnail} alt="차량" />
@@ -207,13 +207,13 @@ const RenterItem = ({ category, list, onSelect }) => {
                   src={list.thumbnail}
                   alt="차량"
                   onClick={() => {
-                    navigate(`/vdetail/${list.vid}`);
+                    navigate(`/vehicle/${list.vid}`);
                   }}
                 />
                 <div
                   className="carInfo"
                   onClick={() => {
-                    navigate(`/vdetail/${list.vid}`);
+                    navigate(`/vehicle/${list.vid}`);
                   }}>
                   <p>{list.vbrand}</p>
                   <p>{list.vname}</p>
@@ -274,13 +274,13 @@ const RenterItem = ({ category, list, onSelect }) => {
                     src={list.thumbnail}
                     alt="차량"
                     onClick={() => {
-                      navigate(`/vdetail/${list.vid}`);
+                      navigate(`/vehicle/${list.vid}`);
                     }}
                   />
                   <div
                     className="carInfo"
                     onClick={() => {
-                      navigate(`/vdetail/${list.vid}`);
+                      navigate(`/vehicle/${list.vid}`);
                     }}>
                     <p>{list.vbrand}</p>
                     <p>{list.vname}</p>
@@ -324,13 +324,13 @@ const RenterItem = ({ category, list, onSelect }) => {
                   src={list.thumbnail}
                   alt="차량"
                   onClick={() => {
-                    navigate(`/vdetail/${list.vid}`);
+                    navigate(`/vehicle/${list.vid}`);
                   }}
                 />
                 <div
                   className="carInfo"
                   onClick={() => {
-                    navigate(`/vdetail/${list.vid}`);
+                    navigate(`/vehicle/${list.vid}`);
                   }}>
                   <p>{list.vbrand}</p>
                   <p>{list.vname}</p>
