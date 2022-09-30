@@ -30,9 +30,13 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
   // console.log(errorMessage);
 
   const confirmPayment = async (e) => {
+    console.log(payMethod);
     const confirm = window.confirm("결제하시겠습니까?");
-    e.preventDefault();
+    console.log("222");
+    // e.preventDefault();
+    console.log("111");
     if (confirm === true && payMethod === undefined) {
+      console.log(confirm);
       toast.warn("결제방식을 선택해주세요.", {
         theme: "dark",
         autoClose: 1500,
@@ -42,6 +46,7 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
         progressClassName: "warn_progress",
       });
     } else if (confirm === false) {
+      console.log("null");
       return null;
     } else if (confirm === true && payMethod !== undefined) {
       const vid = vehicleDetails.vid;
@@ -53,7 +58,7 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
           Authorization: userToken,
           RefreshToken: refreshToken,
         };
-        const resp = await axios
+        await axios
           .post(
             serverApi + `/order/${vid}`,
             {
@@ -143,7 +148,8 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
               id="payMethod"
               onChange={(e) => {
                 setPayMethod(e.target.value);
-              }}>
+              }}
+            >
               <option value="default" disabled>
                 결제방식
               </option>

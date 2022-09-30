@@ -44,14 +44,16 @@ const FliteredVehicle = ({ list }) => {
         navigation={true}
         loop={true}
         modules={[Pagination, Navigation]}
-        className="mySwiper">
-        {list.map((image, i) => {
-          return (
-            <SwiperSlide className="img" key={i}>
-              <img src={image} alt="imageSlide" />
-            </SwiperSlide>
-          );
-        })}
+        className="mySwiper"
+      >
+        {list &&
+          list.map((image, i) => {
+            return (
+              <SwiperSlide className="img" key={i}>
+                <img src={image} alt="imageSlide" />
+              </SwiperSlide>
+            );
+          })}
       </StSwiper>
       {email ? (
         isLike === true ? (
