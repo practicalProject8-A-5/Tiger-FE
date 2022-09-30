@@ -67,6 +67,7 @@ const StDetailRightSection = styled.div`
     bottom: 9em;
     display: flex;
     flex-direction: row-reverse;
+    float: right;
     /* background-color: pink; */
   }
   @media (min-width: 768px) and (max-width: 991px) {

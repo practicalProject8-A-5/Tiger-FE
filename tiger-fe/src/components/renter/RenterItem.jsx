@@ -55,7 +55,7 @@ const RenterItem = ({ category, list, onSelect }) => {
     <div>
       <StRenterItemList>
         {renterItemLists.output && renterItemLists.output.length === 0 ? (
-          <p>등록된 차량이 없습니다.</p>
+          <p>예약된 차량이 없습니다.</p>
         ) : category === "RESERVED" ? (
           renterItemLists.output &&
           renterItemLists.output.map((list, i) => {

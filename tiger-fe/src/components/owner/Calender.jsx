@@ -145,7 +145,7 @@ const StCalender = styled.div`
   width: 765px;
   padding: 40px;
   position: absolute;
-  top: 35%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 10px;
