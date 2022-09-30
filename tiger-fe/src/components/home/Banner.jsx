@@ -23,8 +23,7 @@ const banner = () => {
           autoplay={{
             delay: 3000,
             disableOnInteraction: false,
-          }}
-        >
+          }}>
           <SwiperSlide>
             <img src={Banner} alt="배너1" />
           </SwiperSlide>
@@ -50,7 +49,6 @@ const banner = () => {
 export default banner;
 
 const StBanner = styled.div`
-  /* background-color: pink; */
   width: 100%;
   height: 660px;
   position: relative;
@@ -69,7 +67,6 @@ const StBanner = styled.div`
     justify-content: space-between;
     animation: text-show 2s;
     z-index: 1;
-
     @keyframes text-show {
       from {
         opacity: 0;

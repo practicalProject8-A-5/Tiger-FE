@@ -106,7 +106,7 @@ const Section = () => {
         </div>
       </div>
 
-      <div className="circle_box">
+      {/* <div className="circle_box">
         <div
           className="circle"
           style={{
@@ -116,12 +116,11 @@ const Section = () => {
         >
           <div className="qna">
             <Reveal effect="showUp" duration={1500}>
-              {/* <Reveal effect="showUp" duration={1500}> */}
               <p>자주 묻는 질문 FAQ</p>
             </Reveal>
           </div>
         </div>
-      </div>
+      </div> */}
     </StSection>
   );
 };
