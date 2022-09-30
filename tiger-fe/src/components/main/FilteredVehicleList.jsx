@@ -23,18 +23,19 @@ const FilteredVehicleList = () => {
   const filteredVehicle = useSelector(
     (state) => state.vehicleDetailSlice.filteredVehicleList
   );
-  // console.log(filteredVehicle);
+  console.log("f", filteredVehicle);
 
   const target = useRef(null);
 
   const [newItemLists, setNewItemLists] = useState([]);
   const [page, setPage] = useState(0);
 
-  // console.log(newItemLists);
+  console.log("n", newItemLists);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
+        console.log("____!");
         dispatch(
           __vehicleSearchList({
             location,
@@ -47,9 +48,11 @@ const FilteredVehicleList = () => {
           })
         );
         setPage(page + 1);
+        console.log("____??");
       }
     });
     if (target.current !== null) {
+      console.log(target.current);
       observer.observe(target.current);
     }
     return () => {
@@ -143,7 +146,9 @@ const StItemRight = styled.div`
 `;
 
 const StObserveContainer = styled.div`
+  width: 1px;
   height: 1px;
+  position: relative;
 `;
 
 export default FilteredVehicleList;
