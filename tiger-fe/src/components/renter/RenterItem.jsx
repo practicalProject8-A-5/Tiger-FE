@@ -377,6 +377,9 @@ const StRenterItem = styled.div`
       font-weight: 500;
       font-size: 18px;
       color: #000;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
     }
     span {
       font-style: normal;

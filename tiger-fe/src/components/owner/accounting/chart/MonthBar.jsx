@@ -158,7 +158,7 @@ const MonthBar = ({ monthBarData }) => {
     // el.backgroundColor =
   });
 
-  console.log("newobjData :", objData);
+  // console.log("newobjData :", objData);
 
   const data = {
     labels: [...labelData.map((el) => (el = el.date))],
