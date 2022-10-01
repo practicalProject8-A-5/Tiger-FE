@@ -54,7 +54,7 @@ const FilteredVehicleList = () => {
     }
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
-        console.log("____!");
+        // console.log("____!");
         dispatch(
           __vehicleSearchList({
             location,
@@ -66,12 +66,12 @@ const FilteredVehicleList = () => {
             page,
           })
         );
-        console.log("____!");
+        // console.log("____!");
         setPage(page + 1);
       }
     });
     if (target.current !== null) {
-      console.log(target.current);
+      // console.log(target.current);
       observer.observe(target.current);
     }
     return () => {
@@ -89,7 +89,7 @@ const FilteredVehicleList = () => {
 
   useEffect(() => {
     setNewItemLists([...newItemLists, ...filteredVehicle]);
-    console.log("setNewItemLists");
+    // console.log("setNewItemLists");
   }, [filteredVehicle]);
 
   return (

@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import RentMainPage from "../pages/RentMainPage";
 import OwnerPage from "../pages/OwnerPage";
@@ -17,6 +17,11 @@ import NotFound from "../global_elements/NotFound";
 import ChatModal from "../components/chat/ChatModal";
 import ChatFloat from "../components/chat/ChatFloat";
 import RouteChangeTracker from "../shared/RouteChangeTracker";
+
+// const RentMainPage = lazy(() => import("../pages/RentMainPage"));
+// const HomePage = lazy(() => import("../pages/HomePage"));
+// const VehicleDetailPage = lazy(()=> import("../pages/VehicleDetailPage"))
+// const VehicleListPage = lazy(()=>import("../pages/VehicleListPage"))
 
 const GlobalRouter = () => {
   const userInfo = useSelector((state) => state.memberSlice.userInfo);
@@ -35,6 +40,10 @@ const GlobalRouter = () => {
       <ChatFloat />
       <Routes location={location.state?.backgroundLocation || location}>
         <Route exact path="/" element={<RentMainPage />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/vehicle/:id" element={<VehicleDetailPage />} />
+        <Route path="/vehicles" element={<VehicleListPage />} />
+
         {userInfo.name === null ? (
           <Route path="/owner" element={<Navigate to="/" />} />
         ) : (
@@ -60,9 +69,6 @@ const GlobalRouter = () => {
         ) : (
           <Route path="/renter" element={<RenterPage />} />
         )}
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/vehicle/:id" element={<VehicleDetailPage />} />
-        <Route path="/vehicles" element={<VehicleListPage />} />
         <Route path="/user/kakao/callback" element={<KakaoLogin />} />
         <Route
           path="*"

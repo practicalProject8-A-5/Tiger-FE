@@ -64,7 +64,7 @@ ChartJS.register(
 );
 
 const DayPie = ({ dayPieData }) => {
-  console.log("dayPieData :", dayPieData);
+  // console.log("dayPieData :", dayPieData);
 
   //브랜드 + 이름
   let reformatName = dayPieData.map((obj) => {
