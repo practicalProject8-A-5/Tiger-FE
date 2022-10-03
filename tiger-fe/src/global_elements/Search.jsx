@@ -249,8 +249,9 @@ const StSearch = styled.div`
   }
 `;
 const StSearchLocationContainer = styled.div`
-  /* width: 100%; */
+  width: 20%;
   .location_input {
+    width: 100%;
     color: #757575;
     font-weight: 700;
     font-size: 18px;
@@ -283,7 +284,7 @@ const StSearchLocationContainer = styled.div`
   }
 `;
 const StCalendarContainer = styled.div`
-  width: 540px;
+  width: 40%;
   display: flex;
   background-color: #f2f2f2;
   padding: 0 16px;
@@ -325,7 +326,7 @@ const StCalendarWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 180px;
+  /* width: 180px; */
   height: 42px;
   box-sizing: border-box;
   font-size: 14px;
@@ -440,8 +441,9 @@ const StNewDatePicker = styled(DatePicker)`
   color: #8b8b8b;
 `;
 const StVehicleTypeContainer = styled.div`
+  width: 15%;
   select {
-    width: 300px;
+    width: 100%;
     height: 42px;
     padding: 8px;
     cursor: pointer;
