@@ -112,6 +112,7 @@ const FilteredVehicleList = () => {
           <StItemRight>
             <FilteredMap filteredVehicle={vidData} />
           </StItemRight>
+          {/* <StMapButton>지도보이기</StMapButton> */}
         </>
       )}
     </StItemContainer>
@@ -158,6 +159,28 @@ const StObserveContainer = styled.div`
   width: 1px;
   height: 1px;
   position: relative;
+`;
+
+const StMapButton = styled.button`
+  width: 100px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background-color: #ff881b;
+  color: white;
+  font-weight: 600;
+  font-size: 13px;
+  position: fixed;
+  bottom: 50px;
+  z-index: 9;
+  margin: auto;
+  display: none;
+  @media (max-width: 767px) {
+    display: block;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    display: none;
+  }
 `;
 
 export default FilteredVehicleList;

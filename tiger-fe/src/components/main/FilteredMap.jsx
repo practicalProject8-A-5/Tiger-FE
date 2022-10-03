@@ -176,7 +176,7 @@ const StVehicleMapBox = styled.div`
     color: #5085bb;
   }
   @media (max-width: 767px) {
-    display: none;
+    /* display: none; */
   }
   @media (min-width: 768px) and (max-width: 1023px) {
   }
