@@ -175,14 +175,25 @@ const ModiTest = () => {
         }
       );
       if (resp.data.result === true) {
-        navigate("/owner");
+        toast.success(`차량정보가 수정되었습니다.`, {
+          theme: "dark",
+          autoClose: 1500,
+          position: toast.POSITION.TOP_RIGHT,
+          className: "toatst_success",
+          progressClassName: "success_progress",
+        });
+        setTimeout(() => {
+          navigate("/owner");
+        }, 1000);
       }
     } catch (err) {
       // console.log(err);
       if (address === "") {
         toast.warn("주소등록은 필수에요.", {
           theme: "dark",
-          autoClose: 1000,
+          autoClose: 1500,
+          className: "toatst_warn",
+          progressClassName: "warn_progress",
         });
       }
     }
@@ -248,46 +259,6 @@ const ModiTest = () => {
   const [addImgList, setAddImgList] = useState([]);
   const [fileList, setFileList] = useState([]);
 
-  const errorAlert = () => {
-    if (errors.years) {
-      toast.warn(`${errors.years.message}`, {
-        theme: "dark",
-        autoClose: 1000,
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    } else if (errors.passengers) {
-      toast.success(`${errors.passengers.message}`, {
-        theme: "dark",
-        autoClose: 1000,
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    } else if (errors.fuelEfficiency) {
-      toast.info(`${errors.fuelEfficiency.message}`, {
-        theme: "light",
-        autoClose: 1000,
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    } else if (errors.fuelType) {
-      toast.error(`${errors.fuelType.message}`, {
-        theme: "dark",
-        autoClose: 1000,
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    } else if (errors.transmission) {
-      toast.error(`${errors.transmission.message}`, {
-        theme: "light",
-        autoClose: 1000,
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    } else if (errors.cartype) {
-      toast.error(`${errors.cartype.message}`, {
-        theme: "light",
-        autoClose: 1000,
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    }
-  };
-
   return (
     <StVehicleModify>
       {defaultValue.vname !== undefined && (
@@ -349,15 +320,13 @@ const ModiTest = () => {
             <div className="price_box">
               <label htmlFor="price">렌트 요금</label>
               <input
-                type="text"
+                type="number"
                 id="price"
+                min="0"
+                max="1000000"
                 placeholder="가격 입력"
                 {...register("price", {
                   required: "가격을 입력해주세요",
-                  validate: {
-                    type: (value) =>
-                      priceCheck(value) || "숫자만 입력이 가능해요",
-                  },
                 })}
               />
               <span>₩/1일</span>
@@ -378,33 +347,25 @@ const ModiTest = () => {
                   {errors.years ? (
                     <td style={{ border: " 2px solid #EB3434" }}>
                       <input
-                        type="text"
+                        type="number"
                         id="years"
+                        min="1990"
                         placeholder={errors.years.message}
                         className="error_input"
                         {...register("years", {
-                          required: "연식을 입력해주세요.",
-                          validate: {
-                            type: (value) =>
-                              yearsCheck(value) ||
-                              "연식은 숫자만 입력이 가능해요",
-                          },
+                          required: "연식을 입력해주세요",
                         })}
                       />
                     </td>
                   ) : (
                     <td>
                       <input
-                        type="text"
+                        type="number"
                         id="years"
+                        min="1990"
                         placeholder="연식"
                         {...register("years", {
                           required: "연식을 입력해주세요.",
-                          validate: {
-                            type: (value) =>
-                              yearsCheck(value) ||
-                              "연식은 숫자만 입력이 가능해요",
-                          },
                         })}
                       />
                     </td>
@@ -417,33 +378,25 @@ const ModiTest = () => {
                   {errors.passengers ? (
                     <td style={{ border: " 2px solid #EB3434" }}>
                       <input
-                        type="text"
+                        type="number"
                         id="passengers"
+                        min="1"
                         placeholder={errors.passengers.message}
                         className="error_input"
                         {...register("passengers", {
                           required: "탑승자 수를 입력해주세요.",
-                          validate: {
-                            type: (value) =>
-                              passengersCheck(value) ||
-                              "탑승인원은 숫자만 입력이 가능해요",
-                          },
                         })}
                       />
                     </td>
                   ) : (
                     <td>
                       <input
-                        type="text"
+                        type="number"
                         id="passengers"
+                        min="1"
                         placeholder="탑승자 수"
                         {...register("passengers", {
                           required: "탑승자 수를 입력해주세요.",
-                          validate: {
-                            type: (value) =>
-                              passengersCheck(value) ||
-                              "탑승인원은 숫자만 입력이 가능해요",
-                          },
                         })}
                       />
                     </td>
@@ -464,11 +417,6 @@ const ModiTest = () => {
                         className="error_input"
                         {...register("fuelEfficiency", {
                           required: "연비를 입력해주세요.",
-                          validate: {
-                            type: (value) =>
-                              fuelEfficiencyCheck(value) ||
-                              "연비는 숫자만 입력이 가능해요",
-                          },
                         })}
                       />
                     </td>
@@ -480,11 +428,6 @@ const ModiTest = () => {
                         placeholder="연비"
                         {...register("fuelEfficiency", {
                           required: "연비를 입력해주세요.",
-                          validate: {
-                            type: (value) =>
-                              fuelEfficiencyCheck(value) ||
-                              "연비는 숫자만 입력이 가능해요",
-                          },
                         })}
                       />
                     </td>
@@ -635,7 +578,8 @@ const ModiTest = () => {
                 id="description"
                 placeholder="차량에 대한 설명을 입력해주세요."
                 cols="50"
-                rows="10"></textarea>
+                rows="10"
+              ></textarea>
             </div>
 
             {/* 렌터정보 */}
@@ -693,8 +637,8 @@ const ModiTest = () => {
               setLocationObj={setLocationObj}
             />
 
-            <button onClick={errorAlert}>수정</button>
-            <StyledContainer />
+            <button>수정</button>
+            {/* <StyledContainer /> */}
           </form>
         </>
       )}
@@ -979,6 +923,9 @@ const StyledContainer = styled(ToastContainer)`
   .Toastify__toast {
     position: relative;
   }
+  .Toastify__toast-icon > svg {
+    fill: #fff;
+  }
   .Toastify__toast-body {
     height: 100px;
   }
@@ -995,5 +942,6 @@ const StyledContainer = styled(ToastContainer)`
     width: 25px;
     height: 25px;
     margin: 0;
+    background-color: transparent;
   }
 `;

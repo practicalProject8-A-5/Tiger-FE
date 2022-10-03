@@ -35,6 +35,7 @@ const Stblur = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* overflow: hidden; */
   .background {
     position: fixed;
     top: 0%;
