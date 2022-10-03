@@ -278,7 +278,7 @@ const StCommentRating = styled.div`
     font-style: normal;
     font-weight: 600;
     font-size: 20px;
-    color: #CCCCCC;
+    color: #cccccc;
   }
   .on {
     color: #ff881b;
@@ -286,7 +286,6 @@ const StCommentRating = styled.div`
   .off {
     color: #ccc;
   }
-  .
 `;
 
 const StCommentTextContainer = styled.div`

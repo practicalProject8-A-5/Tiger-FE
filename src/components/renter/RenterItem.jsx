@@ -372,7 +372,7 @@ const StRenterItem = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 17%;
+    width: 11%;
     .item_date {
       font-weight: 500;
       font-size: 16px;
@@ -428,7 +428,7 @@ const StRenterItem = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: center;
-      width: 63%;
+      width: 44%;
       p {
         margin-bottom: 11px;
         font-weight: 500;
@@ -449,6 +449,61 @@ const StRenterItem = styled.div`
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+      }
+    }
+    .flex_wrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 19%;
+      .item_date {
+        font-weight: 500;
+        font-size: 16px;
+        color: #8b8b8b;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .btn_box {
+        margin-bottom: 11px;
+        display: flex;
+        justify-content: end;
+        .modify {
+          font-weight: 500;
+          font-size: 14px;
+          color: #000;
+          text-decoration: underline;
+          margin-right: 12px;
+        }
+        .refund {
+          font-weight: 500;
+          font-size: 14px;
+          color: #eb3434;
+          text-decoration: underline;
+          cursor: pointer;
+        }
+        .returned,
+        .refunded {
+          font-weight: 500;
+          font-size: 14px;
+          color: #8b8b8b;
+        }
+        .return {
+          font-weight: 500;
+          font-size: 14px;
+          color: #eb3434;
+          text-decoration: underline;
+          cursor: pointer;
+        }
+        .chatButton,
+        .comments {
+          font-weight: 500;
+          font-size: 14px;
+          width: auto;
+          cursor: pointer;
+          margin-left: 5px;
+          text-decoration: underline;
+        }
       }
     }
   }
