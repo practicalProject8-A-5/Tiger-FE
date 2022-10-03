@@ -42,6 +42,7 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
         progressClassName: "warn_progress",
       });
     } else if (confirm === false) {
+      console.log("null");
       return null;
     } else if (confirm === true && payMethod !== undefined) {
       const vid = vehicleDetails.vid;
@@ -142,7 +143,8 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
               id="payMethod"
               onChange={(e) => {
                 setPayMethod(e.target.value);
-              }}>
+              }}
+            >
               <option value="default" disabled>
                 결제방식
               </option>
