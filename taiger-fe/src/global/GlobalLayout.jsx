@@ -2,22 +2,22 @@
 
 import React from "react";
 import styled from "styled-components";
-import Header from "../global_elements/Header";
 
 const GlobalLayout = ({ children }) => {
-  return (
-    <GlobalLayoutContainer>
-      {/* <Header /> */}
-      {children}
-    </GlobalLayoutContainer>
-  );
+  return <GlobalLayoutContainer>{children}</GlobalLayoutContainer>;
 };
 
 const GlobalLayoutContainer = styled.div`
-  /* background-color: skyblue; */
-  padding: 0 246px;
   box-sizing: border-box;
   position: relative;
+  margin: 0 auto;
+  max-width: 74.5%;
+  @media (max-width: 767px) {
+    max-width: 90%;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    max-width: 90%;
+  }
 `;
 
 export default GlobalLayout;

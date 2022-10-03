@@ -6,7 +6,7 @@ import RenterNavbar from "../components/renter/RenterNavbar";
 import GlobalLayout from "../global/GlobalLayout";
 import RenterInfo from "../components/renter/RenterInfo";
 import RenterItem from "../components/renter/RenterItem";
-import ChatModal from "../components/chat/ChatModal";
+import styled from "styled-components";
 
 const RenterPage = () => {
   const [category, setCategory] = useState("RESERVED");
@@ -17,12 +17,28 @@ const RenterPage = () => {
       <Header />
       <RenterNavbar category={category} onSelect={onSelect} />
       <GlobalLayout>
-        <RenterInfo />
-        <RenterItem category={category} onSelect={onSelect} />
-        {/* <ChatModal /> */}
+        <StRenterContainer>
+          <RenterItem category={category} onSelect={onSelect} />
+          <RenterInfo />
+        </StRenterContainer>
       </GlobalLayout>
     </>
   );
 };
+
+const StRenterContainer = styled.div`
+  position: relative;
+  margin: 50px auto;
+  display: flex;
+  justify-content: space-between;
+  @media (max-width: 767px) {
+    margin: 50px auto;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    margin: 50px auto;
+    background: #fff;
+    width: 100%;
+  }
+`;
 
 export default RenterPage;

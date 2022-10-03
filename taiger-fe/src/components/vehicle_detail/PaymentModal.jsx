@@ -179,11 +179,29 @@ const StPaymentModal = styled.div`
   top: 0;
   right: 0;
   z-index: 100;
-  width: 519px;
   height: 549px;
   background-color: #fff;
   border-radius: 16px;
   border: 1px solid #eee;
+  box-sizing: border-box;
+  box-shadow: 0px -3px 100px rgba(0, 0, 0, 0.07),
+    0px -0.904412px 42.8088px rgba(0, 0, 0, 0.0456112),
+    0px -0.375647px 17.7806px rgba(0, 0, 0, 0.035),
+    0px -0.135864px 6.4309px rgba(0, 0, 0, 0.0243888);
+  @media (max-width: 767px) {
+    bottom: 0;
+    top: unset;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    bottom: 0;
+    top: unset;
+    width: 100%;
+  }
+  @media (min-width: 1024px) and (max-width: 1920px) {
+    bottom: 0;
+    top: unset;
+    width: 100%;
+  }
 `;
 
 const StPaymentInfo = styled.div`
@@ -382,6 +400,111 @@ const StPaymentInfo = styled.div`
       margin-bottom: 20px;
       padding: 0;
       margin-top: 15px;
+    }
+  }
+  @media (max-width: 767px) {
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .wrap {
+      height: auto;
+
+      .vehicleWrap {
+        flex-direction: row;
+        .vehicleImage {
+          display: inline-block;
+          vertical-align: bottom;
+          height: 100%;
+          min-height: 1px;
+          img {
+            width: 250px;
+            height: 134px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-right: 24px;
+          }
+        }
+        .vehicleInfo {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          padding-left: 12px;
+          box-sizing: border-box;
+          box-sizing: border-box;
+          .vehicleAddress {
+            margin-top: 10px;
+          }
+          .vehicleFullName {
+            font-size: 18px;
+            line-height: 18px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            word-break: break-word;
+            margin-top: 4px;
+          }
+          .vehicleRentPeriod {
+            box-sizing: border-box;
+            font-size: 14px;
+            line-height: 18px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            word-break: break-word;
+            margin-top: 4px;
+          }
+        }
+      }
+    }
+  }
+  @media (min-width: 1024px) and (max-width: 1442px) {
+    .wrap {
+      height: auto;
+      .vehicleWrap {
+        flex-direction: column;
+        .vehicleImage {
+          display: inline-block;
+          vertical-align: bottom;
+          height: 100%;
+          min-height: 1px;
+          img {
+            width: 250px;
+            height: 134px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-right: 24px;
+          }
+        }
+        .vehicleInfo {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          padding-left: 12px;
+          box-sizing: border-box;
+          box-sizing: border-box;
+          .vehicleAddress {
+            margin-top: 10px;
+          }
+          .vehicleFullName {
+            font-size: 18px;
+            line-height: 18px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            word-break: break-word;
+            margin-top: 4px;
+          }
+          .vehicleRentPeriod {
+            box-sizing: border-box;
+            font-size: 14px;
+            line-height: 18px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            word-break: break-word;
+            margin-top: 4px;
+          }
+        }
+      }
     }
   }
 `;

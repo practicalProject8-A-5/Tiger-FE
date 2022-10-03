@@ -70,8 +70,7 @@ const ChatFloat = () => {
           <Link
             to="/chat"
             state={{ backgroundLocation: location }}
-            style={{ textDecoration: "none" }}
-          >
+            style={{ textDecoration: "none" }}>
             <ChatButtonWrap>
               <ChatButton>
                 {notification && <NewNoti />}
@@ -132,6 +131,11 @@ const ChatButton = styled.div`
     width: 34px;
     height: 34px;
     padding-top: 17px;
+  }
+  @media (max-width: 767px) {
+    img {
+      padding-top: 0px;
+    }
   }
 `;
 const NewNoti = styled.div`

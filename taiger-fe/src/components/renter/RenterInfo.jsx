@@ -38,11 +38,9 @@ const RenterInfo = () => {
 };
 
 const StRenterInfo = styled.div`
-  position: fixed;
-  /* z-index: 9; */
-  top: 261px;
-  right: 259px;
-  width: 520px;
+  position: sticky;
+  top: 255px;
+  width: 42%;
   height: 550px;
   display: flex;
   justify-content: center;
@@ -56,7 +54,7 @@ const StRenterInfo = styled.div`
   border-radius: 12px;
   /* background-color: tomato; */
   .userProfile {
-    width: 400px;
+    width: 100%;
     height: 56px;
     /* background-color: pink; */
     box-sizing: border-box;
@@ -105,7 +103,6 @@ const StRenterInfo = styled.div`
     .profileTitle {
       width: 100%;
       height: 25px;
-      /* background-color: yellowgreen; */
       font-weight: 500;
       font-size: 18px;
       color: #000;
@@ -113,12 +110,17 @@ const StRenterInfo = styled.div`
     .profileValue {
       width: 100%;
       height: 34px;
-      /* background-color: royalblue; */
       margin-bottom: 51px;
       border-bottom: 1px solid #000;
       line-height: 36px;
       font-weight: 600;
     }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    display: none;
+  }
+  @media (max-width: 767px) {
+    display: none;
   }
 `;
 

@@ -136,7 +136,7 @@ const Wrap = styled.div`
   display: flex;
   border-radius: 24px;
   z-index: 99;
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 767px) {
     width: 100%;
     height: 100%;
     border-radius: 0;
@@ -151,17 +151,17 @@ const Title = styled.div`
   font-size: 18px;
   span {
     cursor: pointer;
-    /* @media screen and (min-width: 768px) {
+    @media screen and (min-width: 768px) {
       display: none;
-    } */
+    }
   }
 `;
 const LeftWrap = styled.div`
   width: 35%;
-  /* @media screen and (max-width: 768px) {
+  @media screen and (max-width: 768px) {
     display: none;
     width: 100%;
-  } */
+  }
 `;
 const ListWrap = styled.div`
   height: 80%;
@@ -174,10 +174,11 @@ const RoomWrap = styled.div`
   flex-direction: column-reverse;
   border-left: 3px solid #eee;
   position: relative;
-  /* @media screen and (max-width: 768px) {
-    display: none;
-    width: 100%;
-  } */
+  @media screen and (max-width: 768px) {
+    /* display: none; */
+    width: 90%;
+    margin: 0 auto;
+  }
 `;
 const Header = styled.div`
   background-color: #fff;
@@ -211,9 +212,9 @@ const Header = styled.div`
     top: 18px;
     right: 123px;
     border-radius: 15px;
-    /* @media screen and (min-width: 768px) {
+    @media screen and (max-width: 767px) {
       display: none;
-    } */
+    }
   }
   .userInfoChat {
     display: flex;

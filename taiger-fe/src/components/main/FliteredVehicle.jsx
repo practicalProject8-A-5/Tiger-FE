@@ -8,7 +8,6 @@ import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation } from "swiper";
 import { __isLike } from "../../redux/modules/likeSlice";
 import like from "../../assets/Love.png";
 import liked from "../../assets/liked.png";
@@ -32,7 +31,7 @@ const FliteredVehicle = ({ list }) => {
     return () => {
       setIsLike(!isLike);
     };
-  }, []);
+  }, [list.heart, isLike]);
 
   // console.log(list);
 
