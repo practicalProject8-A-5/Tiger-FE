@@ -71,7 +71,7 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
           });
       } catch (error) {
         // console.log(error);
-        setErrorMessage(error.response.data.code);
+        // setErrorMessage(error.response.data.code);
         navigate(-1);
       }
     }

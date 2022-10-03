@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import Banner from "../../assets/home_image/banner.png";
-import Event from "../../assets/home_image/event.png";
+import Banner2 from "../../assets/home_image/banner2.png";
+import Banner3 from "../../assets/home_image/banner3.png";
+// import Event from "../../assets/home_image/event.png";
 
 import "swiper/scss";
 import "swiper/scss/navigation";
@@ -35,12 +37,20 @@ const banner = () => {
               <p>타,이거</p>
             </div>
           </SwiperSlide>
-          {/* <SwiperSlide>
-            <img src={Banner} alt="배너3" />
+          <SwiperSlide>
+            <img src={Banner2} alt="배너3" />
+            <div className="text_box">
+              <p>드림카를 타고 달려봐</p>
+              <p>당신 근처의 모든 차 타,이거</p>
+            </div>
           </SwiperSlide>
           <SwiperSlide>
-            <img src={Banner} alt="배너4" />
-          </SwiperSlide> */}
+            <img src={Banner3} alt="배너4" />
+            <div className="text_box">
+              <p>차고에 방치된 차</p>
+              <p>쓸모를 찾고 싶다면 타,이거</p>
+            </div>
+          </SwiperSlide>
         </StRegisterSwiper>
       </>
     </StBanner>
@@ -50,6 +60,7 @@ const banner = () => {
 export default banner;
 
 const StBanner = styled.div`
+  /* background-color: pink; */
   width: 100%;
   height: 660px;
   position: relative;
@@ -68,6 +79,7 @@ const StBanner = styled.div`
     justify-content: space-between;
     animation: text-show 2s;
     z-index: 1;
+
     @keyframes text-show {
       from {
         opacity: 0;

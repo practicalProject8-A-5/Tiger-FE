@@ -51,7 +51,12 @@ const MainItem = ({ list }) => {
         className="mySwiper">
         {MainItemListImage.map((image, i) => {
           return (
-            <SwiperSlide className="img" key={i}>
+            <SwiperSlide
+              className="img"
+              key={i}
+              onClick={() => {
+                navigate(`/vehicle/${list.vid}`);
+              }}>
               <img src={image} alt="imageSlide" />
             </SwiperSlide>
           );
@@ -148,6 +153,9 @@ const StItem = styled.div`
       font-weight: 500;
       font-size: 18px;
       color: #777777;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
     }
     .km {
       margin: 5px 0 7px 0;

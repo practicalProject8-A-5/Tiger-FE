@@ -208,8 +208,6 @@ const StPaymentInsurance = styled.div`
 `;
 
 const StPaymentTotal = styled.div`
-  -webkit-box-align: center !important;
-  -webkit-box-pack: justify !important;
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;

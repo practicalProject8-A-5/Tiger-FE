@@ -74,6 +74,7 @@ const LoginForm = ({ showModal, goRegister, loginToggle }) => {
         <div className="kakao_button" onClick={kakaoLogin}>
           카카오 로그인
         </div>
+        <p>카카오 로그인시 꼭 이메일을 선택해주세요!</p>
         {/* <div className="google">구글로 간편 로그인</div> */}
         <div className="email" onClick={loginToggle}>
           이메일로 회원가입
@@ -193,7 +194,7 @@ const StLoginForm = styled.div`
       width: 100%;
       height: 56px;
       border-radius: 12px;
-      margin-bottom: 18px;
+
       font-size: 18px;
       color: #4a4a4a;
       background-color: #fff115;
@@ -202,6 +203,10 @@ const StLoginForm = styled.div`
       font-size: 18px;
       line-height: 56px;
       cursor: pointer;
+    }
+    p {
+      margin-top: 5px;
+      margin-bottom: 18px;
     }
     .google {
       width: 100%;
