@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import Button from "../../global_elements/Button";
 import PaymentModal from "./PaymentModal";
 import styled from "styled-components";
-import win from "global";
+// import win from "global";
 
 const VehicleDetailRight = () => {
   const vehicleDetails = useSelector(

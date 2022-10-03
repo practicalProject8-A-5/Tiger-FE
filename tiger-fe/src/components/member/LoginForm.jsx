@@ -112,7 +112,7 @@ const LoginForm = ({ showModal, goRegister, loginToggle }) => {
           <button type="submit">로그인</button>
         </form>
       </div>
-      <StyledContainer />
+      {/* <StyledContainer /> */}
     </StLoginForm>
   );
 };

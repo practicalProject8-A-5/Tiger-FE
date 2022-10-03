@@ -15,6 +15,16 @@ export const fuelEfficiencyCheck = (fuelEfficiency) => {
   return regExp.test(fuelEfficiency);
 };
 
+export const emailCheck = (email) => {
+  let regExp =
+    /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+  return regExp.test(email);
+};
+export const pwCheck = (pw) => {
+  let regExp = /^(?=.*\d)(?=.*[zA-ZS]).{8,}/;
+  return regExp.test(pw);
+};
+
 // export const priceCheck = (string) => {
 //   // let regExp = /[0-9]/g;
 //   let regExp = /[^0-9]/g;

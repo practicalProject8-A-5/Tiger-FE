@@ -88,7 +88,7 @@ const VehicleRegister = () => {
     // setValue("location", address);
   };
 
-  console.log("address:", address);
+  // console.log("address:", address);
 
   const RegisterPostCodeStyle = {
     display: "block",
@@ -151,16 +151,15 @@ const VehicleRegister = () => {
     if (fileList === undefined) {
       toast.warn("이미지등록은 필수에요.", {
         theme: "dark",
-        autoClose: 100000,
-        // icon: "🚀",
-        // theme: "#06bc0b",
+        autoClose: 1500,
+        className: "toatst_warn",
+        progressClassName: "warn_progress",
       });
     }
 
     for (let i = 0; i < fileList.length; i++) {
       formData.append("imageList", fileList[i]);
     }
-
     const userToken = localStorage.getItem("userToken");
     const refreshToken = localStorage.getItem("refreshToken");
     try {
@@ -180,14 +179,25 @@ const VehicleRegister = () => {
         }
       );
       if (resp.data.result === true) {
-        navigate("/owner");
+        toast.success(`차량이 등록되었습니다.`, {
+          theme: "dark",
+          autoClose: 1500,
+          position: toast.POSITION.TOP_RIGHT,
+          className: "toatst_success",
+          progressClassName: "success_progress",
+        });
+        setTimeout(() => {
+          navigate("/owner");
+        }, 1000);
       }
     } catch (err) {
       // console.log(err);
       if (address === "") {
         toast.warn("주소등록은 필수에요.", {
           theme: "dark",
-          autoClose: 100000,
+          autoClose: 1500,
+          className: "toatst_warn",
+          progressClassName: "warn_progress",
         });
       }
     }
@@ -218,58 +228,6 @@ const VehicleRegister = () => {
       };
     },
   };
-  //success
-  // danger
-  // info
-  // warn
-
-  // position: toast.POSITION.TOP_CENTER,
-  // position: toast.POSITION.TOP_LEFT,
-  // position: toast.POSITION.BOTTOM_LEFT,
-  // position: toast.POSITION.BOTTOM_CENTER,
-  // position: toast.POSITION.BOTTOM_RIGHT,
-  // icon: "🚀",
-  // theme: "#06bc0b",
-  const errorAlert = () => {
-    if (errors.years) {
-      toast.warn(`${errors.years.message}`, {
-        theme: "dark",
-        autoClose: 3000,
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    } else if (errors.passengers) {
-      toast.success(`${errors.passengers.message}`, {
-        theme: "dark",
-        autoClose: 3000,
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    } else if (errors.fuelEfficiency) {
-      toast.info(`${errors.fuelEfficiency.message}`, {
-        theme: "light",
-        autoClose: 3000,
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    } else if (errors.fuelType) {
-      toast.error(`${errors.fuelType.message}`, {
-        theme: "dark",
-        autoClose: 3000,
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    } else if (errors.transmission) {
-      toast.error(`${errors.transmission.message}`, {
-        theme: "light",
-        autoClose: 3000,
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    } else if (errors.cartype) {
-      toast.error(`${errors.cartype.message}`, {
-        theme: "light",
-        autoClose: 3000,
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    }
-  };
-
   return (
     <StVehicleRegister>
       <form id="form" onSubmit={handleSubmit(onSubmit, watch)}>
@@ -331,8 +289,6 @@ const VehicleRegister = () => {
           <input
             type="number"
             id="price"
-            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-            onkeyup="if(this.value<0){this.value= this.value * -1}"
             min="0"
             max="1000000"
             placeholder="가격 입력"
@@ -361,17 +317,11 @@ const VehicleRegister = () => {
                   <input
                     type="number"
                     id="years"
-                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                    onkeyup="if(this.value<0){this.value= this.value * -1}"
                     min="1990"
                     placeholder={errors.years.message}
                     className="error_input"
-                    {...register("number", {
-                      required: "연식을 입력해주세요.",
-                      // validate: {
-                      //   type: (value) =>
-                      //     yearsCheck(value) || "최소 1990년 이상이여야 합니다.",
-                      // },
+                    {...register("years", {
+                      required: "연식을 입력해주세요",
                     })}
                   />
                 </td>
@@ -380,16 +330,10 @@ const VehicleRegister = () => {
                   <input
                     type="number"
                     id="years"
-                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                    onkeyup="if(this.value<0){this.value= this.value * -1}"
                     min="1990"
                     placeholder="연식"
                     {...register("years", {
                       required: "연식을 입력해주세요.",
-                      // validate: {
-                      //   type: (value) =>
-                      //     yearsCheck(value) || "최소 1990년 이상이여야 합니다.",
-                      // },
                     })}
                   />
                 </td>
@@ -402,39 +346,25 @@ const VehicleRegister = () => {
               {errors.passengers ? (
                 <td style={{ border: " 2px solid #EB3434" }}>
                   <input
-                    type="text"
+                    type="number"
                     id="passengers"
-                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                    onkeyup="if(this.value<0){this.value= this.value * -1}"
                     min="1"
                     placeholder={errors.passengers.message}
                     className="error_input"
                     {...register("passengers", {
                       required: "탑승자 수를 입력해주세요.",
-                      // validate: {
-                      //   type: (value) =>
-                      //     passengersCheck(value) ||
-                      //     "탑승인원은 숫자만 입력이 가능해요",
-                      // },
                     })}
                   />
                 </td>
               ) : (
                 <td>
                   <input
-                    type="text"
+                    type="number"
                     id="passengers"
-                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                    onkeyup="if(this.value<0){this.value= this.value * -1}"
                     min="1"
                     placeholder="탑승자 수"
                     {...register("passengers", {
                       required: "탑승자 수를 입력해주세요.",
-                      // validate: {
-                      //   type: (value) =>
-                      //     passengersCheck(value) ||
-                      //     "탑승인원은 숫자만 입력이 가능해요",
-                      // },
                     })}
                   />
                 </td>
@@ -449,33 +379,25 @@ const VehicleRegister = () => {
               {errors.fuelEfficiency ? (
                 <td style={{ border: " 2px solid #EB3434" }}>
                   <input
-                    type="text"
+                    type="number"
                     id="fuelEfficiency"
+                    min="1"
                     placeholder={errors.fuelEfficiency.message}
                     className="error_input"
                     {...register("fuelEfficiency", {
                       required: "연비를 입력해주세요.",
-                      // validate: {
-                      //   type: (value) =>
-                      //     fuelEfficiencyCheck(value) ||
-                      //     "연비는 숫자만 입력이 가능해요",
-                      // },
                     })}
                   />
                 </td>
               ) : (
                 <td>
                   <input
-                    type="text"
+                    type="number"
                     id="fuelEfficiency"
                     placeholder="연비"
+                    min="1"
                     {...register("fuelEfficiency", {
                       required: "연비를 입력해주세요.",
-                      // validate: {
-                      //   type: (value) =>
-                      //     fuelEfficiencyCheck(value) ||
-                      //     "연비는 숫자만 입력이 가능해요",
-                      // },
                     })}
                   />
                 </td>
@@ -510,7 +432,7 @@ const VehicleRegister = () => {
                     control={control}
                     name="fuelType"
                     className="select"
-                    rules={{ required: "필수로 선택하셔야합니다." }}
+                    rules={{ required: "연료는 필수로 선택하셔야합니다." }}
                     render={({ field }) => (
                       <Select
                         {...field}
@@ -556,7 +478,7 @@ const VehicleRegister = () => {
                     control={control}
                     name="transmission"
                     className="select"
-                    rules={{ required: "필수로 선택하셔야합니다." }}
+                    rules={{ required: "변속기는 필수로 선택하셔야합니다." }}
                     render={({ field }) => (
                       <Select
                         {...field}
@@ -601,7 +523,7 @@ const VehicleRegister = () => {
                     name="cartype"
                     className="select"
                     control={control}
-                    rules={{ required: "필수로 선택하셔야합니다." }}
+                    rules={{ required: "차 종류는 필수로 선택하셔야합니다." }}
                     render={({ field }) => (
                       <Select
                         {...field}
@@ -664,14 +586,8 @@ const VehicleRegister = () => {
             }}
             onChange={onChangeHandler}
             placeholder="상세 주소를 입력해주세요."
-            // {...register("location", {
-            //   required: "주소를 입력해주세요",
-            // })}
             {...register("location")}
           />
-          {/* {errors.location ? (
-            <div className="location_error">{errors.location.message}</div>
-          ) : null} */}
           {isPopupOpen ? (
             <div>
               <DaumPostcode
@@ -690,7 +606,7 @@ const VehicleRegister = () => {
           setLocationObj={setLocationObj}
         />
 
-        <button onClick={errorAlert}>등록</button>
+        <button>등록</button>
         <StyledContainer />
       </form>
     </StVehicleRegister>
@@ -821,7 +737,6 @@ const StVehicleRegister = styled.div`
             height: 50px;
             box-sizing: border-box;
             vertical-align: middle;
-
             input {
               width: 100%;
               height: 100%;
@@ -837,7 +752,6 @@ const StVehicleRegister = styled.div`
         }
       }
     }
-
     .desc {
       width: 100%;
       textarea {
@@ -851,7 +765,6 @@ const StVehicleRegister = styled.div`
         resize: none;
       }
     }
-
     .location {
       position: relative;
       h2 {
@@ -958,7 +871,6 @@ const StRenterInfoWrapper = styled.div`
         }
       }
     }
-
     p {
       font-weight: 500;
       font-size: 18px;
@@ -972,6 +884,9 @@ const StyledContainer = styled(ToastContainer)`
   }
   .Toastify__toast {
     position: relative;
+  }
+  .Toastify__toast-icon > svg {
+    fill: #fff;
   }
   .Toastify__toast-body {
     height: 100px;
@@ -989,5 +904,6 @@ const StyledContainer = styled(ToastContainer)`
     width: 25px;
     height: 25px;
     margin: 0;
+    background-color: transparent;
   }
 `;
