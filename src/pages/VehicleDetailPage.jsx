@@ -43,14 +43,14 @@ const StDetailContainer = styled.div`
 `;
 
 const StDetailLeftSection = styled.div`
-  /* display: inline-block;
-    width: calc(100% - 360px);
-    vertical-align: top; */
   width: 60%;
   @media (max-width: 767px) {
     width: 100%;
   }
   @media (min-width: 768px) and (max-width: 1023px) {
+    width: 100%;
+  }
+  @media (min-width: 1024px) and (max-width: 1201px) {
     width: 100%;
   }
 `;
