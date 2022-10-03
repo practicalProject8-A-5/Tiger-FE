@@ -27,9 +27,6 @@ const banner = () => {
             delay: 4000,
             disableOnInteraction: false,
           }}>
-          {/* <SwiperSlide>
-            <img src={Event} alt="배너1" />
-          </SwiperSlide> */}
           <SwiperSlide>
             <img src={Banner} alt="배너2" />
             <div className="text_box">
@@ -64,7 +61,6 @@ const StBanner = styled.div`
   width: 100%;
   height: 660px;
   position: relative;
-  background-image: url(${Banner});
   .text_box {
     width: 650px;
     height: 127px;
