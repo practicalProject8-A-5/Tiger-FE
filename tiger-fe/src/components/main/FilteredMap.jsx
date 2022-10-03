@@ -113,7 +113,7 @@ const FilteredMap = ({ filteredVehicle }) => {
 };
 
 const StVehicleMapBox = styled.div`
-  width: 50rem;
+  width: 100%;
   height: 100vh;
   margin-bottom: 15px;
   .info {
@@ -174,6 +174,11 @@ const StVehicleMapBox = styled.div`
   }
   .info .link {
     color: #5085bb;
+  }
+  @media (max-width: 767px) {
+    display: none;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
   }
 `;
 

@@ -122,24 +122,36 @@ const StItemContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  width: 100%;
+  width: 95%;
+  margin: auto;
 `;
 
 const StItemLeft = styled.div`
-  width: 65rem;
+  width: 64%;
   margin-top: 78px;
   display: flex;
-  /* align-items: center; */
   flex-wrap: wrap;
   gap: 0px 40px;
   overflow: auto;
   height: 100vh;
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    gap: 0px 22px;
+  }
 `;
 
 const StItemRight = styled.div`
   margin-top: 78px;
   display: flex;
   align-items: center;
+  width: 50%;
+  @media (max-width: 767px) {
+    display: none;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 const StObserveContainer = styled.div`

@@ -44,8 +44,7 @@ const FliteredVehicle = ({ list }) => {
         }}
         navigation={true}
         loop={true}
-        className="mySwiper"
-      >
+        className="mySwiper">
         <SwiperSlide className="img">
           <img src={list.thumbnail} alt="imageSlide" />
         </SwiperSlide>
@@ -69,8 +68,7 @@ const FliteredVehicle = ({ list }) => {
           navigate(
             `/vehicle/${list.vid}?startDate=${list.startDate}&endDate=${list.endDate}`
           );
-        }}
-      >
+        }}>
         <div className="desc__top">
           <div className="desc__title">{list.location}</div>
           <div className="desc__star">
@@ -95,7 +93,7 @@ const FliteredVehicle = ({ list }) => {
 };
 
 const StItem = styled.div`
-  width: 480px;
+  width: 46%;
   height: 438px;
   position: relative;
   cursor: pointer;
@@ -165,6 +163,11 @@ const StItem = styled.div`
   }
   &:hover .swiper-button-prev {
     opacity: 1;
+  }
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
   }
 `;
 
