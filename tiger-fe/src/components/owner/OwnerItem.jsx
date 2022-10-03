@@ -26,6 +26,7 @@ const OwnerItem = ({ list, category, vid }) => {
   const onClickCalender = (e) => {
     e.stopPropagation();
     setIsModalOpen(!isModalOpen);
+    // document.body.style.overflow = "hidden";
   };
 
   const onClick = (e) => {
@@ -169,7 +170,8 @@ const OwnerItem = ({ list, category, vid }) => {
                 onClick={() => {
                   returnHandler(list.oid);
                   dispatch(__useItemList());
-                }}>
+                }}
+              >
                 반납확인
               </span>
             </div>

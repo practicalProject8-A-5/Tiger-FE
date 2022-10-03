@@ -66,6 +66,31 @@
   background-color: #a9e8ad;
 }
 
+/* .Toastify__toast {
+  position: relative;
+}
+.Toastify__toast-body {
+  height: 100px;
+}
+.Toastify__toast-icon > svg {
+  fill: #fff;
+}
+.Toastify__progress-bar {
+}
+.Toastify__close-button {
+  background-color: pink;
+  border-radius: 12px;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25px;
+  height: 25px;
+  margin: 0;
+} */
+
 /* const StyledContainer = styled(ToastContainer)`
   &&&.Toastify__toast-container {
   }

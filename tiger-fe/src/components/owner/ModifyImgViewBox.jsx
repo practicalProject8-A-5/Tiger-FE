@@ -36,20 +36,24 @@ const ModifyImgViewBox = ({
 
     // console.log(fileLists);
 
-    if (fileLists.length >= 2) {
+    if (fileLists.length > 1) {
       toast.error("이미지는 한번에 한장만 등록이 가능합니다.", {
-        autoClose: 3000,
+        autoClose: 1500,
         position: toast.POSITION.TOP_CENTER,
         theme: "dark",
+        className: "toatst_error",
+        progressClassName: "error_progress",
       });
       setPreView([...preView]);
       setAddImgList([...addImgList]);
       // setFileList([...fileList]);
     } else if (preView.length === 5) {
       toast.error("등록은 5개까지만 가능합니다.", {
-        autoClose: 3000,
+        autoClose: 1500,
         position: toast.POSITION.TOP_CENTER,
         theme: "dark",
+        className: "toatst_error",
+        progressClassName: "error_progress",
       });
       setAddImgList([...addImgList]);
       // setFileList([...fileList]);
@@ -84,9 +88,11 @@ const ModifyImgViewBox = ({
 
     if (thumFileLists.length > 1) {
       toast.error("썸네일은 한번에 한장만 등록이 가능합니다.", {
-        autoClose: 3000,
+        autoClose: 1500,
         position: toast.POSITION.TOP_RIGHT,
         theme: "dark",
+        className: "toatst_error",
+        progressClassName: "error_progress",
       });
       setOldThum(oldThum);
       setNewThum(newThum);
@@ -153,7 +159,7 @@ const ModifyImgViewBox = ({
             multiple="multiple"
             accept="image/jpg, image/png, image/jpeg"
           />
-          <FaExchangeAlt />
+          <FaExchangeAlt className="change" />
         </label>
       </div>
 
@@ -203,13 +209,13 @@ const StViewBox = styled.div`
     border-radius: 12px;
     .thumbox {
       color: #000;
-      border: 2px solid #000;
+      border: 1px solid #ddd;
       border-radius: 12px;
-      font-weight: 400;
+      font-weight: 600;
       font-size: 14px;
       padding: 7px 13px;
       position: absolute;
-      background-color: pink;
+      background-color: #f2f2f2;
       top: 15px;
       left: 15px;
     }
@@ -243,13 +249,18 @@ const StViewBox = styled.div`
         top: 8px;
         right: 8px;
         border-radius: 50%;
-        background-color: pink;
+        background-color: rgba(138, 136, 136, 0.6);
         font-size: 18px;
         display: flex;
         align-items: center;
         justify-content: center;
+        transition: all 0.4s;
         .close {
+          color: #fff;
           cursor: pointer;
+        }
+        :hover {
+          transform: scale(1.115);
         }
       }
     }
@@ -279,13 +290,14 @@ const StViewBox = styled.div`
     height: 30px;
     border-radius: 50%;
     cursor: pointer;
-    background-color: skyblue;
+    background-color: rgba(138, 136, 136, 0.6);
     top: 12px;
     right: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 20px;
+    transition: all 0.4s;
     input {
       position: absolute;
       width: 0;
@@ -293,6 +305,13 @@ const StViewBox = styled.div`
       padding: 0;
       overflow: hidden;
       border: 0;
+    }
+    .change {
+      color: #fff;
+      cursor: pointer;
+    }
+    :hover {
+      transform: scale(1.115);
     }
   }
 `;

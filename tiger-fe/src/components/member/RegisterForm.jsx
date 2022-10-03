@@ -50,19 +50,24 @@ const RegisterForm = ({
 
   // 이메일 중복확인
   const [checkEmail, setCheckEmail] = useState("");
+  const [clickCheckEmail, setClickCheckEmail] = useState(false);
+
+  // console.log("checkEmail:", checkEmail);
+  // console.log("clickCheckEmail:", clickCheckEmail);
+
   const handleChange = (e) => {
+    console.log(e.target.value);
     const checkEmail = e.target.value;
+    // console.log("checkEmail:", checkEmail);
     setCheckEmail(checkEmail);
   };
-  const [clickCheckEmail, setClickCheckEmail] = useState(false);
+
   const emailCheck = async (e) => {
     e.preventDefault();
     setClickCheckEmail(true);
-    // const checkEmailServer = checkEmail;
     const headers = {
       "Content-Type": "application/json",
     };
-    // console.log(checkEmail);
     try {
       const response = await axios.post(
         `${serverApi}/member/emailCheck`,
@@ -71,7 +76,9 @@ const RegisterForm = ({
           headers: headers,
         }
       );
-      if (response.data.result === true && checkEmail !== "") {
+      // console.log(response.data.status);
+      if (response.data.result === true) {
+        // console.log("true일때");
         // 백엔드로 보낸 데이터 결과 200 일 경우
         toast.success("사용 가능한 아이디 입니다.", {
           theme: "dark",
@@ -80,8 +87,9 @@ const RegisterForm = ({
           className: "toatst_success",
           progressClassName: "success_progress",
         });
-        setCheckEmail(!checkEmail); //사용 가능한 아이디 일 경우 state상태에 true값으로 변경, 나중에 회원가입 버튼 클릭 이벤트핸들러에 필요!
-      } else if (response.data.result === false) {
+        setClickCheckEmail(true); //사용 가능한 아이디 일 경우 state상태에 true값으로 변경, 나중에 회원가입 버튼 클릭 이벤트핸들러에 필요!
+      } else if (response.data.status.msg === "이미 존재하는 이메일입니다.") {
+        // console.log("false일때");
         toast.warn("이미 사용중인 아이디 입니다.", {
           theme: "dark",
           autoClose: 1500,
@@ -89,10 +97,11 @@ const RegisterForm = ({
           className: "toatst_warn",
           progressClassName: "warn_progress",
         }); // 이미 데이터베이스에 있는 아이디일 경우 409
-        setCheckEmail("");
-      } else {
-        // 그 외에는 사용 불가한 아이디
-        toast.error("사용 불가한 아이디입니다.", {
+        // alert("이미 사용중");
+        setClickCheckEmail(false);
+      } else if (response.data.status.msg === "유효하지 않은 이메일입니다.") {
+        // console.log("빈값일때");
+        toast.error("이메일을 입력해주세요.", {
           theme: "dark",
           autoClose: 1500,
           position: toast.POSITION.TOP_CENTER,
@@ -186,6 +195,7 @@ const RegisterForm = ({
               <div className="Register__emailCheck" onClick={emailCheck}>
                 중복확인
               </div>
+              {/* <StyledContainer /> */}
             </>
           )}
           {errors.email ? (
@@ -213,13 +223,13 @@ const RegisterForm = ({
                     message: "비밀번호는 8자 이상이여야 합니다,",
                   },
                   maxLength: {
-                    value: 16,
-                    message: "16자 이하로 사용가능합니다.",
+                    value: 12,
+                    message: "12자 이하로 사용가능합니다.",
                   },
                   pattern: {
                     value: regExgPw,
                     message:
-                      "비밀번호는 영문(대/소문자 구분), 숫자 조합하여 6~12자리로 입력해 주세요.",
+                      "비밀번호는 영문(대/소문자 구분), 숫자 조합하여 8~12자리로 입력해 주세요.",
                   },
                 })}
               />
@@ -241,8 +251,8 @@ const RegisterForm = ({
                     message: "비밀번호는 8자 이상이여야 합니다,",
                   },
                   maxLength: {
-                    value: 16,
-                    message: "16자 이하로 사용가능합니다.",
+                    value: 12,
+                    message: "12자 이하로 사용가능합니다.",
                   },
                   pattern: {
                     value: regExgPw,
@@ -276,13 +286,13 @@ const RegisterForm = ({
                     message: "비밀번호는 8자 이상이여야 합니다,",
                   },
                   maxLength: {
-                    value: 16,
-                    message: "16자 이하로 사용가능합니다.",
+                    value: 12,
+                    message: "12자 이하로 사용가능합니다.",
                   },
                   pattern: {
                     value: regExgPw,
                     message:
-                      "비밀번호는 영문(대/소문자 구분), 숫자 조합하여 6~12자리로 입력해 주세요.",
+                      "비밀번호는 영문(대/소문자 구분), 숫자 조합하여 8~12자리로 입력해 주세요.",
                   },
                 })}
               />
@@ -304,8 +314,8 @@ const RegisterForm = ({
                     message: "비밀번호는 8자 이상이여야 합니다,",
                   },
                   maxLength: {
-                    value: 16,
-                    message: "16자 이하로 사용가능합니다.",
+                    value: 12,
+                    message: "12자 이하로 사용가능합니다.",
                   },
                   pattern: {
                     value: regExgPw,
@@ -372,7 +382,6 @@ const RegisterForm = ({
         </div>
         <button type="submit">회원가입</button>
       </form>
-      <StyledContainer />
     </StRegisterForm>
   );
 };
@@ -550,31 +559,32 @@ const StRegisterForm = styled.div`
     }
   }
 `;
-const StyledContainer = styled(ToastContainer)`
-  &&&.Toastify__toast-container {
-  }
-  .Toastify__toast {
-    position: relative;
-  }
-  .Toastify__toast-body {
-    height: 100px;
-    .Toastify__toast-icon > svg {
-      fill: #fff;
-    }
-  }
-  .Toastify__progress-bar {
-  }
-  .Toastify__close-button {
-    border-radius: 12px;
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 25px;
-    height: 25px;
-    margin: 0;
-  }
-`;
+// const StyledContainer = styled(ToastContainer)`
+//   &&&.Toastify__toast-container {
+//   }
+//   .Toastify__toast {
+//     position: relative;
+//   }
+//   .Toastify__toast-body {
+//     height: 100px;
+//     .Toastify__toast-icon > svg {
+//       fill: #fff;
+//     }
+//   }
+//   .Toastify__progress-bar {
+//   }
+//   .Toastify__close-button {
+//     background-color: pink;
+//     border-radius: 12px;
+//     position: absolute;
+//     top: 12px;
+//     right: 12px;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     width: 25px;
+//     height: 25px;
+//     margin: 0;
+//   }
+// `;
 export default RegisterForm;
