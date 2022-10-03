@@ -1,11 +1,11 @@
 // eslint-disable-next-line
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Button from "../../global_elements/Button";
 import PaymentModal from "./PaymentModal";
 import styled from "styled-components";
-import win from "global";
+// import win from "global";
 
 const VehicleDetailRight = () => {
   const vehicleDetails = useSelector(
@@ -28,7 +28,7 @@ const VehicleDetailRight = () => {
   };
 
   return (
-    <div className="box">
+    <div className="box" style={{ width: "100%" }}>
       <StPaymentBox>
         <h1>결제 정보</h1>
         <StPaymentPeriod>
@@ -81,7 +81,7 @@ const VehicleDetailRight = () => {
 };
 
 const StPaymentBox = styled.div`
-  width: 519px;
+  width: 100%;
   height: 549px;
   border: 1px solid #cccccc;
   background-color: #fff;
@@ -98,6 +98,16 @@ const StPaymentBox = styled.div`
     line-height: 35px;
     padding-bottom: 32px;
     border-bottom: 1px solid #cccccc;
+  }
+  @media (max-width: 767px) {
+    width: 100%;
+    padding: 20px;
+    height: auto;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    width: 100%;
+    padding: 20px;
+    height: auto;
   }
 `;
 
@@ -229,7 +239,7 @@ const StPaymentTotal = styled.div`
 `;
 
 const StPaymentButton = styled(Button)`
-  width: 380px;
+  width: 100%;
   height: 60px;
   background: #ff881b;
   border-radius: 12px;
@@ -238,10 +248,15 @@ const StPaymentButton = styled(Button)`
   line-height: 30px;
   color: #ffffff;
   margin: 40px auto;
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 const StNeedLogin = styled(Button)`
-  width: 380px !important;
+  width: 100% !important;
   height: 60px;
   background: #ff881b;
   border-radius: 12px;
@@ -251,6 +266,12 @@ const StNeedLogin = styled(Button)`
   color: #ffffff;
   margin: 40px auto;
   cursor: not-allowed;
+  @media (max-width: 767px) {
+    width: 100%;
+    margin: 40px auto;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 export default VehicleDetailRight;

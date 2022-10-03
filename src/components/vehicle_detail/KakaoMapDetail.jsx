@@ -64,12 +64,27 @@ const StVehicleMapContainer = styled.div`
     font-size: 18px;
     line-height: 25px;
   }
+  @media (max-width: 767px) {
+    h1 {
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 27px;
+      margin-bottom: 14px;
+      margin-top: 28px;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 const StVehicleMapBox = styled.div`
-  width: 840px;
   height: 286px;
   margin-bottom: 15px;
+
+  @media (max-width: 767px) {
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 export default React.memo(KakaoMapDetail);

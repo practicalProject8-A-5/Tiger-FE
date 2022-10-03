@@ -30,34 +30,28 @@ const VehicleDetailPage = () => {
 };
 
 const StDetailContainer = styled.div`
-  @media (min-width: 1200px) {
-    position: relative;
+  position: relative;
+  margin: 50px auto;
+  @media (max-width: 767px) {
     margin: 50px auto;
   }
-  @media (min-width: 768px) and (max-width: 991px) {
+  @media (min-width: 768px) and (max-width: 1023px) {
+    margin: 50px auto;
     background: #fff;
-    margin-top: 70px;
-    margin: 0 auto;
-    padding: 20px 0 80px;
-    width: 90%;
-  }
-  @media (max-width: 767px) {
-    margin: 72px auto;
-    padding: 20px 0 0px;
-    width: 90%;
-  }
-  @media (min-width: 992px) and (max-width: 1199px) {
-    margin: 0 auto;
-    padding: 20px 0 80px;
-    width: 90%;
+    width: 100%;
   }
 `;
 
 const StDetailLeftSection = styled.div`
-  @media (min-width: 1200px) {
-    display: inline-block;
+  /* display: inline-block;
     width: calc(100% - 360px);
-    vertical-align: top;
+    vertical-align: top; */
+  width: 60%;
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    width: 100%;
   }
 `;
 
@@ -68,7 +62,7 @@ const StDetailRightSection = styled.div`
     display: flex;
     flex-direction: row-reverse;
     float: right;
-    /* background-color: pink; */
+    width: 38%;
   }
   @media (min-width: 768px) and (max-width: 991px) {
     bottom: 0;

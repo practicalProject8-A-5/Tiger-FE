@@ -24,6 +24,7 @@ import "swiper/scss/pagination";
 import { AiFillStar } from "react-icons/ai";
 import { ImStarFull } from "react-icons/im";
 import { IoIosShareAlt } from "react-icons/io";
+
 const VehicleDetailLeft = () => {
   const key = process.env.REACT_APP_KAKAO_MAP_KEY;
   const s3 = process.env.REACT_APP_IMAGEURL;
@@ -153,8 +154,14 @@ const VehicleDetailLeft = () => {
         </StVehicleInfoTitleWrapper>
         <StVehicleInfoLocationWrapper>
           <div className="locationTitle">
-            <ImStarFull className="location_star_ico" />
-            <span className="location_num">{vehicleDetails.averageRating}</span>
+            <div className="locationTitle_wrap">
+              {" "}
+              <ImStarFull className="location_star_ico" />
+              <span className="location_num">
+                {vehicleDetails.averageRating}
+              </span>
+            </div>
+
             {commentLists === undefined ? (
               <span className="location_comment">후기 0개 </span>
             ) : (
@@ -163,20 +170,22 @@ const VehicleDetailLeft = () => {
               </span>
             )}
             <p>{vehicleDetails.location}</p>
-            <IoIosShareAlt className="share" onClick={shareToKakao} />
-            {email ? (
-              isLike === true ? (
-                <span className="heart" onClick={likeClickHandler}>
-                  <img src={liked} alt="liked" />
-                </span>
+            <div className="like_wrap">
+              <IoIosShareAlt className="share" onClick={shareToKakao} />
+              {email ? (
+                isLike === true ? (
+                  <span className="heart" onClick={likeClickHandler}>
+                    <img src={liked} alt="liked" />
+                  </span>
+                ) : (
+                  <span className="heart" onClick={likeClickHandler}>
+                    <img src={like} alt="liked" />
+                  </span>
+                )
               ) : (
-                <span className="heart" onClick={likeClickHandler}>
-                  <img src={like} alt="liked" />
-                </span>
-              )
-            ) : (
-              <span className="heart" style={{ display: "none" }}></span>
-            )}
+                <span className="heart" style={{ display: "none" }}></span>
+              )}
+            </div>
           </div>
         </StVehicleInfoLocationWrapper>
         <StVehicleInfoContentsWrapper>
@@ -217,10 +226,14 @@ const VehicleDetailLeft = () => {
             <div className="infoWrapper_personal__info">
               <p>{vehicleDetails.oname}</p>
               <div className="infoWrapper_personal__info__wrapper">
-                <div className="infoWrapper_personal__info__wrapper__email"></div>
-                <p>{vehicleDetails.email}</p>
-                <div className="infoWrapper_personal__info__wrapper__phone"></div>
-                <p>{vehicleDetails.tel}</p>
+                <div className="infoWrapper_personal__info__wrapper__detail">
+                  <div className="infoWrapper_personal__info__wrapper__detail__email"></div>
+                  <p>{vehicleDetails.email}</p>
+                </div>
+                <div className="infoWrapper_personal__info__wrapper__detail">
+                  <div className="infoWrapper_personal__info__wrapper__detail__phone"></div>
+                  <p>{vehicleDetails.tel}</p>
+                </div>
               </div>
             </div>
           </div>
@@ -273,7 +286,7 @@ const VehicleDetailLeft = () => {
 };
 
 const StNewSwiper = styled(Swiper)`
-  width: 79%;
+  width: 100%;
   border-radius: 12px;
   margin: 0 !important;
   .swiper-button-next {
@@ -289,12 +302,18 @@ const StNewSwiper = styled(Swiper)`
     border-radius: 12px;
     object-position: center;
   }
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    width: 100%;
+  }
 `;
 
 const StVehicleInfoContainer = styled.div`
   display: block;
-  /* background-color: skyblue; */
-  width: 79%;
+  width: 100%;
+
   .review {
     font-weight: 600;
     font-size: 20px;
@@ -396,6 +415,12 @@ const StVehicleInfoContainer = styled.div`
       }
     }
   }
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    width: 100%;
+  }
 `;
 
 const StVehicleInfoTitleWrapper = styled.div`
@@ -415,6 +440,7 @@ const StVehicleInfoLocationWrapper = styled.div`
   justify-content: space-between;
   padding-bottom: 65px;
   border-bottom: 1px solid #cccccc;
+
   .locationTitle {
     width: 100%;
     line-height: 64px;
@@ -463,11 +489,42 @@ const StVehicleInfoLocationWrapper = styled.div`
       }
     }
   }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    padding-bottom: 20px;
+  }
+  @media (max-width: 767px) {
+    padding-bottom: 20px;
+    .locationTitle {
+      flex-direction: column;
+      line-height: 36px;
+      align-items: flex-start;
+    }
+    .location_star_ico {
+      font-size: 18px;
+      margin-right: 0px;
+      color: #ffb979;
+    }
+    .location_num {
+      margin-right: 0px;
+      font-weight: 700;
+      font-size: 18px;
+      color: #000000;
+    }
+    .location_comment {
+      margin-right: 0 px;
+      font-weight: 700;
+      font-size: 18px;
+      color: #000000;
+    }
+    .like_wrap {
+    }
+  }
 `;
 
 const StVehicleInfoContentsWrapper = styled.div`
   border-bottom: 1px solid #cccccc;
   padding-bottom: 82px;
+
   h1 {
     font-weight: 600;
     font-size: 20px;
@@ -482,6 +539,18 @@ const StVehicleInfoContentsWrapper = styled.div`
     border-radius: 20px;
     height: auto;
     word-break: break-all;
+  }
+  @media (max-width: 767px) {
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    padding-bottom: 32px;
+    h1 {
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 27px;
+      margin-top: 22px;
+      margin-bottom: 20px;
+    }
   }
 `;
 
@@ -510,36 +579,38 @@ const StRenterInfoWrapper = styled.div`
       }
       &__wrapper {
         display: flex;
+        &__detail {
+          display: flex;
+          &__email {
+            background-image: url(${emails});
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            background-position: bottom;
+          }
+          &__phone {
+            background-image: url(${phone});
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            margin-left: 10px;
+            background-position: bottom;
+          }
+        }
         a {
           text-decoration: underline;
           color: black;
         }
-        &__email {
-          background-image: url(${emails});
-          background-size: contain;
-          background-repeat: no-repeat;
-          width: 20px;
-          height: 20px;
-          margin-right: 10px;
-          background-position: bottom;
-        }
-        &__phone {
-          background-image: url(${phone});
-          background-size: contain;
-          background-repeat: no-repeat;
-          width: 20px;
-          height: 20px;
-          margin-right: 10px;
-          margin-left: 10px;
-          background-position: bottom;
-        }
       }
-    }
-
-    p {
-      font-weight: 500;
-      font-size: 18px;
-      line-height: 25px;
+      p {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 25px;
+      }
     }
   }
   .infoWrapper_desc {
@@ -551,11 +622,80 @@ const StRenterInfoWrapper = styled.div`
       width: 840px;
       height: 320px;
       box-sizing: border-box;
-      padding: 28px;
-      p {
-        font-weight: 400;
-        font-size: 18px;
-        line-height: 25px;
+    }
+  }
+  @media (max-width: 767px) {
+    margin-top: 28px;
+    margin-bottom: 0px;
+    .infoWrapper_personal {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+      &__picture img {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        margin-right: 31px;
+      }
+      &__info {
+        display: flex;
+        padding: 0px;
+        p {
+          margin-bottom: 10px;
+        }
+        &__wrapper {
+          display: flex;
+          flex-direction: column;
+          a {
+          }
+          &__detail {
+            display: flex;
+            &__email {
+            }
+            &__phone {
+              margin-left: 0px;
+            }
+          }
+        }
+      }
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    margin-top: 28px;
+    margin-bottom: 40px;
+    .infoWrapper_personal {
+      margin-top: 0px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 0px;
+      &__picture img {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        margin-right: 31px;
+      }
+      &__info {
+        display: flex;
+        p {
+          margin-bottom: 10px;
+        }
+        &__wrapper {
+          display: flex;
+          flex-direction: column;
+          a {
+          }
+          &__detail {
+            display: flex;
+            &__email {
+            }
+            &__phone {
+              margin-left: 0px;
+            }
+          }
+        }
       }
     }
   }
