@@ -1,13 +1,8 @@
-![header](https://capsule-render.vercel.app/api?type=waving&text=ta,iger&color=auto&height=200&width=auto&animation=scaleIn)
-
+![header](https://capsule-render.vercel.app/api?type=waving&text=ta,iger&color=auto&height=200&align=center&animation=scaleIn)
 <br>
-
 # C2C 카 쉐어링 중개 플랫폼 - <a href="https://taiger.kr/">타, 이거</a>
-
- 
 ## 프로젝트 기간
 - 2022.08.26 ~ 2022.10.07
-
 ## 팀구성
 이름 | 깃허브 주소 | 포지션 
 --- | --- | --- 
@@ -37,7 +32,6 @@
 </div>
 
 ## 그외 라이브러리 🛠
-
 - React-icons
 - Redux logger
 - React Devtools
@@ -46,12 +40,13 @@
 - Sass
 
 ## 환경설정
-
 ```
 - npm install --global yarn (yarn을 설치 안했을때)
 - yarn install
 - yarn start
 ```
+
+## Trouble Shooting
 
 
 
