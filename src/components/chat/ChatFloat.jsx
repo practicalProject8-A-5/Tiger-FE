@@ -137,8 +137,6 @@ const ChatButton = styled.div`
       padding-top: 0px;
     }
   }
-  @media (min-width: 768px) and (max-width: 1023px) {
-  }
 `;
 const NewNoti = styled.div`
   width: 20px;

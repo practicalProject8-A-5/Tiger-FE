@@ -80,11 +80,6 @@ const StVehicleMapContainer = styled.div`
 const StVehicleMapBox = styled.div`
   height: 286px;
   margin-bottom: 15px;
-
-  @media (max-width: 767px) {
-  }
-  @media (min-width: 768px) and (max-width: 1023px) {
-  }
 `;
 
 export default React.memo(KakaoMapDetail);

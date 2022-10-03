@@ -141,8 +141,6 @@ const StPaymentPeriod = styled.div`
 `;
 
 const StPaymentPriceInfo = styled.div`
-  -webkit-box-align: center !important;
-  -webkit-box-pack: justify !important;
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
@@ -168,8 +166,6 @@ const StPaymentPriceInfo = styled.div`
 `;
 
 const StPaymentTax = styled.div`
-  -webkit-box-align: center !important;
-  -webkit-box-pack: justify !important;
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
@@ -193,8 +189,6 @@ const StPaymentTax = styled.div`
 `;
 
 const StPaymentInsurance = styled.div`
-  -webkit-box-align: center !important;
-  -webkit-box-pack: justify !important;
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
@@ -251,8 +245,6 @@ const StPaymentButton = styled(Button)`
   @media (max-width: 767px) {
     width: 100%;
   }
-  @media (min-width: 768px) and (max-width: 1023px) {
-  }
 `;
 
 const StNeedLogin = styled(Button)`
@@ -269,8 +261,6 @@ const StNeedLogin = styled(Button)`
   @media (max-width: 767px) {
     width: 100%;
     margin: 40px auto;
-  }
-  @media (min-width: 768px) and (max-width: 1023px) {
   }
 `;
 

@@ -516,8 +516,6 @@ const StVehicleInfoLocationWrapper = styled.div`
       font-size: 18px;
       color: #000000;
     }
-    .like_wrap {
-    }
   }
 `;
 
@@ -539,8 +537,6 @@ const StVehicleInfoContentsWrapper = styled.div`
     border-radius: 20px;
     height: auto;
     word-break: break-all;
-  }
-  @media (max-width: 767px) {
   }
   @media (min-width: 768px) and (max-width: 1023px) {
     padding-bottom: 32px;
