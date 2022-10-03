@@ -112,6 +112,7 @@ const FilteredVehicleList = () => {
           <StItemRight>
             <FilteredMap filteredVehicle={vidData} />
           </StItemRight>
+          {/* <StMapButton>지도보이기</StMapButton> */}
         </>
       )}
     </StItemContainer>
@@ -122,30 +123,64 @@ const StItemContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  width: 100%;
+  width: 95%;
+  margin: auto;
 `;
 
 const StItemLeft = styled.div`
-  width: 65rem;
+  width: 64%;
   margin-top: 78px;
   display: flex;
-  /* align-items: center; */
   flex-wrap: wrap;
   gap: 0px 40px;
   overflow: auto;
   height: 100vh;
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    gap: 0px 22px;
+  }
 `;
 
 const StItemRight = styled.div`
   margin-top: 78px;
   display: flex;
   align-items: center;
+  width: 50%;
+  @media (max-width: 767px) {
+    display: none;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 const StObserveContainer = styled.div`
   width: 1px;
   height: 1px;
   position: relative;
+`;
+
+const StMapButton = styled.button`
+  width: 100px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background-color: #ff881b;
+  color: white;
+  font-weight: 600;
+  font-size: 13px;
+  position: fixed;
+  bottom: 50px;
+  z-index: 9;
+  margin: auto;
+  display: none;
+  @media (max-width: 767px) {
+    display: block;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    display: none;
+  }
 `;
 
 export default FilteredVehicleList;
