@@ -119,12 +119,10 @@ const RenterItem = ({ category, list, onSelect }) => {
                             },
                           }
                         );
-                        // console.log(response);
                         navigate(`/chat/${response.data}`, {
                           state: { backgroundLocation: location },
                         });
                       } catch (error) {
-                        // console.log(error);
                         return error;
                       }
                     }}>
@@ -422,6 +420,64 @@ const StRenterItem = styled.div`
         cursor: pointer;
         margin-left: 5px;
         text-decoration: underline;
+      }
+    }
+  }
+  @media (max-width: 767px) {
+    .carInfo {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 63%;
+      p {
+        margin-bottom: 11px;
+        font-weight: 500;
+        font-size: 18px;
+        color: #000;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      span {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        color: #8b8b8b;
+        margin-bottom: 13px;
+      }
+      &__location {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .carInfo {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 62%;
+      p {
+        margin-bottom: 11px;
+        font-weight: 500;
+        font-size: 18px;
+        color: #000;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      span {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        color: #8b8b8b;
+        margin-bottom: 13px;
+      }
+      &__location {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
       }
     }
   }
