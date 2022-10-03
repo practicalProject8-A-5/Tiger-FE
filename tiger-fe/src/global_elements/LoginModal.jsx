@@ -48,6 +48,11 @@ const StLoginModal = styled.div`
   background-color: #fff;
   border-radius: 16px;
   border: 1px solid #eee;
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 const StBackground = styled.div`

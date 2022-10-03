@@ -78,7 +78,7 @@ const Search = () => {
     width: "400px",
     height: "400px",
     border: "1px solid black",
-    zIndex: "99",
+    zIndex: "999",
   };
   // search reservation dates
   const [startDates, setStartDates] = useState(null);
@@ -194,7 +194,7 @@ const Search = () => {
                 // customInput={<ExampleCustomInput />}
               />
             </StCalendarWrapper>
-            <div className="hour">24시간</div>
+            <div className="hour">1일</div>
           </div>
         </StCalendarContainer>
         <StVehicleTypeContainer>
@@ -231,15 +231,32 @@ const StSearch = styled.div`
     align-items: center;
     justify-content: space-between;
   }
+  @media (max-width: 767px) {
+    padding: 0 50px;
+    margin: auto;
+    height: auto;
+    .wrap {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    padding: 0 50px;
+    margin: auto;
+  }
 `;
 const StSearchLocationContainer = styled.div`
+  width: 20%;
   .location_input {
+    width: 100%;
     color: #757575;
     font-weight: 700;
     font-size: 18px;
     outline: none;
     border: none;
-    width: 350px;
     height: 28px;
     cursor: pointer;
     background: #f2f2f2;
@@ -251,9 +268,23 @@ const StSearchLocationContainer = styled.div`
     background-position: 9px 7px;
     text-indent: 30px;
   }
+  @media (max-width: 767px) {
+    width: 100%;
+    margin-top: 10px;
+    .location_input {
+      width: 98%;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    width: 40%;
+    margin-right: 20px;
+    .location_input {
+      width: 100%;
+    }
+  }
 `;
 const StCalendarContainer = styled.div`
-  width: 540px;
+  width: 40%;
   display: flex;
   background-color: #f2f2f2;
   padding: 0 16px;
@@ -275,13 +306,27 @@ const StCalendarContainer = styled.div`
       color: #8b8b8b;
     }
   }
+  @media (max-width: 767px) {
+    width: 100%;
+    margin-top: 10px;
+    padding: 0 5px;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    width: 70%;
+    margin-right: 20px;
+    .wrapper_box {
+      width: 100%;
+      .hour {
+      }
+    }
+  }
 `;
 const StCalendarWrapper = styled.div`
   z-index: 98;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 180px;
+  /* width: 180px; */
   height: 42px;
   box-sizing: border-box;
   font-size: 14px;
@@ -385,13 +430,20 @@ const StCalendarWrapper = styled.div`
       }
     }
   }
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    width: 100%;
+  }
 `;
 const StNewDatePicker = styled(DatePicker)`
   color: #8b8b8b;
 `;
 const StVehicleTypeContainer = styled.div`
+  width: 15%;
   select {
-    width: 300px;
+    width: 100%;
     height: 42px;
     padding: 8px;
     cursor: pointer;
@@ -411,6 +463,25 @@ const StVehicleTypeContainer = styled.div`
     option {
       /* background-color: pink; */
       border-radius: 12px;
+    }
+  }
+  @media (max-width: 767px) {
+    width: 100%;
+    margin-top: 10px;
+    select {
+      width: 100%;
+      option {
+      }
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    width: 30%;
+    margin-right: 20px;
+    select {
+      width: 100%;
+
+      option {
+      }
     }
   }
 `;

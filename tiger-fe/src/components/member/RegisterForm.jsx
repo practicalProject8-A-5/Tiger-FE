@@ -165,8 +165,7 @@ const RegisterForm = ({
                   //     "You should write in proper email format.",
                   // },
                 })}
-                onChange={handleChange}
-              ></input>
+                onChange={handleChange}></input>
               <div className="Register__emailCheck" onClick={emailCheck}>
                 중복확인
               </div>
@@ -557,6 +556,13 @@ const StRegisterForm = styled.div`
       margin-top: 8px;
       cursor: pointer;
     }
+  }
+  @media (max-width: 767px) {
+    .Register_wrap {
+      padding: 30px 20px 30px 20px;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
   }
 `;
 // const StyledContainer = styled(ToastContainer)`

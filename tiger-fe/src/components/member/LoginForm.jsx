@@ -295,6 +295,16 @@ const StLoginForm = styled.div`
       }
     }
   }
+  @media (max-width: 767px) {
+    .wrap {
+      padding: 0 20px;
+      .kakao_logo {
+        right: 101px;
+      }
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 const StyledContainer = styled(ToastContainer)`
   &&&.Toastify__toast-container {

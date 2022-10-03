@@ -338,7 +338,7 @@ const StSection = styled.div`
       width: 100%;
       padding: 0px;
       .list {
-        width: 1600px;
+        width: 100%;
         height: 222px;
         background-color: pink;
         margin-bottom: 58px;
