@@ -56,7 +56,9 @@ const RegisterForm = ({
   };
   const [clickCheckEmail, setClickCheckEmail] = useState(false);
   const emailCheck = async (e) => {
+    console.log("ll");
     e.preventDefault();
+    // e.stopPropagation();
     setClickCheckEmail(true);
     // const checkEmailServer = checkEmail;
     const headers = {
@@ -76,7 +78,7 @@ const RegisterForm = ({
         toast.success("사용 가능한 아이디 입니다.", {
           theme: "dark",
           autoClose: 1500,
-          position: toast.POSITION.TOP_CENTER,
+          position: toast.POSITION.TOP_RIGHT,
           className: "toatst_success",
           progressClassName: "success_progress",
         });
@@ -89,12 +91,14 @@ const RegisterForm = ({
           className: "toatst_warn",
           progressClassName: "warn_progress",
         }); // 이미 데이터베이스에 있는 아이디일 경우 409
+        // alert("이미 사용중");
         setCheckEmail("");
       } else {
+        // alert("사용 불가");
         // 그 외에는 사용 불가한 아이디
         toast.error("사용 불가한 아이디입니다.", {
           theme: "dark",
-          autoClose: 1500,
+          autoClose: 3000000,
           position: toast.POSITION.TOP_CENTER,
           className: "toatst_error",
           progressClassName: "error_progress",
@@ -110,14 +114,18 @@ const RegisterForm = ({
   // 회원가입 submit 요청
 
   const onSubmit = (data) => {
+    // data.preventDefault();
+    // data.stopPropagation();
+
     if (clickCheckEmail === false) {
       toast.warn("이메일 중복확인 해주세요.", {
         theme: "dark",
         autoClose: 1500,
-        position: toast.POSITION.TOP_CENTER,
+        position: toast.POSITION.TOP_RIGHT,
         className: "toatst_warn",
         progressClassName: "warn_progress",
       });
+      // alert("중복확인 해주세요");
     } else {
       dispatch(__registerUser(data));
       loginToggle();
@@ -186,6 +194,7 @@ const RegisterForm = ({
               <div className="Register__emailCheck" onClick={emailCheck}>
                 중복확인
               </div>
+              {/* <StyledContainer /> */}
             </>
           )}
           {errors.email ? (
@@ -219,7 +228,7 @@ const RegisterForm = ({
                   pattern: {
                     value: regExgPw,
                     message:
-                      "비밀번호는 영문(대/소문자 구분), 숫자 조합하여 6~12자리로 입력해 주세요.",
+                      "비밀번호는 영문(대/소문자 구분), 숫자 조합하여 8~12자리로 입력해 주세요.",
                   },
                 })}
               />
@@ -282,7 +291,7 @@ const RegisterForm = ({
                   pattern: {
                     value: regExgPw,
                     message:
-                      "비밀번호는 영문(대/소문자 구분), 숫자 조합하여 6~12자리로 입력해 주세요.",
+                      "비밀번호는 영문(대/소문자 구분), 숫자 조합하여 8~12자리로 입력해 주세요.",
                   },
                 })}
               />
@@ -372,7 +381,7 @@ const RegisterForm = ({
         </div>
         <button type="submit">회원가입</button>
       </form>
-      <StyledContainer />
+      {/* <StyledContainer /> */}
     </StRegisterForm>
   );
 };
@@ -565,6 +574,7 @@ const StyledContainer = styled(ToastContainer)`
   .Toastify__progress-bar {
   }
   .Toastify__close-button {
+    background-color: pink;
     border-radius: 12px;
     position: absolute;
     top: 12px;

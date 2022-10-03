@@ -14,12 +14,12 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  priceCheck,
-  yearsCheck,
-  passengersCheck,
-  fuelEfficiencyCheck,
-} from "../../shared/Regex";
+// import {
+//   priceCheck,
+//   yearsCheck,
+//   passengersCheck,
+//   fuelEfficiencyCheck,
+// } from "../../shared/Regex";
 
 const VehicleRegister = () => {
   const serverApi = process.env.REACT_APP_SERVER;
@@ -329,14 +329,15 @@ const VehicleRegister = () => {
         <div className="price_box">
           <label htmlFor="price">렌트 요금</label>
           <input
-            type="text"
+            type="number"
             id="price"
+            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+            onkeyup="if(this.value<0){this.value= this.value * -1}"
+            min="0"
+            max="1000000"
             placeholder="가격 입력"
             {...register("price", {
               required: "가격을 입력해주세요",
-              validate: {
-                type: (value) => priceCheck(value) || "숫자만 입력이 가능해요",
-              },
             })}
           />
           <span>₩/1일</span>
@@ -358,31 +359,37 @@ const VehicleRegister = () => {
               {errors.years ? (
                 <td style={{ border: " 2px solid #EB3434" }}>
                   <input
-                    type="text"
+                    type="number"
                     id="years"
+                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                    onkeyup="if(this.value<0){this.value= this.value * -1}"
+                    min="1990"
                     placeholder={errors.years.message}
                     className="error_input"
-                    {...register("years", {
+                    {...register("number", {
                       required: "연식을 입력해주세요.",
-                      validate: {
-                        type: (value) =>
-                          yearsCheck(value) || "연식은 숫자만 입력이 가능해요",
-                      },
+                      // validate: {
+                      //   type: (value) =>
+                      //     yearsCheck(value) || "최소 1990년 이상이여야 합니다.",
+                      // },
                     })}
                   />
                 </td>
               ) : (
                 <td>
                   <input
-                    type="text"
+                    type="number"
                     id="years"
+                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                    onkeyup="if(this.value<0){this.value= this.value * -1}"
+                    min="1990"
                     placeholder="연식"
                     {...register("years", {
                       required: "연식을 입력해주세요.",
-                      validate: {
-                        type: (value) =>
-                          yearsCheck(value) || "연식은 숫자만 입력이 가능해요",
-                      },
+                      // validate: {
+                      //   type: (value) =>
+                      //     yearsCheck(value) || "최소 1990년 이상이여야 합니다.",
+                      // },
                     })}
                   />
                 </td>
@@ -397,15 +404,18 @@ const VehicleRegister = () => {
                   <input
                     type="text"
                     id="passengers"
+                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                    onkeyup="if(this.value<0){this.value= this.value * -1}"
+                    min="1"
                     placeholder={errors.passengers.message}
                     className="error_input"
                     {...register("passengers", {
                       required: "탑승자 수를 입력해주세요.",
-                      validate: {
-                        type: (value) =>
-                          passengersCheck(value) ||
-                          "탑승인원은 숫자만 입력이 가능해요",
-                      },
+                      // validate: {
+                      //   type: (value) =>
+                      //     passengersCheck(value) ||
+                      //     "탑승인원은 숫자만 입력이 가능해요",
+                      // },
                     })}
                   />
                 </td>
@@ -414,14 +424,17 @@ const VehicleRegister = () => {
                   <input
                     type="text"
                     id="passengers"
+                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                    onkeyup="if(this.value<0){this.value= this.value * -1}"
+                    min="1"
                     placeholder="탑승자 수"
                     {...register("passengers", {
                       required: "탑승자 수를 입력해주세요.",
-                      validate: {
-                        type: (value) =>
-                          passengersCheck(value) ||
-                          "탑승인원은 숫자만 입력이 가능해요",
-                      },
+                      // validate: {
+                      //   type: (value) =>
+                      //     passengersCheck(value) ||
+                      //     "탑승인원은 숫자만 입력이 가능해요",
+                      // },
                     })}
                   />
                 </td>
@@ -442,11 +455,11 @@ const VehicleRegister = () => {
                     className="error_input"
                     {...register("fuelEfficiency", {
                       required: "연비를 입력해주세요.",
-                      validate: {
-                        type: (value) =>
-                          fuelEfficiencyCheck(value) ||
-                          "연비는 숫자만 입력이 가능해요",
-                      },
+                      // validate: {
+                      //   type: (value) =>
+                      //     fuelEfficiencyCheck(value) ||
+                      //     "연비는 숫자만 입력이 가능해요",
+                      // },
                     })}
                   />
                 </td>
@@ -458,11 +471,11 @@ const VehicleRegister = () => {
                     placeholder="연비"
                     {...register("fuelEfficiency", {
                       required: "연비를 입력해주세요.",
-                      validate: {
-                        type: (value) =>
-                          fuelEfficiencyCheck(value) ||
-                          "연비는 숫자만 입력이 가능해요",
-                      },
+                      // validate: {
+                      //   type: (value) =>
+                      //     fuelEfficiencyCheck(value) ||
+                      //     "연비는 숫자만 입력이 가능해요",
+                      // },
                     })}
                   />
                 </td>
@@ -612,7 +625,8 @@ const VehicleRegister = () => {
             id="description"
             placeholder="차량에 대한 설명을 입력해주세요."
             cols="50"
-            rows="10"></textarea>
+            rows="10"
+          ></textarea>
         </div>
 
         {/* 렌터정보 */}
