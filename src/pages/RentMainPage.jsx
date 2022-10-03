@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import MainItemList from "../components/main/MainItemList";
 import Header from "../global_elements/Header";
@@ -9,11 +9,8 @@ import GlobalLayout from "../global/GlobalLayout";
 import TopBtn from "../global_elements/TopBtn";
 
 const RentMainPage = () => {
-  // const [inOwner, setInOwner] = useState(false);
-  // console.log("inOwner==>", inOwner);
   return (
     <StHomePage>
-      {/* <Header inOwner={inOwner} setInOwner={setInOwner} /> */}
       <Header />
       <Search />
       <GlobalLayout>
@@ -27,6 +24,5 @@ const RentMainPage = () => {
 export default RentMainPage;
 
 const StHomePage = styled.div`
-  /* height: 300vh; */
   position: relative;
 `;
