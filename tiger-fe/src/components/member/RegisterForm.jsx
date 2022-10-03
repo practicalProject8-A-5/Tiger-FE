@@ -165,8 +165,7 @@ const RegisterForm = ({
                   //     "You should write in proper email format.",
                   // },
                 })}
-                onChange={handleChange}
-              ></input>
+                onChange={handleChange}></input>
               <div className="Register__emailCheck" onClick={emailCheck}>
                 중복확인
               </div>
@@ -557,6 +556,161 @@ const StRegisterForm = styled.div`
       margin-top: 8px;
       cursor: pointer;
     }
+  }
+  @media (max-width: 767px) {
+    .Register_wrap {
+      width: 100%;
+      height: 762px;
+      padding: 30px 20px 30px 20px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .formbox {
+        width: 100%;
+        height: 98px;
+        font-weight: 400;
+        font-size: 18px;
+        color: #8b8b8b;
+        margin-bottom: 37px;
+        .import {
+          color: #ff881b;
+          margin-right: 5px;
+        }
+        .Register__label {
+          display: block;
+          width: 100%;
+          height: 25px;
+          margin-bottom: 14px;
+        }
+        .Register__input {
+          width: 100%;
+          height: 56px;
+          border: 2px solid #cccccc;
+          outline: none;
+          padding: 17px 24px;
+          box-sizing: border-box;
+          font-weight: 500;
+          font-size: 16px;
+          color: #8b8b8b;
+          font-family: "Noto Sans KR", sans-serif;
+        }
+        .Register__emailCheck {
+          float: right;
+          cursor: pointer;
+          border: 1px solid #cccccc;
+          padding: 7px;
+          height: 20px;
+          line-height: 20px;
+          margin-top: 5px;
+          border-radius: 3px;
+          font-size: 13px;
+          background-color: #ff881b;
+          color: white;
+        }
+        .error {
+          width: 100%;
+          height: 22px;
+          margin-top: 7px;
+          font-weight: 500;
+          font-size: 14px;
+          color: #eb3434;
+          text-align: right;
+        }
+      }
+      .formbox__pw {
+        width: 100%;
+        height: 190px;
+        font-weight: 400;
+        font-size: 18px;
+        color: #8b8b8b;
+        margin-bottom: 37px;
+        .import {
+          height: 100%;
+          font-weight: 400;
+          font-size: 18px;
+          color: #ff881b;
+          margin-right: 5px;
+        }
+        .Register__label {
+          display: block;
+          width: 100%;
+          height: 25px;
+          margin-bottom: 14px;
+        }
+        .Register__input {
+          width: 100%;
+          height: 56px;
+          border: 2px solid #cccccc;
+          outline: none;
+          padding: 17px 24px;
+          box-sizing: border-box;
+          font-weight: 500;
+          font-size: 16px;
+          color: #8b8b8b;
+          font-family: "Noto Sans KR", sans-serif;
+          /* margin-bottom: 14px; */
+        }
+        .Register__input__ck {
+          width: 100%;
+          height: 56px;
+          border: 2px solid #cccccc;
+          outline: none;
+          padding: 17px 24px;
+          box-sizing: border-box;
+          font-weight: 500;
+          font-size: 16px;
+          color: #8b8b8b;
+          margin-top: 14px;
+          font-family: "Noto Sans KR", sans-serif;
+        }
+        .password_wrapper {
+          position: relative;
+          display: flex;
+          margin-bottom: 14px;
+          .eyeIcon {
+            position: absolute;
+            top: 46%;
+            right: 4%;
+            color: #8b8b8b;
+          }
+          .eyeIcon:hover {
+            cursor: pointer;
+          }
+          i {
+            position: absolute;
+            top: 28%;
+            right: 4%;
+            color: #8b8b8b;
+          }
+          i:hover {
+            cursor: pointer;
+          }
+        }
+        .error {
+          width: 100%;
+          margin-top: 7px;
+          font-weight: 500;
+          font-size: 14px;
+          color: #eb3434;
+          text-align: right;
+        }
+      }
+      button {
+        width: 100%;
+        height: 56px;
+        background: #ff881b;
+        color: #fff;
+        font-weight: 600;
+        font-size: 18px;
+        border: none;
+        padding: 0;
+        margin-top: 8px;
+        cursor: pointer;
+      }
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
   }
 `;
 // const StyledContainer = styled(ToastContainer)`
