@@ -46,6 +46,13 @@ const StButton = styled.button`
         `;
     }
   }}
+  @media (max-width: 767px) {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    width: 15%;
+  }
 `;
 
 export default Button;
