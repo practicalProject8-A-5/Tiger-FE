@@ -65,6 +65,7 @@ const Header = ({ ownerMode }) => {
       window.localStorage.clear();
       dispatch(cleanUpRoomList());
       dispatch(loader());
+      navigate("/");
     } else if (confirm === false) {
       return;
     }
