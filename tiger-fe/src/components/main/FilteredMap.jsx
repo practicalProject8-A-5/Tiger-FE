@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const FilteredMap = ({ filteredVehicle }) => {
-  console.log("filteredMap");
+  // console.log("filteredMap");
   const navigate = useNavigate();
   // const location = localStorage.getItem("location");
   const locationX = localStorage.getItem("locationX");

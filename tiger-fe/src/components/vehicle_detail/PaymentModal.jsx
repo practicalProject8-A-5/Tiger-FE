@@ -42,7 +42,7 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
         progressClassName: "warn_progress",
       });
     } else if (confirm === false) {
-      console.log("null");
+      // console.log("null");
       return null;
     } else if (confirm === true && payMethod !== undefined) {
       const vid = vehicleDetails.vid;

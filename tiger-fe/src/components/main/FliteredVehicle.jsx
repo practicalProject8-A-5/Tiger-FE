@@ -15,7 +15,7 @@ import styled from "styled-components";
 import { ImStarFull } from "react-icons/im";
 
 const FliteredVehicle = ({ list }) => {
-  console.log("filterefVehicle");
+  // console.log("filterefVehicle");
   const email = localStorage.getItem("email");
   const navigate = useNavigate();
   const dispatch = useDispatch();
