@@ -150,7 +150,7 @@ const ModifyImgViewBox = ({
   return (
     <StViewBox>
       <div className="thumnail">
-        <img src={thum} alt="Thumnail" />
+        <img src={thum} alt="Thumnail" loading="lazy" />
         <div className="thumbox">대표사진</div>
         <label htmlFor="input_thum" className="btn" onChange={changeThumnail}>
           <input
@@ -168,7 +168,7 @@ const ModifyImgViewBox = ({
           preView.map((image, i) => {
             return (
               <div className="img_preview" key={i}>
-                <img src={image} alt="" />
+                <img src={image} alt="prevImage" loading="lazy" />
                 <div className="sbtn" onClick={() => deleteOnClick(i, image)}>
                   <IoClose className="close" />
                 </div>

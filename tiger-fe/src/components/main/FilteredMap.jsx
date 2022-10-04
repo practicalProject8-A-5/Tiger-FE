@@ -43,7 +43,7 @@ const FilteredMap = ({ filteredVehicle }) => {
         '    <div class="info">' +
         '        <div class="body">' +
         '            <div class="img">' +
-        `                <img src=${filteredVehicle[i].thumbnail} width="73" height="73">` +
+        `                <img src=${filteredVehicle[i].thumbnail} width="73" height="73" loading="lazy">` +
         "            </div>" +
         '            <div class="desc">' +
         `               <div class="name"><a href="/vehicle/${filteredVehicle[i].vid}" class="link" style="text-decoration:none">${filteredVehicle[i].vbrand} ${filteredVehicle[i].vname}</a></div>` +
@@ -109,7 +109,7 @@ const FilteredMap = ({ filteredVehicle }) => {
     createMap();
   }, [filteredVehicle]);
 
-  return <StVehicleMapBox id="map"></StVehicleMapBox>;
+  return <StVehicleMapBox id="map" loading="lazy"></StVehicleMapBox>;
 };
 
 const StVehicleMapBox = styled.div`

@@ -66,7 +66,7 @@ const Section = () => {
         <div className="list">
           <span>1.</span>
           <Flip top>
-            <p>회원가입 후 마이페이지에서 간편하게 오너모드로 전환</p>
+            <p>회원가입 후 렌터페이지에서 간편하게 오너모드로 전환</p>
           </Flip>
           <Swing>
             <img src={toggle} alt="토글사진" />
@@ -91,7 +91,7 @@ const Section = () => {
         <div className="list">
           <span>3.</span>
           <Flip top>
-            <p>마이페이지 &rarr; 정산에서 편리하게 수익관리</p>
+            <p>렌터페이지 &rarr; 정산에서 편리하게 수익관리</p>
           </Flip>
           <div className="img_box">
             <Swing>
@@ -101,7 +101,6 @@ const Section = () => {
               <img src={calculate} alt="정산" />
             </Swing>
           </div>
-          {/* <img src="" alt="" /> */}
           <div className="list_img"></div>
         </div>
       </div>

@@ -74,7 +74,11 @@ const ChatModal = () => {
         <RoomWrap isRoom={roomId}>
           <Header isRoom={roomId}>
             <div className="userInfoChat">
-              <img src={userInfo.profileImage} alt="profileImage" />
+              <img
+                src={userInfo.profileImage}
+                alt="profileImage"
+                loading="lazy"
+              />
               <div className="userInfoChat__name">{userInfo.name}</div>
             </div>
             {roomId && (

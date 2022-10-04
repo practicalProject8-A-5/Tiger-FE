@@ -46,7 +46,7 @@ const FliteredVehicle = ({ list }) => {
         loop={true}
         className="mySwiper">
         <SwiperSlide className="img">
-          <img src={list.thumbnail} alt="imageSlide" />
+          <img src={list.thumbnail} alt="imageSlide" loading="lazy" />
         </SwiperSlide>
       </StSwiper>
       {email ? (

@@ -20,7 +20,7 @@ const ImgViewBox = ({ files }) => {
           {files.map((image, i) => {
             return (
               <SwiperSlide className="img" key={i}>
-                <img src={image} alt="imageSlide" />
+                <img src={image} alt="imageSlide" loading="lazy" />
               </SwiperSlide>
             );
           })}
@@ -34,12 +34,11 @@ const ImgViewBox = ({ files }) => {
           navigation={true}
           // loop={true}
           modules={[Pagination, Navigation]}
-          className="mySwiper"
-        >
+          className="mySwiper">
           {files.map((image, i) => {
             return (
               <SwiperSlide className="img" key={i}>
-                <img src={image} alt="imageSlide" />
+                <img src={image} alt="imageSlide" loading="lazy" />
               </SwiperSlide>
             );
           })}
