@@ -124,7 +124,7 @@ const StItem = styled.div`
   }
   .desc__box {
     margin-top: 19px;
-    width: 315px;
+    width: 100%;
     height: 102px;
     .desc__top {
       display: flex;
@@ -177,10 +177,18 @@ const StItem = styled.div`
   &:hover .swiper-button-prev {
     opacity: 1;
   }
+  @media (max-width: 767px) {
+    width: 100%;
+    gap: 20px 46px;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    width: 47%;
+    gap: 20px 46px;
+  }
 `;
 
 const StSwiper = styled(Swiper)`
-  width: 318px;
+  width: 100%;
   height: 300px;
   position: relative;
   border-radius: 20px;
@@ -248,10 +256,9 @@ const StSwiper = styled(Swiper)`
     border-radius: 0 0 20px 20px;
   }
   img {
-    width: 318px;
+    width: 100%;
     height: 300px;
     object-fit: cover;
-    /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
     border-radius: 20px;
   }
 `;

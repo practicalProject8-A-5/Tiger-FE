@@ -60,6 +60,7 @@ const StItemList = styled.div`
   align-items: center;
   flex-wrap: wrap;
   gap: 59px 46px;
+  justify-content: center;
 `;
 
 const StObserveContainer = styled.div`
