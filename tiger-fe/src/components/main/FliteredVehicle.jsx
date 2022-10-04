@@ -15,6 +15,7 @@ import styled from "styled-components";
 import { ImStarFull } from "react-icons/im";
 
 const FliteredVehicle = ({ list }) => {
+  console.log("filterefVehicle");
   const email = localStorage.getItem("email");
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ const FliteredVehicle = ({ list }) => {
     return () => {
       setIsLike(!isLike);
     };
-  }, [list.heart, isLike]);
+  }, [list.heart]);
 
   // console.log(list);
 
