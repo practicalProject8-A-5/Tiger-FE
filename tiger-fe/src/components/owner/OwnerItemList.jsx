@@ -69,8 +69,14 @@ const OwnerItemList = ({ category }) => {
 };
 
 const StOwnerItemList = styled.div`
-  /* width: 790px; */
+  width: 57%;
   padding-top: 65px;
+  @media (min-width: 768px) and (max-width: 1023px) {
+    width: 100%;
+  }
+  @media (max-width: 767px) {
+    width: 100%;
+  }
 `;
 
 export default OwnerItemList;

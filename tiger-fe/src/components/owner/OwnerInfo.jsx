@@ -52,15 +52,15 @@ const OwnerInfo = () => {
 export default OwnerInfo;
 
 const StOwnerInfo = styled.div`
-  position: fixed;
-  z-index: 8;
-  top: 261px;
-  right: 259px;
-  width: 520px;
+  position: sticky;
+  /* z-index: 8; */
+  top: 255px;
+  width: 42%;
+  /* width: 42%; */
   height: 550px;
   display: flex;
   justify-content: center;
-  padding: 57px 59px 78px 59px;
+  padding: 57px 59px 50px 59px;
   box-sizing: border-box;
   border: 1px solid #cccccc;
   box-shadow: 0px -3px 100px rgba(0, 0, 0, 0.07),
@@ -70,16 +70,15 @@ const StOwnerInfo = styled.div`
   border-radius: 12px;
   /* background-color: tomato; */
   .userProfile {
-    width: 400px;
+    width: 100%;
     height: 56px;
-    /* background-color: pink; */
     box-sizing: border-box;
     position: relative;
     .profile__top {
       width: 100%;
       height: 100%;
       display: flex;
-      margin-bottom: 60px;
+      margin-bottom: 40px;
       .userimg img {
         width: 56px;
         height: 56px;
@@ -128,13 +127,13 @@ const StOwnerInfo = styled.div`
       width: 100%;
       height: 34px;
       /* background-color: royalblue; */
-      margin-bottom: 33px;
+      margin-bottom: 34px;
       border-bottom: 1px solid #000;
       line-height: 36px;
       font-weight: 600;
     }
     .createBtn {
-      width: 380px;
+      width: 100%;
       height: 60px;
       border: 2px solid #ff881b;
       border-radius: 12px;
@@ -148,6 +147,97 @@ const StOwnerInfo = styled.div`
       cursor: pointer;
       font-weight: 600;
       font-size: 20px;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    position: fixed;
+    bottom: 150px;
+    right: 5%;
+    width: auto;
+    height: 60px;
+    padding: 0;
+    border: none;
+    /* background-color: pink; */
+    .userProfile {
+      width: 100%;
+      height: 100%;
+      .profile__top {
+        display: none;
+        .userimg img {
+          display: none;
+        }
+        .userMiniProfile {
+          .userMiniProfile__top {
+            display: none;
+            h3 {
+              display: none;
+            }
+            .bash {
+              display: none;
+            }
+          }
+          .userEmail {
+            display: none;
+          }
+        }
+      }
+      .profileTitle {
+        display: none;
+      }
+      .profileValue {
+        display: none;
+      }
+      .createBtn {
+        width: 70px;
+        height: 60px;
+        color: #ff881b;
+        font-size: 15px;
+      }
+    }
+  }
+  @media (max-width: 767px) {
+    position: fixed;
+    bottom: 150px;
+    right: 5%;
+    width: auto;
+    height: 60px;
+    padding: 0;
+    border: none;
+    .userProfile {
+      width: 100%;
+      height: 100%;
+      .profile__top {
+        display: none;
+        .userimg img {
+          display: none;
+        }
+        .userMiniProfile {
+          .userMiniProfile__top {
+            display: none;
+            h3 {
+              display: none;
+            }
+            .bash {
+              display: none;
+            }
+          }
+          .userEmail {
+            display: none;
+          }
+        }
+      }
+      .profileTitle {
+        display: none;
+      }
+      .profileValue {
+        display: none;
+      }
+      .createBtn {
+        width: 70px;
+        height: 60px;
+        color: #ff881b;
+        font-size: 15px;
+      }
     }
   }
 `;

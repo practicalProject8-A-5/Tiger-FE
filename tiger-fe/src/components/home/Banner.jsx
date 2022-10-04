@@ -26,7 +26,8 @@ const banner = () => {
           autoplay={{
             delay: 4000,
             disableOnInteraction: false,
-          }}>
+          }}
+        >
           <SwiperSlide>
             <img src={Banner} alt="배너2" loading="lazy" />
             <div className="text_box">
@@ -87,12 +88,34 @@ const StBanner = styled.div`
       }
     }
   }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    width: 100%;
+    background-color: skyblue;
+    .text_box {
+      width: 60%;
+      height: 127px;
+      position: absolute;
+      bottom: 101px;
+      left: 55px;
+      font-weight: 600;
+      font-size: 48px;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      animation: text-show 2s;
+      z-index: 1;
+    }
+    @media (max-width: 767px) {
+      width: 100%;
+    }
+  }
 `;
 const StRegisterSwiper = styled(Swiper)`
-  background-color: pink;
+  /* background-color: pink; */
   width: 100%;
   height: 660px;
-  position: relative;
+  position: static;
   .swiper-pagination {
     position: absolute;
     top: 20px;

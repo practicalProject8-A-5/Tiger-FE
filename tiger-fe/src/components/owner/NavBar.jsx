@@ -70,24 +70,12 @@ const StNavBar = styled.div`
     display: flex;
     align-items: center;
     height: 100%;
-    /* background-color: pink; */
-    /* .category {
-      font-weight: 600;
-      font-size: 20px;
-      color: #8b8b8b;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      box-sizing: border-box;
-      cursor: pointer;
-      margin-left: 70px;
-      :nth-child(1) {
-        margin: 0;
-      }
-      :hover {
-        color: #585656;
-      }
-    } */
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    padding: 0 164px;
+  }
+  @media (max-width: 767px) {
+    padding: 0 50px;
   }
 `;
 
@@ -117,10 +105,27 @@ const Category = styled.div`
     margin-left: 70px;
   }
   @media (min-width: 768px) and (max-width: 1023px) {
-    background-color: pink;
+    /* background-color: yellow; */
+    width: 40px;
     display: flex;
-    margin & + & {
-      margin-left: 0px;
+    justify-content: space-between;
+    & + & {
+      margin-left: 8%;
+    }
+  }
+  @media (max-width: 767px) {
+    width: 20px;
+    ${(props) =>
+      props.active &&
+      css`
+        border-bottom: 4px solid #000;
+        color: #000;
+        &:hover {
+          color: #000;
+        }
+      `}
+    & + & {
+      margin-left: 8%;
     }
   }
 `;

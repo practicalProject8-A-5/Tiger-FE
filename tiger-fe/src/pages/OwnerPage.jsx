@@ -20,8 +20,8 @@ const OwnerPage = () => {
       <NavBar category={category} onSelect={onSelect} />
       <GlobalLayout>
         <Stowner>
-          {category !== "Profit" && category !== "Calculate" && <OwnerInfo />}
           <OwnerItemList category={category} onSelect={onSelect} />
+          {category !== "Profit" && category !== "Calculate" && <OwnerInfo />}
         </Stowner>
       </GlobalLayout>
     </>
@@ -31,9 +31,13 @@ const OwnerPage = () => {
 export default OwnerPage;
 
 const Stowner = styled.div`
-  background-color: pink;
+  /* background-color: pink; */
+  position: relative;
+  margin: 50px auto;
+  display: flex;
+  justify-content: space-between;
   @media (max-width: 767px) {
-    /* margin: 50px auto; */
+    margin: 50px auto;
   }
   @media (min-width: 768px) and (max-width: 1023px) {
     margin: 50px auto;

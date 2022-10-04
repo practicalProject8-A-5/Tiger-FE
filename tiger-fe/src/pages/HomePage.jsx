@@ -34,14 +34,17 @@ export default HomePage;
 
 const StHomePage = styled.div`
   position: relative;
-  width: 100%;
+  width: 80%;
   margin: auto;
+  background-color: pink;
   @media (max-width: 767px) {
-    width: 90%;
+    width: 30%;
     margin: auto;
+    background-color: pink;
   }
   @media (min-width: 768px) and (max-width: 1023px) {
-    width: 100%;
+    width: 50%;
     margin: auto;
+    background-color: pink;
   }
 `;

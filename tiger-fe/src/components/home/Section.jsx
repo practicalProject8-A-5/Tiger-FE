@@ -111,7 +111,8 @@ const Section = () => {
           style={{
             background:
               "linear-gradient(to bottom, #ffe6d1 10%, #fffbf6, #fff 80%",
-          }}>
+          }}
+        >
           <div className="qna">
             <Reveal effect="showUp" duration={1500}>
               <p>자주 묻는 질문 FAQ</p>
@@ -298,113 +299,8 @@ const StSection = styled.div`
       }
     }
   }
-  @media (max-width: 767px) {
-    .desc {
-      height: 360px;
-      .logo {
-      }
-      .desc_text {
-        h3 {
-        }
-        p {
-        }
-      }
-    }
-    .item_box_wrap {
-      flex-direction: column;
-      padding: 0;
-      .item_box {
-        width: 100%;
-
-        .item_img {
-          width: 160px;
-          height: 160px;
-          background-color: tomato;
-          margin: 0 auto 65px auto;
-        }
-        img {
-          margin: 0 auto 65px auto;
-        }
-        p {
-          font-weight: 600;
-          font-size: 32px;
-          color: #4d4d4d;
-          margin-bottom: 15px;
-        }
-      }
-    }
-    .list_wrap {
-      width: 100%;
-      padding: 0px;
-      .list {
-        width: 100%;
-        height: 222px;
-        background-color: pink;
-        margin-bottom: 58px;
-        padding: 85px 87px;
-        box-sizing: border-box;
-        display: flex;
-        background: #ffffff;
-        box-shadow: 0px -2px 80px rgba(0, 0, 0, 0.04),
-          0px -0.6px 30px rgba(0, 0, 0, 0.04),
-          0px -0.375647px 17.7806px rgba(0, 0, 0, 0.04),
-          0px -0.1px 6.4309px rgba(0, 0, 0, 0.02);
-        border-radius: 36px;
-        position: relative;
-        margin: 0 auto 58px auto;
-        span {
-          font-weight: 600;
-          font-size: 42px;
-          color: #ff881b;
-          margin-right: 40px;
-        }
-        p {
-          font-weight: 600;
-          font-size: 38px;
-          color: #4d4d4d;
-        }
-        img {
-          position: absolute;
-          top: 33%;
-          right: 140px;
-        }
-        .img_box {
-          position: absolute;
-          top: 14%;
-          right: 30px;
-          display: flex;
-          align-items: center;
-          gap: 30px;
-          img {
-            position: relative;
-            top: 0;
-            right: 0;
-          }
-        }
-      }
-    }
-  }
   @media (min-width: 768px) and (max-width: 1023px) {
-    .item_box_wrap {
-      flex-direction: column;
-      .item_box {
-        width: 100%;
-        .item_img {
-          width: 160px;
-          height: 160px;
-          background-color: tomato;
-          margin: 0 auto 65px auto;
-        }
-        img {
-          margin: 0 auto 65px auto;
-        }
-        p {
-          font-weight: 600;
-          font-size: 32px;
-          color: #4d4d4d;
-          margin-bottom: 15px;
-        }
-      }
-    }
+  }
+  @media (max-width: 767px) {
   }
 `;

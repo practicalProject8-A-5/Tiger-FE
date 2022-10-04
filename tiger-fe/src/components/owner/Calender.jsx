@@ -12,6 +12,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Calender = ({ setIsModalOpen, vId }) => {
+  let first = document.documentElement.clientWidth;
+  console.log(first);
+
+  // if(client)
   const serverApi = process.env.REACT_APP_SERVER;
   const DateList = useSelector((state) => state.getDateListSlice.DateList);
 
@@ -98,6 +102,52 @@ const Calender = ({ setIsModalOpen, vId }) => {
     setReserveDateList([...DateList.reservedDateList]);
     setOpenDateLists([...DateList.openDateList]);
   }, [DateList]);
+
+  if (first < 768) {
+    return (
+      <StCalender>
+        <>
+          <h2>렌트 가능 날짜 선택</h2>
+          <p>오픈날짜를 선택해주세요.</p>
+          <Calendar
+            months={months}
+            weekDays={weekDays}
+            value={openDateLists}
+            format={format}
+            minDate={new Date()}
+            numberOfMonths={1}
+            onChange={(e) => {
+              // console.log(e);
+              const target = e.at(-1);
+              const targetStr = `${target.year}-${target.month.number}-${target.day}`;
+              if (!reserveDateList.includes(targetStr)) {
+                setOpenDateLists(e);
+              } else {
+                e.pop();
+              }
+            }}
+            mapDays={({ date }) => {
+              let color;
+              if (
+                reserveDateList.includes(
+                  `${date.year}-${date.month}-${date.day}`
+                )
+              )
+                color = "red";
+              return { className: "highlight-" + color };
+            }}
+          />
+          <div className="close" onClick={closeModal}>
+            <GrClose />
+          </div>
+          <button className="submit" onClick={submitHandler}>
+            등록
+            <StyledContainer />
+          </button>
+        </>
+      </StCalender>
+    );
+  }
 
   return (
     <StCalender>
@@ -350,6 +400,38 @@ const StCalender = styled.div`
         }
       }
     }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    width: 80%;
+    padding: 40px;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    animation: modal-show 1.5s;
+    background-color: #fff;
+  }
+  @media (max-width: 767px) {
+    width: 30%;
+    h2 {
+      font-weight: 600;
+      font-size: 15px;
+      color: #000;
+      margin-bottom: 9px;
+    }
+    p {
+      font-weight: 600;
+      font-size: 12px;
+      color: #656060;
+      margin-bottom: 52px;
+    }
+    /* .rmdp-wrapper {
+      width: 30%;
+      .rmdp-calendar {
+        width: 30%;
+      }
+    } */
   }
 `;
 
