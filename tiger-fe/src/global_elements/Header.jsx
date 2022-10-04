@@ -433,7 +433,7 @@ const StHeader = styled.div`
     padding: 0;
     margin: auto;
     .wrap {
-      justify-content: space-around;
+      justify-content: flex-start;
       .header__menu {
         width: unset;
         .header__menu__L {
@@ -491,7 +491,7 @@ const StHeader = styled.div`
     padding: 0;
     margin: auto;
     .wrap {
-      justify-content: space-around;
+      justify-content: flex-start;
       .header__menu {
         width: unset;
         .header__menu__L {
