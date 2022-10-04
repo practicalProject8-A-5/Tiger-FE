@@ -119,19 +119,6 @@ const LoginForm = ({ showModal, goRegister, loginToggle }) => {
 };
 
 const StLoginForm = styled.div`
-  .login__header {
-    width: 100%;
-    height: 78px;
-    position: relative;
-    color: #000;
-    border-bottom: 1px solid #f2f2f2;
-    .login__text {
-      font-weight: 600;
-      font-size: 18px;
-      text-align: center;
-      line-height: 78px;
-    }
-  }
   .wrap {
     width: 100%;
     height: 762px;
@@ -298,6 +285,7 @@ const StLoginForm = styled.div`
   @media (max-width: 767px) {
     .wrap {
       padding: 0 20px;
+      justify-content: unset;
       .kakao_logo {
         right: 101px;
       }
@@ -306,32 +294,33 @@ const StLoginForm = styled.div`
   @media (min-width: 768px) and (max-width: 1023px) {
   }
 `;
-const StyledContainer = styled(ToastContainer)`
-  &&&.Toastify__toast-container {
-  }
-  .Toastify__toast {
-    position: relative;
-  }
-  .Toastify__toast-body {
-    height: 100px;
-    .Toastify__toast-icon > svg {
-      fill: #fff;
-    }
-  }
-  .Toastify__progress-bar {
-  }
-  .Toastify__close-button {
-    border-radius: 12px;
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 25px;
-    height: 25px;
-    margin: 0;
-  }
-`;
+
+// const StyledContainer = styled(ToastContainer)`
+//   &&&.Toastify__toast-container {
+//   }
+//   .Toastify__toast {
+//     position: relative;
+//   }
+//   .Toastify__toast-body {
+//     height: 100px;
+//     .Toastify__toast-icon > svg {
+//       fill: #fff;
+//     }
+//   }
+//   .Toastify__progress-bar {
+//   }
+//   .Toastify__close-button {
+//     border-radius: 12px;
+//     position: absolute;
+//     top: 12px;
+//     right: 12px;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     width: 25px;
+//     height: 25px;
+//     margin: 0;
+//   }
+// `;
 
 export default LoginForm;

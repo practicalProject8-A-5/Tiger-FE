@@ -214,12 +214,12 @@ const Header = ({ ownerMode }) => {
                 로그인
               </div>
             )}
-            {isModalOpen && (
-              <LoginBox showModal={showModal} isModalOpen={isModalOpen} />
-            )}
           </div>
         </div>
       </div>
+      {isModalOpen && (
+        <LoginBox showModal={showModal} isModalOpen={isModalOpen} />
+      )}
     </StHeader>
   );
 };
