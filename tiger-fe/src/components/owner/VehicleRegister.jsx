@@ -182,7 +182,7 @@ const VehicleRegister = () => {
         toast.success(`차량이 등록되었습니다.`, {
           theme: "dark",
           autoClose: 1500,
-          position: toast.POSITION.TOP_RIGHT,
+          position: toast.POSITION.TOP_CENTER,
           className: "toatst_success",
           progressClassName: "success_progress",
         });

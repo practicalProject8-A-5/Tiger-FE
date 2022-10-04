@@ -89,7 +89,7 @@ const ModifyImgViewBox = ({
     if (thumFileLists.length > 1) {
       toast.error("썸네일은 한번에 한장만 등록이 가능합니다.", {
         autoClose: 1500,
-        position: toast.POSITION.TOP_RIGHT,
+        position: toast.POSITION.TOP_CENTER,
         theme: "dark",
         className: "toatst_error",
         progressClassName: "error_progress",

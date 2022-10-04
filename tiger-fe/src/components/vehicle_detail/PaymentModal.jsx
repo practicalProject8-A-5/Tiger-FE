@@ -36,7 +36,7 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
       toast.warn("결제방식을 선택해주세요.", {
         theme: "dark",
         autoClose: 1500,
-        position: toast.POSITION.TOP_RIGHT,
+        position: toast.POSITION.TOP_CENTER,
         className: "toatst_warn",
         // bodyClassName: "",
         progressClassName: "warn_progress",
