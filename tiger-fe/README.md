@@ -13,6 +13,9 @@
 권익현  | https://github.com/kwonih1020 | Front-End
 허지연 | yeooon02@gmail.com | UI/UX 
 
+## 아키텍쳐
+![서비스 아키텍처](https://user-images.githubusercontent.com/26310384/193829271-8159e1de-0727-4a9f-805b-5aac52cd7aee.png)
+
 ## 주요기능 🛠
 <div align=center> 
 <img src="https://img.shields.io/badge/React-F7DF1E?style=for-the-badge&logo=react&logoColor=#3776AB"/>
