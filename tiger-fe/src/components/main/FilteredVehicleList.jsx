@@ -12,6 +12,7 @@ import {
 } from "../../redux/modules/vehicleDetailSlice";
 
 const FilteredVehicleList = () => {
+  console.log("filteredvehiclelist");
   const dispatch = useDispatch();
   const location = localStorage.getItem("location");
   const startDate = localStorage.getItem("startDate");

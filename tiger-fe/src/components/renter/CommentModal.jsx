@@ -84,7 +84,11 @@ const CommentModal = ({ showCommentModal, singleVehicle }) => {
       </div>
       <StCommentVehicleInfo>
         <div className="vehicleImage">
-          <img src={singleVehicle.thumbnail} alt="vehicleImage" />
+          <img
+            src={singleVehicle.thumbnail}
+            alt="vehicleImage"
+            loading="lazy"
+          />
         </div>
         <div className="vehicleInfo">
           <div>

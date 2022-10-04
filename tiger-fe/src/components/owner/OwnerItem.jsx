@@ -83,7 +83,12 @@ const OwnerItem = ({ list, category, vid }) => {
       {category === "Registration" ? (
         <StOwnerItem>
           {/* <div className="thumnail" onClick={onClick}></div> */}
-          <img src={list.thumbnail} alt="차량" onClick={onClick} />
+          <img
+            src={list.thumbnail}
+            alt="차량"
+            onClick={onClick}
+            loading="lazy"
+          />
           <div className="carInfo" onClick={onClick}>
             <p>
               {list.vbrand} &nbsp;
@@ -113,7 +118,12 @@ const OwnerItem = ({ list, category, vid }) => {
         </StOwnerItem>
       ) : category === "Reservation" ? (
         <StOwnerItem>
-          <img src={list.thumbnail} alt="차량" onClick={onClick} />
+          <img
+            src={list.thumbnail}
+            alt="차량"
+            onClick={onClick}
+            loading="lazy"
+          />
           <div className="carInfo" onClick={onClick}>
             <p>
               {list.vbrand} &nbsp;
@@ -139,7 +149,12 @@ const OwnerItem = ({ list, category, vid }) => {
         </StOwnerItem>
       ) : category === "progress" ? (
         <StOwnerItem>
-          <img src={list.thumbnail} alt="차량" onClick={onClick} />
+          <img
+            src={list.thumbnail}
+            alt="차량"
+            onClick={onClick}
+            loading="lazy"
+          />
           <div className="carInfo" onClick={onClick}>
             <p>
               {list.vbrand} &nbsp;
@@ -170,8 +185,7 @@ const OwnerItem = ({ list, category, vid }) => {
                 onClick={() => {
                   returnHandler(list.oid);
                   dispatch(__useItemList());
-                }}
-              >
+                }}>
                 반납확인
               </span>
             </div>
@@ -179,7 +193,12 @@ const OwnerItem = ({ list, category, vid }) => {
         </StOwnerItem>
       ) : category === "return" ? (
         <StOwnerItem>
-          <img src={list.thumbnail} alt="차량" onClick={onClick} />
+          <img
+            src={list.thumbnail}
+            alt="차량"
+            onClick={onClick}
+            loading="lazy"
+          />
           <div className="carInfo" onClick={onClick}>
             <p>
               {list.vbrand} &nbsp;
@@ -208,7 +227,12 @@ const OwnerItem = ({ list, category, vid }) => {
         </StOwnerItem>
       ) : category === "Refund" ? (
         <StOwnerItem>
-          <img src={list.thumbnail} alt="차량" onClick={onClick} />
+          <img
+            src={list.thumbnail}
+            alt="차량"
+            onClick={onClick}
+            loading="lazy"
+          />
           <div className="carInfo" onClick={onClick}>
             <p>
               {list.vbrand} &nbsp;

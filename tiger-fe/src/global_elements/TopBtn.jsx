@@ -35,7 +35,7 @@ const TopBtn = () => {
   return (
     showBtn && (
       <StTopBtn onClick={scrollToTop}>
-        <img src={topBtn} alt="top" />
+        <img src={topBtn} alt="top" loading="lazy" />
       </StTopBtn>
     )
   );

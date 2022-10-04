@@ -92,7 +92,7 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
           </div>
           <div className="vehicleWrap">
             <div className="vehicleImage">
-              <img src={vehicleImage} alt="vehicleImage" />
+              <img src={vehicleImage} alt="vehicleImage" loading="lazy" />
             </div>
             <div className="vehicleInfo">
               <div>
@@ -143,8 +143,7 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
               id="payMethod"
               onChange={(e) => {
                 setPayMethod(e.target.value);
-              }}
-            >
+              }}>
               <option value="default" disabled>
                 결제방식
               </option>

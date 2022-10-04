@@ -28,21 +28,21 @@ const banner = () => {
             disableOnInteraction: false,
           }}>
           <SwiperSlide>
-            <img src={Banner} alt="배너2" />
+            <img src={Banner} alt="배너2" loading="lazy" />
             <div className="text_box">
               <p>즉흥적인 여행에 차가 없다면?</p>
               <p>타,이거</p>
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <img src={Banner2} alt="배너3" />
+            <img src={Banner2} alt="배너3" loading="lazy" />
             <div className="text_box">
               <p>드림카를 타고 달려봐</p>
               <p>당신 근처의 모든 차 타,이거</p>
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <img src={Banner3} alt="배너4" />
+            <img src={Banner3} alt="배너4" loading="lazy" />
             <div className="text_box">
               <p>차고에 방치된 차</p>
               <p>쓸모를 찾고 싶다면 타,이거</p>

@@ -15,6 +15,7 @@ import styled from "styled-components";
 import { ImStarFull } from "react-icons/im";
 
 const FliteredVehicle = ({ list }) => {
+  console.log("filterefVehicle");
   const email = localStorage.getItem("email");
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ const FliteredVehicle = ({ list }) => {
     return () => {
       setIsLike(!isLike);
     };
-  }, [list.heart, isLike]);
+  }, [list.heart]);
 
   // console.log(list);
 
@@ -46,7 +47,7 @@ const FliteredVehicle = ({ list }) => {
         loop={true}
         className="mySwiper">
         <SwiperSlide className="img">
-          <img src={list.thumbnail} alt="imageSlide" />
+          <img src={list.thumbnail} alt="imageSlide" loading="lazy" />
         </SwiperSlide>
       </StSwiper>
       {email ? (
