@@ -60,7 +60,7 @@ const LoginForm = ({ showModal, goRegister, loginToggle }) => {
         <AiOutlineClose className="icon" onClick={showModal} />
         <p className="login__text">로그인 또는 회원가입</p>
       </div> */}
-      <div className="wrap">
+      <div className="wraps">
         <AiOutlineClose className="icon" onClick={showModal} />
         <div className="login__logo">
           <img src={logo} alt="logo" />
@@ -119,7 +119,7 @@ const LoginForm = ({ showModal, goRegister, loginToggle }) => {
 };
 
 const StLoginForm = styled.div`
-  .wrap {
+  .wraps {
     width: 100%;
     height: 762px;
     padding: 0 94px;
@@ -283,7 +283,7 @@ const StLoginForm = styled.div`
     }
   }
   @media (max-width: 767px) {
-    .wrap {
+    .wraps {
       padding: 0 20px;
       justify-content: unset;
       .kakao_logo {
@@ -292,6 +292,9 @@ const StLoginForm = styled.div`
     }
   }
   @media (min-width: 768px) and (max-width: 1023px) {
+    .wraps {
+      justify-content: unset;
+    }
   }
 `;
 
