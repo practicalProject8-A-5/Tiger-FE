@@ -48,8 +48,7 @@ const Footer = () => {
           <a
             href="https://github.com/orgs/practicalProject8-A-5/repositories"
             target="_blank"
-            rel="noopener noreferrer"
-          >
+            rel="noopener noreferrer">
             <FaGithub className="git_ico" />
           </a>
         </div>
@@ -58,8 +57,7 @@ const Footer = () => {
           <a
             href="https://www.instagram.com/ta_iger_hh5"
             target="_blank"
-            rel="noopener noreferrer"
-          >
+            rel="noopener noreferrer">
             <FaInstagramSquare className="instagram_ico" />
           </a>
         </div>
@@ -68,8 +66,7 @@ const Footer = () => {
           <a
             href="https://www.facebook.com/profile.php?id=100086498673434"
             target="_blank"
-            rel="noopener noreferrer"
-          >
+            rel="noopener noreferrer">
             <FaFacebook className="facebook_ico" />
           </a>
         </div>
@@ -81,17 +78,24 @@ const Footer = () => {
 export default Footer;
 
 const StFooter = styled.div`
-  width: 100%;
+  /* width: 100%;
   height: 526px;
   padding: 120px 0 0 246px;
   box-sizing: border-box;
   background-color: #000;
+  color: #fff; */
+  width: 100%;
+  height: 526px;
+  padding: 120px 246px 0 246px;
+  box-sizing: border-box;
+  background-color: #000;
   color: #fff;
+  margin: auto;
   .footer_top {
     border-bottom: 1px solid #f2f2f2;
     padding-bottom: 120px;
-    display: flex;
-    gap: 290px;
+    /* display: flex;
+    gap: 290px; */
     .section1 {
       .logo {
         margin-bottom: 40px;
@@ -238,5 +242,11 @@ const StFooter = styled.div`
         }
       }
     }
+  }
+  @media (max-width: 767px) {
+    padding: 120px 6% 0 6%;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    padding: 120px 0 0 0;
   }
 `;
