@@ -57,12 +57,7 @@ const MainItem = ({ list }) => {
               onClick={() => {
                 navigate(`/vehicle/${list.vid}`);
               }}>
-              <img
-                src={image}
-                alt="imageSlide"
-                loading="lazy"
-                decoding="async"
-              />
+              <img src={image} alt="imageSlide" loading="lazy" />
             </SwiperSlide>
           );
         })}
