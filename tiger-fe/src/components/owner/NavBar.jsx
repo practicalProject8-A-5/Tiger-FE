@@ -46,7 +46,8 @@ const NavBar = ({ category, onSelect }) => {
             active={category === c.name}
             onClick={() => {
               onSelect(c.name);
-            }}>
+            }}
+          >
             {c.text}
           </Category>
         ))}
@@ -54,8 +55,6 @@ const NavBar = ({ category, onSelect }) => {
     </StNavBar>
   );
 };
-
-export default NavBar;
 
 const StNavBar = styled.div`
   width: 100%;
@@ -113,17 +112,17 @@ const Category = styled.div`
       &:hover {
         color: #000;
       }
-    `} /* ${(props) =>
-    props.active &&
-    css`
-      font-weight: 600;
-      border-bottom: 2px solid #22b8cf;
-      color: #22b8cf;
-      $:hover {
-        color: #3bc9db;
-      }
-    `} */
-    & + & {
+    `}
+  & + & {
     margin-left: 70px;
   }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    background-color: pink;
+    display: flex;
+    margin & + & {
+      margin-left: 0px;
+    }
+  }
 `;
+
+export default NavBar;
