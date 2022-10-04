@@ -113,6 +113,12 @@ const StNavBar = styled.div`
       }
     } */
   }
+  @media (max-width: 767px) {
+    padding: 0 50px;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    padding: 0 164px;
+  }
 `;
 
 const Category = styled.div`
@@ -148,6 +154,52 @@ const Category = styled.div`
     `} */
     & + & {
     margin-left: 70px;
+  }
+  @media (max-width: 767px) {
+    ${(props) =>
+      props.active &&
+      css`
+        border-bottom: 4px solid #000;
+        color: #000;
+        &:hover {
+          color: #000;
+        }
+      `} /* ${(props) =>
+      props.active &&
+      css`
+        font-weight: 600;
+        border-bottom: 2px solid #22b8cf;
+        color: #22b8cf;
+        $:hover {
+          color: #3bc9db;
+        }
+      `} */
+    & + & {
+      margin-left: 8%;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    ${(props) =>
+      props.active &&
+      css`
+        border-bottom: 4px solid #000;
+        color: #000;
+        &:hover {
+          color: #000;
+        }
+      `} /* ${(props) =>
+      props.active &&
+      css`
+        font-weight: 600;
+        border-bottom: 2px solid #22b8cf;
+        color: #22b8cf;
+        $:hover {
+          color: #3bc9db;
+        }
+      `} */
+    & + & {
+      margin-left: 11%;
+    }
   }
 `;
 
