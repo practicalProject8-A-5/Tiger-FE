@@ -48,5 +48,19 @@
 
 ## Trouble Shooting
 
+### 이미지 렌더링 속도 최적화
+#### Intersection Observer
+- Intersection Observer 도입 후, db에 있는 모든 이미지들을 한번에 불러오는게 아니라 서버와 합을 맞춘대로 20장을 먼저 로딩하고, 미리 타겟으로 지정해둔 요소가 화면에 보일때 다음 20장 이미지를 로딩하게끔 설정하였다. 이렇게하면 모든 이미지를 한번에 요청할 필요없이 첫 20장만 먼저 렌더링이 되기 때문에 로딩 시간을 단축하였다. (영상참조)
+<a href="https://youtu.be/qP9jnuBVW4w">Intersection Observer 영상</a>
+
+#### Lazy Loading 
+Lazy Loading 사용하여 화면에 나타나는 이미지 순으로 렌더링이 되게끔 설정하였습니다. 사용자가 스크롤을 내림으로서 보여지기 시작하는 이미지들이 렌더링이 되기 시작함. 밑에 사진과 (영상 참고).
+<a href="https://youtu.be/o-cI2RKYUJ0">Lazy Loading 영상</a>
+![mainPage](https://user-images.githubusercontent.com/26310384/193827274-742ab5e0-32cf-4d0c-a4d0-a6bf2c8e1ba3.png)
+![mainPage_result](https://user-images.githubusercontent.com/26310384/193827300-f6642040-9bb0-41ee-9368-e98ee41dc289.png)
+
+#### Lighthouse 성능결과
+![lighthouse](https://user-images.githubusercontent.com/26310384/193827536-b1ee5061-4999-4e45-a77b-f691c58e7c1e.png)
+
 
 
