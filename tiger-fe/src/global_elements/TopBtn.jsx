@@ -69,4 +69,8 @@ const StTopBtn = styled.div`
       transform: translateX(0px);
     }
   }
+  @media (max-width: 767px) {
+    bottom: 98px;
+    right: 21px;
+  }
 `;
