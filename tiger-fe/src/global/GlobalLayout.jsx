@@ -14,6 +14,7 @@ const GlobalLayoutContainer = styled.div`
   max-width: 74.5%;
   @media (max-width: 767px) {
     max-width: 90%;
+    overflow: hidden;
   }
   @media (min-width: 768px) and (max-width: 1023px) {
     max-width: 90%;
