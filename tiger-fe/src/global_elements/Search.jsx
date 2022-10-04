@@ -322,7 +322,7 @@ const StCalendarContainer = styled.div`
   }
 `;
 const StCalendarWrapper = styled.div`
-  z-index: 98;
+  z-index: 71;
   display: flex;
   justify-content: center;
   align-items: center;
