@@ -141,7 +141,7 @@ const VehicleDetailLeft = () => {
           vehicleDetails.imageList.map((image, i) => {
             return (
               <SwiperSlide className="image" key={i}>
-                <img src={image} alt="imageSlide" />
+                <img src={image} alt="imageSlide" loading="lazy" />
               </SwiperSlide>
             );
           })}
@@ -221,7 +221,11 @@ const VehicleDetailLeft = () => {
           </div>
           <div className="infoWrapper_personal">
             <div className="infoWrapper_personal__picture">
-              <img src={vehicleDetails.profileImage} alt="" />
+              <img
+                src={vehicleDetails.profileImage}
+                alt="profileImage"
+                loading="lazy"
+              />
             </div>
             <div className="infoWrapper_personal__info">
               <p>{vehicleDetails.oname}</p>

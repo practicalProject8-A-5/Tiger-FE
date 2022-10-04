@@ -56,7 +56,7 @@ const RegisterForm = ({
   // console.log("clickCheckEmail:", clickCheckEmail);
 
   const handleChange = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     const checkEmail = e.target.value;
     // console.log("checkEmail:", checkEmail);
     setCheckEmail(checkEmail);

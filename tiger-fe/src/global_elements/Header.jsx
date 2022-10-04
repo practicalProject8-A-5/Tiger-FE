@@ -65,6 +65,7 @@ const Header = ({ ownerMode }) => {
       window.localStorage.clear();
       dispatch(cleanUpRoomList());
       dispatch(loader());
+      navigate("/");
     } else if (confirm === false) {
       return;
     }
@@ -114,7 +115,7 @@ const Header = ({ ownerMode }) => {
                   style={{ textDecoration: "none", color: textColor }}
                   onClick={handleChangeInputColor}
                 >
-                  <div className="header__mypage">마이페이지</div>
+                  <div className="header__mypage">렌터페이지</div>
                 </Link>
                 <Link to="/owner" style={{ textDecoration: "none" }}>
                   <div className="header__ownerpage">오너페이지</div>
@@ -126,7 +127,7 @@ const Header = ({ ownerMode }) => {
                   to="/renter"
                   style={{ textDecoration: "none", display: "none" }}
                 >
-                  <div className="header__mypage">마이페이지</div>
+                  <div className="header__mypage">렌터페이지</div>
                 </Link>
                 <Link
                   to="/owner"
@@ -179,7 +180,11 @@ const Header = ({ ownerMode }) => {
             {userInfo.name ? (
               <>
                 <div className="header__loggedin" onClick={openDropDown}>
-                  <img src={userInfo.profileImage} alt="profileImage" />
+                  <img
+                    src={userInfo.profileImage}
+                    alt="profileImage"
+                    loading="lazy"
+                  />
                   <div className="header__loggedin__text">
                     <span>반갑습니다!</span>
                     <span>{userInfo.name}님</span>
@@ -205,7 +210,7 @@ const Header = ({ ownerMode }) => {
                         style={{ textDecoration: "none", color: "#000" }}
                         to="/renter"
                       >
-                        <li>마이페이지</li>
+                        <li>렌터페이지</li>
                       </Link>
                       <Link
                         style={{ textDecoration: "none", color: "#000" }}
@@ -223,12 +228,12 @@ const Header = ({ ownerMode }) => {
                 로그인
               </div>
             )}
-            {isModalOpen && (
-              <LoginBox showModal={showModal} isModalOpen={isModalOpen} />
-            )}
           </div>
         </div>
       </div>
+      {isModalOpen && (
+        <LoginBox showModal={showModal} isModalOpen={isModalOpen} />
+      )}
     </StHeader>
   );
 };

@@ -35,7 +35,7 @@ const TopBtn = () => {
   return (
     showBtn && (
       <StTopBtn onClick={scrollToTop}>
-        <img src={topBtn} alt="top" />
+        <img src={topBtn} alt="top" loading="lazy" />
       </StTopBtn>
     )
   );
@@ -68,5 +68,9 @@ const StTopBtn = styled.div`
       opacity: 1;
       transform: translateX(0px);
     }
+  }
+  @media (max-width: 767px) {
+    bottom: 98px;
+    right: 21px;
   }
 `;

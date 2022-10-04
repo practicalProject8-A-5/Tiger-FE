@@ -13,7 +13,7 @@ const initialState = {
   status: 0,
 };
 
-// 렌터 마이페이지 navbar 상태 불러오기
+// 렌터페이지 navbar 상태 불러오기
 export const __getRenterItemList = createAsyncThunk(
   "renter/__getRenterItemList",
   async (payload, thunkAPI) => {

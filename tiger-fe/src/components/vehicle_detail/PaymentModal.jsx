@@ -36,13 +36,13 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
       toast.warn("결제방식을 선택해주세요.", {
         theme: "dark",
         autoClose: 1500,
-        position: toast.POSITION.TOP_RIGHT,
+        position: toast.POSITION.TOP_CENTER,
         className: "toatst_warn",
         // bodyClassName: "",
         progressClassName: "warn_progress",
       });
     } else if (confirm === false) {
-      console.log("null");
+      // console.log("null");
       return null;
     } else if (confirm === true && payMethod !== undefined) {
       const vid = vehicleDetails.vid;
@@ -92,7 +92,7 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
           </div>
           <div className="vehicleWrap">
             <div className="vehicleImage">
-              <img src={vehicleImage} alt="vehicleImage" />
+              <img src={vehicleImage} alt="vehicleImage" loading="lazy" />
             </div>
             <div className="vehicleInfo">
               <div>
@@ -143,8 +143,7 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
               id="payMethod"
               onChange={(e) => {
                 setPayMethod(e.target.value);
-              }}
-            >
+              }}>
               <option value="default" disabled>
                 결제방식
               </option>

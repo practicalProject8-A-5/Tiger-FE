@@ -6,6 +6,7 @@ import FilteredVehicleList from "../components/main/FilteredVehicleList";
 import Search from "../global_elements/Search";
 
 const VehicleListPage = () => {
+  // console.log("vehicleListPage");
   return (
     <>
       <Header />

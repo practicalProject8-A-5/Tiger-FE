@@ -63,6 +63,7 @@ const RenterItem = ({ category, list, onSelect }) => {
               <img
                 src={list.thumbnail}
                 alt="차량"
+                loading="lazy"
                 onClick={() => {
                   navigate(`/vehicle/${list.vid}`);
                 }}
@@ -142,7 +143,7 @@ const RenterItem = ({ category, list, onSelect }) => {
                 navigate(`/vehicle/${list.vid}`);
               }}
               key={i}>
-              <img src={list.thumbnail} alt="차량" />
+              <img src={list.thumbnail} alt="차량" loading="lazy" />
               <div className="carInfo">
                 <p>{list.vbrand}</p>
                 <p>{list.vname}</p>
@@ -171,6 +172,7 @@ const RenterItem = ({ category, list, onSelect }) => {
               <img
                 src={list.thumbnail}
                 alt="차량"
+                loading="lazy"
                 onClick={() => {
                   navigate(`/vehicle/${list.vid}`);
                 }}
@@ -236,6 +238,7 @@ const RenterItem = ({ category, list, onSelect }) => {
                 <img
                   src={list.thumbnail}
                   alt="차량"
+                  loading="lazy"
                   onClick={() => {
                     navigate(`/vehicle/${list.vid}`);
                   }}
@@ -286,6 +289,7 @@ const RenterItem = ({ category, list, onSelect }) => {
               <img
                 src={list.thumbnail}
                 alt="차량"
+                loading="lazy"
                 onClick={() => {
                   navigate(`/vehicle/${list.vid}`);
                 }}

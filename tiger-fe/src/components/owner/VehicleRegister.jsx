@@ -279,7 +279,7 @@ const VehicleRegister = () => {
         toast.success(`차량이 등록되었습니다.`, {
           theme: "dark",
           autoClose: 1500,
-          position: toast.POSITION.TOP_RIGHT,
+          position: toast.POSITION.TOP_CENTER,
           className: "toatst_success",
           progressClassName: "success_progress",
         });
@@ -644,8 +644,7 @@ const VehicleRegister = () => {
             id="description"
             placeholder="차량에 대한 설명을 입력해주세요."
             cols="50"
-            rows="10"
-          ></textarea>
+            rows="10"></textarea>
         </div>
 
         {/* 렌터정보 */}
@@ -654,7 +653,7 @@ const VehicleRegister = () => {
             <h1>Owner 정보</h1>
           </div>
           <div className="infoWrapper_personal">
-            <img src={userInfo.profileImage} alt="userimg" />
+            <img src={userInfo.profileImage} alt="userimg" loading="lazy" />
             <div className="infoWrapper_personal__info">
               <p className="name">{userInfo.name}</p>
               <div className="infoWrapper_personal__info__wrapper">

@@ -18,7 +18,11 @@ const OwnerInfo = () => {
       <div className="userProfile">
         <div className="profile__top">
           <div className="userimg">
-            <img src={memberInfo.profileImage} alt="profileImage" />
+            <img
+              src={memberInfo.profileImage}
+              alt="profileImage"
+              loading="lazy"
+            />
           </div>
           <div className="userMiniProfile">
             <div className="userMiniProfile__top">
