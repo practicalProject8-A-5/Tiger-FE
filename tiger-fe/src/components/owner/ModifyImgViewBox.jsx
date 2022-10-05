@@ -195,6 +195,7 @@ const StViewBox = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  justify-content: center;
   .thumnail {
     width: 413px;
     height: 100%;
@@ -313,5 +314,7 @@ const StViewBox = styled.div`
     :hover {
       transform: scale(1.115);
     }
+  }
+  @media (max-width: 767px) {
   }
 `;
