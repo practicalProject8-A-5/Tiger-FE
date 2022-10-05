@@ -34,7 +34,7 @@
 <img src="https://img.shields.io/badge/Kakao.Map-blue?style=for-the-badge&logo=kakao&logoColor=#1572B6"/>
 </div>
 
-## 그 외 라이브러리 🛠
+## 🛠 그 외 라이브러리
 - React-icons
 - Redux logger
 - React Devtools
@@ -52,11 +52,29 @@
 - yarn start
 ```
 
-## 핵심기능
-Owner 와 Renter 간에 실시간 채팅, 알림 기능 💬 <br>
-달력을 이용한 스케줄링 시스템 📅 <br>
-검색을 이용해 주소 반경 20km안에 있는 차량 검색 기능 🔍 <br>
-Owner 차량 월간/일간 수익지표 기능 🧮 <br>
+## ❗ 핵심기능
+Owner 와 Renter 간에 실시간 채팅, 알림 기능 💬 
+
+![image (2)](https://user-images.githubusercontent.com/26310384/194004846-fc563aad-a55f-49d7-8856-5d5eec3fdf9b.png)
+![Screen Shot 2022-10-03 at 2 09 38 PM](https://user-images.githubusercontent.com/26310384/194004884-f2171570-dd8b-4ca0-962c-1aea7715ed43.png)
+<br>
+
+달력을 이용한 스케줄링 시스템 📅 
+
+![Screen Shot 2022-10-03 at 2 05 44 PM](https://user-images.githubusercontent.com/26310384/194004935-60276e6d-e7db-42f7-a933-2d6d18fb4fae.png)
+<br>
+
+검색을 이용해 주소 반경 20km안에 있는 차량 검색 기능 🔍 
+
+![Screen Shot 2022-10-03 at 2 10 24 PM](https://user-images.githubusercontent.com/26310384/194004986-39565ec6-3336-423e-9d6f-18b40a7af5a4.png)
+<br>
+
+Owner 차량 월간/일간 수익지표 기능 🧮 
+
+![Screen Shot 2022-10-03 at 2 11 03 PM](https://user-images.githubusercontent.com/26310384/194005029-7278bcea-5dca-4206-b11b-faf3ca84cd19.png)
+
+## 📹 시연영상
+<a href="https://youtu.be/-FgCdGtO14g">영상보기</a>
 
 ## 🕹️ 기술적 의사결정
 사용기술 | 기술설명 
@@ -68,10 +86,10 @@ React-Multidate-Picker | 오너의 편의성을 위해 등록날짜, 예약날�
 Kakao Map API &  Daum Postcode API | 두 가지 API를 같이 사용한 이유는 우선 kako map api 성능은 google map 다음으로 빠르다. google map은 대한미국에서 사용하기에 적잘하지 않기 때문에 kakao map 을 사용했고, daum postcode api는 카카오 맵과 호환성이 뛰어나고, 우리 서비스상 필요한 상세주소가 다 담겨져 있어서 사용하기 편했다.
 Intersection Observer | scroll-height로 계산하여 무한스크롤 사용이 가능하지만, Intersection Observer 를 사용하면 이미 설정한 element가 노출이 되었는지 판단하고 감지가 되어서 이 점을 활용하여 무한스크롤을 구현했다. 불필요한 요청을 줄이고 필요할때만 요청이 가게끔 했다. 그리고 debounce & throttle 같이 추가적으로 코드를 안써도 되고, offsetTop으로 layout에 정확한 값을 구하기 위해 Reflow를 하는데, Intersection Observer를 사용하면 매번 Reflow를 할 필요없다.
 
-
-## Trouble Shooting
+## 🔎 Trouble Shooting
 
 ### 이미지 렌더링 속도 최적화
+
 #### Intersection Observer
 ##### 목적: 방대한 양에 데이터들을 나눠서 요청하기 위함
 ##### 문제사항: 등록된 차들이 많아지면서 렌더링 되어야하는 데이터들이 많아짐, 하여 페이지 로딩 속도가 저하됨
@@ -84,14 +102,20 @@ Intersection Observer | scroll-height로 계산하여 무한스크롤 사용이 
 <a href="https://youtu.be/qP9jnuBVW4w">Intersection Observer 영상</a>
 
 #### Lazy Loading 
+
 Lazy Loading 사용하여 화면에 나타나는 이미지 순으로 렌더링이 되게끔 설정하였습니다. 사용자가 스크롤을 내림으로서 보여지기 시작하는 이미지들이 렌더링이 되기 시작함. 밑에 사진과 (영상 참고).
+
 <a href="https://youtu.be/o-cI2RKYUJ0">Lazy Loading 영상</a>
+
 ![mainPage](https://user-images.githubusercontent.com/26310384/193827274-742ab5e0-32cf-4d0c-a4d0-a6bf2c8e1ba3.png)
 ![mainPage_result](https://user-images.githubusercontent.com/26310384/193827300-f6642040-9bb0-41ee-9368-e98ee41dc289.png)
 
 ### 이미지 용량 최적화
+
 browser-image-compression 라이브러리를 이용하여 이용자가 사진을 업로드할 때 사진 용량을 압축 시켜서 서버로 보냈다. 기존 사이즈 약 1.3MB, 최적화 후 약 0.3MB : 결과 ⇒약 28%정도 줄였습니다. 완료한 후에 코드 추후 추가하기.결론 20~30%
+
 ![Untitled](https://user-images.githubusercontent.com/26310384/194003279-1a1492a6-00d0-49b7-b7ea-2a4f044bd5da.png)
 
 #### Lighthouse 성능결과
+LightHouse 성능 결과 66점 → 75점
 ![lighthouse](https://user-images.githubusercontent.com/26310384/193827536-b1ee5061-4999-4e45-a77b-f691c58e7c1e.png)
