@@ -92,7 +92,7 @@ export const __vehicleSearchList = createAsyncThunk(
           RefreshToken: refreshToken,
         };
         const response = await axios.post(
-          `${serverApi}/vehicle/search?page=${page}`,
+          `${serverApi}/vehicle/search?page=${page}&size=6`,
           {
             location: location,
             locationX: locationX,

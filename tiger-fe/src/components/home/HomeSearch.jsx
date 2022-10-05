@@ -5,17 +5,20 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
+import { __vehicleSearchList } from "../../redux/modules/vehicleDetailSlice";
+
 import DaumPostcode from "react-daum-postcode";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
-import { __vehicleSearchList } from "../../redux/modules/vehicleDetailSlice";
 import { format } from "date-fns";
+
 import { FaSearch } from "react-icons/fa";
 import pin from "../../assets/pin_trans.png";
 import clock from "../../assets/clock.png";
 import vehicle from "../../assets/vehicle.png";
 import { FaAngleRight } from "react-icons/fa";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -120,9 +123,8 @@ const HomeSearch = () => {
           className: "toatst_info",
           progressClassName: "info_progress",
         });
-        // icon: "🚀",
       } else {
-        e.preventDefault();
+        // e.preventDefault();
         dispatch(
           __vehicleSearchList({
             location,
@@ -161,8 +163,7 @@ const HomeSearch = () => {
               setIsPopupOpen(!isPopupOpen);
             }}
             onChange={onChangeHandler}
-            placeholder="어디서?"
-          ></input>
+            placeholder="어디서?"></input>
           {isPopupOpen ? (
             <div>
               <DaumPostcode style={postCodeStyle} onComplete={handlePostCode} />
@@ -186,12 +187,11 @@ const HomeSearch = () => {
                 locale={ko}
                 dateFormat="yyyy-MM-dd"
                 minDate={new Date(new Date().setDate(new Date().getDate() + 1))}
+                maxDate={endDates}
                 shouldCloseOnSelect={true}
                 placeholderText="언제부터"
-                // customInput={<ExampleCustomInput />}
               />
             </StCalendarWrapper>
-            {/* <div className="dateConnection">~</div> */}
             <FaAngleRight
               style={{ color: "#CCCCCC", fontSize: 18, marginRight: 27 }}
             />
@@ -204,12 +204,14 @@ const HomeSearch = () => {
                 selectsEnd
                 startDate={startDates}
                 endDate={endDates}
-                minDate={startDates}
+                minDate={
+                  startDates ||
+                  new Date(new Date().setDate(new Date().getDate() + 1))
+                }
                 locale={ko}
                 dateFormat="yyyy-MM-dd"
                 shouldCloseOnSelect={true}
                 placeholderText="언제까지"
-                // customInput={<ExampleCustomInput />}
               />
             </StCalendarWrapper>
             <div className="hour">24시간</div>
