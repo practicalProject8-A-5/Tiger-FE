@@ -10,6 +10,7 @@ import Footer from "../global_elements/Footer";
 import topBtn from "../assets/home_image/top_button_icon.png";
 import { current } from "@reduxjs/toolkit";
 import TopBtn from "../global_elements/TopBtn";
+import Search from "../global_elements/Search";
 
 const HomePage = () => {
   const handleScrolling = (e) => {
@@ -22,7 +23,8 @@ const HomePage = () => {
     <StHomePage onScroll={handleScrolling}>
       <Header />
       <Banner />
-      <HomeSearch />
+      {/* <HomeSearch /> */}
+      <Search />
       <Section />
       <TopBtn />
       <Footer />
@@ -34,17 +36,17 @@ export default HomePage;
 
 const StHomePage = styled.div`
   position: relative;
-  width: 80%;
+  width: 100%;
   margin: auto;
-  background-color: pink;
+  /* background-color: skyblue; */
   @media (max-width: 767px) {
-    width: 30%;
+    width: 100%;
     margin: auto;
-    background-color: pink;
+    /* background-color: pink;/ */
   }
   @media (min-width: 768px) and (max-width: 1023px) {
-    width: 50%;
+    width: 100%;
     margin: auto;
-    background-color: pink;
+    /* background-color: pink; */
   }
 `;

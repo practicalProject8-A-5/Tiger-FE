@@ -104,6 +104,10 @@ const HomeSearch = () => {
   };
   // console.log(type);
 
+  const toMain = () => {
+    navigate("/");
+  };
+
   // submit handler
   const onSubmitHandler = async (e) => {
     try {
@@ -233,6 +237,10 @@ const HomeSearch = () => {
         <FaSearch className="search_i" />
         <p>차량 검색</p>
       </div>
+      <div className="none_search" onClick={toMain}>
+        <FaSearch className="search_none" />
+        <p>차량 검색</p>
+      </div>
       <StyledContainer />
     </StSearch>
   );
@@ -241,10 +249,11 @@ const HomeSearch = () => {
 export default HomeSearch;
 
 const StSearch = styled.div`
-  width: 60%;
+  width: 70%;
+  /* box-sizing: border-box; */
   height: 190px;
   background-color: #fff;
-  /* background-color: skyblue; */
+  /* background-color: pink; */
   box-shadow: 0px 46px 96px rgba(0, 0, 0, 0.08),
     0px 15.375px 26.2996px rgba(0, 0, 0, 0.0521271),
     0px 6.38599px 10.2342px rgba(0, 0, 0, 0.04),
@@ -253,11 +262,9 @@ const StSearch = styled.div`
   position: absolute;
   top: 705px;
   left: 96px;
-  /* background-color: pink; */
   z-index: 2;
   .text_box {
     width: 100%;
-    /* background-color: yellowgreen; */
     display: flex;
     justify-content: space-around;
     font-weight: 600;
@@ -275,14 +282,9 @@ const StSearch = styled.div`
     display: flex;
     justify-content: space-between;
     margin-top: 32px;
-    /* background-color: skyblue; */
     gap: 30px;
-    /* padding: 0 30px; */
-    /* box-sizing: border-box; */
     .location {
-      /* background-color: yellow; */
       width: 400px;
-      /* width: 100%; */
       input {
         width: 400px;
         height: 100%;
@@ -295,9 +297,6 @@ const StSearch = styled.div`
         background: #f2f2f2;
         border-radius: 12px;
         padding: 5px;
-        /* border: 1px solid; */
-        /* background-color: pink; */
-        /* margin-right: 5px; */
         box-sizing: border-box;
         background-image: url(${pin});
         background-repeat: no-repeat;
@@ -305,10 +304,6 @@ const StSearch = styled.div`
         background-position: 9px 20px;
         text-indent: 40px;
       }
-      /* .date {
-        width: 540px;
-        background-color: pink;
-      } */
     }
   }
   .searh_btn {
@@ -339,6 +334,90 @@ const StSearch = styled.div`
       font-size: 26px;
     }
   }
+  .none_search {
+    display: none;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    width: 300px;
+    height: 70px;
+    background-color: transparent;
+    position: absolute;
+    top: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+    .text_box {
+      display: none;
+    }
+    .input_box {
+      display: none;
+    }
+    .searh_btn {
+      display: none;
+    }
+    .none_search {
+      width: 100%;
+      height: 100%;
+      background: #ff881b;
+      border-radius: 30px;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      left: 0;
+      cursor: pointer;
+      z-index: 4;
+      .search_none {
+        font-size: 40px;
+        margin-bottom: 0px;
+      }
+      p {
+        font-weight: 700;
+        font-size: 26px;
+      }
+    }
+  }
+  @media (max-width: 767px) {
+    width: 70px;
+    height: 70px;
+    background-color: transparent;
+    position: absolute;
+    top: 11%;
+    left: 3%;
+    /* transform: translateX(-50%); */
+    .text_box {
+      display: none;
+    }
+    .input_box {
+      display: none;
+    }
+    .searh_btn {
+      display: none;
+    }
+    .none_search {
+      width: 100%;
+      height: 100%;
+      background: #ff881b;
+      border-radius: 30px;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      left: 0;
+      cursor: pointer;
+      z-index: 4;
+      .search_none {
+        font-size: 40px;
+        margin-bottom: 0px;
+      }
+      p {
+        display: none;
+      }
+    }
+  }
 `;
 
 const StCalendarContainer = styled.div`
@@ -348,8 +427,6 @@ const StCalendarContainer = styled.div`
   padding: 0 16px;
   box-sizing: border-box;
   border-radius: 12px;
-  /* background-color: pink; */
-  /* margin: 0 100px; */
   .wrapper_box {
     width: 100%;
     display: flex;
@@ -380,7 +457,6 @@ const StCalendarWrapper = styled.div`
   background: #f2f2f2;
   border-radius: 12px;
   padding: 5px;
-  /* box-sizing: border-box; */
   margin: 20px auto;
   img {
     width: 21px;
@@ -405,7 +481,6 @@ const StCalendarWrapper = styled.div`
   }
   .react-datepicker__tab-loop {
     .react-datepicker-popper {
-      /* background-color: pink; */
       position: absolute;
       inset: 0px auto auto 0px;
       transform: translate(641px, 179px);
@@ -414,15 +489,12 @@ const StCalendarWrapper = styled.div`
           width: 100%;
           .react-datepicker__month-container {
             width: 400px;
-            /* width: 100%; */
-            /* background-color: pink; */
             .react-datepicker__header {
               background-color: #fff;
               border: none;
               font-weight: 600;
               font-size: 18px;
               .react-datepicker__current-month {
-                /* margin-top: 20px; */
                 position: absolute;
                 top: 20%;
                 left: 50%;
@@ -486,7 +558,6 @@ const StNewDatePicker = styled(DatePicker)``;
 const StVehicleTypeContainer = styled.div`
   select {
     width: 300px;
-    /* height: 64px; */
     height: 100%;
     padding: 8px;
     cursor: pointer;
@@ -504,7 +575,6 @@ const StVehicleTypeContainer = styled.div`
     font-weight: 700;
     font-size: 18px;
     option {
-      /* background-color: pink; */
       border-radius: 12px;
     }
   }

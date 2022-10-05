@@ -25,7 +25,6 @@ const Section = () => {
     <StSection>
       <div className="desc">
         <div className="logo">
-          {/* <div className="img"></div> */}
           <img src={logo} alt="로고" />
         </div>
         <div className="desc_text">
@@ -129,16 +128,16 @@ export default Section;
 const StSection = styled.div`
   padding-top: 115px;
   width: 100%;
-  height: 300vh;
+  /* height: 300vh; */
   .desc {
     width: 100%;
-    height: 300px;
+    height: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden; */
     .logo {
       display: flex;
       justify-content: center;
@@ -170,8 +169,9 @@ const StSection = styled.div`
     justify-content: space-between;
     padding: 0 130px;
     box-sizing: border-box;
+    background-color: pink;
     .item_box {
-      width: 480px;
+      width: 30%;
       height: 440px;
       background: #ffffff;
       box-shadow: 0px -2px 80px rgba(0, 0, 0, 0.04),
@@ -181,7 +181,7 @@ const StSection = styled.div`
       border-radius: 36px;
       text-align: center;
       position: relative;
-      padding: 50px 65px 80px 65px;
+      /* padding: 50px 65px 80px 65px; */
       margin-top: 60px;
       box-sizing: border-box;
       .item_img {
@@ -192,6 +192,7 @@ const StSection = styled.div`
       }
       img {
         margin: 0 auto 65px auto;
+        /* margin: 0 auto 20px auto; */
       }
       p {
         font-weight: 600;
@@ -216,13 +217,14 @@ const StSection = styled.div`
     padding: 0 130px;
     box-sizing: border-box;
     .list {
-      width: 1600px;
+      width: 80%;
       height: 222px;
       background-color: pink;
       margin-bottom: 58px;
       padding: 85px 87px;
       box-sizing: border-box;
       display: flex;
+      justify-content: space-between;
       background: #ffffff;
       box-shadow: 0px -2px 80px rgba(0, 0, 0, 0.04),
         0px -0.6px 30px rgba(0, 0, 0, 0.04),
@@ -233,31 +235,27 @@ const StSection = styled.div`
       margin: 0 auto 58px auto;
       span {
         font-weight: 600;
-        font-size: 42px;
+        font-size: 30px;
         color: #ff881b;
         margin-right: 40px;
       }
       p {
         font-weight: 600;
-        font-size: 38px;
+        font-size: 25px;
         color: #4d4d4d;
       }
       img {
-        position: absolute;
-        top: 33%;
-        right: 140px;
+        width: 30%;
+        position: relative;
+        right: 0;
       }
       .img_box {
-        position: absolute;
-        top: 14%;
-        right: 30px;
+        width: 56%;
         display: flex;
         align-items: center;
         gap: 30px;
         img {
-          position: relative;
-          top: 0;
-          right: 0;
+          width: 50%;
         }
       }
     }
@@ -276,7 +274,8 @@ const StSection = styled.div`
       transform: scale(1.4);
       margin-top: 160px;
       .qna {
-        overflow: hidden;
+        /* overflow: hidden; */
+        text-align: center;
         position: absolute;
         top: 104px;
         left: 50%;
@@ -286,21 +285,116 @@ const StSection = styled.div`
           font-weight: 600;
           font-size: 42px;
           color: #000;
-          /* animation: showUp 1.5s;
-          @keyframes showUp {
-            from {
-              transform: translateY(60px);
-            }
-            to {
-              transform: translateY(0);
-            }
-          } */
         }
       }
     }
   }
   @media (min-width: 768px) and (max-width: 1023px) {
+    /* background-color: pink; */
+    .desc {
+      h3 {
+        font-size: 32px;
+      }
+      p {
+        font-size: 22px;
+      }
+    }
+    .item_box_wrap {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .item_box {
+        width: 100%;
+        img {
+        }
+        p {
+        }
+      }
+    }
+    .list_wrap {
+      width: 100%;
+      padding: 0;
+      .list {
+        justify-content: flex-start;
+        width: 100%;
+        span {
+        }
+        p {
+          text-align: center;
+        }
+        img {
+          display: none;
+        }
+        .img_box {
+          display: none;
+        }
+      }
+    }
+    .circle_box {
+      .circle {
+        .qna {
+          p {
+            font-size: 30px;
+          }
+        }
+      }
+    }
   }
   @media (max-width: 767px) {
+    .desc {
+      text-align: center;
+      h3 {
+        font-size: 22px;
+      }
+      p {
+        font-size: 12px;
+      }
+    }
+    .item_box_wrap {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      /* width: 80%; */
+
+      .item_box {
+        width: 100%;
+        img {
+        }
+        p {
+          font-size: 20px;
+        }
+      }
+    }
+    .list_wrap {
+      padding: 0;
+      .list {
+        justify-content: flex-start;
+        width: 100%;
+        padding: 30px 35px;
+        align-items: center;
+        span {
+          font-size: 30px;
+        }
+        p {
+          font-size: 20px;
+          text-align: center;
+        }
+        img {
+          display: none;
+        }
+        .img_box {
+          display: none;
+        }
+      }
+    }
+    .circle_box {
+      .circle {
+        .qna {
+          p {
+            font-size: 16px;
+          }
+        }
+      }
+    }
   }
 `;
