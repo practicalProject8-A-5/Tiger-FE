@@ -50,7 +50,7 @@ const ImgViewBox = ({ files }) => {
 
 export default ImgViewBox;
 const StImgViewBox = styled.div`
-  margin-top: 56px;
+  /* margin-top: 56px; */
   img {
     width: 844px;
     height: 429px;
@@ -63,6 +63,15 @@ const StImgViewBox = styled.div`
   }
   &:hover .swiper-button-prev {
     opacity: 1;
+  }
+  @media (max-width: 767px) {
+    img {
+      width: 100%;
+      object-fit: fill;
+      height: auto;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
   }
 `;
 
@@ -131,12 +140,3 @@ const StRegisterSwiper = styled(Swiper)`
     border-radius: 0 0 20px 20px;
   }
 `;
-
-// const StRegisterSwiperOne = styled(Swiper)`
-//   .swiper-button-prev {
-//     display: none;
-//   }
-//   .swiper-button-next {
-//     display: none;
-//   }
-// `;
