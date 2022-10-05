@@ -657,14 +657,14 @@ const VehicleRegister = () => {
             <div className="infoWrapper_personal__info">
               <p className="name">{userInfo.name}</p>
               <div className="infoWrapper_personal__info__wrapper">
-                <div className="infoWrapper_personal__info__wrapper__email"></div>
-                <a href="mailto:kwonih1020@gmail.com">
+                <div className="infoWraps">
+                  <div className="infoWraps__email"></div>
                   <p>{userInfo.email}</p>
-                </a>
-                <div className="infoWrapper_personal__info__wrapper__phone"></div>
-                <a href="010-1234-1234">
+                </div>
+                <div className="infoWraps">
+                  <div className="infoWraps__phone"></div>
                   <p>{userInfo.phone || userInfo.tel}</p>
-                </a>
+                </div>
               </div>
             </div>
           </div>
@@ -712,20 +712,23 @@ const VehicleRegister = () => {
 export default VehicleRegister;
 
 const StVehicleRegister = styled.div`
-  margin-bottom: 80px;
+  width: 800px;
+  margin: auto;
   form {
     margin: 0 auto;
-    width: 845px;
+    width: 100%;
     .onchange__imgbox {
-      width: 844px;
-      height: 429px;
+      width: 100%;
+      height: 430px;
       border-radius: 12px;
-      background: #f2f2f2;
       margin-top: 56px;
       position: relative;
       text-align: center;
+      overflow: hidden;
+      margin: auto;
+      background-color: gainsboro;
       .imgbox_text {
-        width: 567px;
+        width: 100%;
         height: 30px;
         position: absolute;
         top: 50%;
@@ -749,10 +752,14 @@ const StVehicleRegister = styled.div`
     }
     .input__top {
       padding-top: 50px;
-      display: flex;
       margin-bottom: 80px;
       display: flex;
       justify-content: space-between;
+      margin: auto;
+      width: 100%;
+      .input__box {
+        width: 100%;
+      }
       label {
         font-weight: 600;
         font-size: 18px;
@@ -760,7 +767,7 @@ const StVehicleRegister = styled.div`
         display: block;
       }
       input {
-        width: 393px;
+        width: 98%;
         height: 52px;
         outline: none;
         padding: 15px 16px;
@@ -772,7 +779,8 @@ const StVehicleRegister = styled.div`
       }
     }
     .price_box {
-      margin-bottom: 80px;
+      width: 100%;
+      margin: 60px auto;
       label {
         display: block;
         font-weight: 600;
@@ -848,8 +856,10 @@ const StVehicleRegister = styled.div`
         }
       }
     }
+
     .desc {
       width: 100%;
+      margin: 50px auto;
       textarea {
         padding: 28px 26px;
         box-sizing: border-box;
@@ -863,6 +873,7 @@ const StVehicleRegister = styled.div`
     }
     .location {
       position: relative;
+      width: 100%;
       h2 {
         font-weight: 600;
         font-size: 20px;
@@ -911,11 +922,125 @@ const StVehicleRegister = styled.div`
     font-size: 22px;
     color: #ffffff;
     border: none;
+    margin-bottom: 80px;
+  }
+  @media (max-width: 767px) {
+    width: 100%;
+    margin: auto;
+    form {
+      margin: 0 auto;
+      width: 100%;
+      .onchange__imgbox {
+        width: 100%;
+        height: 430px;
+        border-radius: 12px;
+        margin-top: 56px;
+        position: relative;
+        text-align: center;
+        overflow: hidden;
+        margin: auto;
+        .imgbox_text {
+          width: 100%;
+        }
+      }
+      .imgbox {
+        width: 100%;
+        height: 48px;
+        text-align: center;
+        margin: 0 auto;
+      }
+      .input__top {
+        padding-top: 50px;
+        display: flex;
+        margin-bottom: 80px;
+        display: flex;
+        justify-content: space-between;
+        margin: auto;
+        width: 100%;
+        .input__box {
+          width: 100%;
+        }
+        input {
+          width: 98%;
+        }
+      }
+      .price_box {
+        width: 100%;
+        margin: 60px auto;
+      }
+      table {
+        width: 100%;
+        height: 150px;
+        margin: auto;
+      }
+      .desc {
+        width: 100%;
+        margin: 50px auto;
+      }
+      .location {
+        position: relative;
+        width: 100%;
+        input {
+          width: 100%;
+        }
+      }
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    width: 100%;
+    margin: auto;
+    form {
+      margin: 0 auto;
+      width: 100%;
+      .onchange__imgbox {
+        width: 100%;
+        .imgbox_text {
+          width: 100%;
+        }
+      }
+      .imgbox {
+        width: 100%;
+        height: 48px;
+        text-align: center;
+        margin: 0 auto;
+      }
+      .input__top {
+        margin-bottom: 80px;
+        justify-content: space-between;
+        margin: auto;
+        width: 100%;
+        .input__box {
+          width: 100%;
+        }
+        input {
+          width: 98%;
+        }
+      }
+      .price_box {
+        width: 100%;
+        margin: 60px auto;
+      }
+      table {
+        width: 100%;
+        height: 150px;
+        margin: auto;
+      }
+      .desc {
+        width: 100%;
+      }
+      .location {
+        width: 100%;
+        input {
+          width: 100%;
+        }
+      }
+    }
   }
 `;
+
 const StRenterInfoWrapper = styled.div`
   width: 100%;
-  margin: 80px 0;
+  margin: 80px auto;
   .infoWrapper_nickname {
     font-weight: 600;
     font-size: 20px;
@@ -942,28 +1067,26 @@ const StRenterInfoWrapper = styled.div`
       }
       &__wrapper {
         display: flex;
-        a {
-          text-decoration: underline;
-          color: black;
-        }
-        &__email {
-          background-image: url(${email});
-          background-size: contain;
-          background-repeat: no-repeat;
-          width: 18px;
-          height: 18px;
-          margin-right: 10px;
-          background-position: bottom;
-        }
-        &__phone {
-          background-image: url(${phone});
-          background-size: contain;
-          background-repeat: no-repeat;
-          width: 18px;
-          height: 18px;
-          margin-right: 10px;
-          margin-left: 10px;
-          background-position: bottom;
+        .infoWraps {
+          &__email {
+            background-image: url(${email});
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
+            background-position: bottom;
+          }
+          &__phone {
+            background-image: url(${phone});
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
+            margin-left: 10px;
+            background-position: bottom;
+          }
         }
       }
     }
@@ -971,6 +1094,44 @@ const StRenterInfoWrapper = styled.div`
       font-weight: 500;
       font-size: 18px;
       line-height: 25px;
+    }
+  }
+  @media (max-width: 767px) {
+    .infoWrapper_personal {
+      justify-content: center;
+      &__info {
+        &__wrapper {
+          display: flex;
+          flex-direction: column;
+          .infoWraps {
+            display: flex;
+            &__email {
+              background-image: url(${email});
+              background-size: contain;
+              background-repeat: no-repeat;
+              width: 18px;
+              height: 18px;
+              margin-right: 10px;
+              background-position: bottom;
+            }
+            &__phone {
+              background-image: url(${phone});
+              background-size: contain;
+              background-repeat: no-repeat;
+              width: 18px;
+              height: 18px;
+              margin-right: 10px;
+              margin-left: 0px;
+              background-position: bottom;
+            }
+          }
+        }
+      }
+      p {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 25px;
+      }
     }
   }
 `;
