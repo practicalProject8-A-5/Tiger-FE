@@ -73,7 +73,7 @@ Owner 차량 월간/일간 수익지표 기능 🧮
 
 ![Screen Shot 2022-10-03 at 2 11 03 PM](https://user-images.githubusercontent.com/26310384/194005029-7278bcea-5dca-4206-b11b-faf3ca84cd19.png)
 
-## 📹 시연영상
+## 📹 발표영상
 <a href="https://youtu.be/-FgCdGtO14g">영상보기</a>
 
 ## 🕹️ 기술적 의사결정
