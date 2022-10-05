@@ -196,10 +196,8 @@ const StOwnerInfo = styled.div`
     }
   }
   @media (max-width: 767px) {
-    position: fixed;
-    /* bottom: 150px; */
-    /* right: 5%; */
-    top: 25%;
+    position: absolute;
+    top: -1%;
     width: 90%;
     height: 60px;
     padding: 0;

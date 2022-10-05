@@ -291,13 +291,6 @@ const Profit = () => {
 export default Profit;
 const StProfit = styled.div`
   position: relative;
-  height: 300vh;
-  /* -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none; */
   h2 {
     font-weight: 500;
     font-size: 32px;
