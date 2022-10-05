@@ -1006,6 +1006,7 @@ const StRenterInfoWrapper = styled.div`
       &__wrapper {
         display: flex;
         .infoWraps {
+          display: flex;
           &__email {
             background-image: url(${email});
             background-size: contain;
