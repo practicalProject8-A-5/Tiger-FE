@@ -163,8 +163,7 @@ const Title = styled.div`
 const LeftWrap = styled.div`
   width: 35%;
   @media screen and (max-width: 768px) {
-    display: none;
-    width: 100%;
+    width: 30%;
   }
 `;
 const ListWrap = styled.div`
@@ -196,9 +195,6 @@ const Header = styled.div`
   border-bottom: 3px solid #eee;
   position: absolute;
   align-items: center;
-  @media screen and (max-width: 768px) {
-    padding: 20px 20px 5px 0;
-  }
   span {
     cursor: pointer;
     position: absolute;
@@ -237,6 +233,12 @@ const Header = styled.div`
       font-weight: 600;
       font-size: 18px;
       line-height: 25px;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    padding: 20px 20px 5px 0;
+    span {
+      right: 35px;
     }
   }
 `;
