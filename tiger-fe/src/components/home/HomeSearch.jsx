@@ -123,9 +123,8 @@ const HomeSearch = () => {
           className: "toatst_info",
           progressClassName: "info_progress",
         });
-        // icon: "🚀",
       } else {
-        e.preventDefault();
+        // e.preventDefault();
         dispatch(
           __vehicleSearchList({
             location,

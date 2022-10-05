@@ -18,6 +18,7 @@ import { format } from "date-fns";
 import { FaAngleRight } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useEffect } from "react";
 
 const Search = () => {
   const mapKey = process.env.REACT_APP_REST_API_KEY;
@@ -135,6 +136,22 @@ const Search = () => {
       return err;
     }
   };
+
+  useEffect(() => {
+    const location = localStorage.getItem("location");
+    const _startDate = startDates;
+    const _endDate = endDates;
+    const type = localStorage.getItem("type");
+    const locationX = localStorage.getItem("locationX");
+    const locationY = localStorage.getItem("locationY");
+
+    setLocation(location);
+    setStartDates(_startDate);
+    setEndDates(_endDate);
+    setType(type);
+    setLocationObj({ locationX, locationY });
+  }, []);
+
   return (
     <StSearch>
       <div className="wrap">
