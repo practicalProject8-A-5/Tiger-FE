@@ -41,6 +41,8 @@
 - React Hook Form
 - React Swiper
 - React Multidate picker
+- browser-image-compression
+- Intersection Observer
 - Sass
 
 ## 환경설정
@@ -71,7 +73,14 @@ Intersection Observer | scroll-height로 계산하여 무한스크롤 사용이 
 
 ### 이미지 렌더링 속도 최적화
 #### Intersection Observer
-- Intersection Observer 도입 후, db에 있는 모든 이미지들을 한번에 불러오는게 아니라 서버와 합을 맞춘대로 20장을 먼저 로딩하고, 미리 타겟으로 지정해둔 요소가 화면에 보일때 다음 20장 이미지를 로딩하게끔 설정하였다. 이렇게하면 모든 이미지를 한번에 요청할 필요없이 첫 20장만 먼저 렌더링이 되기 때문에 로딩 시간을 단축하였다. (영상참조)
+##### 목적: 방대한 양에 데이터들을 나눠서 요청하기 위함
+##### 문제사항: 등록된 차들이 많아지면서 렌더링 되어야하는 데이터들이 많아짐, 하여 페이지 로딩 속도가 저하됨
+##### 해결방안:
+1) Intersection Observer API으로 무한스크롤 구현
+2) 순수 JS 로 scroll height로 계산하여 무한스크롤 구현
+##### 의견 조율: Intersection Observer 이용하면 호출 수 제한 방법인 debouncem throttle을 사용하지 않아도 되고, reflow를 하지 않아도 됩니다.
+##### 의견 결정: scroll height으로 가능하나 페이지마다 layout height 을 다시 설정해야되고, debounce 나 throttle을 따로 사용해야함, 하여 intersection observer 내의 변화를 비동기적으로 관찰하여 스크롤시 지정된 수 만큼 데이터가 요청되고 렌더링이 됨
+##### 부가설명: Intersection Observer 도입 후, db에 있는 모든 이미지들을 한번에 불러오는게 아니라 서버와 합을 맞춘대로 20장을 먼저 로딩하고, 미리 타겟으로 지정해둔 요소가 화면에 보일때 다음 20장 이미지를 로딩하게끔 설정하였다. 이렇게하면 모든 이미지를 한번에 요청할 필요없이 첫 20장만 먼저 렌더링이 되기 때문에 로딩 시간을 단축하였다. (영상참조)
 <a href="https://youtu.be/qP9jnuBVW4w">Intersection Observer 영상</a>
 
 #### Lazy Loading 
@@ -80,8 +89,9 @@ Lazy Loading 사용하여 화면에 나타나는 이미지 순으로 렌더링�
 ![mainPage](https://user-images.githubusercontent.com/26310384/193827274-742ab5e0-32cf-4d0c-a4d0-a6bf2c8e1ba3.png)
 ![mainPage_result](https://user-images.githubusercontent.com/26310384/193827300-f6642040-9bb0-41ee-9368-e98ee41dc289.png)
 
+### 이미지 용량 최적화
+browser-image-compression 라이브러리를 이용하여 이용자가 사진을 업로드할 때 사진 용량을 압축 시켜서 서버로 보냈다. 기존 사이즈 약 1.3MB, 최적화 후 약 0.3MB : 결과 ⇒약 28%정도 줄였습니다. 완료한 후에 코드 추후 추가하기.결론 20~30%
+![Untitled](https://user-images.githubusercontent.com/26310384/194003279-1a1492a6-00d0-49b7-b7ea-2a4f044bd5da.png)
+
 #### Lighthouse 성능결과
 ![lighthouse](https://user-images.githubusercontent.com/26310384/193827536-b1ee5061-4999-4e45-a77b-f691c58e7c1e.png)
-
-
-
