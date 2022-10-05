@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Calender = ({ setIsModalOpen, vId }) => {
   let first = document.documentElement.clientWidth;
-  console.log(first);
+  // console.log(first);
 
   // if(client)
   const serverApi = process.env.REACT_APP_SERVER;

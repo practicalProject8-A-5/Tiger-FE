@@ -81,7 +81,7 @@ const FilteredVehicleList = () => {
       }
       dispatch(filteredOptions());
     };
-  }, [target, newItemLists.length]);
+  }, [target, newItemLists.length, dispatch]);
 
   const vidData = newItemLists.filter(
     (arr, index, callback) =>

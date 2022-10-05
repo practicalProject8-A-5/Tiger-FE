@@ -245,5 +245,5 @@ export default BarChart;
 const StDayBar = styled.div`
   margin-top: 48px;
   /* width: 50% !important; */
-  height: 705px !important;
+  /* height: 705px !important; */
 `;

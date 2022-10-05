@@ -213,7 +213,7 @@ const RegisterForm = ({
                 style={{ border: "2px solid #EB3434" }}
                 type={passwordShown ? "text" : "password"}
                 id="pw"
-                placeholder="비밀번호 (영문+숫자+특수문자 8자 이상)"
+                placeholder="비밀번호 (영문 대/소문자+숫자 8자 이상)"
                 className="Register__input"
                 {...register("password", {
                   required: "비밀번호를 입력해주세요.",

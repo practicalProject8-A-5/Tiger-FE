@@ -87,6 +87,9 @@ const List = styled.div`
     justify-content: space-between;
     align-items: center;
   }
+  @media screen and (max-width: 768px) {
+    padding: 10px;
+  }
 `;
 const Nickname = styled.div`
   font-style: normal;

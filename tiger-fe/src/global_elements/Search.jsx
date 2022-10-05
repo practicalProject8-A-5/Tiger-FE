@@ -18,6 +18,7 @@ import { format } from "date-fns";
 import { FaAngleRight } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useEffect } from "react";
 
 const Search = () => {
   const mapKey = process.env.REACT_APP_REST_API_KEY;
@@ -135,6 +136,23 @@ const Search = () => {
       return err;
     }
   };
+
+  useEffect(() => {
+    const location = localStorage.getItem("location");
+    const _startDate = startDates;
+    const _endDate = endDates;
+    const type = localStorage.getItem("type");
+    const locationX = localStorage.getItem("locationX");
+    const locationY = localStorage.getItem("locationY");
+    if (location) {
+      setLocation(location);
+      setStartDates(_startDate);
+      setEndDates(_endDate);
+      setType(type);
+      setLocationObj({ locationX, locationY });
+    }
+  }, []);
+
   return (
     <StSearch>
       <div className="wrap">
@@ -168,12 +186,11 @@ const Search = () => {
                 locale={ko}
                 dateFormat="yyyy-MM-dd"
                 minDate={new Date(new Date().setDate(new Date().getDate() + 1))}
+                maxDate={endDates}
                 shouldCloseOnSelect={true}
                 placeholderText="언제부터"
-                // customInput={<ExampleCustomInput />}
               />
             </StCalendarWrapper>
-            {/* <div className="dateConnection"></div> */}
             <FaAngleRight
               style={{ color: "#CCCCCC", fontSize: 18, marginRight: 27 }}
             />
@@ -186,12 +203,14 @@ const Search = () => {
                 selectsEnd
                 startDate={startDates}
                 endDate={endDates}
-                minDate={startDates}
+                minDate={
+                  startDates ||
+                  new Date(new Date().setDate(new Date().getDate() + 1))
+                }
                 locale={ko}
                 dateFormat="yyyy-MM-dd"
                 shouldCloseOnSelect={true}
                 placeholderText="언제까지"
-                // customInput={<ExampleCustomInput />}
               />
             </StCalendarWrapper>
             <div className="hour">1일</div>

@@ -224,6 +224,6 @@ export default MonthBar;
 const StMonthBar = styled.div`
   margin-top: 48px;
   /* width: 50% !important; */
-  height: 705px !important;
+  /* height: 705px !important; */
   /* background-color: skyblue; */
 `;

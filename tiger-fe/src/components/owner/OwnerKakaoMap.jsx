@@ -104,10 +104,8 @@ export default OwnerKakaoMap;
 const StOwnerMap = styled.div`
   width: 100%;
   height: 286px;
-  background-color: #eee;
   #map {
-    width: 100%;
+    /* width: 100%; */
     height: 100%;
-    background-color: pink;
   }
 `;
