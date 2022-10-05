@@ -932,7 +932,7 @@ const StVehicleRegister = styled.div`
       width: 100%;
       .onchange__imgbox {
         width: 100%;
-        height: 430px;
+        height: auto;
         border-radius: 12px;
         margin-top: 56px;
         position: relative;
@@ -1068,6 +1068,7 @@ const StRenterInfoWrapper = styled.div`
       &__wrapper {
         display: flex;
         .infoWraps {
+          display: flex;
           &__email {
             background-image: url(${email});
             background-size: contain;
