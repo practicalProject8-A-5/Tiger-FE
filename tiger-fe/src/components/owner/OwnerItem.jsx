@@ -185,7 +185,8 @@ const OwnerItem = ({ list, category, vid }) => {
                 onClick={() => {
                   returnHandler(list.oid);
                   dispatch(__useItemList());
-                }}>
+                }}
+              >
                 반납확인
               </span>
             </div>
@@ -273,37 +274,29 @@ const StOwnerItem = styled.div`
   margin-bottom: 40px;
   cursor: pointer;
   /* 임시로 */
-  height: 150px;
+  height: 134px;
   img {
-    width: 250px;
-    height: 100%;
+    width: 32%;
+    height: 134px;
     object-fit: cover;
     border-radius: 12px;
     margin-right: 24px;
   }
-  /* 이미지 test */
-  /* .thumnail {
-    width: 250px;
-    height: 150px;
-    background-color: pink;
-    border-radius: 12px;
-    margin-right: 24px;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-  } */
   .carInfo {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    width: 430px;
-    padding: 10px 0 5px 0;
-    box-sizing: border-box;
+    justify-content: center;
+    width: 48%;
+    /* padding: 10px 0 5px 0;
+    box-sizing: border-box; */
     p {
       margin-bottom: 11px;
       font-weight: 500;
       font-size: 18px;
       color: #000;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
     }
 
     span {
@@ -317,13 +310,13 @@ const StOwnerItem = styled.div`
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
-      margin-bottom: 0px;
+      /* margin-bottom: 0px; */
     }
   }
   .dateBtn {
     width: 97px;
     height: 20px;
-    background-color: yellowgreen;
+    /* background-color: yellowgreen; */
     position: absolute;
     top: 0;
     right: 0;
@@ -332,7 +325,8 @@ const StOwnerItem = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    /* align-items: center; */
+    width: 11%;
     .calender {
       width: 40px;
       height: 40px;
@@ -356,7 +350,7 @@ const StOwnerItem = styled.div`
     .btn_box {
       margin-bottom: 11px;
       display: flex;
-      justify-content: space-around;
+      justify-content: end;
       .modify {
         font-weight: 500;
         font-size: 14px;
@@ -372,6 +366,65 @@ const StOwnerItem = styled.div`
         text-decoration: underline;
         cursor: pointer;
       }
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    img {
+      width: 40%;
+      /* height: 100%; */
+      object-fit: cover;
+      border-radius: 12px;
+      margin-right: 24px;
+    }
+    .carInfo {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 62%;
+      /* background-color: pink; */
+      font-size: 12px;
+    }
+  }
+  @media (max-width: 767px) {
+    /* img {
+      width: 25%;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-right: 24px;
+    } */
+    .carInfo {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 44%;
+      p {
+        margin-bottom: 11px;
+        font-weight: 500;
+        font-size: 18px;
+        color: #000;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      span {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        color: #8b8b8b;
+        margin-bottom: 13px;
+      }
+      &__location {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+    }
+    .flex_wrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      /* align-items: center; */
+      width: 19%;
     }
   }
 `;

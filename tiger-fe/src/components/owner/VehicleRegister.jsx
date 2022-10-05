@@ -14,6 +14,9 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import imageCompression from "browser-image-compression";
+import { BiPhotoAlbum } from "react-icons/bi";
+import { useEffect } from "react";
 // import {
 //   priceCheck,
 //   yearsCheck,
@@ -62,20 +65,84 @@ const VehicleRegister = () => {
   //파일 상태관리 및 Array로 만들기 위해
   const [files, setFiles] = useState([]);
   const [fileList, setFileList] = useState();
+  // const [blob, setBlob] = useState([]);
+
+  const [compressedFiles, setCompressedFiles] = useState([]);
+  // console.log("compressedFiles:", compressedFiles);
+
+  const temp = [];
+
   const [isShowImg, setIsShowImg] = useState(true);
 
-  const changeImg = (e) => {
+  const changeImg = async (e) => {
     const files = e.target.files;
     const fileList = Array.from(files);
     const urlList = fileList.map((file) => URL.createObjectURL(file));
     setFileList(files);
     setFiles([...urlList]);
-    // setFiles([]);
 
+    // console.log(files.length);
     if (files.length !== 0) {
       setIsShowImg(false);
     }
+
+    const resizing = async () => {
+      console.log("압축 시작");
+      const files = e.target.files;
+      // let temp = [];
+      for (let i = 0; i < files.length; i++) {
+        const complessedFile = await getImg(files[i]);
+        console.log(files[i]);
+        console.log(complessedFile);
+        const reader = new FileReader();
+        reader.readAsDataURL(complessedFile);
+        reader.onloadend = () => {
+          console.log("변환 완료");
+          const base64data = reader.result;
+          // console.log(base64data);
+
+          temp.push(base64data);
+          setCompressedFiles(...compressedFiles, [...temp]);
+          console.log(temp);
+        };
+      }
+    };
+    resizing(files);
+
+    // const options = {
+    //   maxSizeMB: 1,
+    //   maxWidthOrHeight: 1920,
+    //   useWebWorker: true,
+    // };
+    // try {
+    //   const imageFile = e.target.files;
+    //   // const temp =[]
+    //   for (let i = 0; i < imageFile.length; i++) {
+    //     console.log(imageFile);
+    //     console.log(imageFile[i]);
+    //     console.log(`original size : ${imageFile[i].size}`);
+    //     const compressedFile = await imageCompression(...imageFile, options);
+    //     console.log(compressedFile);
+    //     console.log(`compressedFile size : ${compressedFile.size}`);
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
+  const getImg = (file) => {
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    };
+    const compressedFile = imageCompression(file, options);
+    // console.log("11");
+    return compressedFile;
+  };
+
+  // useEffect(() => {
+  //   setCompressedFiles(compressedFiles, [...temp]);
+  // }, []);
 
   //location
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -118,8 +185,6 @@ const VehicleRegister = () => {
     // console.log(address);
   };
 
-  // console.log(fileList);
-
   const onSubmit = async ({
     vbrand,
     vname,
@@ -127,10 +192,14 @@ const VehicleRegister = () => {
     passengers,
     fuelEfficiency,
     description,
+    // dataURI,
     // address,
     price,
+    // compressedFiles,
     // locationObj,
   }) => {
+    // console.log(price);
+    // actionImgCompress();
     //이미지 업로드
     // const imgFormData = new FormData();
     // console.log("formdata address :", address);
@@ -156,6 +225,34 @@ const VehicleRegister = () => {
         progressClassName: "warn_progress",
       });
     }
+    // 이미지
+    // console.log(compressedFiles);
+
+    //임시 추후 수정
+    for (let i = 0; i < compressedFiles.length; i++) {
+      console.log(compressedFiles[i]);
+      const byteString = atob(compressedFiles[i].split(",")[1]);
+      console.log(byteString);
+      const ab = new ArrayBuffer(byteString.length);
+      console.log(ab);
+      const ia = new Uint8Array(ab);
+      for (let i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+        // console.log(ia);
+      }
+      const blob = new Blob([ia], {
+        type: "image/jpeg",
+      });
+      console.log("fileList:", fileList);
+      console.log(blob);
+      const file = [new File([blob], "image.jpg")];
+      console.log(file);
+      // console.log(ia);
+      // formData.append("imageList", file);
+    }
+
+    // console.log(dataURI);
+    // console.log(byteString);
 
     for (let i = 0; i < fileList.length; i++) {
       formData.append("imageList", fileList[i]);
@@ -186,9 +283,9 @@ const VehicleRegister = () => {
           className: "toatst_success",
           progressClassName: "success_progress",
         });
-        setTimeout(() => {
-          navigate("/owner");
-        }, 1000);
+        // setTimeout(() => {
+        //   navigate("/owner");
+        // }, 1000);
       }
     } catch (err) {
       // console.log(err);

@@ -168,7 +168,7 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
                 })
               : null}
           </form>
-          <StyledContainer />
+          {/* <StyledContainer /> */}
         </div>
       </StPaymentInfo>
     </StPaymentModal>

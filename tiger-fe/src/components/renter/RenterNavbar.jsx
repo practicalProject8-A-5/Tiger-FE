@@ -43,7 +43,8 @@ const RenterNavbar = ({ category, onSelect }) => {
                   onClick={() => {
                     dispatch(__getRenterItemList(c.name));
                     onSelect(c.name);
-                  }}>
+                  }}
+                >
                   {c.text}
                 </Category>
               ))
@@ -57,7 +58,8 @@ const RenterNavbar = ({ category, onSelect }) => {
                   onClick={() => {
                     dispatch(__getRenterItemList(c.name));
                     onSelect(c.name);
-                  }}>
+                  }}
+                >
                   {c.text}
                 </Category>
               ))
@@ -69,7 +71,8 @@ const RenterNavbar = ({ category, onSelect }) => {
                   onClick={() => {
                     dispatch(__getRenterItemList(c.name));
                     onSelect(c.name);
-                  }}>
+                  }}
+                >
                   {c.text}
                 </Category>
               ))
@@ -197,8 +200,8 @@ const Category = styled.div`
           color: #3bc9db;
         }
       `} */
-    & + & {
-      margin-left: 11%;
+      & + & {
+      margin-left: 8%;
     }
   }
 `;

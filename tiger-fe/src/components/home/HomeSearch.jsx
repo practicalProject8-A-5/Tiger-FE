@@ -161,7 +161,8 @@ const HomeSearch = () => {
               setIsPopupOpen(!isPopupOpen);
             }}
             onChange={onChangeHandler}
-            placeholder="어디서?"></input>
+            placeholder="어디서?"
+          ></input>
           {isPopupOpen ? (
             <div>
               <DaumPostcode style={postCodeStyle} onComplete={handlePostCode} />
@@ -240,7 +241,7 @@ const HomeSearch = () => {
 export default HomeSearch;
 
 const StSearch = styled.div`
-  width: 1470px;
+  width: 60%;
   height: 190px;
   background-color: #fff;
   /* background-color: skyblue; */
@@ -506,6 +507,11 @@ const StVehicleTypeContainer = styled.div`
       /* background-color: pink; */
       border-radius: 12px;
     }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    width: 70%;
+  }
+  @media (max-width: 767px) {
   }
 `;
 const StyledContainer = styled(ToastContainer)`
