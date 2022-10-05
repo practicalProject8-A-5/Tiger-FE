@@ -144,12 +144,13 @@ const Search = () => {
     const type = localStorage.getItem("type");
     const locationX = localStorage.getItem("locationX");
     const locationY = localStorage.getItem("locationY");
-
-    setLocation(location);
-    setStartDates(_startDate);
-    setEndDates(_endDate);
-    setType(type);
-    setLocationObj({ locationX, locationY });
+    if (location) {
+      setLocation(location);
+      setStartDates(_startDate);
+      setEndDates(_endDate);
+      setType(type);
+      setLocationObj({ locationX, locationY });
+    }
   }, []);
 
   return (

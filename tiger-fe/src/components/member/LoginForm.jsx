@@ -40,7 +40,7 @@ const LoginForm = ({ showModal, goRegister, loginToggle }) => {
     dispatch(__userLogin(data)).then((result) => {
       // console.log(result);
       if (result.error?.message === "Rejected") {
-        toast.error(`${result.payload.message}`, {
+        toast.error("입력하신 정보를 다시 확인해주세요", {
           theme: "dark",
           autoClose: 1500,
           position: toast.POSITION.TOP_CENTER,
@@ -56,10 +56,6 @@ const LoginForm = ({ showModal, goRegister, loginToggle }) => {
 
   return (
     <StLoginForm>
-      {/* <div className="login__header">
-        <AiOutlineClose className="icon" onClick={showModal} />
-        <p className="login__text">로그인 또는 회원가입</p>
-      </div> */}
       <div className="wraps">
         <AiOutlineClose className="icon" onClick={showModal} />
         <div className="login__logo">
@@ -75,7 +71,6 @@ const LoginForm = ({ showModal, goRegister, loginToggle }) => {
           카카오 로그인
         </div>
         <p>카카오 로그인시 꼭 이메일을 선택해주세요!</p>
-        {/* <div className="google">구글로 간편 로그인</div> */}
         <div className="email" onClick={loginToggle}>
           이메일로 회원가입
         </div>
@@ -108,12 +103,9 @@ const LoginForm = ({ showModal, goRegister, loginToggle }) => {
               {passwordShown ? eye : eyeHover}
             </i>
           </div>
-
-          {/* <div className="find">아이디/비밀번호 찾기</div> */}
           <button type="submit">로그인</button>
         </form>
       </div>
-      {/* <StyledContainer /> */}
     </StLoginForm>
   );
 };

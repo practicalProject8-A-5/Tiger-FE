@@ -95,7 +95,8 @@ export const __userLogin = createAsyncThunk(
       loader();
       return thunkAPI.fulfillWithValue(response.data.output);
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data);
+      // console.log(error);
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
@@ -163,7 +164,7 @@ const memberSlice = createSlice({
       // console.log(payload);
       state.userInfo = payload;
     },
-    [__userLogin.rejected]: (state, { payload }) => {
+    [__userLogin.rejected]: (state, payload) => {
       state.isLoading = false;
       // console.log(payload);
       state.error = payload;
