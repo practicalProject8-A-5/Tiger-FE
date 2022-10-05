@@ -197,9 +197,10 @@ const StOwnerInfo = styled.div`
   }
   @media (max-width: 767px) {
     position: fixed;
-    bottom: 150px;
-    right: 5%;
-    width: auto;
+    /* bottom: 150px; */
+    /* right: 5%; */
+    top: 25%;
+    width: 90%;
     height: 60px;
     padding: 0;
     border: none;
@@ -233,7 +234,7 @@ const StOwnerInfo = styled.div`
         display: none;
       }
       .createBtn {
-        width: 70px;
+        width: 100%;
         height: 60px;
         color: #ff881b;
         font-size: 15px;

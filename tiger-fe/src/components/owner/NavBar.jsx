@@ -4,9 +4,6 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 const NavBar = ({ category, onSelect }) => {
-  // console.log("category:", category);
-  // console.log("onSelect:", onSelect);
-
   const categories = [
     {
       name: "Registration",
@@ -46,8 +43,7 @@ const NavBar = ({ category, onSelect }) => {
             active={category === c.name}
             onClick={() => {
               onSelect(c.name);
-            }}
-          >
+            }}>
             {c.text}
           </Category>
         ))}
@@ -73,9 +69,15 @@ const StNavBar = styled.div`
   }
   @media (min-width: 768px) and (max-width: 1023px) {
     padding: 0 164px;
+    .wrap {
+      justify-content: space-around;
+    }
   }
   @media (max-width: 767px) {
     padding: 0 50px;
+    .wrap {
+      justify-content: space-around;
+    }
   }
 `;
 
@@ -105,7 +107,6 @@ const Category = styled.div`
     margin-left: 70px;
   }
   @media (min-width: 768px) and (max-width: 1023px) {
-    /* background-color: yellow; */
     width: 40px;
     display: flex;
     justify-content: space-between;

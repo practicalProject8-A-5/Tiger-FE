@@ -43,8 +43,7 @@ const RenterNavbar = ({ category, onSelect }) => {
                   onClick={() => {
                     dispatch(__getRenterItemList(c.name));
                     onSelect(c.name);
-                  }}
-                >
+                  }}>
                   {c.text}
                 </Category>
               ))
@@ -58,8 +57,7 @@ const RenterNavbar = ({ category, onSelect }) => {
                   onClick={() => {
                     dispatch(__getRenterItemList(c.name));
                     onSelect(c.name);
-                  }}
-                >
+                  }}>
                   {c.text}
                 </Category>
               ))
@@ -71,8 +69,7 @@ const RenterNavbar = ({ category, onSelect }) => {
                   onClick={() => {
                     dispatch(__getRenterItemList(c.name));
                     onSelect(c.name);
-                  }}
-                >
+                  }}>
                   {c.text}
                 </Category>
               ))
@@ -97,24 +94,6 @@ const StNavBar = styled.div`
     display: flex;
     align-items: center;
     height: 100%;
-    /* background-color: pink; */
-    /* .category {
-      font-weight: 600;
-      font-size: 20px;
-      color: #8b8b8b;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      box-sizing: border-box;
-      cursor: pointer;
-      margin-left: 70px;
-      :nth-child(1) {
-        margin: 0;
-      }
-      :hover {
-        color: #585656;
-      }
-    } */
   }
   @media (max-width: 767px) {
     padding: 0 50px;
@@ -145,17 +124,8 @@ const Category = styled.div`
       &:hover {
         color: #000;
       }
-    `} /* ${(props) =>
-    props.active &&
-    css`
-      font-weight: 600;
-      border-bottom: 2px solid #22b8cf;
-      color: #22b8cf;
-      $:hover {
-        color: #3bc9db;
-      }
-    `} */
-    & + & {
+    `}
+  & + & {
     margin-left: 70px;
   }
   @media (max-width: 767px) {
@@ -167,16 +137,7 @@ const Category = styled.div`
         &:hover {
           color: #000;
         }
-      `} /* ${(props) =>
-      props.active &&
-      css`
-        font-weight: 600;
-        border-bottom: 2px solid #22b8cf;
-        color: #22b8cf;
-        $:hover {
-          color: #3bc9db;
-        }
-      `} */
+      `}
     & + & {
       margin-left: 8%;
     }
@@ -190,17 +151,8 @@ const Category = styled.div`
         &:hover {
           color: #000;
         }
-      `} /* ${(props) =>
-      props.active &&
-      css`
-        font-weight: 600;
-        border-bottom: 2px solid #22b8cf;
-        color: #22b8cf;
-        $:hover {
-          color: #3bc9db;
-        }
-      `} */
-      & + & {
+      `}
+    & + & {
       margin-left: 8%;
     }
   }
