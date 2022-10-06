@@ -109,6 +109,8 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  /* font-size: 62.5%;
+  font-size: 1.6rem; */
 }
 ol,
 ul {

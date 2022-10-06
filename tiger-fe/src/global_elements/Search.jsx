@@ -72,9 +72,10 @@ const Search = () => {
   const locationX = Number(locationObj.locationX);
   const locationY = Number(locationObj.locationY);
   // console.log(locationX, locationY);
+
   const postCodeStyle = {
     display: "block",
-    position: "absolute",
+    position: "fixed",
     top: "190px",
     width: "400px",
     height: "400px",
@@ -164,10 +165,15 @@ const Search = () => {
               setIsPopupOpen(!isPopupOpen);
             }}
             onChange={onChangeHandler}
-            placeholder="어디서?"></input>
+            placeholder="어디서?"
+          ></input>
           {isPopupOpen ? (
-            <div>
-              <DaumPostcode style={postCodeStyle} onComplete={handlePostCode} />
+            <div className="post">
+              <DaumPostcode
+                style={postCodeStyle}
+                onComplete={handlePostCode}
+                className="post"
+              />
             </div>
           ) : (
             !isPopupOpen
@@ -287,6 +293,17 @@ const StSearchLocationContainer = styled.div`
     background-position: 9px 7px;
     text-indent: 30px;
   }
+  /* .post {
+    div {
+      display: block;
+      position: absolute;
+      top: 200px !important;
+      width: 400px;
+      height: 400px;
+      border: 1px solid black;
+      z-index: 999;
+    }
+  } */
   @media (max-width: 767px) {
     width: 100%;
     margin-top: 10px;

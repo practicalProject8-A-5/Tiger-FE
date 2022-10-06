@@ -246,6 +246,7 @@ const StHeader = styled.div`
   padding: 0 246px;
   box-sizing: border-box;
   background-color: #fff;
+  /* background-color: pink; */
   display: flex;
   align-items: center;
   justify-content: center;
