@@ -18,7 +18,9 @@
 ## 팀 노션 페이지
 <a href="https://www.notion.so/ta-iger-c2c-4b3b2ff06b23444d9c6154a6ae8d638c">노션페이지 바로가기</a>
 
-## 아키텍쳐
+## 와이어프레임 & 아키텍쳐 
+![유즈케이스](https://user-images.githubusercontent.com/26310384/194286865-7c4c5d72-e1d4-4eb9-9def-a4f16a6b6ec4.png)
+
 ![서비스 아키텍처 (수정본)](https://user-images.githubusercontent.com/26310384/194273279-5e5fd8c8-db24-43c0-959b-16cf517a4f97.png)
 
 
