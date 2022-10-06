@@ -407,6 +407,7 @@ const StSection = styled.div`
             text-align: left;
             p {
               padding-left: 23px;
+              line-height: 18px;
             }
           }
         }
@@ -448,10 +449,27 @@ const StSection = styled.div`
       }
     }
     .circle_box {
+      margin-top: 0px;
+      overflow: unset;
       .circle {
+        margin-top: 178px;
         .qna {
           p {
+            font-size: 16px;
+          }
+          h3 {
             font-size: 30px;
+          }
+          .question {
+            .qlist {
+              width: 90%;
+            }
+            .answer {
+              width: 90%;
+              p {
+                line-height: 18px;
+              }
+            }
           }
         }
       }
@@ -507,10 +525,27 @@ const StSection = styled.div`
       }
     }
     .circle_box {
+      margin-top: 0px;
+      overflow: unset;
       .circle {
+        margin-top: 178px;
         .qna {
           p {
             font-size: 16px;
+          }
+          h3 {
+            font-size: 30px;
+          }
+          .question {
+            .qlist {
+              width: 100%;
+            }
+            .answer {
+              width: 100%;
+              p {
+                line-height: 18px;
+              }
+            }
           }
         }
       }
