@@ -134,14 +134,26 @@ Lazy Loading 사용하여 화면에 나타나는 이미지 순으로 렌더링�
 
 #### Backend 내부에서 image resize한 후 S3 업로드
 #### imgSclr를 활용한  이미지 리사이즈
+
 #### 원본이미지 정보
+
 ![Screen Shot 2022-10-05 at 6 09 39 PM](https://user-images.githubusercontent.com/26310384/194281703-3b2fced3-a25c-437a-b0d8-820f50f8f8fb.png)
 
 #### 압축&resizeing 후 이미지 정보
+
 ![Screen Shot 2022-10-05 at 6 05 38 PM](https://user-images.githubusercontent.com/26310384/194281751-a48308e0-affe-48e6-96b8-d598cc69de47.png)
 
-#### Lighthouse 성능결과
-LightHouse 성능 결과 69점 → 80점
+#### 성능향상 수치
+
+--- | Size | Dimensions | 렌더링 속도 
+--- | --- | --- | ---
+원본이미지 | 325KB | 1024*683 | 77.8ms
+프론트 압축 | 198KB | 1024*683 | 
+백엔드 Resize | 54.9KB | 800*534 | 30.1ms 
+최종 감소율 | 83.16% 감소 | ---- | 61.3% 감소
+
+#### Lighthouse 성능결과 => LightHouse 성능 결과 69점 → 80점
+
 ![Lighthouse_1](https://user-images.githubusercontent.com/26310384/194272426-f9a998f8-5400-4b61-83d1-93f8c69bc91a.png)
 ![Screen Shot 2022-10-06 at 5 55 28 PM](https://user-images.githubusercontent.com/26310384/194272688-b95c02b8-720b-408d-b286-2d8f0bd57c69.png)
 
