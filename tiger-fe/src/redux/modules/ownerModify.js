@@ -46,7 +46,6 @@ export const __ownerModiRegisterInfo = createAsyncThunk(
       const resp = await axios.get(`${serverApi}/vehicle/management/${vId}`, {
         headers: headers,
       });
-      // console.log(resp.data);
       return thunkAPI.fulfillWithValue(resp.data.output);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -61,11 +60,9 @@ const ownerModiRegisterInfoSlice = createSlice({
   extraReducers: {
     [__ownerModiRegisterInfo.pending]: (state, action) => {
       state.isLoading = true;
-      // console.log("pending");
     },
     [__ownerModiRegisterInfo.fulfilled]: (state, action) => {
       state.isLoading = false;
-      // console.log(action.payload);
       state.ownerModiRegisterInfo = action.payload;
     },
     [__ownerModiRegisterInfo.rejected]: (state, action) => {
@@ -75,5 +72,4 @@ const ownerModiRegisterInfoSlice = createSlice({
   },
 });
 
-// export const {} = ownerModiRegisterInfoSlice .actions;
 export default ownerModiRegisterInfoSlice.reducer;

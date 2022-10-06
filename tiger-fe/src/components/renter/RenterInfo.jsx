@@ -6,7 +6,6 @@ import styled from "styled-components";
 
 const RenterInfo = () => {
   const memberInfo = useSelector((state) => state.memberSlice.userInfo);
-  // console.log(memberInfo);
 
   return (
     <StRenterInfo>
@@ -56,11 +55,9 @@ const StRenterInfo = styled.div`
     0px -0.375647px 17.7806px rgba(0, 0, 0, 0.035),
     0px -0.135864px 6.4309px rgba(0, 0, 0, 0.0243888);
   border-radius: 12px;
-  /* background-color: tomato; */
   .userProfile {
     width: 100%;
     height: 56px;
-    /* background-color: pink; */
     box-sizing: border-box;
     position: relative;
     .profile__top {

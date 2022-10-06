@@ -16,7 +16,6 @@ import CalenderBox from "../owner/CalenderBox";
 const OwnerItem = ({ list, category, vid }) => {
   const serverApi = process.env.REACT_APP_SERVER;
 
-  // console.log(category);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const vId = vid;
@@ -26,7 +25,6 @@ const OwnerItem = ({ list, category, vid }) => {
   const onClickCalender = (e) => {
     e.stopPropagation();
     setIsModalOpen(!isModalOpen);
-    // document.body.style.overflow = "hidden";
   };
 
   const onClick = (e) => {
@@ -55,7 +53,6 @@ const OwnerItem = ({ list, category, vid }) => {
 
   const returnHandler = async (oid) => {
     const orderId = oid;
-    // console.log("orderId", orderId);
     try {
       const userToken = localStorage.getItem("userToken");
       const refreshToken = localStorage.getItem("refreshToken");
@@ -71,9 +68,7 @@ const OwnerItem = ({ list, category, vid }) => {
           headers: headers,
         }
       );
-      // console.log("반납하기 성공", response);
     } catch (error) {
-      // console.log("반납하기 실패", error);
       return error;
     }
   };
@@ -82,7 +77,6 @@ const OwnerItem = ({ list, category, vid }) => {
     <>
       {category === "Registration" ? (
         <StOwnerItem>
-          {/* <div className="thumnail" onClick={onClick}></div> */}
           <img
             src={list.thumbnail}
             alt="차량"
@@ -170,23 +164,19 @@ const OwnerItem = ({ list, category, vid }) => {
             </p>
             <p className="carInfo__location">{list.location}</p>
           </div>
-          {/* <div className="dateBtn">{list.createdAt}</div> */}
           <div className="flex_wrap">
-            {/* <span className="item_date">{list.createdAt}</span> */}
             <span className="item_date">
               {list.startDate}
               <span>~</span>
               {list.endDate}
             </span>
             <div className="btn_box">
-              <span className="modify">{/* 수정 */}</span>
               <span
                 className="delete"
                 onClick={() => {
                   returnHandler(list.oid);
                   dispatch(__useItemList());
-                }}
-              >
+                }}>
                 반납확인
               </span>
             </div>
@@ -239,7 +229,6 @@ const OwnerItem = ({ list, category, vid }) => {
               {list.vbrand} &nbsp;
               {list.vname}
             </p>
-            {/* <span>오너 네임</span> */}
             <p>
               ₩ {list.price}/
               {(new Date(list.endDate).getTime() -
@@ -265,15 +254,12 @@ const OwnerItem = ({ list, category, vid }) => {
   );
 };
 
-export default OwnerItem;
-
 const StOwnerItem = styled.div`
   width: 100%;
   display: flex;
   position: relative;
   margin-bottom: 40px;
   cursor: pointer;
-  /* 임시로 */
   height: 134px;
   img {
     width: 32%;
@@ -287,8 +273,6 @@ const StOwnerItem = styled.div`
     flex-direction: column;
     justify-content: center;
     width: 48%;
-    /* padding: 10px 0 5px 0;
-    box-sizing: border-box; */
     p {
       margin-bottom: 11px;
       font-weight: 500;
@@ -310,13 +294,11 @@ const StOwnerItem = styled.div`
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
-      /* margin-bottom: 0px; */
     }
   }
   .dateBtn {
     width: 97px;
     height: 20px;
-    /* background-color: yellowgreen; */
     position: absolute;
     top: 0;
     right: 0;
@@ -325,7 +307,6 @@ const StOwnerItem = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* align-items: center; */
     width: 11%;
     .calender {
       width: 40px;
@@ -345,7 +326,6 @@ const StOwnerItem = styled.div`
       display: flex;
       flex-direction: column;
       align-items: center;
-      /* background-color: pink; */
     }
     .btn_box {
       margin-bottom: 11px;
@@ -371,7 +351,6 @@ const StOwnerItem = styled.div`
   @media (min-width: 768px) and (max-width: 1023px) {
     img {
       width: 40%;
-      /* height: 100%; */
       object-fit: cover;
       border-radius: 12px;
       margin-right: 24px;
@@ -381,17 +360,10 @@ const StOwnerItem = styled.div`
       flex-direction: column;
       justify-content: center;
       width: 62%;
-      /* background-color: pink; */
       font-size: 12px;
     }
   }
   @media (max-width: 767px) {
-    /* img {
-      width: 25%;
-      object-fit: cover;
-      border-radius: 12px;
-      margin-right: 24px;
-    } */
     .carInfo {
       display: flex;
       flex-direction: column;
@@ -423,8 +395,9 @@ const StOwnerItem = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      /* align-items: center; */
       width: 19%;
     }
   }
 `;
+
+export default OwnerItem;

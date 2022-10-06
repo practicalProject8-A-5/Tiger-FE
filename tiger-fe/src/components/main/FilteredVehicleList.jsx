@@ -12,7 +12,6 @@ import {
 } from "../../redux/modules/vehicleDetailSlice";
 
 const FilteredVehicleList = () => {
-  // console.log("filteredvehiclelist");
   const dispatch = useDispatch();
   const location = localStorage.getItem("location");
   const startDate = localStorage.getItem("startDate");
@@ -55,7 +54,6 @@ const FilteredVehicleList = () => {
     }
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
-        // console.log("____!");
         dispatch(
           __vehicleSearchList({
             location,
@@ -67,12 +65,10 @@ const FilteredVehicleList = () => {
             page,
           })
         );
-        // console.log("____!");
         setPage(page + 1);
       }
     });
     if (target.current !== null) {
-      // console.log(target.current);
       observer.observe(target.current);
     }
     return () => {
@@ -90,7 +86,6 @@ const FilteredVehicleList = () => {
 
   useEffect(() => {
     setNewItemLists([...newItemLists, ...filteredVehicle]);
-    // console.log("setNewItemLists");
   }, [filteredVehicle]);
 
   return (

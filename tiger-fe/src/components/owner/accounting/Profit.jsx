@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+
 import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
@@ -36,9 +38,6 @@ const Profit = () => {
     setMonth(false);
   };
 
-  // const [loading, setLoading] = useState(true);
-  // console.log("loading :", loading);
-
   const [dayLineData, setDayLineData] = useState([]);
   const [monthLineData, setMonthLineData] = useState([]);
   const [dayPieData, setDayPieData] = useState([]);
@@ -47,12 +46,6 @@ const Profit = () => {
   const [monthBarData, setMonthBarData] = useState([]);
 
   const [noRevenue, setNoRevenue] = useState(false);
-  // console.log(dayLineData);
-  // console.log(monthLineData);
-  // console.log(dayPieData);
-  // console.log(monthPieData);
-  // console.log(dayBarData);
-  // console.log(monthBarData);
 
   // 일별 라인차트
   let today = new Date();
@@ -62,10 +55,8 @@ const Profit = () => {
   let dateDate = ("0" + today.getDate()).slice(-2);
 
   let date = `${dateYear}-${dateMonth}-${dateDate}`;
-  // console.log(date);
 
   const getDayLineChart = async () => {
-    // setLoading(true);
     try {
       const userToken = localStorage.getItem("userToken");
       const refreshToken = localStorage.getItem("refreshToken");
@@ -80,9 +71,7 @@ const Profit = () => {
           headers: headers,
         }
       );
-      // console.log(resp.data.output.Line);
       setDayLineData(resp.data.output.Line);
-      // setLoading(false);
     } catch (error) {
       return error;
     }
@@ -90,7 +79,6 @@ const Profit = () => {
 
   // 월별 라인차트
   const getMonthLineChart = async () => {
-    // setLoading(true);
     try {
       const userToken = localStorage.getItem("userToken");
       const refreshToken = localStorage.getItem("refreshToken");
@@ -105,9 +93,7 @@ const Profit = () => {
           headers: headers,
         }
       );
-      // console.log(resp.data.output);
       setMonthLineData(resp.data.output.Line);
-      // setLoading(false);
     } catch (error) {
       return error;
     }
@@ -115,7 +101,6 @@ const Profit = () => {
 
   // 일별 파이차트
   const getDayPieChart = async () => {
-    // setLoading(true);
     try {
       const userToken = localStorage.getItem("userToken");
       const refreshToken = localStorage.getItem("refreshToken");
@@ -130,14 +115,7 @@ const Profit = () => {
           headers: headers,
         }
       );
-      // console.log(resp.data.output.pie);
-      // if (resp.data.output.pie.length === 0) {
-      //   setNoRevenue(true);
-      // } else {
-      // }
       setDayPieData(resp.data.output.pie);
-      // set;
-      // setLoading(false);
     } catch (error) {
       return error;
     }
@@ -145,7 +123,6 @@ const Profit = () => {
 
   // 월별 파이차트
   const getMonthPieChart = async () => {
-    // setLoading(true);
     try {
       const userToken = localStorage.getItem("userToken");
       const refreshToken = localStorage.getItem("refreshToken");
@@ -160,9 +137,7 @@ const Profit = () => {
           headers: headers,
         }
       );
-      // console.log(resp.data.output.pie);
       setMonthPieData(resp.data.output.pie);
-      // setLoading(false);
     } catch (error) {
       return error;
     }
@@ -170,7 +145,6 @@ const Profit = () => {
 
   // 일별 바차트
   const getDayBarChart = async () => {
-    // setLoading(true);
     try {
       const userToken = localStorage.getItem("userToken");
       const refreshToken = localStorage.getItem("refreshToken");
@@ -185,18 +159,14 @@ const Profit = () => {
           headers: headers,
         }
       );
-      // console.log(resp.data);
       setDayBarData(resp.data.output.bar);
-      // setLoading(false);
     } catch (error) {
-      // console.log(error);
       return error;
     }
   };
 
   // 월별 바차트
   const getMonthBarChart = async () => {
-    // setLoading(true);
     try {
       const userToken = localStorage.getItem("userToken");
       const refreshToken = localStorage.getItem("refreshToken");
@@ -211,12 +181,9 @@ const Profit = () => {
           headers: headers,
         }
       );
-      // console.log(resp.data.output.bar);
       setMonthBarData(resp.data.output.bar);
-      // setLoading(false);
     } catch (error) {
       return error;
-      // console.log(error);
     }
   };
 
@@ -234,7 +201,6 @@ const Profit = () => {
       <h2>
         <span>{memberInfo.name}</span>님의 최근 수익 지표
       </h2>
-      {/* {!month ? <span>날짜별</span> : <span>월간</span>} */}
       <p>날짜별 수익 그래프를 확인해보세요.</p>
 
       <div className="dropBox" onClick={clickOpen}>
@@ -246,7 +212,6 @@ const Profit = () => {
             <GoTriangleUp className="up" />
           )}
         </div>
-
         {!openDrop ? null : (
           <div className="underBox">
             <div className="month" onClick={clickMonth}>
@@ -263,32 +228,18 @@ const Profit = () => {
           <DayLine dayLineData={dayLineData} />
           <DayPie dayPieData={dayPieData} />
           <DayBar dayBarData={dayBarData} />
-          {/* <div className="temp">
-            
-          </div> */}
         </>
       ) : (
         <>
           <MonthLine monthLineData={monthLineData} />
           <MonthPie monthPieData={monthPieData} />
           <MonthBar monthBarData={monthBarData} />
-          {/* <div className="temp">
-            
-          </div> */}
         </>
       )}
-
-      {/* <DayLine dayLineData={dayLineData} /> */}
-      {/* <MonthLine monthLineData={monthLineData} /> */}
-      {/* <DayPie dayPieData={dayPieData} /> */}
-      {/* <MonthPie monthPieData={monthPieData} /> */}
-      {/* <DayBar dayBarData={dayBarData} /> */}
-      {/* <MonthBar monthBarData={monthBarData} /> */}
     </StProfit>
   );
 };
 
-export default Profit;
 const StProfit = styled.div`
   position: relative;
   h2 {
@@ -348,7 +299,6 @@ const StProfit = styled.div`
         padding: 4px 12px;
         box-sizing: border-box;
         border-radius: 8px 8px 0px 0px;
-        /* background: #ffd6b0; */
         background: #fff;
         transition: all 0.6s;
         border-bottom: 1px solid #ddd;
@@ -365,7 +315,6 @@ const StProfit = styled.div`
         background: #fff;
         transition: all 0.6s;
         :hover {
-          /* background: #ffb979; */
           background: #ffd6b0;
         }
       }
@@ -377,3 +326,5 @@ const StProfit = styled.div`
     margin-top: 150px;
   }
 `;
+
+export default Profit;

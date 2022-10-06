@@ -1,13 +1,10 @@
+// eslint-disable-next-line
+
 import React from "react";
-import { useEffect } from "react";
 import styled from "styled-components";
 import Calender from "./Calender";
 
 const CalenderBox = ({ setIsModalOpen, vId, dateList }) => {
-  // useEffect(() => {
-  // console.log(dateList);
-  // }, [dateList]);
-  // console.log(dateList);
   return (
     <Stblur>
       <div className="background">
@@ -21,8 +18,6 @@ const CalenderBox = ({ setIsModalOpen, vId, dateList }) => {
   );
 };
 
-export default CalenderBox;
-
 const Stblur = styled.div`
   position: absolute;
   width: 100%;
@@ -35,7 +30,6 @@ const Stblur = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* overflow: hidden; */
   .background {
     position: fixed;
     top: 0%;
@@ -43,7 +37,6 @@ const Stblur = styled.div`
     width: 100vw;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
-    /* backdrop-filter: blur(5px); */
     animation: modal-bg-show 1s;
     @keyframes modal-bg-show {
       from {
@@ -55,3 +48,5 @@ const Stblur = styled.div`
     }
   }
 `;
+
+export default CalenderBox;

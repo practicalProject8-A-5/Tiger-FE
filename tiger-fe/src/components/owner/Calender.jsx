@@ -13,9 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Calender = ({ setIsModalOpen, vId }) => {
   let first = document.documentElement.clientWidth;
-  // console.log(first);
 
-  // if(client)
   const serverApi = process.env.REACT_APP_SERVER;
   const DateList = useSelector((state) => state.getDateListSlice.DateList);
 
@@ -89,7 +87,6 @@ const Calender = ({ setIsModalOpen, vId }) => {
         //모달 오픈 넣으면 알럿이 안떠요
       }
     } catch (error) {
-      // console.log(err);
       return error;
     }
   };
@@ -117,7 +114,6 @@ const Calender = ({ setIsModalOpen, vId }) => {
             minDate={new Date()}
             numberOfMonths={1}
             onChange={(e) => {
-              // console.log(e);
               const target = e.at(-1);
               const targetStr = `${target.year}-${target.month.number}-${target.day}`;
               if (!reserveDateList.includes(targetStr)) {
@@ -162,7 +158,6 @@ const Calender = ({ setIsModalOpen, vId }) => {
           minDate={new Date()}
           numberOfMonths={2}
           onChange={(e) => {
-            // console.log(e);
             const target = e.at(-1);
             const targetStr = `${target.year}-${target.month.number}-${target.day}`;
             if (!reserveDateList.includes(targetStr)) {
@@ -426,12 +421,6 @@ const StCalender = styled.div`
       color: #656060;
       margin-bottom: 52px;
     }
-    /* .rmdp-wrapper {
-      width: 30%;
-      .rmdp-calendar {
-        width: 30%;
-      }
-    } */
   }
 `;
 
@@ -462,4 +451,5 @@ const StyledContainer = styled(ToastContainer)`
     margin: 0;
   }
 `;
+
 export default Calender;

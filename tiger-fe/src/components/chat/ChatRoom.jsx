@@ -22,11 +22,9 @@ import send from "../../assets/send_icon.png";
 const ChatRoom = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const location = useLocation();
 
   const { roomId } = useParams();
-  // console.log(roomId);
   const roomIdNum = parseInt(roomId);
 
   const inputRef = useRef();
@@ -34,10 +32,8 @@ const ChatRoom = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  // const user = useSelector((state) => state.user.user);
-
   const user = useSelector((state) => state.memberSlice.userInfo);
-  // console.log("user", user);
+
   const senderId = parseInt(user.id);
 
   const authorization = localStorage.getItem("userToken");
@@ -45,49 +41,34 @@ const ChatRoom = () => {
 
   const chatApi = process.env.REACT_APP_CHAT;
 
-  const roomList = useSelector((state) => state.chatSlice.roomList);
-  // console.log("roomList :", roomList);
-
   // 웹소켓 연결 요청 & 구독 요청
   const socketConnect = () => {
     const webSocket = new SockJS(`${chatApi}/wss-stomp`);
     stompClient.current = webstomp.over(webSocket);
-    // console.log(webSocket);
-
     // STOMPJS console log 지워주는 부분
     // stompClient.current.debug = null;
-
     stompClient.current.connect(
       {
         Authorization: authorization,
         RefreshToken: refreshToken,
         type: "TALK",
       },
-
       // 연결 성공 시 실행되는 함수
       () => {
         stompClient.current.subscribe(
           `/sub/chat/room/${roomId}`,
           (response) => {
-            // console.log(response);
             const messageFromServer = JSON.parse(response.body);
-            // console.log("messageFromServer,", messageFromServer);
             dispatch(addMessage(messageFromServer));
-            // if(roomList.length === 0) {
-            //   dispatch(getRoomListDB())
-            // }
-            // console.log("___________________");
             dispatch(
               updateRoomMessage({
                 ...messageFromServer,
                 index: location.state.index ?? 0,
               })
             );
-            // console.log("여기까지와요~~~~~~~~~");
           },
           { Authorization: authorization, RefreshToken: refreshToken }
         );
-        // console.log("subscribe");
         setIsLoading(false);
       }
     );
@@ -104,7 +85,6 @@ const ChatRoom = () => {
     event.preventDefault();
 
     const message = event.target.chat.value;
-    // console.log(message);
     if (message === "" || message.trim() === "") return false;
 
     const messageObj = {
@@ -115,8 +95,6 @@ const ChatRoom = () => {
       type: "TALK",
       name: user.name,
     };
-
-    // console.log(messageObj);
 
     stompClient.current.send(`/pub/chat/message`, JSON.stringify(messageObj), {
       Authorization: authorization,
@@ -139,8 +117,6 @@ const ChatRoom = () => {
     return () => {
       // 언마운트 시 연결 해제
       if (stompClient.current) socketDisconnect();
-      // console.log(location);
-      // console.log("locationStateIndex", location.state.index);
       dispatch(readMessage(location.state.index));
     };
   }, [roomId]);

@@ -13,11 +13,9 @@ const ChatFloat = () => {
   const location = useLocation();
   const isChatModalOn = useMatch("/chat/*");
   const notification = useSelector((state) => state.chatSlice.notification);
-  // console.log("notification :", notification);
 
   const user = useSelector((state) => state.memberSlice.userInfo.id);
   const userId = parseInt(user);
-  // console.log("userId :", userId);
 
   const eventSource = useRef();
 
@@ -26,8 +24,6 @@ const ChatFloat = () => {
 
   useEffect(() => {
     if (userId) {
-      // SSE 구독 요청
-      // console.log("sse: ", userId);
       eventSource.current = new EventSource(
         `${process.env.REACT_APP_CHAT}/user/subscribe/${userId}`,
         {
@@ -35,19 +31,16 @@ const ChatFloat = () => {
             "Content-Type": "text/event-stream",
             Connection: "keep-alive",
             "Cache-Control": "no-cache",
-            // Authorization: authorization,
-            // RefreshToken: refreshToken,
           },
         }
       );
 
       eventSource.current.onopen = (event) => {
-        // console.log("connection opened");
+        return event;
       };
 
       // 서버에서 메시지가 전송될 때 실행되는 함수
       eventSource.current.onmessage = (message) => {
-        // console.log("서버에서 메시지가 전송될 때 실행되는 함수 :", message);
         if (!message.data.includes("EventStream Created.")) {
           dispatch(setNotification(true));
         }
@@ -58,7 +51,6 @@ const ChatFloat = () => {
       if (eventSource.current) {
         eventSource.current.close();
         eventSource.current = null;
-        // console.log("closed");
       }
     };
   }, [userId, dispatch, authorization, refreshToken]);

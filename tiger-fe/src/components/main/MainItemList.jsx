@@ -11,14 +11,11 @@ const MainItemList = () => {
   const mainItemLists = useSelector(
     (state) => state.incomeItemListSlice.incomeItemList
   );
-  // console.log(mainItemLists);
 
   const target = useRef(null);
 
   const [newItemLists, setNewItemLists] = useState([]);
   const [page, setPage] = useState(0);
-
-  // console.log(newItemLists);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -51,8 +48,6 @@ const MainItemList = () => {
   );
 };
 
-export default MainItemList;
-
 const StItemList = styled.div`
   width: 100%;
   margin-top: 108px;
@@ -66,3 +61,5 @@ const StItemList = styled.div`
 const StObserveContainer = styled.div`
   height: 1px;
 `;
+
+export default MainItemList;

@@ -52,7 +52,6 @@ const HomeSearch = () => {
     setLocation(fullAddress);
     getCoords(fullAddress);
   };
-  // console.log(location);
 
   const [locationObj, setLocationObj] = useState({});
 
@@ -68,7 +67,6 @@ const HomeSearch = () => {
         }
       )
       .then((res) => {
-        // console.log(res);
         const location = res.data.documents[0];
         setLocationObj({
           locationX: location.address.x,
@@ -79,10 +77,8 @@ const HomeSearch = () => {
 
   const locationX = Number(locationObj.locationX);
   const locationY = Number(locationObj.locationY);
-  // console.log(locationX, locationY);
 
   const postCodeStyle = {
-    // display: "block",
     position: "absolute",
     top: "87%",
     left: "1%",
@@ -97,15 +93,12 @@ const HomeSearch = () => {
   const [endDates, setEndDates] = useState(null);
   const startDate = format(new Date(startDates), "yyyy-MM-dd");
   const endDate = format(new Date(endDates), "yyyy-MM-dd");
-  // console.log(startDate);
-  // console.log(endDate);
 
   //search vehicle type
   const [type, setType] = useState();
   const handleChange = (e) => {
     setType(e.target.value);
   };
-  // console.log(type);
 
   const toMain = () => {
     navigate("/");
@@ -128,7 +121,7 @@ const HomeSearch = () => {
           progressClassName: "info_progress",
         });
       } else {
-        // e.preventDefault();
+        e.preventDefault();
         dispatch(
           __vehicleSearchList({
             location,
@@ -252,10 +245,8 @@ export default HomeSearch;
 
 const StSearch = styled.div`
   width: 70%;
-  /* box-sizing: border-box; */
   height: 190px;
   background-color: #fff;
-  /* background-color: pink; */
   box-shadow: 0px 46px 96px rgba(0, 0, 0, 0.08),
     0px 15.375px 26.2996px rgba(0, 0, 0, 0.0521271),
     0px 6.38599px 10.2342px rgba(0, 0, 0, 0.04),
@@ -387,7 +378,6 @@ const StSearch = styled.div`
     position: absolute;
     top: 11%;
     left: 3%;
-    /* transform: translateX(-50%); */
     .text_box {
       display: none;
     }
@@ -611,6 +601,5 @@ const StyledContainer = styled(ToastContainer)`
     width: 25px;
     height: 25px;
     margin: 0;
-    /* background-color: #fff; */
   }
 `;

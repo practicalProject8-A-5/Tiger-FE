@@ -15,20 +15,11 @@ import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import imageCompression from "browser-image-compression";
-import { BiPhotoAlbum } from "react-icons/bi";
-import { useEffect } from "react";
-// import {
-//   priceCheck,
-//   yearsCheck,
-//   passengersCheck,
-//   fuelEfficiencyCheck,
-// } from "../../shared/Regex";
 
 const VehicleRegister = () => {
   const serverApi = process.env.REACT_APP_SERVER;
-
   const userInfo = useSelector((state) => state.memberSlice.userInfo);
-  // console.log(userInfo);
+
   const navigate = useNavigate();
   //유효성 검사 및 select 최적화
   const {
@@ -36,11 +27,8 @@ const VehicleRegister = () => {
     handleSubmit,
     control,
     watch,
-    // setValue,
     formState: { errors },
   } = useForm();
-
-  // console.log(watch("fuelType"));
 
   //value가 서버에 보내는 값, label view에 보여주는 값
   const cartypeOption = [
@@ -65,10 +53,8 @@ const VehicleRegister = () => {
   //파일 상태관리 및 Array로 만들기 위해
   const [files, setFiles] = useState([]);
   const [fileList, setFileList] = useState();
-  // const [blob, setBlob] = useState([]);
 
   const [compressedFiles, setCompressedFiles] = useState([]);
-  console.log("compressedFiles:", compressedFiles);
 
   const temp = [];
 
@@ -81,34 +67,25 @@ const VehicleRegister = () => {
     setFileList(files);
     setFiles([...urlList]);
 
-    // console.log(files.length);
     if (files.length !== 0) {
       setIsShowImg(false);
     }
 
     const resizing = async () => {
-      console.log("압축 시작");
       const files = e.target.files;
       // let temp = [];
       for (let i = 0; i < files.length; i++) {
         const complessedFile = await getImg(files[i]);
-        console.log(files[i]);
-        console.log(complessedFile);
         const reader = new FileReader();
         reader.readAsDataURL(complessedFile);
         reader.onloadend = () => {
-          console.log("변환 완료");
           const base64data = reader.result;
           temp.push(base64data);
-
           if (Array.isArray(compressedFiles)) {
-            console.log("배열임");
             setCompressedFiles(...compressedFiles, [...temp]);
           } else {
-            console.log("아님");
             setCompressedFiles([]);
           }
-          console.log(temp);
         };
       }
     };
@@ -121,13 +98,8 @@ const VehicleRegister = () => {
       useWebWorker: true,
     };
     const compressedFile = imageCompression(file, options);
-    // console.log("11");
     return compressedFile;
   };
-
-  // useEffect(() => {
-  //   setCompressedFiles(compressedFiles, [...temp]);
-  // }, []);
 
   //location
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -196,8 +168,6 @@ const VehicleRegister = () => {
         progressClassName: "warn_progress",
       });
     }
-    // 이미지
-    // console.log(compressedFiles);
 
     //임시 추후 수정
     const tempArray = [];
@@ -214,22 +184,13 @@ const VehicleRegister = () => {
       const file = new File([blob], `compressedFiles${i}.jpg`, {
         type: "image/jpeg",
       });
-      console.log(tempArray);
       formData.append("imageList", file);
     }
 
-    // console.log(dataURI);
-    // console.log(byteString);
-
-    // for (let i = 0; i < fileList.length; i++) {
-    //   formData.append("imageList", fileList[i]);
-    // }
     const userToken = localStorage.getItem("userToken");
     const refreshToken = localStorage.getItem("refreshToken");
+
     try {
-      for (let value of formData.values()) {
-        console.log(value);
-      }
       const multipartType = { "Content-Type": "multipart/form-data" };
       const resp = await axios.post(
         `${serverApi}/vehicle/management`,
@@ -255,7 +216,6 @@ const VehicleRegister = () => {
         }, 1000);
       }
     } catch (err) {
-      // console.log(err);
       if (address === "") {
         toast.warn("주소등록은 필수에요.", {
           theme: "dark",
@@ -330,7 +290,6 @@ const VehicleRegister = () => {
               <div className="error">{errors.vbrand.message}</div>
             ) : null}
           </div>
-
           <div className="input__box">
             <label htmlFor="vname">모델명</label>
             <input
@@ -365,7 +324,6 @@ const VehicleRegister = () => {
             <div className="error">{errors.price.message}</div>
           ) : null}
         </div>
-
         {/* 차량정보 */}
         <table>
           <caption>차량정보</caption>
@@ -412,7 +370,6 @@ const VehicleRegister = () => {
                   />
                 </td>
               )}
-
               {/* 탑승자 수 */}
               <th>
                 <label htmlFor="passengers">탑승 가능 인원</label>
@@ -454,7 +411,6 @@ const VehicleRegister = () => {
                 </td>
               )}
             </tr>
-
             <tr>
               {/* 연비 */}
               <th>
@@ -496,7 +452,6 @@ const VehicleRegister = () => {
                   />
                 </td>
               )}
-
               {/* 드롭박스 : 연료 */}
               <th>
                 <label htmlFor="fuelType">연료</label>
@@ -540,7 +495,6 @@ const VehicleRegister = () => {
                 </td>
               )}
             </tr>
-
             <tr>
               {/* 드롭박스 : 변속기 */}
               <th>
@@ -560,7 +514,6 @@ const VehicleRegister = () => {
                         placeholder={errors.transmission.message}
                         options={transmissionOption}
                         styles={errorStyle}
-                        // onChange={setSelectTransmission}
                       />
                     )}
                   />
@@ -585,7 +538,6 @@ const VehicleRegister = () => {
                   />
                 </td>
               )}
-
               {/* 드롭박스 : 차 타입 */}
               <th>
                 <label htmlFor="cartype">차 종류</label>
@@ -605,7 +557,6 @@ const VehicleRegister = () => {
                         placeholder={errors.cartype.message}
                         options={cartypeOption}
                         styles={errorStyle}
-                        // onChange={setSelectCarType}
                       />
                     )}
                   />
@@ -624,7 +575,6 @@ const VehicleRegister = () => {
                         placeholder="차 종류 선택"
                         options={cartypeOption}
                         styles={style}
-                        // onChange={setSelectCarType}
                       />
                     )}
                   />
@@ -636,7 +586,6 @@ const VehicleRegister = () => {
 
         <div className="desc">
           <textarea
-            // name="description"
             {...register("description")}
             id="description"
             placeholder="차량에 대한 설명을 입력해주세요."
@@ -667,7 +616,6 @@ const VehicleRegister = () => {
             </div>
           </div>
         </StRenterInfoWrapper>
-
         {/* 위치 */}
         <div className="location">
           <h2>렌터지역</h2>
@@ -693,21 +641,17 @@ const VehicleRegister = () => {
             !isPopupOpen
           )}
         </div>
-
         <OwnerKakaoMap
           address={address}
           locationObj={locationObj}
           setLocationObj={setLocationObj}
         />
-
         <button>등록</button>
         <StyledContainer />
       </form>
     </StVehicleRegister>
   );
 };
-
-export default VehicleRegister;
 
 const StVehicleRegister = styled.div`
   width: 800px;
@@ -1163,3 +1107,5 @@ const StyledContainer = styled(ToastContainer)`
     background-color: transparent;
   }
 `;
+
+export default VehicleRegister;

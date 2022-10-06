@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+
 import React from "react";
 import styled from "styled-components";
 import { Chart as ChartJS } from "chart.js";
@@ -57,12 +59,10 @@ ChartJS.register(
   Title,
   Tooltip,
   SubTitle,
-
   ChartDataLabels
 );
 
 const BarChart = ({ dayBarData }) => {
-  // console.log(dayBarData);
   let today = new Date();
   let dateYear = today.getFullYear();
   let dateMonth = ("0" + (today.getMonth() + 1)).slice(-2);
@@ -75,7 +75,6 @@ const BarChart = ({ dayBarData }) => {
     (arr, index, callback) =>
       index === callback.findIndex((el) => el.vid === arr.vid)
   );
-  // console.log(vidData);
 
   let reformatName = vidData.map((obj) => {
     let robj = {
@@ -85,15 +84,12 @@ const BarChart = ({ dayBarData }) => {
     return robj;
   });
 
-  // console.log(reformatName);
-
   // 임시객체
   let carList = {};
   for (let i = 0; i < reformatName.length; i++) {
     let newArray = new Array(last).fill(0);
     carList[reformatName[i]] = newArray;
   }
-  // console.log(carList);
 
   const bgColor = [
     "rgba(255, 99, 132, 0.9)",
@@ -109,8 +105,6 @@ const BarChart = ({ dayBarData }) => {
     "rgba(255, 159, 64, 1)",
   ];
 
-  // console.log(bgColor);
-
   //datasets 객체 생성
   let objData = [];
   for (let i = 0; i <= vidData.length - 1; i++) {
@@ -123,14 +117,6 @@ const BarChart = ({ dayBarData }) => {
       },
     });
   }
-  // console.log("objData :", objData);
-
-  // console.log(last);
-  // let vidData = dayBarData.filter(
-  //   (arr, index, callback) =>
-  //     index === callback.findIndex((el) => el.vid === arr.id)
-  // );
-  // console.log(vidData);
 
   //큰 라벨(X축 생성)
   let labelData = [];
@@ -141,7 +127,6 @@ const BarChart = ({ dayBarData }) => {
       labelData.push({ date: `${dateYear}-${dateMonth}-${i}`, sum: 0 });
     }
   }
-  // console.log(labelData); // 매월 1일~마지막 일 과 default 가격(0)
 
   let formatData = [];
 
@@ -154,35 +139,24 @@ const BarChart = ({ dayBarData }) => {
     } else {
       formatData.push(0);
     }
-    // console.log("idx :", idx + 1);
-    // console.log("filterData :", filterData);
 
     filterData.map((el) => {
       let carName = `${el.vbrand}${el.vname}`;
       carList[carName][idx] = el.sum;
     });
   });
-  // console.log("carList ==>", carList);
 
   objData.forEach((el) => {
     const tempLabel = el.label;
     el.data = carList[tempLabel];
-    // el.backgroundColor =
   });
-
-  // console.log("newobjData :", objData);
-  // console.log("formatData :", formatData);
 
   // ------------------------------------------------------
   const data = {
     labels: [...labelData.map((el) => (el = el.date))],
-    // labels: ["1월", "2월", "3월", "4월", "5월", "6월"],
-
-    // labels,
     datasets: [...objData],
     tooltips: {},
   };
-  // console.log(data.datasets);
 
   const options = {
     plugins: {
@@ -222,9 +196,6 @@ const BarChart = ({ dayBarData }) => {
       },
       y: {
         stacked: true,
-        // min: 0,
-        // max: 50000,
-        // beginAtZero: true,
       },
     },
   };
@@ -240,10 +211,8 @@ const BarChart = ({ dayBarData }) => {
   );
 };
 
-export default BarChart;
-
 const StDayBar = styled.div`
   margin-top: 48px;
-  /* width: 50% !important; */
-  /* height: 705px !important; */
 `;
+
+export default BarChart;

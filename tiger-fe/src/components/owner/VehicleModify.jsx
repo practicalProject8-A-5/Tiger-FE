@@ -15,12 +15,6 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import {
-  priceCheck,
-  yearsCheck,
-  passengersCheck,
-  fuelEfficiencyCheck,
-} from "../../shared/Regex";
 
 const ModiTest = () => {
   const navigate = useNavigate();
@@ -51,7 +45,6 @@ const ModiTest = () => {
 
       setDefaultValue(resp.data.output);
     } catch (error) {
-      // console.log(error);
       return error;
     }
   };
@@ -63,7 +56,6 @@ const ModiTest = () => {
     watch,
     reset,
     formState: { errors },
-    // setValue,
   } = useForm({
     mode: "onChange",
   });
@@ -86,8 +78,6 @@ const ModiTest = () => {
     { value: "전기", label: "전기" },
     { value: "수소", label: "수소" },
   ];
-
-  // const [selectCarType, setSelectCarType] = useState(defaultValue);
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [address, setAddress] = useState("");
@@ -133,8 +123,6 @@ const ModiTest = () => {
     fuelEfficiency,
     description,
     price,
-    imageList,
-    removeList,
   }) => {
     const formData = new FormData();
     formData.append("vbrand", vbrand);
@@ -159,9 +147,6 @@ const ModiTest = () => {
     const userToken = localStorage.getItem("userToken");
     const refreshToken = localStorage.getItem("refreshToken");
     try {
-      // for (let value of formData.values()) {
-      //   console.log(value);
-      // }
       const multipartType = { "Content-Type": "multipart/form-data" };
       const resp = await axios.put(
         `${serverApi}/vehicle/management/${numVid}`,
@@ -187,7 +172,6 @@ const ModiTest = () => {
         }, 1000);
       }
     } catch (err) {
-      // console.log(err);
       if (address === "") {
         toast.warn("주소등록은 필수에요.", {
           theme: "dark",
@@ -239,10 +223,6 @@ const ModiTest = () => {
       fuelEfficiency: defaultValue.fuelEfficiency,
       description: defaultValue.description,
       location: defaultValue.location,
-
-      // fuelType: defaultValue.fuelType,
-      // transmission: defaultValue.transmission,
-      // cartype: defaultValue.type,
     });
   }, [defaultValue]);
 
@@ -281,7 +261,6 @@ const ModiTest = () => {
                 numVid={numVid}
               />
             </div>
-
             {/* 브랜드명, 차종 */}
             <div className="input__top">
               <div className="input__box">
@@ -299,7 +278,6 @@ const ModiTest = () => {
                   <div className="error">{errors.vbrand.message}</div>
                 ) : null}
               </div>
-
               <div className="input__box">
                 <label htmlFor="vname">모델명</label>
                 <input
@@ -315,7 +293,6 @@ const ModiTest = () => {
                 ) : null}
               </div>
             </div>
-
             {/* 가격 */}
             <div className="price_box">
               <label htmlFor="price">렌트 요금</label>
@@ -334,7 +311,6 @@ const ModiTest = () => {
                 <div className="error">{errors.price.message}</div>
               ) : null}
             </div>
-
             {/* 차량정보 */}
             <table>
               <caption>차량정보</caption>
@@ -370,7 +346,6 @@ const ModiTest = () => {
                       />
                     </td>
                   )}
-
                   {/* 탑승자 수 */}
                   <th>
                     <label htmlFor="passengers">탑승 가능 인원</label>
@@ -402,7 +377,6 @@ const ModiTest = () => {
                     </td>
                   )}
                 </tr>
-
                 <tr>
                   {/* 연비 */}
                   <th>
@@ -432,7 +406,6 @@ const ModiTest = () => {
                       />
                     </td>
                   )}
-
                   {/* 드롭박스 : 연료 */}
                   <th>
                     <label htmlFor="fuelType">연료</label>
@@ -476,7 +449,6 @@ const ModiTest = () => {
                     </td>
                   )}
                 </tr>
-
                 <tr>
                   {/* 드롭박스 : 변속기 */}
                   <th>
@@ -496,7 +468,6 @@ const ModiTest = () => {
                             placeholder={errors.transmission.message}
                             options={transmissionOption}
                             styles={errorStyle}
-                            // onChange={setSelectTransmission}
                           />
                         )}
                       />
@@ -521,7 +492,6 @@ const ModiTest = () => {
                       />
                     </td>
                   )}
-
                   {/* 드롭박스 : 차 타입 */}
                   <th>
                     <label htmlFor="cartype">차 종류</label>
@@ -543,7 +513,6 @@ const ModiTest = () => {
                             placeholder={errors.cartype.message}
                             options={cartypeOption}
                             styles={errorStyle}
-                            // onChange={setSelectCarType}
                           />
                         )}
                       />
@@ -570,18 +539,14 @@ const ModiTest = () => {
                 </tr>
               </tbody>
             </table>
-
             <div className="desc">
               <textarea
-                // name="description"
                 {...register("description")}
                 id="description"
                 placeholder="차량에 대한 설명을 입력해주세요."
                 cols="50"
-                rows="10"
-              ></textarea>
+                rows="10"></textarea>
             </div>
-
             {/* 렌터정보 */}
             <StRenterInfoWrapper>
               <div className="infoWrapper_nickname">
@@ -604,7 +569,6 @@ const ModiTest = () => {
                 </div>
               </div>
             </StRenterInfoWrapper>
-
             {/* 위치 */}
             <div className="location">
               <h2>렌터지역</h2>
@@ -630,15 +594,12 @@ const ModiTest = () => {
                 !isPopupOpen
               )}
             </div>
-
             <OwnerKakaoMap
               address={address}
               locationObj={locationObj}
               setLocationObj={setLocationObj}
             />
-
             <button>수정</button>
-            {/* <StyledContainer /> */}
           </form>
         </>
       )}
@@ -646,8 +607,6 @@ const ModiTest = () => {
     </StVehicleModify>
   );
 };
-
-export default ModiTest;
 
 const StVehicleModify = styled.div`
   width: 800px;
@@ -1103,3 +1062,5 @@ const StyledContainer = styled(ToastContainer)`
     background-color: transparent;
   }
 `;
+
+export default ModiTest;

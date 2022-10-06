@@ -18,11 +18,9 @@ const ChatList = () => {
   const scrollRef = useRef();
   const user = useSelector((state) => state.memberSlice.userInfo);
   let messageList = useSelector((state) => state.chatSlice.messageList);
-  // console.log(messageList);
 
   useEffect(() => {
     dispatch(cleanUpMessage());
-    // console.log("cleanUpMessage");
     dispatch(getMessageListDB(parseInt(roomId)));
   }, [roomId]);
 
@@ -42,7 +40,6 @@ const ChatList = () => {
     let slicedList = [];
     messageList.forEach((message) => {
       slicedList = [...slicedList, message];
-      // console.log("message :", message);
       if (message.type === "STATUS" && message.senderEmail === user.email) {
         slicedList = [];
       }

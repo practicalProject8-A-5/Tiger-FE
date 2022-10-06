@@ -7,7 +7,6 @@ import RegisterForm from "../components/member/RegisterForm";
 
 const LoginModal = ({ showModal }) => {
   const [goRegister, setGoRegister] = useState(false);
-  // console.log(showModal);
 
   const loginToggle = () => {
     setGoRegister(!goRegister);
@@ -35,8 +34,6 @@ const LoginModal = ({ showModal }) => {
   );
 };
 
-export default LoginModal;
-
 const StLoginModal = styled.div`
   position: absolute;
   top: 50%;
@@ -51,8 +48,6 @@ const StLoginModal = styled.div`
   @media (max-width: 767px) {
     width: 100%;
   }
-  @media (min-width: 768px) and (max-width: 1023px) {
-  }
 `;
 
 const StBackground = styled.div`
@@ -60,3 +55,5 @@ const StBackground = styled.div`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
 `;
+
+export default LoginModal;

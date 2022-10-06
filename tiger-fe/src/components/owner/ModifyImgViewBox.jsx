@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -7,8 +9,6 @@ import { toast } from "react-toastify";
 import { FaPlus, FaExchangeAlt } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import axios from "axios";
-import { useCallback } from "react";
-import { set } from "react-hook-form";
 
 const ModifyImgViewBox = ({
   thum,
@@ -25,7 +25,6 @@ const ModifyImgViewBox = ({
   numVid,
 }) => {
   const serverApi = process.env.REACT_APP_SERVER;
-  // console.log(thum);
 
   const onChageHandler = (e) => {
     const files = e.target.files;
@@ -33,8 +32,6 @@ const ModifyImgViewBox = ({
     setFileList(files);
     const fileLists = Array.from(files);
     const urlList = fileLists.map((file) => URL.createObjectURL(file));
-
-    // console.log(fileLists);
 
     if (fileLists.length > 1) {
       toast.error("이미지는 한번에 한장만 등록이 가능합니다.", {
@@ -46,7 +43,6 @@ const ModifyImgViewBox = ({
       });
       setPreView([...preView]);
       setAddImgList([...addImgList]);
-      // setFileList([...fileList]);
     } else if (preView.length === 5) {
       toast.error("등록은 5개까지만 가능합니다.", {
         autoClose: 1500,
@@ -56,11 +52,9 @@ const ModifyImgViewBox = ({
         progressClassName: "error_progress",
       });
       setAddImgList([...addImgList]);
-      // setFileList([...fileList]);
     } else {
       setPreView([...preView, ...urlList]);
       setAddImgList([...addImgList, ...fileLists]);
-      // setFileList([...fileList, fileLists]);
     }
   };
 
@@ -72,14 +66,10 @@ const ModifyImgViewBox = ({
     } else {
       setDeleteList([...deleteList, image]);
     }
-    // console.log(image);
-    // console.log(image.includes(blob));
   };
 
   const [oldThum, setOldThum] = useState([]);
   const [newThum, setNewThum] = useState([]);
-
-  // const [changeThum, setChangeThum] = useState([]);
 
   const changeThumnail = (e) => {
     const files = e.target.files;
@@ -106,9 +96,6 @@ const ModifyImgViewBox = ({
   };
 
   const thumSubmit = async (oldThum, newThum) => {
-    // console.log(oldThum);
-    // console.log(newThum);
-
     const formData = new FormData();
     formData.append("oldThumbnail", oldThum);
 
@@ -119,10 +106,6 @@ const ModifyImgViewBox = ({
     const userToken = localStorage.getItem("userToken");
     const refreshToken = localStorage.getItem("refreshToken");
     try {
-      // for (let value of formData.values()) {
-      //   console.log(value);
-      // }
-
       const multipartType = { "Content-Type": "multipart/form-data" };
       const resp = await axios.put(
         `${serverApi}/vehicle/thumbnail/${numVid}`,
@@ -137,7 +120,7 @@ const ModifyImgViewBox = ({
       );
       setThum(resp.data.output.newThumbnail[0]);
     } catch (err) {
-      // console.log(err);
+      return err;
     }
   };
 
@@ -188,8 +171,6 @@ const ModifyImgViewBox = ({
     </StViewBox>
   );
 };
-
-export default ModifyImgViewBox;
 
 const StViewBox = styled.div`
   width: 100%;
@@ -393,3 +374,5 @@ const StViewBox = styled.div`
     }
   }
 `;
+
+export default ModifyImgViewBox;

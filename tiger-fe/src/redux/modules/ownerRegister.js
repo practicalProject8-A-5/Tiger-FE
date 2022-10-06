@@ -29,9 +29,7 @@ export const __ownerRegisterInfo = createAsyncThunk(
       passengers,
       transmission,
       fuelEfficiency,
-      // formData,
     } = payload;
-    // console.log(payload);
     const userToken = localStorage.getItem("userToken");
     const refreshToken = localStorage.getItem("refreshToken");
     try {
@@ -39,14 +37,9 @@ export const __ownerRegisterInfo = createAsyncThunk(
         Authorization: userToken,
         RefreshToken: refreshToken,
         "Content-Type": "application/json",
-        // "Content-Type": "multipart/form-data",
       };
       const resp = await axios.post(
         `${memberApi}/vehicle/management`,
-        // `/api/vehicle/management`,
-        // `/api/vehicle`
-
-        // formData,
         {
           vbrand,
           vname,
@@ -64,8 +57,6 @@ export const __ownerRegisterInfo = createAsyncThunk(
 
         { headers: headers }
       );
-      // console.log(resp.data);
-      // console.log(vbrand);
       return thunkAPI.fulfillWithValue(resp.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -80,11 +71,9 @@ const ownerRegisterInfoSlice = createSlice({
   extraReducers: {
     [__ownerRegisterInfo.pending]: (state, action) => {
       state.isLoading = true;
-      // console.log("pending");
     },
     [__ownerRegisterInfo.fulfilled]: (state, action) => {
       state.isLoading = false;
-      // console.log(action.payload);
       state.ownerRegisterInfo = action.payload;
     },
     [__ownerRegisterInfo.rejected]: (state, action) => {
@@ -94,5 +83,4 @@ const ownerRegisterInfoSlice = createSlice({
   },
 });
 
-// export const {} = ownerRegisterInfoSlice.actions;
 export default ownerRegisterInfoSlice.reducer;

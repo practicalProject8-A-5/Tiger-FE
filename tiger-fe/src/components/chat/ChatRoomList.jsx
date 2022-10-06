@@ -9,15 +9,7 @@ import moment from "moment";
 // 채팅 > 채팅방 목록
 const ChatRoomList = ({ location, roomId }) => {
   const roomList = useSelector((state) => state.chatSlice.roomList);
-  // console.log("roomList :", roomList);
-
   const userId = useSelector((state) => state.memberSlice.userInfo.id);
-  // console.log("userIdSelctor :", userId);
-
-  const renterItemLists = useSelector(
-    (state) => state.renterItemListSlice.renterItemLists
-  );
-  // console.log(renterItemLists);
 
   return (
     <>
@@ -37,27 +29,6 @@ const ChatRoomList = ({ location, roomId }) => {
               <List selected={+room.roomId === +roomId}>
                 <span>
                   <Nickname>{room?.name}</Nickname>
-                  {/* <RoomOwnerInfo>
-                    {renterItemLists.output &&
-                      renterItemLists.output.map((list, i) => {
-                        return (
-                          <div key={i} className="roomOwnerInfo__vehicle">
-                            {room.memberId === list.ownerId ? (
-                              <>
-                                <span>
-                                  {list.vbrand} {list.vname}
-                                </span>
-                                <span>
-                                  {list.location.length >= 10
-                                    ? list.location.substr(0, 15) + "..."
-                                    : null}
-                                </span>
-                              </>
-                            ) : null}
-                          </div>
-                        );
-                      })}
-                  </RoomOwnerInfo> */}
                   <Date>{!isExit && moment(room.date).format("HH:mm")}</Date>
                 </span>
                 <span>

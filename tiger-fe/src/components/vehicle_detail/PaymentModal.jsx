@@ -12,7 +12,6 @@ import "react-toastify/dist/ReactToastify.css";
 const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
   const navigate = useNavigate();
   const serverApi = process.env.REACT_APP_SERVER;
-  // console.log(vehicleDetails);
   const vehicleImage = vehicleDetails.imageList[0];
 
   const startDate = vehicleDetails.startDate;
@@ -25,9 +24,7 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
   const paidAmount = totalDays * vehicleDetails.price;
 
   const [payMethod, setPayMethod] = useState();
-  // console.log(payMethod);
   const [errorMessage, setErrorMessage] = useState("");
-  // console.log(errorMessage);
 
   const confirmPayment = (e) => {
     const confirm = window.confirm("결제하시겠습니까?");
@@ -38,11 +35,9 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
         autoClose: 1500,
         position: toast.POSITION.TOP_CENTER,
         className: "toatst_warn",
-        // bodyClassName: "",
         progressClassName: "warn_progress",
       });
     } else if (confirm === false) {
-      // console.log("null");
       return null;
     } else if (confirm === true && payMethod !== undefined) {
       const vid = vehicleDetails.vid;
@@ -66,11 +61,9 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
             { headers: headers }
           )
           .then(() => {
-            // console.log(resp);
             navigate("/renter");
           });
       } catch (error) {
-        // console.log(error);
         // setErrorMessage(error.response.data.code);
         navigate(-1);
       }

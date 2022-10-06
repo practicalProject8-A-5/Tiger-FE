@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+
 import React from "react";
 import { Chart as ChartJS } from "chart.js";
 import { Pie } from "react-chartjs-2";
@@ -61,8 +63,6 @@ ChartJS.register(
 );
 
 const MonthPie = ({ monthPieData }) => {
-  // console.log("monthPieData :", monthPieData);
-
   let reformatName = monthPieData.map((obj) => {
     let robj = {
       name: "",
@@ -80,13 +80,9 @@ const MonthPie = ({ monthPieData }) => {
 
   const data = {
     labels: [...reformatName],
-    // labels: ["1", "2"],
     datasets: [
       {
-        // label: "# of Votes",
-        // data: [12, 19, 3, 5, 2, 3],
         data: [...dataSum],
-        // fill: true,
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -104,7 +100,6 @@ const MonthPie = ({ monthPieData }) => {
           "rgba(255, 159, 64, 1)",
         ],
         borderWidth: 1,
-        // pointBorderColor: "#fc7b02",
         color: "#8b8b8b",
         datalabels: {
           color: "#000",
@@ -126,13 +121,9 @@ const MonthPie = ({ monthPieData }) => {
           font: {
             size: 18,
             style: "italic",
-            // family: '"Bungee Spice", cursive',
             family: '"Oswald", sans-serif',
             weight: "800",
           },
-          // padding: {
-          //   left: 30,
-          // },
         },
       },
       title: {
@@ -175,8 +166,6 @@ const MonthPie = ({ monthPieData }) => {
   );
 };
 
-export default MonthPie;
-
 const StMonthPie = styled.div`
   margin-top: 48px;
   width: 50% !important;
@@ -184,11 +173,6 @@ const StMonthPie = styled.div`
   p {
     margin-top: 50px;
   }
-  @media (min-width: 768px) and (max-width: 1023px) {
-  }
-  @media (max-width: 767px) {
-  }
-  /* width: 50% !important;
-  height: 100% !important; */
-  /* background-color: pink; */
 `;
+
+export default MonthPie;
