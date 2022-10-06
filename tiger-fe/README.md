@@ -14,7 +14,8 @@
 허지연 | yeooon02@gmail.com | UI/UX 
 
 ## 아키텍쳐
-![서비스 아키텍처](https://user-images.githubusercontent.com/26310384/193829271-8159e1de-0727-4a9f-805b-5aac52cd7aee.png)
+![서비스 아키텍처 (수정본)](https://user-images.githubusercontent.com/26310384/194273279-5e5fd8c8-db24-43c0-959b-16cf517a4f97.png)
+
 
 ## 주요기능 🛠
 <div align=center> 
@@ -74,7 +75,7 @@ Owner 차량 월간/일간 수익지표 기능 🧮
 ![Screen Shot 2022-10-03 at 2 11 03 PM](https://user-images.githubusercontent.com/26310384/194005029-7278bcea-5dca-4206-b11b-faf3ca84cd19.png)
 
 ## 📹 발표영상
-<a href="https://youtu.be/-FgCdGtO14g">영상보기</a>
+<a href="">영상보기</a>
 
 ## 🕹️ 기술적 의사결정
 사용기술 | 기술설명 
@@ -85,6 +86,7 @@ Chart.js | 사용자에게 수익을 한눈에 볼 수 있게끔 데이터를 �
 React-Multidate-Picker | 오너의 편의성을 위해 등록날짜, 예약날짜를 구분하기 위함과 동시에 오너가 한 눈에 볼 수 있게 달력을 사용.
 Kakao Map API &  Daum Postcode API | 두 가지 API를 같이 사용한 이유는 우선 kako map api 성능은 google map 다음으로 빠르다. google map은 대한미국에서 사용하기에 적잘하지 않기 때문에 kakao map 을 사용했고, daum postcode api는 카카오 맵과 호환성이 뛰어나고, 우리 서비스상 필요한 상세주소가 다 담겨져 있어서 사용하기 편했다.
 Intersection Observer | scroll-height로 계산하여 무한스크롤 사용이 가능하지만, Intersection Observer 를 사용하면 이미 설정한 element가 노출이 되었는지 판단하고 감지가 되어서 이 점을 활용하여 무한스크롤을 구현했다. 불필요한 요청을 줄이고 필요할때만 요청이 가게끔 했다. 그리고 debounce & throttle 같이 추가적으로 코드를 안써도 되고, offsetTop으로 layout에 정확한 값을 구하기 위해 Reflow를 하는데, Intersection Observer를 사용하면 매번 Reflow를 할 필요없다.
+browser-image-compression | 이용자들이 고의적으로 많은 양에 고화질 이미지들을 업로드 했을때 s3 비용과 서비스 렌더링 속도에 악 영향을 미칠수 있기에, 프론트쪽에서 이미지 용량을 압축해서 s3로 보내기 위해서 도입 하였습니다.
 
 ## 🔎 Trouble Shooting
 
