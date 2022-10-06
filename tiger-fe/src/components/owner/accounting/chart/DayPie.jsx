@@ -1,9 +1,10 @@
+// eslint-disable-next-line
+
 import React from "react";
 import { Chart as ChartJS } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import styled from "styled-components";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-import axios from "axios";
 
 import {
   Chart,
@@ -32,8 +33,6 @@ import {
   Tooltip,
   SubTitle,
 } from "chart.js";
-import { useEffect } from "react";
-import { useState } from "react";
 
 ChartJS.register(
   ArcElement,
@@ -64,8 +63,6 @@ ChartJS.register(
 );
 
 const DayPie = ({ dayPieData }) => {
-  // console.log("dayPieData :", dayPieData);
-
   //브랜드 + 이름
   let reformatName = dayPieData.map((obj) => {
     let robj = {
@@ -74,27 +71,16 @@ const DayPie = ({ dayPieData }) => {
     robj = `${obj.vbrand}${obj.vname}`;
     return robj;
   });
-
-  // console.log(reformatName);
   let dataSum = dayPieData.map((el) => el.sum);
-  // console.log(dataSum);
-
   let total = 0;
   dataSum.forEach((item) => {
     total += item;
   });
-  // console.log(total);
-  // console.log(typeof dataSum[0]);
-
   const data = {
-    // labels: ["차종1", "차종2", "차종3", "차종4", "차종5", "차종6"],
     labels: [...reformatName],
     datasets: [
       {
-        // label: "# of Votes",
-        // data: [12, 19, 3, 5, 2, 3],
         data: [...dataSum],
-        // fill: true,
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -112,7 +98,6 @@ const DayPie = ({ dayPieData }) => {
           "rgba(255, 159, 64, 1)",
         ],
         borderWidth: 1,
-        // pointBorderColor: "#fc7b02",
         color: "#8b8b8b",
         datalabels: {
           color: "#000",
@@ -134,13 +119,9 @@ const DayPie = ({ dayPieData }) => {
           font: {
             size: 18,
             style: "italic",
-            // family: '"Bungee Spice", cursive',
             family: '"Oswald", sans-serif',
             weight: "800",
           },
-          // padding: {
-          //   top: 30,
-          // },
         },
       },
       title: {
@@ -183,8 +164,6 @@ const DayPie = ({ dayPieData }) => {
   );
 };
 
-export default DayPie;
-
 const StDayPie = styled.div`
   margin-top: 48px;
   width: 50% !important;
@@ -192,11 +171,6 @@ const StDayPie = styled.div`
   p {
     margin-top: 50px;
   }
-  @media (min-width: 768px) and (max-width: 1023px) {
-    /* width: 60% !important; */
-  }
-  @media (max-width: 767px) {
-  }
-  /* width: 70% !important; */
-  /* height: 705px !important; */
 `;
+
+export default DayPie;

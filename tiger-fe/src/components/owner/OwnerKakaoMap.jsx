@@ -1,7 +1,6 @@
-/*global kakao*/
-
 // eslint-disable-next-line
 
+/*global kakao*/
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
@@ -10,8 +9,6 @@ const OwnerKakaoMap = ({ address, locationObj, setLocationObj }) => {
   const mapKey = process.env.REACT_APP_REST_API_KEY;
 
   const locationOnMap = address;
-  // console.log(locationOnMap);
-  // console.log(locationObj);
 
   const getCoords = async (locationOnMap) => {
     const headers = {
@@ -25,7 +22,6 @@ const OwnerKakaoMap = ({ address, locationObj, setLocationObj }) => {
         }
       )
       .then((res) => {
-        // console.log(res);
         const location = res.data.documents[0];
         setLocationObj({
           locationX: location.address.x,
@@ -43,13 +39,7 @@ const OwnerKakaoMap = ({ address, locationObj, setLocationObj }) => {
     // 지도를 생성합니다
     var map = new kakao.maps.Map(mapContainer, mapOption);
 
-    // console.log(map);
-
-    // const resultX = locationObj.locationX;
-    // const resultY = locationObj.locationY;
-
     if (locationOnMap) {
-      // console.log(locationOnMap);
       var coords = new kakao.maps.LatLng(
         locationObj.locationY,
         locationObj.locationX
@@ -69,14 +59,6 @@ const OwnerKakaoMap = ({ address, locationObj, setLocationObj }) => {
 
       // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
       map.setCenter(coords);
-
-      // console.log(coords);
-
-      // const locationX = parseInt(locationObj.locationX);
-      // const locationY = parseInt(locationObj.locationY);
-      // // 위도경도 값
-      // console.log(locationX, locationY);
-      // console.log(typeof locationX);
     }
   };
 
@@ -89,8 +71,6 @@ const OwnerKakaoMap = ({ address, locationObj, setLocationObj }) => {
     createMap();
   }, [locationObj]);
 
-  // --------------익현 끝 --------------------------------------
-  // return <div></div>;
   return (
     <StOwnerMap>
       <div id="map"></div>
@@ -99,13 +79,12 @@ const OwnerKakaoMap = ({ address, locationObj, setLocationObj }) => {
   );
 };
 
-export default OwnerKakaoMap;
-
 const StOwnerMap = styled.div`
   width: 100%;
   height: 286px;
   #map {
-    /* width: 100%; */
     height: 100%;
   }
 `;
+
+export default OwnerKakaoMap;

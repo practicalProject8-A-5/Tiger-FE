@@ -12,8 +12,6 @@ const OwnerPage = () => {
   const [category, setCategory] = useState("Registration");
   const onSelect = useCallback((category) => setCategory(category), []);
 
-  // console.log(category);
-
   return (
     <>
       <Header />
@@ -28,10 +26,7 @@ const OwnerPage = () => {
   );
 };
 
-export default OwnerPage;
-
 const Stowner = styled.div`
-  /* background-color: pink; */
   position: relative;
   margin: 50px auto;
   display: flex;
@@ -45,3 +40,5 @@ const Stowner = styled.div`
     width: 100%;
   }
 `;
+
+export default OwnerPage;

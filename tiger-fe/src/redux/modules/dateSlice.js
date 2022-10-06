@@ -22,7 +22,6 @@ export const __getDateList = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const vId = payload;
-      // console.log("redux-get===>", vId);
       const userToken = localStorage.getItem("userToken");
       const refreshToken = localStorage.getItem("refreshToken");
       const headers = {
@@ -33,7 +32,6 @@ export const __getDateList = createAsyncThunk(
       const resp = await axios.get(`${serverApi}/vehicle/schedule/${vId}`, {
         headers: headers,
       });
-      // console.log(resp.data.output);
       return thunkAPI.fulfillWithValue(resp.data.output);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -53,7 +51,6 @@ const getDateListSlice = createSlice({
     [__getDateList.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.DateList = action.payload;
-      // console.log(action.payload);
     },
     [__getDateList.rejected]: (state, action) => {
       state.isLoading = false;

@@ -47,7 +47,7 @@ const Search = () => {
     setLocation(fullAddress);
     getCoords(fullAddress);
   };
-  // console.log(location);
+
   const [locationObj, setLocationObj] = useState({});
   const getCoords = (location) => {
     const headers = {
@@ -61,7 +61,6 @@ const Search = () => {
         }
       )
       .then((res) => {
-        // console.log(res);
         const location = res.data.documents[0];
         setLocationObj({
           locationX: location.address.x,
@@ -71,7 +70,6 @@ const Search = () => {
   };
   const locationX = Number(locationObj.locationX);
   const locationY = Number(locationObj.locationY);
-  // console.log(locationX, locationY);
 
   const postCodeStyle = {
     display: "block",
@@ -87,15 +85,13 @@ const Search = () => {
   const [endDates, setEndDates] = useState(null);
   const startDate = format(new Date(startDates), "yyyy-MM-dd");
   const endDate = format(new Date(endDates), "yyyy-MM-dd");
-  // console.log(startDate);
-  // console.log(endDate);
 
   //search vehicle type
   const [type, setType] = useState();
   const handleChange = (e) => {
     setType(e.target.value);
   };
-  // console.log(type);
+
   // submit handler
   const onSubmitHandler = async (e) => {
     try {
@@ -165,8 +161,7 @@ const Search = () => {
               setIsPopupOpen(!isPopupOpen);
             }}
             onChange={onChangeHandler}
-            placeholder="어디서?"
-          ></input>
+            placeholder="어디서?"></input>
           {isPopupOpen ? (
             <div className="post">
               <DaumPostcode
@@ -293,17 +288,6 @@ const StSearchLocationContainer = styled.div`
     background-position: 9px 7px;
     text-indent: 30px;
   }
-  /* .post {
-    div {
-      display: block;
-      position: absolute;
-      top: 200px !important;
-      width: 400px;
-      height: 400px;
-      border: 1px solid black;
-      z-index: 999;
-    }
-  } */
   @media (max-width: 767px) {
     width: 100%;
     margin-top: 10px;
@@ -399,15 +383,12 @@ const StCalendarWrapper = styled.div`
           width: 100%;
           .react-datepicker__month-container {
             width: 400px;
-            /* width: 100%; */
-            /* background-color: pink; */
             .react-datepicker__header {
               background-color: #fff;
               border: none;
               font-weight: 600;
               font-size: 18px;
               .react-datepicker__current-month {
-                /* margin-top: 20px; */
                 position: absolute;
                 top: 20%;
                 left: 50%;
@@ -460,8 +441,6 @@ const StCalendarWrapper = styled.div`
               }
             }
           }
-          .react-datepicker__triangle {
-          }
         }
       }
     }
@@ -476,6 +455,7 @@ const StCalendarWrapper = styled.div`
 const StNewDatePicker = styled(DatePicker)`
   color: #8b8b8b;
 `;
+
 const StVehicleTypeContainer = styled.div`
   width: 15%;
   select {
@@ -497,7 +477,6 @@ const StVehicleTypeContainer = styled.div`
     font-weight: 700;
     font-size: 18px;
     option {
-      /* background-color: pink; */
       border-radius: 12px;
     }
   }
@@ -506,8 +485,6 @@ const StVehicleTypeContainer = styled.div`
     margin-top: 10px;
     select {
       width: 100%;
-      option {
-      }
     }
   }
   @media (min-width: 768px) and (max-width: 1023px) {
@@ -515,9 +492,6 @@ const StVehicleTypeContainer = styled.div`
     margin-right: 20px;
     select {
       width: 100%;
-
-      option {
-      }
     }
   }
 `;
@@ -548,4 +522,5 @@ const StyledContainer = styled(ToastContainer)`
     margin: 0;
   }
 `;
+
 export default Search;

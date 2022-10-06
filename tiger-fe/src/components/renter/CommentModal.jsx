@@ -15,17 +15,14 @@ import { AiOutlineClose } from "react-icons/ai";
 import { ImStarFull } from "react-icons/im";
 
 const CommentModal = ({ showCommentModal, singleVehicle }) => {
-  // console.log(singleVehicle);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const vid = parseInt(singleVehicle.vid);
-  // console.log("vid", vid);
 
   // get reviewed comment
   const reviewedComment = useSelector(
     (state) => state.vehicleDetailSlice.reviewedComment
   );
-  // console.log("reviewedComment :", reviewedComment);
 
   const [rating, setRating] = useState(reviewedComment?.rating);
   const [hover, setHover] = useState(reviewedComment?.rating);

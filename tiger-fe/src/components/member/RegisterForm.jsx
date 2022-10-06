@@ -52,13 +52,8 @@ const RegisterForm = ({
   const [checkEmail, setCheckEmail] = useState("");
   const [clickCheckEmail, setClickCheckEmail] = useState(false);
 
-  // console.log("checkEmail:", checkEmail);
-  // console.log("clickCheckEmail:", clickCheckEmail);
-
   const handleChange = (e) => {
-    // console.log(e.target.value);
     const checkEmail = e.target.value;
-    // console.log("checkEmail:", checkEmail);
     setCheckEmail(checkEmail);
   };
 
@@ -76,9 +71,7 @@ const RegisterForm = ({
           headers: headers,
         }
       );
-      // console.log(response.data.status);
       if (response.data.result === true) {
-        // console.log("true일때");
         // 백엔드로 보낸 데이터 결과 200 일 경우
         toast.success("사용 가능한 아이디 입니다.", {
           theme: "dark",
@@ -89,7 +82,6 @@ const RegisterForm = ({
         });
         setClickCheckEmail(true); //사용 가능한 아이디 일 경우 state상태에 true값으로 변경, 나중에 회원가입 버튼 클릭 이벤트핸들러에 필요!
       } else if (response.data.status.msg === "이미 존재하는 이메일입니다.") {
-        // console.log("false일때");
         toast.warn("이미 사용중인 아이디 입니다.", {
           theme: "dark",
           autoClose: 1500,
@@ -97,10 +89,8 @@ const RegisterForm = ({
           className: "toatst_warn",
           progressClassName: "warn_progress",
         }); // 이미 데이터베이스에 있는 아이디일 경우 409
-        // alert("이미 사용중");
         setClickCheckEmail(false);
       } else if (response.data.status.msg === "유효하지 않은 이메일입니다.") {
-        // console.log("빈값일때");
         toast.error("이메일을 입력해주세요.", {
           theme: "dark",
           autoClose: 1500,
@@ -109,7 +99,6 @@ const RegisterForm = ({
           progressClassName: "error_progress",
         });
       }
-      // console.log(response);
       return response;
     } catch (error) {
       return error;
@@ -117,7 +106,6 @@ const RegisterForm = ({
   };
 
   // 회원가입 submit 요청
-
   const onSubmit = (data) => {
     if (clickCheckEmail === false) {
       toast.warn("이메일 중복확인 해주세요.", {
@@ -159,11 +147,6 @@ const RegisterForm = ({
                     value: regExpEm,
                     message: "이메일 형식이 아닙니다.",
                   },
-                  // validate: {
-                  //   type: (value) =>
-                  //     emailCheck(value) ||
-                  //     "You should write in proper email format.",
-                  // },
                 })}
                 onChange={handleChange}></input>
               <div className="Register__emailCheck" onClick={emailCheck}>
@@ -183,18 +166,12 @@ const RegisterForm = ({
                     value: regExpEm,
                     message: "이메일 형식이 아닙니다.",
                   },
-                  // validate: {
-                  //   type: (value) =>
-                  //     emailCheck(value) ||
-                  //     "You should write in proper email format.",
-                  // },
                 })}
                 onChange={handleChange}
               />
               <div className="Register__emailCheck" onClick={emailCheck}>
                 중복확인
               </div>
-              {/* <StyledContainer /> */}
             </>
           )}
           {errors.email ? (
@@ -352,11 +329,6 @@ const RegisterForm = ({
               className="Register__input"
               {...register("name", {
                 required: "이름을 입력해주세요.",
-                // validate: {
-                //   type: (value) =>
-                //     emailCheck(value) ||
-                //     "You should write in proper email format.",
-                // },
               })}
             />
           ) : (
@@ -367,11 +339,6 @@ const RegisterForm = ({
               className="Register__input"
               {...register("name", {
                 required: "이름을 입력해주세요.",
-                // validate: {
-                //   type: (value) =>
-                //     emailCheck(value) ||
-                //     "You should write in proper email format.",
-                // },
               })}
             />
           )}
@@ -565,32 +532,5 @@ const StRegisterForm = styled.div`
   @media (min-width: 768px) and (max-width: 1023px) {
   }
 `;
-// const StyledContainer = styled(ToastContainer)`
-//   &&&.Toastify__toast-container {
-//   }
-//   .Toastify__toast {
-//     position: relative;
-//   }
-//   .Toastify__toast-body {
-//     height: 100px;
-//     .Toastify__toast-icon > svg {
-//       fill: #fff;
-//     }
-//   }
-//   .Toastify__progress-bar {
-//   }
-//   .Toastify__close-button {
-//     background-color: pink;
-//     border-radius: 12px;
-//     position: absolute;
-//     top: 12px;
-//     right: 12px;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     width: 25px;
-//     height: 25px;
-//     margin: 0;
-//   }
-// `;
+
 export default RegisterForm;

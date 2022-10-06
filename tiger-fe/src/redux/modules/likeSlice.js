@@ -30,7 +30,6 @@ export const __isLike = createAsyncThunk(
         {},
         { headers: headers }
       );
-      // console.log(response.data);
       return thunkAPI.fulfillWithValue(response.data.output);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -48,7 +47,6 @@ export const likeSlice = createSlice({
     },
     [__isLike.fulfilled]: (state, action) => {
       state.isLoading = false;
-      // console.log(action.payload);
       state.isLike = action.payload;
     },
     [__isLike.rejected]: (state, action) => {
@@ -58,5 +56,4 @@ export const likeSlice = createSlice({
   },
 });
 
-// export const {} = likeSlice.actions;
 export default likeSlice.reducer;

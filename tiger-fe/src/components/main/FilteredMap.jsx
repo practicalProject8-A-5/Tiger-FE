@@ -1,21 +1,16 @@
 // eslint-disable-next-line
 
 /*global kakao*/
-
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const FilteredMap = ({ filteredVehicle }) => {
-  // console.log("filteredMap");
   const navigate = useNavigate();
-  // const location = localStorage.getItem("location");
+
   const locationX = localStorage.getItem("locationX");
   const locationY = localStorage.getItem("locationY");
 
-  // var centerCoords = new kakao.maps.LatLng(locationY, locationX);
-
-  // console.log(filteredVehicle);
   const createMap = () => {
     var centerCoords = new kakao.maps.LatLng(locationY, locationX);
 
@@ -90,8 +85,6 @@ const FilteredMap = ({ filteredVehicle }) => {
           infowindow.close();
         };
       }
-
-      // map.setCenter(centerCoords);
     }
     // 지도 타입 변경 컨트롤을 생성한다
     var mapTypeControl = new kakao.maps.MapTypeControl();
@@ -175,11 +168,6 @@ const StVehicleMapBox = styled.div`
   }
   .info .link {
     color: #5085bb;
-  }
-  @media (max-width: 767px) {
-    /* display: none; */
-  }
-  @media (min-width: 768px) and (max-width: 1023px) {
   }
 `;
 

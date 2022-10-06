@@ -20,7 +20,6 @@ export const __incomeItemList = createAsyncThunk(
   "main/__incomeItemList",
   async (payload, thunkAPI) => {
     const page = payload;
-    // console.log(page);
     if (email) {
       try {
         const headers = {
@@ -28,12 +27,9 @@ export const __incomeItemList = createAsyncThunk(
           Authorization: userToken,
           RefreshToken: refreshToken,
         };
-        const resp = await axios.get(
-          `${serverApi}/vehicle?page=${page}`,
-          // {},
-          { headers: headers }
-        );
-        // console.log(resp.data);
+        const resp = await axios.get(`${serverApi}/vehicle?page=${page}`, {
+          headers: headers,
+        });
         return thunkAPI.fulfillWithValue(resp.data.output);
       } catch (error) {
         return thunkAPI.rejectWithValue(error.message);
@@ -43,12 +39,9 @@ export const __incomeItemList = createAsyncThunk(
         const headers = {
           "Content-Type": "application/json",
         };
-        const resp = await axios.get(
-          `${serverApi}/vehicle?page=${page}`,
-          // {},
-          { headers: headers }
-        );
-        // console.log(resp.data);
+        const resp = await axios.get(`${serverApi}/vehicle?page=${page}`, {
+          headers: headers,
+        });
         return thunkAPI.fulfillWithValue(resp.data.output);
       } catch (error) {
         return thunkAPI.rejectWithValue(error.message);
@@ -68,11 +61,9 @@ const incomeItemListSlice = createSlice({
   extraReducers: {
     [__incomeItemList.pending]: (state, action) => {
       state.isLoading = true;
-      // console.log("pending");
     },
     [__incomeItemList.fulfilled]: (state, action) => {
       state.isLoading = false;
-      // console.log(action.payload.content);
       state.incomeItemList = action.payload.content;
     },
     [__incomeItemList.rejected]: (state, action) => {

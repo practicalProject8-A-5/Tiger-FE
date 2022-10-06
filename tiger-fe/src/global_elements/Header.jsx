@@ -16,36 +16,31 @@ const Header = ({ ownerMode }) => {
   const location = useLocation();
 
   const notification = useSelector((state) => state.chatSlice.notification);
-  // console.log("notification :", notification);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
     setIsModalOpen(!isModalOpen);
   };
 
-  const [inOwner, setInOwner] = useState(false);
-
-  const ownerToggle = useMatch("/*");
-
-  const onClick = () => {
-    if (ownerToggle !== null) {
-      setInOwner(!inOwner);
-      setTimeout(() => {
-        navigate("/owner");
-      }, 1000);
-    } else {
-      setInOwner(!inOwner);
-      setTimeout(() => {
-        navigate("/*");
-      }, 1000);
-    }
-  };
-  // console.log(inOwner);
+  // const [inOwner, setInOwner] = useState(false);
+  // const ownerToggle = useMatch("/*");
+  // const onClick = () => {
+  //   if (ownerToggle !== null) {
+  //     setInOwner(!inOwner);
+  //     setTimeout(() => {
+  //       navigate("/owner");
+  //     }, 1000);
+  //   } else {
+  //     setInOwner(!inOwner);
+  //     setTimeout(() => {
+  //       navigate("/*");
+  //     }, 1000);
+  //   }
+  // };
 
   // 로그인 여부
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.memberSlice.userInfo);
-  // console.log(userInfo);
 
   // 로그아웃 delete 호출
   const __userLogout = async () => {
@@ -53,7 +48,6 @@ const Header = ({ ownerMode }) => {
     if (confirm === true) {
       const userToken = localStorage.getItem("userToken");
       const refreshToken = localStorage.getItem("refreshToken");
-      // console.log(refreshToken);
       const headers = {
         "Content-Type": "application/json",
         Authorization: userToken,
@@ -97,15 +91,13 @@ const Header = ({ ownerMode }) => {
             <Link
               to="/home"
               style={{ textDecoration: "none", color: textColor }}
-              onClick={handleChangeInputColor}
-            >
+              onClick={handleChangeInputColor}>
               <div className="header__home">홈</div>
             </Link>
             <Link
               to="/"
               style={{ textDecoration: "none", color: textColor }}
-              onClick={handleChangeInputColor}
-            >
+              onClick={handleChangeInputColor}>
               <div className="header__main">24렌트</div>
             </Link>
             {userInfo.name ? (
@@ -113,8 +105,7 @@ const Header = ({ ownerMode }) => {
                 <Link
                   to="/renter"
                   style={{ textDecoration: "none", color: textColor }}
-                  onClick={handleChangeInputColor}
-                >
+                  onClick={handleChangeInputColor}>
                   <div className="header__mypage">렌터페이지</div>
                 </Link>
                 <Link to="/owner" style={{ textDecoration: "none" }}>
@@ -125,14 +116,12 @@ const Header = ({ ownerMode }) => {
               <>
                 <Link
                   to="/renter"
-                  style={{ textDecoration: "none", display: "none" }}
-                >
+                  style={{ textDecoration: "none", display: "none" }}>
                   <div className="header__mypage">렌터페이지</div>
                 </Link>
                 <Link
                   to="/owner"
-                  style={{ textDecoration: "none", display: "none" }}
-                >
+                  style={{ textDecoration: "none", display: "none" }}>
                   <div className="header__ownerpage">오너페이지</div>
                 </Link>
               </>
@@ -195,27 +184,23 @@ const Header = ({ ownerMode }) => {
                       <Link
                         to="/chat"
                         state={{ backgroundLocation: location }}
-                        style={{ textDecoration: "none", color: "#000" }}
-                      >
+                        style={{ textDecoration: "none", color: "#000" }}>
                         {/* {notification && <NewNoti />} */}
                         <li>메세지</li>
                       </Link>
                       <Link
                         style={{ textDecoration: "none", color: "#000" }}
-                        to="/owner"
-                      >
+                        to="/owner">
                         <li>오너페이지</li>
                       </Link>
                       <Link
                         style={{ textDecoration: "none", color: "#000" }}
-                        to="/renter"
-                      >
+                        to="/renter">
                         <li>렌터페이지</li>
                       </Link>
                       <Link
                         style={{ textDecoration: "none", color: "#000" }}
-                        to="/home"
-                      >
+                        to="/home">
                         <li>도움말</li>
                       </Link>
                       <li onClick={__userLogout}>로그아웃</li>
@@ -238,15 +223,12 @@ const Header = ({ ownerMode }) => {
   );
 };
 
-export default Header;
-
 const StHeader = styled.div`
   width: 100%;
   height: 112px;
   padding: 0 246px;
   box-sizing: border-box;
   background-color: #fff;
-  /* background-color: pink; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -255,7 +237,6 @@ const StHeader = styled.div`
     width: 100%;
     height: 40px;
     display: flex;
-    /* background-color: pink; */
     .header__logo {
       width: 121px;
       height: 40px;
@@ -279,23 +260,19 @@ const StHeader = styled.div`
           font-size: 20px;
           font-weight: 500;
           line-height: 23px;
-          /* margin-right: 44px; */
           cursor: pointer;
           color: black;
         }
         .header__main {
-          /* width: 65px; */
           height: 23px;
           color: #ff881b;
           font-weight: 500;
           font-size: 20px;
           line-height: 23px;
-          /* margin-right: 44px; */
           cursor: pointer;
           color: black;
         }
         .header__mypage {
-          /* width: 92px; */
           height: 23px;
           font-weight: 500;
           font-size: 20px;
@@ -304,7 +281,6 @@ const StHeader = styled.div`
           color: black;
         }
         .header__ownerpage {
-          /* width: 92px; */
           height: 23px;
           font-weight: 500;
           font-size: 20px;
@@ -335,7 +311,6 @@ const StHeader = styled.div`
             background: rgba(33, 33, 33, 0.08);
             border-radius: 7px;
             transition: all 0.5s;
-            /* background-color: pink;/ */
             cursor: pointer;
             input {
               display: none;
@@ -352,7 +327,6 @@ const StHeader = styled.div`
               height: 20px;
               border-radius: 50%;
               background-color: #fff;
-              /* border: 1px solid #ddd; */
               transition: all 0.5s;
               box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
             }
@@ -482,20 +456,6 @@ const StHeader = styled.div`
             cursor: pointer;
             z-index: 99;
             position: relative;
-            ul {
-            }
-            li {
-              :nth-last-child(5) {
-              }
-            }
-            li:hover {
-            }
-            .header__loggedin__text {
-            }
-            span {
-            }
-            img {
-            }
           }
         }
       }
@@ -540,20 +500,6 @@ const StHeader = styled.div`
             cursor: pointer;
             z-index: 9;
             position: relative;
-            ul {
-            }
-            li {
-              :nth-last-child(5) {
-              }
-            }
-            li:hover {
-            }
-            .header__loggedin__text {
-            }
-            span {
-            }
-            img {
-            }
           }
         }
       }
@@ -573,21 +519,11 @@ const NewNoti = styled.div`
     right: 2px;
     bottom: 40px;
   }
-  /* &:before {
-    position: absolute;
-    left: 0;
-    top: -10%;
-    width: 100%;
-    height: 120%;
-    background: red;
-    filter: blur(5px);
-    content: "";
-    opacity: 0;
-    animation: flash 0.9s ease-out alternate infinite;
-  } */
   @keyframes flash {
     to {
       opacity: 1;
     }
   }
 `;
+
+export default Header;

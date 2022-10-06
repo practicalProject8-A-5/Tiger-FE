@@ -1,10 +1,11 @@
+// eslint-disable-next-line
+
 import React from "react";
 import styled from "styled-components";
 
 import { Chart as ChartJS } from "chart.js";
 import { Line } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-import { useState } from "react";
 
 import {
   Chart,
@@ -69,9 +70,8 @@ const DayLine = ({ dayLineData }) => {
   let dateDate = ("0" + today.getDate()).slice(-2);
 
   let last = new Date(dateYear, dateMonth, 0).getDate();
-  // console.log(last);
-
   let labelData = [];
+
   for (let i = 1; i <= last; i++) {
     if (i < 10) {
       labelData.push({ date: `${dateYear}-${dateMonth}-0${i}`, sum: 0 });
@@ -79,7 +79,6 @@ const DayLine = ({ dayLineData }) => {
       labelData.push({ date: `${dateYear}-${dateMonth}-${i}`, sum: 0 });
     }
   }
-  // console.log(labelData); // 매월 1일~마지막 일 과 default 가격(0)
 
   let formatData = [];
 
@@ -92,10 +91,7 @@ const DayLine = ({ dayLineData }) => {
     } else {
       formatData.push(0);
     }
-    // console.log(filterData);
   });
-
-  // console.log(formatData);
 
   const data = {
     labels: [...labelData.map((el) => (el = el.date))],
@@ -163,7 +159,6 @@ const DayLine = ({ dayLineData }) => {
         beginAtZero: true,
       },
       x: {
-        // display: false,
         display: true,
       },
     },
@@ -179,4 +174,5 @@ const DayLine = ({ dayLineData }) => {
 const StDayLine = styled.div`
   margin-top: 48px;
 `;
+
 export default DayLine;

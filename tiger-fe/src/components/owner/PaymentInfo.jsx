@@ -9,8 +9,6 @@ import TestCalender from "./TestCalender";
 const PaymentInfo = () => {
   const {
     register,
-    handleSubmit,
-    // watch,
     formState: { errors },
   } = useForm();
 
@@ -18,14 +16,9 @@ const PaymentInfo = () => {
   const [isShow, setIsShow] = useState(false);
 
   const openHandler = () => {
-    // console.log("눌림");
     setIsShow(!isShow);
-    // setIsOpenPayInfo(!isOpenPayInfo);
   };
-  // console.log("IsShow :", isShow);
-  // console.log(isOpenPayInfo);
 
-  // useEffect(setIsOpenPayInfo(), [isOpenPayInfo]);
   return (
     <>
       {!isOpenPayInfo ? (
@@ -36,7 +29,6 @@ const PaymentInfo = () => {
             <p>렌트 가능 날짜가 선택되었습니다.</p>
             <div className="calender" onClick={openHandler}></div>
           </div>
-
           <div className="price_box">
             <div className="renter_price">
               <label htmlFor="price">렌트 요금</label>
@@ -45,7 +37,6 @@ const PaymentInfo = () => {
                   type="text"
                   id="price"
                   placeholder="가격을 입력해주세요."
-                  // placeholder={errors.price.message}
                   className="error_input"
                   {...register("price", {
                     required: "가격 입력은 필수 입니다.",
@@ -57,13 +48,11 @@ const PaymentInfo = () => {
                 <span>₩/24시간</span>
               </div>
             </div>
-
             <div className="total_price">
               <p>총 렌트 금액</p>
               <span>12345₩</span>
             </div>
           </div>
-
           <button>등록하기</button>
         </StPaymentInfo>
       ) : (
@@ -82,7 +71,6 @@ const PaymentInfo = () => {
                   type="text"
                   id="price"
                   placeholder="가격을 입력해주세요."
-                  // placeholder={errors.price.message}
                   className="error_input"
                   {...register("price", {
                     required: "가격 입력은 필수 입니다.",
@@ -101,7 +89,6 @@ const PaymentInfo = () => {
             </div>
           </div>
           <button>등록하기</button>
-          {/* isOpenPayInfo, setIsOpenPayInfo */}
           {isShow ? (
             <TestCalender
               isOpenPayInfo={isOpenPayInfo}
@@ -112,8 +99,6 @@ const PaymentInfo = () => {
           ) : null}
         </StPaymentInfo>
       )}
-
-      {/* after */}
     </>
   );
 };
@@ -129,7 +114,6 @@ const StPaymentInfo = styled.div`
     0px -0.1px 6.4309px rgba(0, 0, 0, 0.02);
   border-radius: 12px;
   padding: 60px 60px 40px 60px;
-  /* background-color: skyblue; */
   box-sizing: border-box;
   h1 {
     font-weight: 600;
@@ -140,7 +124,6 @@ const StPaymentInfo = styled.div`
   .pay__month {
     width: 100%;
     height: 38px;
-    /* background-color: yellow; */
     font-weight: 500;
     font-size: 18px;
     color: #000;
@@ -167,9 +150,6 @@ const StPaymentInfo = styled.div`
   .price_box {
     margin-top: 78px;
     margin-bottom: 53px;
-    /* background-color: pink; */
-    /* display: flex;
-    align-items: center; */
     .renter_price {
       width: 100%;
       height: 40px;
@@ -177,13 +157,10 @@ const StPaymentInfo = styled.div`
       justify-content: space-between;
       align-items: center;
       margin-bottom: 20px;
-      /* border-bottom: 1px solid; */
-
       label {
         font-weight: 500;
         font-size: 18px;
         height: 100%;
-        /* background-color: skyblue; */
         line-height: 40px;
       }
       .flex_wrap {

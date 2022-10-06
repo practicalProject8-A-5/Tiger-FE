@@ -17,9 +17,7 @@ const initialState = {
 export const __getRenterItemList = createAsyncThunk(
   "renter/__getRenterItemList",
   async (payload, thunkAPI) => {
-    // console.log(payload);
     const status = payload;
-    // console.log(typeof status);
     const userToken = localStorage.getItem("userToken");
     const refreshToken = localStorage.getItem("refreshToken");
     if (status === "LIKE") {
@@ -32,7 +30,6 @@ export const __getRenterItemList = createAsyncThunk(
         const responseLiked = await axios.get(`${serverApi}/heart/vehicle`, {
           headers: headers,
         });
-        // console.log(responseLiked.data);
         return thunkAPI.fulfillWithValue(responseLiked.data);
       } catch (error) {
         return thunkAPI.rejectWithValue(error);
@@ -48,10 +45,8 @@ export const __getRenterItemList = createAsyncThunk(
           serverApi + `/order/renter?status=${status}&limit=100&offset=0`,
           { headers: headers }
         );
-        // console.log(response);
         return thunkAPI.fulfillWithValue(response.data);
       } catch (error) {
-        // console.log(error);
         return thunkAPI.rejectWithValue(error.response.data);
       }
     }
@@ -68,7 +63,6 @@ const renterItemListSlice = createSlice({
     },
     [__getRenterItemList.fulfilled]: (state, action) => {
       state.isLoading = false;
-      // console.log(action.payload);
       state.renterItemLists = action.payload;
     },
     [__getRenterItemList.rejected]: (state, action) => {
@@ -78,5 +72,4 @@ const renterItemListSlice = createSlice({
   },
 });
 
-// export const {} = renterItemListSlice.actions;
 export default renterItemListSlice.reducer;

@@ -30,7 +30,6 @@ const VehicleDetailLeft = () => {
   const s3 = process.env.REACT_APP_IMAGEURL;
 
   const email = localStorage.getItem("email");
-  // console.log(email);
   const dispatch = useDispatch();
 
   const id = useParams();
@@ -39,7 +38,6 @@ const VehicleDetailLeft = () => {
   useEffect(() => {
     dispatch(__vehicleDetail({ vId, startDate, endDate }));
     dispatch(__getVehicleComments(vId));
-    // console.log("??");
     return () => {
       dispatch(options());
     };
@@ -49,13 +47,11 @@ const VehicleDetailLeft = () => {
   const vehicleDetails = useSelector(
     (state) => state.vehicleDetailSlice.vehicleDetails
   );
-  // console.log(vehicleDetails);
 
   // get comment lists
   const commentLists = useSelector(
     (state) => state.vehicleDetailSlice.commentLists
   );
-  // console.log(commentLists);
 
   // url에서 startDate & endDate params 잡아오기
   const startDate = new URL(window.location.href).searchParams.get("startDate");
@@ -85,13 +81,11 @@ const VehicleDetailLeft = () => {
     //kakao sdk script 부른 후 window.kakao로 접근
     if (window.Kakao) {
       const kakao = window.Kakao;
-
       //중복 initialization방지
       //카카오에서 제공하는 key를 이용해 initialize
       if (!kakao.isInitialized()) {
         kakao.init(`${key}`);
       }
-
       kakao.Link.sendDefault({
         objectType: "feed",
         content: {
@@ -125,8 +119,6 @@ const VehicleDetailLeft = () => {
   };
 
   SwiperCore.use([Navigation, Scrollbar]);
-
-  // console.log(commentLists);
 
   return (
     <>
@@ -328,7 +320,6 @@ const StVehicleInfoContainer = styled.div`
     display: flex;
     align-items: center;
     margin-bottom: 32px;
-    /* background-color: pink; */
     .star_num {
       font-weight: 600;
       font-size: 32px;

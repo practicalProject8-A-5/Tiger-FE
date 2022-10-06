@@ -15,23 +15,19 @@ import { useNavigate } from "react-router-dom";
 import { ImStarFull } from "react-icons/im";
 
 const MainItem = ({ list }) => {
-  // console.log(list);
   const email = localStorage.getItem("email");
   const MainItemListImage = list.imageList;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [isLike, setIsLike] = useState(list.heart);
-  // console.log(isLike);
 
   const likeClickHandler = () => {
     dispatch(__isLike(list.vid));
-    // console.log("222");
     setIsLike(!isLike);
   };
 
   useEffect(() => {
-    // console.log(list.heart);
     setIsLike(list.heart);
     return () => {
       setIsLike(!isLike);
@@ -242,7 +238,6 @@ const StSwiper = styled(Swiper)`
   .swiper-pagination {
     width: 100%;
     height: 20px;
-    /* opacity: 0.4; */
     span {
       opacity: 1;
       color: #000;
@@ -250,7 +245,6 @@ const StSwiper = styled(Swiper)`
   }
   .swiper-pagination {
     background-color: rgba(255, 255, 255, 0.4);
-    /* background-color: pink; */
     position: absolute;
     bottom: 0;
     border-radius: 0 0 20px 20px;

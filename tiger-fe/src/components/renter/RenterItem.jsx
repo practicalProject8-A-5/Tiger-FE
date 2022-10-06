@@ -7,7 +7,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { __getRenterItemList } from "../../redux/modules/renterItemListSlice";
 import axios from "axios";
 import CommentModal from "./CommentModal";
-// import CommentEditModal from "./CommentEditModal";
 
 const RenterItem = ({ category, list, onSelect }) => {
   const serverApi = process.env.REACT_APP_SERVER;
@@ -21,7 +20,6 @@ const RenterItem = ({ category, list, onSelect }) => {
   const renterItemLists = useSelector(
     (state) => state.renterItemListSlice.renterItemLists
   );
-  // console.log(renterItemLists);
 
   useEffect(() => {
     if (category === "RESERVED") {
@@ -104,7 +102,6 @@ const RenterItem = ({ category, list, onSelect }) => {
                     className="chatButton"
                     onClick={async () => {
                       const ownerId = list.ownerId;
-                      // console.log(list.ownerId);
                       try {
                         const response = await axios.post(
                           `${chatApi}/chat/room`,
@@ -199,7 +196,6 @@ const RenterItem = ({ category, list, onSelect }) => {
                     className="chatButton"
                     onClick={async () => {
                       const ownerId = list.ownerId;
-                      // console.log(list.ownerId);
                       try {
                         const response = await axios.post(
                           `${chatApi}/chat/room`,
@@ -315,7 +311,6 @@ const RenterItem = ({ category, list, onSelect }) => {
 
 const StRenterItemList = styled.div`
   width: 57%;
-  /* height: 890px; */
   @media (max-width: 767px) {
     width: 100%;
   }

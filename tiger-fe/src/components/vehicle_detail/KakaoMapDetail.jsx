@@ -30,11 +30,8 @@ const KakaoMapDetail = ({ vehicleDetails }) => {
         '<div style="width:150px;text-align:center;padding:6px 0;">차량 위치</div>',
     });
     infowindow.open(map, marker);
-
     // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
     map.setCenter(coords);
-
-    // console.log(coords);
   };
 
   useEffect(() => {
@@ -72,8 +69,6 @@ const StVehicleMapContainer = styled.div`
       margin-bottom: 14px;
       margin-top: 28px;
     }
-  }
-  @media (min-width: 768px) and (max-width: 1023px) {
   }
 `;
 

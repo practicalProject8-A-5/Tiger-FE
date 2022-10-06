@@ -11,8 +11,6 @@ import { Pagination, Navigation } from "swiper";
 
 const ImgViewBox = ({ files }) => {
   //트러블 슈팅 하나짜리 이후에 여러개 다시 수정하면 버튼이 안눌림
-
-  // console.log("files :", files);
   return (
     <StImgViewBox>
       {files.length === 1 ? (
@@ -50,12 +48,10 @@ const ImgViewBox = ({ files }) => {
 
 export default ImgViewBox;
 const StImgViewBox = styled.div`
-  /* margin-top: 56px; */
   img {
     width: 844px;
     height: 429px;
     object-fit: cover;
-    /* background-color: pink; */
     border-radius: 12px;
   }
   &:hover .swiper-button-next {
@@ -70,8 +66,6 @@ const StImgViewBox = styled.div`
       object-fit: fill;
       height: auto;
     }
-  }
-  @media (min-width: 768px) and (max-width: 1023px) {
   }
 `;
 
@@ -89,7 +83,6 @@ const StRegisterSwiper = styled(Swiper)`
     :hover {
       transform: scale(1.25);
     }
-
     :after {
       line-height: 32px;
       font-size: 12px;
@@ -113,7 +106,6 @@ const StRegisterSwiper = styled(Swiper)`
     :hover {
       transform: scale(1.25);
     }
-
     :after {
       line-height: 32px;
       font-size: 12px;
@@ -126,7 +118,6 @@ const StRegisterSwiper = styled(Swiper)`
   .swiper-pagination {
     width: 100%;
     height: 20px;
-    /* opacity: 0.4; */
     span {
       opacity: 1;
       color: #000;
@@ -134,7 +125,6 @@ const StRegisterSwiper = styled(Swiper)`
   }
   .swiper-pagination {
     background-color: rgba(255, 255, 255, 0.4);
-    /* background-color: pink; */
     position: absolute;
     bottom: 0;
     border-radius: 0 0 20px 20px;

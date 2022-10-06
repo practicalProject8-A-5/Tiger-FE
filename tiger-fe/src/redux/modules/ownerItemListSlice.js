@@ -27,7 +27,6 @@ export const __registeredItemList = createAsyncThunk(
       const resp = await axios.get(`${serverApi}/vehicle/management`, {
         headers: headers,
       });
-      // console.log(resp.data);
       return thunkAPI.fulfillWithValue(resp.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -51,7 +50,6 @@ export const __reservedItemList = createAsyncThunk(
         `${serverApi}/order/owner?status=RESERVED&limit=100&offset=0`,
         { headers: headers }
       );
-      // console.log(resp.data);
       return thunkAPI.fulfillWithValue(resp.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -75,7 +73,6 @@ export const __useItemList = createAsyncThunk(
         `${serverApi}/order/owner?status=USE&limit=100&offset=0`,
         { headers: headers }
       );
-      // console.log(resp.data);
       return thunkAPI.fulfillWithValue(resp.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -99,7 +96,6 @@ export const __returnItemList = createAsyncThunk(
         `${serverApi}/order/owner?status=RETURN&limit=100&offset=0`,
         { headers: headers }
       );
-      // console.log(resp.data);
       return thunkAPI.fulfillWithValue(resp.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -123,7 +119,6 @@ export const __cancleItemList = createAsyncThunk(
         `${serverApi}/order/owner?status=CANCEL&limit=100&offset=0`,
         { headers: headers }
       );
-      // console.log(resp.data);
       return thunkAPI.fulfillWithValue(resp.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -143,7 +138,6 @@ const ownerItemListSlice = createSlice({
     },
     [__registeredItemList.fulfilled]: (state, action) => {
       state.isLoading = false;
-      // console.log(action.payload);
       state.OwnerItemList = action.payload;
     },
     [__registeredItemList.rejected]: (state, action) => {
@@ -157,7 +151,6 @@ const ownerItemListSlice = createSlice({
     },
     [__reservedItemList.fulfilled]: (state, action) => {
       state.isLoading = false;
-      // console.log(action.payload);
       state.OwnerItemList = action.payload;
     },
     [__reservedItemList.rejected]: (state, action) => {
@@ -171,7 +164,6 @@ const ownerItemListSlice = createSlice({
     },
     [__useItemList.fulfilled]: (state, action) => {
       state.isLoading = false;
-      // console.log(action.payload);
       state.OwnerItemList = action.payload;
     },
     [__useItemList.rejected]: (state, action) => {
@@ -185,7 +177,6 @@ const ownerItemListSlice = createSlice({
     },
     [__returnItemList.fulfilled]: (state, action) => {
       state.isLoading = false;
-      // console.log(action.payload);
       state.OwnerItemList = action.payload;
     },
     [__returnItemList.rejected]: (state, action) => {
@@ -199,7 +190,6 @@ const ownerItemListSlice = createSlice({
     },
     [__cancleItemList.fulfilled]: (state, action) => {
       state.isLoading = false;
-      // console.log(action.payload);
       state.OwnerItemList = action.payload;
     },
     [__cancleItemList.rejected]: (state, action) => {
@@ -209,5 +199,4 @@ const ownerItemListSlice = createSlice({
   },
 });
 
-// export const {} = ownerItemListSlice.actions;
 export default ownerItemListSlice.reducer;

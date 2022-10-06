@@ -26,7 +26,6 @@ const initialState = {
   userToken,
 };
 
-// configure header's Content-Type as JSON
 const config = {
   headers: {
     "Content-Type": "application/json",
@@ -48,10 +47,8 @@ export const __registerUser = createAsyncThunk(
         autoClose: 1500,
         position: toast.POSITION.TOP_CENTER,
         className: "toatst_success",
-        // bodyClassName: "",
         progressClassName: "success_progress",
       });
-      // console.log(response.data);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       toast.error("회원가입 실패", {
@@ -59,7 +56,6 @@ export const __registerUser = createAsyncThunk(
         autoClose: 1500,
         position: toast.POSITION.TOP_CENTER,
         className: "toatst_error",
-        // bodyClassName: "",
         progressClassName: "error_progress",
       });
       return thunkAPI.rejectWithValue(error);
@@ -83,19 +79,17 @@ export const __userLogin = createAsyncThunk(
       localStorage.setItem("id", response.data.output.id);
       localStorage.setItem("refreshToken", response.headers.refreshtoken);
       localStorage.setItem("profileImage", response.data.output.profileImage);
-      // console.log(response.data);
+
       toast.success("로그인 성공", {
         theme: "dark",
         autoClose: 1500,
         position: toast.POSITION.TOP_CENTER,
         className: "toatst_success",
-        // bodyClassName: "",
         progressClassName: "success_progress",
       });
       loader();
       return thunkAPI.fulfillWithValue(response.data.output);
     } catch (error) {
-      // console.log(error);
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -110,7 +104,7 @@ export const __kakaoLogin = createAsyncThunk(
         kakaoApi + `/user/kakao/callback?code=${code}`,
         {}
       );
-      // console.log(response);
+
       localStorage.setItem("userToken", response.headers.authorization);
       localStorage.setItem("email", response.data.output.email);
       localStorage.setItem("phone", response.data.output.tel);
@@ -123,13 +117,11 @@ export const __kakaoLogin = createAsyncThunk(
         autoClose: 1500,
         position: toast.POSITION.TOP_CENTER,
         className: "toatst_success",
-        // bodyClassName: "",
         progressClassName: "success_progress",
       });
       loader();
       return thunkAPI.fulfillWithValue(response.data.output);
     } catch (error) {
-      // console.log(error);
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
@@ -145,7 +137,6 @@ const memberSlice = createSlice({
       const name = localStorage.getItem("name");
       const profileImage = localStorage.getItem("profileImage");
       const id = localStorage.getItem("id");
-      // console.log(payload);
       if (userToken !== null) {
         state.userInfo = { email, phone, name, profileImage, id };
       } else {
@@ -161,12 +152,10 @@ const memberSlice = createSlice({
     },
     [__userLogin.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      // console.log(payload);
       state.userInfo = payload;
     },
     [__userLogin.rejected]: (state, payload) => {
       state.isLoading = false;
-      // console.log(payload);
       state.error = payload;
     },
     // 카카오 로그인
@@ -176,12 +165,10 @@ const memberSlice = createSlice({
     },
     [__kakaoLogin.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      // console.log(payload);
       state.userInfo = payload;
     },
     [__kakaoLogin.rejected]: (state, { payload }) => {
       state.isLoading = false;
-      // console.log(payload);
       state.error = payload.message;
     },
     // register user

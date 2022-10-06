@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Chart as ChartJS } from "chart.js";
@@ -62,8 +64,6 @@ ChartJS.register(
 );
 
 const MonthBar = ({ monthBarData }) => {
-  // console.log(monthBarData);
-
   let currentYear = new Date().getFullYear();
   const [year, setYear] = useState(currentYear);
 
@@ -86,7 +86,6 @@ const MonthBar = ({ monthBarData }) => {
     (arr, index, callback) =>
       index === callback.findIndex((el) => el.vid === arr.vid)
   );
-  // console.log(vidData);
 
   let reformatName = vidData.map((obj) => {
     let robj = {
@@ -95,14 +94,12 @@ const MonthBar = ({ monthBarData }) => {
     robj = `${obj.vbrand}${obj.vname}`;
     return robj;
   });
-  // console.log(reformatName);
 
   let carList = {};
   for (let i = 0; i < reformatName.length; i++) {
     let newArray = new Array(12).fill(0);
     carList[reformatName[i]] = newArray;
   }
-  // console.log(carList);
 
   const bgColor = [
     "rgba(255, 99, 132, 0.9)",
@@ -129,7 +126,6 @@ const MonthBar = ({ monthBarData }) => {
       },
     });
   }
-  // console.log("objData :", objData);
 
   let formatData = [];
 
@@ -142,23 +138,17 @@ const MonthBar = ({ monthBarData }) => {
     } else {
       formatData.push(0);
     }
-    // console.log("idx :", idx + 1);
-    // console.log("filterData :", filterData);
 
     filterData.map((el) => {
       let carName = `${el.vbrand}${el.vname}`;
       carList[carName][idx] = el.sum;
     });
   });
-  // console.log("carList ==>", carList);
 
   objData.forEach((el) => {
     const tempLabel = el.label;
     el.data = carList[tempLabel];
-    // el.backgroundColor =
   });
-
-  // console.log("newobjData :", objData);
 
   const data = {
     labels: [...labelData.map((el) => (el = el.date))],
@@ -219,11 +209,8 @@ const MonthBar = ({ monthBarData }) => {
   );
 };
 
-export default MonthBar;
-
 const StMonthBar = styled.div`
   margin-top: 48px;
-  /* width: 50% !important; */
-  /* height: 705px !important; */
-  /* background-color: skyblue; */
 `;
+
+export default MonthBar;

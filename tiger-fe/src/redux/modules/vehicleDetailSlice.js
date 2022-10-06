@@ -25,7 +25,6 @@ export const __vehicleDetail = createAsyncThunk(
   "detail/__vehicleDetail",
   async (payload, thunkAPI) => {
     const { vId, startDate, endDate } = payload;
-    // console.log(vId);
     if (email) {
       try {
         const headers = {
@@ -38,14 +37,12 @@ export const __vehicleDetail = createAsyncThunk(
             `${serverApi}/vehicle/${vId}?startDate=&endDate=`,
             { headers: headers }
           );
-          // console.log(responseNull.data.output);
           return thunkAPI.fulfillWithValue(responseNull.data.output);
         } else {
           const response = await axios.get(
             `${serverApi}/vehicle/${vId}?startDate=${startDate}&endDate=${endDate}`,
             { headers: headers }
           );
-          // console.log(response.data.output);
           return thunkAPI.fulfillWithValue(response.data.output);
         }
       } catch (error) {
@@ -61,14 +58,12 @@ export const __vehicleDetail = createAsyncThunk(
             `${serverApi}/vehicle/${vId}?startDate=&endDate=`,
             { headers: headers }
           );
-          // console.log(responseNull.data.output);
           return thunkAPI.fulfillWithValue(responseNull.data.output);
         } else {
           const response = await axios.get(
             `${serverApi}/vehicle/${vId}?startDate=${startDate}&endDate=${endDate}`,
             { headers: headers }
           );
-          // console.log(response.data.output);
           return thunkAPI.fulfillWithValue(response.data.output);
         }
       } catch (error) {
@@ -103,7 +98,6 @@ export const __vehicleSearchList = createAsyncThunk(
           },
           { headers: headers }
         );
-        // console.log(response.data.output);
         return thunkAPI.fulfillWithValue(response.data.output);
       } catch (error) {
         return thunkAPI.rejectWithValue(error);
@@ -125,7 +119,6 @@ export const __vehicleSearchList = createAsyncThunk(
           },
           { headers: headers }
         );
-        // console.log(response.data.output);
         return thunkAPI.fulfillWithValue(response.data.output);
       } catch (error) {
         return thunkAPI.rejectWithValue(error);
@@ -139,7 +132,6 @@ export const __getVehicleComments = createAsyncThunk(
   "detail/__getVehicleComments",
   async (payload, thunkAPI) => {
     const vid = payload;
-    // console.log(vid);
     try {
       const headers = {
         "Content-Type": "application/json",
@@ -149,7 +141,6 @@ export const __getVehicleComments = createAsyncThunk(
       const response = await axios.get(`${serverApi}/vehicle/review/${vid}`, {
         headers: headers,
       });
-      // console.log("getComments", response.data.output);
       return thunkAPI.fulfillWithValue(response.data.output);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -162,7 +153,6 @@ export const __getReviewedComment = createAsyncThunk(
   "detail/__getReviewedComment",
   async (payload, thunkAPI) => {
     const vid = payload;
-    // console.log(vid);
     try {
       const headers = {
         "Content-Type": "application/json",
@@ -172,7 +162,6 @@ export const __getReviewedComment = createAsyncThunk(
       const response = await axios.get(`${serverApi}/vehicle/reviewed/${vid}`, {
         headers: headers,
       });
-      // console.log("getReviewedComment", response.data.output);
       return thunkAPI.fulfillWithValue(response.data.output);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -185,9 +174,6 @@ export const __postVehicleComments = createAsyncThunk(
   "detail/__postVehicleComments",
   async (payload, thunkAPI) => {
     const { comment, rating, vid } = payload;
-    // console.log(vid);
-    // console.log(comment);
-    // console.log(rating);
     try {
       const headers = {
         "Content-Type": "application/json",
@@ -204,7 +190,6 @@ export const __postVehicleComments = createAsyncThunk(
           headers: headers,
         }
       );
-      // console.log("commentPost :", response.data);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -217,7 +202,6 @@ export const __deleteComment = createAsyncThunk(
   "detail/__deleteComment",
   async (payload, thunkAPI) => {
     const vid = payload;
-    // console.log(vid);
     try {
       const headers = {
         "Content-Type": "application/json",
@@ -230,7 +214,6 @@ export const __deleteComment = createAsyncThunk(
           headers: headers,
         }
       );
-      // console.log("commentPut :", response.data);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -258,7 +241,6 @@ export const vehicleDetailSlice = createSlice({
     },
     [__vehicleDetail.fulfilled]: (state, action) => {
       state.isLoading = false;
-      // console.log(action.payload);
       state.vehicleDetails = action.payload;
     },
     [__vehicleDetail.rejected]: (state, action) => {
@@ -270,7 +252,6 @@ export const vehicleDetailSlice = createSlice({
     },
     [__vehicleSearchList.fulfilled]: (state, action) => {
       state.isLoading = false;
-      // console.log(action.payload);
       state.filteredVehicleList = action.payload.content;
     },
     [__vehicleSearchList.rejected]: (state, action) => {
@@ -282,7 +263,6 @@ export const vehicleDetailSlice = createSlice({
     },
     [__getVehicleComments.fulfilled]: (state, action) => {
       state.isLoading = false;
-      // console.log(action.payload);
       state.commentLists = action.payload;
     },
     [__getVehicleComments.rejected]: (state, action) => {
@@ -294,7 +274,6 @@ export const vehicleDetailSlice = createSlice({
     },
     [__getReviewedComment.fulfilled]: (state, action) => {
       state.isLoading = false;
-      // console.log(action.payload);
       state.reviewedComment = action.payload;
     },
     [__getReviewedComment.rejected]: (state, action) => {
@@ -306,7 +285,6 @@ export const vehicleDetailSlice = createSlice({
     },
     [__postVehicleComments.fulfilled]: (state, action) => {
       state.isLoading = false;
-      // console.log(action.payload);
       state.postComment = action.payload;
     },
     [__postVehicleComments.rejected]: (state, action) => {

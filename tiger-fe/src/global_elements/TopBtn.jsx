@@ -6,7 +6,6 @@ import styled from "styled-components";
 import topBtn from "../assets/home_image/top_button_icon.png";
 
 const TopBtn = () => {
-  // console.log(window.scrollY);
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -17,7 +16,6 @@ const TopBtn = () => {
   const [showBtn, setShowBtn] = useState(false);
 
   useEffect(() => {
-    // console.log("11");
     const handleShowBtn = () => {
       if (window.scrollY > 400) {
         setShowBtn(!showBtn);
@@ -41,7 +39,6 @@ const TopBtn = () => {
   );
 };
 
-export default TopBtn;
 const StTopBtn = styled.div`
   width: 64px;
   height: 64px;
@@ -55,7 +52,6 @@ const StTopBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* transition: all 0.4s; */
   cursor: pointer;
   z-index: 99;
   animation: top-btn-show 1s;
@@ -74,3 +70,5 @@ const StTopBtn = styled.div`
     right: 21px;
   }
 `;
+
+export default TopBtn;

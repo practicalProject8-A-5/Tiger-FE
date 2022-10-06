@@ -8,7 +8,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import styled from "styled-components";
 import logo from "../../assets/ta,iger_logo.png";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import kakaoLogo from "../../assets/kakaoLogin.png";
@@ -30,15 +30,10 @@ const LoginForm = ({ showModal, goRegister, loginToggle }) => {
     setPasswordShown(passwordShown ? false : true);
   };
 
-  // const error = useSelector((state) => state.memberSlice.error);
-  // console.log(error);
-
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    // console.log(data);
     dispatch(__userLogin(data)).then((result) => {
-      // console.log(result);
       if (result.error?.message === "Rejected") {
         toast.error("입력하신 정보를 다시 확인해주세요", {
           theme: "dark",
@@ -48,7 +43,6 @@ const LoginForm = ({ showModal, goRegister, loginToggle }) => {
           progressClassName: "error_progress",
         });
       } else {
-        // console.log("loggedin");
         showModal();
       }
     });
@@ -289,33 +283,5 @@ const StLoginForm = styled.div`
     }
   }
 `;
-
-// const StyledContainer = styled(ToastContainer)`
-//   &&&.Toastify__toast-container {
-//   }
-//   .Toastify__toast {
-//     position: relative;
-//   }
-//   .Toastify__toast-body {
-//     height: 100px;
-//     .Toastify__toast-icon > svg {
-//       fill: #fff;
-//     }
-//   }
-//   .Toastify__progress-bar {
-//   }
-//   .Toastify__close-button {
-//     border-radius: 12px;
-//     position: absolute;
-//     top: 12px;
-//     right: 12px;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     width: 25px;
-//     height: 25px;
-//     margin: 0;
-//   }
-// `;
 
 export default LoginForm;
