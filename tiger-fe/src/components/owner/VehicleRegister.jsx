@@ -99,8 +99,6 @@ const VehicleRegister = () => {
         reader.onloadend = () => {
           console.log("변환 완료");
           const base64data = reader.result;
-          // console.log(base64data);
-
           temp.push(base64data);
 
           if (Array.isArray(compressedFiles)) {
@@ -110,32 +108,11 @@ const VehicleRegister = () => {
             console.log("아님");
             setCompressedFiles([]);
           }
-          // console.log(compressedFiles);
           console.log(temp);
         };
       }
     };
     resizing();
-
-    // const options = {
-    //   maxSizeMB: 1,
-    //   maxWidthOrHeight: 1920,
-    //   useWebWorker: true,
-    // };
-    // try {
-    //   const imageFile = e.target.files;
-    //   // const temp =[]
-    //   for (let i = 0; i < imageFile.length; i++) {
-    //     console.log(imageFile);
-    //     console.log(imageFile[i]);
-    //     console.log(`original size : ${imageFile[i].size}`);
-    //     const compressedFile = await imageCompression(...imageFile, options);
-    //     console.log(compressedFile);
-    //     console.log(`compressedFile size : ${compressedFile.size}`);
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
   const getImg = (file) => {
     const options = {
@@ -225,31 +202,19 @@ const VehicleRegister = () => {
     //임시 추후 수정
     const tempArray = [];
     for (let i = 0; i < compressedFiles.length; i++) {
-      // console.log(temp.length);
-      // console.log(`compressedFiles[${i}]:`, compressedFiles[i]);
       const byteString = atob(compressedFiles[i].split(",")[1]);
-      // console.log("byteString:", byteString);
       const ab = new ArrayBuffer(byteString.length);
-      // console.log(ab);
       const ia = new Uint8Array(ab);
       for (let i = 0; i < byteString.length; i++) {
         ia[i] = byteString.charCodeAt(i);
-        // console.log(ia);
       }
       const blob = new Blob([ia], {
         type: "image/jpeg",
-        // type: "image/webp",
       });
-      // console.log("fileList:", fileList);
-      // console.log(blob);
       const file = new File([blob], `compressedFiles${i}.jpg`, {
         type: "image/jpeg",
-        // type: "image/webp",
       });
-      // console.log(file);
-      // tempArray.push(file);
       console.log(tempArray);
-      // // console.log(ia);
       formData.append("imageList", file);
     }
 
