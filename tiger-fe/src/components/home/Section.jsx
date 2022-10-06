@@ -169,7 +169,7 @@ const StSection = styled.div`
     justify-content: space-between;
     padding: 0 130px;
     box-sizing: border-box;
-    background-color: pink;
+    /* background-color: pink; */
     .item_box {
       width: 30%;
       height: 440px;
@@ -219,7 +219,7 @@ const StSection = styled.div`
     .list {
       width: 80%;
       height: 222px;
-      background-color: pink;
+      /* background-color: pink; */
       margin-bottom: 58px;
       padding: 85px 87px;
       box-sizing: border-box;
@@ -341,6 +341,10 @@ const StSection = styled.div`
     }
   }
   @media (max-width: 767px) {
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 0;
+    /* background-color: pink; */
     .desc {
       text-align: center;
       h3 {
@@ -354,6 +358,7 @@ const StSection = styled.div`
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      padding: 0;
       /* width: 80%; */
 
       .item_box {

@@ -24,7 +24,7 @@ const HomePage = () => {
       <Header />
       <Banner />
       {/* <HomeSearch /> */}
-      <Search />
+      {/* <Search /> */}
       <Section />
       <TopBtn />
       <Footer />

@@ -578,7 +578,8 @@ const ModiTest = () => {
                 id="description"
                 placeholder="차량에 대한 설명을 입력해주세요."
                 cols="50"
-                rows="10"></textarea>
+                rows="10"
+              ></textarea>
             </div>
 
             {/* 렌터정보 */}
@@ -870,7 +871,7 @@ const StVehicleModify = styled.div`
       width: 100%;
       .onchange__imgbox {
         width: 100%;
-        height: 430px;
+        height: auto;
         border-radius: 12px;
         margin-top: 56px;
         position: relative;

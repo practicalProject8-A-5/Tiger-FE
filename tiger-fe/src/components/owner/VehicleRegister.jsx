@@ -68,7 +68,7 @@ const VehicleRegister = () => {
   // const [blob, setBlob] = useState([]);
 
   const [compressedFiles, setCompressedFiles] = useState([]);
-  // console.log("compressedFiles:", compressedFiles);
+  console.log("compressedFiles:", compressedFiles);
 
   const temp = [];
 
@@ -102,12 +102,20 @@ const VehicleRegister = () => {
           // console.log(base64data);
 
           temp.push(base64data);
-          setCompressedFiles(...compressedFiles, [...temp]);
+
+          if (Array.isArray(compressedFiles)) {
+            console.log("배열임");
+            setCompressedFiles(...compressedFiles, [...temp]);
+          } else {
+            console.log("아님");
+            setCompressedFiles([]);
+          }
+          // console.log(compressedFiles);
           console.log(temp);
         };
       }
     };
-    resizing(files);
+    resizing();
 
     // const options = {
     //   maxSizeMB: 1,
@@ -148,14 +156,10 @@ const VehicleRegister = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [address, setAddress] = useState("");
   const [locationObj, setLocationObj] = useState({});
-  // console.log(locationObj);
 
   const onChangeHandler = (e) => {
     setAddress(e.target.value);
-    // setValue("location", address);
   };
-
-  // console.log("address:", address);
 
   const RegisterPostCodeStyle = {
     display: "block",
@@ -182,7 +186,6 @@ const VehicleRegister = () => {
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
     setAddress(fullAddress);
-    // console.log(address);
   };
 
   const onSubmit = async ({
@@ -192,17 +195,8 @@ const VehicleRegister = () => {
     passengers,
     fuelEfficiency,
     description,
-    // dataURI,
-    // address,
     price,
-    // compressedFiles,
-    // locationObj,
   }) => {
-    // console.log(price);
-    // actionImgCompress();
-    //이미지 업로드
-    // const imgFormData = new FormData();
-    // console.log("formdata address :", address);
     const formData = new FormData();
     formData.append("vbrand", vbrand);
     formData.append("vname", vname);
@@ -229,12 +223,14 @@ const VehicleRegister = () => {
     // console.log(compressedFiles);
 
     //임시 추후 수정
+    const tempArray = [];
     for (let i = 0; i < compressedFiles.length; i++) {
-      console.log(compressedFiles[i]);
+      // console.log(temp.length);
+      // console.log(`compressedFiles[${i}]:`, compressedFiles[i]);
       const byteString = atob(compressedFiles[i].split(",")[1]);
-      console.log(byteString);
+      // console.log("byteString:", byteString);
       const ab = new ArrayBuffer(byteString.length);
-      console.log(ab);
+      // console.log(ab);
       const ia = new Uint8Array(ab);
       for (let i = 0; i < byteString.length; i++) {
         ia[i] = byteString.charCodeAt(i);
@@ -242,27 +238,33 @@ const VehicleRegister = () => {
       }
       const blob = new Blob([ia], {
         type: "image/jpeg",
+        // type: "image/webp",
       });
-      console.log("fileList:", fileList);
-      console.log(blob);
-      const file = [new File([blob], "image.jpg")];
-      console.log(file);
-      // console.log(ia);
-      // formData.append("imageList", file);
+      // console.log("fileList:", fileList);
+      // console.log(blob);
+      const file = new File([blob], `compressedFiles${i}.jpg`, {
+        type: "image/jpeg",
+        // type: "image/webp",
+      });
+      // console.log(file);
+      // tempArray.push(file);
+      console.log(tempArray);
+      // // console.log(ia);
+      formData.append("imageList", file);
     }
 
     // console.log(dataURI);
     // console.log(byteString);
 
-    for (let i = 0; i < fileList.length; i++) {
-      formData.append("imageList", fileList[i]);
-    }
+    // for (let i = 0; i < fileList.length; i++) {
+    //   formData.append("imageList", fileList[i]);
+    // }
     const userToken = localStorage.getItem("userToken");
     const refreshToken = localStorage.getItem("refreshToken");
     try {
-      // for (let value of formData.values()) {
-      //   console.log(value);
-      // }
+      for (let value of formData.values()) {
+        console.log(value);
+      }
       const multipartType = { "Content-Type": "multipart/form-data" };
       const resp = await axios.post(
         `${serverApi}/vehicle/management`,
@@ -283,9 +285,9 @@ const VehicleRegister = () => {
           className: "toatst_success",
           progressClassName: "success_progress",
         });
-        // setTimeout(() => {
-        //   navigate("/owner");
-        // }, 1000);
+        setTimeout(() => {
+          navigate("/owner");
+        }, 1000);
       }
     } catch (err) {
       // console.log(err);
@@ -415,10 +417,15 @@ const VehicleRegister = () => {
                     type="number"
                     id="years"
                     min="1990"
+                    max="9999"
                     placeholder={errors.years.message}
                     className="error_input"
                     {...register("years", {
                       required: "연식을 입력해주세요",
+                      maxLength: {
+                        value: 9999,
+                        message: "최대 4자리수만 가능합니다.",
+                      },
                     })}
                   />
                 </td>
@@ -428,9 +435,14 @@ const VehicleRegister = () => {
                     type="number"
                     id="years"
                     min="1990"
+                    max="9999"
                     placeholder="연식"
                     {...register("years", {
                       required: "연식을 입력해주세요.",
+                      maxLength: {
+                        value: 9999,
+                        message: "최대 4자리수만 가능합니다.",
+                      },
                     })}
                   />
                 </td>
@@ -446,10 +458,15 @@ const VehicleRegister = () => {
                     type="number"
                     id="passengers"
                     min="1"
+                    max="99"
                     placeholder={errors.passengers.message}
                     className="error_input"
                     {...register("passengers", {
                       required: "탑승자 수를 입력해주세요.",
+                      maxLength: {
+                        value: 99,
+                        message: "최대 2자리수만 가능합니다.",
+                      },
                     })}
                   />
                 </td>
@@ -459,9 +476,14 @@ const VehicleRegister = () => {
                     type="number"
                     id="passengers"
                     min="1"
+                    max="99"
                     placeholder="탑승자 수"
                     {...register("passengers", {
                       required: "탑승자 수를 입력해주세요.",
+                      maxLength: {
+                        value: 99,
+                        message: "최대 2자리수만 가능합니다.",
+                      },
                     })}
                   />
                 </td>
@@ -479,10 +501,15 @@ const VehicleRegister = () => {
                     type="number"
                     id="fuelEfficiency"
                     min="1"
+                    max="99"
                     placeholder={errors.fuelEfficiency.message}
                     className="error_input"
                     {...register("fuelEfficiency", {
                       required: "연비를 입력해주세요.",
+                      maxLength: {
+                        value: 99,
+                        message: "최대 2자리수만 가능합니다.",
+                      },
                     })}
                   />
                 </td>
@@ -493,8 +520,13 @@ const VehicleRegister = () => {
                     id="fuelEfficiency"
                     placeholder="연비"
                     min="1"
+                    max="99"
                     {...register("fuelEfficiency", {
                       required: "연비를 입력해주세요.",
+                      maxLength: {
+                        value: 99,
+                        message: "최대 2자리수만 가능합니다.",
+                      },
                     })}
                   />
                 </td>
@@ -644,7 +676,8 @@ const VehicleRegister = () => {
             id="description"
             placeholder="차량에 대한 설명을 입력해주세요."
             cols="50"
-            rows="10"></textarea>
+            rows="10"
+          ></textarea>
         </div>
 
         {/* 렌터정보 */}
