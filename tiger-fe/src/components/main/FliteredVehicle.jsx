@@ -42,7 +42,8 @@ const FliteredVehicle = ({ list }) => {
         }}
         navigation={true}
         loop={true}
-        className="mySwiper">
+        className="mySwiper"
+      >
         <SwiperSlide className="img">
           <img src={list.thumbnail} alt="imageSlide" loading="lazy" />
         </SwiperSlide>
@@ -66,7 +67,8 @@ const FliteredVehicle = ({ list }) => {
           navigate(
             `/vehicle/${list.vid}?startDate=${list.startDate}&endDate=${list.endDate}`
           );
-        }}>
+        }}
+      >
         <div className="desc__top">
           <div className="desc__title">{list.location}</div>
           <div className="desc__star">
@@ -101,7 +103,7 @@ const StItem = styled.div`
     position: absolute;
     top: 18px;
     right: 18px;
-    z-index: 98;
+    z-index: 4;
     img {
       height: 25px;
       width: 25px;
