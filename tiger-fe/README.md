@@ -121,8 +121,8 @@ Lazy Loading 사용하여 화면에 나타나는 이미지 순으로 렌더링�
 
 ##### 도입이유: 고화질 이미지 렌더링 속도 개선
 ##### 문제상황: 큰 용량 때문에 S3 비용과 클라이언트 이미지 렌더링 속도 저하
-##### 해결방안: FE: browser-image-compression 패키지 사용BE: imgscale를 활용한 imageResize
-##### 의견결정: maxSize Mb를 1로 지정, (그 이하는 이미지 깨짐 현상 발견)
+##### 해결방안: FE: browser-image-compression 패키지 사용BE: imgscalr를 활용한 imageResize
+##### 의견결정: maxSize MB를 1로 지정, (그 이하는 이미지 깨짐 현상 발견)
 ##### Base 64
 
 ![image (1)](https://user-images.githubusercontent.com/26310384/194281495-a0ed7f1b-06b2-428a-9c38-cd353c2faaec.png)
