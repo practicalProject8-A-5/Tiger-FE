@@ -119,15 +119,15 @@ Lazy Loading 사용하여 화면에 나타나는 이미지 순으로 렌더링�
 
 ### 이미지 용량 최적화
 
-1. 도입이유: 고화질 이미지 렌더링 속도 개선
-2. 문제상황: 큰 용량 때문에 S3 비용과 클라이언트 이미지 렌더링 속도 저하
-3. 해결방안: FE: browser-image-compression 패키지 사용BE: imgscale를 활용한 imageResize
-4. 의견결정: maxSize Mb를 1로 지정, (그 이하는 이미지 깨짐 현상 발견)
-5. Base 64
+##### 도입이유: 고화질 이미지 렌더링 속도 개선
+##### 문제상황: 큰 용량 때문에 S3 비용과 클라이언트 이미지 렌더링 속도 저하
+##### 해결방안: FE: browser-image-compression 패키지 사용BE: imgscale를 활용한 imageResize
+##### 의견결정: maxSize Mb를 1로 지정, (그 이하는 이미지 깨짐 현상 발견)
+##### Base 64
 
 ![image (1)](https://user-images.githubusercontent.com/26310384/194281495-a0ed7f1b-06b2-428a-9c38-cd353c2faaec.png)
 
-6. Decoding
+##### Decoding
 
 ![image](https://user-images.githubusercontent.com/26310384/194281557-00ba054d-ea26-4e41-b211-0a321ae1a376.png)
 
@@ -136,14 +136,27 @@ Lazy Loading 사용하여 화면에 나타나는 이미지 순으로 렌더링�
 #### imgSclr를 활용한  이미지 리사이즈
 
 #### 원본이미지 정보
+![Screen Shot 2022-10-06 at 4 36 15 PM](https://user-images.githubusercontent.com/26310384/194284429-c2cc3fb4-4953-4fe2-ab6a-eaec73181f72.png)
 
-![Screen Shot 2022-10-05 at 6 09 39 PM](https://user-images.githubusercontent.com/26310384/194281703-3b2fced3-a25c-437a-b0d8-820f50f8f8fb.png)
+##### 원본이미지 업로드 후 (사이즈: 326KB)
+![Screen Shot 2022-10-06 at 4 36 44 PM](https://user-images.githubusercontent.com/26310384/194284503-97f7722c-f621-40b8-9b6a-cb882175323d.png)
 
-#### 압축&resizeing 후 이미지 정보
-
+#### 압축 후 이미지 정보 (사이즈: 198KB)
 ![Screen Shot 2022-10-05 at 6 05 38 PM](https://user-images.githubusercontent.com/26310384/194281751-a48308e0-affe-48e6-96b8-d598cc69de47.png)
 
-#### 성능향상 수치
+##### resize 전 이미지 정보 (Dimension: 1024x683px)
+![Screen Shot 2022-10-06 at 4 37 31 PM (1)](https://user-images.githubusercontent.com/26310384/194284745-f8f0578e-6621-4025-be8d-dc8bd23fcd36.png)
+
+##### resize 후 이미지 정보 (Dimension: 800x534px / rezie을 인해 용량도 한번 더 축소가 되었음 => 54.9KB)
+![Screen Shot 2022-10-06 at 4 40 23 PM](https://user-images.githubusercontent.com/26310384/194284898-6dcc62bd-3d28-4f0c-9867-1ae930acf9a7.png)
+
+#### 압축&resize 적용 전 걸리는 로딩시간
+![Screen Shot 2022-10-06 at 4 39 06 PM](https://user-images.githubusercontent.com/26310384/194285139-0d4f047e-a988-407a-b299-6233430eb2f3.png)
+
+#### 압축&resize 적용 후 걸리는 로딩시간
+![Screen Shot 2022-10-06 at 4 39 50 PM](https://user-images.githubusercontent.com/26310384/194285193-6b6495cd-71c7-4467-b583-664c88213ed2.png)
+
+#### 성능향상 수치 정리
 
 --- | Size | Dimensions | 렌더링 속도 
 --- | --- | --- | ---
