@@ -176,6 +176,7 @@ const ModiTest = () => {
         toast.warn("주소등록은 필수에요.", {
           theme: "dark",
           autoClose: 1500,
+          position: toast.POSITION.TOP_CENTER,
           className: "toatst_warn",
           progressClassName: "warn_progress",
         });
@@ -545,7 +546,8 @@ const ModiTest = () => {
                 id="description"
                 placeholder="차량에 대한 설명을 입력해주세요."
                 cols="50"
-                rows="10"></textarea>
+                rows="10"
+              ></textarea>
             </div>
             {/* 렌터정보 */}
             <StRenterInfoWrapper>

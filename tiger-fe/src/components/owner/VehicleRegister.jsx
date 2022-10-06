@@ -220,6 +220,7 @@ const VehicleRegister = () => {
         toast.warn("주소등록은 필수에요.", {
           theme: "dark",
           autoClose: 1500,
+          position: toast.POSITION.TOP_CENTER,
           className: "toatst_warn",
           progressClassName: "warn_progress",
         });
