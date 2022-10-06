@@ -1,8 +1,10 @@
 ![header](https://capsule-render.vercel.app/api?type=waving&text=ta,iger&color=auto&height=200&align=center&animation=scaleIn)
 <br>
 # C2C 카 쉐어링 중개 플랫폼 - <a href="https://taiger.kr/">타, 이거</a>
+
 ## 프로젝트 기간
 - 2022.08.26 ~ 2022.10.07
+
 ## 팀구성
 이름 | 깃허브 주소 | 포지션 
 --- | --- | --- 
@@ -12,6 +14,9 @@
 심채운 | https://github.com/Sim0321 | Front-End
 권익현  | https://github.com/kwonih1020 | Front-End
 허지연 | yeooon02@gmail.com | UI/UX 
+
+## 팀 노션 페이지
+<a href="https://www.notion.so/ta-iger-c2c-4b3b2ff06b23444d9c6154a6ae8d638c">노션페이지 바로가기</a>
 
 ## 아키텍쳐
 ![서비스 아키텍처 (수정본)](https://user-images.githubusercontent.com/26310384/194273279-5e5fd8c8-db24-43c0-959b-16cf517a4f97.png)
@@ -114,9 +119,26 @@ Lazy Loading 사용하여 화면에 나타나는 이미지 순으로 렌더링�
 
 ### 이미지 용량 최적화
 
-browser-image-compression 라이브러리를 이용하여 이용자가 사진을 업로드할 때 사진 용량을 압축 시켜서 서버로 보냈다. 기존 사이즈 약 1.3MB, 최적화 후 약 0.3MB : 결과 ⇒약 28%정도 줄였습니다. 완료한 후에 코드 추후 추가하기.결론 20~30%
+1. 도입이유: 고화질 이미지 렌더링 속도 개선
+2. 문제상황: 큰 용량 때문에 S3 비용과 클라이언트 이미지 렌더링 속도 저하
+3. 해결방안: FE: browser-image-compression 패키지 사용BE: imgscale를 활용한 imageResize
+4. 의견결정: maxSize Mb를 1로 지정, (그 이하는 이미지 깨짐 현상 발견)
+5. Base 64
 
-![Untitled](https://user-images.githubusercontent.com/26310384/194003279-1a1492a6-00d0-49b7-b7ea-2a4f044bd5da.png)
+![image (1)](https://user-images.githubusercontent.com/26310384/194281495-a0ed7f1b-06b2-428a-9c38-cd353c2faaec.png)
+
+6. Decoding
+
+![image](https://user-images.githubusercontent.com/26310384/194281557-00ba054d-ea26-4e41-b211-0a321ae1a376.png)
+
+
+#### Backend 내부에서 image resize한 후 S3 업로드
+#### imgSclr를 활용한  이미지 리사이즈
+#### 원본이미지 정보
+![Screen Shot 2022-10-05 at 6 09 39 PM](https://user-images.githubusercontent.com/26310384/194281703-3b2fced3-a25c-437a-b0d8-820f50f8f8fb.png)
+
+#### 압축&resizeing 후 이미지 정보
+![Screen Shot 2022-10-05 at 6 05 38 PM](https://user-images.githubusercontent.com/26310384/194281751-a48308e0-affe-48e6-96b8-d598cc69de47.png)
 
 #### Lighthouse 성능결과
 LightHouse 성능 결과 69점 → 80점
