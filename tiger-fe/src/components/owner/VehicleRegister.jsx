@@ -170,7 +170,7 @@ const VehicleRegister = () => {
     }
 
     //임시 추후 수정
-    const tempArray = [];
+    // const tempArray = [];
     for (let i = 0; i < compressedFiles.length; i++) {
       const byteString = atob(compressedFiles[i].split(",")[1]);
       const ab = new ArrayBuffer(byteString.length);

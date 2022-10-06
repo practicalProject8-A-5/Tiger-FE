@@ -19,8 +19,14 @@ import form from "../../assets/home_image/inform.png";
 
 import chart from "../../assets/home_image/image_chart.png";
 import calculate from "../../assets/home_image/image_chart2.png";
+import { useState } from "react";
+import { TiArrowSortedDown } from "react-icons/ti";
 
 const Section = () => {
+  const [open, setOpen] = useState(false);
+  const clickOpen = () => {
+    setOpen(!open);
+  };
   return (
     <StSection>
       <div className="desc">
@@ -113,9 +119,52 @@ const Section = () => {
           }}
         >
           <div className="qna">
-            <Reveal effect="showUp" duration={1500}>
-              <p>자주 묻는 질문 FAQ</p>
-            </Reveal>
+            <h3>자주 묻는 질문 FAQ</h3>
+            <div className="question">
+              <>
+                <div className="qlist">
+                  <div className="left">
+                    <span>Q.</span>
+                    <p>실제로 결제가 가능한 사이트인가요?</p>
+                  </div>
+                  <TiArrowSortedDown onClick={clickOpen} className="btn" />
+                </div>
+                {!open ? <p>hi</p> : null}
+              </>
+
+              <>
+                <div className="qlist">
+                  <div className="left">
+                    <span>Q.</span>
+                    <p>차량등록은 몇개까지 가능한가요?</p>
+                  </div>
+                  <TiArrowSortedDown onClick={clickOpen} className="btn" />
+                </div>
+                {!open ? <p>hi</p> : null}
+              </>
+
+              <>
+                <div className="qlist">
+                  <div className="left">
+                    <span>Q.</span>
+                    <p>실제로 차량을 이용할 수 있나요?</p>
+                  </div>
+                  <TiArrowSortedDown onClick={clickOpen} className="btn" />
+                </div>
+                {!open ? <p>hi</p> : null}
+              </>
+
+              <>
+                <div className="qlist">
+                  <div className="left">
+                    <span>Q.</span>
+                    <p>실제 전화번호를 사용하나요?</p>
+                  </div>
+                  <TiArrowSortedDown onClick={clickOpen} className="btn" />
+                </div>
+                {!open ? <p>hi</p> : null}
+              </>
+            </div>
           </div>
         </div>
       </div>
@@ -263,7 +312,7 @@ const StSection = styled.div`
   .circle_box {
     margin-top: 200px;
     width: 100%;
-    height: 665px;
+    /* height: 665px; */
     overflow: hidden;
     .circle {
       margin-top: 104px;
@@ -274,6 +323,9 @@ const StSection = styled.div`
       transform: scale(1.4);
       margin-top: 160px;
       .qna {
+        width: 90%;
+        margin: 0 auto;
+        /* background-color: skyblue; */
         /* overflow: hidden; */
         text-align: center;
         position: absolute;
@@ -281,10 +333,48 @@ const StSection = styled.div`
         left: 50%;
         height: 60px;
         transform: translateX(-50%);
-        p {
+
+        h3 {
           font-weight: 600;
           font-size: 42px;
           color: #000;
+        }
+        .question {
+          margin-top: 86px;
+          width: 80%;
+          margin: 86px auto 0 auto;
+          font-weight: 500;
+          font-size: 20px;
+          color: #4d4d4d;
+          padding-bottom: 80px;
+          /* background-color: pink; */
+          .qlist {
+            width: 80%;
+            margin: 0 auto 35px auto;
+            height: 85px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 2px solid #cccccc;
+            border-radius: 20px;
+            padding: 0 20px;
+            box-sizing: border-box;
+            .left {
+              display: flex;
+              span {
+                margin-right: 10px;
+              }
+              p {
+              }
+            }
+            .btn {
+              cursor: pointer;
+              font-size: 28px;
+            }
+            :nth-last-child() {
+              margin-bottom: 0px;
+            }
+          }
         }
       }
     }

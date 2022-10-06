@@ -48,7 +48,8 @@ const Footer = () => {
           <a
             href="https://github.com/orgs/practicalProject8-A-5/repositories"
             target="_blank"
-            rel="noopener noreferrer">
+            rel="noopener noreferrer"
+          >
             <FaGithub className="git_ico" />
           </a>
         </div>
@@ -57,7 +58,8 @@ const Footer = () => {
           <a
             href="https://www.instagram.com/ta_iger_hh5"
             target="_blank"
-            rel="noopener noreferrer">
+            rel="noopener noreferrer"
+          >
             <FaInstagramSquare className="instagram_ico" />
           </a>
         </div>
@@ -66,7 +68,8 @@ const Footer = () => {
           <a
             href="https://www.facebook.com/profile.php?id=100086498673434"
             target="_blank"
-            rel="noopener noreferrer">
+            rel="noopener noreferrer"
+          >
             <FaFacebook className="facebook_ico" />
           </a>
         </div>
@@ -90,7 +93,7 @@ const StFooter = styled.div`
   box-sizing: border-box;
   background-color: #000;
   color: #fff;
-  margin: auto;
+  margin: 150px auto 0 auto;
   .footer_top {
     border-bottom: 1px solid #f2f2f2;
     padding-bottom: 120px;
