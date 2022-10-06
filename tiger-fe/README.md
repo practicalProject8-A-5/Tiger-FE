@@ -117,5 +117,8 @@ browser-image-compression 라이브러리를 이용하여 이용자가 사진을
 ![Untitled](https://user-images.githubusercontent.com/26310384/194003279-1a1492a6-00d0-49b7-b7ea-2a4f044bd5da.png)
 
 #### Lighthouse 성능결과
-LightHouse 성능 결과 66점 → 75점
-![lighthouse](https://user-images.githubusercontent.com/26310384/193827536-b1ee5061-4999-4e45-a77b-f691c58e7c1e.png)
+LightHouse 성능 결과 69점 → 80점
+![Lighthouse_1](https://user-images.githubusercontent.com/26310384/194272426-f9a998f8-5400-4b61-83d1-93f8c69bc91a.png)
+![Screen Shot 2022-10-06 at 5 55 28 PM](https://user-images.githubusercontent.com/26310384/194272688-b95c02b8-720b-408d-b286-2d8f0bd57c69.png)
+
+
