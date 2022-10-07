@@ -65,7 +65,7 @@ const Section = () => {
           <div className="item_box">
             <img src={finance} alt="수익" />
             <p>보다 합리적으로,</p>
-            <p>간편한 영수증 관리</p>
+            <p>간편한 수익 확인</p>
           </div>
         </Zoom>
       </div>
@@ -138,8 +138,9 @@ const Section = () => {
                   {open === "payment" ? (
                     <>
                       <p>
-                        A. 아니요, 타,이거 서비스는 항해99 실전프로젝트
-                        포트폴리오용 서비스입니다.
+                        A. 아니요, "타,이거" 서비스는 항해99 실전프로젝트
+                        포트폴리오용 서비스입니다. 실제로 아무런 결제가 일어나지
+                        않습니다.
                       </p>
                     </>
                   ) : null}
@@ -159,7 +160,7 @@ const Section = () => {
                 </div>
                 <div className="answer">
                   {open === "vehicle" ? (
-                    <p>A. 무제한입니다. 원하시는 만큼 등록 가능합니다.</p>
+                    <p>A. 무제한으로 원하시는 만큼 등록 가능합니다.</p>
                   ) : null}
                 </div>
               </>
@@ -177,10 +178,7 @@ const Section = () => {
                 </div>
                 <div className="answer">
                   {open === "use" ? (
-                    <p>
-                      A. 아니요. 개인정보 보호를 위해 랜덤으로 전화번호를
-                      생성하고 있습니다.
-                    </p>
+                    <p>A. 아니요. 차량은 실제로 이용하지 못합니다.</p>
                   ) : null}
                 </div>
               </>
@@ -198,7 +196,10 @@ const Section = () => {
                 </div>
                 <div className="answer">
                   {open === "tel" ? (
-                    <p>A. 아니요. 차량은 실제로 이용하지 못합니다.</p>
+                    <p>
+                      A. 아니요. 개인정보 보호를 위해 랜덤으로 전화번호를
+                      생성하고 있습니다.
+                    </p>
                   ) : null}
                 </div>
               </>
