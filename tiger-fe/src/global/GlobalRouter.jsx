@@ -17,6 +17,7 @@ import NotFound from "../global_elements/NotFound";
 import ChatModal from "../components/chat/ChatModal";
 import ChatFloat from "../components/chat/ChatFloat";
 import RouteChangeTracker from "../shared/RouteChangeTracker";
+import ScrollTop from "../shared/ScrollTop";
 
 const GlobalRouter = () => {
   const userInfo = useSelector((state) => state.memberSlice.userInfo);
@@ -26,6 +27,7 @@ const GlobalRouter = () => {
 
   return (
     <>
+      <ScrollTop />
       {location.state?.backgroundLocation && (
         <Routes>
           <Route path="/chat" element={<ChatModal />} />

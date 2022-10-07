@@ -211,8 +211,6 @@ const Section = () => {
   );
 };
 
-export default Section;
-
 const StSection = styled.div`
   padding-top: 115px;
   width: 100%;
@@ -553,3 +551,5 @@ const StSection = styled.div`
     }
   }
 `;
+
+export default Section;
