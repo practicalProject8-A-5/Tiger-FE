@@ -528,6 +528,8 @@ const StSection = styled.div`
       overflow: unset;
       .circle {
         margin-top: 178px;
+        transform: scale(1.08);
+        height: 650px;
         .qna {
           p {
             font-size: 16px;
