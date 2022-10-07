@@ -285,6 +285,7 @@ const StNewSwiper = styled(Swiper)`
   width: 100%;
   border-radius: 12px;
   margin: 0 !important;
+  z-index: 0;
   .swiper-button-next {
     right: 15px !important;
   }

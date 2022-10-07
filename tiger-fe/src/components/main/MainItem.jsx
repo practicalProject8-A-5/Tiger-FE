@@ -112,7 +112,7 @@ const StItem = styled.div`
     position: absolute;
     top: 18px;
     right: 18px;
-    z-index: 70;
+    z-index: 1;
     img {
       height: 25px;
       width: 25px;

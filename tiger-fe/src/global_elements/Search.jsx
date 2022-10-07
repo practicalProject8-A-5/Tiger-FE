@@ -310,6 +310,7 @@ const StCalendarContainer = styled.div`
   padding: 0 16px;
   box-sizing: border-box;
   border-radius: 12px;
+  z-index: 2;
   .wrapper_box {
     width: 100%;
     display: flex;
