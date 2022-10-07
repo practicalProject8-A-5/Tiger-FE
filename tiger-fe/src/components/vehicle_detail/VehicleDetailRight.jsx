@@ -72,11 +72,15 @@ const VehicleDetailRight = () => {
             <StNeedLogin>본인 차량입니다</StNeedLogin>
           ) : !userInfo.name ? (
             <StNeedLogin onClick={showModal}>로그인후 이용해주세요</StNeedLogin>
+          ) : vehicleDetails.startDate === null &&
+            vehicleDetails.endDate === null ? (
+            <StNotSearchedButton>검색후 이용해주세요</StNotSearchedButton>
           ) : (
             <StPaymentButton onClick={showPaymentModal}>
               예약하기
             </StPaymentButton>
           )}
+
           {paymentModalOpen && (
             <PaymentModal
               showPaymentModal={showPaymentModal}
@@ -85,9 +89,9 @@ const VehicleDetailRight = () => {
           )}
         </StPaymentBox>
       </div>
-      {isModalOpen && (
+      {/* {isModalOpen && (
         <LoginBox showModal={showModal} isModalOpen={isModalOpen} />
-      )}
+      )} */}
     </>
   );
 };
@@ -259,6 +263,22 @@ const StPaymentButton = styled(Button)`
   }
 `;
 
+const StNotSearchedButton = styled(Button)`
+  width: 100%;
+  height: 60px;
+  background: #ff881b;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 30px;
+  color: #ffffff;
+  margin: 40px auto;
+  cursor: not-allowed;
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+`;
+
 const StNeedLogin = styled(Button)`
   width: 100% !important;
   height: 60px;
@@ -269,7 +289,7 @@ const StNeedLogin = styled(Button)`
   line-height: 30px;
   color: #ffffff;
   margin: 40px auto;
-  /* cursor: not-allowed; */
+  cursor: not-allowed;
   @media (max-width: 767px) {
     width: 100%;
     margin: 40px auto;

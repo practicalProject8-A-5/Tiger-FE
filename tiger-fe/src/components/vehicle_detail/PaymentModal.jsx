@@ -64,7 +64,6 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
             navigate("/renter");
           });
       } catch (error) {
-        // setErrorMessage(error.response.data.code);
         navigate(-1);
       }
     }
@@ -143,14 +142,9 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
               <option value="CARD">CARD</option>
               {/* <option value="CASH">CASH</option> */}
             </select>
-            {vehicleDetails.startDate === null &&
-            vehicleDetails.endDate === null ? (
-              <div className="noneSearched">검색후 이용해주세요</div>
-            ) : (
-              <button type="submit" onClick={confirmPayment}>
-                결제하기
-              </button>
-            )}
+            <button type="submit" onClick={confirmPayment}>
+              결제하기
+            </button>
             {errorMessage === "DUPLICATE_ORDERDATE"
               ? toast.info("이미 예약을 한 차량입니다.", {
                   theme: "dark",
@@ -161,7 +155,6 @@ const PaymentModal = ({ showPaymentModal, vehicleDetails }) => {
                 })
               : null}
           </form>
-          {/* <StyledContainer /> */}
         </div>
       </StPaymentInfo>
     </StPaymentModal>
@@ -380,6 +373,7 @@ const StPaymentInfo = styled.div`
       text-align: center;
       line-height: 56px;
       border-radius: 10px;
+      cursor: not-allowed;
     }
 
     button {

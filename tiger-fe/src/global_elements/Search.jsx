@@ -78,7 +78,7 @@ const Search = () => {
     width: "400px",
     height: "400px",
     border: "1px solid black",
-    zIndex: "999",
+    // zIndex: "999",
   };
   // search reservation dates
   const [startDates, setStartDates] = useState(null);
@@ -176,7 +176,7 @@ const Search = () => {
         </StSearchLocationContainer>
         <StCalendarContainer>
           <div className="wrapper_box">
-            <StCalendarWrapper style={{ zIndex: 99, position: "relative" }}>
+            <StCalendarWrapper style={{ position: "relative" }}>
               <img src={clock} alt="시계" />
               <StNewDatePicker
                 selected={startDates}
@@ -321,7 +321,7 @@ const StCalendarContainer = styled.div`
       top: 50%;
       right: 0;
       transform: translateY(-50%);
-      z-index: 98;
+      /* z-index: 98; */
       font-weight: 500;
       font-size: 18px;
       color: #8b8b8b;
@@ -343,7 +343,7 @@ const StCalendarContainer = styled.div`
   }
 `;
 const StCalendarWrapper = styled.div`
-  z-index: 71;
+  /* z-index: 71; */
   display: flex;
   justify-content: center;
   align-items: center;
