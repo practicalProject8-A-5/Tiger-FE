@@ -63,7 +63,7 @@ const Header = ({ ownerMode }) => {
   };
   const handleCloseDropDown = (e) => {
     if (isDropDown && (!el.current || !el.current.contains(e.target)))
-      setIsDropDown(!isDropDown);
+      setIsDropDown(false);
   };
 
   useEffect(() => {
@@ -71,7 +71,7 @@ const Header = ({ ownerMode }) => {
     return () => {
       window.removeEventListener("click", handleCloseDropDown);
     };
-  }, []);
+  }, [isDropDown]);
 
   return (
     <StHeader>
