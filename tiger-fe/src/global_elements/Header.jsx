@@ -1,8 +1,8 @@
 // eslint-disable-next-line
 
-import React, { useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useMatch, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../assets/ta,iger_logo.png";
 import axios from "axios";
@@ -14,6 +14,7 @@ const Header = ({ ownerMode }) => {
   const memberApi = process.env.REACT_APP_SERVER;
   const navigate = useNavigate();
   const location = useLocation();
+  const el = useRef();
 
   const notification = useSelector((state) => state.chatSlice.notification);
 
@@ -21,22 +22,6 @@ const Header = ({ ownerMode }) => {
   const showModal = () => {
     setIsModalOpen(!isModalOpen);
   };
-
-  // const [inOwner, setInOwner] = useState(false);
-  // const ownerToggle = useMatch("/*");
-  // const onClick = () => {
-  //   if (ownerToggle !== null) {
-  //     setInOwner(!inOwner);
-  //     setTimeout(() => {
-  //       navigate("/owner");
-  //     }, 1000);
-  //   } else {
-  //     setInOwner(!inOwner);
-  //     setTimeout(() => {
-  //       navigate("/*");
-  //     }, 1000);
-  //   }
-  // };
 
   // 로그인 여부
   const dispatch = useDispatch();
@@ -65,17 +50,28 @@ const Header = ({ ownerMode }) => {
     }
   };
 
-  // 로그인 드랍메뉴
-  const [isDropDown, setIsDropDown] = useState(false);
-  const openDropDown = () => {
-    setIsDropDown(!isDropDown);
-  };
-
   // 메뉴바 글씨 클릭시 색상 변환 유지
   const [textColor, setTextColor] = useState("black");
   const handleChangeInputColor = (e) => {
     setTextColor(textColor === "black" ? "#CCCCCC" : "black");
   };
+
+  // 로그인 드랍메뉴
+  const [isDropDown, setIsDropDown] = useState(false);
+  const openDropDown = () => {
+    setIsDropDown(!isDropDown);
+  };
+  const handleCloseDropDown = (e) => {
+    if (isDropDown && (!el.current || !el.current.contains(e.target)))
+      setIsDropDown(!isDropDown);
+  };
+
+  useEffect(() => {
+    window.addEventListener("click", handleCloseDropDown);
+    return () => {
+      window.removeEventListener("click", handleCloseDropDown);
+    };
+  }, []);
 
   return (
     <StHeader>
@@ -128,47 +124,12 @@ const Header = ({ ownerMode }) => {
             )}
           </div>
           <div className="header__menu__R">
-            {/* {userInfo.name ? (
-              <div className="header__switch">
-                <span className="text">오너모드로 전환</span>
-                {!inOwner ? (
-                  <label className="switch">
-                    <input id="switch" type="checkbox" onClick={onClick} />
-                    <span className="slider"></span>
-                  </label>
-                ) : (
-                  <label
-                    className="switch"
-                    style={{ backgroundColor: "#ff881b" }}
-                  >
-                    <input id="switch" type="checkbox" onClick={onClick} />
-                    <span className="slider"></span>
-                  </label>
-                )}
-              </div>
-            ) : (
-              <div className="header__switch" style={{ display: "none" }}>
-                <span className="text">오너모드로 전환</span>
-                {!inOwner ? (
-                  <label
-                    className="switch"
-                    style={{ backgroundColor: "#ff881b" }}
-                  >
-                    <input id="switch" type="checkbox" onClick={onClick} />
-                    <span className="slider"></span>
-                  </label>
-                ) : (
-                  <label className="f" style={{ backgroundColor: "pink" }}>
-                    <input id="switch" type="checkbox" onClick={onClick} />
-                    <span className="slider"></span>
-                  </label>
-                )}
-              </div>
-            )} */}
-
             {userInfo.name ? (
               <>
-                <div className="header__loggedin" onClick={openDropDown}>
+                <div
+                  className="header__loggedin"
+                  onClick={openDropDown}
+                  ref={el}>
                   <img
                     src={userInfo.profileImage}
                     alt="profileImage"
@@ -185,7 +146,6 @@ const Header = ({ ownerMode }) => {
                         to="/chat"
                         state={{ backgroundLocation: location }}
                         style={{ textDecoration: "none", color: "#000" }}>
-                        {/* {notification && <NewNoti />} */}
                         <li>메세지</li>
                       </Link>
                       <Link
