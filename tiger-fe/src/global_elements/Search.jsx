@@ -78,7 +78,7 @@ const Search = () => {
     width: "400px",
     height: "400px",
     border: "1px solid black",
-    // zIndex: "999",
+    zIndex: "2",
   };
   // search reservation dates
   const [startDates, setStartDates] = useState(null);
